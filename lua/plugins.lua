@@ -62,7 +62,12 @@ packer.startup(function(use)
 	use("junegunn/vim-easy-align")
 	use("terrortylor/nvim-comment")
 	-- for git tools
-	use("lewis6991/gitsigns.nvim")
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	})
 	-- -- ====================== Syntax =====================
 	-- -- TODO: 配置
 	use({
