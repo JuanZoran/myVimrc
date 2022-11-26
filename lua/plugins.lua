@@ -61,6 +61,8 @@ packer.startup(function(use)
 	use("voldikss/vim-floaterm")
 	use("junegunn/vim-easy-align")
 	use("terrortylor/nvim-comment")
+	-- for git tools
+	use("lewis6991/gitsigns.nvim")
 	-- -- ====================== Syntax =====================
 	-- -- TODO: 配置
 	use({
