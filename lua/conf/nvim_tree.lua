@@ -1,117 +1,118 @@
-local nvim_tree = require 'nvim-tree'
-local nvim_tree_config = require 'nvim-tree.config'
+local nvim_tree = require("nvim-tree")
+local nvim_tree_config = require("nvim-tree.config")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
+vim.g.nvim_tree_auto_close = 1
 
-nvim_tree.setup {
-    disable_netrw = true,
-    hijack_netrw = true,
-    -- open_on_setup = false,
-    -- ignore_ft_on_setup = {
-        -- "startify",
-        -- "dashboard",
-        -- "alpha",
-    -- },
-    -- sort_by = "name",
-    -- auto_close = true, has been removed
-    open_on_tab = false,
-    -- hijack_cursor = false,
-    update_cwd = true,
-    -- hijack_directories = {
-        -- enable = true,
-        -- auto_open = true,
-    -- },
-    diagnostics = {
-        enable = true,
-        icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
-        },
-    },
-    update_focused_file = {
-        enable = true,
-        update_cwd = true,
-        ignore_list = {},
-    },
-    git = {
-        enable = true,
-        ignore = true,
-        timeout = 500,
-    },
-    view = {
-        -- width = 30,
-        -- height = 30,
-        -- hide_root_folder = false,
-        -- side = "left",
-        -- auto_resize = true,
-        adaptive_size = true,
-        mappings = {
-            -- custom_only = true, -- 只用自定义的按键
-            list = {
-                { key = "u", action = "parent_node" },
-                { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" }, -- 打开文件
-                { key = "h", cb = tree_cb "close_node" },
-                { key = "v", cb = tree_cb "vsplit" },
-            },
-        },
-        -- number = false,
-        -- relativenumber = false,
-    },
-    -- actions = {
-    --     quit_on_open = true,
-    --     window_picker = { enable = true },
-    -- },
-    renderer = {
-        highlight_git = true,
-        root_folder_modifier = ":t",
-        highlight_opened_files = "icon", -- can be [icon, name, all, none]
-        icons = {
-            -- show = {
-            --     file = true,
-            --     folder = true,
-            --     folder_arrow = true,
-            --     git = true,
-            -- },
-            glyphs = {
-                default = "",
-                symlink = "",
-                git = {
-                    unstaged = "",
-                    staged = "S",
-                    unmerged = "",
-                    renamed = "➜",
-                    deleted = "",
-                    untracked = "U",
-                    ignored = "◌",
-                },
-                folder = {
-                    default = "",
-                    open = "",
-                    empty = "",
-                    empty_open = "",
-                    symlink = "",
-                    arrow_closed = "", -- arrow when folder is closed
-                    arrow_open = "", -- arrow when folder is open
-                },
-            },
-        },
-        special_files = {
-            "README.md",
-            "readme.md",
-            "xmake.lua",
-            "CMakeLists.txt",
-        },
-    },
-    -- tab = {
-        -- sync = {
-            -- open = false,
-            -- close = false,
-            -- ignore = {},
-        -- },
-    -- },
-} -- view.mappings.list = { -- BEGIN_DEFAULT_MAPPINGS
+nvim_tree.setup({
+	disable_netrw = true,
+	hijack_netrw = true,
+	open_on_setup = true,
+	ignore_ft_on_setup = {
+		-- "startify",
+		-- "dashboard",
+		"alpha",
+	},
+	-- sort_by = "name",
+	-- auto_close = true, has been removed
+	open_on_tab = false,
+	-- hijack_cursor = false,
+	update_cwd = true,
+	-- hijack_directories = {
+	-- enable = true,
+	-- auto_open = true,
+	-- },
+	diagnostics = {
+		enable = true,
+		icons = {
+			hint = "",
+			info = "",
+			warning = "",
+			error = "",
+		},
+	},
+	update_focused_file = {
+		enable = true,
+		update_cwd = true,
+		ignore_list = {},
+	},
+	git = {
+		enable = true,
+		ignore = true,
+		timeout = 500,
+	},
+	view = {
+		-- width = 30,
+		-- height = 30,
+		-- hide_root_folder = false,
+		-- side = "left",
+		-- auto_resize = true,
+		adaptive_size = true,
+		mappings = {
+			-- custom_only = true, -- 只用自定义的按键
+			list = {
+				{ key = "u", action = "parent_node" },
+				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") }, -- 打开文件
+				{ key = "h", cb = tree_cb("close_node") },
+				{ key = "v", cb = tree_cb("vsplit") },
+			},
+		},
+		-- number = false,
+		-- relativenumber = false,
+	},
+	-- actions = {
+	--     quit_on_open = true,
+	--     window_picker = { enable = true },
+	-- },
+	renderer = {
+		highlight_git = true,
+		root_folder_modifier = ":t",
+		highlight_opened_files = "icon", -- can be [icon, name, all, none]
+		icons = {
+			-- show = {
+			--     file = true,
+			--     folder = true,
+			--     folder_arrow = true,
+			--     git = true,
+			-- },
+			glyphs = {
+				default = "",
+				symlink = "",
+				git = {
+					unstaged = "",
+					staged = "S",
+					unmerged = "",
+					renamed = "➜",
+					deleted = "",
+					untracked = "U",
+					ignored = "◌",
+				},
+				folder = {
+					default = "",
+					open = "",
+					empty = "",
+					empty_open = "",
+					symlink = "",
+					arrow_closed = "", -- arrow when folder is closed
+					arrow_open = "", -- arrow when folder is open
+				},
+			},
+		},
+		special_files = {
+			"README.md",
+			"readme.md",
+			"xmake.lua",
+			"CMakeLists.txt",
+		},
+	},
+	-- tab = {
+	-- sync = {
+	-- open = false,
+	-- close = false,
+	-- ignore = {},
+	-- },
+	-- },
+}) -- view.mappings.list = { -- BEGIN_DEFAULT_MAPPINGS
 --   { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
 --   { key = "<C-e>",                          action = "edit_in_place" },
 --   { key = "O",                              action = "edit_no_picker" },

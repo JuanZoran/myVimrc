@@ -45,18 +45,15 @@ packer.startup(function(use)
 	})
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	-- -- 通知栏
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+	})
 	use("rcarriga/nvim-notify")
 	-- -- smooth scroll
 	use("karb94/neoscroll.nvim")
-	-- use 'edluffy/specs.nvim'
-	-- -- 滚动栏
-	-- use 'petertriho/nvim-scrollbar'
-	-- use 'gelguy/wilder.nvim'
-	-- -- above func
-	-- use {
-	-- "SmiteshP/nvim-navic",
-	-- requires = "neovim/nvim-lspconfig"
-	-- }
 	-- -- ====================== Tools =====================
 	use("voldikss/vim-floaterm")
 	use("junegunn/vim-easy-align")
@@ -68,6 +65,7 @@ packer.startup(function(use)
 			require("conf.gitsigns")
 		end,
 	})
+	use("voldikss/vim-translator")
 	-- -- ====================== Syntax =====================
 	-- -- TODO: 配置
 	use({
@@ -79,10 +77,8 @@ packer.startup(function(use)
 	})
 	use({
 		"windwp/nvim-autopairs",
-		-- config = function() require("nvim-autopairs").setup {} end
 	})
 	--
-	-- use 'JoosepAlviste/nvim-ts-context-commentstring'
 	use("p00f/nvim-ts-rainbow")
 	use({ "michaelb/sniprun", run = "bash ./install.sh" })
 	--
@@ -123,28 +119,17 @@ packer.startup(function(use)
 	use("jvgrootveld/telescope-zoxide")
 	use("ThePrimeagen/harpoon")
 	use("brandoncc/telescope-harpoon.nvim")
-	-- use({
-	-- 	"benfowler/telescope-luasnip.nvim",
-	-- 	-- module = "telescope._extensions.luasnip",  -- if you wish to lazy-load
-	-- })
 	use({
 		"glacambre/firenvim",
 		run = function()
 			vim.fn["firenvim#install"](0)
 		end,
 	})
+
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 	use("folke/which-key.nvim")
-	--   config = function()
-	--     require("which-key").setup {
-	--       -- your configuration comes here
-	--       -- or leave it empty to use the default settings
-	--       -- refer to the configuration section below
-	--     }
-	--   end
-	-- }
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

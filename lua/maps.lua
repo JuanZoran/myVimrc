@@ -11,6 +11,7 @@ local function keymap(...) -- for better keymap-binding alias
 end
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 local nopt = {
 	silent = true,
 }
@@ -31,21 +32,21 @@ keymap(
 	--     require 'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))
 	-- end },
 	-- { "<leader>fb", builtin.buffers },
-	{ "<leader>rg", builtin.registers },
-	{ "<leader>fh", builtin.help_tags },
-	{ "<leader>ft", builtin.live_grep },
-	{ "<leader>sp", builtin.spell_suggest },
-	{ "<leader>lt", builtin.treesitter },
-	{ "<leader>le", builtin.diagnostics },
-	{ "<leader>fa", builtin.current_buffer_fuzzy_find },
-	-- { "<leader>fa", grep_string},
-	{ "<leader>fp", "<cmd>Telescope packer<cr>" },
-	{ "<leader>cd", "<cmd>Telescope zoxide list<cr>" },
-	{ "<leader>fh", "<cmd>Telescope harpoon marks<cr>" },
-	{ "<leader>sn", "<cmd>Telescope luasnip<cr>" },
-	{ "<C-e>", builtin.commands },
+	{ "<leader>tg", builtin.registers },
+	{ "<leader>th", builtin.help_tags },
+	{ "<leader>tt", builtin.live_grep },
+	{ "<leader>tf", builtin.current_buffer_fuzzy_find },
+	{ "<leader>tp", "<cmd>Telescope packer<cr>" },
+	{ "<leader>hm", "<cmd>Telescope harpoon marks<cr>" },
+	{ "<leader>ts", builtin.spell_suggest },
+	{ "<leader>tr", builtin.treesitter },
+	{ "<leader>te", builtin.diagnostics },
+	{ "<leader>tc", builtin.commands },
+	{ "<leader>ti", builtin.jumplist },
+	{ "<leader>tu", builtin.oldfiles },
+
 	{ "<C-u>", builtin.oldfiles },
-	{ "<C-h>", builtin.registers },
+	{ "<leader>cd", "<cmd>Telescope zoxide list<cr>" },
 	{ "<C-i>", builtin.jumplist },
 	{ "<C-_>", builtin.keymaps }, -- for C-/
 	{
@@ -57,7 +58,7 @@ keymap(
 )
 
 keymap("n", nopt, {
-	"<Leader>hk",
+	"<Leader>hh",
 	function()
 		require("harpoon.ui").toggle_quick_menu()
 	end,
@@ -69,15 +70,15 @@ keymap("n", nopt, {
 }, {
 	"<Leader>hj",
 	function()
-		require("harpoon.ui").nav_next()
+		require("harpoon.ui").nav_prev()
 	end,
 }, {
 	"<Leader>hl",
 	function()
-		require("harpoon.ui").nav_last()
+		require("harpoon.ui").nav_next()
 	end,
 }, {
-	"<Leader>hh",
+	"<Leader>hc",
 	function()
 		require("harpoon.cmd-ui").toggle_quick_menu()
 	end,
@@ -100,14 +101,18 @@ keymap(
 	nopt,
 	{ "'", '"' },
 	-- 光标移动
+	{ "i", "k" },
+	{ "k", "j" },
+	{ "j", "h" },
 
 	{ "L", "$" },
 	{ "J", "0" },
-	-- 输入
 	{ "h", "i" },
 	{ "H", "I" },
+	-- 输入
 	-- { "K", ":lua vim.notify('fuck you nvim')<CR>" },
 	{ "<Leader>=", "<Plug>(EasyAlign)" },
+	{ "<space>", "<Nop>" },
 	-- { "<Leader>cc", ":CommentToggle<CR>" },
 	{ "nr", "<Plug>SnipClose" },
 	{ "<Leader>R", "<Plug>SnipRun" }
@@ -119,10 +124,6 @@ keymap(
 	-- 光标移动, has done by plugin : neoscorll
 	--    {"I", "<C-u>"},
 	--    {"K", "<C-d>"},
-
-	{ "i", "k" },
-	{ "k", "j" },
-	{ "j", "h" },
 	-- 窗口相关
 	{ "wo", ":vsp<CR>" }, -- 左右分屏
 	{ "wu", ":sp<CR>" }, -- 上下分屏
@@ -130,8 +131,15 @@ keymap(
 	{ "wl", "<C-w>l" },
 	{ "wk", "<C-w>j" },
 	{ "wi", "<C-w>k" },
-	{ "w-", "<C-w>-" },
-	{ "w=", "<C-w>+" },
+	{ "w=", "<C-w>=" },
+	{ "w<Down>", "<C-w>J" },
+	{ "w<Up>", "<C-w>K" },
+	{ "w<Right>", "<C-w>L" },
+	{ "w<Left>", "<C-w>H" },
+	{ "<C-Down>", "<C-w>-" },
+	{ "<C-Up>", "<C-w>+" },
+	{ "<C-Right>", "<C-w>>" },
+	{ "<C-Left>", "<C-w><" },
 	{ "wn", ":only<CR>" },
 	{ "ww", "<cmd>NvimTreeToggle<CR>" },
 
@@ -140,7 +148,7 @@ keymap(
 	{ "<C-d>", ":FloatermToggle<CR>" },
 	-- TODO: config Bufferline
 	{ "<C-j>", ":BufferLineCyclePrev<CR>" },
-	{ "<Leader>d", ":BufferLinePickClose<CR>" },
+	{ "<Leader>b", ":BufferLinePickClose<CR>" },
 	{ "<C-l>", ":BufferLineCycleNext<CR>" },
 
 	{
@@ -151,9 +159,10 @@ keymap(
 	},
 	{ "<Leader>rn", "<cmd>Lspsaga rename<CR>" },
 	{ "<Leader>ca", "<cmd>Lspsaga code_action<CR>" },
-	{ "<Leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>" },
-	{ "<Leader>D", "<cmd>Lspsaga show_cursor_diagnostics<CR>" },
+	{ "<Leader>dd", "<cmd>Lspsaga show_line_diagnostics<CR>" },
+	{ "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>" },
 	{ "<Leader>o", "<cmd>LSoutlineToggle<CR>" },
+	{ "<Leader><Leader>", "<Plug>TranslateW" },
 	--- code referecnce
 	-- { "gh", function()
 	--     vim.lsp.buf.hover()
@@ -190,13 +199,13 @@ keymap(
 	-- { "<Leader>ej", function()
 	--     vim.diagnostic.goto_prev()
 	-- end },
-	{ "<Leader>ej", "<cmd>Lspsaga diagnostic_jump_prev<cr>" },
-	{ "<Leader>el", "<cmd>Lspsaga diagnostic_jump_next<cr>" },
+	{ "<Leader>dj", "<cmd>Lspsaga diagnostic_jump_prev<cr>" },
+	{ "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>" },
 	-- { "<Leader>el", function()
 	--     vim.diagnostic.goto_next()
 	-- end },
 	{
-		"<Leader>ee",
+		"<Leader>de",
 		function()
 			vim.diagnostic.open_float()
 		end,
@@ -247,15 +256,12 @@ keymap(
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
 	-- Move text up and down
-	{ "i", "k" },
-	{ "k", "j" },
-	{ "j", "h" },
 	{ "<A-k>", ":move '>+1<CR>gv-gv" },
 	{ "<A-i>", ":move '<-2<CR>gv-gv" },
+	{ "<Leader><Leader>", "<Plug>TranslateWV" },
 	{ "p", '"_dP' }, --- 选中的东西粘贴后, 不替换当前的寄存器
-
-	{ "[", "<" },
-	{ "]", ">" }
+	{ "[", "<gv" },
+	{ "]", ">gv" }
 )
 
 keymap( -- for insert and command-Line mode

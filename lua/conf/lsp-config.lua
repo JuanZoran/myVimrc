@@ -14,7 +14,6 @@ mason.setup({
 
 		-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
 		-- border = "none",
-
 		icons = {
 			-- The list icon to use for installed packages.
 			package_installed = "✓",
@@ -52,6 +51,7 @@ mason_lspconfig.setup({
 		"clangd",
 		"sumneko_lua",
 		"gopls",
+		-- "goimports",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = true, -- not the same as ensure_installed
@@ -64,7 +64,7 @@ mason_null_ls.setup({
 		"stylua", -- lua formatter
 		"clang-format",
 		"goimports",
-		-- "eslint_d", -- ts/js linter
+		"clangd",
 	},
 	-- auto-install configured formatters & linters (with null-ls)
 	automatic_installation = true,

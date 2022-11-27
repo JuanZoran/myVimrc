@@ -12,7 +12,7 @@ vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
 
 vim.opt.mouse = "a"
-vim.opt.cmdheight = 2
+-- vim.opt.cmdheight = 1
 vim.opt.pumheight = 10
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
