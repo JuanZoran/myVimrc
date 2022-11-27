@@ -1,89 +1,85 @@
-require("mason").setup {
-    ui = {
-        -- Whether to automatically check for new versions when opening the :Mason window.
-        -- check_outdated_packages_on_open = true,
+require("mason").setup({
+	ui = {
+		-- Whether to automatically check for new versions when opening the :Mason window.
+		-- check_outdated_packages_on_open = true,
 
-        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        -- border = "none",
+		-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+		-- border = "none",
 
-        icons = {
-            -- The list icon to use for installed packages.
-            package_installed = "✓",
-            -- The list icon to use for packages that are installing, or queued for installation.
-            package_pending = "➜",
-            -- The list icon to use for packages that are not installed.
-            package_uninstalled = "✗",
-        },
+		icons = {
+			-- The list icon to use for installed packages.
+			package_installed = "✓",
+			-- The list icon to use for packages that are installing, or queued for installation.
+			package_pending = "➜",
+			-- The list icon to use for packages that are not installed.
+			package_uninstalled = "✗",
+		},
 
-        keymaps = {
-            -- Keymap to expand a package
-            toggle_package_expand = "<CR>",
-            -- Keymap to install the package under the current cursor position
-            install_package = "<Leader>i",
-            -- Keymap to reinstall/update the package under the current cursor position
-            update_package = "u",
-            -- Keymap to check for new version for the package under the current cursor position
-            check_package_version = "c",
-            -- Keymap to update all installed packages
-            update_all_packages = "U",
-            -- Keymap to check which installed packages are outdated
-            check_outdated_packages = "C",
-            -- Keymap to uninstall a package
-            uninstall_package = "d",
-            -- Keymap to cancel a package installation
-            cancel_installation = "<C-c>",
-            -- Keymap to apply language filter
-            apply_language_filter = "<C-f>",
-        },
-    },
-}
+		keymaps = {
+			-- Keymap to expand a package
+			toggle_package_expand = "<CR>",
+			-- Keymap to install the package under the current cursor position
+			install_package = "<Leader>i",
+			-- Keymap to reinstall/update the package under the current cursor position
+			update_package = "u",
+			-- Keymap to check for new version for the package under the current cursor position
+			check_package_version = "c",
+			-- Keymap to update all installed packages
+			update_all_packages = "U",
+			-- Keymap to check which installed packages are outdated
+			check_outdated_packages = "C",
+			-- Keymap to uninstall a package
+			uninstall_package = "d",
+			-- Keymap to cancel a package installation
+			cancel_installation = "<C-c>",
+			-- Keymap to apply language filter
+			apply_language_filter = "<C-f>",
+		},
+	},
+})
 require("mason-lspconfig").setup()
-require("mason-lspconfig").setup_handlers {
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function (server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup {}
-    end,
-    -- Next, you can provide a dedicated handler for specific servers.
-    -- For example, a handler override for the `rust_analyzer`:
-    -- ["rust_analyzer"] = function ()
-    --     require("rust-tools").setup {}
-    -- end
-}
-local lspconfig = require('lspconfig')
+require("mason-lspconfig").setup_handlers({
+	-- The first entry (without a key) will be the default handler
+	-- and will be called for each installed server that doesn't have
+	-- a dedicated handler.
+	function(server_name) -- default handler (optional)
+		require("lspconfig")[server_name].setup({})
+	end,
+	-- Next, you can provide a dedicated handler for specific servers.
+	-- For example, a handler override for the `rust_analyzer`:
+	-- ["rust_analyzer"] = function ()
+	--     require("rust-tools").setup {}
+	-- end
+})
+local lspconfig = require("lspconfig")
 local lsp_defaults = lspconfig.util.default_config
 
-lsp_defaults.capabilities = vim.tbl_deep_extend(
-  'force',
-  lsp_defaults.capabilities,
-  require('cmp_nvim_lsp').default_capabilities()
-)
+lsp_defaults.capabilities =
+	vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 local lkind = {
-  mode = "symbol",
-  symbol_map = {
-    NONE = "",
-    Array = "",
-    Boolean = "⊨",
-    Class = "",
-    Constructor = "",
-    Key = "",
-    Namespace = "",
-    Null = "NULL",
-    Number = "#",
-    Object = "⦿",
-    Package = "",
-    Property = "",
-    Reference = "",
-    Snippet = "",
-    String = "𝓐",
-    TypeParameter = "",
-    Unit = "",
-  },
+	mode = "symbol",
+	symbol_map = {
+		NONE = "",
+		Array = "",
+		Boolean = "⊨",
+		Class = "",
+		Constructor = "",
+		Key = "",
+		Namespace = "",
+		Null = "NULL",
+		Number = "#",
+		Object = "⦿",
+		Package = "",
+		Property = "",
+		Reference = "",
+		Snippet = "",
+		String = "𝓐",
+		TypeParameter = "",
+		Unit = "",
+	},
 }
 require("lspkind").init(lkind)
-
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig
 -- for auto load lsp

@@ -65,7 +65,7 @@ packer.startup(function(use)
 	use({
 		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("gitsigns").setup()
+			require("conf.gitsigns")
 		end,
 	})
 	-- -- ====================== Syntax =====================
@@ -110,6 +110,7 @@ packer.startup(function(use)
 	-- --- snip
 	use("saadparwaiz1/cmp_luasnip")
 	use("L3MON4D3/LuaSnip")
+	use("rafamadriz/friendly-snippets")
 
 	-- -- Telescope
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
@@ -122,10 +123,10 @@ packer.startup(function(use)
 	use("jvgrootveld/telescope-zoxide")
 	use("ThePrimeagen/harpoon")
 	use("brandoncc/telescope-harpoon.nvim")
-	use({
-		"benfowler/telescope-luasnip.nvim",
-		-- module = "telescope._extensions.luasnip",  -- if you wish to lazy-load
-	})
+	-- use({
+	-- 	"benfowler/telescope-luasnip.nvim",
+	-- 	-- module = "telescope._extensions.luasnip",  -- if you wish to lazy-load
+	-- })
 	use({
 		"glacambre/firenvim",
 		run = function()
@@ -135,7 +136,7 @@ packer.startup(function(use)
 	-- formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
-	--   "folke/which-key.nvim",
+	use("folke/which-key.nvim")
 	--   config = function()
 	--     require("which-key").setup {
 	--       -- your configuration comes here

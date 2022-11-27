@@ -5,6 +5,7 @@ vim.opt.relativenumber = true
 
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
+-- vim.opt.smarttab = false
 vim.opt.fileencoding = "utf-8"
 
 vim.opt.scrolloff = 10
@@ -17,7 +18,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hidden = true
 vim.opt.title = true -- for show current dir
-vim.opt.timeoutlen = 800 --default value = 1000
+vim.opt.timeoutlen = 500 --default value = 1000
 -- vim.opt.showtabline = 2 -- for 标签页面
 -- vim.opt.hlsearch = true    default for true
 vim.opt.hlsearch = false
@@ -59,7 +60,7 @@ vim.g.did_load_filetypes = 1
 vim.g.loaded_spellfile_plugin = 1
 
 -- Do not load native syntax completion
--- vim.g.loaded_syntax_completion = 1
+vim.g.loaded_syntax_completion = 1
 ---  SETTINGS  ---
 vim.opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.opt.shortmess:append("c") -- don't show redundant messages from ins-completion-menu

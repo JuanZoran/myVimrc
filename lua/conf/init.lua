@@ -10,6 +10,7 @@ async.run(function()
 	require("lualine").setup({
 		options = { theme = "everforest" },
 	})
+	require("which-key").setup({})
 end)
 
 async.run(function()
