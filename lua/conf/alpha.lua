@@ -23,6 +23,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>"),
 	dashboard.button("s", "  > Settings", ":e $HOME/.config/nvim/lua/base.lua<CR>"),
 	dashboard.button("k", "  > keybings", ":e $HOME/.config/nvim/lua/maps.lua<CR>"),
+	-- dashboard.button("j", "  > keybings", ":e $HOME/.config/nvim/lua/maps.lua<CR>"), -- TODO config this file
 	dashboard.button("q", "  > Quit", ":qa<CR>"),
 }
 

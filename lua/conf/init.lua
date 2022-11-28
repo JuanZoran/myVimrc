@@ -1,14 +1,19 @@
 local async = require("plenary.async")
 async.run(function()
-	require("impatient")
 	require("filetype").setup({})
 	require("conf.notify")
 end)
 
 async.run(function()
 	require("conf.nvim_tree")
+    local navic = require("nvim-navic")
 	require("lualine").setup({
 		options = { theme = "everforest" },
+        sections = {
+        lualine_c = {
+            { navic.get_location, cond = navic.is_available },
+        }
+    }
 	})
 	require("conf.which-key")
 end)
@@ -20,7 +25,7 @@ async.run(function()
 	require("conf.comment")
 	require("conf.lsp-config")
 	require("conf.lsp.lspsaga")
-	require("conf.lsp.null-ls")
+	-- require("conf.lsp.null-ls")
 	require("conf.lsp")
 end)
 async.run(function()

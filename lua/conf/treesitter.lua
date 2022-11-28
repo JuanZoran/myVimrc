@@ -24,6 +24,16 @@ ts.setup({
 	indent = {
 		enable = true,
 	},
+	autopairs = {
+		enable = true,
+	},
+	textobjects = require("conf.textobjects"),
+    neorg = {
+        enable = true,
+    },
+    matchup = {
+        enable = true,
+    },
 })
 
 require("nvim-treesitter.install").prefer_git = true

@@ -1,12 +1,8 @@
 local vim = vim
-local function keymap(...) -- for better keymap-binding alias
+local function keymap(mode, option, ...) -- for better keymap-binding alias
 	local maps = { ... }
-	local mode = maps[1]
-	local option = maps[2]
-	for k, v in ipairs(maps) do
-		if k > 2 then
-			vim.keymap.set(mode, v[1], v[2], option)
-		end
+	for _, v in ipairs(maps) do
+		vim.keymap.set(mode, v[1], v[2], option)
 	end
 end
 
@@ -34,6 +30,7 @@ keymap(
 	-- { "<leader>fb", builtin.buffers },
 	{ "<leader>tg", builtin.registers },
 	{ "<leader>th", builtin.help_tags },
+	{ "<leader>gf", builtin.git_files },
 	{ "<leader>tt", builtin.live_grep },
 	{ "<leader>tf", builtin.current_buffer_fuzzy_find },
 	{ "<leader>tp", "<cmd>Telescope packer<cr>" },
@@ -44,6 +41,20 @@ keymap(
 	{ "<leader>tc", builtin.commands },
 	{ "<leader>ti", builtin.jumplist },
 	{ "<leader>tu", builtin.oldfiles },
+	{ "<leader>tk", builtin.keymaps },
+	{
+		"==",
+		function()
+			vim.lsp.buf.format({
+				filter = function(client)
+					-- apply whatever logic you want (in this example, we'll only use null-ls)
+					return client.name == "null-ls"
+				end,
+				-- bufnr = bufnr,
+				async = true,
+			})
+		end,
+	},
 
 	{ "<C-u>", builtin.oldfiles },
 	{ "<leader>cd", "<cmd>Telescope zoxide list<cr>" },
@@ -104,7 +115,20 @@ keymap(
 	{ "i", "k" },
 	{ "k", "j" },
 	{ "j", "h" },
+    {"s", ":HopChar2MW<cr>"},
+    -- {"S", ":HopChar2MW<cr>"},
 
+	{ "ej", ":HopPatternBC<CR>" },
+	{ "ee", "e" },
+	{ "el", ":HopPatternAC<CR>" },
+	{ "<Leader>l", ":HopWordAC<CR>" },
+	{ "<Leader>i", ":HopVerticalBC<CR>" },
+	{ "<Leader>k", ":HopVerticalAC<CR>" },
+	{ "<Leader>j", ":HopWordBC<CR>" },
+	{ "<Leader>sa", ":SaveSession<CR>" },
+	{ "<Leader>sr", ":Autosession search<CR>" },
+	{ "<Leader>st", ":Telescope session-lens search_session<CR>" },
+	{ "<Leader>sd", ":Autosession delete<CR>" },
 	{ "L", "$" },
 	{ "J", "0" },
 	{ "h", "i" },
@@ -142,37 +166,50 @@ keymap(
 	{ "<C-Left>", "<C-w><" },
 	{ "wn", ":only<CR>" },
 	{ "ww", "<cmd>NvimTreeToggle<CR>" },
+    { ';', '@'},
+    { ';;', 'q'},
+    { "'", '"'},
+    -- { "''", '.'},
 
-	{ "<C-t>", ":FloatermNew<CR>" },
+	{ "<Leader>tm", ":FloatermNew<CR>" },
+	{ "<Leader>gi", ":FloatermNew lazygit<CR>" },
 	{ "<Leader>ra", ":FloatermNew ranger<CR>" },
 	{ "<C-d>", ":FloatermToggle<CR>" },
+	{ "<C-g>", ":FloatermNew lazygit<CR>" },
+	{ "<C-h>", "<cmd>FloatermHide<CR>" },
 	-- TODO: config Bufferline
 	{ "<C-j>", ":BufferLineCyclePrev<CR>" },
 	{ "<Leader>b", ":BufferLinePickClose<CR>" },
-	{ "<C-l>", ":BufferLineCycleNext<CR>" },
 
-	{
-		"==",
-		function()
-			vim.lsp.buf.format({ asyn = true })
-		end,
-	},
+	{ "<C-l>", ":BufferLineCycleNext<CR>" },
 	{ "<Leader>rn", "<cmd>Lspsaga rename<CR>" },
 	{ "<Leader>ca", "<cmd>Lspsaga code_action<CR>" },
+	{ "<Leader>df", "<cmd>FloatermKill<cr>" },
 	{ "<Leader>dd", "<cmd>Lspsaga show_line_diagnostics<CR>" },
 	{ "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>" },
+	{
+		"<Leader>dm",
+		function()
+			vim.diagnostic.setqflist()
+		end,
+	},
 	{ "<Leader>o", "<cmd>LSoutlineToggle<CR>" },
 	{ "<Leader><Leader>", "<Plug>TranslateW" },
-	--- code referecnce
-	-- { "gh", function()
-	--     vim.lsp.buf.hover()
-	-- end },
 	{ "gh", "<cmd>Lspsaga hover_doc<cr>" },
 	{ "gf", "<cmd>Lspsaga lsp_finder<cr>" },
 	{ "gd", "<cmd>Lspsaga peek_definition<cr>" },
-	-- { "gd", function()
-	--     vim.lsp.buf.definition()
-	-- end },
+    { 'yw', 'yiw'},
+    { 'y"', 'yi"'},
+    { 'yp', 'yip'},
+    { 'dw', 'diw'},
+    { 'dp', 'dip'},
+    { 'd"', 'di"'},
+    { 'vw', 'viw'},
+    { 'vp', 'vip'},
+    { 'v"', 'vi"'},
+    { 'cw', 'ciw'},
+    { 'cp', 'cip'},
+    { 'c"', 'ci"'},
 	{
 		"gD",
 		function()
@@ -185,9 +222,6 @@ keymap(
 			vim.lsp.buf.implementation()
 		end,
 	},
-	-- { "gf", function()
-	--     vim.lsp.buf.implementation()
-	-- end },
 	{
 		"gr",
 		function()
@@ -196,48 +230,40 @@ keymap(
 	},
 
 	-- for text diagnostic
-	-- { "<Leader>ej", function()
-	--     vim.diagnostic.goto_prev()
-	-- end },
 	{ "<Leader>dj", "<cmd>Lspsaga diagnostic_jump_prev<cr>" },
 	{ "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>" },
-	-- { "<Leader>el", function()
-	--     vim.diagnostic.goto_next()
-	-- end },
 	{
 		"<Leader>de",
 		function()
 			vim.diagnostic.open_float()
 		end,
 	},
-	-- ======= for which key ==============
-	-- which key will auto create maps, so we don't need do anything
-	-- { "<Leader>", ":WhichKey <Space><CR>" },
-	-- { "g", ":WhichKey g<CR>" },
-	-- { "w", ":WhichKey w<CR>" },
-
 	---------------------------
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
 	-- 其他
-	-- { "nh", ":noh<CR>" },
 	{ "<C-a>", "/<++><CR>vf>c" }, -- PlaceHolder
 	{ "<C-w>", ":wq<CR>" },
 	{ "<C-q>", ":q!<CR>" },
 	{ "na", "<C-a>" },
-	{ "<Leader>a", "@" },
-	{ "<Leader>p", ":PackerSync<CR>" }, -- TODO :插件安装
+	{ "<Leader>p", ":PackerSync<CR>" }, -- :插件安装
 	-- { "<Leader>w", ":w<CR>:source $MYVIMRC<CR>" }, --TODO
 	{ "<Leader>ck", ":set spell!<CR>" }
 )
+
+
+
+
+
 
 keymap(
 	"i", -- 插入模式
 	iopt,
 	{ "<C-f>", ":FloatermNew fanger<CR>" },
-	--
+	{ "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
+	{ "<C-d>", "<Esc><cmd>FloatermToggle<CR>" },
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
@@ -271,13 +297,32 @@ keymap( -- for insert and command-Line mode
 	{ "<C-l>", "<Right>" }
 )
 
+-- place this in one of your configuration file(s)
+local hop = require("hop")
+local directions = require("hop.hint").HintDirection
+vim.keymap.set("", "f", function()
+	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+end, { remap = true })
+vim.keymap.set("", "F", function()
+	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+end, { remap = true })
+vim.keymap.set("", "t", function()
+	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
+end, { remap = true })
+vim.keymap.set("", "T", function()
+	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
+end, { remap = true })
+
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
-vim.keymap.set("n", ";", ":")
--- has been maped by neo-scroll plugin
--- vim.keymap.set("", "I", "<c-u>zz", { noremap = false })
--- vim.keymap.set("", "I", "<c-u>", { noremap = false })
--- vim.keymap.set("", "K", "<c-d>", { noremap = false })
+vim.keymap.set("n", "<Leader>T", ":Telescope ")
+vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", nopt)
+vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", nopt)
+
+
+-- vim.keymap.set("n", "<Tab>", '<CMD>lua print([[ Tab is pressed ]])<CR>')
+-- vim.keymap.set("n", "<C-i>", '<CMD>lua print([[ Ctr-i is pressed ]])<CR>')
+-- vim.keymap.set("n", "<C-i>", '<C-i>')
 
 -- String value	Help page	Affected modes	Vimscript equivalent
 -- '' (an empty string)	mapmode-nvo	Normal, Visual, Select, Operator-pending	:map
@@ -290,3 +335,5 @@ vim.keymap.set("n", ";", ":")
 -- 'i'	mapmode-i	Insert	:imap
 -- 'l'	mapmode-l	Insert, Command-line, Lang-Arg	:lmap
 -- 'c'	mapmode-c	Command-line	:cmap
+
+

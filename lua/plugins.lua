@@ -26,6 +26,7 @@ packer.startup(function(use)
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		sections = { lualine_c = { require("auto-session-library").current_session_name } },
 	})
 	-- -- 文件树
 	use({
@@ -56,6 +57,38 @@ packer.startup(function(use)
 	use("karb94/neoscroll.nvim")
 	-- -- ====================== Tools =====================
 	use("voldikss/vim-floaterm")
+	use({
+		"RRethy/vim-illuminate",
+		config = function()
+			require("conf/illuminate")
+		end,
+	})
+	use({
+		"mfussenegger/nvim-treehopper",
+		config = function()
+			require("conf/treehop")
+		end,
+	})
+	use({
+		"rmagatti/auto-session",
+		config = function()
+			require("auto-session").setup({
+				log_level = "error",
+				auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			})
+		end,
+	})
+	use({
+		"rmagatti/session-lens",
+		requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
+		config = function()
+			require("session-lens").setup({--[[your custom config--]]
+                prompt_title = '历史片段',
+                -- theme_conf = require('telescope.themes').get_dropdown()
+			})
+		end,
+	})
+
 	use("junegunn/vim-easy-align")
 	use("terrortylor/nvim-comment")
 	-- for git tools
@@ -66,6 +99,14 @@ packer.startup(function(use)
 		end,
 	})
 	use("voldikss/vim-translator")
+	use({
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+		config = function()
+			-- you can configure Hop the way you like here; see :h hop-config
+			require("hop").setup({})
+		end,
+	})
 	-- -- ====================== Syntax =====================
 	-- -- TODO: 配置
 	use({
@@ -78,10 +119,16 @@ packer.startup(function(use)
 	use({
 		"windwp/nvim-autopairs",
 	})
+	use("nvim-treesitter/nvim-treesitter-textobjects")
 	--
 	use("p00f/nvim-ts-rainbow")
-	use({ "michaelb/sniprun", run = "bash ./install.sh" })
-	--
+	use({
+		"michaelb/sniprun",
+		run = "bash install.sh",
+		config = function()
+			require("conf.sniprun").setup()
+		end,
+	})
 	-- -- ====================== Completion =====================
 	--
 	use({
@@ -97,7 +144,9 @@ packer.startup(function(use)
 		after = "nvim-cmp",
 		run = "bash ./install.sh",
 	})
-	use("hrsh7th/nvim-cmp")
+	use({ "hrsh7th/nvim-cmp", requires = {
+		"L3MON4D3/LuaSnip",
+	} })
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
@@ -114,6 +163,16 @@ packer.startup(function(use)
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
+	use({
+		"nvim-neorg/neorg",
+		-- tag = "*",
+		ft = "norg",
+		run = ":Neorg sync-parsers",
+		after = "nvim-treesitter", -- You may want to specify Telescope here as well
+		config = function()
+			require("conf/neorg").setup()
+		end,
+	})
 	use("nvim-telescope/telescope-project.nvim")
 	use("nvim-telescope/telescope-packer.nvim")
 	use("jvgrootveld/telescope-zoxide")
@@ -127,9 +186,31 @@ packer.startup(function(use)
 	})
 
 	-- formatting & linting
-	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
-	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	}) -- configure formatters & linters
+	use({
+		"jayp0521/mason-null-ls.nvim",
+		config = function()
+			require("mason-null-ls").setup({})
+		end,
+	}) -- bridges gap b/w mason & null-ls
 	use("folke/which-key.nvim")
+	use({
+		"SmiteshP/nvim-navic",
+		requires = "neovim/nvim-lspconfig",
+	})
+
+	--- =========== alternative ======================
+	-- use({
+	-- 	"andymass/vim-matchup",
+	-- 	setup = function()
+	-- 		-- may set any options here
+	--             -- vim.g.matchup_surround_enabled = 1
+	-- 		vim.g.matchup_matchparen_offscreen = { method = "popup" }
+	-- 	end,
+	-- })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

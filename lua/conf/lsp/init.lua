@@ -1,3 +1,17 @@
+local servers = {
+	"sumneko_lua",
+	"pyright",
+	"clangd",
+	"gopls",
+	"bashls",
+}
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = servers,
+	automatic_installation = true,
+})
+
 -- import lspconfig plugin safely
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
@@ -5,58 +19,22 @@ if not lspconfig_status then
 	return
 end
 
--- import cmp-nvim-lsp plugin safely
-local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_nvim_lsp_status then
-	vim.notify("cmp_lsp error", "error")
-	return
+local opts = {}
+for _, server in pairs(servers) do
+	opts = {
+		on_attach = require("conf.lsp.handlers").on_attach,
+		capabilities = require("conf.lsp.handlers").capabilities,
+	}
+
+	server = vim.split(server, "@")[1]
+	local require_ok, conf_opts = pcall(require, "conf.lsp.settings." .. server)
+	if require_ok then
+		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+	else
+		vim.notify(server .. " Not Found")
+	end
+
+	lspconfig[server].setup(opts)
 end
 
--- local on_attach = function(client, buf)
--- used to enable autocompletion (assign to every lsp server config)
-local capabilities = cmp_nvim_lsp.default_capabilities()
-local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
-lspconfig["sumneko_lua"].setup({
-	capabilities = capabilities,
-	-- on_attach = on_attach,
-	settings = { -- custom settings for lua
-		Lua = {
-			-- make the language server recognize "vim" global
-			diagnostics = {
-				globals = { "vim" },
-			},
-			workspace = {
-				-- make language server aware of runtime files
-				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.stdpath("config") .. "/lua"] = true,
-				},
-			},
-		},
-	},
-})
-
-lspconfig["clangd"].setup({
-	-- capabilities = capabilities,
-	-- -- on_attach = on_attach,
-	-- settings = { -- custom settings for lua
-	-- 	Lua = {
-	-- 		-- make the language server recognize "vim" global
-	-- 		diagnostics = {
-	-- 			globals = { "vim" },
-	-- 		},
-	-- 		workspace = {
-	-- 			-- make language server aware of runtime files
-	-- 			library = {
-	-- 				[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-	-- 				[vim.fn.stdpath("config") .. "/lua"] = true,
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
-})
+require("conf.lsp.null-ls")
