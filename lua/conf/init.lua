@@ -6,15 +6,6 @@ require("conf.notify")
 
 -- async.run(function()
 require("conf.nvim_tree")
-local navic = require("nvim-navic")
-require("lualine").setup({
-	options = { theme = "everforest" },
-	sections = {
-		lualine_c = {
-			{ navic.get_location, cond = navic.is_available },
-		},
-	},
-})
 require("conf.which-key")
 -- end)
 

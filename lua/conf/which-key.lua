@@ -4,89 +4,80 @@ wk.register({
 	["<Leader>"] = {
 		["t"] = {
 			name = " Telescope",
-			g = { builtin.registers, " 查看所有寄存器的值" },
-			h = { builtin.help_tags, " 查看所有tag" },
-			t = { builtin.live_grep, " 正则查找目录下的文件" },
-			f = { builtin.current_buffer_fuzzy_find, " 模糊查找当前Buffer内容" },
-			s = { builtin.spell_suggest, "益查找拼写建议" },
-			r = { builtin.treesitter, " 查看treesitter提供的符号" },
-			e = { builtin.diagnostics, " 查看诊断信息" },
-			c = { builtin.commands, "גּ 查看命令模式下的所有命令" },
-			u = { builtin.oldfiles, " 查看编辑历史[C-u]" },
-			i = { builtin.jumplist, " 查看跳转历史[C-i]" },
-			k = { builtin.keymaps, " 查看所有的键位映射[C-/]" },
+			g = { builtin.registers, " Check out all register" },
+			h = { builtin.help_tags, " Check out all tags" },
+			t = { builtin.live_grep, " Search text in cucurrent directory" },
+			f = { builtin.current_buffer_fuzzy_find, " Search text in current buffer" },
+			s = { builtin.spell_suggest, "益spell suggestions about cursor word" },
+			r = { builtin.treesitter, "滑Have a look at the tags provided by 滑" },
+			e = { builtin.diagnostics, " take a look" },
+			c = { builtin.commands, "גּ Check out commands" },
+			u = { builtin.oldfiles, " Check out edited files[C-u]" },
+			i = { builtin.jumplist, " Get jumplist[C-i]" },
+			k = { builtin.keymaps, " Check out keymaps[C-/]" },
 		},
 		["h"] = {
 			name = " Harpoon",
 			h = {
-				function()
-					require("harpoon.ui").toggle_quick_menu()
-				end,
-				" 打开文件清单",
+				require("harpoon.ui").toggle_quick_menu,
+				" You recored file List",
 			},
 			c = {
-				function()
-					require("harpoon.cmd-ui").toggle_quick_menu()
-				end,
-				" 打开命令清单",
+				require("harpoon.cmd-ui").toggle_quick_menu,
+				" Open Commands List",
 			},
 			i = {
-				function()
-					require("harpoon.mark").add_file()
-				end,
-				" 将当前文件加入清单",
+				require("harpoon.mark").add_file,
+				" Add current file to list",
 			},
 			j = {
-				function()
-					require("harpoon.ui").nav_prev()
-				end,
-				"ﭢ 跳转到下一个清单文件",
+				require("harpoon.ui").nav_prev,
+				"ﭢ Jump to next file on the list",
 			},
 			l = {
-				function()
-					require("harpoon.ui").nav_next()
-				end,
-				"ﭠ 跳转到上一个清单文件",
+				require("harpoon.ui").nav_next,
+				"ﭠ Jump to last file on the list",
 			},
-			m = { "<cmd>Telescope harpoon marks<CR>", " 查看所有标记" },
+			m = { "<cmd>Telescope harpoon marks<CR>", " show all the marks by telescope" },
 		},
-		["="] = { "<Plug>EasyAlign", "ﱓ 按格式对齐" },
-		["R"] = { "<Plug>SnipRun", " 运行代码片段" },
-		["o"] = { "<cmd>LSoutlineToggle<CR>", " 查看变量窗口" },
-		["b"] = { ":BufferLinePickClose<CR>", "﫧选中一个缓冲区删除" },
-		["<space>"] = { "<Plug>TranslateW", " 查看当前单词的翻译" },
-		["p"] = { ":PackerSync<CR>", "מּ [同步/安装] 插件" },
+		["="] = { "<Plug>(EasyAlign)", "ﱓ EasyAlign" },
+		["R"] = { "<Plug>SnipRun", " Run the code snip" },
+		["o"] = { "<cmd>LSoutlineToggle<CR>", " Show the variables window" },
+		["b"] = { ":BufferLinePickClose<CR>", "﫧 Pick a Buffer to delete" },
+		["<space>"] = { "<Plug>TranslateW", " Translate" },
+		["p"] = { ":PackerSync<CR>", "מּ [Sync/Install] Plugin" },
+		-- ["u"] = { ":PackerSync<CR>", "מּ [Sync/Install] Plugin" },
 		["r"] = {
 			name = "凜ranger/rename",
-			a = { ":FloatermNew ranger<CR>", " 新建一个终端运行ranger" },
-			n = { "<cmd>Lspsaga rename<CR>", "凜重命名" },
+			a = { ":FloatermNew ranger<CR>", " Ranger" },
+			n = { "<cmd>Lspsaga rename<CR>", "凜 Rename" },
 		},
 		["c"] = {
 			name = " spell/code_action/cd",
-			k = { ":set spell!<CR>", "暈开/关 vim自带的拼写检查" },
-			a = { "<cmd>Lspsaga code_action<CR>", " 查看可以进行的代码操作" },
-			d = { "<cmd>Telescope zoxide list<CR>", " 查看最近跳转" },
+			k = { ":set spell!<CR>", "暈Toggle vim builtin spell checker" },
+			a = { "<cmd>Lspsaga code_action<CR>", " Code Action" },
+			d = { "<cmd>Telescope zoxide list<CR>", " Cd recently directory" },
 		},
-		["d"] = {
-			name = " 代码诊断",
-			d = { "<cmd>Lspsaga show_line_diagnostics<CR>", " 查看当前行诊断信息" },
-			c = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", " 查看光标处诊断信息" },
-			j = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", " 跳转到上一个诊断信息处" },
-			l = { "<cmd>Lspsaga diagnostic_jump_next<CR>", " 跳转到下一个诊断信息处" },
-			m = {
-				function()
-					vim.diagnostic.setqflist()
-				end,
-				" 打开诊断列表",
-			},
-			e = {
-				function()
-					vim.diagnostic.open_float()
-				end,
-				" 查看详细诊断信息",
-			},
-		},
-	},
+		-- ["d"] = {
+		-- 	name = " Diagnostic",
+		-- 	d = { "<cmd>Lspsaga show_line_diagnostics<CR>", " " },
+		-- 	c = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", " 查看光标处诊断信息" },
+		-- 	j = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", " 跳转到上一个诊断信息处" },
+		-- 	l = { "<cmd>Lspsaga diagnostic_jump_next<CR>", " 跳转到下一个诊断信息处" },
+		-- 	m = {
+		-- 		function()
+		-- 			vim.diagnostic.setqflist()
+		-- 		end,
+		-- 		" 打开诊断列表",
+		-- 	},
+		-- 	e = {
+		-- 		function()
+		-- 			vim.diagnostic.open_float()
+		-- 		end,
+		-- 		" 查看详细诊断信息",
+		-- 	},
+		-- },
+	-- },
 	["w"] = {
 		name = " 窗口操作",
 		o = { ":vsp<CR>", " 左右分屏" },
@@ -103,29 +94,29 @@ wk.register({
 		["<Left>"] = { "<C-w>H", " 窗口向左移动" },
 		["<Right>"] = { "<C-w>L", " 窗口向右移动" },
 	},
-	["g"] = {
-		name = " 跳转操作",
-		h = { "<cmd>Lspsaga hover_doc<cr>", " 查看悬浮文档" },
-		f = { "<cmd>Lspsaga lsp_finder<cr>", " 查看相关信息" },
-		d = { "<cmd>Lspsaga peek_definition<cr>", " 查看定义" },
-		D = {
-			function()
-				vim.lsp.buf.declaration()
-			end,
-			" 查看声明",
-		},
-		i = {
-			function()
-				vim.lsp.buf.implementation()
-			end,
-			" 查看实现",
-		},
-		r = {
-			function()
-				vim.lsp.buf.references()
-			end,
-			" 查看所有引用",
-		},
+	-- ["g"] = {
+	-- 	name = " 跳转操作",
+	-- 	h = { "<cmd>Lspsaga hover_doc<cr>", " 查看悬浮文档" },
+	-- 	f = { "<cmd>Lspsaga lsp_finder<cr>", " 查看相关信息" },
+	-- 	d = { "<cmd>Lspsaga peek_definition<cr>", " 查看定义" },
+	-- 	D = {
+	-- 		function()
+	-- 			vim.lsp.buf.declaration()
+	-- 		end,
+	-- 		" 查看声明",
+	-- 	},
+	-- 	i = {
+	-- 		function()
+	-- 			vim.lsp.buf.implementation()
+	-- 		end,
+	-- 		" 查看实现",
+	-- 	},
+	-- 	r = {
+	-- 		function()
+	-- 			vim.lsp.buf.references()
+	-- 		end,
+	-- 		" 查看所有引用",
+	-- 	},
 	},
 })
 

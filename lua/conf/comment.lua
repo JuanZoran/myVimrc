@@ -1,4 +1,3 @@
--- TODO: config this
 require("Comment").setup({
 	---Add a space b/w comment and the line
 	-- padding = true,
@@ -20,15 +19,15 @@ require("Comment").setup({
 	-- 	---Block-comment keymap
 	-- 	block = "gb",
 	-- },
-	-- ---LHS of extra mappings
-	-- extra = {
-	-- 	---Add comment on the line above
-	-- 	above = "gcO",
-	-- 	---Add comment on the line below
-	-- 	below = "gco",
-	-- 	---Add comment at the end of line
-	-- 	eol = "gcA",
-	-- },
+	---LHS of extra mappings
+	extra = {
+		---Add comment on the line above
+		above = "gcO",
+		---Add comment on the line below
+		below = "gco",
+		---Add comment at the end of line
+		eol = "<Leader>A",
+	},
 	-- ---Enable keybindings
 	-- ---NOTE: If given `false` then the plugin won't create any mappings
 	-- mappings = {

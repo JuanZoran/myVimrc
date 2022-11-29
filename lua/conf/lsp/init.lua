@@ -1,12 +1,11 @@
 local servers = {
-	"sumneko_lua",
+	"sumneko_lua", -- for python
 	"pyright",
 	"clangd",
 	"gopls",
 	"bashls",
-    "marksman",
+	"marksman",
 }
-
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
@@ -20,11 +19,14 @@ if not lspconfig_status then
 	return
 end
 
+local handler = require("conf.lsp.handlers")
+handler.setup()
+--- 自动启动
 local opts = {}
 for _, server in pairs(servers) do
 	opts = {
-		on_attach = require("conf.lsp.handlers").on_attach,
-		capabilities = require("conf.lsp.handlers").capabilities,
+		on_attach = handler.on_attach,
+		capabilities = handler.capabilities,
 	}
 
 	server = vim.split(server, "@")[1]

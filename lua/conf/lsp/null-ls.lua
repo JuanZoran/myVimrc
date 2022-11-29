@@ -15,7 +15,7 @@ null_ls.setup({
 		formatting.clang_format,
 		formatting.goimports,
 		formatting.beautysh,
-		diagnostics.cpplint,
+		-- diagnostics.cpplint,
 		diagnostics.shellcheck,
 		diagnostics.pylint,
 	},

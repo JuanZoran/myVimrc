@@ -53,4 +53,18 @@ require("noice").setup({
 	hover = {
 		enabled = false, -- avoid get conflicts with lspsaga
 	},
+	-- routes = {
+	-- 	{
+	-- 		filter = {
+	-- 			event = "msg_show",
+	-- 			kind = "",
+	-- 			find = "written",
+	-- 		},
+	-- 		opts = { skip = true },
+	-- 	},
+	-- 	{
+	-- 		view = "notify",
+	-- 		filter = { event = "msg_showmode" },
+	-- 	},
+	-- },
 })

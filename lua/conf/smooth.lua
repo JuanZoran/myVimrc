@@ -1,10 +1,18 @@
-
 require('cinnamon').setup {
   extra_keymaps = false,
-  override_keymaps = true,
+  override_keymaps = false, -- whether to force mapping
   max_length = 500,
   scroll_limit = -1,
 }
+local M = require('util')
+M.map(
+    "o", -- be appended to other operator
+    nil,
+    {"J", "0"},
+    {"L", "$"},
+    {"k", "j"},
+    {"i", "k"}
+)
 
 
 -- DEFAULT_KEYMAPS:
@@ -27,8 +35,8 @@ vim.keymap.set({ 'n', 'x' }, 'G', "<Cmd>lua Scroll('G', 0, 1)<CR>")
 
 -- Start/end of line:
 vim.keymap.set({ 'n', 'x' }, 'J', "<Cmd>lua Scroll('0')<CR>")
--- vim.keymap.set({ 'n', 'x' }, '^', "<Cmd>lua Scroll('^')<CR>")
 vim.keymap.set({ 'n', 'x' }, 'L', "<Cmd>lua Scroll('$', 0, 1)<CR>")
+
 
 -- Paragraph movements:
 vim.keymap.set({ 'n', 'x' }, '{', "<Cmd>lua Scroll('{')<CR>")

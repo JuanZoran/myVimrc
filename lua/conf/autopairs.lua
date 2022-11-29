@@ -7,7 +7,7 @@ require("nvim-autopairs").setup({
         offset = 0, -- Offset from pattern match
         end_key = "l",
         keys = "qwertyuiopzxcvbnmasdfghjkl",
-        check_comma = false,
+        check_comma = true,
         highlight = "PmenuSel",
         highlight_grey = "LineNr",
     },

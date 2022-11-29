@@ -18,15 +18,15 @@ vim.cmd([[
 
 packer.startup(function(use)
 	use("wbthomason/packer.nvim")
+	--- required for other plugins
 	use("nvim-lua/popup.nvim")
 	use("nvim-lua/plenary.nvim")
-	-- ================= My plugins here ====================
+	-- ================= my plugins here ====================
 	-- fast speed
 	use("lewis6991/impatient.nvim")
 	use({ "dstein64/vim-startuptime" })
 	use("nathom/filetype.nvim")
-	-- use 'lukas-reineke/indent-blankline.nvim'
-	-- ====================== UI =====================
+	-- ====================== ui =====================
 	-- about theme
 	use("sainnhe/everforest")
 	-- 状态栏
@@ -34,32 +34,6 @@ packer.startup(function(use)
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
-		sections = {
-			lualine_c = {
-				require("auto-session-library").current_session_name,
-			},
-			lualine_x = {
-				{
-					require("noice").api.status.message.get_hl,
-					cond = require("noice").api.status.message.has,
-				},
-				{
-					require("noice").api.status.command.get,
-					cond = require("noice").api.status.command.has,
-					color = { fg = "#ff9e64" },
-				},
-				{
-					require("noice").api.status.mode.get,
-					cond = require("noice").api.status.mode.has,
-					color = { fg = "#ff9e64" },
-				},
-				{
-					require("noice").api.status.search.get,
-					cond = require("noice").api.status.search.has,
-					color = { fg = "#ff9e64" },
-				},
-			},
-		},
 	})
 	-- -- 文件树
 	use({
@@ -73,25 +47,30 @@ packer.startup(function(use)
 	use({
 		"goolord/alpha-nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
+		config = function()
+			require("conf.lualine")
+		end,
 	})
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	-- -- 通知栏
 	use({
 		"j-hui/fidget.nvim",
 		config = function()
+			-- require("fidget").setup({text = {spinner = "moon"}})
 			require("fidget").setup({})
 		end,
 	})
 	use("rcarriga/nvim-notify")
-	-- -- smooth scroll
-	-- use("karb94/neoscroll.nvim")
+
+	-- smooth scroll animation
 	use({
 		"declancm/cinnamon.nvim",
 		config = function()
 			require("conf.smooth")
 		end,
 	})
-	-- Packer
+
+	-- nice UI
 	use({
 		"folke/noice.nvim",
 		config = function()
@@ -99,37 +78,44 @@ packer.startup(function(use)
 		end,
 		requires = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
+			"muniftanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
 	})
-	-- -- ====================== Tools =====================
+
+	-- -- ====================== tools =====================
 	use("voldikss/vim-floaterm")
 	use("famiu/bufdelete.nvim")
 	use({
-		"RRethy/vim-illuminate",
+		"rrethy/vim-illuminate", -- for cursor highlighting
 		config = function()
 			require("conf/illuminate")
 		end,
 	})
+
+	--  smart 'm'
 	use({
 		"mfussenegger/nvim-treehopper",
 		config = function()
-			require("conf/treehop")
+			require("conf.treehop")
 		end,
 	})
+
+	--  session manager
 	use({
 		"rmagatti/auto-session",
 		config = function()
 			require("auto-session").setup({
 				log_level = "error",
-				auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-				post_cwd_changed_hook = function() -- example refreshing the lualine status line _after_ the cwd changes
-					require("lualine").refresh() -- refresh lualine so the new session name is displayed in the status bar
-				end,
+				auto_session_suppress_dirs = { "~/", "~/projects", "~/downloads", "/" },
+				-- 				post_cwd_changed_hook = function() -- example refreshing the lualine status line _after_ the cwd changes
+				-- ---@diagnostic disable-next-line: different-requires
+				-- 					require("lualine").refresh() -- refresh lualine so the new session name is displayed in the status bar
+				-- 				end,
 			})
 		end,
 	})
+
 	use({
 		"rmagatti/session-lens",
 		requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
@@ -143,6 +129,7 @@ packer.startup(function(use)
 		end,
 	})
 
+	-- quickly toggle status [keybind: <Leader>u]
 	use({
 		"nguyenvukhang/nvim-toggler",
 		config = function()
@@ -151,16 +138,16 @@ packer.startup(function(use)
 	})
 
 	use("junegunn/vim-easy-align")
-	-- TODO change the plugin to Comment
-	-- use("terrortylor/nvim-comment")
+
+	-- easy comment
 	use({
-		"numToStr/Comment.nvim",
+		"numtostr/comment.nvim",
 		config = function()
 			require("conf.comment")
 		end,
 	})
 
-	-- for git tools
+	-- git tools
 	use({
 		"lewis6991/gitsigns.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
@@ -168,17 +155,20 @@ packer.startup(function(use)
 			require("conf.gitsigns")
 		end,
 	})
+
 	use("voldikss/vim-translator")
+
+	-- easymotion-like
 	use({
 		"phaazon/hop.nvim",
 		branch = "v2", -- optional but strongly recommended
 		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
-			require("hop").setup({})
+			-- you can configure hop the way you like here; see :h hop-config
+			require("conf.hop")
 		end,
 	})
-	-- -- ====================== Syntax =====================
-	-- -- TODO: 配置
+	-- -- ====================== syntax =====================
+	-- treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
@@ -186,26 +176,20 @@ packer.startup(function(use)
 		end,
 		requires = { "p00f/nvim-ts-rainbow" },
 	})
-	use({
-		"windwp/nvim-autopairs",
-	})
+
+	use("windwp/nvim-autopairs")
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 	--
 	use("p00f/nvim-ts-rainbow")
 	use({
 		"michaelb/sniprun",
 		run = "bash install.sh",
+        ft = {"cpp"},
 		config = function()
 			require("conf.sniprun").setup()
 		end,
 	})
-	-- -- ====================== Completion =====================
-	-- use({
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	config = function()
-	-- 		require("lsp_signature").setup({})
-	-- 	end,
-	-- })
+	-- -- ====================== completion =====================
 	use({
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
@@ -220,15 +204,15 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- Snippets
+	-- snippets
 	use({
 		{
-			"L3MON4D3/LuaSnip",
+			"l3mon4d3/luasnip",
 			-- opt = true,
 		},
 		"rafamadriz/friendly-snippets",
 	})
-	-- Completion
+	-- completion
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -241,26 +225,26 @@ packer.startup(function(use)
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
 		},
-		-- event = "InsertEnter",
-		wants = "LuaSnip",
+		event = "insertenter",
+		wants = "luasnip",
 		config = function()
 			require("conf.cmp")
 		end,
 	})
 
-	-- -- Telescope
+	-- -- telescope
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
+
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use("nvim-telescope/telescope-project.nvim")
 	use("jvgrootveld/telescope-zoxide")
-	use("ThePrimeagen/harpoon")
+	use("theprimeagen/harpoon")
 	use("brandoncc/telescope-harpoon.nvim")
 	use({
 		"glacambre/firenvim",
-		-- ft = {"markdown", "md"},
 		run = function()
 			vim.fn["firenvim#install"](0)
 		end,
@@ -279,24 +263,25 @@ packer.startup(function(use)
 	}) -- bridges gap b/w mason & null-ls
 	use("folke/which-key.nvim")
 	use({
-		"SmiteshP/nvim-navic",
+		"smiteshp/nvim-navic",
 		requires = "neovim/nvim-lspconfig",
 	})
 
 	--- =========== alternative ======================
+	-- use 'lukas-reineke/indent-blankline.nvim'
 	-- use({
 	-- 	"nvim-neorg/neorg",
 	-- 	-- tag = "*",
 	-- 	ft = "norg",
-	-- 	run = ":Neorg sync-parsers",
-	-- 	after = "nvim-treesitter", -- You may want to specify Telescope here as well
+	-- 	run = ":neorg sync-parsers",
+	-- 	after = "nvim-treesitter", -- you may want to specify telescope here as well
 	-- 	config = function()
 	-- 		require("conf/neorg").setup()
 	-- 	end,
 	-- })
 	--
 	-- use({
-	-- 	"tzachar/cmp-tabnine", -- use ":CmpTabnineHub" command to login
+	-- 	"tzachar/cmp-tabnine", -- use ":cmptabninehub" command to login
 	-- 	after = "nvim-cmp",
 	-- 	run = "bash ./install.sh",
 	-- })
@@ -307,7 +292,7 @@ packer.startup(function(use)
 	-- })
 	--
 	-- use({ "hrsh7th/nvim-cmp", requires = {
-	-- 	"L3MON4D3/LuaSnip",
+	-- 	"l3mon4d3/luasnip",
 	-- } })
 	-- use("onsails/lspkind.nvim")
 	-- use("hrsh7th/cmp-nvim-lsp")
@@ -317,7 +302,7 @@ packer.startup(function(use)
 	-- use("hrsh7th/cmp-nvim-lua")
 	-- --- snip
 	-- use("saadparwaiz1/cmp_luasnip")
-	-- use("L3MON4D3/LuaSnip")
+	-- use("l3mon4d3/luasnip")
 	-- use("rafamadriz/friendly-snippets")
 
 	-- use({
@@ -329,6 +314,6 @@ packer.startup(function(use)
 	-- 	end,
 	-- })
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
+	-- automatically set up your configuration after cloning packer.nvim
+	-- put this at the end after all plugins
 end)

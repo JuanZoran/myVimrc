@@ -1,7 +1,6 @@
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 
-
 mason.setup({
 	ui = {
 		-- Whether to automatically check for new versions when opening the :Mason window.
@@ -46,7 +45,7 @@ mason_lspconfig.setup({
 		"clangd",
 		"sumneko_lua",
 		"gopls",
-		-- "goimports",
+		"pyright",
 	},
 	-- auto-install configured servers (with lspconfig)
 	automatic_installation = true, -- not the same as ensure_installed

@@ -14,7 +14,7 @@ M.setup = function()
 
 	local config = {
 		-- disable virtual text
-		virtual_text = false,
+		virtual_text = false, --- enable for diagnostic information
 		-- show signs
 		signs = {
 			active = signs,
@@ -28,33 +28,16 @@ M.setup = function()
 			border = "rounded",
 			source = "always",
 			header = "",
-			prefix = "",
+			-- prefix = "🔔",
+			prefix = "🔮",
 		},
 	}
 
 	vim.diagnostic.config(config)
-
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-		border = "rounded",
-	})
-
-	-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	-- 	border = "rounded",
 	-- })
 end
-
--- local function lsp_highlight_document(client)
--- 	-- Set autocommands conditional on server_capabilities
--- 	if client.server_capabilities.documentHighlight then
--- 		vim.cmd([[
---       augroup lsp_document_highlight
---         autocmd! * <buffer>
---         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
---         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
---       augroup END
---     ]])
--- 	end
--- end
 
 local navic = require("nvim-navic")
 navic.setup({
@@ -86,23 +69,70 @@ navic.setup({
 		Operator = " ",
 		TypeParameter = " ",
 	},
-	highlight = false,
+	-- highlight = true,
+	separator = "  ",
+	-- separator = "  ",
 })
 
 M.on_attach = function(client, bufnr)
 	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
+
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
 	end
-
-	-- require("lsp_signature").on_attach({
-	-- 	bind = true, -- This is mandatory, otherwise border config won't get registered.
-	-- 	handler_opts = {
-	-- 		border = "rounded",
-	-- 	},
-	-- }, bufnr) -- Note: add in lsp client on-attach
-
-	-- lsp_highlight_document(client)
+	local map = require("util").map
+	map(
+		"n",
+		{ silent = true, buffer = bufnr },
+		{ "<Leader>rn", "<cmd>Lspsaga rename<CR>" },
+		{ "<Leader>ca", "<cmd>Lspsaga code_action<CR>" },
+		{ "<Leader>dd", "<cmd>Lspsaga show_line_diagnostics<CR>" },
+		{ "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>" },
+		{
+			"<Leader>dm",
+			vim.diagnostic.setqflist,
+		},
+		{ "<Leader>o", "<cmd>LSoutlineToggle<CR>" },
+		{ "gh", "<cmd>Lspsaga hover_doc<cr>" },
+		{ "gf", "<cmd>Lspsaga lsp_finder<cr>" },
+		{ "gd", "<cmd>Lspsaga peek_definition<cr>" },
+		{
+			"gD",
+			vim.lsp.buf.declaration,
+		},
+		{
+			"gi",
+			vim.lsp.buf.implementation,
+		},
+		{
+			"gr",
+			vim.lsp.buf.references,
+		},
+		{
+			"<Leader>de",
+			vim.diagnostic.open_float,
+		},
+		-- for text diagnostic
+		{ "<Leader>dj", "<cmd>Lspsaga diagnostic_jump_prev<cr>" },
+		{ "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>" },
+		{
+			"<Leader>de",
+			vim.diagnostic.open_float,
+		},
+		{
+			"==",
+			function()
+				vim.lsp.buf.format({
+					filter = function(client)
+						-- apply whatever logic you want (in this example, we'll only use null-ls)
+						return client.name == "null-ls"
+					end,
+					async = true,
+				})
+			end,
+		}
+	)
 end
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -114,3 +144,29 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 return M
+
+-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+-- 	border = "rounded",
+-- })
+
+-- local function lsp_highlight_document(client)
+-- 	-- Set autocommands conditional on server_capabilities
+-- 	if client.server_capabilities.documentHighlight then
+-- 		vim.cmd([[
+--       augroup lsp_document_highlight
+--         autocmd! * <buffer>
+--         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+--         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+--       augroup END
+--     ]])
+-- 	end
+-- end
+--
+-- require("lsp_signature").on_attach({
+-- 	bind = true, -- This is mandatory, otherwise border config won't get registered.
+-- 	handler_opts = {
+-- 		border = "rounded",
+-- 	},
+-- }, bufnr) -- Note: add in lsp client on-attach
+
+-- lsp_highlight_document(client)
