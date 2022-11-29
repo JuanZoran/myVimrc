@@ -96,20 +96,19 @@ cmp.setup({
 			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 			vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.menu = ({
-				nvim_lsp    = "[LSP]",
-				neorg       = "[Neorg]",
-				luasnip     = "[Snippet]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[Snippet]",
 				cmp_tabnine = "[TabNine]",
-				nvim_lua    = "[NVIM]",
-				buffer      = "[Buffer]",
-				path        = "[Path]",
+				nvim_lua = "[NVIM]",
+				buffer = "[Buffer]",
+				path = "[Path]",
+				-- neorg       = "[Neorg]",
 			})[entry.source.name]
 			return vim_item
 		end,
 	},
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "neorg" },
 		{ name = "luasnip" },
 		{ name = "cmp_tabnine" },
 		{ name = "nvim_lua" },
@@ -118,7 +117,7 @@ cmp.setup({
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
-		select   = false,
+		select = false,
 	},
 	window = {
 		documentation = {
@@ -126,9 +125,15 @@ cmp.setup({
 		},
 	},
 	experimental = {
-		ghost_text  = true,
+		ghost_text = true,
 		native_menu = false,
 	},
+	-- sorting = {
+	-- 	priority_weight = 2,
+	-- 	comparators = {
+	-- 		require("cmp_tabnine.compare"),
+	-- 	},
+	-- },
 })
 
 -- `/` cmdline setup.

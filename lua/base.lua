@@ -1,34 +1,36 @@
 local vim = vim
-vim.opt.autoread = true
-vim.bo.autoread = true
-vim.opt.number = true
+-- vim.g.mkdp_auto_start = 1
+vim.opt.autoread       = true
+vim.bo.autoread        = true
+vim.opt.number         = true
 vim.opt.relativenumber = true
 
-vim.scriptencoding = "utf-8"
-vim.opt.encoding = "utf-8"
+vim.scriptencoding     = "utf-8"
+vim.opt.encoding       = "utf-8"
 -- vim.opt.smarttab = false
-vim.opt.fileencoding = "utf-8"
+vim.opt.fileencoding   = "utf-8"
 
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 10
-vim.opt.swapfile = false
+vim.opt.scrolloff      = 10
+vim.opt.sidescrolloff  = 10 
+vim.opt.swapfile       = false
+-- vim.opt.foldenable       = true
+-- vim.opt.foldlevel       = 99
 
-vim.opt.mouse = "a"
+vim.opt.mouse          = "a"
 -- vim.opt.undofile = true
 -- vim.opt.undodir = "~/.vim/undodir"
 
--- vim.opt.cmdheight = 1
-vim.opt.pumheight = 10
+vim.opt.cmdheight  = 2
+vim.opt.pumheight  = 10
 vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.hidden = true
-vim.opt.title = true -- for show current dir
+vim.opt.smartcase  = true
+vim.opt.hidden     = true
+vim.opt.title      = true -- for show current dir
 vim.opt.timeoutlen = 500 --default value = 1000
-vim.opt.hlsearch = false
+vim.opt.hlsearch   = false
 -- vim.opt.showtabline = 2 -- for 标签页面
 -- vim.opt.hlsearch = true    default for true
 -- vim.opt.incsearch = true --default for true
-
 -- vim.opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板
 
 -- TODO: w, {v, b, l}
@@ -56,6 +58,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.wo.signcolumn = "yes"
 vim.opt.list = true
+vim.opt.listchars = "tab:▸ " -- Show tabs as '▸   ▸   '
 
 vim.opt.cursorline = true
 
@@ -64,6 +67,7 @@ vim.opt.splitright = true
 vim.opt.wrap = false
 -- vim.opt.autochdir     = true
 vim.opt.helplang = "cn"
+vim.opt.shortmess:append("c")
 vim.opt.updatetime = 200
 
 vim.cmd([[set iskeyword+=-]]) -- 将word-word视为一个word, 方便daw
@@ -89,7 +93,7 @@ vim.g.loaded_getscript          = 1
 vim.g.loaded_getscriptPlugin    = 1
 vim.g.loaded_netrw              = 1
 vim.g.loaded_netrwPlugin        = 1
-vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwSettings      = 1
 ----============  disable end  ===========-------
 
 ---  SETTINGS  ---

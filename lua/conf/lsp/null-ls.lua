@@ -14,12 +14,9 @@ null_ls.setup({
 		formatting.stylua,
 		formatting.clang_format,
 		formatting.goimports,
-		formatting.markdownlint,
 		formatting.beautysh,
 		diagnostics.cpplint,
 		diagnostics.shellcheck,
-		diagnostics.markdownlint,
 		diagnostics.pylint,
-		-- diagnostics.selece,
 	},
 })

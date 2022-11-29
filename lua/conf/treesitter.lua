@@ -28,9 +28,9 @@ ts.setup({
 		enable = true,
 	},
 	textobjects = require("conf.textobjects"),
-    neorg = {
-        enable = true,
-    },
+    -- neorg = {
+    --     enable = true,
+    -- },
     matchup = {
         enable = true,
     },

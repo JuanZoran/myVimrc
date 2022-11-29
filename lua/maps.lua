@@ -33,7 +33,7 @@ keymap(
 	{ "<leader>gf", builtin.git_files },
 	{ "<leader>tt", builtin.live_grep },
 	{ "<leader>tf", builtin.current_buffer_fuzzy_find },
-	{ "<leader>tp", "<cmd>Telescope packer<cr>" },
+	-- { "<leader>tp", "<cmd>Telescope packer<cr>" },
 	{ "<leader>hm", "<cmd>Telescope harpoon marks<cr>" },
 	{ "<leader>ts", builtin.spell_suggest },
 	{ "<leader>tr", builtin.treesitter },
@@ -70,36 +70,24 @@ keymap(
 
 keymap("n", nopt, {
 	"<Leader>hh",
-	function()
-		require("harpoon.ui").toggle_quick_menu()
-	end,
+	require("harpoon.ui").toggle_quick_menu,
 }, {
 	"<Leader>hi",
-	function()
-		require("harpoon.mark").add_file()
-	end,
+	require("harpoon.mark").add_file,
 }, {
 	"<Leader>hj",
-	function()
-		require("harpoon.ui").nav_prev()
-	end,
+	require("harpoon.ui").nav_prev,
 }, {
 	"<Leader>hl",
-	function()
-		require("harpoon.ui").nav_next()
-	end,
+	require("harpoon.ui").nav_next,
 }, {
 	"<Leader>hc",
-	function()
-		require("harpoon.cmd-ui").toggle_quick_menu()
-	end,
+	require("harpoon.cmd-ui").toggle_quick_menu,
 })
 
 local vopt = {
 	silent = true,
 }
-
--- 't'	mapmode-t	Terminal	:tmap
 
 vim.keymap.set(
 	{ "!", "v", "o" }, -- mode
@@ -112,11 +100,12 @@ keymap(
 	nopt,
 	{ "'", '"' },
 	-- 光标移动
-	{ "i", "k" },
-	{ "k", "j" },
-	{ "j", "h" },
-    {"s", ":HopChar2MW<cr>"},
-    -- {"S", ":HopChar2MW<cr>"},
+    -- BACK:
+	-- { "i", "k" },
+	-- { "k", "j" },
+	-- { "j", "h" },
+	{ "s", ":HopChar2MW<cr>" },
+	-- {"S", ":HopChar2MW<cr>"},
 
 	{ "ej", ":HopPatternBC<CR>" },
 	{ "ee", "e" },
@@ -142,6 +131,9 @@ keymap(
 	{ "<Leader>R", "<Plug>SnipRun" }
 )
 
+
+
+
 keymap(
 	"n", -- 正常模式
 	nopt, -- 选项
@@ -157,6 +149,9 @@ keymap(
 	{ "wi", "<C-w>k" },
 	{ "w=", "<C-w>=" },
 	{ "w<Down>", "<C-w>J" },
+	{ "bb", "b" },
+	{ "bd", ":Bdelete<CR>" },
+	{ "qd", ":Bdelete<CR>" },
 	{ "w<Up>", "<C-w>K" },
 	{ "w<Right>", "<C-w>L" },
 	{ "w<Left>", "<C-w>H" },
@@ -166,11 +161,9 @@ keymap(
 	{ "<C-Left>", "<C-w><" },
 	{ "wn", ":only<CR>" },
 	{ "ww", "<cmd>NvimTreeToggle<CR>" },
-    { ';', '@'},
-    { ';;', 'q'},
-    { "'", '"'},
-    -- { "''", '.'},
-
+	{ ";", "@" },
+	{ ";;", "q" },
+	{ "'", '"' },
 	{ "<Leader>tm", ":FloatermNew<CR>" },
 	{ "<Leader>gi", ":FloatermNew lazygit<CR>" },
 	{ "<Leader>ra", ":FloatermNew ranger<CR>" },
@@ -189,44 +182,37 @@ keymap(
 	{ "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>" },
 	{
 		"<Leader>dm",
-		function()
-			vim.diagnostic.setqflist()
-		end,
+		vim.diagnostic.setqflist,
 	},
 	{ "<Leader>o", "<cmd>LSoutlineToggle<CR>" },
 	{ "<Leader><Leader>", "<Plug>TranslateW" },
 	{ "gh", "<cmd>Lspsaga hover_doc<cr>" },
+	{ "<leader>gh", "<cmd>Gitsigns preview_hunk_inline<cr>" },
 	{ "gf", "<cmd>Lspsaga lsp_finder<cr>" },
 	{ "gd", "<cmd>Lspsaga peek_definition<cr>" },
-    { 'yw', 'yiw'},
-    { 'y"', 'yi"'},
-    { 'yp', 'yip'},
-    { 'dw', 'diw'},
-    { 'dp', 'dip'},
-    { 'd"', 'di"'},
-    { 'vw', 'viw'},
-    { 'vp', 'vip'},
-    { 'v"', 'vi"'},
-    { 'cw', 'ciw'},
-    { 'cp', 'cip'},
-    { 'c"', 'ci"'},
+	{ "yw", "yiw" },
+	{ 'y"', 'yi"' },
+	{ "yp", "yip" },
+	{ "dw", "diw" },
+	{ "dp", "dip" },
+	{ 'd"', 'di"' },
+	{ "vw", "viw" },
+	{ "vp", "vip" },
+	{ 'v"', 'vi"' },
+	{ "cw", "ciw" },
+	{ "cp", "cip" },
+	{ 'c"', 'ci"' },
 	{
 		"gD",
-		function()
-			vim.lsp.buf.declaration()
-		end,
+		vim.lsp.buf.declaration,
 	},
 	{
 		"gi",
-		function()
-			vim.lsp.buf.implementation()
-		end,
+		vim.lsp.buf.implementation,
 	},
 	{
 		"gr",
-		function()
-			vim.lsp.buf.references()
-		end,
+		vim.lsp.buf.references,
 	},
 
 	-- for text diagnostic
@@ -234,30 +220,25 @@ keymap(
 	{ "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>" },
 	{
 		"<Leader>de",
-		function()
-			vim.diagnostic.open_float()
-		end,
+		vim.diagnostic.open_float,
 	},
-	---------------------------
-	-- {"<++>", "<++>"},
-	-- {"<++>", "<++>"},
-	-- {"<++>", "<++>"},
-	-- {"<++>", "<++>"},
+	-- 	---------------------------
+	-- 	-- {"<++>", "<++>"},
+	-- 	-- {"<++>", "<++>"},
+	-- 	-- {"<++>", "<++>"},
+	-- 	-- {"<++>", "<++>"},
 	-- 其他
 	{ "<C-a>", "/<++><CR>vf>c" }, -- PlaceHolder
-	{ "<C-w>", ":wq<CR>" },
+	-- { "<C-w>", ":wq<CR>" },
+    {"<Leader>w", ":wq<CR>" },
 	{ "<C-q>", ":q!<CR>" },
-	{ "na", "<C-a>" },
+	{ "<C-i>", ":Telescope jumplist<CR>" },
+	{ "na", "<c-a>" },
+	{ "nh", ":noh<CR>" },
 	{ "<Leader>p", ":PackerSync<CR>" }, -- :插件安装
-	-- { "<Leader>w", ":w<CR>:source $MYVIMRC<CR>" }, --TODO
 	{ "<Leader>ck", ":set spell!<CR>" }
 )
-
-
-
-
-
-
+--
 keymap(
 	"i", -- 插入模式
 	iopt,
@@ -265,8 +246,8 @@ keymap(
 	{ "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
 	{ "<C-d>", "<Esc><cmd>FloatermToggle<CR>" },
 	-- {"<++>", "<++>"},
-	-- {"<++>", "<++>"},
-	-- {"<++>", "<++>"},
+	-- 最近跳转的历史"<++>"},
+	-- {"<+, "<++>"},
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
 	-- {"<++>", "<++>"},
@@ -319,7 +300,6 @@ vim.keymap.set("n", "<Leader>T", ":Telescope ")
 vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", nopt)
 vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", nopt)
 
-
 -- vim.keymap.set("n", "<Tab>", '<CMD>lua print([[ Tab is pressed ]])<CR>')
 -- vim.keymap.set("n", "<C-i>", '<CMD>lua print([[ Ctr-i is pressed ]])<CR>')
 -- vim.keymap.set("n", "<C-i>", '<C-i>')
@@ -335,5 +315,4 @@ vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", nopt)
 -- 'i'	mapmode-i	Insert	:imap
 -- 'l'	mapmode-l	Insert, Command-line, Lang-Arg	:lmap
 -- 'c'	mapmode-c	Command-line	:cmap
-
-
+-- 't'	mapmode-t	Terminal	:tmap

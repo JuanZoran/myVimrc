@@ -1,15 +1,6 @@
 -- local async = require("plenary.async")
 -- async.run(function()
 require("impatient") -- for load cache
-require("plugins")
-require("conf")
--- end)
--- async.run(function()
-require("base")
-require("ui")
-require("autocommand")
--- end)
--- async.run(function()
-require("maps")
--- vim.keymap.set("", "nj", "%", { remap = true })
+
+require("conf-loader")
 -- end)

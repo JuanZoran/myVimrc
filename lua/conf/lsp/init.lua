@@ -4,6 +4,7 @@ local servers = {
 	"clangd",
 	"gopls",
 	"bashls",
+    "marksman",
 }
 
 require("mason").setup()

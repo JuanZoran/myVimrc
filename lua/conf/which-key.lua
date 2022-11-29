@@ -8,7 +8,6 @@ wk.register({
 			h = { builtin.help_tags, " 查看所有tag" },
 			t = { builtin.live_grep, " 正则查找目录下的文件" },
 			f = { builtin.current_buffer_fuzzy_find, " 模糊查找当前Buffer内容" },
-			p = { "<cmd>Telescope packer<cr>", " 查找插件的文档[C-p]" },
 			s = { builtin.spell_suggest, "益查找拼写建议" },
 			r = { builtin.treesitter, " 查看treesitter提供的符号" },
 			e = { builtin.diagnostics, " 查看诊断信息" },

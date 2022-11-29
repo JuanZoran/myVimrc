@@ -38,9 +38,9 @@ M.setup = function()
 		border = "rounded",
 	})
 
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",
-	})
+	-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	-- 	border = "rounded",
+	-- })
 end
 
 -- local function lsp_highlight_document(client)
@@ -94,6 +94,14 @@ M.on_attach = function(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
 	end
+
+	-- require("lsp_signature").on_attach({
+	-- 	bind = true, -- This is mandatory, otherwise border config won't get registered.
+	-- 	handler_opts = {
+	-- 		border = "rounded",
+	-- 	},
+	-- }, bufnr) -- Note: add in lsp client on-attach
+
 	-- lsp_highlight_document(client)
 end
 
