@@ -184,7 +184,7 @@ packer.startup(function(use)
 	use({
 		"michaelb/sniprun",
 		run = "bash install.sh",
-        ft = {"cpp"},
+		ft = { "cpp" },
 		config = function()
 			require("conf.sniprun").setup()
 		end,
@@ -264,7 +264,7 @@ packer.startup(function(use)
 	use("folke/which-key.nvim")
 	use({
 		"smiteshp/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
+		requires = { "neovim/nvim-lspconfig", --[[ "fgheng/winbar.nvim", ]]  "utilyre/barbecue.nvim"},
 	})
 
 	--- =========== alternative ======================

@@ -3,6 +3,22 @@
 -- autocmd! 清除之前的所有autocmd
 -- 记录上一次的位置
 -- local savepos = vim.api.nvim_create_augroup("savepos", {clear = true})
+vim.api.nvim_create_autocmd({
+	"BufWinEnter",
+	"BufWritePost",
+	"CursorMoved",
+	"InsertLeave",
+	"TextChanged",
+	"TextChangedI",
+	-- add more events here
+}, {
+	group = vim.api.nvim_create_augroup("barbecue", {}),
+	callback = function()
+		require("barbecue.ui").update()
+
+		-- maybe a bit more logic here
+	end,
+})
 
 vim.cmd([[
 if has("autocmd")
@@ -54,7 +70,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.keymap.set("n", "nr", "<Plug>SnipClose", { silent = true })
 		vim.keymap.set("n", "<Leader>R", "<Plug>SnipRun", { silent = true })
-        -- vim.notify("Hello World!")
+		-- vim.notify("Hello World!")
 	end,
 })
 

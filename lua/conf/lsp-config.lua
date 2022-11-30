@@ -45,6 +45,7 @@ mason_lspconfig.setup({
 		"clangd",
 		"sumneko_lua",
 		"gopls",
+		"bashls",
 		"pyright",
 	},
 	-- auto-install configured servers (with lspconfig)

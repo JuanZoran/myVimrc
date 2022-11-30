@@ -1,5 +1,30 @@
+local vim = vim
 vim.opt.termguicolors = true
 vim.g.deus_termcolors = 256
+
+
+-- TODO
+-- for non background
+
+vim.g.everforest_background                = "hard"
+vim.g.everforest_transparent_background    = 1 -- avaliable : 0, 1, 2
+vim.g.everforest_diagnostic_text_highlight = 1
+vim.g.everforest_diagnostic_line_highlight = 1
+vim.g.everforest_diagnostic_virtual_text   = "colored"
+vim.g.everforest_better_preformance        = 1
+vim.g.everforest_ui_contrast               = "high"
+vim.g.everforest_current_word = "underline"
+vim.g.everforest_spell_foreground = "colored"
+-- vim.g.everforest_
+
+-- vim.g.everforest_enable_italic = 1
+-- vim.g.everforest_disable_italic_comment = 0
+-- vim.g.everforest_show_eob = 0
+-- vim.g.everforest_cursor = "red" -- only work for gui
+
+
+vim.cmd([[colorscheme everforest]])
+vim.cmd([[hi Todo gui=bold guifg=#2f383e guibg=#83c092]])
 
 -- https://zhuanlan.zhihu.com/p/20718108
 -- hi 样式名称 guifg=Gvim字体颜色 guibg=Gvim背景颜色 ctermfg=终端Vim字体颜色 ctermbg=终端Vim背景颜色 gui=Gvim字体样式 cterm=终端Vim字体样式
@@ -17,19 +42,3 @@ vim.g.deus_termcolors = 256
 --     hi SignColumn ctermbg=None guibg=None
 --     hi VertSplit ctermfg=None ctermbg=None cterm=None guibg=None guifg=None
 --     ]])
-
--- TODO
--- for non background
-vim.cmd([[colorscheme everforest]])
--- vim.nvim_set_hl(0, 'Normal', {})
-vim.cmd([[highlight Normal guibg=None ctermbg=None]])
--- vim.cmd([[highlight Visual guibg=#e9dcb6 ctermbg=16]])
-vim.cmd([[highlight EndOfBuffer guibg=None ctermbg=None]])
-vim.cmd([[hi Todo gui=bold guifg=#2f383e guibg=#83c092]])
-vim.cmd([[hi NonText guibg=None]])
--- NonTextxxx ctermfg=239 guifg=#525c62
--- vim.cmd([[highlight FidgetTitle ctermfg=None guifg=None]])
-
--- vim.api.nvim_set_hl(0, "Normal", { guibg = "NONE", ctermbg = "NONE" })
--- vim.api.nvim_set_hl(0, "EndOfBuffer", { guibg = "NONE", ctermbg = "NONE" })
--- vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
