@@ -84,6 +84,14 @@ packer.startup(function(use)
 	})
 
 	-- -- ====================== tools =====================
+	-- Lua
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("conf.todo-comments")
+		end,
+	})
 	use("voldikss/vim-floaterm")
 	use("famiu/bufdelete.nvim")
 	use({
@@ -225,7 +233,7 @@ packer.startup(function(use)
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
 		},
-		event = "insertenter",
+		event = { "CmdlineEnter", "InsertEnter" },
 		wants = "luasnip",
 		config = function()
 			require("conf.cmp")
@@ -237,12 +245,14 @@ packer.startup(function(use)
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-project.nvim" },
+			{ "jvgrootveld/telescope-zoxide" },
+			{ "brandoncc/telescope-harpoon.nvim" },
+		},
 	})
-	use("nvim-telescope/telescope-project.nvim")
-	use("jvgrootveld/telescope-zoxide")
-	use("theprimeagen/harpoon")
-	use("brandoncc/telescope-harpoon.nvim")
+	use({ "theprimeagen/harpoon" })
 	use({
 		"glacambre/firenvim",
 		run = function()
@@ -261,11 +271,14 @@ packer.startup(function(use)
 			require("mason-null-ls").setup({})
 		end,
 	}) -- bridges gap b/w mason & null-ls
-	use("folke/which-key.nvim")
 	use({
 		"smiteshp/nvim-navic",
-		requires = { "neovim/nvim-lspconfig", --[[ "fgheng/winbar.nvim", ]]  "utilyre/barbecue.nvim"},
+		requires = {
+			"neovim/nvim-lspconfig", --[[ "fgheng/winbar.nvim", ]]
+			{"utilyre/barbecue.nvim", branch = "dev"},
+		},
 	})
+	use("folke/which-key.nvim")
 
 	--- =========== alternative ======================
 	-- use 'lukas-reineke/indent-blankline.nvim'
