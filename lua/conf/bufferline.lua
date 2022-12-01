@@ -4,15 +4,15 @@ require("bufferline").setup({
 	options = {
 		-- use nvim native lsp
 		diagnostics = "nvim-lsp",
+		-- close_icon = "",
+		-- show_close_icon = false,
 		-- diagnostics_indicator = function(count, level, _, _)
 		-- 	local icon = level:match("error") and " " or " "
 		-- 	return " " .. icon .. count
 		-- end,
-        -- diagnostics_update_in_insert = false,
-        modified_icon = '',
-        close_icon = '',
+		-- diagnostics_update_in_insert = false,
+		modified_icon = "💌",
 		separator_style = "thick", -- slant, padded_slant
-        show_close_icon = true,
 		offsets = {
 			{
 				filetype = "NvimTree",
@@ -23,7 +23,6 @@ require("bufferline").setup({
 		},
 	},
 })
-
 
 -- require('bufferline').setup {
 --     options = {

@@ -2,47 +2,13 @@ local map = require("util").map
 local vim = vim
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-local nopt = {
-	silent = true,
-}
--- 插入模式的选项
-local iopt = {
+local opt = {
 	silent = true,
 }
 
-----Telescope
-local builtin = require("telescope.builtin")
-map(
-	"n",
-	nopt,
-	{ "<C-f>", builtin.find_files },
-	{ "<leader>tg", builtin.registers },
-	{ "<leader>th", builtin.help_tags },
-	{ "<leader>gf", builtin.git_files },
-	{ "<leader>tt", builtin.live_grep },
-	{ "<leader>tf", builtin.current_buffer_fuzzy_find },
-	{ "<leader>ts", builtin.spell_suggest },
-	{ "<leader>tr", builtin.treesitter },
-	{ "<leader>te", builtin.diagnostics },
-	{ "<leader>tc", builtin.commands },
-	{ "<leader>ti", builtin.jumplist },
-	{ "<leader>tu", builtin.oldfiles },
-	{ "<leader>tk", builtin.keymaps },
-
-	{ "<C-u>", builtin.oldfiles },
-	{ "<leader>cd", "<cmd>Telescope zoxide list<cr>" },
-	{ "<C-i>", builtin.jumplist },
-	{ "<C-_>", builtin.keymaps }, -- for C-/
-	{
-		"<C-p>",
-		function() -- 打开项目
-			require("telescope").extensions.project.project({})
-		end,
-	}
-)
 
 --- for harpoon keybindings
-map("n", nopt, {
+map("n", opt, {
 	"<Leader>hh",
 	require("harpoon.ui").toggle_quick_menu,
 }, {
@@ -63,12 +29,12 @@ vim.keymap.set(
 	{ "!", "v", "o" }, -- mode
 	"<C-s>",
 	"<Esc>",
-	nopt
+	opt
 )
 
 map(
 	"", -- global pattern
-	nopt,
+	opt,
 	{ "'", '"' },
 	{ "<Leader>sa", ":SaveSession<CR>" },
 	{ "<Leader>sr", ":Autosession search<CR>" },
@@ -77,12 +43,12 @@ map(
 	{ "h", "i" },
 	{ "H", "I" },
 	{ "<Leader>=", "<Plug>(EasyAlign)" }
-	-- { "<Leader>R", "<Plug>SnipRun" } 
+	-- { "<Leader>R", "<Plug>SnipRun" }
 )
 
 map(
 	"n", -- 正常模式
-	nopt, -- 选项
+	opt, -- 选项
 	-- 窗口相关
 	{ "wo", ":vsp<CR>" }, -- 左右分屏
 	{ "wu", ":sp<CR>" }, -- 上下分屏
@@ -138,10 +104,8 @@ map(
 	{ "c<cr>", 'ci"' },
 	-- 其他
 	{ "<C-a>", "/<++><CR>vf>c" }, -- PlaceHolder
-	-- { "<C-w>", ":wq<CR>" },
 	{ "<Leader>w", ":wq<CR>" },
 	{ "<C-q>", ":q!<CR>" },
-	{ "<C-i>", ":Telescope jumplist<CR>" },
 	{ "na", "<c-a>" },
 	{ "nh", ":noh<CR>" },
 	{ "<Leader>p", ":PackerSync<CR>" }, -- :插件安装
@@ -155,7 +119,7 @@ map(
 -- Insert mode
 map(
 	"i",
-	iopt,
+	opt,
 	{ "<C-f>", ":FloatermNew fanger<CR>" },
 	{ "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
 	{ "<C-d>", "<Esc><cmd>FloatermToggle<CR>" },
@@ -172,18 +136,17 @@ map(
 )
 
 map(
-	"c",
-	iopt,
+	"c", -- command-line mode
+	opt,
 	{ "<C-q>", "<Esc>" },
 	{ "<C-j>", "<Left>" },
-	-- { "<C-u>", "<Up>" },
-	-- { "<C-o>", "<Down>" },
-	{ "<C-l>", "<Right>" }
+	{ "<C-l>", "<Right>" },
+	{ "<C-o>", "<cr>" }
 )
 
 map(
 	"v",
-	iopt,
+	opt,
 	-- { "<Leader><Leader>", ":TranslateW" },
 	{ ">", ">gv" },
 	{ "<", "<gv" }
@@ -191,11 +154,8 @@ map(
 
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
-vim.keymap.set("n", "<Leader>T", ":Telescope ")
 
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
 
 -- String value	Help page	Affected modes	Vimscript equivalent
 -- '' (an empty string)	mapmode-nvo	Normal, Visual, Select, Operator-pending	:map

@@ -1,3 +1,4 @@
+-- packer init
 vim.cmd([[packadd packer.nvim]])
 local packer = require("packer")
 packer.init({
@@ -18,23 +19,22 @@ vim.cmd([[
 
 packer.startup(function(use)
 	use("wbthomason/packer.nvim")
-	--- required for other plugins
-	use("nvim-lua/popup.nvim")
-	use("nvim-lua/plenary.nvim")
 	-- ================= my plugins here ====================
 	-- fast speed
 	use("lewis6991/impatient.nvim")
 	use({ "dstein64/vim-startuptime" })
 	use("nathom/filetype.nvim")
+
 	-- ====================== ui =====================
 	-- about theme
 	use("sainnhe/everforest")
+
 	-- 状态栏
-	use("kyazdani42/nvim-web-devicons")
 	use({
-		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    	"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons" },
 	})
+
 	-- -- 文件树
 	use({
 		"nvim-tree/nvim-tree.lua",
@@ -43,32 +43,25 @@ packer.startup(function(use)
 		},
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
 	})
+
 	-- home
 	use({
 		"goolord/alpha-nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
-		config = function()
-			require("conf.lualine")
-		end,
 	})
+
+	-- tab line
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
-	-- -- 通知栏
+
+	-- -- 通知样式 TODO: config with lsp-status
 	use("rcarriga/nvim-notify")
 
 	-- smooth scroll animation
-	use({
-		"declancm/cinnamon.nvim",
-		config = function()
-			require("conf.smooth")
-		end,
-	})
+	use("declancm/cinnamon.nvim")
 
-	-- nice UI
+	-- nice ui
 	use({
 		"folke/noice.nvim",
-		config = function()
-			require("conf/noice")
-		end,
 		requires = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"muniftanjim/nui.nvim",
@@ -76,129 +69,25 @@ packer.startup(function(use)
 		},
 	})
 
+    -- lsp funcion parse in statusline winbar
+	use({
+		"smiteshp/nvim-navic",
+		requires = {
+			"neovim/nvim-lspconfig",
+		},
+	})
+
+    -- uesful which-key
+	use("folke/which-key.nvim")
+
 	-- -- ====================== tools =====================
-	-- Lua
+    -- TODO list
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("conf.todo-comments")
-		end,
-	})
-	use("voldikss/vim-floaterm")
-	-- use("famiu/bufdelete.nvim")
-	use({
-		"rrethy/vim-illuminate", -- for cursor highlighting
-		config = function()
-			require("conf/illuminate")
-		end,
 	})
 
-	--  smart 'm'
-	use({
-		"mfussenegger/nvim-treehopper",
-		config = function()
-			require("conf.treehop")
-		end,
-	})
-
-	--  session manager
-	use({
-		"rmagatti/auto-session",
-		config = function()
-			require("auto-session").setup({
-				log_level = "error",
-				auto_session_suppress_dirs = { "~/", "~/projects", "~/downloads", "/" },
-				-- 				post_cwd_changed_hook = function() -- example refreshing the lualine status line _after_ the cwd changes
-				-- ---@diagnostic disable-next-line: different-requires
-				-- 					require("lualine").refresh() -- refresh lualine so the new session name is displayed in the status bar
-				-- 				end,
-			})
-		end,
-	})
-
-	use({
-		"rmagatti/session-lens",
-		requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-		config = function()
-			require("session-lens").setup({--[[your custom config--]]
-				prompt_title = "历史片段",
-				path_display = { "shorten" },
-				theme_conf = require("telescope.themes").get_dropdown({}),
-				previewer = true,
-			})
-		end,
-	})
-
-	-- quickly toggle status [keybind: <Leader>u]
-	use({
-		"nguyenvukhang/nvim-toggler",
-		config = function()
-			require("conf.toggle")
-		end,
-	})
-
-	use("junegunn/vim-easy-align")
-
-	-- easy comment
-	use({
-		"numtostr/comment.nvim",
-		config = function()
-			require("conf.comment")
-		end,
-	})
-
-	-- git tools
-	use({
-		"lewis6991/gitsigns.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("conf.gitsigns")
-		end,
-	})
-
-	use("voldikss/vim-translator")
-
-	-- easymotion-like
-	use({
-		"phaazon/hop.nvim",
-		branch = "v2", -- optional but strongly recommended
-		config = function()
-			require("conf.hop")
-		end,
-	})
-	-- -- ====================== syntax =====================
-	-- treesitter
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function ()
-        require('ufo').setup()
-    end}
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end,
-		requires = { "p00f/nvim-ts-rainbow" },
-	})
-
-	use("windwp/nvim-autopairs")
-	use("nvim-treesitter/nvim-treesitter-textobjects")
-	--
-	use("p00f/nvim-ts-rainbow")
-	use({
-		"michaelb/sniprun",
-		run = "bash install.sh",
-		ft = { "cpp", "python", "go"},
-		config = function()
-			require("conf.sniprun").setup()
-		end,
-	})
-	-- -- ====================== completion =====================
-	use({
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
-	})
-	use("glepnir/lspsaga.nvim")
+    -- markdown preview
 	use({
 		"iamcco/markdown-preview.nvim",
 		ft = { "markdown", "md" },
@@ -207,45 +96,101 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- snippets
+	-- TODO: compare this with toggleterm
+	use("voldikss/vim-floaterm") -- float terminal
+	use("rrethy/vim-illuminate") -- cursor-word highlighting
+	use("mfussenegger/nvim-treehopper") -- smart range switching with 'm'
+	use("rmagatti/auto-session") -- workspace manage
+	use("nguyenvukhang/nvim-toggler") -- easy change true/false with '<leader>u'
+	use("junegunn/vim-easy-align") -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
+	use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
+	use("voldikss/vim-translator") -- translator with <leader><leader>
+	use("windwp/nvim-autopairs") -- smart pair
+	use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
+
+    -- combine auto-session with telescope
 	use({
-		{
-			"l3mon4d3/luasnip",
-			-- opt = true,
-		},
-		"rafamadriz/friendly-snippets",
+		"rmagatti/session-lens",
+		requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
 	})
-	-- completion
+
+    -- integrate with git
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
+    -- optional but strongly recommended
+	use({
+		"phaazon/hop.nvim",
+		branch = "v2",
+	})
+
+	-- -- ====================== syntax =====================
+	-- high-performance language parser
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end,
+		requires = { "p00f/nvim-ts-rainbow" }, -- rainbow pairs
+	})
+
+	-- make neovim has modernize folder
+	use({
+		"kevinhwang91/nvim-ufo",
+		requires = "kevinhwang91/promise-async",
+	})
+
+	-- powerful code-runner
+	use({
+		"michaelb/sniprun",
+		run = "bash install.sh",
+		ft = { "cpp", "python", "go" },
+	})
+
+	-- -- ====================== completion =====================
+	-- mason | lspconfig | mason-lspconfig
+	use({
+		"williamboman/mason.nvim", -- lsp manager
+		"williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
+		"neovim/nvim-lspconfig", -- official lspconfig
+	})
+	use("glepnir/lspsaga.nvim") -- pretty ui for [code-action | hover-text | ....]
+
+	-- NOTE: a super powerful completion engine for neovim
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "tzachar/cmp-tabnine", after = "nvim-cmp" },
-			"hrsh7th/cmp-nvim-lsp",
+			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+			{ "l3mon4d3/luasnip", after = "nvim-cmp" },
+			{ "rafamadriz/friendly-snippets", after = "nvim-cmp" },
 		},
-		event = { "CmdlineEnter", "InsertEnter" },
-		wants = "luasnip",
+		event = { "cmdlineenter", "insertenter" }, -- lazy-load
 		config = function()
 			require("conf.cmp")
 		end,
 	})
 
 	-- -- telescope
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-lua/plenary.nvim" }, -- lib
 			{ "nvim-telescope/telescope-project.nvim" },
-			{ "jvgrootveld/telescope-zoxide" },
-			{ "brandoncc/telescope-harpoon.nvim" },
+			{ "jvgrootveld/telescope-zoxide" }, -- powerful cd
+			{ "brandoncc/telescope-harpoon.nvim" }, -- list
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
 		},
 	})
+
+	-- harpoon | firenvim
 	use({ "theprimeagen/harpoon" })
 	use({
 		"glacambre/firenvim",
@@ -254,7 +199,7 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- formatting & linting
+	-- FIXME: desable null-ls
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -265,14 +210,7 @@ packer.startup(function(use)
 			require("mason-null-ls").setup({})
 		end,
 	}) -- bridges gap b/w mason & null-ls
-	use({
-		"smiteshp/nvim-navic",
-		requires = {
-			"neovim/nvim-lspconfig", --[[ "fgheng/winbar.nvim", ]]
-			-- {"utilyre/barbecue.nvim", branch = "dev"},
-		},
-	})
-	use("folke/which-key.nvim")
+
 
 	--- =========== alternative ======================
 	-- use 'lukas-reineke/indent-blankline.nvim'

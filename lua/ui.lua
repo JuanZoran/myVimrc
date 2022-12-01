@@ -12,7 +12,7 @@ vim.g.everforest_diagnostic_text_highlight = 1
 vim.g.everforest_diagnostic_line_highlight = 1
 vim.g.everforest_diagnostic_virtual_text   = "colored"
 vim.g.everforest_better_preformance        = 1
-vim.g.everforest_ui_contrast               = "high"
+-- vim.g.everforest_ui_contrast               = "high"
 vim.g.everforest_current_word = "underline"
 vim.g.everforest_spell_foreground = "colored"
 

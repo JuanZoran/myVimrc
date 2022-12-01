@@ -26,23 +26,23 @@ vim.opt.ttimeoutlen = 10 --default value = 1000
 vim.opt.hlsearch = false
 
 -- TODO: w, {v, b, l}
-vim.opt.formatoptions = vim.opt.formatoptions
-	- "a" -- Auto formatting is BAD.
-	- "t" -- Don't auto format my code. I got linters for that.
-	+ "c" -- In general, I like it when comments respect textwidth
-	+ "q" -- Allow formatting comments w/ gq
-	- "o" -- O and o, don't continue comments
-	+ "r" -- But do continue when pressing enter.
-	+ "n" -- Indent past the formatlistpat, not underneath it.
-	+ "j" -- Auto-remove comments if possible.
-	- "2" -- I'm not in gradeschool anymore
+-- vim.opt.formatoptions = vim.opt.formatoptions
+-- 	- "a" -- Auto formatting is BAD.
+-- 	- "t" -- Don't auto format my code. I got linters for that.
+-- 	+ "c" -- In general, I like it when comments respect textwidth
+-- 	+ "q" -- Allow formatting comments w/ gq
+-- 	- "o" -- O and o, don't continue comments
+-- 	+ "r" -- But do continue when pressing enter.
+-- 	+ "n" -- Indent past the formatlistpat, not underneath it.
+-- 	+ "j" -- Auto-remove comments if possible.
+-- 	- "2" -- I'm not in gradeschool anymore
 
 -- Cool floating window popup menu for completion on command line
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.foldenable = false
+-- vim.opt.foldenable = false
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.shortmess:append("c") -- don't show redundant messages from ins-completion-menu
 vim.opt.shortmess:append("I") -- don't show the default intro message

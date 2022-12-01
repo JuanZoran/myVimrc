@@ -4,6 +4,7 @@ if not saga_status then
 	vim.notify("saga error", "error")
 	return
 end
+local icon = require('util').icon
 
 saga.init_lsp_saga({
 	-- keybinds for navigation in lspsaga window
@@ -17,5 +18,5 @@ saga.init_lsp_saga({
 		edit = "<CR>",
 	},
 	border_style = "rounded",
-	-- code_action_icon = "💡",
+	code_action_icon = icon.CodeAction,
 })

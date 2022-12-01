@@ -110,3 +110,40 @@ telescope.load_extension("session-lens")
 telescope.load_extension("harpoon")
 telescope.load_extension("zoxide")
 telescope.load_extension("project")
+
+
+--- key-bindings ==============================
+local map = require("util").map
+----Telescope
+local builtin = require("telescope.builtin")
+local opt = {silent = true}
+map(
+	"n",
+	opt,
+	{ "<C-f>", builtin.find_files },
+	{ "<leader>tg", builtin.registers },
+	{ "<leader>th", builtin.help_tags },
+	{ "<leader>gf", builtin.git_files },
+	{ "<leader>tt", builtin.live_grep },
+	{ "<leader>tf", builtin.current_buffer_fuzzy_find },
+	{ "<leader>ts", builtin.spell_suggest },
+	{ "<leader>tr", builtin.treesitter },
+	{ "<leader>te", builtin.diagnostics },
+	{ "<leader>tc", builtin.commands },
+	{ "<leader>ti", builtin.jumplist },
+	{ "<leader>tu", builtin.oldfiles },
+	{ "<leader>tk", builtin.keymaps },
+
+	{ "<C-u>", builtin.oldfiles },
+	{ "<leader>cd", "<cmd>Telescope zoxide list<cr>" },
+	{ "<C-o>", builtin.jumplist },
+	{ "<C-_>", builtin.keymaps }, -- for C-/
+	{
+		"<C-p>",
+		function() -- 打开项目
+			require("telescope").extensions.project.project({})
+		end,
+	}
+)
+
+vim.keymap.set("n", "<Leader>T", ":Telescope ")

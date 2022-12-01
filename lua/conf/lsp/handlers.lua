@@ -1,4 +1,5 @@
 local M = {}
+local icon = require('util').icon
 
 -- TODO: backfill this to template
 M.setup = function()
@@ -12,7 +13,8 @@ M.setup = function()
 	-- 	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	-- end
 
-	local signs = { Error = "🤕", Warn = "😦", Info = "🤔", Hint = "😐" }
+    -- FIXME: a bug
+	local signs = require('util').icon
 	for type, icon in pairs(signs) do
 		local hl = "DiagnosticSign" .. type
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -21,7 +23,7 @@ M.setup = function()
 	local config = {
 		-- disable virtual text
 		-- virtual_text = true, --- enable for diagnostic information
-		virtual_text = { source = "always", prefix = "🔬" },
+		virtual_text = { source = "always", prefix = icon.VirtualText },
 
 		-- show signs
 		signs = {
@@ -37,7 +39,7 @@ M.setup = function()
 			source = "always",
 			header = "",
 			-- prefix = "🔔",
-			prefix = "🔮",
+			prefix = icon.LSPFloat,
 		},
 	}
 
@@ -132,8 +134,8 @@ M.on_attach = function(client, bufnr)
 			"==",
 			function()
 				vim.lsp.buf.format({
+                    -- FIXME: remove null-ls
 					filter = function(client)
-						-- apply whatever logic you want (in this example, we'll only use null-ls)
 						return client.name == "null-ls"
 					end,
 					async = true,

@@ -4,13 +4,14 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 vim.g.nvim_tree_auto_close = 1
 
+local icon = require('util').icon
 nvim_tree.setup({
 	disable_netrw = true,
 	hijack_netrw = true,
-	open_on_setup = true,
+	open_on_setup = false,
 	ignore_ft_on_setup = {
-		-- "startify",
-		-- "dashboard",
+		"startify",
+		"dashboard",
 		"alpha",
 	},
 	-- sort_by = "name",
@@ -25,10 +26,10 @@ nvim_tree.setup({
 	diagnostics = {
 		enable = true,
 		icons = {
-			hint = "",
-			info = "",
-			warning = "",
-			error = "",
+			hint = icon.Hint,
+			info = icon.Info,
+			warning = icon.Warn,
+			error = icon.Error,
 		},
 	},
 	update_focused_file = {
@@ -68,6 +69,7 @@ nvim_tree.setup({
 		highlight_git = true,
 		root_folder_modifier = ":t",
 		highlight_opened_files = "icon", -- can be [icon, name, all, none]
+        -- NOTE: nvim_tree icon
 		icons = {
 			-- show = {
 			--     file = true,
