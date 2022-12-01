@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		require("conf.sniprun").setup()
 		vim.keymap.set("n", "nr", "<Plug>SnipClose", { silent = true })
-		vim.keymap.set("n", "<Leader>R", "<Plug>SnipRun", { silent = true })
+		vim.keymap.set("", "<Leader>R", "<Plug>SnipRun", { silent = true })
 	end,
 })
 

@@ -9,42 +9,13 @@ if not snip_status_ok then
 	vim.notify("luasnip error", "error")
 	return
 end
--- local has_words_before = function()
--- 	local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
--- 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
--- end
+
 require("luasnip.loaders.from_lua").lazy_load()
 require("luasnip/loaders/from_vscode").lazy_load()
 
+
 --   פּ ﯟ   some other good icons
-local kind_icons = {
-	Text = "",
-	Method = "",
-	Function = "",
-	Constructor = "",
-	Field = "ﰠ",
-	Variable = "",
-	Class = "ﴯ",
-	Interface = "",
-	Module = "",
-	Property = "ﰠ",
-	Unit = "塞",
-	Value = "",
-	Enum = "",
-	Keyword = "",
-	Snippet = "",
-	Color = "",
-	File = "",
-	Reference = "",
-	Folder = "",
-	EnumMember = "",
-	Constant = "",
-	Struct = "פּ",
-	Event = "",
-	Operator = "",
-	TypeParameter = "",
-}
--- find more here: https://www.nerdfonts.com/cheat-sheet
+local kind_icons = require('util').icon.code_icon
 
 cmp.setup({
 	snippet = {

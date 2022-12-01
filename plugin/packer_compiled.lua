@@ -244,12 +244,6 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
-  ["mason-null-ls.nvim"] = {
-    config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18mason-null-ls\frequire\0" },
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
-    url = "https://github.com/jayp0521/mason-null-ls.nvim"
-  },
   ["mason.nvim"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/mason.nvim",
@@ -265,18 +259,13 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/nui.nvim",
     url = "https://github.com/muniftanjim/nui.nvim"
   },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
-  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-nvim-lua", "cmp-tabnine", "cmp-path", "cmp-cmdline", "cmp-buffer", "friendly-snippets", "luasnip", "cmp-nvim-lsp", "cmp_luasnip" },
+    after = { "cmp_luasnip", "cmp-nvim-lsp", "cmp-nvim-lua", "cmp-path", "friendly-snippets", "cmp-tabnine", "cmp-cmdline", "cmp-buffer", "luasnip" },
     config = { "\27LJ\2\n(\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\rconf.cmp\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -429,19 +418,15 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: mason-null-ls.nvim
-time([[Config for mason-null-ls.nvim]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18mason-null-ls\frequire\0", "config", "mason-null-ls.nvim")
-time([[Config for mason-null-ls.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
 vim.cmd [[au FileType python ++once lua require("packer.load")({'sniprun'}, { ft = "python" }, _G.packer_plugins)]]
 vim.cmd [[au FileType go ++once lua require("packer.load")({'sniprun'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType cpp ++once lua require("packer.load")({'sniprun'}, { ft = "cpp" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType md ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "md" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cpp ++once lua require("packer.load")({'sniprun'}, { ft = "cpp" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)

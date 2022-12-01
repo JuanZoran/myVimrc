@@ -199,19 +199,6 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- FIXME: desable null-ls
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-	}) -- configure formatters & linters
-	use({
-		"jayp0521/mason-null-ls.nvim",
-		config = function()
-			require("mason-null-ls").setup({})
-		end,
-	}) -- bridges gap b/w mason & null-ls
-
-
 	--- =========== alternative ======================
 	-- use 'lukas-reineke/indent-blankline.nvim'
 	-- use({
