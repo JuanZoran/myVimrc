@@ -1,29 +1,29 @@
 local vim = vim
-vim.opt.autoread       = true
-vim.bo.autoread        = true
-vim.opt.number         = true
+vim.opt.autoread = true
+vim.bo.autoread = true
+vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.scriptencoding     = "utf-8"
-vim.opt.encoding       = "utf-8"
+vim.scriptencoding = "utf-8"
+vim.opt.encoding = "utf-8"
 -- vim.opt.smarttab = false
-vim.opt.fileencoding   = "utf-8"
+vim.opt.fileencoding = "utf-8"
 
-vim.opt.scrolloff      = 10
-vim.opt.sidescrolloff  = 10 
-vim.opt.swapfile       = false
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+vim.opt.swapfile = false
 
-vim.opt.mouse          = "a"
+vim.opt.mouse = "a"
 
-vim.opt.cmdheight   = 2
-vim.opt.pumheight   = 10
-vim.opt.ignorecase  = true
-vim.opt.smartcase   = true
-vim.opt.hidden      = true
-vim.opt.title       = true -- for show current dir
-vim.opt.timeoutlen  = 500 --default value = 1000
+-- vim.opt.cmdheight = 2
+vim.opt.pumheight = 10
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hidden = true
+vim.opt.title = true -- for show current dir
+vim.opt.timeoutlen = 500 --default value = 1000
 vim.opt.ttimeoutlen = 10 --default value = 1000
-vim.opt.hlsearch    = false
+vim.opt.hlsearch = false
 
 -- TODO: w, {v, b, l}
 vim.opt.formatoptions = vim.opt.formatoptions
@@ -50,7 +50,11 @@ vim.opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一�
 vim.opt.list = true
 vim.opt.listchars = "tab:▸ " -- Show tabs as '▸   ▸   '
 
-vim.opt.cursorline = true
+vim.opt.cursorline   = true
+vim.o.foldcolumn     = "1" -- '0' is not bad
+vim.o.foldlevel      = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable     = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -68,27 +72,28 @@ vim.wo.signcolumn = "yes"
 vim.cmd([[set iskeyword+=-]]) -- 将word-word视为一个word, 方便daw
 
 -----================ disabled some native =====================
-vim.g.loaded_matchit            = 1
+vim.o.showmode = false
+vim.g.loaded_matchit = 1
 vim.g.did_install_default_menus = 1
-vim.g.did_install_syntax_menu   = 1
-vim.g.loaded                    = 1
-vim.g.loaded_netrwPlugins       = 1
+vim.g.did_install_syntax_menu = 1
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugins = 1
 -- Uncomment this if you define your own filetypes in `after/ftplugin`
-vim.g.did_load_filetypes        = 1
+vim.g.did_load_filetypes = 1
 -- Do not load spell files
-vim.g.loaded_spellfile_plugin   = 1
+vim.g.loaded_spellfile_plugin = 1
 -- Do not load native syntax completion
-vim.g.loaded_syntax_completion  = 1
-vim.g.loaded_gzip               = 1
-vim.g.loaded_zip                = 1
-vim.g.loaded_zipPlugin          = 1
-vim.g.loaded_tar                = 1
-vim.g.loaded_tarPlugin          = 1
-vim.g.loaded_getscript          = 1
-vim.g.loaded_getscriptPlugin    = 1
-vim.g.loaded_netrw              = 1
-vim.g.loaded_netrwPlugin        = 1
-vim.g.loaded_netrwSettings      = 1
+vim.g.loaded_syntax_completion = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_zip = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
 ----============  disable end  ===========-------
 
 -- vim.opt.showtabline = 2 -- for 标签页面

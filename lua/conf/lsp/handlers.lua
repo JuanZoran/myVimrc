@@ -148,9 +148,12 @@ if not status_ok then
 	return
 end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
+-- NOTE: Make UFO use Lsp for fold
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
 return M
 
 -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {

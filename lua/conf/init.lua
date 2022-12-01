@@ -1,28 +1,12 @@
--- local async = require("plenary.async")
--- async.run(function()
-require("filetype").setup({})
+require("filetype").setup{}
 require("conf.notify")
--- end)
-
--- async.run(function()
 require("conf.nvim_tree")
 require("conf.which-key")
--- end)
-
--- async.run(function()
 require("conf.alpha")
 require("conf.bufferline")
--- require("conf.nscroll")
 require("conf.lsp-config")
 require("conf.lsp.lspsaga")
--- require("conf.lsp.null-ls")
 require("conf.lsp")
--- end)
--- async.run(function()
 require("conf.treesitter")
 require("conf.autopairs")
 require("conf.telescope")
-
--- lazy-load
--- require("conf.cmp")
--- end)

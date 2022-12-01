@@ -1,5 +1,3 @@
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 local ts = require("nvim-treesitter.configs")
 ts.setup({
 	auto_install = true,

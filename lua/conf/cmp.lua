@@ -19,30 +19,30 @@ require("luasnip/loaders/from_vscode").lazy_load()
 --   פּ ﯟ   some other good icons
 local kind_icons = {
 	Text = "",
-	Method = "m",
+	Method = "",
 	Function = "",
-	Constructor = "",
-	Field = "",
-	Variable = "",
-	Class = "",
+	Constructor = "",
+	Field = "ﰠ",
+	Variable = "",
+	Class = "ﴯ",
 	Interface = "",
 	Module = "",
-	Property = "",
-	Unit = "",
+	Property = "ﰠ",
+	Unit = "塞",
 	Value = "",
 	Enum = "",
 	Keyword = "",
-	Snippet = "",
+	Snippet = "",
 	Color = "",
 	File = "",
-	Reference = "",
+	Reference = "",
 	Folder = "",
 	EnumMember = "",
-	Constant = "",
-	Struct = "",
+	Constant = "",
+	Struct = "פּ",
 	Event = "",
 	Operator = "",
-	TypeParameter = "",
+	TypeParameter = "",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -96,12 +96,12 @@ cmp.setup({
 			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 			vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.menu = ({
-				nvim_lsp = "[LSP]",
-				luasnip = "[Snippet]",
+				nvim_lsp    = "[LSP]",
+				luasnip     = "[Snippet]",
 				cmp_tabnine = "[TabNine]",
-				nvim_lua = "[NVIM]",
-				buffer = "[Buffer]",
-				path = "[Path]",
+				nvim_lua    = "[NVIM]",
+				buffer      = "[Buffer]",
+				path        = "[Path]",
 				-- neorg       = "[Neorg]",
 			})[entry.source.name]
 			return vim_item

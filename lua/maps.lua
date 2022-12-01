@@ -1,4 +1,4 @@
-local M = require("util")
+local map = require("util").map
 local vim = vim
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -12,7 +12,7 @@ local iopt = {
 
 ----Telescope
 local builtin = require("telescope.builtin")
-M.map(
+map(
 	"n",
 	nopt,
 	{ "<C-f>", builtin.find_files },
@@ -42,7 +42,7 @@ M.map(
 )
 
 --- for harpoon keybindings
-M.map("n", nopt, {
+map("n", nopt, {
 	"<Leader>hh",
 	require("harpoon.ui").toggle_quick_menu,
 }, {
@@ -66,7 +66,7 @@ vim.keymap.set(
 	nopt
 )
 
-M.map(
+map(
 	"", -- global pattern
 	nopt,
 	{ "'", '"' },
@@ -80,7 +80,7 @@ M.map(
 	-- { "<Leader>R", "<Plug>SnipRun" } 
 )
 
-M.map(
+map(
 	"n", -- 正常模式
 	nopt, -- 选项
 	-- 窗口相关
@@ -93,10 +93,10 @@ M.map(
 	{ "w=", "<C-w>=" },
 	{ "w<Down>", "<C-w>J" },
 	{ "bb", "b" },
-	{ "bd", ":Bdelete<CR>" },
+	{ "bd", ":bdelete!<CR>" },
 	{ "b<left>", ":BufferLineMovePrev<CR>" },
 	{ "b<right>", ":BufferLineMoveNext<CR>" },
-	{ "qd", ":Bdelete<CR>" },
+	{ "qd", ":bdelete!<CR>" },
 	{ "w<Up>", "<C-w>K" },
 	{ "w<Right>", "<C-w>L" },
 	{ "w<Left>", "<C-w>H" },
@@ -153,7 +153,7 @@ M.map(
 	-- 	-- {"<++>", "<++>"},
 )
 -- Insert mode
-M.map(
+map(
 	"i",
 	iopt,
 	{ "<C-f>", ":FloatermNew fanger<CR>" },
@@ -171,7 +171,7 @@ M.map(
 	{ "<C-l>", "<Right>" }
 )
 
-M.map(
+map(
 	"c",
 	iopt,
 	{ "<C-q>", "<Esc>" },
@@ -181,7 +181,7 @@ M.map(
 	{ "<C-l>", "<Right>" }
 )
 
-M.map(
+map(
 	"v",
 	iopt,
 	-- { "<Leader><Leader>", ":TranslateW" },
@@ -192,6 +192,10 @@ M.map(
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
 vim.keymap.set("n", "<Leader>T", ":Telescope ")
+
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
 -- String value	Help page	Affected modes	Vimscript equivalent
 -- '' (an empty string)	mapmode-nvo	Normal, Visual, Select, Operator-pending	:map

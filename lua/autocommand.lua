@@ -3,21 +3,21 @@
 -- autocmd! 清除之前的所有autocmd
 -- 记录上一次的位置
 -- local savepos = vim.api.nvim_create_augroup("savepos", {clear = true})
-vim.api.nvim_create_autocmd({
-	"BufWinEnter",
-	"BufWritePost",
-	"CursorMoved",
-	"InsertLeave",
-	"TextChanged",
-	"TextChangedI",
-	-- add more events here
-}, {
-	group = vim.api.nvim_create_augroup("barbecue", {}),
-	callback = function()
-		require("barbecue.ui").update()
-		-- maybe a bit more logic here
-	end,
-})
+-- vim.api.nvim_create_autocmd({
+-- 	"BufWinEnter",
+-- 	"BufWritePost",
+-- 	"CursorMoved",
+-- 	"InsertLeave",
+-- 	"TextChanged",
+-- 	"TextChangedI",
+-- 	-- add more events here
+-- }, {
+-- 	group = vim.api.nvim_create_augroup("barbecue", {}),
+-- 	callback = function()
+--             -- TODO: make this more efficient
+-- 		require("barbecue.ui").update()
+-- 	end,
+-- })
 
 vim.cmd([[
 if has("autocmd")
@@ -81,3 +81,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 })
+
+
+-- NOTE: can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]

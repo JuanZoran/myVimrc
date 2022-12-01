@@ -53,13 +53,6 @@ packer.startup(function(use)
 	})
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	-- -- 通知栏
-	use({
-		"j-hui/fidget.nvim",
-		config = function()
-			-- require("fidget").setup({text = {spinner = "moon"}})
-			require("fidget").setup({})
-		end,
-	})
 	use("rcarriga/nvim-notify")
 
 	-- smooth scroll animation
@@ -93,7 +86,7 @@ packer.startup(function(use)
 		end,
 	})
 	use("voldikss/vim-floaterm")
-	use("famiu/bufdelete.nvim")
+	-- use("famiu/bufdelete.nvim")
 	use({
 		"rrethy/vim-illuminate", -- for cursor highlighting
 		config = function()
@@ -171,12 +164,14 @@ packer.startup(function(use)
 		"phaazon/hop.nvim",
 		branch = "v2", -- optional but strongly recommended
 		config = function()
-			-- you can configure hop the way you like here; see :h hop-config
 			require("conf.hop")
 		end,
 	})
 	-- -- ====================== syntax =====================
 	-- treesitter
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async', config = function ()
+        require('ufo').setup()
+    end}
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
@@ -192,7 +187,7 @@ packer.startup(function(use)
 	use({
 		"michaelb/sniprun",
 		run = "bash install.sh",
-		ft = { "cpp" },
+		ft = { "cpp", "python", "go"},
 		config = function()
 			require("conf.sniprun").setup()
 		end,
@@ -227,7 +222,6 @@ packer.startup(function(use)
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "tzachar/cmp-tabnine", after = "nvim-cmp" },
 			"hrsh7th/cmp-nvim-lsp",
-			"onsails/lspkind.nvim",
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
@@ -275,7 +269,7 @@ packer.startup(function(use)
 		"smiteshp/nvim-navic",
 		requires = {
 			"neovim/nvim-lspconfig", --[[ "fgheng/winbar.nvim", ]]
-			{"utilyre/barbecue.nvim", branch = "dev"},
+			-- {"utilyre/barbecue.nvim", branch = "dev"},
 		},
 	})
 	use("folke/which-key.nvim")
