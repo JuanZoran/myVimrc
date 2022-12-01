@@ -1,25 +1,36 @@
-require("filetype").setup{}
+-- NOTE: UI
+require("conf.alpha")
 require("conf.notify")
 require("conf.nvim_tree")
-require("conf.which-key")
-require("conf.alpha")
 require("conf.bufferline")
 require("conf.lualine")
-require("conf.lsp-config")
-require("conf.lsp.lspsaga")
-require("conf.lsp")
-require("conf.treesitter")
-require("conf.autopairs")
+require("conf.smooth")
+require("conf.noice")
+
+
+-- NOTE: Tools
+require("conf.which-key")
+require("conf.comment")
 require("conf.telescope")
-require("conf/illuminate")
-require("conf.treehop")
 require("conf.auto-session")
 require("conf.session-lens")
 require("conf.toggle")
 require("conf.todo-comments")
-require("conf.comment")
-require("conf.gitsigns")
 require("conf.hop")
+
+-- NOTE: Treesitter
+require("conf.treesitter")
+require("conf.gitsigns")
+require("conf.autopairs")
+require("conf.treehop")
+
+
+-- NOTE: LSP
+require("conf.lsp-config")
+require("conf.lsp.lspsaga")
+require("conf.lsp")
 require("conf.ufo")
-require("conf.noice")
-require("conf.smooth")
+require("conf/illuminate")
+
+
+-- TODO: Debugger

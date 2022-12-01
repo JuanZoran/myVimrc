@@ -52,7 +52,7 @@ nvim_tree.setup({
 		mappings = {
 			-- custom_only = true, -- 只用自定义的按键
 			list = {
-				{ key = "u", action = "parent_node" },
+				{ key = "u", action = "dir_up" },
 				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") }, -- 打开文件
 				{ key = "h", cb = tree_cb("close_node") },
 				{ key = "v", cb = tree_cb("vsplit") },

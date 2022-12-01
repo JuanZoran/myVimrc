@@ -5,6 +5,7 @@ vim.keymap.set("v", "za", "zf")
 
 
 
+-- show how many lines get folded
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
     local suffix = ('  %d '):format(endLnum - lnum)
