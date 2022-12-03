@@ -1,28 +1,44 @@
 local vim = vim
 vim.opt.termguicolors = true
-vim.g.deus_termcolors = 256
 
 
--- TODO
--- for non background
+-- everforest
+if false then
+    vim.g.everforest_background                = "hard"
+    vim.g.everforest_transparent_background    = 2 -- avaliable : 0, 1, 2
+    vim.g.everforest_diagnostic_text_highlight = 1
+    vim.g.everforest_diagnostic_line_highlight = 1
+    vim.g.everforest_diagnostic_virtual_text   = "colored"
+    vim.g.everforest_better_preformance        = 1
+    -- vim.g.everforest_ui_contrast               = "high"
+    vim.g.everforest_current_word              = "underline"
+    vim.g.everforest_spell_foreground          = "colored"
 
-vim.g.everforest_background                = "hard"
-vim.g.everforest_transparent_background    = 2 -- avaliable : 0, 1, 2
-vim.g.everforest_diagnostic_text_highlight = 1
-vim.g.everforest_diagnostic_line_highlight = 1
-vim.g.everforest_diagnostic_virtual_text   = "colored"
-vim.g.everforest_better_preformance        = 1
--- vim.g.everforest_ui_contrast               = "high"
-vim.g.everforest_current_word = "underline"
-vim.g.everforest_spell_foreground = "colored"
-
--- vim.g.everforest_enable_italic = 1
--- vim.g.everforest_disable_italic_comment = 0
--- vim.g.everforest_show_eob = 0
--- vim.g.everforest_cursor = "red" -- only work for gui
+    -- vim.g.everforest_enable_italic = 1
+    -- vim.g.everforest_disable_italic_comment = 0
+    -- vim.g.everforest_show_eob = 0
+    -- vim.g.everforest_cursor = "red" -- only work for gui
 
 
-vim.cmd([[colorscheme everforest]])
+    vim.cmd([[colorscheme everforest]])
+else
+					-- *bold* *underline* *undercurl*
+					-- *underdouble* *underdotted*
+					-- *underdashed* *inverse* *italic*
+					-- *standout* *nocombine* *strikethrough*
+    require('github-theme').setup {
+        theme_style = "dark_default", -- dark | dark_default | dimmed | dark_colorblind | light | light_default | light_colorblind
+        function_style = "italic",
+        -- keyword_style = "italic",
+        -- dark_sidebar = true,
+        dark_float = true,
+        -- comment_style = "italic",
+        -- transparent = false,
+    }
+end
+
+
+
 -- vim.cmd([[hi Todo gui=bold guifg=#2f383e guibg=#83c092]])
 
 -- https://zhuanlan.zhihu.com/p/20718108

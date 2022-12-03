@@ -1,4 +1,3 @@
-local vim = vim
 vim.opt.autoread = true
 vim.bo.autoread = true
 vim.opt.number = true
@@ -49,6 +48,7 @@ vim.opt.shortmess:append("I") -- don't show the default intro message
 vim.opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 vim.opt.list = true
 vim.opt.listchars = "tab:▸ " -- Show tabs as '▸   ▸   '
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.opt.cursorline   = true
 vim.o.foldcolumn     = "1" -- '0' is not bad

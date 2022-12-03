@@ -1,83 +1,89 @@
 local function diff_source()
-  local gitsigns = vim.b.gitsigns_status_dict
-  if gitsigns then
-    return {
-      added = gitsigns.added,
-      modified = gitsigns.changed,
-      removed = gitsigns.removed
-    }
-  end
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+        return {
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed
+        }
+    end
 end
-
 
 local icon = require("util").icon
 local navic = require("nvim-navic")
-require("lualine").setup({
-	options = { theme = "everforest" },
-	-- options = { theme = "gruvbox-material" },
-	-- options = { theme = "material" },
-	-- options = { theme = "seoul256" },
-	sections = {
-		lualine_b = {
-            "branch",
-            {'diff', source = diff_source},
-			{
-				"diagnostics",
-				-- Table of diagnostic sources, available sources are:
-				--   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-				sources = { "nvim_diagnostic", "nvim_lsp" },
-				-- Displays diagnostics for the defined severity types
-				sections = { "error", "warn", "info", "hint" },
-				diagnostics_color = {
-					-- Same values as the general color option can be used here.
-					error = "DiagnosticError", -- Changes diagnostics' error color.
-					warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
-					info = "DiagnosticInfo", -- Changes diagnostics' info color.
-					hint = "DiagnosticHint", -- Changes diagnostics' hint color.
-				},
-				symbols = { error = icon.Error, warn = icon.Warn, info = icon.Info, hint = icon.Hint },
-				colored = false, -- Displays diagnostics status in color if set to true.
-				update_in_insert = false, -- Update diagnostics in insert mode.
-				always_visible = true, -- Show diagnostics even if there are none.
-			},
-		},
-		lualine_c = {
-			{ require("auto-session-library").current_session_name },
-		},
-	},
-	winbar = {
-		lualine_a = {
 
-		},
-		lualine_b = {
-			{
-				require("noice").api.status.mode.get, -- for macro
-				cond = require("noice").api.status.mode.has,
-				color = { fg = "#a7c080" },
-			},
-			{
-				require("noice").api.status.command.get, -- show cmd in botton right
-				cond = require("noice").api.status.command.has,
-				color = { fg = "#a7c080" },
-			},
-			{
-				require("noice").api.status.search.get, -- for search result
-				cond = require("noice").api.status.search.has,
-				color = { fg = "#a7c080" },
-			},
-		},
-		lualine_c = {
-			{ navic.get_location, cond = navic.is_available , color = {fg = "#a7c080"}},
-		},
-		lualine_x = {},
-		-- lualine_y = {},
-		-- lualine_z = {},
-	},
-	disabled_filetypes = {
-		statusline = { "alpha" },
-		winbar = { "alpha" },
-	},
-	-- extensions = { "quickfix", "nvim_tree" },
+require("lualine").setup({
+    -- options = { theme = "everforest" },
+    -- options = { theme = "iceberg_dark" },
+    options = {
+        theme = "auto",
+        disabled_filetypes = {
+            statusline = { "alpha" },
+            winbar = { "alpha" },
+        },
+    },
+    -- options = { theme = "gruvbox-material" },
+    -- options = { theme = "material" },
+    -- options = { theme = "seoul256" },
+    sections = {
+        lualine_b = {
+            "branch",
+            { 'diff', source = diff_source },
+            {
+                "diagnostics",
+                -- Table of diagnostic sources, available sources are:
+                --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+                sources = { "nvim_diagnostic", "nvim_lsp" },
+                -- Displays diagnostics for the defined severity types
+                sections = { "error", "warn", "info", "hint" },
+                diagnostics_color = {
+                    -- Same values as the general color option can be used here.
+                    error = "DiagnosticError", -- Changes diagnostics' error color.
+                    warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
+                    info = "DiagnosticInfo", -- Changes diagnostics' info color.
+                    hint = "DiagnosticHint", -- Changes diagnostics' hint color.
+                },
+                symbols = { error = icon.Error, warn = icon.Warn, info = icon.Info, hint = icon.Hint },
+                colored = false, -- Displays diagnostics status in color if set to true.
+                update_in_insert = false, -- Update diagnostics in insert mode.
+                always_visible = true, -- Show diagnostics even if there are none.
+            },
+        },
+        lualine_c = {
+            { require("auto-session-library").current_session_name },
+        },
+    },
+
+    winbar = {
+        -- lualine_a = {
+        --
+        -- },
+        lualine_b = {
+            {
+                require("noice").api.status.mode.get, -- for macro
+                cond = require("noice").api.status.mode.has,
+                -- color = { fg = "#a7c080" },
+            },
+            {
+                require("noice").api.status.command.get, -- show cmd in botton right
+                cond = require("noice").api.status.command.has,
+            },
+            {
+                require("noice").api.status.search.get, -- for search result
+                cond = require("noice").api.status.search.has,
+            },
+        },
+
+        lualine_c = {
+            {
+                navic.get_location,
+                cond = navic.is_available,
+            },
+        },
+        lualine_x = {},
+        -- lualine_y = {},
+        -- lualine_z = {},
+    },
 })
 
 -- require('lualine').setup {

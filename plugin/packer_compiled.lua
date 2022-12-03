@@ -193,6 +193,11 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["github-nvim-theme"] = {
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -265,7 +270,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp_luasnip", "cmp-nvim-lsp", "cmp-nvim-lua", "cmp-path", "friendly-snippets", "cmp-tabnine", "cmp-cmdline", "cmp-buffer", "luasnip" },
+    after = { "cmp-tabnine", "cmp-buffer", "cmp-nvim-lua", "friendly-snippets", "cmp_luasnip", "cmp-nvim-lsp", "luasnip", "cmp-cmdline", "cmp-path" },
     config = { "\27LJ\2\n(\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\rconf.cmp\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -422,16 +427,16 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType python ++once lua require("packer.load")({'sniprun'}, { ft = "python" }, _G.packer_plugins)]]
-vim.cmd [[au FileType go ++once lua require("packer.load")({'sniprun'}, { ft = "go" }, _G.packer_plugins)]]
 vim.cmd [[au FileType cpp ++once lua require("packer.load")({'sniprun'}, { ft = "cpp" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'sniprun'}, { ft = "python" }, _G.packer_plugins)]]
 vim.cmd [[au FileType md ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "md" }, _G.packer_plugins)]]
+vim.cmd [[au FileType go ++once lua require("packer.load")({'sniprun'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au insertenter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "insertenter *" }, _G.packer_plugins)]]
 vim.cmd [[au cmdlineenter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "cmdlineenter *" }, _G.packer_plugins)]]
+vim.cmd [[au insertenter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "insertenter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

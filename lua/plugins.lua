@@ -28,6 +28,8 @@ packer.startup(function(use)
 	-- ====================== ui =====================
 	-- about theme
 	use("sainnhe/everforest")
+	use("projekt0n/github-nvim-theme")
+
 
 	-- 状态栏
 	use({
