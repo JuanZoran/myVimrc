@@ -112,6 +112,8 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
+capabilities.textDocument.publishDiagnostics.codeActionsInline = true
+
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 return M
 

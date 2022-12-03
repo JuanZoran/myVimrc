@@ -33,7 +33,7 @@ else
         -- dark_sidebar = true,
         dark_float = true,
         -- comment_style = "italic",
-        -- transparent = false,
+        transparent = true,
     }
 end
 

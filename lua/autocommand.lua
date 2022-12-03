@@ -39,17 +39,6 @@ autocmd InsertEnter * :silent if fcitx5state == 2 | call system("fcitx5-remote -
 ]])
 
 
--- NOTE: lazy load
-local sniprun = vim.api.nvim_create_augroup("SnipRun", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	group = sniprun,
-	pattern = { "cpp", "python", "go" },
-	callback = function()
-		require("conf.sniprun").setup()
-		vim.keymap.set("n", "nr", "<Plug>SnipClose", { silent = true })
-		vim.keymap.set("", "<Leader>R", "<Plug>SnipRun", { silent = true })
-	end,
-})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
@@ -61,3 +50,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- NOTE: can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]
+
+-- -- NOTE: lazy load
+-- local sniprun = vim.api.nvim_create_augroup("SnipRun", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	group = sniprun,
+-- 	pattern = { "cpp", "python", "go" },
+-- 	callback = function()
+-- 		require("conf.sniprun").setup()
+-- 		vim.keymap.set("n", "nr", "<Plug>SnipClose", { silent = true })
+-- 		vim.keymap.set("", "<Leader>R", "<Plug>SnipRun", { silent = true })
+-- 	end,
+-- })

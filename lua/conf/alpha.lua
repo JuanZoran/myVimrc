@@ -44,12 +44,12 @@ dashboard.section.buttons.val = {
 	dashboard.button("q", "🏓  > Quit", ":qa<CR>"),
 }
 
--- dashboard.section.footer.val = {
--- 	"               ",
--- 	" Talk is cheap ",
--- 	"Show me the code",
--- 	"       🚀      ",
--- 	"               ",
--- }
+dashboard.section.footer.val = {
+	"               ",
+	" Talk is cheap ",
+	"Show me the code",
+	"       🚀      ",
+	"               ",
+}
 -- Send config to alpha
 alpha.setup(dashboard.opts)

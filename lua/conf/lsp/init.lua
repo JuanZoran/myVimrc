@@ -21,6 +21,7 @@ end
 
 local handler = require("conf.lsp.handlers")
 handler.setup()
+
 --- 自动启动
 local opts = {}
 for _, server in pairs(servers) do

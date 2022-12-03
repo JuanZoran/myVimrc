@@ -145,11 +145,11 @@ packer.startup(function(use)
 	})
 
 	-- powerful code-runner
-	use({
-		"michaelb/sniprun",
-		run = "bash install.sh",
-		ft = { "cpp", "python", "go" },
-	})
+	-- use({
+	-- 	"michaelb/sniprun",
+	-- 	run = "bash install.sh",
+	-- 	ft = { "cpp", "python", "go",},
+	-- })
 
 	-- -- ====================== completion =====================
 	-- mason | lspconfig | mason-lspconfig

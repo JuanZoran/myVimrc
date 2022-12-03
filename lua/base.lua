@@ -23,9 +23,8 @@ vim.opt.title = true -- for show current dir
 vim.opt.timeoutlen = 500 --default value = 1000
 vim.opt.ttimeoutlen = 10 --default value = 1000
 vim.opt.hlsearch = false
+-- vim.opt.paste = true
 
--- TODO: w, {v, b, l}
--- vim.opt.formatoptions = vim.opt.formatoptions
 -- 	- "a" -- Auto formatting is BAD.
 -- 	- "t" -- Don't auto format my code. I got linters for that.
 -- 	+ "c" -- In general, I like it when comments respect textwidth
