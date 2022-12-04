@@ -1,11 +1,11 @@
 require('cinnamon').setup {
-  extra_keymaps = false,
+  extra_keymaps = true,
   override_keymaps = false, -- whether to force mapping
   max_length = 500,
   scroll_limit = -1,
 }
-local M = require('util')
-M.map(
+local map = require('util').map
+map(
     "o", -- be appended to other operator
     nil,
     {"J", "0"},
