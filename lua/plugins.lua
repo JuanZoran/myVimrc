@@ -52,7 +52,7 @@ packer.startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons" },
 	})
 
-	-- tab line
+	-- tabline
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 
 	-- -- 通知样式 TODO: config with lsp-status
@@ -144,12 +144,6 @@ packer.startup(function(use)
 		requires = "kevinhwang91/promise-async",
 	})
 
-	-- powerful code-runner
-	-- use({
-	-- 	"michaelb/sniprun",
-	-- 	run = "bash install.sh",
-	-- 	ft = { "cpp", "python", "go",},
-	-- })
 
 	-- -- ====================== completion =====================
 	-- mason | lspconfig | mason-lspconfig
@@ -184,10 +178,10 @@ packer.startup(function(use)
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			{ "nvim-lua/plenary.nvim" }, -- lib
-			{ "nvim-telescope/telescope-project.nvim" },
-			{ "jvgrootveld/telescope-zoxide" }, -- powerful cd
-			{ "brandoncc/telescope-harpoon.nvim" }, -- list
+			{ "nvim-lua/plenary.nvim"                     },  -- lib
+			{ "nvim-telescope/telescope-project.nvim"     },
+			{ "jvgrootveld/telescope-zoxide"              },  -- powerful cd
+			{ "brandoncc/telescope-harpoon.nvim"          },  -- list
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
 		},
 	})
@@ -200,53 +194,6 @@ packer.startup(function(use)
 			vim.fn["firenvim#install"](0)
 		end,
 	})
-
-	--- =========== alternative ======================
-	-- use 'lukas-reineke/indent-blankline.nvim'
-	-- use({
-	-- 	"nvim-neorg/neorg",
-	-- 	-- tag = "*",
-	-- 	ft = "norg",
-	-- 	run = ":neorg sync-parsers",
-	-- 	after = "nvim-treesitter", -- you may want to specify telescope here as well
-	-- 	config = function()
-	-- 		require("conf/neorg").setup()
-	-- 	end,
-	-- })
-	--
-	-- use({
-	-- 	"tzachar/cmp-tabnine", -- use ":cmptabninehub" command to login
-	-- 	after = "nvim-cmp",
-	-- 	run = "bash ./install.sh",
-	-- })
-	--
-	-- use({
-	-- 	"toppair/peek.nvim",
-	-- 	run = "deno task --quiet build:fast",
-	-- })
-	--
-	-- use({ "hrsh7th/nvim-cmp", requires = {
-	-- 	"l3mon4d3/luasnip",
-	-- } })
-	-- use("onsails/lspkind.nvim")
-	-- use("hrsh7th/cmp-nvim-lsp")
-	-- use("hrsh7th/cmp-buffer")
-	-- use("hrsh7th/cmp-path")
-	-- use("hrsh7th/cmp-cmdline")
-	-- use("hrsh7th/cmp-nvim-lua")
-	-- --- snip
-	-- use("saadparwaiz1/cmp_luasnip")
-	-- use("l3mon4d3/luasnip")
-	-- use("rafamadriz/friendly-snippets")
-
-	-- use({
-	-- 	"andymass/vim-matchup",
-	-- 	setup = function()
-	-- 		-- may set any options here
-	--             -- vim.g.matchup_surround_enabled = 1
-	-- 		vim.g.matchup_matchparen_offscreen = { method = "popup" }
-	-- 	end,
-	-- })
 
 	-- automatically set up your configuration after cloning packer.nvim
 	-- put this at the end after all plugins

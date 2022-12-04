@@ -1,5 +1,5 @@
 local servers = {
-	"sumneko_lua", -- for python
+	"sumneko_lua",
 	"pyright",
 	"clangd",
 	"gopls",
@@ -33,6 +33,7 @@ for _, server in pairs(servers) do
 	server = vim.split(server, "@")[1]
 	local require_ok, conf_opts = pcall(require, "conf.lsp.settings." .. server)
 	if require_ok then
+        -- 合并表: force | error | keep, 表示发生冲突时的处理方法
 		opts = vim.tbl_deep_extend("force", conf_opts, opts)
 	else
 		vim.notify(server .. " Not Found")

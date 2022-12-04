@@ -25,6 +25,7 @@ vim.opt.ttimeoutlen = 10 --default value = 1000
 vim.opt.hlsearch = false
 -- vim.opt.paste = true
 
+-- vim.opt.formatoptions:remove("o")
 -- 	- "a" -- Auto formatting is BAD.
 -- 	- "t" -- Don't auto format my code. I got linters for that.
 -- 	+ "c" -- In general, I like it when comments respect textwidth

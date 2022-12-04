@@ -4,7 +4,7 @@ require("nvim-autopairs").setup({
         map = "<C-e>",
         chars = { "{", "[", "(", '"', "'" , "<" },
         pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-        offset = 0, -- Offset from pattern match
+        offset = -1, -- Offset from pattern match
         end_key = "l",
         keys = "qwertyuiopzxcvbnmasdfghjkl",
         check_comma = true,

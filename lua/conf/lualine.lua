@@ -55,9 +55,7 @@ require("lualine").setup({
     },
 
     winbar = {
-        -- lualine_a = {
-        --
-        -- },
+        lualine_a = {},
         lualine_b = {
             {
                 require("noice").api.status.mode.get, -- for macro
@@ -80,7 +78,9 @@ require("lualine").setup({
                 cond = navic.is_available,
             },
         },
-        lualine_x = {},
+        lualine_z = {
+            "os.date[[%A %H:%M]]",
+        },
         -- lualine_y = {},
         -- lualine_z = {},
     },

@@ -22,10 +22,10 @@ if false then
 
     vim.cmd([[colorscheme everforest]])
 else
-					-- *bold* *underline* *undercurl*
-					-- *underdouble* *underdotted*
-					-- *underdashed* *inverse* *italic*
-					-- *standout* *nocombine* *strikethrough*
+    -- *bold* *underline* *undercurl*
+    -- *underdouble* *underdotted*
+    -- *underdashed* *inverse* *italic*
+    -- *standout* *nocombine* *strikethrough*
     require('github-theme').setup {
         theme_style = "dark_default", -- dark | dark_default | dimmed | dark_colorblind | light | light_default | light_colorblind
         function_style = "italic",
@@ -34,12 +34,17 @@ else
         dark_float = true,
         -- comment_style = "italic",
         transparent = true,
+        overrides = function(_)
+            return {
+                IncSearch = { fg = "#c9d1d9", bg = "#ff4081" },
+            }
+        end
     }
 end
 
 
 
--- vim.cmd([[hi Todo gui=bold guifg=#2f383e guibg=#83c092]])
+-- vim.cmd([[hi IncSearch gui=bold guifg=#2f383e guibg=#83c092]])
 
 -- https://zhuanlan.zhihu.com/p/20718108
 -- hi 样式名称 guifg=Gvim字体颜色 guibg=Gvim背景颜色 ctermfg=终端Vim字体颜色 ctermbg=终端Vim背景颜色 gui=Gvim字体样式 cterm=终端Vim字体样式

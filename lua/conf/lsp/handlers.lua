@@ -42,7 +42,6 @@ navic.setup({
     icon = icon.code_icon,
 	highlight = true,
 	separator = "  ",
-	-- separator = "  ",
 })
 
 M.on_attach = function(client, bufnr)
@@ -116,29 +115,3 @@ capabilities.textDocument.publishDiagnostics.codeActionsInline = true
 
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 return M
-
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
--- 	border = "rounded",
--- })
-
--- local function lsp_highlight_document(client)
--- 	-- Set autocommands conditional on server_capabilities
--- 	if client.server_capabilities.documentHighlight then
--- 		vim.cmd([[
---       augroup lsp_document_highlight
---         autocmd! * <buffer>
---         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
---         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
---       augroup END
---     ]])
--- 	end
--- end
---
--- require("lsp_signature").on_attach({
--- 	bind = true, -- This is mandatory, otherwise border config won't get registered.
--- 	handler_opts = {
--- 		border = "rounded",
--- 	},
--- }, bufnr) -- Note: add in lsp client on-attach
-
--- lsp_highlight_document(client)

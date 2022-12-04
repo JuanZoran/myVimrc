@@ -10,30 +10,34 @@ local opt = {
 M.map(
     "",
     opt,
-	{ "s", ":HopChar2MW<cr>" },
-	-- {"S", ":HopChar2MW<cr>"},
-	{ "ej", ":HopPatternBC<CR>" },
-	{ "ee", "e" },
-	{ "el", ":HopPatternAC<CR>" },
-	{ "<Leader>l", ":HopWordAC<CR>" },
-	{ "<Leader>i", ":HopVerticalBC<CR>" },
-	{ "<Leader>k", ":HopVerticalAC<CR>" },
-	{ "<Leader>j", ":HopWordBC<CR>" }
+    { "s", ":HopChar2MW<cr>" },
+    -- {"S", ":HopChar2MW<cr>"},
+    { "ej", ":HopPatternBC<CR>" },
+    { "ee", "e" },
+    { "el", ":HopPatternAC<CR>" },
+    { "<Leader>l", ":HopWordAC<CR>" },
+    { "<Leader>i", ":HopVerticalBC<CR>" },
+    { "<Leader>k", ":HopVerticalAC<CR>" },
+    { "<Leader>j", ":HopWordBC<CR>" }
 )
 
 
 vim.keymap.set("", "f", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
 end, { remap = true })
 vim.keymap.set("", "F", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
 end, { remap = true })
 vim.keymap.set("", "t", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
+    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
 end, { remap = true })
 vim.keymap.set("", "T", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
+    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
 end, { remap = true })
 
 -- ============================ configuration ======================================
-hop.setup{}
+hop.setup {
+    -- jump_on_sole_occurrences = true,
+    -- hint_position = require 'hop.hint'.HintPosition.END,
+    -- hint_position = require 'hop.hint'.HintPosition.MIDDLE,
+}
