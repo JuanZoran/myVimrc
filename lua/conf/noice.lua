@@ -3,13 +3,13 @@ require("noice").setup({
     lsp = {
         -- TODO: config this with lsp progress
         progress = {
-            enabled = true,
+            enabled = false,
             -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
             -- See the section on formatting for more details on how to customize.
-            format = "lsp_progress",
-            format_done = "Completle!",
-            throttle = 1000 / 50, -- frequency to update lsp progress message
-            view = "notify",
+            -- format = "lsp_progress",
+            -- format_done = "Completle!",
+            -- throttle = 1000 / 50, -- frequency to update lsp progress message
+            -- view = "notify",
         },
         hover = {
             enabled = false, -- avoid get conflicts with lspsaga

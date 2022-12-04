@@ -17,19 +17,17 @@ require("lualine").setup({
     sections = {
         lualine_b = {
             "branch",
-            -- { 'diff', source = diff_source },
             { 'diff' },
         },
         lualine_c = {
             { require("auto-session-library").current_session_name },
             {
                 "filename",
-                -- TODO: Config this
                 path = 1,
             },
+            'lsp_progress',
         },
     },
-
     winbar = {
         lualine_a = {
             {
@@ -51,13 +49,13 @@ require("lualine").setup({
                 update_in_insert = false, -- Update diagnostics in insert mode.
                 always_visible = true, -- Show diagnostics even if there are none.
             },
-        },
-        lualine_b = {
             {
                 require("noice").api.status.mode.get, -- for macro
                 cond = require("noice").api.status.mode.has,
                 -- color = { fg = "#a7c080" },
             },
+        },
+        lualine_b = {
             {
                 require("noice").api.status.command.get,
                 cond = require("noice").api.status.command.has,
