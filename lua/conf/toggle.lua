@@ -2,7 +2,7 @@
 require('nvim-toggler').setup({
   -- your own inverses
   inverses = {
-    -- ['vim'] = 'emacs'
+    ['True'] = 'False'
   },
   -- removes the default <leader>i keymap
   remove_default_keybinds = true,

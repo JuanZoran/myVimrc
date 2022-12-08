@@ -12,7 +12,7 @@ require("bufferline").setup({
 		-- end,
 		-- diagnostics_update_in_insert = false,
 		modified_icon = "💌",
-		separator_style = "thick", -- slant, padded_slant
+		separator_style = "padded_slant", -- slant, padded_slant | triky
 		offsets = {
 			{
 				filetype = "NvimTree",

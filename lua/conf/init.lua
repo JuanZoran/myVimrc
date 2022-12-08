@@ -13,8 +13,8 @@ require("conf.ufo")
 require("conf/illuminate")
 -- NOTE: Treesitter
 require("conf.treesitter")
-require("conf.gitsigns")
 require("conf.autopairs")
+require("conf.gitsigns")
 require("conf.treehop")
 
 if not (vim.g.started_by_firenvim) then

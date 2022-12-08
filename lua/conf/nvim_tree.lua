@@ -3,12 +3,14 @@ local nvim_tree_config = require("nvim-tree.config")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 vim.g.nvim_tree_auto_close = 1
+-- vim.g.nvim_tree_respect_buf_cwd = 1
+
 
 local icon = require('util').icon
 nvim_tree.setup({
     disable_netrw = true,
     hijack_netrw = true,
-    open_on_setup = false,
+    -- open_on_setup = false,
     ignore_ft_on_setup = {
         "startify",
         "dashboard",
@@ -110,6 +112,7 @@ nvim_tree.setup({
             "CMakeLists.txt",
         },
     },
+    respect_buf_cwd = true,
     -- tab = {
     -- sync = {
     -- open = false,

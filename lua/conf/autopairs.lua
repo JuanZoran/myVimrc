@@ -12,6 +12,8 @@ require("nvim-autopairs").setup({
         highlight_grey = "LineNr",
     },
 })
+require('nvim-autopairs').add_rules(require "nvim-autopairs.rules.endwise-lua")
+
 
 -- vim.cmd[[hi PmenuSel guifg=#1d202f guibg=#f7768e]]
 vim.cmd[[hi PmenuSel cterm=bold gui=bold guifg=#1d202f guibg=#7aa2f7]]

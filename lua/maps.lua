@@ -79,6 +79,7 @@ map(
 	{ "<Leader>gi", ":FloatermNew lazygit<CR>" },
 	{ "<Leader>ra", ":FloatermNew ranger<CR>" },
 	{ "<C-d>", ":FloatermToggle<CR>" },
+	{ "<C-t>", ":FloatermNew dooit<CR>" },
 	{ "<C-g>", ":FloatermNew lazygit<CR>" },
 	{ "<C-h>", "<cmd>FloatermHide<CR>" },
 	{ "<Leader>df", "<cmd>FloatermKill<cr>" },
@@ -105,6 +106,7 @@ map(
 	-- 其他
 	{ "<C-a>", "/<++><CR>vf>c" }, -- PlaceHolder
 	{ "<Leader>w", ":wq<CR>" },
+	{ "<Leader>W", ":w<CR>" },
 	{ "<C-q>", ":q!<CR>" },
 	{ "na", "<c-a>" },
 	{ "nh", ":noh<CR>" },
@@ -152,6 +154,8 @@ map(
 	{ "<", "<gv" }
 )
 
+-- vim.keymap.set("n", "<Tab>", '<CMD>lua print([[ Tab is pressed ]])<CR>')
+-- vim.keymap.set("n", "<C-i>", '<CMD>lua print([[ Ctr-i is pressed ]])<CR>')
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
 

@@ -110,8 +110,17 @@ packer.startup(function(use)
     use("junegunn/vim-easy-align") -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
     use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
     use("voldikss/vim-translator") -- translator with <leader><leader>
-    use("windwp/nvim-autopairs") -- smart pair
     use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
+
+    -- Auto pairs
+    use {
+        "windwp/nvim-autopairs",
+        -- wants = "nvim-treesitter",
+        -- module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
+        -- config = function()
+        --     require('conf.autopairs')
+        -- end
+    }
 
     -- combine auto-session with telescope
     use({
@@ -176,6 +185,19 @@ packer.startup(function(use)
             require("conf.cmp")
         end,
     })
+
+
+    -- use({
+    --     'jameshiew/nvim-magic',
+    --     config = function()
+    --         require('nvim-magic').setup()
+    --     end,
+    --     requires = {
+    --         'nvim-lua/plenary.nvim',
+    --         'MunifTanjim/nui.nvim'
+    --     }
+    -- })
+
 
     -- -- telescope
     use({

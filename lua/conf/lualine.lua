@@ -1,5 +1,5 @@
 local icon = require("util").icon
-local navic = require("nvim-navic")
+local navic = require('nvim-navic')
 
 require("lualine").setup({
     -- options = { theme = "everforest" },
@@ -10,8 +10,14 @@ require("lualine").setup({
     options = {
         theme = "auto",
         disabled_filetypes = {
-            statusline = { "alpha" },
-            winbar = { "alpha" },
+            statusline = {
+                "alpha",
+                "nvim_tree",
+            },
+            winbar = {
+                "alpha",
+                "nvim_tree",
+            },
         },
     },
     sections = {
@@ -68,6 +74,7 @@ require("lualine").setup({
 
         lualine_c = {
             {
+                -- require('conf.winbar').get_winbar()
                 navic.get_location,
                 cond = navic.is_available,
             },
@@ -75,6 +82,5 @@ require("lualine").setup({
         lualine_z = {
             "os.date[[%A %H:%M]]",
         },
-        -- lualine_z = {},
     },
 })

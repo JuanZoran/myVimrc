@@ -76,24 +76,12 @@ vim.o.showmode = false
 vim.g.loaded_matchit = 1
 vim.g.did_install_default_menus = 1
 vim.g.did_install_syntax_menu = 1
-vim.g.loaded = 1
-vim.g.loaded_netrwPlugins = 1
 -- Uncomment this if you define your own filetypes in `after/ftplugin`
 vim.g.did_load_filetypes = 1
 -- Do not load spell files
 vim.g.loaded_spellfile_plugin = 1
 -- Do not load native syntax completion
 vim.g.loaded_syntax_completion = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
 ----============  disable end  ===========-------
 
 -- vim.opt.showtabline = 2 -- for 标签页面
@@ -105,3 +93,33 @@ vim.g.loaded_netrwSettings = 1
 -- vim.opt.foldlevel       = 99
 -- vim.opt.undofile = true
 -- vim.opt.undodir = "~/.vim/undodir"
+local g = vim.g
+
+-- Disable some builtin vim plugins
+local disabled_built_ins = {
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "matchit",
+  "matchparen",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "shada",
+  "vimball",
+  "vimballPlugin",
+  "tohtml",
+  "tutor",
+  "zip",
+  "zipPlugin",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+  g["loaded_" .. plugin] = 1
+end
