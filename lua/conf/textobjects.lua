@@ -5,12 +5,12 @@ M = {
 		lookahead = true,
 		keymaps = {
 			-- You can use the capture groups defined in textobjects.scm
-			["qj"] = "@function.outer",
-			["ql"] = "@function.inner",
-			["qL"] = "@class.inner",
+			["<leader>fl"] = "@function.outer",
+			["<leader>fj"] = "@function.inner",
+			["<leader>cj"] = "@class.inner",
 			-- You can optionally set descriptions to the mappings (used in the desc parameter of
 			-- nvim_buf_set_keymap) which plugins like which-key display
-			["qJ"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+			["<leader>cl"] = { query = "@class.outer", desc = "Select inner part of a class region" },
 		},
 		-- You can choose the select mode (default is charwise 'v')
 		--
@@ -48,20 +48,20 @@ M = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        ["ql"] = "@function.outer",
-        ["qL"] = { query = "@class.outer", desc = "Next class start" },
+        ["<leader>fl"] = "@function.outer",
+        ["<leader>cl"] = { query = "@class.outer", desc = "Next class start" },
       },
       goto_next_end = {
-        ["gl"] = "@function.outer",
-        ["gL"] = "@class.outer",
+        ["<leader>fL"] = "@function.outer",
+        ["<leader>cL"] = "@class.outer",
       },
       goto_previous_start = {
-        ["qj"] = "@function.outer",
-        ["qJ"] = "@class.outer",
+        ["<leader>fj"] = "@function.outer",
+        ["<leader>cj"] = "@class.outer",
       },
       goto_previous_end = {
-        ["gj"] = "@function.outer",
-        ["gJ"] = "@class.outer",
+        ["<leader>fJ"] = "@function.outer",
+        ["<leader>cJ"] = "@class.outer",
       },
     },
 }

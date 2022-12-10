@@ -1,3 +1,5 @@
+
+require("conf.filetype")
 -- NOTE: UI
 require("conf.smooth")
 require("conf.which-key")
@@ -29,6 +31,7 @@ if not (vim.g.started_by_firenvim) then
     require("conf.auto-session")
     require("conf.session-lens")
     require("conf.todo-comments")
+    require("conf.indent")
 end
 
 

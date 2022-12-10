@@ -109,8 +109,11 @@ packer.startup(function(use)
     use("nguyenvukhang/nvim-toggler") -- easy change true/false with '<leader>u'
     use("junegunn/vim-easy-align") -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
     use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
-    use("voldikss/vim-translator") -- translator with <leader><leader>
     use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
+    use("lukas-reineke/indent-blankline.nvim")
+
+    use("sicong-li/T.vim")
+
 
     -- Auto pairs
     use {
@@ -207,6 +210,10 @@ packer.startup(function(use)
             { "nvim-telescope/telescope-project.nvim" },
             { "jvgrootveld/telescope-zoxide" }, -- powerful cd
             { "brandoncc/telescope-harpoon.nvim" }, -- list
+            {
+                "ThePrimeagen/refactoring.nvim",
+                ft = {"go", "cpp", "c", "python", "lua", },
+            }, -- list
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
         },
     })

@@ -3,6 +3,7 @@
     "Lua.diagnostics.disable": [
         "different-requires",
         "redefined-local",
-        "undefined-doc-name"
+        "undefined-doc-name",
+        "undefined-field"
     ]
 }

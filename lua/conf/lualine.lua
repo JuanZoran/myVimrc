@@ -16,7 +16,13 @@ require("lualine").setup({
             },
             winbar = {
                 "alpha",
-                "nvim_tree",
+                "NvimTree",
+                -- "dap-repl",
+                -- "dapui_console",
+                -- "dapui_watches",
+                -- "dapui_stacks",
+                -- "dapui_breakpoints",
+                -- "dapui_scopes",
             },
         },
     },
@@ -40,7 +46,7 @@ require("lualine").setup({
                 "diagnostics",
                 -- Table of diagnostic sources, available sources are:
                 --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-                sources = { "nvim_lsp" },
+                sources = { "nvim_diagnostic" },
                 -- Displays diagnostics for the defined severity types
                 sections = { "error", "warn", "info", "hint" },
                 diagnostics_color = {

@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["T.vim"] = {
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/T.vim",
+    url = "https://github.com/sicong-li/T.vim"
+  },
   ["alpha-nvim"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/alpha-nvim",
@@ -218,6 +223,11 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
@@ -275,7 +285,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-nvim-lsp", "luasnip", "cmp-nvim-lua", "friendly-snippets", "cmp-cmdline", "cmp-buffer", "cmp-tabnine", "cmp-path", "cmp_luasnip" },
+    after = { "luasnip", "cmp_luasnip", "cmp-buffer", "friendly-snippets", "cmp-nvim-lua", "cmp-nvim-lsp", "cmp-tabnine", "cmp-path", "cmp-cmdline" },
     config = { "\27LJ\2\n(\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\rconf.cmp\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -353,6 +363,11 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/promise-async",
     url = "https://github.com/kevinhwang91/promise-async"
   },
+  ["refactoring.nvim"] = {
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/refactoring.nvim",
+    url = "https://github.com/ThePrimeagen/refactoring.nvim"
+  },
   ["session-lens"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/session-lens",
@@ -407,11 +422,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/vim-startuptime",
     url = "https://github.com/dstein64/vim-startuptime"
-  },
-  ["vim-translator"] = {
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/vim-translator",
-    url = "https://github.com/voldikss/vim-translator"
   },
   ["which-key.nvim"] = {
     loaded = true,

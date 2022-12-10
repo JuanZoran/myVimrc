@@ -42,7 +42,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 -- vim.opt.foldenable = false
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "noinsert", "menuone", "noselect" }
 vim.opt.shortmess:append("c") -- don't show redundant messages from ins-completion-menu
 vim.opt.shortmess:append("I") -- don't show the default intro message
 vim.opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
@@ -102,10 +102,10 @@ local disabled_built_ins = {
   "getscriptPlugin",
   "gzip",
   "logipat",
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
+  -- "netrw",
+  -- "netrwPlugin",
+  -- "netrwSettings",
+  -- "netrwFileHandlers",
   "matchit",
   "matchparen",
   "tar",

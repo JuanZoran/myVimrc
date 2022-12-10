@@ -110,6 +110,7 @@ telescope.load_extension("session-lens")
 telescope.load_extension("harpoon")
 telescope.load_extension("zoxide")
 telescope.load_extension("project")
+telescope.load_extension("refactoring")
 
 
 --- key-bindings ==============================
@@ -147,3 +148,4 @@ map(
 )
 
 vim.keymap.set("n", "<Leader>T", ":Telescope ")
+vim.keymap.set("v", "<Leader>rr", "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>")

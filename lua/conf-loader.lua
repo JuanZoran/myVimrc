@@ -1,5 +1,5 @@
-require("plugins")
 require("base")
+require("plugins")
 require("ui")
 require("autocommand")
 require("maps")

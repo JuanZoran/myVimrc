@@ -87,7 +87,7 @@ map(
 	{ "<C-j>", ":BufferLineCyclePrev<CR>" },
 	{ "<Leader>b", ":BufferLinePickClose<CR>" },
 	{ "<C-l>", ":BufferLineCycleNext<CR>" },
-	{ "<Leader><Leader>", "<Plug>TranslateW" },
+	{ "mm", "<cmd>call T#Main(expand('<cword>'))<cr>" },
 
 	{ "<leader>gh", "<cmd>Gitsigns preview_hunk_inline<cr>" },
 	-- for quick yank
@@ -122,7 +122,7 @@ map(
 map(
 	"i",
 	opt,
-	{ "<C-f>", ":FloatermNew fanger<CR>" },
+	{ "<C-f>", ":FloatermNew ranger<CR>" },
 	{ "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
 	{ "<C-d>", "<Esc><cmd>FloatermToggle<CR>" },
 	{ "<C-a>", "<Esc>/<++><CR>vf>c" },
@@ -149,7 +149,7 @@ map(
 map(
 	"v",
 	opt,
-	-- { "<Leader><Leader>", ":TranslateW" },
+	{ "mm", ":<c-u>call T#VisualSearch(visualmode())<cr>" },
 	{ ">", ">gv" },
 	{ "<", "<gv" }
 )
