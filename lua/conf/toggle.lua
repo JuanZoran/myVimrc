@@ -9,4 +9,4 @@ require('nvim-toggler').setup({
 })
 
 -- init.lua
-vim.keymap.set({ 'n', 'v' }, '<leader>u', require('nvim-toggler').toggle)
+vim.keymap.set('n', '<leader>u', require('nvim-toggler').toggle)

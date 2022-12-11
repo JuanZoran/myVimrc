@@ -4,7 +4,7 @@ wk.register({
 	["<Leader>"] = {
 		["t"] = {
 			name = " Telescope",
-			g = { builtin.registers, " Check out all register" },
+			-- g = { builtin.registers, " Check out all register" },
 			h = { builtin.help_tags, " Check out all tags" },
 			t = { builtin.live_grep, " Search text in cucurrent directory" },
 			f = { builtin.current_buffer_fuzzy_find, " Search text in current buffer" },

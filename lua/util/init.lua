@@ -1,4 +1,5 @@
 local M = {}
+
 local keymap = vim.keymap.set
 function M.map(mode, option, ...) -- for better keymap-binding alias
     local maps = { ... }
@@ -51,8 +52,8 @@ M.icon = {
         Operator = " ",
         TypeParameter = " ",
         Snippet = "",
-
     },
 }
+
 
 return M

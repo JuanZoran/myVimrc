@@ -87,7 +87,6 @@ map(
 	{ "<C-j>", ":BufferLineCyclePrev<CR>" },
 	{ "<Leader>b", ":BufferLinePickClose<CR>" },
 	{ "<C-l>", ":BufferLineCycleNext<CR>" },
-	{ "mm", "<cmd>call T#Main(expand('<cword>'))<cr>" },
 
 	{ "<leader>gh", "<cmd>Gitsigns preview_hunk_inline<cr>" },
 	-- for quick yank
@@ -149,7 +148,6 @@ map(
 map(
 	"v",
 	opt,
-	{ "mm", ":<c-u>call T#VisualSearch(visualmode())<cr>" },
 	{ ">", ">gv" },
 	{ "<", "<gv" }
 )

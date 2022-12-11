@@ -4,6 +4,7 @@
         "different-requires",
         "redefined-local",
         "undefined-doc-name",
-        "undefined-field"
+        "undefined-field",
+        "param-type-mismatch"
     ]
 }

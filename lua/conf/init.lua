@@ -5,7 +5,6 @@ require("conf.smooth")
 require("conf.which-key")
 require("conf.comment")
 require("conf.hop")
-require("conf.toggle")
 
 -- NOTE: LSP
 require("conf.lsp-config")
@@ -33,10 +32,6 @@ if not (vim.g.started_by_firenvim) then
     require("conf.todo-comments")
     require("conf.indent")
 end
-
-
-
-
 
 
 

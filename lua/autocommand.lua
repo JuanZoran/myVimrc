@@ -53,12 +53,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- NOTE: can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]
 
-local snip = vim.api.nvim_create_augroup("CodeSnip", { clear = true })
--- for C-file-snip
-vim.api.nvim_create_autocmd("BufNewFile", {
-    group = snip,
-    pattern = "*.c",
-    callback = function()
-        vim.cmd[[0r ~/.config/nvim/lua/snips/snip.c]]
-    end,
-})
+-- local snip = vim.api.nvim_create_augroup("CodeSnip", { clear = true })
+-- -- for C-file-snip
+-- vim.api.nvim_create_autocmd("BufNewFile", {
+--     group = snip,
+--     pattern = "*.c",
+--     callback = function()
+--         vim.cmd[[0r ~/.config/nvim/lua/snips/snip.c]]
+--     end,
+-- })

@@ -5,6 +5,7 @@ require("filetype").setup({
             -- Set the filetype of *.pn files to potion
             c = "c",
             sh = "sh",
+            h = "cpp",
         },
         -- literal = {
         --     -- Set the filetype of files named "MyBackupFile" to lua
