@@ -43,13 +43,12 @@ map(
 	{ "h", "i" },
 	{ "H", "I" },
 	{ "<Leader>=", "<Plug>(EasyAlign)" }
-	-- { "<Leader>R", "<Plug>SnipRun" }
 )
 
 map(
 	"n", -- 正常模式
 	opt, -- 选项
-	-- 窗口相关
+	-- NOTE:窗口相关
 	{ "wo", ":vsp<CR>" }, -- 左右分屏
 	{ "wu", ":sp<CR>" }, -- 上下分屏
 	{ "wj", "<C-w>h" },
@@ -58,8 +57,6 @@ map(
 	{ "wi", "<C-w>k" },
 	{ "w=", "<C-w>=" },
 	{ "w<Down>", "<C-w>J" },
-	{ "bb", "b" },
-	{ "bd", ":bdelete!<CR>" },
 	{ "b<left>", ":BufferLineMovePrev<CR>" },
 	{ "b<right>", ":BufferLineMoveNext<CR>" },
 	{ "qd", ":bdelete!<CR>" },
@@ -71,10 +68,10 @@ map(
 	{ "<C-Right>", "<C-w>>" },
 	{ "<C-Left>", "<C-w><" },
 	{ "wn", ":only<CR>" },
-	{ "ww", "<cmd>NvimTreeToggle<CR>" },
 	{ ";", "@" },
 	{ ";;", "q" },
 	{ "'", '"' },
+    -- NOTE: Floaterm
 	{ "<Leader>tm", ":FloatermNew<CR>" },
 	{ "<Leader>gi", ":FloatermNew lazygit<CR>" },
 	{ "<Leader>ra", ":FloatermNew ranger<CR>" },
@@ -83,6 +80,7 @@ map(
 	{ "<C-g>", ":FloatermNew lazygit<CR>" },
 	{ "<C-h>", "<cmd>FloatermHide<CR>" },
 	{ "<Leader>df", "<cmd>FloatermKill<cr>" },
+
 	-- TODO: config Bufferline
 	{ "<C-j>", ":BufferLineCyclePrev<CR>" },
 	{ "<Leader>b", ":BufferLinePickClose<CR>" },

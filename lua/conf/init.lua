@@ -21,7 +21,7 @@ require("conf.treehop")
 if not (vim.g.started_by_firenvim) then
     require("conf.alpha")
     require("conf.notify")
-    require("conf.nvim_tree")
+    -- require("conf.nvim_tree")
     require("conf.bufferline")
     require("conf.lualine")
     require("conf.noice")

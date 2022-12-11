@@ -29,7 +29,7 @@ packer.startup(function(use)
     use("nathom/filetype.nvim")
 
 
-    -- ====================== ui =====================
+    -- NOTE:====================== ui =====================
     -- about theme
     use { "sainnhe/everforest", opt = true }
     use("projekt0n/github-nvim-theme")
@@ -47,6 +47,8 @@ packer.startup(function(use)
     -- -- 文件树
     use({
         "nvim-tree/nvim-tree.lua",
+        keys = {'n','ww'},
+        config = 'require"conf.nvim_tree"',
         requires = {
             "nvim-tree/nvim-web-devicons", -- optional, for file icons
         },
@@ -61,9 +63,6 @@ packer.startup(function(use)
 
     -- tabline
     use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
-
-    -- -- 通知样式 TODO: config with lsp-status
-    use("rcarriga/nvim-notify")
 
     -- smooth scroll animation
     use("declancm/cinnamon.nvim")
@@ -85,15 +84,18 @@ packer.startup(function(use)
             "neovim/nvim-lspconfig",
         },
     })
+    use("rrethy/vim-illuminate") -- cursor-word highlighting
+    use("lukas-reineke/indent-blankline.nvim")
 
-    -- uesful which-key
-    use("folke/which-key.nvim")
 
-    -- -- ====================== tools =====================
+    -- NOTE: ====================== tools =====================
     use({
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
     })
+
+    -- uesful which-key
+    use("folke/which-key.nvim")
 
     -- markdown preview
     use({
@@ -113,14 +115,13 @@ packer.startup(function(use)
             require("conf.toggle")
         end,
     }
+
     -- TODO: compare this with toggleterm
     use("voldikss/vim-floaterm") -- float terminal
-    use("rrethy/vim-illuminate") -- cursor-word highlighting
     use("mfussenegger/nvim-treehopper") -- smart range switching with 'm'
     use("junegunn/vim-easy-align") -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
     use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
     use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
-    use("lukas-reineke/indent-blankline.nvim")
 
     -- lazy-load translate plugin
     use({
@@ -140,10 +141,6 @@ packer.startup(function(use)
     -- TODO:config autopair
     use {
         "windwp/nvim-autopairs",
-        -- wants = "nvim-treesitter",
-        -- config = function()
-        --     require('conf.autopairs')
-        -- end
     }
 
     -- combine auto-session with telescope
@@ -164,7 +161,28 @@ packer.startup(function(use)
         branch = "v2",
     })
 
-    -- -- ====================== syntax =====================
+    use {
+        'AckslD/nvim-trevJ.lua',
+        keys = { {
+            "n",
+            "<leader>ff",
+        } },
+        config = function()
+            local m = require('trevj')
+            m.setup {}
+            vim.keymap.set('n', '<leader>ff', m.format_at_cursor)
+        end, -- optional call for configurating non-default filetypes etc
+    }
+
+    use { -- foucs mode
+        'junegunn/limelight.vim',
+        keys = {'n', '<leader><leader>h'},
+            config = 'require("conf.zen")'
+    }
+
+
+
+    -- NOTE: ====================== syntax =====================
     -- high-performance language parser
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -205,7 +223,7 @@ packer.startup(function(use)
                 requires = {
                     "rafamadriz/friendly-snippets"
                 },
-                config = function ()
+                config = function()
                     require('snips').setup()
                 end
             },
