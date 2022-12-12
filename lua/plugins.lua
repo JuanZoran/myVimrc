@@ -7,6 +7,10 @@ packer.init({
             return require("packer.util").float({ border = "rounded" })
         end,
     },
+    profile = {
+        enable = true,
+        threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    },
 })
 
 -- for autosource the plugin configuration
@@ -26,13 +30,22 @@ packer.startup(function(use)
     })
     -- fast speed
     use("lewis6991/impatient.nvim")
-    use("nathom/filetype.nvim")
+    use "nathom/filetype.nvim"
+
 
 
     -- NOTE:====================== ui =====================
     -- about theme
     use { "sainnhe/everforest", opt = true }
     use("projekt0n/github-nvim-theme")
+    use {
+
+        "norcalli/nvim-colorizer.lua",
+        cmd = "ColorizerToggle",
+        config = function()
+            require('colorizer').setup {}
+        end
+    }
 
 
     -- 状态栏
@@ -106,15 +119,15 @@ packer.startup(function(use)
         end,
     })
 
-    use {
-        'edluffy/hologram.nvim',
-        fd = { 'md', 'markdown' },
-        config = function()
-            require('hologram').setup {
-                auto_display = true -- WIP automatic markdown image display, may be prone to breaking
-            }
-        end
-    }
+    -- use {
+    --     'edluffy/hologram.nvim',
+    --     fd = { 'md', 'markdown' },
+    --     config = function()
+    --         require('hologram').setup {
+    --             auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+    --         }
+    --     end
+    -- }
     -- easy change true/false with '<leader>u'
     use {
         "nguyenvukhang/nvim-toggler",
@@ -206,7 +219,13 @@ packer.startup(function(use)
     -- make neovim has modernize folder
     use({
         "kevinhwang91/nvim-ufo",
+        keys = {
+            {'n', 'zR'},
+            {'n', 'zM'},
+            {'v', 'za'},
+        },
         requires = "kevinhwang91/promise-async",
+        config = 'require "conf.ufo"',
     })
     -- -- ====================== completion =====================
     -- mason | lspconfig | mason-lspconfig
@@ -252,13 +271,6 @@ packer.startup(function(use)
             { "nvim-telescope/telescope-project.nvim" },
             { "jvgrootveld/telescope-zoxide" }, -- powerful cd
             { "brandoncc/telescope-harpoon.nvim" }, -- list
-            {
-                "ThePrimeagen/refactoring.nvim",
-                ft = { "go", "cpp", "c", "python", "lua", },
-                config = function()
-                    require('conf.refactor')
-                end
-            }, -- list
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
             {
                 "nvim-telescope/telescope-frecency.nvim",
@@ -266,6 +278,16 @@ packer.startup(function(use)
             },
         },
     })
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        keys = {
+            { 'v', '<Leader>rr' },
+        },
+        config = function()
+            require('conf.refactor')
+        end
+    } -- list
+
     use {
         "AckslD/nvim-neoclip.lua",
         config = function()

@@ -91,7 +91,7 @@ vim.g.loaded_syntax_completion = 1
 -- vim.opt.foldenable       = true
 -- vim.opt.foldlevel       = 99
 vim.opt.undofile = true
-vim.opt.undodir = "~/.vim/undodir"
+-- vim.opt.undodir = 
 local g = vim.g
 
 -- Disable some builtin vim plugins

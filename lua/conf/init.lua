@@ -1,4 +1,3 @@
-
 require("conf.filetype")
 -- NOTE: UI
 require("conf.smooth")
@@ -10,7 +9,6 @@ require("conf.hop")
 require("conf.lsp-config")
 require("conf.lsp.lspsaga")
 require("conf.lsp")
-require("conf.ufo")
 require("conf/illuminate")
 -- NOTE: Treesitter
 require("conf.treesitter")
@@ -32,7 +30,5 @@ if not (vim.g.started_by_firenvim) then
     require("conf.todo-comments")
     require("conf.indent")
 end
-
-
 
 -- TODO: Debugger

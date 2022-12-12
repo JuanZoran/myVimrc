@@ -8,6 +8,7 @@ require('refactoring').setup({
         h = true,
         hpp = true,
         cxx = true,
+        -- lua = true,
     },
     prompt_func_param_type = {
         go = true,
@@ -18,6 +19,7 @@ require('refactoring').setup({
         h = true,
         hpp = true,
         cxx = true,
+        -- lua = true
     },
     -- printf_statements = {},
     -- print_var_statements = {},

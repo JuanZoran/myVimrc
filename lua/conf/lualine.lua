@@ -72,21 +72,22 @@ require("lualine").setup({
                 require("noice").api.status.command.get,
                 cond = require("noice").api.status.command.has,
             },
-            {
-                require("noice").api.status.search.get,
-                cond = require("noice").api.status.search.has,
-            },
+            -- {
+            --     require("noice").api.status.search.get,
+            --     cond = require("noice").api.status.search.has,
+            -- },
         },
 
         lualine_c = {
             {
-                -- require('conf.winbar').get_winbar()
                 navic.get_location,
                 cond = navic.is_available,
+                -- color = { fg = "#f3ca28" },
             },
         },
         lualine_z = {
             "os.date[[%A %H:%M]]",
         },
     },
+    extensions = { "nvim-tree", "quickfix" },
 })

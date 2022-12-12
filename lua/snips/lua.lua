@@ -126,7 +126,8 @@ local snips = {
     s(
         "rq",
         fmt('local {} = require("{}")', {
-            l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
+            l(l._1:match("[^./]*$"), 1),
+            -- l(l._1:match("[^.]*$"):gsub("[^%a]+", "-"), 1),
             i(1, "module"),
         })
     ),
@@ -135,6 +136,7 @@ local snips = {
     parse("pa", [[parse("$1", "$2")]]),
     -- s("auto-", fmt([[s("{}", {})]], {i(1, 'trigger'), i(2, "")} ))
 }
+
 
 
 -- End Refactoring --

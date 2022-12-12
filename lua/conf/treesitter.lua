@@ -1,7 +1,8 @@
 local ts = require("nvim-treesitter.configs")
 ts.setup({
 	auto_install = true,
-	enable_installed = "cpp, python, go, lua, vim, markdown, bash",
+	-- ensure_installed = "cpp, python, go, lua, vim, markdown, bash",
+	sync_installl = false,
 	highlight = {
 		enable = true,
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -34,7 +35,7 @@ ts.setup({
     },
 })
 
-require("nvim-treesitter.install").prefer_git = true
+-- require("nvim-treesitter.install").prefer_git = true
 -- vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
 --     group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
 --     callback = function()

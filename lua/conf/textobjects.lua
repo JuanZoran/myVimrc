@@ -1,4 +1,4 @@
-M = {
+return {
     select = {
         enable = true,
         -- Automatically jump forward to textobj, similar to targets.vim
@@ -73,5 +73,3 @@ M = {
     --     }
     -- }
 }
-
-return M
