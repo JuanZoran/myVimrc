@@ -82,7 +82,10 @@ function M.setup()
     require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_lua").lazy_load { paths = snippets_folder }
 
-    vim.cmd [[command! LuaSnipEdit :lua require("luasnip.loaders.from_lua").edit_snippet_files()]]
+
+    vim.cmd([[autocmd BufEnter */snips/*.lua nnoremap <silent> <buffer> <CR> /-- End Refactoring --<CR>2<Up>o]])
+    vim.keymap.set('n', '<leader><cr>', '<CMD>lua require"luasnip.loaders.from_lua".edit_snippet_files()<CR>')
+    -- vim.cmd [[command! LuaSnipEdit :lua require("luasnip.loaders.from_lua").edit_snippet_files()]]
 end
 
 -- function M.same(index)

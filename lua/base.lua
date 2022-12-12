@@ -72,8 +72,7 @@ vim.wo.signcolumn = "yes"
 vim.cmd([[set iskeyword+=-]]) -- 将word-word视为一个word, 方便daw
 
 -----================ disabled some native =====================
-vim.o.showmode = false
-vim.g.loaded_matchit = 1
+-- vim.o.showmode = false
 vim.g.did_install_default_menus = 1
 vim.g.did_install_syntax_menu = 1
 -- Uncomment this if you define your own filetypes in `after/ftplugin`
@@ -91,8 +90,8 @@ vim.g.loaded_syntax_completion = 1
 -- vim.opt.hidden = true -- I like having buffers stay around
 -- vim.opt.foldenable       = true
 -- vim.opt.foldlevel       = 99
--- vim.opt.undofile = true
--- vim.opt.undodir = "~/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.undodir = "~/.vim/undodir"
 local g = vim.g
 
 -- Disable some builtin vim plugins

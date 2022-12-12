@@ -47,7 +47,7 @@ packer.startup(function(use)
     -- -- 文件树
     use({
         "nvim-tree/nvim-tree.lua",
-        keys = {'n','ww'},
+        keys = { 'n', 'ww' },
         config = 'require"conf.nvim_tree"',
         requires = {
             "nvim-tree/nvim-web-devicons", -- optional, for file icons
@@ -88,7 +88,7 @@ packer.startup(function(use)
     use("lukas-reineke/indent-blankline.nvim")
 
 
-    -- NOTE: ====================== tools =====================
+    -- NOTE: ====================== Tools =====================
     use({
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
@@ -105,6 +105,16 @@ packer.startup(function(use)
             vim.fn["mkdp#util#install"]()
         end,
     })
+
+    use {
+        'edluffy/hologram.nvim',
+        fd = { 'md', 'markdown' },
+        config = function()
+            require('hologram').setup {
+                auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+            }
+        end
+    }
     -- easy change true/false with '<leader>u'
     use {
         "nguyenvukhang/nvim-toggler",
@@ -176,8 +186,8 @@ packer.startup(function(use)
 
     use { -- foucs mode
         'junegunn/limelight.vim',
-        keys = {'n', '<leader><leader>h'},
-            config = 'require("conf.zen")'
+        keys = { 'n', '<leader><leader>h' },
+        config = 'require("conf.zen")'
     }
 
 
@@ -250,6 +260,10 @@ packer.startup(function(use)
                 end
             }, -- list
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
+            {
+                "nvim-telescope/telescope-frecency.nvim",
+                requires = { "kkharji/sqlite.lua" }
+            },
         },
     })
     use {

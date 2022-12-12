@@ -79,7 +79,7 @@ telescope.setup({
             },
         },
     },
-    pickers = {
+    -- pickers = {
         -- Default configuration for builtin pickers goes here:
         -- picker_name = {
         --   picker_config_key = value,
@@ -87,7 +87,7 @@ telescope.setup({
         -- }
         -- Now the picker_config_key will be applied every time you call this
         -- builtin picker
-    },
+    -- },
     extensions = {
         project = {
             theme = "dropdown",
@@ -111,6 +111,7 @@ telescope.load_extension("harpoon")
 telescope.load_extension("zoxide")
 telescope.load_extension("project")
 telescope.load_extension "neoclip"
+telescope.load_extension("frecency")
 
 
 
@@ -124,6 +125,7 @@ map(
     opt,
     { "<C-f>", builtin.find_files },
     { "<leader>tg", "<cmd>Telescope neoclip<cr>" },
+    { "<C-y>", "<cmd>Telescope frecency<cr>" },
     { "<leader>th", builtin.help_tags },
     { "<leader>gf", builtin.git_files },
     { "<leader>tt", builtin.live_grep },
