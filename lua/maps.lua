@@ -16,7 +16,6 @@ vim.keymap.set(
 map(
     "", -- global pattern
     opt,
-    { "'", '"' },
     { "h", "i" },
     { "H", "I" }
 )
@@ -42,63 +41,62 @@ map(
 
     -- NOTE: Bufferline
     {'b', '<cmd>WhichKey b<cr>'},
-    { "b<left>", ":BufferLineMovePrev<CR>",     { desc = '[]Move Buffer to Left'      }},
-    { "b<right>", ":BufferLineMoveNext<CR>",    { desc = '[]Move Buffer to Right'     }},
-    -- TODO: config Bufferline
+    { "b<left>",   ":BufferLineMovePrev<CR>",   { desc = '[]Move Buffer to Left'      }},
+    { "b<right>",  ":BufferLineMoveNext<CR>",   { desc = '[]Move Buffer to Right'     }},
     { "<Leader>b", ":BufferLinePickClose<CR>" , { desc = '﫧 Pick a Buffer to delete' }},
-    { "<C-j>", ":BufferLineCyclePrev<CR>"       },
+    { "<C-j>", ":BufferLineCyclePrev<CR>" },
     { "<C-l>", ":BufferLineCycleNext<CR>" },
 
-    { "qd", "<cmd>bdelete!<CR>" },
-    { "qw", "<cmd>close<CR>" },
-    { "<C-Down>", "<C-w>-" },
-    { "<C-Up>", "<C-w>+" },
-    { "<C-Right>", "<C-w>>" },
-    { "<C-Left>", "<C-w><" },
+    { "qd",        "<cmd>bdelete!<CR>" },
+    { "qw",        "<cmd>close<CR>"    },
+    { "<C-Down>",  "<C-w>-"            },
+    { "<C-Up>",    "<C-w>+"            },
+    { "<C-Right>", "<C-w>>"            },
+    { "<C-Left>",  "<C-w><"            },
     { ";", "@" },
     { ";;", "q" },
     -- NOTE: Floaterm
-    { "<Leader>tm", ":FloatermNew<CR>" },
+    { "<Leader>tm", ":FloatermNew<CR>"         },
     { "<Leader>gi", ":FloatermNew lazygit<CR>" },
-    { "<Leader>ra", ":FloatermNew ranger<CR>" },
-    { "<C-d>", ":FloatermToggle<CR>" },
-    { "<C-t>", ":FloatermNew dooit<CR>" },
-    { "<C-g>", ":FloatermNew lazygit<CR>" },
-    { "<C-h>", "<cmd>FloatermHide<CR>" },
-    { "<Leader>fd", "<cmd>FloatermKill<cr>" },
+    { "<Leader>ra", ":FloatermNew ranger<CR>"  },
+    { "<C-d>",      ":FloatermToggle<CR>"      },
+    { "<C-t>",      ":FloatermNew dooit<CR>"   },
+    { "<C-g>",      ":FloatermNew lazygit<CR>" },
+    { "<C-h>",      "<cmd>FloatermHide<CR>"    },
+    { "<Leader>fd", "<cmd>FloatermKill<cr>"    },
 
-    { "<Leader>sa", ":SaveSession<CR>" },
-    { "<Leader>sr", ":Autosession search<CR>" },
+    { "<Leader>sa", ":SaveSession<CR>"                           },
+    { "<Leader>sr", ":Autosession search<CR>"                    },
     { "<Leader>st", ":Telescope session-lens search_session<CR>" },
-    { "<Leader>sd", ":Autosession delete<CR>" },
+    { "<Leader>sd", ":Autosession delete<CR>"                    },
 
 
     { "<leader>gh", "<cmd>Gitsigns preview_hunk_inline<cr>" },
     -- for quick yank
-    { "yw", "yiw" }, -- yank a word
-    { "y<cr>", 'yi"' }, -- yank in ""
-    { "y<space>", [[yi']] }, -- yank in ""
-    { "yp", "yip" }, -- yank a Paragraph
-    { "dw", "diw" },
-    { "d<cr>", 'di"' }, -- delete ""
-    { "dp", "dip" },
-    { "d<space>", [[di']] }, -- yank in ""
-    { "vw", "viw" },
-    { "vp", "vip" },
-    { "v<cr>", 'vi"' },
-    { "v<space>", [[vi']] }, -- yank in ""
-    { "cw", "ciw" },
-    { "cp", "cip" },
-    { "c<cr>", 'ci"' },
-    { "c<space>", [[ci']] }, -- yank in ""
+    { "yw",       "yiw"   }, -- yank a word
+    { "y<cr>",    'yi"'   }, -- yank in ""
+    { "y<space>", [[yi']] }, -- yank in ''
+    { "yp",       "yip"   }, -- yank a Paragraph
+    { "dw",       "diw"   },
+    { "d<cr>",    'di"'   },
+    { "dp",       "dip"   },
+    { "d<space>", [[di']] },
+    { "vw",       "viw"   },
+    { "vp",       "vip"   },
+    { "v<cr>",    'vi"'   },
+    { "v<space>", [[vi']] },
+    { "cw",       "ciw"   },
+    { "cp",       "cip"   },
+    { "c<cr>",    'ci"'   },
+    { "c<space>", [[ci']] },
 
     -- 其他
-    { "<C-a>", "/<++><CR>vf>c" }, -- PlaceHolder
-    { "<Leader>w", ":wq<CR>" },
-    { "<Leader>W", ":w<CR>" },
-    { "<C-q>", ":q!<CR>" },
-    { "na", "<c-a>" },
-    { "nh", ":noh<CR>" },
+    { "<C-a>",     "/<++><CR>vf>c" }, -- PlaceHolder
+    { "<Leader>w", ":wq<CR>"       },
+    { "<Leader>W", ":w<CR>"        },
+    { "<C-q>",     ":q!<CR>"       },
+    { "na",        "<c-a>"         },
+    { "nh",        ":noh<CR>"      },
     { "<Leader>p", ":PackerSync<CR>",  { desc = 'מּ [Sync/Install] Plugin'            }},
     { "<Leader>ck", ":set spell!<CR>", { desc = '暈Toggle vim builtin spell checker' }}
  	---------------------------
@@ -116,8 +114,8 @@ map(
     opt,
     { "<C-f>", ":FloatermNew ranger<CR>", { desc = ' Ranger' } },
     { "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
-    { "<C-d>", "<Esc><cmd>FloatermToggle<CR>" },
-    { "<C-a>", "<Esc>/<++><CR>vf>c" },
+    { "<C-d>", "<Esc><cmd>FloatermToggle<CR>"      },
+    { "<C-a>", "<Esc>/<++><CR>vf>c"                },
     -- {"<++>", "<++>"},
     -- 最近跳转的历史"<++>"},
     -- {"<+, "<++>"},
@@ -141,14 +139,14 @@ map(
 map(
     "v",
     opt,
-    { "<A-i>", ":move '<-2<CR>gv-gv" },
-    { "<A-k>", ":move '>+1<CR>gv-gv" },
+    { "<A-i>", ":m .-2<CR>gv" },
+    { "<A-k>", ":m .+2<CR>gv" },
+    -- { "<A-i>", ":move '<-2<CR>gv-gv" },
+    -- { "<A-k>", ":move '>+1<CR>gv-gv" },
     { ">", ">gv" },
     { "<", "<gv" }
 )
 
--- vim.keymap.set("n", "<Tab>", '<CMD>lua print([[ Tab is pressed ]])<CR>')
--- vim.keymap.set("n", "<C-i>", '<CMD>lua print([[ Ctr-i is pressed ]])<CR>')
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
 
