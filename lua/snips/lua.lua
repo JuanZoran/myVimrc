@@ -131,9 +131,11 @@ local snips = {
             i(1, "module"),
         })
     ),
-    parse("lm", "local M = {}\n\nfunction M.setup()\n  $1 \nend\n\nreturn M"),
-    parse("cmd", "<CMD>$1<CR>"),
-    parse("pa", [[parse("$1", "$2")]]),
+    parse("lm",            "local M = {}\n\nfunction M.setup()\n  $1 \nend\n\nreturn M"),
+    parse("cmd",           "<CMD>$1<CR>"),
+    parse("pa",            [[parse("$1", "$2")]]),
+    parse("formatEnable", "---@format enable"),
+    parse("formatDisable", "---@format disable"),
     -- s("auto-", fmt([[s("{}", {})]], {i(1, 'trigger'), i(2, "")} ))
 }
 

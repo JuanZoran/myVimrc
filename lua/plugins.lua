@@ -14,12 +14,12 @@ packer.init({
 })
 
 -- for autosource the plugin configuration
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+-- vim.cmd([[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+--   augroup end
+-- ]])
 
 packer.startup(function(use)
     use("wbthomason/packer.nvim")
@@ -119,16 +119,6 @@ packer.startup(function(use)
         end,
     })
 
-    -- use {
-    --     'edluffy/hologram.nvim',
-    --     fd = { 'md', 'markdown' },
-    --     config = function()
-    --         require('hologram').setup {
-    --             auto_display = true -- WIP automatic markdown image display, may be prone to breaking
-    --         }
-    --     end
-    -- }
-    -- easy change true/false with '<leader>u'
     use {
         "nguyenvukhang/nvim-toggler",
         keys = {
@@ -141,10 +131,32 @@ packer.startup(function(use)
 
     -- TODO: compare this with toggleterm
     use("voldikss/vim-floaterm") -- float terminal
-    use("mfussenegger/nvim-treehopper") -- smart range switching with 'm'
-    use("junegunn/vim-easy-align") -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
     use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
     use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
+
+    -- smart range switching with 'm'
+    use {
+        "mfussenegger/nvim-treehopper",
+        keys = {
+            { 'x', 'm' },
+            { 'o', 'm' },
+        },
+        config = function()
+            vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
+            vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", { silent = true })
+        end
+    }
+
+    -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
+    use {
+        "junegunn/vim-easy-align",
+        keys = {
+            { '', '<Leader>=' },
+        },
+        config = function()
+            vim.keymap.set('', '<leader>=', '<Plug>(EasyAlign)', { desc = 'ﱓ EasyAlign' })
+        end,
+    }
 
     -- lazy-load translate plugin
     use({
@@ -154,8 +166,8 @@ packer.startup(function(use)
             { 'n', 'mm' },
         },
         config = function()
-            vim.keymap.set("v", "mm", ':<c-u>call T#VisualSearch(visualmode())<cr>')
-            vim.keymap.set("n", "mm", "<cmd>call T#Main(expand('<cword>'))<cr>")
+            vim.keymap.set("v", "mm", ':<c-u>call T#VisualSearch(visualmode())<cr>', { desc = ' Translate' })
+            vim.keymap.set("n", "mm", "<cmd>call T#Main(expand('<cword>'))<cr>", { desc = ' Translate' })
         end
     })
 
@@ -164,6 +176,8 @@ packer.startup(function(use)
     -- TODO:config autopair
     use {
         "windwp/nvim-autopairs",
+        event = 'InsertEnter',
+        config = 'require("conf.autopairs")'
     }
 
     -- combine auto-session with telescope
@@ -193,7 +207,7 @@ packer.startup(function(use)
         config = function()
             local m = require('trevj')
             m.setup {}
-            vim.keymap.set('n', '<leader>ff', m.format_at_cursor)
+            vim.keymap.set('n', '<leader>ff', m.format_at_cursor, { desc = '[]Open Format At Cursor' })
         end, -- optional call for configurating non-default filetypes etc
     }
 
@@ -220,11 +234,11 @@ packer.startup(function(use)
     use({
         "kevinhwang91/nvim-ufo",
         keys = {
-            {'n', 'zR'},
-            {'n', 'zM'},
-            {'v', 'za'},
+            { 'n', 'zR' },
+            { 'n', 'zM' },
+            { 'v', 'za' },
         },
-        requires = "kevinhwang91/promise-async",
+        requires = { "kevinhwang91/promise-async", opt = true },
         config = 'require "conf.ufo"',
     })
     -- -- ====================== completion =====================
@@ -268,16 +282,34 @@ packer.startup(function(use)
         "nvim-telescope/telescope.nvim",
         requires = {
             { "nvim-lua/plenary.nvim" }, -- lib
-            { "nvim-telescope/telescope-project.nvim" },
-            { "jvgrootveld/telescope-zoxide" }, -- powerful cd
-            { "brandoncc/telescope-harpoon.nvim" }, -- list
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
-            {
-                "nvim-telescope/telescope-frecency.nvim",
-                requires = { "kkharji/sqlite.lua" }
-            },
         },
     })
+
+    use {
+        "jvgrootveld/telescope-zoxide", -- powerful cd
+        module = 'telescope._extensions.zoxide',
+        keys = {
+            { 'n', '<leader>cd' },
+        },
+        config = function()
+            require("telescope").load_extension('zoxide')
+            vim.keymap.set('n', '<leader>cd', "<cmd>Telescope zoxide list<cr>", { desc = ' Cd recently directory' })
+        end,
+    }
+
+    use {
+        "nvim-telescope/telescope-project.nvim",
+        keys = {
+            { 'n', '<C-p>' },
+        },
+        config = function()
+            local telescope = require('telescope')
+            telescope.load_extension('project')
+            vim.keymap.set('n', '<C-p>', telescope.extensions.project.project)
+        end,
+    } -- project
+
     use {
         "ThePrimeagen/refactoring.nvim",
         keys = {
@@ -289,15 +321,52 @@ packer.startup(function(use)
     } -- list
 
     use {
+        "brandoncc/telescope-harpoon.nvim", -- list
+        keys = {
+            { 'n', '<Leader>hh' },
+            { 'n', '<Leader>hi' },
+            { 'n', '<Leader>hj' },
+            { 'n', '<Leader>hl' },
+            { 'n', '<Leader>hc' },
+            { 'n', '<Leader>hm' },
+        },
+        config = function()
+            require('conf.harpoon')
+        end,
+        requires = { {
+            "theprimeagen/harpoon",
+            opt = true
+        } }
+    } -- list
+
+
+    use {
+        "nvim-telescope/telescope-frecency.nvim",
+        keys = {
+            { 'n', '<C-y>' },
+        },
+        requires = { "kkharji/sqlite.lua", opt = true },
+        config = function()
+            vim.cmd [[PackerLoad sqlite.lua]]
+            require("telescope").load_extension("frecency")
+            vim.keymap.set('n', '<C-y>', '<cmd>Telescope frecency<cr>') -- []Recently File Sorted by Frequency
+        end
+    } -- list
+
+    use {
         "AckslD/nvim-neoclip.lua",
+        keys = {
+            { 'n', '<leader>tg' },
+        },
         config = function()
             require("neoclip").setup()
+            require("telescope").load_extension "neoclip"
+            vim.keymap.set('n', '<leader>tg', '<cmd>Telescope neoclip<cr>', { desc = '[]Clipboard History' })
         end,
     }
 
 
-    -- harpoon | firenvim
-    use({ "theprimeagen/harpoon" })
+    -- | firenvim
     use({
         "glacambre/firenvim",
         run = function()
@@ -307,4 +376,15 @@ packer.startup(function(use)
 
     -- automatically set up your configuration after cloning packer.nvim
     -- put this at the end after all plugins
+    -- HACK: alternatively
+    -- use {
+    --     'edluffy/hologram.nvim',
+    --     fd = { 'md', 'markdown' },
+    --     config = function()
+    --         require('hologram').setup {
+    --             auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+    --         }
+    --     end
+    -- }
+    -- easy change true/false with '<leader>u'
 end)

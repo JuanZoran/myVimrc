@@ -4,7 +4,11 @@ local keymap = vim.keymap.set
 function M.map(mode, option, ...) -- for better keymap-binding alias
     local maps = { ... }
     for _, v in ipairs(maps) do
-        keymap(mode, v[1], v[2], option)
+        if v[3] then
+            keymap(mode, v[1], v[2], vim.tbl_extend('force', option, v[3]))
+        else
+            keymap(mode, v[1], v[2], option)
+        end
     end
 end
 

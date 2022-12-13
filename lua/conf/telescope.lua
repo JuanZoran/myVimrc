@@ -80,13 +80,13 @@ telescope.setup({
         },
     },
     -- pickers = {
-        -- Default configuration for builtin pickers goes here:
-        -- picker_name = {
-        --   picker_config_key = value,
-        --   ...
-        -- }
-        -- Now the picker_config_key will be applied every time you call this
-        -- builtin picker
+    -- Default configuration for builtin pickers goes here:
+    -- picker_name = {
+    --   picker_config_key = value,
+    --   ...
+    -- }
+    -- Now the picker_config_key will be applied every time you call this
+    -- builtin picker
     -- },
     extensions = {
         project = {
@@ -107,11 +107,7 @@ telescope.load_extension("fzf")
 -- telescope.load_extension("notify")
 -- telescope.load_extension("noice")
 telescope.load_extension("session-lens")
-telescope.load_extension("harpoon")
-telescope.load_extension("zoxide")
-telescope.load_extension("project")
-telescope.load_extension "neoclip"
-telescope.load_extension("frecency")
+-- telescope.load_extension("project")
 
 
 
@@ -124,25 +120,21 @@ map(
     "n",
     opt,
     { "<C-f>", builtin.find_files },
-    { "<leader>tg", "<cmd>Telescope neoclip<cr>" },
-    { "<C-y>", "<cmd>Telescope frecency<cr>" },
-    { "<leader>th", builtin.help_tags },
-    { "<leader>gf", builtin.git_files },
-    { "<leader>tt", builtin.live_grep },
-    { "<leader>tf", builtin.current_buffer_fuzzy_find },
-    { "<leader>ts", builtin.spell_suggest },
-    { "<leader>tr", builtin.treesitter },
-    { "<leader>te", builtin.diagnostics },
-    { "<leader>tc", builtin.commands },
-    { "<leader>ti", builtin.jumplist },
-    { "<leader>tu", builtin.oldfiles },
-    { "<leader>tk", builtin.keymaps },
+    { "<leader>th", builtin.help_tags, { desc = ' Check out all tags' } },
+    { "<leader>tf", builtin.git_files, { desc = ' Search text in current buffer' } },
+    { "<leader>tt", builtin.live_grep, { desc = ' Search text in cucurrent directory' } },
+    { "<leader>gf", builtin.current_buffer_fuzzy_find, { desc = '[]Search Git File' } },
+    { "<leader>ts", builtin.spell_suggest, { desc = '益spell suggestions about cursor word' } },
+    { "<leader>tr", builtin.treesitter, { desc = '滑Have a look at the tags provided by 滑' } },
+    { "<leader>te", builtin.diagnostics, { desc = ' take a look' } },
+    { "<leader>tc", builtin.commands, { desc = 'גּ Check out commands' } },
+    { "<leader>ti", builtin.jumplist, { desc = ' Get jumplist[C-i]' } },
+    { "<leader>tu", builtin.oldfiles, { desc = ' Check out edited files[C-u]' } },
+    { "<leader>tk", builtin.keymaps, { desc = ' Check out keymaps[C-/]' } },
 
     { "<C-u>", builtin.oldfiles },
-    { "<leader>cd", "<cmd>Telescope zoxide list<cr>" },
     { "<C-o>", builtin.jumplist },
-    { "<C-_>", builtin.keymaps }, -- for C-/
-    { "<C-p>", telescope.extensions.project.project, }
+    { "<C-_>", builtin.keymaps }-- for C-/
 )
 
 vim.keymap.set("n", "<Leader>T", ":Telescope ")

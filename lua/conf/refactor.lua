@@ -26,4 +26,9 @@ require('refactoring').setup({
 })
 
 require('telescope').load_extension("refactoring")
-vim.keymap.set("v", "<Leader>rr", "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>")
+vim.keymap.set(
+    "v",
+    "<Leader>rr",
+    "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>",
+    { desc = '[]Refactoring Operations' }
+)

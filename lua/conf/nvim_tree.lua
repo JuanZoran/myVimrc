@@ -4,7 +4,7 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 vim.g.nvim_tree_auto_close = 1
 -- vim.g.nvim_tree_respect_buf_cwd = 1
-vim.keymap.set('n', 'ww','<cmd>NvimTreeToggle<cr>')
+vim.keymap.set('n', 'ww', '<cmd>NvimTreeToggle<cr>', { desc = ' 触发文件树' })
 
 local icon = require('util').icon
 nvim_tree.setup({

@@ -18,4 +18,3 @@ M.lazygit_toggle = function()
   }
   lazygit:toggle()
 end
-
