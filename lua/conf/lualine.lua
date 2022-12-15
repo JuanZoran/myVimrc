@@ -14,12 +14,14 @@ require("lualine").setup({
                 "alpha",
                 -- "NvimTree",
                 "startuptime",
+                "lspsagaoutline",
             },
             winbar = {
                 "alpha",
                 "help",
                 "packer",
                 "NvimTree",
+                "lspsagaoutline",
                 -- "dap-repl",
                 -- "dapui_console",
                 -- "dapui_watches",
@@ -88,6 +90,9 @@ require("lualine").setup({
                 -- color = { fg = "#f3ca28" },
             },
         },
+        -- lualine_y = {
+        --     require("lspsaga.symbolwinbar").get_symbol_node(),
+        -- },
         lualine_z = {
             "os.date[[%A %H:%M]]",
         },

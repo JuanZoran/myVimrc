@@ -1,7 +1,7 @@
 require("nvim-autopairs").setup({
     check_ts = true,
     fast_wrap = {
-        map = "<C-e>",
+        map = "<C-l>",
         chars = { "{", "[", "(", '"', "'" , "<" },
         pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
         offset = -1, -- Offset from pattern match
@@ -29,6 +29,7 @@ local handlers = require("nvim-autopairs.completion.handlers")
 
 cmp.event:on(
     "confirm_done",
+    -- TODO: figure out this
     cmp_autopairs.on_confirm_done({
         filetypes = {
             -- "*" is an alias to all filetypes

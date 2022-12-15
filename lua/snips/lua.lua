@@ -141,5 +141,5 @@ local snips = {
 
 
 
--- End Refactoring --
+-- End Snippets --
 return snips

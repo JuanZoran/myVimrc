@@ -1,6 +1,17 @@
 local M = {}
 
 local keymap = vim.keymap.set
+function M.tmap(arg) -- for better keymap-binding alias
+    for _, v in ipairs(arg.map) do
+        if v[3] then
+            keymap(arg.mode, v[1], v[2], vim.tbl_extend('force', arg.opt, v[3]))
+        else
+            keymap(arg.mode, v[1], v[2], arg.opt)
+        end
+    end
+end
+
+
 function M.map(mode, option, ...) -- for better keymap-binding alias
     local maps = { ... }
     for _, v in ipairs(maps) do
@@ -58,6 +69,5 @@ M.icon = {
         Snippet = "",
     },
 }
-
 
 return M

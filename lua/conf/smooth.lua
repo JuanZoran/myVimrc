@@ -1,19 +1,20 @@
 require('cinnamon').setup {
-  extra_keymaps = true,
-  override_keymaps = false, -- whether to force mapping
-  max_length = 500,
-  scroll_limit = -1,
+    extra_keymaps = true,
+    override_keymaps = false, -- whether to force mapping
+    max_length = 500,
+    scroll_limit = -1,
 }
-local map = require('util').map
-map(
-    "o", -- be appended to other operator
-    nil,
-    {"J", "0"},
-    {"L", "$"},
-    {"k", "j"},
-    {"i", "k"}
-)
-
+local set = require('util').tmap
+set {
+    mode = "o", -- be appended to other operator
+    opt = nil,
+    map = {
+        { "J", "0" },
+        { "L", "$" },
+        { "k", "j" },
+        { "i", "k" },
+    }
+}
 
 -- DEFAULT_KEYMAPS:
 
@@ -89,7 +90,6 @@ vim.keymap.set({ 'n', 'x' }, '<Left>', "<Cmd>lua Scroll('h', 0, 1)<CR>")
 vim.keymap.set({ 'n', 'x' }, '<Right>', "<Cmd>lua Scroll('l', 0, 1)<CR>")
 
 -- SCROLL_WHEEL_KEYMAPS:
-
 vim.keymap.set({ 'n', 'x' }, '<ScrollWheelUp>', "<Cmd>lua Scroll('<ScrollWheelUp>')<CR>")
 vim.keymap.set({ 'n', 'x' }, '<ScrollWheelDown>', "<Cmd>lua Scroll('<ScrollWheelDown>')<CR>")
 

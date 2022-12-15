@@ -75,7 +75,7 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["T.vim"] = {
-    config = { "\27LJ\2\n­\1\0\0\5\0\b\0\0156\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0B\0\4\0016\0\0\0009\0\1\0009\0\2\0'\2\6\0'\3\4\0'\4\a\0B\0\4\1K\0\1\0,<cmd>call T#Main(expand('<cword>'))<cr>\6n0:<c-u>call T#VisualSearch(visualmode())<cr>\amm\6v\bset\vkeymap\bvim\0" },
+    config = { "\27LJ\2\ná\1\0\0\6\0\n\0\0176\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0005\5\6\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0'\3\4\0'\4\b\0005\5\t\0B\0\5\1K\0\1\0\1\0\1\tdesc\18ïž¾ Translate,<cmd>call T#Main(expand('<cword>'))<cr>\6n\1\0\1\tdesc\18ïž¾ Translate0:<c-u>call T#VisualSearch(visualmode())<cr>\amm\6v\bset\vkeymap\bvim\0" },
     keys = { { "v", "mm" }, { "n", "mm" } },
     loaded = false,
     needs_bufread = false,
@@ -125,10 +125,8 @@ _G.packer_plugins = {
   },
   ["cmp-nvim-lsp"] = {
     after_files = { "/home/zoran/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua" },
-    load_after = {
-      ["nvim-cmp"] = true
-    },
-    loaded = false,
+    load_after = {},
+    loaded = true,
     needs_bufread = false,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
@@ -166,7 +164,7 @@ _G.packer_plugins = {
   cmp_luasnip = {
     after_files = { "/home/zoran/.local/share/nvim/site/pack/packer/opt/cmp_luasnip/after/plugin/cmp_luasnip.lua" },
     load_after = {
-      ["nvim-cmp"] = true
+      luasnip = true
     },
     loaded = false,
     needs_bufread = false,
@@ -215,11 +213,6 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/harpoon",
     url = "https://github.com/theprimeagen/harpoon"
   },
-  ["hop.nvim"] = {
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/hop.nvim",
-    url = "https://github.com/phaazon/hop.nvim"
-  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -229,6 +222,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["leap.nvim"] = {
+    config = { "\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0" },
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/leap.nvim",
+    url = "https://github.com/ggandor/leap.nvim"
   },
   ["limelight.vim"] = {
     config = { 'require("conf.zen")' },
@@ -255,10 +254,16 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   luasnip = {
+    after = { "cmp_luasnip" },
     config = { "\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nsnips\frequire\0" },
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/luasnip",
-    url = "https://github.com/l3mon4d3/luasnip"
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/luasnip",
+    url = "https://github.com/L3mon4d3/luasnip"
   },
   ["markdown-preview.nvim"] = {
     loaded = false,
@@ -296,7 +301,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-tabnine", "cmp-path", "cmp-buffer", "cmp-cmdline", "cmp-nvim-lsp", "cmp-nvim-lua", "cmp_luasnip" },
+    after = { "cmp-cmdline", "cmp-tabnine", "cmp-path", "cmp-buffer", "cmp-nvim-lua", "luasnip" },
     config = { "\27LJ\2\n(\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\rconf.cmp\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -324,7 +329,7 @@ _G.packer_plugins = {
     url = "https://github.com/smiteshp/nvim-navic"
   },
   ["nvim-neoclip.lua"] = {
-    config = { "\27LJ\2\nÑ\1\0\0\6\0\f\0\0206\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\5\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\1K\0\1\0\1\0\1\tdesc\16Powerful cd\31<cmd>Telescope neoclip<cr>\15<leader>tg\6n\bset\vkeymap\bvim\19load_extension\14telescope\nsetup\fneoclip\frequire\0" },
+    config = { "\27LJ\2\nÙ\1\0\0\6\0\f\0\0206\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\5\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\1K\0\1\0\1\0\1\tdesc\24[]Clipboard History\31<cmd>Telescope neoclip<cr>\15<leader>tg\6n\bset\vkeymap\bvim\19load_extension\14telescope\nsetup\fneoclip\frequire\0" },
     keys = { { "n", "<leader>tg" } },
     loaded = false,
     needs_bufread = false,
@@ -354,15 +359,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
     url = "https://github.com/nvim-tree/nvim-tree.lua"
-  },
-  ["nvim-treehopper"] = {
-    config = { "\27LJ\2\n½\1\0\0\6\0\n\0\0176\0\0\0009\0\1\0009\0\2\0'\2\3\0'\3\4\0'\4\5\0005\5\6\0B\0\5\0016\0\0\0009\0\1\0009\0\2\0'\2\a\0'\3\4\0'\4\b\0005\5\t\0B\0\5\1K\0\1\0\1\0\1\vsilent\2%:lua require('tsht').nodes()<CR>\6x\1\0\1\vsilent\2*:<C-U>lua require('tsht').nodes()<CR>\6m\6o\bset\vkeymap\bvim\0" },
-    keys = { { "x", "m" }, { "o", "m" } },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/nvim-treehopper",
-    url = "https://github.com/mfussenegger/nvim-treehopper"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -439,7 +435,7 @@ _G.packer_plugins = {
     url = "https://github.com/kkharji/sqlite.lua"
   },
   ["telescope-frecency.nvim"] = {
-    config = { "\27LJ\2\nÆ\1\0\0\5\0\f\0\0186\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\3\0'\2\4\0B\0\2\0029\0\5\0'\2\6\0B\0\2\0016\0\0\0009\0\a\0009\0\b\0'\2\t\0'\3\n\0'\4\v\0B\0\4\1K\0\1\0 <cmd>Telescope frecency<cr>\n<C-y>\6n\bset\vkeymap\rfrecency\19load_extension\14telescope\frequire\26PackerLoad sqlite.lua\bcmd\bvim\0" },
+    config = { "\27LJ\2\nœ\1\0\0\5\0\n\0\0146\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0B\0\4\1K\0\1\0 <cmd>Telescope frecency<cr>\n<C-y>\6n\bset\vkeymap\bvim\rfrecency\19load_extension\14telescope\frequire\0" },
     keys = { { "n", "<C-y>" } },
     loaded = false,
     needs_bufread = false,
@@ -470,6 +466,11 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/telescope-project.nvim",
     url = "https://github.com/nvim-telescope/telescope-project.nvim"
   },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
   ["telescope-zoxide"] = {
     config = { "\27LJ\2\nÈ\1\0\0\6\0\v\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0005\5\n\0B\0\5\1K\0\1\0\1\0\1\tdesc\30îž€ Cd recently directory#<cmd>Telescope zoxide list<cr>\15<leader>cd\6n\bset\vkeymap\bvim\vzoxide\19load_extension\14telescope\frequire\0" },
     keys = { { "n", "<leader>cd" } },
@@ -480,8 +481,11 @@ _G.packer_plugins = {
     url = "https://github.com/jvgrootveld/telescope-zoxide"
   },
   ["telescope.nvim"] = {
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    commands = { "Telescope" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["todo-comments.nvim"] = {
@@ -497,11 +501,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
-  },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/vim-floaterm",
-    url = "https://github.com/voldikss/vim-floaterm"
   },
   ["vim-illuminate"] = {
     loaded = true,
@@ -552,10 +551,15 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
--- Config for: luasnip
-time([[Config for luasnip]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nsnips\frequire\0", "config", "luasnip")
-time([[Config for luasnip]], false)
+-- Config for: leap.nvim
+time([[Config for leap.nvim]], true)
+try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0", "config", "leap.nvim")
+time([[Config for leap.nvim]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-lspconfig ]]
+vim.cmd [[ packadd cmp-nvim-lsp ]]
+time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
@@ -573,49 +577,52 @@ pcall(vim.api.nvim_create_user_command, 'StartupTime', function(cmdargs)
           require('packer.load')({'vim-startuptime'}, { cmd = 'StartupTime' }, _G.packer_plugins)
           return vim.fn.getcompletion('StartupTime ', 'cmdline')
       end})
+pcall(vim.api.nvim_create_user_command, 'Telescope', function(cmdargs)
+          require('packer.load')({'telescope.nvim'}, { cmd = 'Telescope', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'telescope.nvim'}, { cmd = 'Telescope' }, _G.packer_plugins)
+          return vim.fn.getcompletion('Telescope ', 'cmdline')
+      end})
 time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[nnoremap <silent> <C-y> <cmd>lua require("packer.load")({'telescope-frecency.nvim'}, { keys = "<lt>C-y>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> mm <cmd>lua require("packer.load")({'T.vim'}, { keys = "mm", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'limelight.vim'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> zM <cmd>lua require("packer.load")({'nvim-ufo'}, { keys = "zM", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> zR <cmd>lua require("packer.load")({'nvim-ufo'}, { keys = "zR", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <leader>ff <cmd>lua require("packer.load")({'nvim-trevJ.lua'}, { keys = "<lt>leader>ff", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[vnoremap <silent> <Leader>rr <cmd>lua require("packer.load")({'refactoring.nvim'}, { keys = "<lt>Leader>rr", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[onoremap <silent> m <cmd>lua require("packer.load")({'nvim-treehopper'}, { keys = "m", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[vnoremap <silent> mm <cmd>lua require("packer.load")({'T.vim'}, { keys = "mm", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[vnoremap <silent> za <cmd>lua require("packer.load")({'nvim-ufo'}, { keys = "za", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <Leader>= <cmd>lua require("packer.load")({'vim-easy-align'}, { keys = "<lt>Leader>=", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hm <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hm", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hl <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hl", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[xnoremap <silent> m <cmd>lua require("packer.load")({'nvim-treehopper'}, { keys = "m", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <C-p> <cmd>lua require("packer.load")({'telescope-project.nvim'}, { keys = "<lt>C-p>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <leader>tg <cmd>lua require("packer.load")({'nvim-neoclip.lua'}, { keys = "<lt>leader>tg", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hc <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> ww <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "ww", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>u <cmd>lua require("packer.load")({'nvim-toggler'}, { keys = "<lt>Leader>u", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hj <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hj", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <leader>cd <cmd>lua require("packer.load")({'telescope-zoxide'}, { keys = "<lt>leader>cd", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader><leader>h <cmd>lua require("packer.load")({'limelight.vim'}, { keys = "<lt>leader><lt>leader>h", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hi <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hi", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'limelight.vim'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> mm <cmd>lua require("packer.load")({'T.vim'}, { keys = "mm", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>u <cmd>lua require("packer.load")({'nvim-toggler'}, { keys = "<lt>Leader>u", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <Leader>= <cmd>lua require("packer.load")({'vim-easy-align'}, { keys = "<lt>Leader>=", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[vnoremap <silent> mm <cmd>lua require("packer.load")({'T.vim'}, { keys = "mm", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> ww <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "ww", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hc <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hc", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hj <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hj", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <Leader>hh <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hh", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hm <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hm", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <C-y> <cmd>lua require("packer.load")({'telescope-frecency.nvim'}, { keys = "<lt>C-y>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <C-p> <cmd>lua require("packer.load")({'telescope-project.nvim'}, { keys = "<lt>C-p>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hi <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hi", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hl <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hl", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[vnoremap <silent> <Leader>rr <cmd>lua require("packer.load")({'refactoring.nvim'}, { keys = "<lt>Leader>rr", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> zR <cmd>lua require("packer.load")({'nvim-ufo'}, { keys = "zR", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[vnoremap <silent> za <cmd>lua require("packer.load")({'nvim-ufo'}, { keys = "za", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <leader>ff <cmd>lua require("packer.load")({'nvim-trevJ.lua'}, { keys = "<lt>leader>ff", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <leader>tg <cmd>lua require("packer.load")({'nvim-neoclip.lua'}, { keys = "<lt>leader>tg", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType md ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "md" }, _G.packer_plugins)]]
 vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType md ++once lua require("packer.load")({'markdown-preview.nvim'}, { ft = "md" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-autopairs'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au cmdlineenter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "cmdlineenter *" }, _G.packer_plugins)]]
-vim.cmd [[au insertenter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "insertenter *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp', 'luasnip', 'nvim-autopairs'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

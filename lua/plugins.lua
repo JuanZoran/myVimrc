@@ -61,6 +61,7 @@ packer.startup(function(use)
     use({
         "nvim-tree/nvim-tree.lua",
         keys = { 'n', 'ww' },
+        -- cond = 'not vim.g.vscode',
         config = 'require"conf.nvim_tree"',
         requires = {
             "nvim-tree/nvim-web-devicons", -- optional, for file icons
@@ -130,22 +131,10 @@ packer.startup(function(use)
     }
 
     -- TODO: compare this with toggleterm
-    use("voldikss/vim-floaterm") -- float terminal
+    -- FIXME: use Lspsaga with this
+    -- use("voldikss/vim-floaterm") -- float terminal
     use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
     use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
-
-    -- smart range switching with 'm'
-    use {
-        "mfussenegger/nvim-treehopper",
-        keys = {
-            { 'x', 'm' },
-            { 'o', 'm' },
-        },
-        config = function()
-            vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
-            vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", { silent = true })
-        end
-    }
 
     -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
     use {
@@ -192,11 +181,6 @@ packer.startup(function(use)
         requires = { "nvim-lua/plenary.nvim" },
     })
 
-    -- optional but strongly recommended
-    use({
-        "phaazon/hop.nvim",
-        branch = "v2",
-    })
 
     use {
         'AckslD/nvim-trevJ.lua',
@@ -250,38 +234,51 @@ packer.startup(function(use)
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
     })
 
+    use {
+        "L3mon4d3/luasnip",
+        requires = {
+            "rafamadriz/friendly-snippets"
+        },
+        event = 'InsertEnter',
+        after = 'nvim-cmp',
+        config = function()
+            require('snips').setup()
+        end
+    }
+
     -- NOTE: a super powerful completion engine for neovim
     use({
         "hrsh7th/nvim-cmp",
         requires = {
             { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
             { "tzachar/cmp-tabnine", after = "nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
             { "hrsh7th/cmp-path", after = "nvim-cmp" },
             { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-            { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+            { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
             { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-            {
-                "l3mon4d3/luasnip",
-                requires = {
-                    "rafamadriz/friendly-snippets"
-                },
-                config = function()
-                    require('snips').setup()
-                end
-            },
         },
-        event = { "cmdlineenter", "insertenter" }, -- lazy-load
+        event = 'InsertEnter', -- lazy-load
+        -- event = { "cmdlineenter", "insertenter" }, -- lazy-load
         config = function()
             require("conf.cmp")
         end,
     })
 
+    use({
+        "ggandor/leap.nvim",
+        config = function ()
+            require("leap").add_default_mappings()
+        end
+    })
+
     -- -- telescope
+
     use({
         "nvim-telescope/telescope.nvim",
+        cmd = 'Telescope',
         requires = {
-            { "nvim-lua/plenary.nvim" }, -- lib
+            { "nvim-lua/plenary.nvim", opt = true }, -- lib
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
             { 'nvim-telescope/telescope-ui-select.nvim' },
         },
@@ -348,7 +345,6 @@ packer.startup(function(use)
         },
         requires = { "kkharji/sqlite.lua", opt = true },
         config = function()
-            vim.cmd [[PackerLoad sqlite.lua]]
             require("telescope").load_extension("frecency")
             vim.keymap.set('n', '<C-y>', '<cmd>Telescope frecency<cr>') -- []Recently File Sorted by Frequency
         end
@@ -378,6 +374,24 @@ packer.startup(function(use)
     -- automatically set up your configuration after cloning packer.nvim
     -- put this at the end after all plugins
     -- HACK: alternatively
+    -- smart range switching with 'm'
+    -- optional but strongly recommended
+    -- use({
+    --     "phaazon/hop.nvim",
+    --     branch = "v2",
+    -- })
+
+    -- use {
+    --     "mfussenegger/nvim-treehopper",
+    --     keys = {
+    --         { 'x', 'm' },
+    --         { 'o', 'm' },
+    --     },
+    --     config = function()
+    --         vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
+    --         vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", { silent = true })
+    --     end
+    -- }
     -- use {
     --     'edluffy/hologram.nvim',
     --     fd = { 'md', 'markdown' },

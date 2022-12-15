@@ -5,6 +5,7 @@ require('nvim-toggler').setup({
         ['True'] = 'False',
         ['enable'] = 'disable',
         ['if'] = 'elseif',
+        ['Right'] = 'Left',
     },
     remove_default_keybinds = true,
 })

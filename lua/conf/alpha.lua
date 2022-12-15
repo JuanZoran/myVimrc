@@ -40,7 +40,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("p", "🌳  > Find Project", ":Telescope project<CR>"),
 	dashboard.button("f", "🎑  > Find File", ":Telescope find_files<CR>"),
 	dashboard.button("r", "🥂  > Recent File", ":Telescope oldfiles<CR>"),
-	dashboard.button("s", "💻  > Session", "<cmd>SearchSession<CR>"),
+	dashboard.button("s", "💻  > Current Dir Session", "<cmd>RestoreSession<CR>"),
 	dashboard.button("q", "🏓  > Quit", ":qa<CR>"),
 }
 
