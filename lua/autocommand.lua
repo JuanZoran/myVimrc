@@ -1,8 +1,8 @@
-vim.cmd([[
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
-]])
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd(
+    "BufReadPost",
+    { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
+)
 
 -- 设置firenvim的大小
 vim.cmd([[
@@ -40,6 +40,8 @@ autocmd InsertLeave * :silent let fcitx5state=system("fcitx5-remote")[0] | silen
 autocmd InsertEnter * :silent if fcitx5state == 2 | call system("fcitx5-remote -o") | endif
 ]])
 
+-- Don't auto comment when o
+vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
 
 vim.api.nvim_create_autocmd("TextYankPost", {

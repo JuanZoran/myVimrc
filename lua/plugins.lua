@@ -283,6 +283,7 @@ packer.startup(function(use)
         requires = {
             { "nvim-lua/plenary.nvim" }, -- lib
             { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
+            { 'nvim-telescope/telescope-ui-select.nvim' },
         },
     })
 

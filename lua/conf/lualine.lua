@@ -12,10 +12,13 @@ require("lualine").setup({
         disabled_filetypes = {
             statusline = {
                 "alpha",
-                "nvim_tree",
+                -- "NvimTree",
+                "startuptime",
             },
             winbar = {
                 "alpha",
+                "help",
+                "packer",
                 "NvimTree",
                 -- "dap-repl",
                 -- "dapui_console",

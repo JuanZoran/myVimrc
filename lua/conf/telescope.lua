@@ -89,6 +89,7 @@ telescope.setup({
     -- builtin picker
     -- },
     extensions = {
+        ['ui-select'] = {require('telescope.themes').get_dropdown()},
         project = {
             theme = "dropdown",
             sync_with_nvim_tree = true,
@@ -102,6 +103,10 @@ telescope.setup({
         },
     },
 })
+
+-- To get ui-select loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+telescope.load_extension("ui-select")
 
 telescope.load_extension("fzf")
 -- telescope.load_extension("notify")
