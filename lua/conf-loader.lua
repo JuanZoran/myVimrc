@@ -1,7 +1,7 @@
 require("base")
+require("maps")
 require("plugins")
 require('snips')
 require("ui")
 require("autocommand")
-require("maps")
 require("conf")

@@ -42,8 +42,6 @@ cmp.event:on(
                     handler = handlers["*"],
                 },
             },
-            -- -- Disable for tex
-            -- tex = false,
         },
     })
 )

@@ -30,7 +30,7 @@ local header = {
 		" ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ",
 	},
 }
-dashboard.section.header.val = header[2]
+dashboard.section.header.val = header[1]
 
 -- Set menu
 dashboard.section.buttons.val = {

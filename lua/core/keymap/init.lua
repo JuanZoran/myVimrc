@@ -102,7 +102,6 @@ set{
 
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
--- TODO:
 vim.keymap.set("t", "<C-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<cr>]])
 vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set("v", "<C-v>", '"+y')

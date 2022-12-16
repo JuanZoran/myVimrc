@@ -1,14 +1,10 @@
 ---@diagnostic disable: undefined-global
 local snippets = {}
+                                                                    -- NOTE:type <CR> begin to write snippet
+                                                                            -- Example:
+                                                                                -- local snip = parse("trigger", "first snippet")
+                                                                    -- NOTE: use table.insert(snippets, snip)
 
--- NOTE:type <CR> begin to write snippet
--- Example:
--- local snip = parse("trigger", "first snippet")
-    -- NOTE: use table.insert(snippets, snip)
-
-local snip = parse("var", [[${$1}]])
-table.insert(snippets, snip)
--- snippets:insert(snip)
 
 -- End Snippets --
 return snippets
@@ -35,4 +31,3 @@ return snippets
 -- events = require("luasnip.util.events")
 -- parse  = require("luasnip.util.parser").parse_snippet
 -- ai     = require("luasnip.nodes.absolute_indexer")
-

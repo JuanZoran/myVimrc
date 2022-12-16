@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- input switch
 local fcitx = vim.api.nvim_create_augroup("Fcitx5", { clear = true })
 -- 退出插入模式时回到正常模式
-local state = ''
+local state = vim.fn.system('fcitx5-remote')
 vim.api.nvim_create_autocmd('InsertLeave', {
     group = fcitx,
     pattern = '*',
