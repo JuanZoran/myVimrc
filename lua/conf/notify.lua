@@ -27,4 +27,4 @@ notify.setup({
 	    TRACE = icons.Trace,
 	},
 })
-vim.notify = notify
+-- vim.notify = notify

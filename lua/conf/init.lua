@@ -16,7 +16,6 @@ require("conf.gitsigns")
 -- require("conf.treehop")
 
 if not (vim.g.started_by_firenvim) then
-    require("conf.alpha")
     require("conf.notify")
     -- require("conf.nvim_tree")
     require("conf.bufferline")
@@ -24,8 +23,6 @@ if not (vim.g.started_by_firenvim) then
     require("conf.noice")
 -- NOTE: Tools
     require("conf.telescope")
-    require("conf.auto-session")
-    require("conf.session-lens")
     require("conf.todo-comments")
     require("conf.indent")
 end

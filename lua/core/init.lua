@@ -1,6 +1,0 @@
-require("core.option")
-require("core.plugin")
-require('core.snippet')
-require("core.ui")
-require("core.keymap")
-require("core.command")

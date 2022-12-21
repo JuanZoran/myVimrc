@@ -33,7 +33,7 @@ set {
             vim.fn.VSCodeNotify('workbench.action.closeActiveEditor')
         end },
         { "ww", function() vim.fn.VSCodeNotify('workbench.view.explorer') end },
-
+        { '<leader>u', require('nvim-toggler').toggle, },
         -- TODO:config this
         --         { "w<Down>",  "<C-w>J",         { desc = ' 窗口向下移动'     }},
         --         { "w<Up>",    "<C-w>K",         { desc = ' 窗口向上移动'     }},

@@ -49,7 +49,7 @@ use {
     requires = {
         "rafamadriz/friendly-snippets"
     },
-    event = {'InsertEnter', 'CmdlineEnter'},
+    event = {'insertenter', 'cmdlineenter'},
     after = 'nvim-cmp',
     config = function()
         require('snips').setup()

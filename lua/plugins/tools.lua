@@ -49,14 +49,16 @@ use {
 
 -- lazy-load translate plugin
 use({
-    "sicong-li/T.vim",
+    "JuanZoran/Trans.nvim",
     keys = {
         { 'v', 'mm' },
         { 'n', 'mm' },
     },
+    run = 'bash ./install.sh',
     config = function()
-        vim.keymap.set("v", "mm", ':<c-u>call T#VisualSearch(visualmode())<cr>', { desc = ' Translate' })
-        vim.keymap.set("n", "mm", "<cmd>call T#Main(expand('<cword>'))<cr>", { desc = ' Translate' })
+        require("Trans").setup{}
+        vim.keymap.set("v", "mm", '<Esc><Cmd>TranslateSelectWord<CR>', { desc = ' Translate' })
+        vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>", { desc = ' Translate' })
     end
 })
 
@@ -67,12 +69,6 @@ use {
     config = 'require("conf.autopairs")'
 }
 
-
--- combine auto-session with telescope
-use({
-    "rmagatti/session-lens",
-    requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-})
 
 
 -- integrate with git

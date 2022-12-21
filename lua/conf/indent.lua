@@ -46,6 +46,7 @@ require("indent_blankline").setup {
     filetype_exclude = {
         'NvimTree',
         'Alpha',
+        'dashboard',
         'git*',
         'help',
         'lspinfo',

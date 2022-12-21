@@ -37,7 +37,6 @@ require("lualine").setup({
             { 'diff' },
         },
         lualine_c = {
-            { require("auto-session-library").current_session_name },
             {
                 "filename",
                 path = 1,
