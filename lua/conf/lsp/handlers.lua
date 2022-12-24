@@ -37,20 +37,11 @@ M.setup = function()
     vim.diagnostic.config(config)
 end
 
-local navic = require("nvim-navic")
-navic.setup({
-    icon = icon.code_icon,
-    highlight = true,
-    separator = "  ",
-})
 
 
 ---@format disable
-M.on_attach = function(client, bufnr)
+M.on_attach = function(_, bufnr)
 
-    if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-    end
     local set = require("util").tmap
     set {
         mode = "n",

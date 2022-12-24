@@ -1,9 +1,7 @@
 require("conf.filetype")
 -- NOTE: UI
-require("conf.smooth")
 require("conf.which-key")
 require("conf.comment")
--- require("conf.hop")
 
 -- NOTE: LSP
 require("conf.lsp-config")

@@ -35,6 +35,7 @@ set {
         { "qw",        ":close<CR>"                   },
         { "qd",        ":bdelete!<CR>"                },
 
+        { "<C-m>",   "J",  },
     -- INFO: Bufferline
         { "b<left>",   ":BufferLineMovePrev<CR>",   '[]Move Buffer to Left'      },
         { "b<right>",  ":BufferLineMoveNext<CR>",   '[]Move Buffer to Right'     },
@@ -44,15 +45,10 @@ set {
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
     -- INFO: Floaterm
-        { "<C-d>",      "<cmd>Lspsaga open_floaterm<CR>"      },
-        { "<Leader>ra", "<cmd>Lspsaga open_floaterm ranger<CR>" ,' Ranger'},
-        { "<C-t>",      "<cmd>Lspsaga open_floaterm dooit<CR>" },
-        { "<C-g>",      "<cmd>Lspsaga open_floaterm lazygit<CR>" },
-
-        { "<Leader>sa", ":SaveSession<CR>"                           },
-        { "<Leader>sr", ":Autosession search<CR>"                    },
-        { "<Leader>st", ":Telescope session-lens search_session<CR>" },
-        { "<Leader>sd", ":Autosession delete<CR>"                    },
+        -- { "<Leader>sa", ":SaveSession<CR>"                           },
+        -- { "<Leader>sr", ":Autosession search<CR>"                    },
+        -- { "<Leader>st", ":Telescope session-lens search_session<CR>" },
+        -- { "<Leader>sd", ":Autosession delete<CR>"                    },
         { "<leader>gh", ":Gitsigns preview_hunk_inline<cr>" },
 
         -- 其他
@@ -102,8 +98,6 @@ set{
 
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
--- TODO:
-vim.keymap.set("t", "<C-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<cr>]])
 vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set("v", "<C-v>", '"+y')
 

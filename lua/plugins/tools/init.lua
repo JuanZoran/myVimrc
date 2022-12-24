@@ -29,11 +29,17 @@ use {
     end,
 }
 
--- TODO: compare this with toggleterm
--- FIXME: use Lspsaga with this
--- use("voldikss/vim-floaterm") -- float terminal
 use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
 use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
+use {
+    'akinsho/toggleterm.nvim',
+    keys = {
+        {'n', '<C-d>'},
+        {'n', '<C-g>'},
+        {'i', '<C-g>'},
+    },
+    config = [[require"plugins.tools.toggleterm"]],
+}
 
 
 -- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table

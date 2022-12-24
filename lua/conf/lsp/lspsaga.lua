@@ -17,6 +17,8 @@ saga.init_lsp_saga({
     symbol_in_winbar = {
         in_custom = true,
         enable = false,
+        separator = '  ',
+        -- click_support = true
     },
     definition_action_keys = {
         -- edit = '<C-c>o',
@@ -29,3 +31,4 @@ saga.init_lsp_saga({
     border_style = "rounded",
     code_action_icon = icon.CodeAction,
 })
+

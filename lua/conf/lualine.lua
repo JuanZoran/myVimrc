@@ -1,5 +1,38 @@
 local icon = require("util").icon
-local navic = require('nvim-navic')
+
+local function diff_source()
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+        return {
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed
+        }
+    end
+end
+
+-- local function handler(clicks, button, modifiers)
+--     -- To see all available details: vim.pretty_print(node)
+--     local st = node.range.start
+--     local en = node.range['end']
+--     if button == "l" then
+--         if clicks == 2 then
+--             -- double left click to do nothing
+--         else -- jump to node's starting line+char
+--             vim.fn.cursor(st.line + 1, st.character + 1)
+--         end
+--     elseif button == "r" then
+--         if modifiers == "s" then
+--             print "lspsaga" -- shift right click to print "lspsaga"
+--         end -- jump to node's ending line+char
+--         vim.fn.cursor(en.line + 1, en.character + 1)
+--     elseif button == "m" then
+--         -- middle click to visual select node
+--         vim.fn.cursor(st.line + 1, st.character + 1)
+--         vim.cmd "normal v"
+--         vim.fn.cursor(en.line + 1, en.character + 1)
+--     end
+-- end
 
 require("lualine").setup({
     -- options = { theme = "everforest" },
@@ -14,6 +47,7 @@ require("lualine").setup({
                 "alpha",
                 -- "NvimTree",
                 "startuptime",
+                "toggleterm",
                 "lspsagaoutline",
             },
             winbar = {
@@ -22,6 +56,7 @@ require("lualine").setup({
                 "packer",
                 "NvimTree",
                 "lspsagaoutline",
+                "toggleterm",
                 -- "dap-repl",
                 -- "dapui_console",
                 -- "dapui_watches",
@@ -33,8 +68,9 @@ require("lualine").setup({
     },
     sections = {
         lualine_b = {
-            "branch",
-            { 'diff' },
+            -- "branch",
+            { 'b:gitsigns_head', icon = '' },
+            { 'diff', source = diff_source },
         },
         lualine_c = {
             {
@@ -84,14 +120,15 @@ require("lualine").setup({
 
         lualine_c = {
             {
-                navic.get_location,
-                cond = navic.is_available,
-                -- color = { fg = "#f3ca28" },
+                require('lspsaga.symbolwinbar').get_symbol_node,
+                -- on_click = handler,
             },
+            -- {
+            --     navic.get_location,
+            --     cond = navic.is_available,
+            --     -- color = { fg = "#f3ca28" },
+            -- },
         },
-        -- lualine_y = {
-        --     require("lspsaga.symbolwinbar").get_symbol_node(),
-        -- },
         lualine_z = {
             "os.date[[%A %H:%M]]",
         },

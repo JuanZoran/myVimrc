@@ -26,7 +26,7 @@ set {
         { "c<cr>",    'ci"'   },
         -- INFO: in ''
         { "y<space>", [[yi']] },
-        { "c<pace>", [[ci']] },
+        { "c<space>", [[ci']] },
 
         -- INFO: resize
         { "<C-Down>",  "<C-w>-" },
@@ -48,10 +48,11 @@ set {
 set {
     mode = "v",
     map = {
-        { "<A-i>", ":m .-2<CR>gv" },
-        { "<A-k>", ":m .+2<CR>gv" },
+        { "<A-i>", ":m '<-2<CR>gv" },
+        { "<A-k>", ":m '>+1<CR>gv" },
         { ">", ">gv" },
         { "<", "<gv" },
+        { "p", "\"_dp" },
     }
 }
 

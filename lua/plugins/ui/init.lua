@@ -45,7 +45,14 @@ use {
 use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 
 -- smooth scroll animation
-use("declancm/cinnamon.nvim")
+use {
+    "declancm/cinnamon.nvim",
+    config = [[require("plugins.ui.smooth")]]
+}
+
+use { 'gen740/SmoothCursor.nvim',
+    config = [[require "plugins.ui.SmoothCursor"]]
+}
 
 -- nice ui
 use({
