@@ -4,7 +4,11 @@ local use = require("packer").use
 
 
 use("rrethy/vim-illuminate") -- cursor-word highlighting
-use("lukas-reineke/indent-blankline.nvim")
+
+use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = [[require 'plugins.lang.indent']], 
+}
 
 
 -- high-performance language parser
@@ -43,7 +47,7 @@ use {
     requires = {
         "rafamadriz/friendly-snippets"
     },
-    event = {'insertenter', 'cmdlineenter'},
+    event = { 'insertenter', 'cmdlineenter' },
     after = 'nvim-cmp',
     config = function()
         require('snips').setup()
@@ -54,13 +58,13 @@ use {
 use({
     "hrsh7th/nvim-cmp",
     requires = {
-        { "hrsh7th/cmp-buffer",       after = "nvim-cmp"       },
-        { "tzachar/cmp-tabnine",      after = "nvim-cmp"       },
-        { "hrsh7th/cmp-nvim-lsp",     after = "nvim-lspconfig" },
-        { "hrsh7th/cmp-path",         after = "nvim-cmp"       },
-        { "hrsh7th/cmp-nvim-lua",     after = "nvim-cmp"       },
-        { "saadparwaiz1/cmp_luasnip", after = "luasnip"        },
-        { "hrsh7th/cmp-cmdline",      after = "nvim-cmp"       },
+        { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+        { "tzachar/cmp-tabnine", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
+        { "hrsh7th/cmp-path", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+        { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
+        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
     },
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
     config = function()

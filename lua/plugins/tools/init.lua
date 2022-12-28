@@ -1,22 +1,22 @@
 local use = require("packer").use
 -- NOTE: ====================== Tools =====================
-use({
+use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
-})
+}
 
 
 use("folke/which-key.nvim")
 
 
 -- markdown preview
-use({
+use {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown", "md" },
     run = function()
         vim.fn["mkdp#util#install"]()
     end,
-})
+}
 
 
 use {
@@ -34,9 +34,9 @@ use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
 use {
     'akinsho/toggleterm.nvim',
     keys = {
-        {'n', '<C-d>'},
-        {'n', '<C-g>'},
-        {'i', '<C-g>'},
+        { 'n', '<C-d>' },
+        { 'n', '<C-g>' },
+        { 'i', '<C-g>' },
     },
     config = [[require"plugins.tools.toggleterm"]],
 }
@@ -54,19 +54,19 @@ use {
 }
 
 -- lazy-load translate plugin
-use({
-    "JuanZoran/Trans.nvim",
+use {
+    "/home/zoran/project/neovim/Trans",
     keys = {
         { 'v', 'mm' },
         { 'n', 'mm' },
     },
     run = 'bash ./install.sh',
     config = function()
-        require("Trans").setup{}
+        require("Trans").setup {}
         vim.keymap.set("v", "mm", '<Esc><Cmd>TranslateSelectWord<CR>', { desc = ' Translate' })
         vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>", { desc = ' Translate' })
     end
-})
+}
 
 
 use {
@@ -75,13 +75,17 @@ use {
     config = 'require("conf.autopairs")'
 }
 
+-- use {
+--     'rhysd/vim-grammarous',
+-- }
+
 
 
 -- integrate with git
-use({
+use {
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
-})
+}
 
 
 use {
@@ -105,18 +109,16 @@ use { -- foucs mode
 }
 
 
-use({
+use {
     "ggandor/leap.nvim",
-    config = function()
-        require("leap").add_default_mappings()
-    end
-})
+    config = require("leap").add_default_mappings,
+}
 
 
 -- | firenvim
-use({
+use {
     "glacambre/firenvim",
     run = function()
         vim.fn["firenvim#install"](0)
     end,
-})
+}

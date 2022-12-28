@@ -9,10 +9,10 @@ packer.init({
     },
     compile_path = vim.fn.stdpath('config') .. '/lua/plugins/' .. 'packer_compiled.lua',
 
-    profile = {
-        enable = true,
-        threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
-    },
+    -- profile = {
+    --     enable = true,
+    --     threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    -- },
 })
 
 require("plugins.packer_compiled")

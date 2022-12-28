@@ -22,7 +22,6 @@ if not (vim.g.started_by_firenvim) then
 -- NOTE: Tools
     require("conf.telescope")
     require("conf.todo-comments")
-    require("conf.indent")
 end
 
 -- TODO: Debugger

@@ -1,5 +1,5 @@
 require("core.base")
-require("core.ui")
+-- require("core.ui")
 require("core.autocommand")
 require("maps")
 require("plugins")

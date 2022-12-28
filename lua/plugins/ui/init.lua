@@ -2,8 +2,17 @@ local use = require("packer").use
 -- NOTE:====================== ui =====================
 -- about theme
 use { "sainnhe/everforest", opt = true }
-use("projekt0n/github-nvim-theme")
 
+use {
+    "marko-cerovac/material.nvim",
+    config = [[require 'plugins.ui.theme.material']]
+}
+
+
+use {
+    "projekt0n/github-nvim-theme",
+    opt = true
+}
 
 use {
 

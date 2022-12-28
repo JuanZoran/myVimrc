@@ -1,4 +1,4 @@
-require("smoothcursor").setup{
+require("smoothcursor").setup {
     fancy = {
         enable = true,
     }

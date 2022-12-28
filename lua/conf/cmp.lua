@@ -41,13 +41,16 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<C-o>"] = cmp.mapping.confirm({ select = true }),
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
+            -- TODO: config some
+            if luasnip.jumpable(1) then
+                luasnip.jump(1)
             elseif cmp.visible() then
                 cmp.select_next_item()
             else
                 fallback()
             end
+
+
         end, { "i", "s" }),
 
         ["<S-Tab>"] = cmp.mapping(function(fallback)
