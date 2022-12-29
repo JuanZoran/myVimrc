@@ -105,11 +105,13 @@ use {
     end, -- optional call for configurating non-default filetypes etc
 }
 
-
-use { -- foucs mode
-    'junegunn/limelight.vim',
-    keys = { 'n', '<leader><leader>h' },
-    config = 'require("conf.zen")'
+-- focues mode
+use {
+    "folke/twilight.nvim",
+    keys = {
+        {'n', '<leader><leader>h'}
+    },
+    config = [[require 'plugins.tools.zen']]
 }
 
 
@@ -126,3 +128,9 @@ use {
         vim.fn["firenvim#install"](0)
     end,
 }
+
+-- use { -- foucs mode
+--     'junegunn/limelight.vim',
+--     keys = { 'n', '<leader><leader>h' },
+--     config = 'require("conf.zen")'
+-- }

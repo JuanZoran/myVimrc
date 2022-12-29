@@ -17,20 +17,33 @@ require("filetype").setup({
         -- },
 
         -- The same as the ones above except the keys map to functions
-        -- function_extensions = {
-        --     ["cpp"] = function()
-        --         vim.bo.filetype = "cpp"
-        --         -- Remove annoying indent jumping
-        --         vim.bo.cinoptions = vim.bo.cinoptions .. "L0"
-        --     end,
-        --     ["pdf"] = function()
-        --         vim.bo.filetype = "pdf"
-        --         -- Open in PDF viewer (Skim.app) automatically
-        --         vim.fn.jobstart(
-        --             "open -a skim " .. '"' .. vim.fn.expand("%") .. '"'
-        --         )
-        --     end,
-        -- },
+        function_extensions = {
+            ['md'] = function()
+                -- vim.g.mkdp_auto_start = 1
+                vim.bo.filetype = "markdown"
+                vim.keymap.set("n", "mp", "<Plug>MarkdownPreviewToggle", { silent = true, buffer = true })
+            end,
+            cpp = function()
+                vim.bo.filetype = "cpp"
+                -- Remove annoying indent jumping
+                -- vim.bo.cinoptions = vim.bo.cinoptions .. "L0"
+
+                -- switch header / source
+                vim.keymap.set({ "i", "n" }, "<C-k>", "<cmd>ClangdSwitchSourceHeader<CR>", { buffer = true })
+            end,
+
+            py = function()
+                vim.bo.filetype = 'python'
+                vim.keymap.set({ "i", "n" }, "<C-k>", "<cmd>PyrightOrganizeImports<CR>", { buffer = true })
+            end,
+            --     ["pdf"] = function()
+            --         vim.bo.filetype = "pdf"
+            --         -- Open in PDF viewer (Skim.app) automatically
+            --         vim.fn.jobstart(
+            --             "open -a skim " .. '"' .. vim.fn.expand("%") .. '"'
+            --         )
+            --     end,
+        },
         -- function_literal = {
         --     Brewfile = function()
         --         vim.cmd("syntax off")

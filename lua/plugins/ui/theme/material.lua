@@ -39,7 +39,7 @@ require('material').setup {
     },
 
     disable = {
-        colored_cursor = false, -- Disable the colored cursor
+        colored_cursor = true, -- Disable the colored cursor
         borders = true, -- Disable borders between verticaly split windows
         background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
         term_colors = true, -- Prevent the theme from setting terminal colors
