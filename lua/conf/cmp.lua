@@ -11,7 +11,6 @@ if not snip_status_ok then
 end
 
 local kind_icons = require('util').icon.code_icon
-
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -86,9 +85,9 @@ cmp.setup({
     sources = {
         { name = "luasnip" },
         { name = "nvim_lsp" },
-        { name = "cmp_tabnine", max_item_count = 6},
+        { name = "cmp_tabnine", max_item_count = 6 },
         { name = "nvim_lua" },
-        { name = "buffer" , max_item_count = 6},
+        { name = "buffer", max_item_count = 6 },
         { name = "path" },
     },
     -- confirm_opts = {

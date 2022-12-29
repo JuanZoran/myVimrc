@@ -3,25 +3,29 @@ local use = require("packer").use
 -- NOTE: ====================== syntax =====================
 
 
-use("rrethy/vim-illuminate") -- cursor-word highlighting
+-- cursor-word highlighting
+use {
+    "rrethy/vim-illuminate",
+}
+
 
 use {
     "lukas-reineke/indent-blankline.nvim",
-    config = [[require 'plugins.lang.indent']], 
+    config = [[require 'plugins.lang.indent']],
 }
 
 
 -- high-performance language parser
-use({
+use {
     "nvim-treesitter/nvim-treesitter",
     run = function()
         require("nvim-treesitter.install").update({ with_sync = true })
     end,
     requires = { "p00f/nvim-ts-rainbow" }, -- rainbow pairs
-})
+}
 
 -- make neovim has modernize folder
-use({
+use {
     "kevinhwang91/nvim-ufo",
     keys = {
         { 'n', 'zR' },
@@ -30,17 +34,17 @@ use({
     },
     requires = { "kevinhwang91/promise-async", opt = true },
     config = 'require "conf.ufo"',
-})
+}
 
 
 -- -- ====================== completion =====================
 -- mason | lspconfig | mason-lspconfig
-use({
+use {
     "williamboman/mason.nvim", -- lsp manager
     "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
     "neovim/nvim-lspconfig", -- official lspconfig
     "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
-})
+}
 
 use {
     "L3mon4d3/luasnip",
@@ -55,7 +59,7 @@ use {
 }
 
 -- NOTE: a super powerful completion engine for neovim
-use({
+use {
     "hrsh7th/nvim-cmp",
     requires = {
         { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
@@ -70,4 +74,4 @@ use({
     config = function()
         require("conf.cmp")
     end,
-})
+}

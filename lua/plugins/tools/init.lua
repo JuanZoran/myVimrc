@@ -6,7 +6,10 @@ use {
 }
 
 
-use("folke/which-key.nvim")
+use {
+    "folke/which-key.nvim",
+    config = [[ require "plugins.tools.which-key" ]]
+}
 
 
 -- markdown preview
@@ -24,12 +27,13 @@ use {
     keys = {
         { "n", "<Leader>u" },
     },
-    config = function()
-        require("conf.toggle")
-    end,
+    config = [[require'plugins.tools.toggle']]
 }
 
-use("numtostr/comment.nvim") -- powerful comment with gc<char> | gb<char> | <leader>a
+use {
+    "numtostr/comment.nvim",
+    config = [[require'plugins.tools.comment']]
+} -- powerful comment with gc<char> | gb<char> | <leader>a
 use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
 use {
     'akinsho/toggleterm.nvim',

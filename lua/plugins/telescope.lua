@@ -1,5 +1,5 @@
 local use = require("packer").use
-use({
+use {
     "nvim-telescope/telescope.nvim",
     cmd = 'Telescope',
     requires = {
@@ -7,7 +7,7 @@ use({
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
         { 'nvim-telescope/telescope-ui-select.nvim' },
     },
-})
+}
 
 use {
     "jvgrootveld/telescope-zoxide", -- powerful cd
@@ -87,4 +87,3 @@ use {
         vim.keymap.set('n', '<leader>tg', '<cmd>Telescope neoclip<cr>', { desc = '[]Clipboard History' })
     end,
 }
-

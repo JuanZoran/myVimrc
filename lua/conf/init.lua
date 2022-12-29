@@ -1,13 +1,13 @@
-require("conf.filetype")
+-- require("conf.filetype")
 -- NOTE: UI
-require("conf.which-key")
-require("conf.comment")
+-- require("conf.which-key")
+-- require("conf.comment")
 
 -- NOTE: LSP
 require("conf.lsp-config")
 require("conf.lsp.lspsaga")
 require("conf.lsp")
-require("conf/illuminate")
+-- require("conf.illuminate")
 -- NOTE: Treesitter
 require("conf.treesitter")
 require("conf.gitsigns")

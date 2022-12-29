@@ -1,7 +1,7 @@
-require('material').setup({
+require('material').setup {
     contrast = {
         terminal = false, -- Enable contrast for the built-in terminal
-        sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+        sidebars = true, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
         floating_windows = false, -- Enable contrast for floating windows
         -- cursor_line = true, -- Enable darker background for the cursor line
         non_current_windows = false, -- Enable darker background for non-current windows
@@ -12,9 +12,9 @@ require('material').setup({
         comments = { italic = true },
         strings = { bold = true },
         keywords = { --[[ underline = true ]] },
-        functions = { bold = true, --[[undercurl = true ]] },
+        functions = { bold = true, --[[ undercurl = true ]] },
         variables = {},
-        operators = {},
+        operators = { bold = true },
         types = {},
     },
 
@@ -39,11 +39,11 @@ require('material').setup({
     },
 
     disable = {
-        colored_cursor = true, -- Disable the colored cursor
-        borders = false, -- Disable borders between verticaly split windows
+        colored_cursor = false, -- Disable the colored cursor
+        borders = true, -- Disable borders between verticaly split windows
         background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
         term_colors = true, -- Prevent the theme from setting terminal colors
-        eob_lines = false -- Hide the end-of-buffer lines
+        eob_lines = true -- Hide the end-of-buffer lines
     },
 
     high_visibility = {
@@ -58,11 +58,13 @@ require('material').setup({
     custom_colors = nil, -- If you want to everride the default colors, set this to a function
 
     custom_highlights = {
-        CursorLine = { --[[ bg = '#8b949e', ]] underline = true },
+        CursorLine = { --[[ bg = '#8b949e', ]] underline = true, bold = true },
         IncSearch = { fg = "#c9d1d9", bg = "#ff4081" },
     }, -- Overwrite highlights with your own
-})
+}
 
 vim.g.material_style = "deep ocean"
+-- vim.g.material_style = "palenight"
+-- vim.g.material_style = "darker"
 
 vim.cmd [[colorscheme material]]
