@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
 local snips = {
     s(
-        "ustd",
+        "using",
         fmt(
         --===== "ustd" =====
             [[
@@ -15,4 +15,7 @@ local snips = {
     ),
 }
 
+
+
+-- End Snippets -- 
 return snips

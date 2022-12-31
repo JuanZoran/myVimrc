@@ -35,7 +35,7 @@ set {
         { "qw",        ":close<CR>"                   },
         { "qd",        ":bdelete!<CR>"                },
 
-        { "<C-m>",   "J",  },
+        { "<S-CR>",   "J",  },
     -- INFO: Bufferline
         { "b<left>",   ":BufferLineMovePrev<CR>",   '[]Move Buffer to Left'      },
         { "b<right>",  ":BufferLineMoveNext<CR>",   '[]Move Buffer to Right'     },

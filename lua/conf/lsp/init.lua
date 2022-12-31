@@ -4,7 +4,6 @@ local servers = {
 	"clangd",
 	"gopls",
 	"bashls",
-	"marksman",
 }
 require("mason").setup()
 require("mason-lspconfig").setup({

@@ -50,15 +50,40 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- NOTE: can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]
 
+-- TODO: setup automatically setup template
+local template = {
+    { suffix = 'c', pattern = 'main.c' },
+    'zsh'
+}
+
+local template_group = vim.api.nvim_create_augroup('Template', { clear = true })
+for _, v in ipairs(template) do
+    if type(v) == 'string' then
+        vim.api.nvim_create_autocmd('BufNewFile', {
+            group = template_group,
+            pattern = '*.' .. v,
+            command = [[0r ~/.config/nvim/lua/snips/template/snip.]] .. v,
+        })
+    elseif type(v) == 'table' then
+        vim.api.nvim_create_autocmd('BufNewFile', {
+            group = template_group,
+            pattern = v.pattern,
+            command = [[0r ~/.config/nvim/lua/snips/template/snip.]] .. v.suffix,
+        })
+    else
+        vim.notify('unknown type template', 'error')
+    end
+end
+
+
 local snip = vim.api.nvim_create_augroup("CodeSnip", { clear = true })
--- for C-file-snip
 vim.api.nvim_create_autocmd("BufNewFile", {
     group = snip,
     pattern = "*/snips/*.lua",
     command = [[0r ~/.config/nvim/lua/snips/template/snip.lua]],
 })
 
-vim.api.nvim_create_autocmd("BufRead", {
+vim.api.nvim_create_autocmd("BufEnter", {
     group = snip,
     pattern = "*/snips/*.lua",
     callback = function()

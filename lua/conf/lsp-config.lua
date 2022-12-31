@@ -41,7 +41,7 @@ require("mason-lspconfig").setup({
         "sumneko_lua",
         "clangd",
         "gopls",
-        "marksman",
+        -- "marksman",
         "pyright",
     },
     automatic_installation = true,

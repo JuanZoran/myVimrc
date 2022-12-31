@@ -34,7 +34,10 @@ use {
     "numtostr/comment.nvim",
     config = [[require'plugins.tools.comment']]
 } -- powerful comment with gc<char> | gb<char> | <leader>a
+
+
 use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
+
 use {
     'akinsho/toggleterm.nvim',
     keys = {
@@ -83,6 +86,12 @@ use {
 --     'rhysd/vim-grammarous',
 -- }
 
+-- Lua
+use({
+    "olimorris/persisted.nvim",
+    module = "persisted", -- For lazy loading
+    config = [[require 'plugins.tools.session']],
+})
 
 
 -- integrate with git
@@ -109,7 +118,7 @@ use {
 use {
     "folke/twilight.nvim",
     keys = {
-        {'n', '<leader><leader>h'}
+        { 'n', '<leader><leader>h' }
     },
     config = [[require 'plugins.tools.zen']]
 }
@@ -128,9 +137,3 @@ use {
         vim.fn["firenvim#install"](0)
     end,
 }
-
--- use { -- foucs mode
---     'junegunn/limelight.vim',
---     keys = { 'n', '<leader><leader>h' },
---     config = 'require("conf.zen")'
--- }
