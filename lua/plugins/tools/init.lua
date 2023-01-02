@@ -16,9 +16,7 @@ use {
 use {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown", "md" },
-    run = function()
-        vim.fn["mkdp#util#install"]()
-    end,
+    run = vim.fn["mkdp#util#install"]
 }
 
 
@@ -62,7 +60,7 @@ use {
 
 -- lazy-load translate plugin
 use {
-    "/home/zoran/project/neovim/Trans",
+    "/home/zoran/project/Neovim/Trans",
     keys = {
         { 'v', 'mm' },
         { 'n', 'mm' },
@@ -82,9 +80,6 @@ use {
     config = 'require("conf.autopairs")'
 }
 
--- use {
---     'rhysd/vim-grammarous',
--- }
 
 -- Lua
 use({
@@ -137,3 +132,7 @@ use {
         vim.fn["firenvim#install"](0)
     end,
 }
+
+-- use {
+--     'rhysd/vim-grammarous',
+-- }

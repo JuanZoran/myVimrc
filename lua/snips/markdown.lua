@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 -- code snippets
 local filetypes = {
     "bash",
@@ -9,14 +10,14 @@ local filetypes = {
     -- "rust",
 }
 
-local MD = {}
+local snips = {}
 
 for _, value in pairs(filetypes) do
     local codesnip = s(
         value,
         fmt(
             string.format(
-                [[```%s
+[[```%s
 	{}
 ```]]            ,
                 value),
@@ -24,7 +25,7 @@ for _, value in pairs(filetypes) do
         )
     )
 
-    table.insert(MD, codesnip)
+    table.insert(snips, codesnip)
 end
 
 -- table.insert(MD, s(
@@ -36,4 +37,4 @@ end
 -- ))
 
 
-return MD
+return snips

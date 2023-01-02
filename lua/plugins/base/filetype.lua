@@ -21,7 +21,9 @@ require("filetype").setup({
             ['md'] = function()
                 -- vim.g.mkdp_auto_start = 1
                 vim.bo.filetype = "markdown"
-                vim.keymap.set("n", "mp", "<Plug>MarkdownPreviewToggle", { silent = true, buffer = true })
+                vim.keymap.set("n", "mp", "<Plug>MarkdownPreviewToggle", { buffer = true })
+                -- TODO config title mapping
+                -- vim.keymap.set({'n', 'i'}, '<A-=>', '')
             end,
             cpp = function()
                 vim.bo.filetype = "cpp"

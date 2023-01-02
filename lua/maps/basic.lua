@@ -34,7 +34,7 @@ set {
         { "<C-Right>", "<C-w>>" },
         { "<C-Left>",  "<C-w><" },
 
-        { "<leader>a", "@" },
+        { "<leader>a", "@" , 'macro' },
         -- { ";", "@" },
     }
 }
@@ -63,7 +63,7 @@ set {
     map = {
         {'<C-a>', '<ESC>I'},
         {'<C-e>', '<ESC>A'},
-        {'<C-b>', '<ESC>ba'},
+        {'<C-b>', '<ESC>bi'},
         {'<C-f>', '<ESC>ea'},
         {'<C-n>', '<ESC>o'},
         {'<C-p>', '<ESC>O'},

@@ -30,16 +30,16 @@ set {
 
     -- INFO: command
         { "wd",        ":close<CR>",    '[] 关闭当前窗口' },
-        { "<Leader>w", ":wq<CR>"                      },
-        { "<Leader>W", ":w<CR>"                       },
+        { "<Leader>w", ":w<CR>"                       },
+        -- { "<Leader>W", ":w<CR>"                       },
         { "qw",        ":close<CR>"                   },
         { "qd",        ":bdelete!<CR>"                },
 
         { "<S-CR>",   "J",  },
     -- INFO: Bufferline
-        { "b<left>",   ":BufferLineMovePrev<CR>",   '[]Move Buffer to Left'      },
-        { "b<right>",  ":BufferLineMoveNext<CR>",   '[]Move Buffer to Right'     },
-        { "<Leader>b", ":BufferLinePickClose<CR>" , '﫧 Pick a Buffer to delete' },
+        { "<leader>b<left>",   ":BufferLineMovePrev<CR>",   '[]Move Buffer to Left'      },
+        { "<leader>b<right>",  ":BufferLineMoveNext<CR>",   '[]Move Buffer to Right'     },
+        { "<Leader>bb", ":BufferLinePickClose<CR>" , '﫧 Pick a Buffer to delete' },
 
         { "<C-j>", ":BufferLineCyclePrev<CR>" },
         { "<C-l>", ":BufferLineCycleNext<CR>" },

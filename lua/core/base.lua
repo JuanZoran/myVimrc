@@ -4,6 +4,7 @@ opt.termguicolors = true
 opt.autoread = true
 opt.number = true
 opt.relativenumber = true
+
 -- lualine did
 opt.showmode = false
 opt.ruler = false
@@ -11,7 +12,7 @@ opt.ruler = false
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 
--- vim.opt.smarttab = false
+-- opt.smarttab = false
 opt.scrolloff = 10
 opt.sidescrolloff = 10
 opt.swapfile = false
@@ -28,7 +29,7 @@ opt.timeoutlen = 500 --default value = 1000
 opt.ttimeout = true
 opt.ttimeoutlen = 50 --default value = 1000
 opt.hlsearch = false
--- vim.opt.paste = true
+-- opt.paste = true
 
 -- Cool floating window popup menu for completion on command line
 opt.tabstop = 4
@@ -41,10 +42,13 @@ opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 
 
 opt.cursorline       = true
--- vim.o.foldcolumn     = "1" -- '0' is not bad
-vim.o.foldlevel      = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable     = true
+-- opt.foldcolumn     = "1" -- '0' is not bad
+opt.foldlevel      = 99 -- Using ufo provider need a large value, feel free to decrease the value
+opt.foldlevelstart = 99
+opt.foldenable     = true
+
+
+opt.formatoptions:remove('cro')
 
 opt.splitbelow = true
 opt.splitright = true
@@ -121,6 +125,6 @@ end
 -- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- vim.opt.showtabline = 2 -- for 标签页面
--- vim.opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板
+-- opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板
 -- vim.opt.pumblend = 17
 -- vim.opt.hidden = true -- I like having buffers stay around

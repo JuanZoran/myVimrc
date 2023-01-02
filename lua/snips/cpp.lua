@@ -13,9 +13,11 @@ local snips = {
             }
         )
     ),
+    parse("formatEnable", "// clang-format on"),
+    parse("formatDisable", "// clang-format off"),
 }
 
 
 
--- End Snippets -- 
+-- End Snippets --
 return snips

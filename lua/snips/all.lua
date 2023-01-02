@@ -23,6 +23,7 @@
 -- local dl = require("luasnip.extras").dynamic_lambda
 -- local conds = require "luasnip.extras.expand_conditions"
 
+local snips = {}
 
 local function bash(_, snip)
     local file = io.popen(snip.trigger, "r")
@@ -34,8 +35,17 @@ local function bash(_, snip)
     return res
 end
 
-local snips = {
-    s({ trig = "pwd" }, { f(bash, {}) }),
+local bash_command = {
+    'pwd',
+    -- '',
 }
+
+
+for _, v in ipairs(bash_command) do
+    -- s({ trig = "pwd" }, { f(bash, {}) }),
+    -- table.insert(snips, s({ trig = v }, { f(bash) }))
+    table.insert(snips, s(v, { f(bash) }))
+end
+
 
 return snips

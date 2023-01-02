@@ -23,7 +23,7 @@ cmp.setup({
         ["<C-Space>"] = cmp.mapping {
             i = function(_)
                 if luasnip.choice_active() then
-                    luasnip.change_choice(1)
+                    luasnip.change_choice()
                 else
                     cmp.mapping.complete()()
                 end
