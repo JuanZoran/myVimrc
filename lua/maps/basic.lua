@@ -9,22 +9,22 @@ set {
     -- opt = opt,
     map = {
     -- INFO: tips
-        -- INFO: in paragraph
+        -- INFO  in paragraph
         { "yp",       "yip"   },
         { "dp",       "dip"   },
         { "vp",       "vip"   },
         { "cp",       "cip"   },
-        -- INFO: in word
+        -- INFO  in word
         { "yw",       "yiw"   },
         { "dw",       "diw"   },
         { "vw",       "viw"   },
         { "cw",       "ciw"   },
-        -- INFO: in ""
+        -- INFO  in ""
         { "d<cr>",    'di"'   },
         { "y<cr>",    'yi"'   },
         { "v<cr>",    'vi"'   },
         { "c<cr>",    'ci"'   },
-        -- INFO: in ''
+        -- INFO  in ''
         { "y<space>", [[yi']] },
         { "c<space>", [[ci']] },
 

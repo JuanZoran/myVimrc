@@ -33,9 +33,8 @@ local config = {
         prefix = icon.LSPFloat,
     },
 }
+
 vim.diagnostic.config(config)
-
-
 
 ---@format disable
 M.on_attach = function(_, bufnr)

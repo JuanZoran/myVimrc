@@ -31,7 +31,7 @@ set {
     -- INFO : command
         { "wd",        ":close<CR>",    '[] 关闭当前窗口' },
         { "<Leader>w", ":w<CR>"                       },
-        { "<Leader><leader>w", ":wqa<CR>"                       },
+        { "<Leader><leader>w", ":wqa<CR>" ,     '[] 保存关闭所有窗口'},
         { "qw",        ":close<CR>"                   },
         { "qd",        ":bdelete!<CR>"                },
 
@@ -44,7 +44,6 @@ set {
         { "<C-j>", ":BufferLineCyclePrev<CR>" },
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
-        { "<leader>gh", ":Gitsigns preview_hunk_inline<cr>" },
 
         -- 其他
         { "<C-;>",     "/<++><CR>vf>c" }, -- PlaceHolder
