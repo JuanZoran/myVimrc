@@ -49,8 +49,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
--- NOTE : can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]
-
 -- TODO : setup automatically setup template
 local template = {}
 for file in vim.fs.dir(vim.fn.stdpath('config') .. '/lua/template') do
@@ -61,20 +59,13 @@ local template_group = vim.api.nvim_create_augroup('Template', { clear = true })
 for _, filename in ipairs(template) do
     vim.api.nvim_create_autocmd('BufNewFile', {
         group = template_group,
-        pattern = filename:gsub('all', '*'),
+        pattern = filename:gsub('all', '*'):gsub('-', '/'),
         command = [[0r ~/.config/nvim/lua/template/]] .. filename,
     })
 end
 
 
-
 local snip = vim.api.nvim_create_augroup("CodeSnip", { clear = true })
-vim.api.nvim_create_autocmd("BufNewFile", {
-    group = snip,
-    pattern = "*/snips/*.lua",
-    command = [[0r ]] .. vim.fn.stdpath('config') .. '/lua/snips/template/init.lua',
-})
-
 vim.api.nvim_create_autocmd("BufEnter", {
     group = snip,
     pattern = "*/snips/*.lua",
@@ -84,11 +75,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 
-
-
-
-
--- input switch
+-- 中文输入法切换的问题
 local fcitx = vim.api.nvim_create_augroup("Fcitx5", { clear = true })
 local state = ''
 vim.api.nvim_create_autocmd('InsertLeave', {
@@ -110,7 +97,7 @@ vim.api.nvim_create_autocmd('InsertEnter', {
     end,
 })
 
-
+-- INFO : vim script for input switch
 -- vim.cmd[[
 -- let fcitx5state=system("fcitx5-remote")
 -- autocmd InsertLeave * :silent let fcitx5state=system("fcitx5-remote")[0] | silent !fcitx5-remote -c
