@@ -31,7 +31,7 @@ set {
     -- INFO : command
         { "wd",        ":close<CR>",    '[] 关闭当前窗口' },
         { "<Leader>w", ":w<CR>"                       },
-        -- { "<Leader>W", ":w<CR>"                       },
+        { "<Leader><leader>w", ":wqa<CR>"                       },
         { "qw",        ":close<CR>"                   },
         { "qd",        ":bdelete!<CR>"                },
 

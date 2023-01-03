@@ -76,7 +76,7 @@ dashboard.section.buttons.val = {
     dashboard.button("p", "🌳  > Find Project", ":Telescope project<CR>"),
     dashboard.button("f", "🎑  > Find File", ":Telescope find_files<CR>"),
     dashboard.button("r", "🥂  > Recent File", ":Telescope oldfiles<CR>"),
-    dashboard.button("s", "💻  > Load Session", '<Cmd>SessionLoad<CR>'),
+    dashboard.button("<CR>", "💻  > Load Session", '<Cmd>SessionLoad<CR>'),
     dashboard.button("q", "🏓  > Quit", ":qa<CR>"),
 }
 
