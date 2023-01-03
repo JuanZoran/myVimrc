@@ -28,13 +28,6 @@ use {
     config = [[require'plugins.tools.toggle']]
 }
 
-use {
-    "numtostr/comment.nvim",
-    config = [[require'plugins.tools.comment']]
-} -- powerful comment with gc<char> | gb<char> | <leader>a
-
-
-use("nvim-treesitter/nvim-treesitter-textobjects") -- easymotion with text
 
 use {
     'akinsho/toggleterm.nvim',
@@ -47,16 +40,25 @@ use {
 }
 
 
--- TODO: read official readme for better use this powerful align helper: this can help markdown auto-align with table
+
+-- NOTE : for align
+vim.keymap.set(
+    'x', '<leader>=', function()
+    require 'align'.align_to_string(true, true, true)
+end)
+
 use {
-    "junegunn/vim-easy-align",
-    keys = {
-        { '', '<Leader>=' },
+    {
+        'Vonr/align.nvim',
+        module = 'align',
     },
-    config = function()
-        vim.keymap.set('', '<leader>=', '<Plug>(EasyAlign)', { desc = 'ﱓ EasyAlign' })
-    end,
+
+    { -- powerful comment with gc<char> | gb<char> | <leader>a
+        "numtostr/comment.nvim",
+        config = [[require'plugins.tools.comment']],
+    },
 }
+
 
 -- lazy-load translate plugin
 use {
@@ -69,10 +71,9 @@ use {
     config = function()
         require("Trans").setup {}
         vim.keymap.set("v", "mm", '<Esc><Cmd>TranslateSelectWord<CR>', { desc = ' Translate' })
-        vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>", { desc = ' Translate' })
+        vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>",      { desc = ' Translate' })
     end
 }
-
 
 use {
     "windwp/nvim-autopairs",
@@ -80,14 +81,11 @@ use {
     config = [[require "plugins.tools.autopairs"]]
 }
 
-
--- Lua
-use{
+-- Session
+use {
     "olimorris/persisted.nvim",
-    module = "persisted", -- For lazy loading
     config = [[require 'plugins.tools.session']],
 }
-
 
 -- integrate with git
 use {
@@ -99,10 +97,9 @@ use {
 
 use {
     'AckslD/nvim-trevJ.lua',
-    keys = { {
-        "n",
-        "<leader>ff",
-    } },
+    keys = {
+        { "n", "<leader>ff", },
+    },
     config = function()
         local m = require('trevj')
         m.setup {}
@@ -136,4 +133,26 @@ use {
 
 -- use {
 --     'rhysd/vim-grammarous',
+-- }
+
+-- use {
+--     "mfussenegger/nvim-treehopper",
+--     keys = {
+--         { 'x', 'm' },
+--         { 'o', 'm' },
+--     },
+--     config = function()
+--         vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
+--         vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", { silent = true })
+--     end
+-- }
+
+-- use {
+--     'edluffy/hologram.nvim',
+--     fd = { 'md', 'markdown' },
+--     config = function()
+--         require('hologram').setup {
+--             auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+--         }
+--     end
 -- }

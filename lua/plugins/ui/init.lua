@@ -3,10 +3,10 @@ local use = require("packer").use
 
 -- NOTE : Theme
 use {
-    { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = false, },
-    { "marko-cerovac/material.nvim", config = [[require 'plugins.ui.theme.material']], opt = true, },
-    { "sainnhe/everforest", config = [[require 'plugins.ui.theme.everforest']], opt = true, },
-    { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
+    { "rebelot/kanagawa.nvim",       config = [[require 'plugins.ui.theme.kanagawa']],   opt = false, },
+    { "marko-cerovac/material.nvim", config = [[require 'plugins.ui.theme.material']],   opt = true, },
+    { "sainnhe/everforest",          config = [[require 'plugins.ui.theme.everforest']], opt = true, },
+    { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']],     opt = true },
 }
 
 
@@ -52,7 +52,7 @@ use {
 
 -- smooth scroll animation
 use {
-    { "declancm/cinnamon.nvim", config = [[require("plugins.ui.smooth")]] },
+    { "declancm/cinnamon.nvim",   config = [[require("plugins.ui.smooth")]]      },
     { 'gen740/SmoothCursor.nvim', config = [[require "plugins.ui.SmoothCursor"]] },
 }
 

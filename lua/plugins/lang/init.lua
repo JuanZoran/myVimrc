@@ -21,7 +21,10 @@ use {
     run = function()
         require("nvim-treesitter.install").update({ with_sync = true })
     end,
-    requires = { "p00f/nvim-ts-rainbow" }, -- rainbow pairs
+    requires = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "p00f/nvim-ts-rainbow",
+    }, -- rainbow pairs
     config = [[require("plugins.lang.treesitter")]]
 }
 
