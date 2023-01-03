@@ -1,5 +1,3 @@
-vim.cmd [[PackerLoad harpoon]]
-
 require("telescope").load_extension("harpoon")
 
 local map = require("util").map

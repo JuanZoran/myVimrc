@@ -8,6 +8,7 @@ use {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
 }
+
 -- NOTE :better performance
 use("lewis6991/impatient.nvim")
 use {

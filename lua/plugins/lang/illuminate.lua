@@ -1,5 +1,5 @@
 -- default configuration
-require('illuminate').configure({
+require('illuminate').configure {
     -- providers: provider used to get references in the buffer, ordered by priority
     providers = {
         'lsp',
@@ -44,4 +44,4 @@ require('illuminate').configure({
     large_file_overrides = nil,
     -- min_count_to_highlight: minimum number of matches required to perform highlighting
     min_count_to_highlight = 1,
-})
+}

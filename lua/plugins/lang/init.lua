@@ -36,8 +36,8 @@ use {
         { 'n', 'zM' },
         { 'v', 'za' },
     },
-    requires = { "kevinhwang91/promise-async", opt = true },
-    config = [['require "plugins.lang.ufo"']],
+    requires = { "kevinhwang91/promise-async", module = 'promise-async' },
+    config = [[require 'plugins.lang.ufo']],
 }
 
 

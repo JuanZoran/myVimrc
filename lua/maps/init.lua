@@ -13,7 +13,7 @@ require("maps.basic")
 set {
     mode = 'n',
     map = {
-    -- INFO: about window
+    -- INFO : about window
         {'w', '<cmd>WhichKey w<cr>'},
         { "wo",       ":vsp<CR>",       ' 左右分屏'         },
         { "wu",       ":sp<CR>",        ' 上下分屏'         },
@@ -28,7 +28,7 @@ set {
         { "w<Left>",  "<C-w>H",         ' 窗口向左移动'     },
         { "w<Right>", "<C-w>L",         ' 窗口向右移动'     },
 
-    -- INFO: command
+    -- INFO : command
         { "wd",        ":close<CR>",    '[] 关闭当前窗口' },
         { "<Leader>w", ":w<CR>"                       },
         -- { "<Leader>W", ":w<CR>"                       },
@@ -36,7 +36,7 @@ set {
         { "qd",        ":bdelete!<CR>"                },
 
         { "<S-CR>",   "J",  },
-    -- INFO: Bufferline
+    -- INFO : Bufferline
         { "<leader>b<left>",   ":BufferLineMovePrev<CR>",   '[]Move Buffer to Left'      },
         { "<leader>b<right>",  ":BufferLineMoveNext<CR>",   '[]Move Buffer to Right'     },
         { "<Leader>bb", ":BufferLinePickClose<CR>" , '﫧 Pick a Buffer to delete' },
@@ -44,11 +44,6 @@ set {
         { "<C-j>", ":BufferLineCyclePrev<CR>" },
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
-    -- INFO: Floaterm
-        -- { "<Leader>sa", ":SaveSession<CR>"                           },
-        -- { "<Leader>sr", ":Autosession search<CR>"                    },
-        -- { "<Leader>st", ":Telescope session-lens search_session<CR>" },
-        -- { "<Leader>sd", ":Autosession delete<CR>"                    },
         { "<leader>gh", ":Gitsigns preview_hunk_inline<cr>" },
 
         -- 其他

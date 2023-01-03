@@ -32,17 +32,17 @@ opt.hlsearch = false
 -- opt.paste = true
 
 -- Cool floating window popup menu for completion on command line
-opt.tabstop = 4
+opt.tabstop     = 4
 opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
+opt.shiftwidth  = 4
+opt.expandtab   = true
 opt.completeopt = { "menu", "menuone", "noselect" }
-opt.shortmess = 'aoOTIcF'
+opt.shortmess   = 'aoOTIcF'
 opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 
 
-opt.cursorline       = true
--- opt.foldcolumn     = "1" -- '0' is not bad
+opt.cursorline     = true
+opt.foldcolumn     = "1" -- '0' is not bad
 opt.foldlevel      = 99 -- Using ufo provider need a large value, feel free to decrease the value
 opt.foldlevelstart = 99
 opt.foldenable     = true
@@ -54,9 +54,9 @@ opt.splitbelow = true
 opt.splitright = true
 opt.wrap = false
 -- opt.autochdir     = true
-opt.helplang = "cn"
+opt.helplang   = "cn"
 opt.updatetime = 200
--- vim.opt.equalalways = false -- I don't like my windows changing all the time
+-- opt.equalalways = false -- I don't like my windows changing all the time
 opt.undofile = true
 opt.undodir = vim.fn.expand('~/.vim/')
 
@@ -64,7 +64,7 @@ opt.undodir = vim.fn.expand('~/.vim/')
 opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.wo.signcolumn = "yes"
 
-vim.cmd([[set iskeyword+=-]]) -- 将word-word视为一个word, 方便daw
+opt.iskeyword:append('-')   -- 将word-word视为一个word, 方便daw
 
 -----================ disabled some native =====================
 

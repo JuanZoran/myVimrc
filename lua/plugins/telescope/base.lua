@@ -1,6 +1,6 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-    vim.notify("Error telescope", "error")
+    vim.notify("Error telescope", 'error')
     return
 end
 
@@ -89,7 +89,7 @@ telescope.setup({
     -- builtin picker
     -- },
     extensions = {
-        ['ui-select'] = {require('telescope.themes').get_dropdown()},
+        ['ui-select'] = { require('telescope.themes').get_dropdown() },
         project = {
             theme = "dropdown",
             sync_with_nvim_tree = true,
@@ -107,7 +107,6 @@ telescope.setup({
 -- To get ui-select loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 telescope.load_extension("ui-select")
-
 telescope.load_extension("fzf")
 -- telescope.load_extension("notify")
 -- telescope.load_extension("noice")
@@ -116,29 +115,30 @@ telescope.load_extension("fzf")
 
 
 --- key-bindings ==============================
-local map = require("util").map
-----Telescope
+local set = require("util.map").set
 local builtin = require("telescope.builtin")
-local opt = { silent = true }
-map(
-    "n",
-    opt,
-    { "<C-f>", builtin.find_files },
-    { "<leader>th", builtin.help_tags, { desc = ' Check out all tags' } },
-    { "<leader>tf", builtin.git_files, { desc = ' Search text in current buffer' } },
-    { "<leader>tt", builtin.live_grep, { desc = ' Search text in cucurrent directory' } },
-    { "<leader>gf", builtin.current_buffer_fuzzy_find, { desc = '[]Search Git File' } },
-    { "<leader>ts", builtin.spell_suggest, { desc = '益spell suggestions about cursor word' } },
-    { "<leader>tr", builtin.treesitter, { desc = '滑Have a look at the tags provided by 滑' } },
-    { "<leader>te", builtin.diagnostics, { desc = ' take a look' } },
-    { "<leader>tc", builtin.commands, { desc = 'גּ Check out commands' } },
-    { "<leader>ti", builtin.jumplist, { desc = ' Get jumplist[C-i]' } },
-    { "<leader>tu", builtin.oldfiles, { desc = ' Check out edited files[C-u]' } },
-    { "<leader>tk", builtin.keymaps, { desc = ' Check out keymaps[C-/]' } },
+set {
+    mode = 'n',
+    opt = {},
+    map = {
+        { "<C-f>", builtin.find_files },
+        { "<leader>th", builtin.help_tags,                 ' Check out all tags'                     },
+        { "<leader>tf", builtin.git_files,                 ' Search text in current buffer'          },
+        { "<leader>tt", builtin.live_grep,                 ' Search text in cucurrent directory'     },
+        { "<leader>gf", builtin.current_buffer_fuzzy_find, '[]Search Git File'                          },
+        { "<leader>ts", builtin.spell_suggest,             '益spell suggestions about cursor word'     },
+        { "<leader>tr", builtin.treesitter,                '滑Have a look at the tags provided by 滑' },
+        { "<leader>te", builtin.diagnostics,               ' take a look'                            },
+        { "<leader>tc", builtin.commands,                  'גּ Check out commands'                     },
+        { "<leader>ti", builtin.jumplist,                  ' Get jumplist[C-i]'                      },
+        { "<leader>tu", builtin.oldfiles,                  ' Check out edited files[C-u]'            },
+        { "<leader>tk", builtin.keymaps,                   ' Check out keymaps[C-/]'                 },
 
-    { "<C-u>", builtin.oldfiles },
-    { "<C-o>", builtin.jumplist },
-    { "<C-_>", builtin.keymaps }-- for C-/
-)
+        { "<C-u>", builtin.oldfiles },
+        { "<C-o>", builtin.jumplist },
+        { "<C-_>", builtin.keymaps } -- for C-/
+    }
 
-vim.keymap.set("n", "<Leader>T", ":Telescope ")
+}
+
+-- vim.keymap.set("n", "<Leader>T", ":Telescope ")

@@ -1,12 +1,12 @@
 local use = require("packer").use
 use {
     "nvim-telescope/telescope.nvim",
-    cmd = 'Telescope',
     requires = {
         { "nvim-lua/plenary.nvim", opt = true }, -- lib
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
-        { 'nvim-telescope/telescope-ui-select.nvim' },
+        { 'nvim-telescope/telescope-ui-select.nvim', },
     },
+    config = [[require 'plugins.telescope.base']]
 }
 
 use {
@@ -38,7 +38,7 @@ use {
     keys = {
         { 'v', '<Leader>rr' },
     },
-    config = [[require 'conf.refactor']]
+    config = [[require 'plugins.telescope.refactor']]
 } -- list
 
 
@@ -52,9 +52,7 @@ use {
         { 'n', '<Leader>hc' },
         { 'n', '<Leader>hm' },
     },
-    config = function()
-        require('conf.harpoon')
-    end,
+    config = [[require 'plugins.telescope.harpoon']],
     requires = { {
         "theprimeagen/harpoon",
         opt = true
