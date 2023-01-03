@@ -56,12 +56,23 @@ M.on_attach = function(_, bufnr)
             { "<Leader>dm", vim.diagnostic.setqflist,                   ' 打开诊断列表'                },
             { "<Leader>o", "<cmd>Lspsaga outline<CR>",                  ' Show the variables window'   },
 
-            { "gh", "<cmd>Lspsaga hover_doc<cr>",                       ' 查看悬浮文档' },
             { "gf", "<cmd>Lspsaga lsp_finder<cr>",                      ' 查看相关信息' },
             { "gd", "<cmd>Lspsaga peek_definition<cr>",                 ' 查看定义'     },
             { "gD", vim.lsp.buf.declaration,                            ' 查看声明'     },
             { "gi", vim.lsp.buf.implementation,                         ' 查看实现'     },
             { "gr", vim.lsp.buf.references,                             ' 查看所有引用' },
+
+            {
+                "gh",
+                function ()
+                    local winid = require('ufo').peekFoldedLinesUnderCursor()
+                    if not winid then
+                        -- choose one of coc.nvim and nvim lsp
+                        vim.cmd [[Lspsaga hover_doc]]
+                    end
+                end,
+                ' 查看悬浮文档',
+            },
             {
                 "==",
                 function()

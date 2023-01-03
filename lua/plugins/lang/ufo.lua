@@ -1,6 +1,7 @@
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "<leader><leader>p", require("ufo").peekFoldedLinesUnderCursor)
 vim.keymap.set("v", "za", "zf")
 
 
@@ -19,7 +20,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
         else
             chunkText = truncate(chunkText, targetWidth - curWidth)
             local hlGroup = chunk[2]
-            table.insert(newVirtText, {chunkText, hlGroup})
+            table.insert(newVirtText, { chunkText, hlGroup })
             chunkWidth = vim.fn.strdisplaywidth(chunkText)
             -- str width returned from truncate() may less than 2nd argument, need padding
             if curWidth + chunkWidth < targetWidth then
@@ -29,14 +30,20 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
         end
         curWidth = curWidth + chunkWidth
     end
-    table.insert(newVirtText, {suffix, 'MoreMsg'})
+    table.insert(newVirtText, { suffix, 'MoreMsg' })
     return newVirtText
 end
 
 -- global handler
-require('ufo').setup({
-    fold_virt_text_handler = handler
-})
+require('ufo').setup {
+    fold_virt_text_handler = handler,
+    preview = {
+        mappings = {
+            scrollU = 'I',
+            scrollD = 'K'
+        }
+    },
+}
 
 
 -- {
