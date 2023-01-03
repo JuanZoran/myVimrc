@@ -1,8 +1,15 @@
--- go to last loc when opening a buffer
-vim.api.nvim_create_autocmd(
-    "BufReadPost",
-    { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
-)
+local View = vim.api.nvim_create_augroup('View', { clear = true })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = View,
+    command = [[silent! loadview]]
+})
+
+-- TODO : config this
+vim.api.nvim_create_autocmd('VimLeavePre', {
+    group = View,
+    command = [[mkview]]
+})
 
 -- 设置firenvim的大小
 vim.cmd [[
@@ -35,9 +42,7 @@ set_cursorline("FileType", false, "TelescopePrompt")
 
 
 -- Don't auto comment when o
-vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
-
-
+-- vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -103,3 +108,13 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 -- autocmd InsertLeave * :silent let fcitx5state=system("fcitx5-remote")[0] | silent !fcitx5-remote -c
 -- autocmd InsertEnter * :silent if fcitx5state == 2 | call system("fcitx5-remote -o") | endif
 -- ]]
+
+-- INFO : store Position
+-- vim.api.nvim_create_autocmd(
+--     "BufReadPost",
+--     {
+--         group = vim.api.nvim_create_augroup('Position', { clear = true }),
+--         command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
+--     }
+-- )
+-- go to last loc when opening a buffer

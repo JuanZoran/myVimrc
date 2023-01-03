@@ -31,11 +31,11 @@ use {
 -- make neovim has modernize folder
 use {
     "kevinhwang91/nvim-ufo",
-    keys = {
-        { 'n', 'zR' },
-        { 'n', 'zM' },
-        { 'v', 'za' },
-    },
+    -- keys = {
+    --     { 'n', 'zR' },
+    --     { 'n', 'zM' },
+    --     { 'v', 'za' },
+    -- },
     requires = { "kevinhwang91/promise-async", module = 'promise-async' },
     config = [[require 'plugins.lang.ufo']],
 }
