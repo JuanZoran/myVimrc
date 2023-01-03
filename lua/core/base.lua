@@ -42,13 +42,12 @@ opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 
 
 opt.cursorline     = true
-opt.foldcolumn     = "1" -- '0' is not bad
+-- opt.foldcolumn     = "1" -- '0' is not bad
 opt.foldlevel      = 99 -- Using ufo provider need a large value, feel free to decrease the value
 opt.foldlevelstart = 99
 opt.foldenable     = true
 
-
-opt.formatoptions:remove('cro')
+-- opt.formatoptions:remove('cro')
 
 opt.splitbelow = true
 opt.splitright = true
@@ -122,7 +121,8 @@ end
 
 -- opt.list = true
 -- opt.listchars = "tab:▸ " -- Show tabs as '▸   ▸   '
--- vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+-- opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+opt.sessionoptions="buffers,curdir,folds,winsize,winpos,localoptions"
 
 -- vim.opt.showtabline = 2 -- for 标签页面
 -- opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板

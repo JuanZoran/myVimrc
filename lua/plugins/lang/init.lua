@@ -1,6 +1,6 @@
 local use = require("packer").use
 
--- NOTE: ====================== syntax =====================
+-- NOTE : ====================== syntax =====================
 
 
 -- cursor-word highlighting
@@ -8,14 +8,14 @@ use {
     "rrethy/vim-illuminate",
 }
 
-
+-- Pretty Indent
 use {
     "lukas-reineke/indent-blankline.nvim",
     config = [[require 'plugins.lang.indent']],
 }
 
 
--- high-performance language parser
+-- Treesitter
 use {
     "nvim-treesitter/nvim-treesitter",
     run = function()
@@ -41,7 +41,7 @@ use {
 }
 
 
--- -- ====================== completion =====================
+-- NOTE :====================== Completion =====================
 -- mason | lspconfig | mason-lspconfig
 use {
     "williamboman/mason.nvim", -- lsp manager
@@ -50,6 +50,7 @@ use {
     "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
 }
 
+-- LuaSnip
 use {
     "L3mon4d3/luasnip",
     requires = {

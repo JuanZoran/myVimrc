@@ -1,15 +1,20 @@
 local View = vim.api.nvim_create_augroup('View', { clear = true })
 
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('BufRead', {
     group = View,
     command = [[silent! loadview]]
 })
 
--- TODO : config this
-vim.api.nvim_create_autocmd('VimLeavePre', {
+vim.api.nvim_create_autocmd('BufWinLeave', {
     group = View,
-    command = [[mkview]]
+    command = [[silent! mkview]]
 })
+
+-- TODO : config this
+-- vim.api.nvim_create_autocmd('VimLeavePre', {
+--     group = View,
+--     command = [[mkview]]
+-- })
 
 -- 设置firenvim的大小
 vim.cmd [[
@@ -22,27 +27,27 @@ autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 ]]
 
 -- for cursorline
-local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
-local set_cursorline = function(event, value, pattern)
-    vim.api.nvim_create_autocmd(event, {
-        group = group,
-        pattern = pattern,
-        callback = function()
-            vim.opt_local.cursorline = value
-        end,
-    })
-end
+-- local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+-- local set_cursorline = function(event, value, pattern)
+--     vim.api.nvim_create_autocmd(event, {
+--         group = group,
+--         pattern = pattern,
+--         callback = function()
+--             vim.opt_local.cursorline = value
+--         end,
+--     })
+-- end
 
 
-set_cursorline("WinLeave", false)
--- set_cursorline("InsertEnter", false)
--- set_cursorline("InsertLeave", true)
-set_cursorline("WinEnter", true)
-set_cursorline("FileType", false, "TelescopePrompt")
+-- set_cursorline("WinLeave", false)
+-- -- set_cursorline("InsertEnter", false)
+-- -- set_cursorline("InsertLeave", true)
+-- set_cursorline("WinEnter", true)
+-- set_cursorline("FileType", false, "TelescopePrompt")
 
 
 -- Don't auto comment when o
--- vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+vim.api.nvim_create_autocmd("FileType", { command = [[set formatoptions-=cro]] })
 
 
 vim.api.nvim_create_autocmd("TextYankPost", {

@@ -12,6 +12,7 @@ require("indent_blankline").setup {
     --     'rainbowcol6',
     --     'rainbowcol7',
     -- },
+
     -- char_highlight_list = {
     --     "IndentBlanklineIndent1",
     --     "IndentBlanklineIndent2",

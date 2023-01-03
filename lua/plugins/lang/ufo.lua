@@ -4,7 +4,6 @@ vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 vim.keymap.set("v", "za", "zf")
 
 
-
 -- show how many lines get folded
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
@@ -33,12 +32,13 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     table.insert(newVirtText, {suffix, 'MoreMsg'})
     return newVirtText
 end
+
 -- global handler
 require('ufo').setup({
     fold_virt_text_handler = handler
 })
 
---
+
 -- {
 --     open_fold_hl_timeout = {
 --         description = [[Time in millisecond between the range to be highlgihted and to be cleared
