@@ -10,4 +10,9 @@ return {
         -- bg = "#ff4081",
         bg = "#10B981",
     },
+    MoreMsg = { -- for ufo virtual text
+        fg = '#599eff',
+        bold = true,
+        -- bg = '#7f52ff'
+    }
 }

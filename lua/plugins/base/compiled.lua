@@ -337,7 +337,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "luasnip", "cmp-rg", "cmp-cmdline", "cmp-nvim-lua", "cmp-path", "cmp-tabnine", "cmp-buffer" },
+    after = { "cmp-nvim-lua", "cmp-buffer", "cmp-tabnine", "cmp-path", "cmp-cmdline", "luasnip", "cmp-rg" },
     config = { 'require "plugins.lang.cmp"' },
     loaded = false,
     needs_bufread = false,
@@ -360,12 +360,9 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-neoclip.lua"] = {
-    config = { "\27LJ\2\nÙ\1\0\0\6\0\f\0\0206\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\3\0B\0\2\0029\0\4\0'\2\1\0B\0\2\0016\0\5\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\1K\0\1\0\1\0\1\tdesc\24[]Clipboard History\31<cmd>Telescope neoclip<cr>\15<leader>tg\6n\bset\vkeymap\bvim\19load_extension\14telescope\nsetup\fneoclip\frequire\0" },
-    keys = { { "n", "<leader>tg" } },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = false,
-    path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/nvim-neoclip.lua",
+    config = { "require 'plugins.telescope.neoclip'" },
+    loaded = true,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/start/nvim-neoclip.lua",
     url = "https://github.com/AckslD/nvim-neoclip.lua"
   },
   ["nvim-notify"] = {
@@ -468,6 +465,15 @@ _G.packer_plugins = {
     path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/sqlite.lua",
     url = "https://github.com/kkharji/sqlite.lua"
   },
+  ["telescope-emoji.nvim"] = {
+    config = { "\27LJ\2\n¸\1\0\0\6\0\v\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0005\5\n\0B\0\5\1K\0\1\0\1\0\1\tdesc\21ðŸ¤ Search Emoji\29<cmd>Telescope emoji<cr>\15<leader>tm\6n\bset\vkeymap\bvim\nemoji\19load_extension\14telescope\frequire\0" },
+    keys = { { "", "n" }, { "", "<leader>tm" } },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/telescope-emoji.nvim",
+    url = "https://github.com/xiyaowong/telescope-emoji.nvim"
+  },
   ["telescope-frecency.nvim"] = {
     config = { "\27LJ\2\nœ\1\0\0\5\0\n\0\0146\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0B\0\4\1K\0\1\0 <cmd>Telescope frecency<cr>\n<C-y>\6n\bset\vkeymap\bvim\rfrecency\19load_extension\14telescope\frequire\0" },
     keys = { { "n", "<C-y>" } },
@@ -504,6 +510,15 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/zoran/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
     url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
+  ["telescope-undo.nvim"] = {
+    config = { "\27LJ\2\nÏ\2\0\0\n\0\23\0\"6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\r\0005\3\v\0005\4\t\0005\5\a\0005\6\5\0006\a\0\0'\t\3\0B\a\2\0029\a\4\a=\a\6\6=\6\b\5=\5\n\4=\4\f\3=\3\14\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\15\0'\2\f\0B\0\2\0016\0\16\0009\0\17\0009\0\18\0'\2\19\0'\3\20\0'\4\21\0005\5\22\0B\0\5\1K\0\1\0\1\0\1\tdesc\19[]Undo History\28<cmd>Telescope undo<cr>\15<leader>tu\6n\bset\vkeymap\bvim\19load_extension\15extensions\1\0\0\tundo\1\0\0\rmappings\1\0\0\6i\1\0\0\t<CR>\1\0\0\frestore\27telescope-undo.actions\nsetup\14telescope\frequire\0" },
+    keys = { { "", "n" }, { "", "<leader>tu" } },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/zoran/.local/share/nvim/site/pack/packer/opt/telescope-undo.nvim",
+    url = "https://github.com/debugloop/telescope-undo.nvim"
   },
   ["telescope-zoxide"] = {
     config = { "\27LJ\2\nÈ\1\0\0\6\0\v\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0005\5\n\0B\0\5\1K\0\1\0\1\0\1\tdesc\30îž€ Cd recently directory#<cmd>Telescope zoxide list<cr>\15<leader>cd\6n\bset\vkeymap\bvim\vzoxide\19load_extension\14telescope\frequire\0" },
@@ -580,8 +595,7 @@ local module_lazy_loads = {
   ["^align"] = "align.nvim",
   ["^notify"] = "nvim-notify",
   ["^nui"] = "nui.nvim",
-  ["^promise%-async"] = "promise-async",
-  ["^telescope%._extensions%.zoxide"] = "telescope-zoxide"
+  ["^promise%-async"] = "promise-async"
 }
 local lazy_load_called = {['packer.load'] = true}
 local function lazy_load_module(module_name)
@@ -608,14 +622,26 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+ require "plugins.tools.which-key" 
+time([[Config for which-key.nvim]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+require "plugins.ui.lualine"
+time([[Config for lualine.nvim]], false)
+-- Config for: filetype.nvim
+time([[Config for filetype.nvim]], true)
+ require 'plugins.base.filetype' 
+time([[Config for filetype.nvim]], false)
 -- Config for: leap.nvim
 time([[Config for leap.nvim]], true)
 require 'plugins.tools.leap'
 time([[Config for leap.nvim]], false)
--- Config for: SmoothCursor.nvim
-time([[Config for SmoothCursor.nvim]], true)
-require "plugins.ui.SmoothCursor"
-time([[Config for SmoothCursor.nvim]], false)
+-- Config for: todo-comments.nvim
+time([[Config for todo-comments.nvim]], true)
+require 'plugins.tools.todo-comments'
+time([[Config for todo-comments.nvim]], false)
 -- Config for: noice.nvim
 time([[Config for noice.nvim]], true)
 require "plugins.ui.noice"
@@ -624,58 +650,50 @@ time([[Config for noice.nvim]], false)
 time([[Config for kanagawa.nvim]], true)
 require 'plugins.ui.theme.kanagawa'
 time([[Config for kanagawa.nvim]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
- require "plugins.tools.which-key" 
-time([[Config for which-key.nvim]], false)
--- Config for: persisted.nvim
-time([[Config for persisted.nvim]], true)
-require 'plugins.tools.session'
-time([[Config for persisted.nvim]], false)
--- Config for: indent-blankline.nvim
-time([[Config for indent-blankline.nvim]], true)
-require 'plugins.lang.indent'
-time([[Config for indent-blankline.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require("plugins.lang.treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: filetype.nvim
-time([[Config for filetype.nvim]], true)
- require 'plugins.base.filetype' 
-time([[Config for filetype.nvim]], false)
--- Config for: nvim-ufo
-time([[Config for nvim-ufo]], true)
-require 'plugins.lang.ufo'
-time([[Config for nvim-ufo]], false)
--- Config for: cinnamon.nvim
-time([[Config for cinnamon.nvim]], true)
-require("plugins.ui.smooth")
-time([[Config for cinnamon.nvim]], false)
--- Config for: comment.nvim
-time([[Config for comment.nvim]], true)
-require'plugins.tools.comment'
-time([[Config for comment.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-require "plugins.ui.bufferline"
-time([[Config for bufferline.nvim]], false)
--- Config for: todo-comments.nvim
-time([[Config for todo-comments.nvim]], true)
-require 'plugins.tools.todo-comments'
-time([[Config for todo-comments.nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-require "plugins.ui.lualine"
-time([[Config for lualine.nvim]], false)
--- Config for: alpha-nvim
-time([[Config for alpha-nvim]], true)
-require("plugins.ui.alpha")
-time([[Config for alpha-nvim]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 require 'plugins.telescope.base'
 time([[Config for telescope.nvim]], false)
+-- Config for: nvim-neoclip.lua
+time([[Config for nvim-neoclip.lua]], true)
+require 'plugins.telescope.neoclip'
+time([[Config for nvim-neoclip.lua]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+require "plugins.ui.bufferline"
+time([[Config for bufferline.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+require 'plugins.lang.indent'
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: SmoothCursor.nvim
+time([[Config for SmoothCursor.nvim]], true)
+require "plugins.ui.SmoothCursor"
+time([[Config for SmoothCursor.nvim]], false)
+-- Config for: persisted.nvim
+time([[Config for persisted.nvim]], true)
+require 'plugins.tools.session'
+time([[Config for persisted.nvim]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+require("plugins.ui.alpha")
+time([[Config for alpha-nvim]], false)
+-- Config for: comment.nvim
+time([[Config for comment.nvim]], true)
+require'plugins.tools.comment'
+time([[Config for comment.nvim]], false)
+-- Config for: cinnamon.nvim
+time([[Config for cinnamon.nvim]], true)
+require("plugins.ui.smooth")
+time([[Config for cinnamon.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require("plugins.lang.treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-ufo
+time([[Config for nvim-ufo]], true)
+require 'plugins.lang.ufo'
+time([[Config for nvim-ufo]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 require 'plugins.tools.gitsigns'
@@ -706,28 +724,31 @@ time([[Defining lazy-load commands]], false)
 
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
-vim.cmd [[nnoremap <silent> <C-d> <cmd>lua require("packer.load")({'toggleterm.nvim'}, { keys = "<lt>C-d>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <leader>ff <cmd>lua require("packer.load")({'nvim-trevJ.lua'}, { keys = "<lt>leader>ff", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> mi <cmd>lua require("packer.load")({'Trans'}, { keys = "mi", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hj <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hj", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <C-p> <cmd>lua require("packer.load")({'telescope-project.nvim'}, { keys = "<lt>C-p>", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <leader>tg <cmd>lua require("packer.load")({'nvim-neoclip.lua'}, { keys = "<lt>leader>tg", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>u <cmd>lua require("packer.load")({'nvim-toggler'}, { keys = "<lt>Leader>u", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[vnoremap <silent> <Leader>rr <cmd>lua require("packer.load")({'refactoring.nvim'}, { keys = "<lt>Leader>rr", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hi <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hi", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hm <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hm", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hc <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <Leader>hl <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hl", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[inoremap <silent> <C-g> <cmd>lua require("packer.load")({'toggleterm.nvim'}, { keys = "<lt>C-g>" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <C-g> <cmd>lua require("packer.load")({'toggleterm.nvim'}, { keys = "<lt>C-g>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <C-y> <cmd>lua require("packer.load")({'telescope-frecency.nvim'}, { keys = "<lt>C-y>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[vnoremap <silent> <Leader>rr <cmd>lua require("packer.load")({'refactoring.nvim'}, { keys = "<lt>Leader>rr", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hm <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hm", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <leader>cd <cmd>lua require("packer.load")({'telescope-zoxide'}, { keys = "<lt>leader>cd", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <leader><leader>h <cmd>lua require("packer.load")({'zen-mode.nvim'}, { keys = "<lt>leader><lt>leader>h", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>tm <cmd>lua require("packer.load")({'telescope-emoji.nvim'}, { keys = "<lt>leader>tm", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> ww <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "ww", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hj <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hj", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[inoremap <silent> <C-g> <cmd>lua require("packer.load")({'toggleterm.nvim'}, { keys = "<lt>C-g>" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <leader>ff <cmd>lua require("packer.load")({'nvim-trevJ.lua'}, { keys = "<lt>leader>ff", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>u <cmd>lua require("packer.load")({'nvim-toggler'}, { keys = "<lt>Leader>u", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hi <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hi", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <C-d> <cmd>lua require("packer.load")({'toggleterm.nvim'}, { keys = "<lt>C-d>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> mi <cmd>lua require("packer.load")({'Trans'}, { keys = "mi", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'telescope-emoji.nvim'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <C-p> <cmd>lua require("packer.load")({'telescope-project.nvim'}, { keys = "<lt>C-p>", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> <Leader>hh <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hh", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hl <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hl", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>tu <cmd>lua require("packer.load")({'telescope-undo.nvim'}, { keys = "<lt>leader>tu", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'telescope-undo.nvim'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[vnoremap <silent> mm <cmd>lua require("packer.load")({'Trans'}, { keys = "mm", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[nnoremap <silent> mm <cmd>lua require("packer.load")({'Trans'}, { keys = "mm", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <leader>cd <cmd>lua require("packer.load")({'telescope-zoxide'}, { keys = "<lt>leader>cd", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> n <cmd>lua require("packer.load")({'nvim-tree.lua'}, { keys = "n", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[nnoremap <silent> <C-y> <cmd>lua require("packer.load")({'telescope-frecency.nvim'}, { keys = "<lt>C-y>", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[nnoremap <silent> <Leader>hc <cmd>lua require("packer.load")({'telescope-harpoon.nvim'}, { keys = "<lt>Leader>hc", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
@@ -739,9 +760,9 @@ vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-prev
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au cmdlineenter * ++once lua require("packer.load")({'luasnip', 'nvim-cmp'}, { event = "cmdlineenter *" }, _G.packer_plugins)]]
+vim.cmd [[au cmdlineenter * ++once lua require("packer.load")({'nvim-cmp', 'luasnip'}, { event = "cmdlineenter *" }, _G.packer_plugins)]]
+vim.cmd [[au insertenter * ++once lua require("packer.load")({'nvim-cmp', 'luasnip'}, { event = "insertenter *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-autopairs'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au insertenter * ++once lua require("packer.load")({'luasnip', 'nvim-cmp'}, { event = "insertenter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

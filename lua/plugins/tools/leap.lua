@@ -57,7 +57,8 @@ vim.keymap.set(
             action = paranormal,
             multiselect = true,
         }
-    end
+    end,
+    { desc = '[]Select targets to exec normal command' }
 )
 
 -- local function get_line_starts(winid)

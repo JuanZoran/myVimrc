@@ -12,7 +12,6 @@ use {
 
 use {
     "jvgrootveld/telescope-zoxide", -- powerful cd
-    module = 'telescope._extensions.zoxide',
     keys = {
         { 'n', '<leader>cd' },
     },
@@ -75,12 +74,41 @@ use {
 
 use {
     "AckslD/nvim-neoclip.lua",
+    config = [[require 'plugins.telescope.neoclip']]
+}
+
+use {
+    "xiyaowong/telescope-emoji.nvim",
     keys = {
-        { 'n', '<leader>tg' },
+        'n', '<leader>tm'
     },
     config = function()
-        require("neoclip").setup()
-        require("telescope").load_extension "neoclip"
-        vim.keymap.set('n', '<leader>tg', '<cmd>Telescope neoclip<cr>', { desc = '[]Clipboard History' })
+        require("telescope").load_extension "emoji"
+        vim.keymap.set('n', '<leader>tm', '<cmd>Telescope emoji<cr>', { desc = '🤠Search Emoji' })
+    end,
+}
+
+use {
+    "debugloop/telescope-undo.nvim",
+    keys = {
+        'n', '<leader>tu'
+    },
+          -- ["<cr>"] = require("telescope-undo.actions").yank_additions,
+          -- ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+          -- ["<C-cr>"] = require("telescope-undo.actions").restore,
+    config = function()
+        require("telescope").setup {
+            extensions = {
+                undo = {
+                    mappings = {
+                        i = {
+                            ['<CR>'] = require("telescope-undo.actions").restore,
+                        },
+                    }
+                }
+            }
+        }
+        require("telescope").load_extension "undo"
+        vim.keymap.set('n', '<leader>tu', '<cmd>Telescope undo<cr>', { desc = '[]Undo History' })
     end,
 }

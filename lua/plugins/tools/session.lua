@@ -1,7 +1,8 @@
 require("persisted").setup {
     use_git_branch = true, -- create session files based on the branch of the git enabled repository
     on_autoload_no_session = function()
-        vim.notify('Session Not Exsit', 'info')
+        -- vim.notify('Session Not Exsit', 'info')
+        print('Session Not Exsit')
     end, -- function to run when `autoload = true` but there is no session to load
     -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
     -- command = "VimLeavePre", -- the autocommand for which the session is saved
