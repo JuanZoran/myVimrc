@@ -122,7 +122,7 @@ end
 -- opt.list = true
 -- opt.listchars = "tab:▸ " -- Show tabs as '▸   ▸   '
 -- opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-opt.sessionoptions="buffers,curdir,folds,winsize,winpos"
+opt.sessionoptions="buffers,curdir,folds,winsize,winpos,help"
 
 -- vim.opt.showtabline = 2 -- for 标签页面
 -- opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板

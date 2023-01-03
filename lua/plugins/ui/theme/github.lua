@@ -12,7 +12,10 @@ require('github-theme').setup {
     transparent = true,
     overrides = function(_)
         return {
-            IncSearch = { fg = "#c9d1d9", bg = "#ff4081" },
+            IncSearch = {
+                fg = "#c9d1d9",
+                bg = "#ff4081",
+            },
         }
     end
 }

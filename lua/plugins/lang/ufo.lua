@@ -1,11 +1,13 @@
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-vim.keymap.set("n", "<leader><leader>p", require("ufo").peekFoldedLinesUnderCursor)
+vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor)
+vim.keymap.set("n", "zj", require("ufo").goPreviousClosedFold)
+vim.keymap.set("n", "zl", require("ufo").goNextClosedFold)
 vim.keymap.set("v", "za", "zf")
 
 
--- show how many lines get folded
+-- INFO : virtual Text hint
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
     local suffix = ('  %d '):format(endLnum - lnum)
@@ -37,6 +39,7 @@ end
 -- global handler
 require('ufo').setup {
     fold_virt_text_handler = handler,
+    open_fold_hl_timeout = 250,
     preview = {
         mappings = {
             scrollU = 'I',
@@ -45,7 +48,15 @@ require('ufo').setup {
     },
 }
 
+-- INFO open Fold hl
+vim.api.nvim_set_hl(0, 'UfoFoldedBg', {
+    link = 'IncSearch',
+    -- fg = 113,
+    -- bg = '#89e051',
+})
 
+
+-- INFO : some infomation for ufo
 -- {
 --     open_fold_hl_timeout = {
 --         description = [[Time in millisecond between the range to be highlgihted and to be cleared

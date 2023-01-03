@@ -14,7 +14,7 @@ require("todo-comments").setup {
         TODO = { icon = icon.Todo, color = "info" },
         HACK = { icon = icon.Hack, color = "warning" },
         WARN = { icon = icon.Warn, color = "warning", alt = { "WARNING", } },
-        PERF = { icon = icon.Perf, alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+        PERF = { icon = icon.Perf, --[[ color = 'default', ]] alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
         NOTE = { icon = icon.Note, color = "hint", alt = { "INFO" } },
         TEST = { icon = icon.Test, color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
     },
@@ -34,21 +34,21 @@ require("todo-comments").setup {
         -- before = "", -- "fg" or "bg" or empty
         keyword = "wide_bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
         -- after = "fg", -- "fg" or "bg" or empty
-        pattern = [[.*<(KEYWORDS)\s:]], -- pattern or table of patterns, used for highlightng (vim regex)
+        pattern = [[.*<(KEYWORDS)\s]], -- pattern or table of patterns, used for highlightng (vim regex)
         -- comments_only = true, -- uses treesitter to match keywords in comments only
         -- max_line_len = 400, -- ignore lines longer than this
         -- exclude = {}, -- list of file types to exclude highlighting
     },
     -- list of named colors where we try to extract the guifg from the
-    -- list of highlight groups or use the hex color if hl not found as a fallback
-    -- colors = {
-    --   error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-    --   warning = { "DiagnosticWarning", "WarningMsg", "#FBBF24" },
-    --   info = { "DiagnosticInfo", "#2563EB" },
-    --   hint = { "DiagnosticHint", "#10B981" },
-    --   default = { "Identifier", "#7C3AED" },
-    --   test = { "Identifier", "#FF00FF" }
-    -- },
+    -- INFO  list of highlight groups or use the hex color if hl not found as a fallback
+    colors = {
+        error = { "#DC2626" },
+        warning = { "#FBBF24" },
+        info = { "#2563EB" },
+        hint = { "#10B981" },
+        default = { "#7C3AED" },
+        test = { "#89e051" }
+    },
     -- search = {
     --       command = "rg",
     --       args = {
@@ -65,9 +65,7 @@ require("todo-comments").setup {
     -- },
 }
 
-vim.keymap.set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment" })
-
-vim.keymap.set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
-
-vim.keymap.set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>", { desc = "show all TODOs" })
-vim.keymap.set("n", "<Leader>td", "<cmd>TodoTelescope<cr>", { desc = "search todos by telescope" })
+vim.keymap.set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment"         })
+vim.keymap.set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment"     })
+vim.keymap.set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>",            { desc = "show all TODOs"            })
+vim.keymap.set("n", "<Leader>td", "<cmd>TodoTelescope<cr>",           { desc = "search todos by telescope" })

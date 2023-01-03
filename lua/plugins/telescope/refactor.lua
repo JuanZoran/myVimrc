@@ -1,4 +1,4 @@
-require('refactoring').setup({
+require('refactoring').setup {
     prompt_func_return_type = {
         go = true,
         -- java = false,
@@ -23,12 +23,12 @@ require('refactoring').setup({
     },
     -- printf_statements = {},
     -- print_var_statements = {},
-})
+}
 
 require('telescope').load_extension("refactoring")
 vim.keymap.set(
     "v",
     "<Leader>rr",
-    "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>",
+    require('telescope').extensions.refactoring.refactors,
     { desc = '[]Refactoring Operations' }
 )

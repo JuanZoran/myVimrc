@@ -1,4 +1,5 @@
 local use = require("packer").use
+
 use {
     "nvim-telescope/telescope.nvim",
     requires = {

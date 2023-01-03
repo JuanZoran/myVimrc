@@ -1,9 +1,22 @@
-require("twilight").setup {
-
+require("zen-mode").setup {
+    window = {
+        -- backdrop = 0.7,
+        width = .85,
+    },
+    -- NOTE it doesn't work
+    -- plugins = {
+    --     kitty = {
+    --         enable = true,
+    --         font = '+10',
+    --     },
+    -- }
 }
 
-vim.keymap.set('n','<leader><leader>h', '<cmd>Twilight<cr>')
+require("twilight").setup {
+    context = 30
+}
 
--- NOTE: limelight config
+vim.keymap.set('n', '<leader><leader>h', '<cmd>ZenMode<cr>')
+-- NOTE limelight hl
 -- vim.g.limelight_conceal_ctermfg = 'gray'
 -- vim.g.limelight_conceal_guifg = 'DarkGray'

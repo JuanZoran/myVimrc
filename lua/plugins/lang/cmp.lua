@@ -17,6 +17,7 @@ cmp.setup({
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
+
     mapping = {
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
@@ -64,6 +65,7 @@ cmp.setup({
         -- ["<C-i>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
         ["<C-k>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "!" }),
     },
+
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)

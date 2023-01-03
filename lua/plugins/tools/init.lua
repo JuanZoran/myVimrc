@@ -66,12 +66,14 @@ use {
     keys = {
         { 'v', 'mm' },
         { 'n', 'mm' },
+        { 'n', 'mi' },
     },
     run = 'bash ./install.sh',
     config = function()
-        require("Trans").setup {}
+        require "Trans".setup {}
         vim.keymap.set("v", "mm", '<Esc><Cmd>TranslateSelectWord<CR>', { desc = ' Translate' })
-        vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>",      { desc = ' Translate' })
+        vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>", { desc = ' Translate' })
+        vim.keymap.set("n", "mi", "<Cmd>TranslateInputWord<CR>", { desc = ' Translate From Input' })
     end
 }
 
@@ -107,21 +109,26 @@ use {
     end, -- optional call for configurating non-default filetypes etc
 }
 
--- focues mode
+-- Zen mode
 use {
-    "folke/twilight.nvim",
-    keys = {
-        { 'n', '<leader><leader>h' }
+    {
+        "folke/zen-mode.nvim",
+        keys = {
+            { 'n', '<leader><leader>h' }
+        },
+        config = [[require 'plugins.tools.zen']]
     },
-    config = [[require 'plugins.tools.zen']]
+    {
+         "folke/twilight.nvim",
+        after = 'zen-mode.nvim',
+    },
 }
 
 
 use {
     "ggandor/leap.nvim",
-    config = require("leap").add_default_mappings,
+    config = [[require 'plugins.tools.leap']]
 }
-
 
 -- | firenvim
 use {
@@ -135,18 +142,7 @@ use {
 --     'rhysd/vim-grammarous',
 -- }
 
--- use {
---     "mfussenegger/nvim-treehopper",
---     keys = {
---         { 'x', 'm' },
---         { 'o', 'm' },
---     },
---     config = function()
---         vim.keymap.set("o", "m", ":<C-U>lua require('tsht').nodes()<CR>", { silent = true })
---         vim.keymap.set("x", "m", ":lua require('tsht').nodes()<CR>", { silent = true })
---     end
--- }
-
+-- INFO Markdown image preview
 -- use {
 --     'edluffy/hologram.nvim',
 --     fd = { 'md', 'markdown' },

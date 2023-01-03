@@ -18,7 +18,7 @@ require("filetype").setup({
 
         -- The same as the ones above except the keys map to functions
         function_extensions = {
-            ['md'] = function()
+            md = function()
                 -- vim.g.mkdp_auto_start = 1
                 vim.bo.filetype = "markdown"
                 vim.keymap.set("n", "mp", "<Plug>MarkdownPreviewToggle", { buffer = true })

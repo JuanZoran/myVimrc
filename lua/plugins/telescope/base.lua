@@ -8,7 +8,6 @@ local actions = require("telescope.actions")
 
 telescope.setup({
     defaults = {
-
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "smart" },
@@ -108,13 +107,14 @@ telescope.setup({
 -- load_extension, somewhere after setup function:
 telescope.load_extension("ui-select")
 telescope.load_extension("fzf")
+-- INFO : avalible extensions
 -- telescope.load_extension("notify")
 -- telescope.load_extension("noice")
 -- telescope.load_extension("project")
 
 
 
---- key-bindings ==============================
+-- INFO : key-bindings ==============================
 local set = require("util.map").set
 local builtin = require("telescope.builtin")
 set {
@@ -123,6 +123,7 @@ set {
     map = {
         { "<C-f>", builtin.find_files },
         { "<leader>th", builtin.help_tags,                 ' Check out all tags'                     },
+        { "<leader>tH", builtin.highlights,                 '[] Check out all highlights'               },
         { "<leader>tf", builtin.git_files,                 ' Search text in current buffer'          },
         { "<leader>tt", builtin.live_grep,                 ' Search text in cucurrent directory'     },
         { "<leader>gf", builtin.current_buffer_fuzzy_find, '[]Search Git File'                          },
@@ -140,5 +141,4 @@ set {
     }
 
 }
-
 -- vim.keymap.set("n", "<Leader>T", ":Telescope ")
