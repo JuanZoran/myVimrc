@@ -5,14 +5,14 @@ vim.api.nvim_create_autocmd(
 )
 
 -- 设置firenvim的大小
-vim.cmd([[
+vim.cmd [[
 function! OnUIEnter(event) abort
   if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
     set lines=40 columns=120
   endif
 endfunction
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-]])
+]]
 
 -- for cursorline
 local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
@@ -42,46 +42,37 @@ vim.api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] }
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
-        vim.highlight.on_yank({
+        vim.highlight.on_yank {
             higroup = "IncSearch",
             timeout = 250,
-        })
+        }
     end,
 })
 
--- NOTE: can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]
+-- NOTE : can create a autocmd for autoclose nvim_tree [see nvim_tree wiki]
 
--- TODO: setup automatically setup template
-local template = {
-    { suffix = 'c', pattern = 'main.c' },
-    'zsh'
-}
+-- TODO : setup automatically setup template
+local template = {}
+for file in vim.fs.dir(vim.fn.stdpath('config') .. '/lua/template') do
+    table.insert(template, file)
+end
 
 local template_group = vim.api.nvim_create_augroup('Template', { clear = true })
-for _, v in ipairs(template) do
-    if type(v) == 'string' then
-        vim.api.nvim_create_autocmd('BufNewFile', {
-            group = template_group,
-            pattern = '*.' .. v,
-            command = [[0r ~/.config/nvim/lua/snips/template/snip.]] .. v,
-        })
-    elseif type(v) == 'table' then
-        vim.api.nvim_create_autocmd('BufNewFile', {
-            group = template_group,
-            pattern = v.pattern,
-            command = [[0r ~/.config/nvim/lua/snips/template/snip.]] .. v.suffix,
-        })
-    else
-        vim.notify('unknown type template', 'error')
-    end
+for _, filename in ipairs(template) do
+    vim.api.nvim_create_autocmd('BufNewFile', {
+        group = template_group,
+        pattern = filename:gsub('all', '*'),
+        command = [[0r ~/.config/nvim/lua/template/]] .. filename,
+    })
 end
+
 
 
 local snip = vim.api.nvim_create_augroup("CodeSnip", { clear = true })
 vim.api.nvim_create_autocmd("BufNewFile", {
     group = snip,
     pattern = "*/snips/*.lua",
-    command = [[0r ~/.config/nvim/lua/snips/template/snip.lua]],
+    command = [[0r ]] .. vim.fn.stdpath('config') .. '/lua/snips/template/init.lua',
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {

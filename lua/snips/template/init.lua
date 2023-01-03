@@ -1,13 +1,19 @@
 ---@diagnostic disable: undefined-global
 local snippets = {}
-                                                                    -- NOTE:type <CR> begin to write snippet
-                                                                            -- Example:
-                                                                                -- local snip = parse("trigger", "first snippet")
-                                                                    -- NOTE: use table.insert(snippets, snip)
+                                                -- NOTE :type <CR> begin to write snippet
+                                                        -- Example:
+                                                            -- local snip = parse("trigger", "first snippet")
+                                                -- NOTE :use table.insert(snippets, snip)
+
+
+
+
+
 
 
 -- End Snippets --
 return snippets
+
 
 -- =========== builtin function for luasnip ===================
 -- s      = require("luasnip.nodes.snippet").S

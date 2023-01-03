@@ -38,9 +38,7 @@ use {
     keys = {
         { 'v', '<Leader>rr' },
     },
-    config = function()
-        require('conf.refactor')
-    end
+    config = [[require 'conf.refactor']]
 } -- list
 
 

@@ -22,6 +22,7 @@ use {
         require("nvim-treesitter.install").update({ with_sync = true })
     end,
     requires = { "p00f/nvim-ts-rainbow" }, -- rainbow pairs
+    config = [[require("plugins.lang.treesitter")]]
 }
 
 -- make neovim has modernize folder
@@ -33,7 +34,7 @@ use {
         { 'v', 'za' },
     },
     requires = { "kevinhwang91/promise-async", opt = true },
-    config = 'require "conf.ufo"',
+    config = [['require "plugins.lang.ufo"']],
 }
 
 
@@ -58,7 +59,7 @@ use {
     end
 }
 
--- NOTE: a super powerful completion engine for neovim
+-- NOTE : a super powerful completion engine for neovim
 use {
     "hrsh7th/nvim-cmp",
     requires = {
@@ -72,7 +73,5 @@ use {
         { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
     },
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
-    config = function()
-        require("conf.cmp")
-    end,
+    config = [[require "plugins.lang.cmp"]]
 }

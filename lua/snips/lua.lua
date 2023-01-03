@@ -52,7 +52,7 @@ local snips = {
                 t("]]"), -- 4
                 c(2, -- 5
                     {
-                        -- i(nil, 'fmt'),
+                        i(1, 'fmt'),
                         -- i(nil, 'fmta'),
                     }
                 ),
@@ -84,5 +84,4 @@ local snips = {
 
 
 -- End Snippets --
-
 return snips

@@ -23,6 +23,7 @@ function M.map(mode, option, ...) -- for better keymap-binding alias
 end
 
 
+-- TODO:
 M.icon = {
     Error = "🥵",
     Warn = "🫢",

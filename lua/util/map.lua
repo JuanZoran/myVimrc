@@ -16,7 +16,7 @@ function M.map(map)
     end
 end
 
--- TODO: util for keymap lazyload
+-- TODO :util for keymap lazyload
 function M.plugin(keys, cmd)
     local set = vim.keymap.set
     for k, v in ipairs(keys) do

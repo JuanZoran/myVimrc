@@ -1,8 +1,9 @@
 local use = require("packer").use
--- NOTE: ====================== Tools =====================
+-- NOTE : ====================== Tools =====================
 use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
+    config = [[require 'plugins.tools.todo-comments']]
 }
 
 
@@ -12,7 +13,6 @@ use {
 }
 
 
--- markdown preview
 use {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown", "md" },
@@ -77,22 +77,23 @@ use {
 use {
     "windwp/nvim-autopairs",
     event = 'InsertEnter',
-    config = 'require("conf.autopairs")'
+    config = [[require "plugins.tools.autopairs"]]
 }
 
 
 -- Lua
-use({
+use{
     "olimorris/persisted.nvim",
     module = "persisted", -- For lazy loading
     config = [[require 'plugins.tools.session']],
-})
+}
 
 
 -- integrate with git
 use {
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
+    config = [[require 'plugins.tools.gitsigns']]
 }
 
 

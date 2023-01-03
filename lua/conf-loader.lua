@@ -1,6 +1,0 @@
-require("core.base")
-require("core.autocommand")
-require("maps")
-require("plugins")
-require('snips')
-require("conf")

@@ -1,29 +1,14 @@
 local use = require("packer").use
--- NOTE:====================== ui =====================
--- about theme
+-- NOTE :====================== ui =====================
+
+-- NOTE : Theme
 use {
-    "sainnhe/everforest",
-    config = [[require 'plugins.ui.theme.everforest']],
-    opt = true,
+    { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = false, },
+    { "marko-cerovac/material.nvim", config = [[require 'plugins.ui.theme.material']], opt = true, },
+    { "sainnhe/everforest", config = [[require 'plugins.ui.theme.everforest']], opt = true, },
+    { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
 }
 
-use {
-    "marko-cerovac/material.nvim",
-    config = [[require 'plugins.ui.theme.material']],
-    opt = true,
-}
-
-
-use {
-    "rebelot/kanagawa.nvim",
-    config = [[require 'plugins.ui.theme.kanagawa']],
-    opt = false,
-}
-
-use {
-    "projekt0n/github-nvim-theme",
-    opt = true
-}
 
 use {
 
@@ -34,26 +19,29 @@ use {
     end
 }
 
--- 状态栏
-use({
-    "nvim-lualine/lualine.nvim",
-    requires = {
-        "kyazdani42/nvim-web-devicons",
-        'arkav/lualine-lsp-progress'
-    },
-})
 
--- -- 文件树
-use({
-    "nvim-tree/nvim-tree.lua",
-    keys = { 'n', 'ww' },
-    -- cond = 'not vim.g.vscode',
-    config = 'require"conf.nvim_tree"',
-    requires = {
-        "nvim-tree/nvim-web-devicons", -- optional, for file icons
+use {
+    { -- 状态栏
+        "nvim-lualine/lualine.nvim",
+        requires = { "kyazdani42/nvim-web-devicons", 'arkav/lualine-lsp-progress' },
+        config = [[require "plugins.ui.lualine"]],
     },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-})
+
+    { -- 文件树
+        "nvim-tree/nvim-tree.lua",
+        keys = { 'n', 'ww' },
+        -- cond = 'not vim.g.vscode',
+        config = [[require "plugins.ui.nvim_tree"]],
+        tag = "nightly", -- optional, updated every week. (see issue #1193)
+    },
+
+    { -- 标签栏
+        "akinsho/bufferline.nvim",
+        tag = "v3.*",
+        requires = "nvim-tree/nvim-web-devicons",
+        config = [[require "plugins.ui.bufferline"]],
+    },
+}
 
 
 use {
@@ -61,25 +49,21 @@ use {
     config = [[require("plugins.ui.alpha")]],
 }
 
--- tabline
-use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 
 -- smooth scroll animation
 use {
-    "declancm/cinnamon.nvim",
-    config = [[require("plugins.ui.smooth")]]
+    { "declancm/cinnamon.nvim", config = [[require("plugins.ui.smooth")]] },
+    { 'gen740/SmoothCursor.nvim', config = [[require "plugins.ui.SmoothCursor"]] },
 }
 
-use { 'gen740/SmoothCursor.nvim',
-    config = [[require "plugins.ui.SmoothCursor"]]
-}
+
 
 -- nice ui
-use({
+use {
     "folke/noice.nvim",
     requires = {
-        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-        "muniftanjim/nui.nvim",
-        "rcarriga/nvim-notify",
+        { "muniftanjim/nui.nvim" , module = 'nui' },
+        { "rcarriga/nvim-notify", config = [[require "plugins.ui.notify"]], module = 'notify' },
     },
-})
+    config = [[require "plugins.ui.noice"]]
+}

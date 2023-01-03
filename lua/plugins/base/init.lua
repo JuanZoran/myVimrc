@@ -1,15 +1,14 @@
 local use = require("packer").use
--- NOTE: load the packer compiled file
+-- NOTE : load the packer compiled file
 require("plugins.base.compiled")
-
 
 use("wbthomason/packer.nvim")
 
-use({
+use {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
-})
--- fast speed
+}
+-- NOTE :better performance
 use("lewis6991/impatient.nvim")
 use {
     "nathom/filetype.nvim",
