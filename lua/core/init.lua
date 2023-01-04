@@ -1,8 +1,8 @@
 require 'core.base'
 require 'maps'
 require 'core.autocmd'
-require 'core.template'
 
+require 'template'
 require 'plugins'
 require 'lsp'
 require 'snips'

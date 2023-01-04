@@ -1,8 +1,8 @@
 -- INFO  Config
 local template = {}
-local template_dir = vim.fn.stdpath('config') .. '/lua/template'
+local template_dir = vim.fn.stdpath('config') .. '/lua/template/src'
 local rule = {
-    ['*'] = 'all',
+    ['*'] = '__all__',
     ['/'] = '-',
 }
 
@@ -36,21 +36,21 @@ for _, filename in ipairs(template) do
 end
 
 local function OpenSelectTemplate(file)
-    vim.cmd ('e ' .. template_dir .. '/' .. file)
+    vim.cmd('e ' .. template_dir .. '/' .. file)
 end
 
 -- NOTE Edit Template
-vim.keymap.set('n', '<leader><leader><CR>', function ()
+vim.keymap.set('n', '<leader><leader><CR>', function()
     vim.ui.select(template, {
         prompt = '请选择一个片段编辑',
-        format_item = function (file)
-             return toPattern(file)
+        format_item = function(file)
+            return toPattern(file)
         end,
     }, OpenSelectTemplate)
-end)
+end, { desc = '🌳Edit Template' })
 
 -- NOTE Create New Template
-vim.keymap.set('n', '<leader><leader>t', function ()
+vim.keymap.set('n', '<leader><leader>t', function()
     local newFile = toName(vim.fn.input('请输入模板生效的模式：'))
     OpenSelectTemplate(newFile)
-end)
+end, { desc = '🔨Create New Template' })
