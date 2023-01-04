@@ -29,8 +29,7 @@ use {
 
     { -- 文件树
         "nvim-tree/nvim-tree.lua",
-        event = 'BufRead',
-        -- keys = { 'n', 'ww' },
+        keys = { 'n', 'ww' },
         config = [[require "plugins.ui.nvim_tree"]],
         tag = "nightly", -- optional, updated every week. (see issue #1193)
     },

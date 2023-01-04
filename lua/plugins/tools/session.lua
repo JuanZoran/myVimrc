@@ -5,12 +5,11 @@ require("persisted").setup {
         return vim.bo.filetype ~= 'alpha'
     end,
     -- INFO config example
-    -- on_autoload_no_session = function()
-    --     -- vim.notify('Session Not Exsit', 'info')
-    --     print('Session Not Exsit')
-    -- end, -- function to run when `autoload = true` but there is no session to load
+    on_autoload_no_session = function()
+        print('Session Not Exist')
+    end,
     -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
-    -- command = "VimLeavePre", -- the autocommand for which the session is saved
+    command = "VimLeavePre", -- the autocommand for which the session is saved
     -- silent = false, -- silent nvim message when sourcing session file
     -- autosave = true, -- automatically save session files when exiting Neovim
     -- should_autosave = nil, -- function to determine if a session should be autosaved

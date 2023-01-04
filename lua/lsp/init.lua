@@ -67,7 +67,7 @@ return {
         local native_name = package_to_lspconfig[pkg.name]
         if native_name then
             local new_file = ('%s/%s.lua'):format(conf_dir, native_name)
-            local exsit = io.open(new_file, 'r')
+            local exsit = io.open(new_file, 'rb')
             if exsit then
                 vim.notify(pkg.name .. 'configuration has exsited!')
                 exsit:close()

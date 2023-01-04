@@ -44,9 +44,8 @@ set {
         { "<C-j>", ":BufferLineCyclePrev<CR>" },
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
-
         -- 其他
-        { "<C-;>",     "/<++><CR>vf>c" }, -- PlaceHolder
+        { "<CR>",     "/<++><CR>vf>c" }, -- PlaceHolder
         { "<C-q>",     ":q!<CR>"       },
         { "na",        "<c-a>"         },
         -- { "nh",        ":noh<CR>"      },
@@ -60,8 +59,6 @@ set {
 
 ---@format enable
 
-
-
 -- Insert mode
 set{
     mode = 'i',
@@ -69,7 +66,8 @@ set{
         -- { "<C-f>", ":FloatermNew ranger<CR>", { desc = ' Ranger' } },
         -- { "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
         -- { "<C-d>", "<Esc><cmd>FloatermToggle<CR>"      },
-        { "<C-;>", "<Esc>/<++><CR>vf>c" },
+        -- { "<C-;>", "<Esc>/<++><CR>vf>c" },
+        { "<C-CR>", "<Esc>/<++><CR>vf>c" },
         { "<C-j>", "<Left>" },
         { "<C-l>", "<Right>" },
     }
