@@ -1,5 +1,4 @@
--- init.lua
-require('nvim-toggler').setup({
+require('nvim-toggler').setup {
     -- your own inverses
     inverses = {
         ['True'] = 'False',
@@ -8,7 +7,7 @@ require('nvim-toggler').setup({
         ['Right'] = 'Left',
     },
     remove_default_keybinds = true,
-})
+}
 
 -- init.lua
-vim.keymap.set('n', '<leader>u', require('nvim-toggler').toggle, { desc = '[]Quickly Switch' })
+vim.keymap.set('n', '<leader>u', require('nvim-toggler').toggle, { desc = '🌀 Quickly Switch' })

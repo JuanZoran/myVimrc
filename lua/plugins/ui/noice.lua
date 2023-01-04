@@ -1,19 +1,7 @@
 -- vim.notify("setting .........")
 require("noice").setup({
+    -- you can enable a preset for easier configuration
     lsp = {
-        -- TODO: config this with lsp progress
-        progress = {
-            enabled = false,
-            -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
-            -- See the section on formatting for more details on how to customize.
-            -- format = "lsp_progress",
-            -- format_done = "Completle!",
-            -- throttle = 1000 / 50, -- frequency to update lsp progress message
-            -- view = "notify",
-        },
-        hover = {
-            enabled = false, -- avoid get conflicts with lspsaga
-        },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -21,9 +9,8 @@ require("noice").setup({
             ["cmp.entry.get_documentation"] = true,
         },
     },
-    -- you can enable a preset for easier configuration
     presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
+        bottom_search = false, -- use a classic bottom cmdline for search
         -- command_palette = true, -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false, -- enables an input dialog for inc-rename.nvim

@@ -1,5 +1,5 @@
 -- TODO: config
-local util = require "lspconfig/util"
+local util = require "lspconfig.util"
 return {
     cmd = { "gopls", "serve" },
     filetypes = { "go", "gomod" },

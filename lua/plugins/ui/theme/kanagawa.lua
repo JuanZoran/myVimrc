@@ -1,5 +1,5 @@
 -- Default options:
-require('kanagawa').setup({
+require('kanagawa').setup {
     undercurl = true, -- enable undercurls
     commentStyle = { italic = true },
     functionStyle = {},
@@ -16,8 +16,8 @@ require('kanagawa').setup({
     colors = {},
     overrides = require("plugins.ui.theme.override"),
     theme = "default" -- Load "default" theme or the experimental "light" theme
-})
+}
 
 
 -- setup must be called before loading
-vim.cmd("colorscheme kanagawa")
+vim.cmd [[colorscheme kanagawa]]

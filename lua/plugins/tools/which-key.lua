@@ -1,45 +1,11 @@
 local wk = require("which-key")
--- wk.register({
-	-- ["<Leader>"] = {
-		-- ["<space>"] = { "<Plug>TranslateW", "" },
-		-- ["r"] = {
-			-- name = "凜ranger/rename",
-		-- },
-		-- ["c"] = {
-		-- 	name = " spell/code_action/cd",
-		-- 	a = { "<cmd>Lspsaga code_action<CR>", "" },
-		-- },
-		-- ["d"] = {
-		-- 	name = " Diagnostic",
-		-- 	c = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "" },
-		-- 	j = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", "" },
-		-- 	l = { "<cmd>Lspsaga diagnostic_jump_next<CR>", "" },
-		-- 	m = {
-		-- 		function()
-		-- 			vim.diagnostic.setqflist()
-		-- 		end,
-		-- 		"",
-		-- 	},
-		-- 	e = {
-		-- 		function()
-		-- 			vim.diagnostic.open_float()
-		-- 		end,
-		-- 		"",
-		-- 	},
-		-- },
-	-- },
-	-- ["w"] = {
-	-- 	name = " 窗口操作",
-	-- },
-
-
 wk.setup({
 	{
 		plugins = {
 			marks = false, -- shows a list of your marks on ' and `
-			registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+			registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
 			spelling = {
-				enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+				enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
 				suggestions = 30, -- how many suggestions should be shown in the list?
 			},
 			-- the presets plugin, adds help for a bunch of default keybindings in Neovim
@@ -57,11 +23,10 @@ wk.setup({
 		-- add operators that will trigger motion and text object completion
 		-- to enable all native operators, set the preset / operators plugin above
 		operators = { gc = "Comments" },
-        -- NOTE: icon can be set
 		icons = {
 			breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
 			separator = "", -- symbol used between a key and it's label
-			group = "", -- symbol prepended to a group
+			group = "🇨🇳", -- symbol prepended to a group
 		},
 		popup_mappings = {
 			scroll_down = "<c-k>", -- binding to scroll down inside the popup
@@ -85,13 +50,12 @@ wk.setup({
 			-- most people should not need to change this
 			i = { "i", "k" },
 			v = { "i", "k" },
-			-- n = { "<C-w>" },
 		},
 		-- disable the WhichKey popup for certain buf types and file types.
 		-- Disabled by deafult for Telescope
 		disable = {
-			buftypes = {},
-			filetypes = { "TelescopePrompt" , "NvimTree"},
+			filetypes = {},
+			buftypes = { "TelescopePrompt" , "NvimTree"},
 		},
 	},
 })

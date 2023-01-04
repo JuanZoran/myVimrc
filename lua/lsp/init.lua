@@ -1,10 +1,7 @@
-local servers = {
-    -- "sumneko_lua",
-    -- "pyright",
-    -- "clangd",
-    -- "gopls",
-    -- "bashls",
-}
+local servers = {}
+local enable_auto_install = false
+
+require("lsp.saga")
 
 -- NOTE :  debug.getinfo(1,"S").source:sub(2)  can get this absolute filename
 -- local confDir = debug.getinfo(1,"S").source:sub(2):match('.*/') .. 'settings'
@@ -16,8 +13,6 @@ for file in vim.fs.dir(confDir) do
         table.insert(servers, server)
     end
 end
-
-require("lsp.saga")
 
 require('mason').setup {
     ui = {
@@ -58,10 +53,10 @@ require('mason').setup {
     },
 }
 
-require("mason-lspconfig").setup({
-    ensure_installed = servers,
-    automatic_installation = true,
-})
+require("mason-lspconfig").setup {
+    ensure_installed = enable_auto_install and servers or nil,
+    automatic_installation = enable_auto_install,
+}
 
 -- import lspconfig plugin safely
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
@@ -74,15 +69,26 @@ local handler = require("lsp.handlers")
 
 --- 自动启动
 local opts = {}
+-- local blacklist = {
+--     'grammarly'
+-- }
+
 for _, server in ipairs(servers) do
+    -- if not vim.tbl_contains(blacklist, server) then
     opts = {
         on_attach = handler.on_attach,
         capabilities = handler.capabilities,
     }
+    -- end
 
     local conf_opts = require('lsp.conf.' .. server)
+    for k, v in pairs(conf_opts) do
+        if type(v) == 'table' then
+            opts[k] = opts[k] and vim.tbl_deep_extend("force", opts[k], v) or v
+        else
+            opts[k] = v
+        end
+    end
     -- 合并表: force | error | keep, 表示发生冲突时的处理方法
-    opts = vim.tbl_deep_extend("force", conf_opts, opts)
-
     lspconfig[server].setup(opts)
 end

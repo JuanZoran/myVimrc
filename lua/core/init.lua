@@ -1,7 +1,7 @@
 require 'core.base'
+require 'maps'
 require 'core.autocmd'
 
-require 'lsp'
-require 'maps'
 require 'plugins'
+require 'lsp'
 require 'snips'

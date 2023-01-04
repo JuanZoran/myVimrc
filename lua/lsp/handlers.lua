@@ -36,9 +36,10 @@ local config = {
 
 vim.diagnostic.config(config)
 
+
 ---@format disable
 M.on_attach = function(_, bufnr)
-
+    -- NOTE Keymap
     local set = require("util.map").set
     set {
         mode = "n",
@@ -80,15 +81,11 @@ M.on_attach = function(_, bufnr)
                 ' formatting buffer' ,
             }
         }
+
     }
+
 end
 ---@format enable
-
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-    vim.notify('cmp_nvim_lsp error', 'Error')
-    return
-end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- NOTE : Make UFO use Lsp for fold
@@ -97,6 +94,12 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
+-- NOTE  cmp config
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not status_ok then
+        vim.notify('cmp_nvim_lsp error', 'Error')
+        return
+    end
 capabilities.textDocument.publishDiagnostics.codeActionsInline = true
 
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)

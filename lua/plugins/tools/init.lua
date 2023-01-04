@@ -47,6 +47,10 @@ vim.keymap.set(
     require 'align'.align_to_string(false, true, true)
 end)
 
+-- vim.keymap.set(
+--     'x', '<leader><leader>=', function()
+--     require 'align'.align_to_char(1, false, true)
+-- end)
 use {
     {
         'Vonr/align.nvim',
@@ -60,7 +64,7 @@ use {
 }
 
 
--- lazy-load translate plugin
+-- Lazy-load translate plugin
 use {
     "/home/zoran/project/Neovim/Trans",
     keys = {
@@ -92,7 +96,7 @@ use {
 -- integrate with git
 use {
     "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+    requires = { "nvim-lua/plenary.nvim", module = 'plenary' },
     config = [[require 'plugins.tools.gitsigns']]
 }
 

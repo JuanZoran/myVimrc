@@ -77,7 +77,7 @@ require("lualine").setup({
                 "filename",
                 path = 1,
             },
-            'lsp_progress',
+            -- 'lsp_progress',
         },
     },
     winbar = {

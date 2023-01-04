@@ -33,7 +33,6 @@ use {
     config = [[require 'plugins.lang.ufo']],
 }
 
--- NOTE :====================== Completion =====================
 -- mason | lspconfig | mason-lspconfig
 use {
     "williamboman/mason.nvim", -- lsp manager
@@ -41,6 +40,8 @@ use {
     "neovim/nvim-lspconfig", -- official lspconfig
     "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
 }
+
+-- NOTE :====================== Completion =====================
 
 -- LuaSnip
 use {
@@ -59,14 +60,14 @@ use {
 use {
     "hrsh7th/nvim-cmp",
     requires = {
-        { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-        { "tzachar/cmp-tabnine", after = "nvim-cmp" },
-        { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
-        { "hrsh7th/cmp-path", after = "nvim-cmp" },
-        { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-        { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
-        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-        { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
+        { "hrsh7th/cmp-buffer"       , after = "nvim-cmp" },
+        { "tzachar/cmp-tabnine"      , after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp"     , after = "nvim-lspconfig" },
+        { "hrsh7th/cmp-path"         , after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lua"     , after = "nvim-cmp" },
+        { "saadparwaiz1/cmp_luasnip" , after = "luasnip" },
+        { "hrsh7th/cmp-cmdline"      , after = "nvim-cmp" },
+        { "lukas-reineke/cmp-rg"     , after = "nvim-cmp" },
     },
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
     config = [[require "plugins.lang.cmp"]]
