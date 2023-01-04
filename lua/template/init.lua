@@ -31,7 +31,7 @@ for _, filename in ipairs(template) do
     vim.api.nvim_create_autocmd('BufNewFile', {
         group = template_group,
         pattern = toPattern(filename),
-        command = [[0r ]] .. template_dir .. '/' .. filename,
+        command = [[silent! 0r ]] .. template_dir .. '/' .. filename,
     })
 end
 

@@ -62,6 +62,7 @@ M.on_attach = function(_, bufnr)
             { "gi", vim.lsp.buf.implementation,                         ' 查看实现'     },
             { "gr", vim.lsp.buf.references,                             ' 查看所有引用' },
 
+
             {
                 "gh",
                 function ()
@@ -81,9 +82,11 @@ M.on_attach = function(_, bufnr)
                 ' formatting buffer' ,
             }
         }
-
     }
-
+    -- TODO mapping for edit lsp config
+    -- vim.keymap('n', '<leader><leader>l', function ()
+    --     vim.cmd ('e %s'):format()
+    -- end)
 end
 ---@format enable
 

@@ -1,4 +1,3 @@
--- TODO: config
 return {
     cmd = {
         "clangd",

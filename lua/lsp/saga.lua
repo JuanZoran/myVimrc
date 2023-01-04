@@ -6,7 +6,7 @@ if not saga_status then
 end
 local icon = require('util').icon
 
-saga.init_lsp_saga({
+saga.init_lsp_saga {
     -- keybinds for navigation in lspsaga window
     -- move_in_saga = { prev = "i", next = "k" },
     -- move_in_saga = { prev = "<C-i>", next = "<C-k>" },
@@ -30,4 +30,4 @@ saga.init_lsp_saga({
     -- use enter to open file with definition preview
     border_style = "rounded",
     code_action_icon = icon.CodeAction,
-})
+}
