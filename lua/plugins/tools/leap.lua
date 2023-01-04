@@ -21,12 +21,10 @@ local cmd = 'normal '
 local function paranormal(targets)
     local input = vim.fn.input(cmd)
     if #input < 1 then
-        vim.notify('Please Check out your input', 'warn')
+        vim.notify('Operation Aborted')
         return
     end
-
     local ns = vim.api.nvim_create_namespace("")
-
     -- Set an extmark as an anchor for each target, so that we can also execute
     -- commands that modify the positions of other targets (insert/change/delete).
     for _, target in ipairs(targets) do

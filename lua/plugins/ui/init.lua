@@ -29,8 +29,8 @@ use {
 
     { -- 文件树
         "nvim-tree/nvim-tree.lua",
-        keys = { 'n', 'ww' },
-        -- cond = 'not vim.g.vscode',
+        event = 'BufRead',
+        -- keys = { 'n', 'ww' },
         config = [[require "plugins.ui.nvim_tree"]],
         tag = "nightly", -- optional, updated every week. (see issue #1193)
     },

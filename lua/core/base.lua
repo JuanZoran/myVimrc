@@ -77,7 +77,6 @@ g.did_install_syntax_menu = 1
 -- Uncomment this if you define your own filetypes in `after/ftplugin`
 -- Disable some builtin vim plugins
 local disabled_built_ins = {
-    "",
     "spellfile_plugin",
     "syntax_completion",
     "filetypes",

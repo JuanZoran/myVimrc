@@ -1,17 +1,16 @@
 local use = require("packer").use
 
--- NOTE : ====================== syntax =====================
-
-
+-- NOTE : ====================== Syntax =====================
 -- cursor-word highlighting
-use {
-    "rrethy/vim-illuminate",
-}
-
 -- Pretty Indent
 use {
-    "lukas-reineke/indent-blankline.nvim",
-    config = [[require 'plugins.lang.indent']],
+    {
+        "rrethy/vim-illuminate",
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        config = [[require 'plugins.lang.indent']],
+    },
 }
 
 -- Treesitter
@@ -60,14 +59,14 @@ use {
 use {
     "hrsh7th/nvim-cmp",
     requires = {
-        { "hrsh7th/cmp-buffer",       after = "nvim-cmp"       },
-        { "tzachar/cmp-tabnine",      after = "nvim-cmp"       },
-        { "hrsh7th/cmp-nvim-lsp",     after = "nvim-lspconfig" },
-        { "hrsh7th/cmp-path",         after = "nvim-cmp"       },
-        { "hrsh7th/cmp-nvim-lua",     after = "nvim-cmp"       },
-        { "saadparwaiz1/cmp_luasnip", after = "luasnip"        },
-        { "hrsh7th/cmp-cmdline",      after = "nvim-cmp"       },
-        { "lukas-reineke/cmp-rg",     after = "nvim-cmp"       },
+        { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+        { "tzachar/cmp-tabnine", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
+        { "hrsh7th/cmp-path", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+        { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
+        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+        { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
     },
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
     config = [[require "plugins.lang.cmp"]]

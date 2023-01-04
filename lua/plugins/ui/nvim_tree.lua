@@ -2,10 +2,8 @@ local nvim_tree = require("nvim-tree")
 local nvim_tree_config = require("nvim-tree.config")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-vim.g.nvim_tree_auto_close = 1
--- vim.g.nvim_tree_respect_buf_cwd = 1
 -- if not vim.g.vscode then
-    vim.keymap.set('n', 'ww', '<cmd>NvimTreeToggle<cr>', { desc = ' 触发文件树' })
+vim.keymap.set('n', 'ww', '<cmd>NvimTreeToggle<cr>', { desc = ' 触发文件树' })
 -- end
 
 local icon = require('util').icon
@@ -122,7 +120,20 @@ nvim_tree.setup({
     -- ignore = {},
     -- },
     -- },
-}) -- view.mappings.list = { -- BEGIN_DEFAULT_MAPPINGS
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
+    pattern = "NvimTree_*",
+    callback = function()
+        local layout = vim.api.nvim_call_function("winlayout", {})
+        if layout[1] == "leaf" and
+            vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" and
+            layout[3] == nil then vim.cmd("confirm quit") end
+    end
+})
+
+-- INFO view.mappings.list = { -- BEGIN_DEFAULT_MAPPINGS
 --   { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
 --   { key = "<C-e>",                          action = "edit_in_place" },
 --   { key = "O",                              action = "edit_no_picker" },

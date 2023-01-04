@@ -6,7 +6,7 @@ return {
     },
 
     IncSearch = {
-        fg = "#1d202f",
+        fg = "#0f0f15",
         -- bg = "#ff4081",
         bg = "#10B981",
     },
