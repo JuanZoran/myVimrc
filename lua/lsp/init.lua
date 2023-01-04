@@ -32,7 +32,7 @@ require('mason').setup {
 
         keymaps = {
             -- Keymap to expand a package
-            toggle_package_expand = "<CR>",
+            toggle_package_expand = "o",
             -- Keymap to install the package under the current cursor position
             install_package = "<Leader>i",
             -- Keymap to reinstall/update the package under the current cursor position

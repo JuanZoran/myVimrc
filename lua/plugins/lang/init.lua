@@ -39,6 +39,11 @@ use {
     "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
     "neovim/nvim-lspconfig", -- official lspconfig
     "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
+
+    -- NOTE  Dap
+    -- 'jayp0521/mason-nvim-dap.nvim',
+    -- 'mfussenegger/nvim-dap',
+    -- 'rcarriga/nvim-dap-ui',
 }
 
 -- NOTE :====================== Completion =====================
