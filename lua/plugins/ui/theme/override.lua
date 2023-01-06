@@ -14,5 +14,8 @@ return {
         fg = '#599eff',
         bold = true,
         -- bg = '#7f52ff'
+    },
+    ['@variable'] = {
+        fg = '#ffa066',
     }
 }

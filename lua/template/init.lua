@@ -36,7 +36,9 @@ for _, filename in ipairs(template) do
 end
 
 local function OpenSelectTemplate(file)
-    vim.cmd('e ' .. template_dir .. '/' .. file)
+    if #file > 0 then
+        vim.cmd('e ' .. template_dir .. '/' .. file)
+    end
 end
 
 -- NOTE Edit Template
@@ -48,6 +50,19 @@ vim.keymap.set('n', '<leader><leader><CR>', function()
         end,
     }, OpenSelectTemplate)
 end, { desc = '🌳Edit Template' })
+
+
+-- NOTE Delete Template
+vim.keymap.set('n', '<leader><leader>d', function()
+    vim.ui.select(template, {
+        prompt = '请选择一个片段删除',
+        format_item = function(file)
+            return toPattern(file)
+        end,
+    }, function (file)
+        os.execute(('rm %s/%s'):format(template_dir, file))
+    end)
+end, { desc = '❌Remove Template' })
 
 -- NOTE Create New Template
 vim.keymap.set('n', '<leader><leader>t', function()

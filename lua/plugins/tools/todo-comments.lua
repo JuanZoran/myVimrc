@@ -12,11 +12,11 @@ require("todo-comments").setup {
             --     -- signs = false, -- configure signs for some keywords individually
         },
         TODO = { icon = icon.Todo, color = "info" },
-        HACK = { icon = icon.Hack, color = "warning" },
+        HACK = { icon = icon.Hack, --[[ color = "warning" ,]] alt = { 'EXAMPLE' } },
         WARN = { icon = icon.Warn, color = "warning", alt = { "WARNING", } },
-        PERF = { icon = icon.Perf, --[[ color = 'default', ]] alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+        PERF = { icon = icon.Perf, --[[ color = 'default', ]] alt = { "OPTIMIZE" } },
         NOTE = { icon = icon.Note, color = "hint", alt = { "INFO" } },
-        TEST = { icon = icon.Test, color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+        TEST = { icon = icon.Test, color = "test", alt = { "PASSED", "FAILED" } },
     },
     -- gui_style = {
     --   fg = "NONE", -- The gui style to use for the fg highlight group.
@@ -65,7 +65,7 @@ require("todo-comments").setup {
     -- },
 }
 
-vim.keymap.set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment"         })
-vim.keymap.set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment"     })
-vim.keymap.set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>",            { desc = "show all TODOs"            })
-vim.keymap.set("n", "<Leader>td", "<cmd>TodoTelescope<cr>",           { desc = "search todos by telescope" })
+vim.keymap.set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment" })
+vim.keymap.set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
+vim.keymap.set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>", { desc = "show all TODOs" })
+vim.keymap.set("n", "<Leader>td", "<cmd>TodoTelescope<cr>", { desc = "search todos by telescope" })

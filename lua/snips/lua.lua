@@ -72,7 +72,13 @@ local snips = {
         })
     ),
     parse("s", "s('$1', $2)"),
-    parse("lm", "local M = {}\n\nfunction M.setup()\n  $1 \nend\n\nreturn M"),
+    parse("lm", [[
+        local M = {}
+
+        $1
+
+        return M
+    ]]),
     parse("cmd", "<Cmd>$1<CR>"),
     parse("parse", [[parse("$1", "$2")]]),
     s("formatEnable", { t("---@format enable") }),

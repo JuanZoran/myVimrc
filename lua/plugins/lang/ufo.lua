@@ -4,6 +4,7 @@ vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor)
 vim.keymap.set("n", "zj", require("ufo").goPreviousClosedFold)
 vim.keymap.set("n", "zl", require("ufo").goNextClosedFold)
+vim.keymap.set("n", "Z", 'zf')
 vim.keymap.set("v", "za", "zf")
 
 

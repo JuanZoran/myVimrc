@@ -29,4 +29,4 @@ require("neoclip").setup {
 }
 
 require("telescope").load_extension "neoclip"
-vim.keymap.set('n', '<leader>tg', '<cmd>Telescope neoclip<cr>', { desc = '[]Clipboard History' })
+vim.keymap.set('n', '<leader><C-p>', '<cmd>Telescope neoclip<cr>', { desc = '📋Clipboard History' })

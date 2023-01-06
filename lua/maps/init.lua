@@ -45,7 +45,6 @@ set {
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
         -- 其他
-        { "<CR>",     "/<++><CR>vf>c" }, -- PlaceHolder
         { "<C-q>",     ":q!<CR>"       },
         { "na",        "<c-a>"         },
         -- { "nh",        ":noh<CR>"      },
@@ -88,6 +87,7 @@ set{
 vim.keymap.set("n", "tx", ":r !figlet ")
 vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set("v", "<C-v>", '"+y')
+vim.keymap.set("n", "<CR>", '/<++><CR>vf>c', {silent = true})
 
 
 

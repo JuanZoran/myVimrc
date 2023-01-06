@@ -74,7 +74,7 @@ use {
     },
     run = 'bash ./install.sh',
     config = function()
-        require "Trans".setup {}
+        -- require "Trans".setup {}
         vim.keymap.set("v", "mm", '<Esc><Cmd>TranslateSelectWord<CR>', { desc = ' Translate' })
         vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>", { desc = ' Translate' })
         vim.keymap.set("n", "mi", "<Cmd>TranslateInputWord<CR>", { desc = ' Translate From Input' })
@@ -123,7 +123,7 @@ use {
         config = [[require 'plugins.tools.zen']]
     },
     {
-         "folke/twilight.nvim",
+        "folke/twilight.nvim",
         after = 'zen-mode.nvim',
     },
 }
