@@ -1,9 +1,6 @@
 return {
     Visual = {
-        -- bg = '#444c56'
-        -- bg = '#1F2233'
         fg = '#000000',
-        -- bg = "#599eff",
         bg = "#519aba",
     },
     Pmenu = {

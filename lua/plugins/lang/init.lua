@@ -89,4 +89,3 @@ use {
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
     config = [[require "plugins.lang.cmp"]]
 }
-

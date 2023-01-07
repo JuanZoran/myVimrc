@@ -17,7 +17,10 @@ cmp.setup({
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
-
+    experimental = {
+        -- native_menu = false,
+        ghost_text = true,
+    },
     mapping = {
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
@@ -40,24 +43,35 @@ cmp.setup({
         -- Set `select` to `false` to only confirm explicitly selected items.
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<C-o>"] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<C-e>"] = cmp.mapping(function(fallback)
             -- TODO: config some
             if luasnip.jumpable(1) then
                 luasnip.jump(1)
-            elseif cmp.visible() then
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            -- TODO: config some
+            if cmp.visible() then
                 cmp.select_next_item()
             else
                 fallback()
             end
-
-
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            elseif cmp.visible() then
+        ["<C-p>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
                 cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -75,6 +89,7 @@ cmp.setup({
             vim_item.menu = ({
                 luasnip     = "[Snippet]",
                 nvim_lsp    = "[LSP]",
+                copilot     = "[Copilot]",
                 nvim_lua    = "[NVIM]",
                 path        = "[Path]",
                 cmp_tabnine = "[TabNine]",
@@ -87,6 +102,7 @@ cmp.setup({
     },
     sources = {
         { name = "nvim_lsp", max_item_count = 5 },
+        { name = "copilot", group_index = 2 },
         { name = "luasnip" },
         { name = "cmp_tabnine", max_item_count = 5 },
         { name = "nvim_lua" },
@@ -109,9 +125,6 @@ cmp.setup({
         --     col_offset = -3,
         --     side_padding = 0,
         -- },
-    },
-    experimental = {
-        ghost_text = true,
     },
 })
 

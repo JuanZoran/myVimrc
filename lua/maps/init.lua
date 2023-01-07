@@ -45,7 +45,10 @@ set {
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
         -- 其他
-        { "<C-q>",     ":q<CR>"       },
+        { "<C-q>",     function () -- smart quit
+            vim.cmd(vim.bo.modifiable and 'wq' or 'q') 
+        end },
+        { "<leader>q",     ":q!<CR>"       },
         { "na",        "<c-a>"         },
         -- { "nh",        ":noh<CR>"      },
         { "<Leader>p", ":PackerSync<CR>",  'מּ [Sync/Install] Plugin'            },

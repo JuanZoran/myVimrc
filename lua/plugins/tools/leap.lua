@@ -57,6 +57,7 @@ vim.keymap.set(
         }
     end,
     { desc = '[]Select targets to exec normal command' }
+    -- require('specs').show_specs()
 )
 
 -- local function get_line_starts(winid)

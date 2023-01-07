@@ -22,7 +22,6 @@ function M.map(mode, option, ...) -- for better keymap-binding alias
     end
 end
 
-
 -- TODO :
 M.icon = {
     Error = "🥵",
@@ -73,6 +72,7 @@ M.icon = {
         Object = "",
         Text = "",
         Snippet = "",
+        Copilot = "",
         -- File = " ",
         -- Module = " ",
         -- Namespace = " ",

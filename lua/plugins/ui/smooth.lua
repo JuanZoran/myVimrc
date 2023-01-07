@@ -12,7 +12,7 @@ require("smoothcursor").setup {
 }
 
 local specs = require('specs')
-local show = specs.show_specs
+-- local show = specs.show_specs
 specs.setup {
     show_jumps       = true,
     min_jump         = 30,

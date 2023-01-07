@@ -56,7 +56,7 @@ use {
     requires = {
         'declancm/cinnamon.nvim',
         'edluffy/specs.nvim',
-    }
+    },
 }
 
 
