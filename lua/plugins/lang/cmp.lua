@@ -86,8 +86,8 @@ cmp.setup({
         end,
     },
     sources = {
+        { name = "nvim_lsp", max_item_count = 5 },
         { name = "luasnip" },
-        { name = "nvim_lsp" },
         { name = "cmp_tabnine", max_item_count = 5 },
         { name = "nvim_lua" },
         { name = "buffer", max_item_count = 4 },
@@ -99,9 +99,16 @@ cmp.setup({
     --     select = false,
     -- },
     window = {
-        documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        },
+        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
+        -- documentation = {
+        --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        -- },
+        -- completion = {
+        --     winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        --     col_offset = -3,
+        --     side_padding = 0,
+        -- },
     },
     experimental = {
         ghost_text = true,

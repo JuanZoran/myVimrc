@@ -9,9 +9,9 @@ require("persisted").setup {
         print('Session Not Exist')
     end,
     -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
-    command = "VimLeavePre", -- the autocommand for which the session is saved
+    -- command = "VimLeavePre", -- the autocommand for which the session is saved
     -- silent = false, -- silent nvim message when sourcing session file
-    -- autosave = true, -- automatically save session files when exiting Neovim
+    autosave = false, -- automatically save session files when exiting Neovim
     -- should_autosave = nil, -- function to determine if a session should be autosaved
     -- autoload = false, -- automatically load the session for the cwd on Neovim startup
     -- follow_cwd = true, -- change session file name to match current working directory if it changes

@@ -51,8 +51,12 @@ use {
 
 -- smooth scroll animation
 use {
-    { "declancm/cinnamon.nvim",   config = [[require("plugins.ui.smooth")]]      },
-    { 'gen740/SmoothCursor.nvim', config = [[require "plugins.ui.SmoothCursor"]] },
+    'gen740/SmoothCursor.nvim',
+    config = [[require 'plugins.ui.smooth']],
+    requires = {
+        'declancm/cinnamon.nvim',
+        'edluffy/specs.nvim',
+    }
 }
 
 

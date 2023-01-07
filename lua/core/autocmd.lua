@@ -4,9 +4,9 @@ vim.api.nvim_create_autocmd('BufRead', {
     command = [[silent! loadview]]
 })
 
-vim.api.nvim_create_autocmd('BufWinLeave', {
+vim.api.nvim_create_autocmd({'BufWrite', 'QuitPre'}, {
     group = View,
-    command = [[silent! mkview]]
+    command = [[silent! mkview | SessionSave]]
 })
 
 -- 设置firenvim的大小
@@ -76,19 +76,19 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 -- )
 
 -- INFO cursorline
--- local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
--- local set_cursorline = function(event, value, pattern)
---     vim.api.nvim_create_autocmd(event, {
---         group = group,
---         pattern = pattern,
---         callback = function()
---             vim.opt_local.cursorline = value
---         end,
---     })
--- end
+local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+local set_cursorline = function(event, value, pattern)
+    vim.api.nvim_create_autocmd(event, {
+        group = group,
+        pattern = pattern,
+        callback = function()
+            vim.opt_local.cursorline = value
+        end,
+    })
+end
 
 -- set_cursorline("WinLeave", false)
--- -- set_cursorline("InsertEnter", false)
--- -- set_cursorline("InsertLeave", true)
+set_cursorline("InsertEnter", false)
+set_cursorline("InsertLeave", true)
 -- set_cursorline("WinEnter", true)
--- set_cursorline("FileType", false, "TelescopePrompt")
+set_cursorline("FileType", false, "TelescopePrompt")

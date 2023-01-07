@@ -1,6 +1,7 @@
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
+--- TODO : add image support
 local header = {
     {
         "                                             ",

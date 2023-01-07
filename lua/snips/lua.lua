@@ -65,6 +65,13 @@ local snips = {
         )
     ),
     s(
+        "creturn",
+        fmt('---@return {} {}', {
+            i(1, "type"),
+            i(2, "message"),
+        })
+    ),
+    s(
         "rq",
         fmt('local {} = require("{}")', {
             l(l._1:match("[^./]*$"), 1),

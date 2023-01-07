@@ -2,6 +2,7 @@ local servers = {}
 local auto_install = false
 local auto_configure = true
 
+--- TODO :lualine show lspname
 require("lsp.saga")
 require("lsp.mason")
 

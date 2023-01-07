@@ -17,6 +17,12 @@ return {
             telemetry = {
                 enable = false,
             },
+            ['type.weakNilCheck'] = true,
+            -- FIXME it doesn't'
+            -- ['completion.postfix'] = '->',
+            -- completion = {
+            --     postfix = '->'
+            -- }
         },
     },
 }

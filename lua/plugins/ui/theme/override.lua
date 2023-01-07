@@ -1,4 +1,15 @@
 return {
+    Visual = {
+        -- bg = '#444c56'
+        -- bg = '#1F2233'
+        fg = '#000000',
+        -- bg = "#599eff",
+        bg = "#519aba",
+    },
+    Pmenu = {
+        fg = '#A6ACCD',
+        bg = 'NONE',
+    },
     PmenuSel = {
         bold = true,
         fg = '#1d202f',
@@ -17,5 +28,12 @@ return {
     },
     ['@variable'] = {
         fg = '#ffa066',
-    }
+    },
+    CursorLine = {
+        bg = '#2e3a4d',
+        bold = true,
+    },
+    -- FloatShadowThrough = {
+    --     bg = 'None'
+    -- }
 }

@@ -45,7 +45,7 @@ set {
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
         -- 其他
-        { "<C-q>",     ":q!<CR>"       },
+        { "<C-q>",     ":q<CR>"       },
         { "na",        "<c-a>"         },
         -- { "nh",        ":noh<CR>"      },
         { "<Leader>p", ":PackerSync<CR>",  'מּ [Sync/Install] Plugin'            },

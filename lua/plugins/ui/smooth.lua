@@ -4,6 +4,34 @@ require('cinnamon').setup {
     max_length = 500,
     scroll_limit = -1,
 }
+
+require("smoothcursor").setup {
+    fancy = {
+        enable = true,
+    }
+}
+
+local specs = require('specs')
+local show = specs.show_specs
+specs.setup {
+    show_jumps       = true,
+    min_jump         = 30,
+    popup            = {
+        delay_ms = 0, -- delay before popup displays
+        inc_ms = 20, -- time increments used for fade/resize effects
+        blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        width = 20,
+        winhl = "PMenu",
+        fader = require('specs').sinus_fader,
+        resizer = require('specs').shrink_resizer
+    },
+    ignore_filetypes = {},
+    ignore_buftypes  = {
+        nofile = true,
+    },
+}
+
+
 local set = require('util').tmap
 set {
     mode = "o", -- be appended to other operator
@@ -15,6 +43,8 @@ set {
         { "i", "k" },
     }
 }
+
+
 
 -- DEFAULT_KEYMAPS:
 

@@ -1,5 +1,6 @@
 local icon = require("util").icon
 
+-- TODO : lsp server Name
 local function diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
@@ -11,35 +12,8 @@ local function diff_source()
     end
 end
 
--- local function handler(clicks, button, modifiers)
---     -- To see all available details: vim.pretty_print(node)
---     local st = node.range.start
---     local en = node.range['end']
---     if button == "l" then
---         if clicks == 2 then
---             -- double left click to do nothing
---         else -- jump to node's starting line+char
---             vim.fn.cursor(st.line + 1, st.character + 1)
---         end
---     elseif button == "r" then
---         if modifiers == "s" then
---             print "lspsaga" -- shift right click to print "lspsaga"
---         end -- jump to node's ending line+char
---         vim.fn.cursor(en.line + 1, en.character + 1)
---     elseif button == "m" then
---         -- middle click to visual select node
---         vim.fn.cursor(st.line + 1, st.character + 1)
---         vim.cmd "normal v"
---         vim.fn.cursor(en.line + 1, en.character + 1)
---     end
--- end
 
 require("lualine").setup({
-    -- options = { theme = "everforest" },
-    -- options = { theme = "iceberg_dark" },
-    -- options = { theme = "gruvbox-material" },
-    -- options = { theme = "material" },
-    -- options = { theme = "seoul256" },
     options = {
         theme = "auto",
         disabled_filetypes = {
