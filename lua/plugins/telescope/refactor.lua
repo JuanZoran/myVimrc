@@ -30,5 +30,5 @@ vim.keymap.set(
     "v",
     "<Leader>rr",
     require('telescope').extensions.refactoring.refactors,
-    { desc = '[]Refactoring Operations' }
+    { desc = '🎈Refactoring Operations' }
 )

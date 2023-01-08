@@ -81,7 +81,7 @@ use {
         { "tzachar/cmp-tabnine", after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
         { "hrsh7th/cmp-path", after = "nvim-cmp" },
-        { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+        -- { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
         { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
         { "lukas-reineke/cmp-rg", after = "nvim-cmp" },

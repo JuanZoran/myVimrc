@@ -61,8 +61,17 @@ set {
 set {
     mode = 'i',
     map = {
-        {'<C-a>', '<ESC>I'},
-        {'<C-e>', '<ESC>A'},
+        {'<C-a>', function ()
+            -- FIXME : not this first cols which has character
+            -- local text = 
+            local line = vim.fn.line('.')
+            vim.fn.cursor(line, 1)
+        end},
+        {'<C-e>', function ()
+            local line = vim.fn.line('.')
+            local e = vim.fn.col('$')
+            vim.fn.cursor(line, e)
+        end},
         {'<C-b>', '<ESC>bi'},
         {'<C-f>', '<ESC>ea'},
         {'<C-n>', '<ESC>o'},

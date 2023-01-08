@@ -1,5 +1,6 @@
 local icon = require("util").icon
 
+
 -- TODO : lsp server Name
 local function diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
@@ -12,14 +13,41 @@ local function diff_source()
     end
 end
 
-
-local function lsp_name()
-
+local function lsp_is_active()
+    return vim.lsp.buf_get_clients() ~= nil
 end
+
+local function get_lsp_staus()
+    local clients = vim.lsp.buf_get_clients()
+    local status = ''
+    local tmp = {}
+    for _, v in pairs(clients) do
+        table.insert(tmp, v.name)
+    end
+    status = table.concat(tmp, '  ')
+    return status
+end
+
+local lsp_status = {
+    get_lsp_staus,
+    cond = lsp_is_active,
+    color = {
+        fg = '#000000', bg = '#10B981'
+    },
+    separator = {
+        left = '',
+        right = '',
+    }, -- Determines what separator to use for the component.
+}
 
 
 require("lualine").setup({
     options = {
+        -- component_separators = { left = '', right = '' },
+        section_separators = {
+            right = '',
+            left = '',
+        },
         theme = "auto",
         disabled_filetypes = {
             statusline = {
@@ -60,7 +88,10 @@ require("lualine").setup({
         },
     },
     winbar = {
-        lualine_a = {
+        lualine_z = {
+            lsp_status,
+        },
+        lualine_b = {
             {
                 "diagnostics",
                 -- Table of diagnostic sources, available sources are:
@@ -86,30 +117,20 @@ require("lualine").setup({
                 -- color = { fg = "#a7c080" },
             },
         },
-        lualine_b = {
-            {
-                require("noice").api.status.command.get,
-                cond = require("noice").api.status.command.has,
-            },
-            -- {
-            --     require("noice").api.status.search.get,
-            --     cond = require("noice").api.status.search.has,
-            -- },
-        },
 
         lualine_c = {
             {
                 require('lspsaga.symbolwinbar').get_symbol_node,
                 -- on_click = handler,
             },
-            -- {
-            --     navic.get_location,
-            --     cond = navic.is_available,
-            --     -- color = { fg = "#f3ca28" },
-            -- },
         },
-        lualine_z = {
-            "os.date[[%A %H:%M]]",
+        lualine_a = {
+            {
+                "os.date[[%A %H:%M]]",
+                color = {
+                    fg = '#000000', bg = '#10B981'
+                },
+            },
         },
     },
     extensions = { "nvim-tree", "quickfix" },
