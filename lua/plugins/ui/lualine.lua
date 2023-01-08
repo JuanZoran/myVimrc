@@ -13,6 +13,11 @@ local function diff_source()
 end
 
 
+local function lsp_name()
+
+end
+
+
 require("lualine").setup({
     options = {
         theme = "auto",

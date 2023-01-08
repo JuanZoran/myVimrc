@@ -6,8 +6,11 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 vim.keymap.set('n', 'ww', '<cmd>NvimTreeToggle<cr>', { desc = ' 触发文件树' })
 -- end
 
+local HEIGHT_RATIO = 0.8 -- You can change this
+local WIDTH_RATIO = 0.4 -- You can change this too
+
 local icon = require('util').icon
-nvim_tree.setup({
+nvim_tree.setup {
     disable_netrw = true,
     hijack_netrw = true,
     -- open_on_setup = false,
@@ -48,9 +51,9 @@ nvim_tree.setup({
         -- width = 30,
         -- height = 30,
         -- hide_root_folder = false,
-        -- side = "left",
+        -- side = "center",
         -- auto_resize = true,
-        adaptive_size = true,
+        -- adaptive_size = true,
         mappings = {
             -- custom_only = true, -- 只用自定义的按键
             list = {
@@ -63,9 +66,34 @@ nvim_tree.setup({
                 { key = "?", action = "toggle_help" },
             },
         },
-        -- number = false,
-        -- relativenumber = false,
+        float = {
+            enable = true,
+            open_win_config = function()
+                local screen_w = vim.opt.columns:get()
+                local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+                local window_w = screen_w * WIDTH_RATIO
+                local window_h = screen_h * HEIGHT_RATIO
+                local window_w_int = math.floor(window_w)
+                local window_h_int = math.floor(window_h)
+                local center_x = (screen_w - window_w) / 2
+                local center_y = ((vim.opt.lines:get() - window_h) / 2)
+                    - vim.opt.cmdheight:get()
+                return {
+                    border = 'rounded',
+                    relative = 'editor',
+                    row = center_y,
+                    col = center_x,
+                    width = window_w_int,
+                    height = window_h_int,
+                }
+            end,
+        },
+        width = function()
+            return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+        end,
     },
+    -- number = false,
+    -- relativenumber = false,
     -- actions = {
     --     quit_on_open = true,
     --     window_picker = { enable = true },
@@ -120,7 +148,7 @@ nvim_tree.setup({
     -- ignore = {},
     -- },
     -- },
-})
+}
 
 vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),

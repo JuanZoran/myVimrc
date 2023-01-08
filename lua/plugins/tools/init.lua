@@ -21,10 +21,12 @@ use {
 
 
 use {
-    "nguyenvukhang/nvim-toggler",
+    'CKolkey/ts-node-action',
     keys = {
-        { "n", "<Leader>u" },
+        { "n", "<leader>u" },
     },
+    -- "nguyenvukhang/nvim-toggler",
+    -- disable = true,
     config = [[require'plugins.tools.toggle']]
 }
 

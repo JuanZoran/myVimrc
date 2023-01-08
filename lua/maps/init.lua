@@ -46,10 +46,10 @@ set {
 
         -- 其他
         { "<C-q>",     function () -- smart quit
-            vim.cmd(vim.bo.modifiable and 'wq' or 'q') 
+            vim.cmd((vim.bo.modifiable and not vim.bo.readonly) and 'wq' or 'q') 
         end },
         { "<leader>q",     ":q!<CR>"       },
-        { "na",        "<c-a>"         },
+        -- { "na",        "<c-a>"         },
         -- { "nh",        ":noh<CR>"      },
         { "<Leader>p", ":PackerSync<CR>",  'מּ [Sync/Install] Plugin'            },
         { "<Leader>ck", ":set spell!<CR>", '暈Toggle vim builtin spell checker' }

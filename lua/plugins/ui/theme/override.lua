@@ -28,9 +28,15 @@ return {
     },
     CursorLine = {
         bg = '#2e3a4d',
-        bold = true,
+        -- bold = true,
     },
-    -- FloatShadowThrough = {
-    --     bg = 'None'
-    -- }
+    -- TermCursorNC = {
+    --     link = 'Cursor'
+    -- },
+    TermCursor = {
+        link = 'Cursor'
+    },
+    Cursor = {
+        bg = '#58a6ff',
+    },
 }

@@ -14,8 +14,8 @@ use {
 
     "norcalli/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
-    config = function()
-        require('colorizer').setup {}
+    config = function () -- don't change this
+       require('colorizer').setup{}
     end
 }
 
@@ -50,15 +50,6 @@ use {
 
 
 -- smooth scroll animation
-use {
-    'gen740/SmoothCursor.nvim',
-    config = [[require 'plugins.ui.smooth']],
-    requires = {
-        'declancm/cinnamon.nvim',
-        'edluffy/specs.nvim',
-    },
-}
-
 
 
 -- nice ui
@@ -69,4 +60,14 @@ use {
         { "rcarriga/nvim-notify", config = [[require "plugins.ui.notify"]], module = 'notify' },
     },
     config = [[require "plugins.ui.noice"]]
+}
+
+use {
+    'gen740/SmoothCursor.nvim',
+    event = 'VimEnter',
+    config = [[require 'plugins.ui.smooth']],
+    requires = {
+        'declancm/cinnamon.nvim',
+        'edluffy/specs.nvim',
+    },
 }

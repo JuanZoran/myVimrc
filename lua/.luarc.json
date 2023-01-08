@@ -3,5 +3,9 @@
     "Lua.diagnostics.disable": [
         "different-requires",
         "param-type-mismatch"
+    ],
+    "Lua.diagnostics.globals": [
+        "vim",
+        "Scroll"
     ]
 }

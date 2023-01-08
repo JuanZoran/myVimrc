@@ -89,7 +89,6 @@ cmp.setup({
             vim_item.menu = ({
                 luasnip     = "[Snippet]",
                 nvim_lsp    = "[LSP]",
-                copilot     = "[Copilot]",
                 nvim_lua    = "[NVIM]",
                 path        = "[Path]",
                 cmp_tabnine = "[TabNine]",
@@ -102,7 +101,6 @@ cmp.setup({
     },
     sources = {
         { name = "nvim_lsp", max_item_count = 5 },
-        { name = "copilot", group_index = 2 },
         { name = "luasnip" },
         { name = "cmp_tabnine", max_item_count = 5 },
         { name = "nvim_lua" },

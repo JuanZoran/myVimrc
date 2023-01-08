@@ -9,36 +9,37 @@ require("nvim-autopairs").setup({
         keys = "qwertyuiopzxcvbnmasdfghjkl",
         check_comma = true,
         highlight = "PmenuSel",
-        highlight_grey = "LineNr",
+        -- highlight_grey = "LineNr",
+        highlight_grey = "Comment",
     },
 })
 
 require('nvim-autopairs').add_rules(require "nvim-autopairs.rules.endwise-lua")
 
-local cmp_status, cmp = pcall(require, "cmp")
-if not cmp_status then
-    vim.notify('cmp error', 'error')
-    return
-end
+-- local cmp_status, cmp = pcall(require, "cmp")
+-- if not cmp_status then
+--     vim.notify('cmp error', 'error')
+--     return
+-- end
+--
+-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+-- local handlers = require("nvim-autopairs.completion.handlers")
 
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local handlers = require("nvim-autopairs.completion.handlers")
-
-cmp.event:on(
-    "confirm_done",
-    -- TODO figure out this
-    cmp_autopairs.on_confirm_done({
-        filetypes = {
-            -- "*" is an alias to all filetypes
-            ["*"] = {
-                ["("] = {
-                    kind = {
-                        cmp.lsp.CompletionItemKind.Function,
-                        cmp.lsp.CompletionItemKind.Method,
-                    },
-                    handler = handlers["*"],
-                },
-            },
-        },
-    })
-)
+-- cmp.event:on(
+--     "confirm_done",
+--     -- TODO figure out this
+--     cmp_autopairs.on_confirm_done({
+--         filetypes = {
+--             -- "*" is an alias to all filetypes
+--             ["*"] = {
+--                 ["("] = {
+--                     kind = {
+--                         cmp.lsp.CompletionItemKind.Function,
+--                         cmp.lsp.CompletionItemKind.Method,
+--                     },
+--                     handler = handlers["*"],
+--                 },
+--             },
+--         },
+--     })
+-- )
