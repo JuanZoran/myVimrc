@@ -39,4 +39,21 @@ return {
     Cursor = {
         bg = '#58a6ff',
     },
+    FloatBorder = {
+        fg = '#54546d',
+        bg = 'NONE',
+    },
+    FloatTitle = {
+        fg = '#938aa9',
+        bg = 'NONE',
+    },
+    -- FloatShadow = {
+    --     link = 'FloatBorder',
+    -- },
+    -- FloatShadowThrough = {
+    --     link = 'FloatBorder',
+    -- },
+    NormalFloat = {
+        link = 'Normal'
+    },
 }

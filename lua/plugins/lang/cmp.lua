@@ -29,9 +29,11 @@ cmp.setup({
                 if luasnip.choice_active() then
                     luasnip.change_choice()
                 else
+---@diagnostic disable-next-line: missing-parameter
                     cmp.mapping.complete()()
                 end
             end,
+---@diagnostic disable-next-line: missing-parameter
             c = cmp.mapping.complete()
         },
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.

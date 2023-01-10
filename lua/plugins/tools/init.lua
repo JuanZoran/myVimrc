@@ -74,10 +74,9 @@ use {
     },
     run = 'bash ./install.sh',
     config = function()
-        -- require "Trans".setup {}
-        vim.keymap.set("v", "mm", '<Esc><Cmd>TranslateSelectWord<CR>', { desc = ' Translate' })
-        vim.keymap.set("n", "mm", "<Cmd>TranslateCursorWord<CR>", { desc = ' Translate' })
-        vim.keymap.set("n", "mi", "<Cmd>TranslateInputWord<CR>", { desc = ' Translate From Input' })
+        require "Trans".setup {}
+        vim.keymap.set({ "v", 'n' }, "mm", '<Cmd>Translate<CR>', { desc = ' Translate' })
+        vim.keymap.set("n", "mi", "<Cmd>TranslateInput<CR>", { desc = ' Translate From Input' })
     end
 }
 

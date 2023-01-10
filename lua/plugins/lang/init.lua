@@ -51,7 +51,7 @@ use {
     "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
     "neovim/nvim-lspconfig", -- official lspconfig
     "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
-
+    'ray-x/lsp_signature.nvim',
     -- NOTE  Dap
     -- 'jayp0521/mason-nvim-dap.nvim',
     -- 'mfussenegger/nvim-dap',
@@ -59,6 +59,15 @@ use {
 }
 
 -- NOTE :====================== Completion =====================
+
+
+use {
+    "folke/neodev.nvim",
+    config = function()
+        require('neodev').setup {
+        }
+    end
+}
 
 -- LuaSnip
 use {

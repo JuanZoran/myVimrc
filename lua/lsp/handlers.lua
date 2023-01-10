@@ -36,7 +36,6 @@ local config = {
 
 vim.diagnostic.config(config)
 
-
 ---@format disable
 M.on_attach = function(_, bufnr)
     -- NOTE Keymap
@@ -106,4 +105,5 @@ end
 capabilities.textDocument.publishDiagnostics.codeActionsInline = true
 
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
 return M

@@ -23,6 +23,11 @@ return {
             -- completion = {
             --     postfix = '->'
             -- }
+            completion = {
+                callSnippet = "Replace"
+            },
         },
     },
 }
+
+

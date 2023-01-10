@@ -38,6 +38,7 @@ for _, server in ipairs(servers) do
     opts = {
         on_attach = handler.on_attach,
         capabilities = handler.capabilities,
+        handlers = handler.handlers
     }
 
     local conf_opts = require('lsp.conf.' .. server)

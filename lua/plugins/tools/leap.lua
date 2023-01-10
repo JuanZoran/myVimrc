@@ -2,14 +2,14 @@ local set = require("util.map").set
 set {
     mode = '',
     map = {
-        {'<leader>j', '<Plug>(leap-backward-to)', '⬅️ quick jump backward'},
-        {'<leader><leader>l', '<Plug>(leap-cross-window)', '💪quick jump cross window'},
-        {'<leader>l', '<Plug>(leap-forward-to)', '➡️ quick jump forward'},
+        { '<leader>j', '<Plug>(leap-backward-to)', '⬅️ quick jump backward' },
+        { '<leader><leader>l', '<Plug>(leap-cross-window)', '💪quick jump cross window' },
+        { '<leader>l', '<Plug>(leap-forward-to)', '➡️ quick jump forward' },
     }
 }
 
 
-vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Linenr' })
 vim.api.nvim_set_hl(0, 'LeapMatch', {
     fg = '#599eff',
     bold = true,
@@ -47,7 +47,7 @@ local function paranormal(targets)
         -- local id = target.extmark_id
         -- local pos = vim.api.nvim_buf_get_extmark_by_id(0, ns, id, {})
         -- vim.fn.cursor(pos[1] + 1, pos[2] + 1)
-        vim.fn.cursor(line, col)
+        vim.fn.cursor({line, col})
         vim.cmd(cmd .. input)
     end
 
