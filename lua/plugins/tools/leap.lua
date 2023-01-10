@@ -1,4 +1,14 @@
-require("leap").add_default_mappings()
+local set = require("util.map").set
+set {
+    mode = '',
+    map = {
+        {'<leader>j', '<Plug>(leap-backward-to)', '⬅️ quick jump backward'},
+        {'<leader><leader>l', '<Plug>(leap-cross-window)', '💪quick jump cross window'},
+        {'<leader>l', '<Plug>(leap-forward-to)', '➡️ quick jump forward'},
+    }
+}
+
+
 vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
 vim.api.nvim_set_hl(0, 'LeapMatch', {
     fg = '#599eff',
@@ -56,8 +66,7 @@ vim.keymap.set(
             multiselect = true,
         }
     end,
-    { desc = '[]Select targets to exec normal command' }
-    -- require('specs').show_specs()
+    { desc = '🔌Select targets to exec normal command' }
 )
 
 -- local function get_line_starts(winid)

@@ -84,7 +84,7 @@ use {
         -- { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
         { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-        { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
+        -- { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
     },
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
     config = [[require "plugins.lang.cmp"]]

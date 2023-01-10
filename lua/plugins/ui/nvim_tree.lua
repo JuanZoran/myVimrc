@@ -11,6 +11,7 @@ local WIDTH_RATIO = 0.4 -- You can change this too
 
 local icon = require('util').icon
 nvim_tree.setup {
+    respect_buf_cwd = true,
     disable_netrw = true,
     hijack_netrw = true,
     -- open_on_setup = false,
@@ -140,7 +141,6 @@ nvim_tree.setup {
             "CMakeLists.txt",
         },
     },
-    respect_buf_cwd = true,
     -- tab = {
     -- sync = {
     -- open = false,

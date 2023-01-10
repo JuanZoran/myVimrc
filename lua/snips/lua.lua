@@ -87,7 +87,7 @@ local snips = {
         return M
     ]]),
     parse("cmd", "<Cmd>$1<CR>"),
-    parse("parse", [[parse("$1", "$2")]]),
+    parse("parse", [[parse("${1:trig}", "$2")]]),
     s("formatEnable", { t("---@format enable") }),
     s("formatDisable", { t("---@format disable") }),
 

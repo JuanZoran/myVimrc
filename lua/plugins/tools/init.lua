@@ -25,8 +25,6 @@ use {
     keys = {
         { "n", "<leader>u" },
     },
-    -- "nguyenvukhang/nvim-toggler",
-    -- disable = true,
     config = [[require'plugins.tools.toggle']]
 }
 
@@ -151,10 +149,10 @@ use {
 -- INFO Markdown image preview
 -- use {
 --     'edluffy/hologram.nvim',
---     fd = { 'md', 'markdown' },
---     config = function()
---         require('hologram').setup {
---             auto_display = true -- WIP automatic markdown image display, may be prone to breaking
---         }
---     end
+--     -- fd = { 'md', 'markdown' },
+--     -- config = function()
+--     --     require('hologram').setup {
+--     --         auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+--     --     }
+--     -- end
 -- }

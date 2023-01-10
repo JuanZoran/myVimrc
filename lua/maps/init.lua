@@ -46,7 +46,19 @@ set {
 
         -- 其他
         { "<C-q>",     function () -- smart quit
-            vim.cmd((vim.bo.modifiable and not vim.bo.readonly) and 'wq' or 'q') 
+            local cmd = ''
+            if vim.bo.modifiable and not vim.bo.readonly then
+                local line = vim.api.nvim_buf_line_count(0)
+                local cols = vim.fn.col('$')
+                if line == 1 and cols == 1 then
+                    cmd = 'q'
+                else
+                    cmd = 'wq'
+                end
+            else
+                cmd = 'q!'
+            end
+            vim.cmd(cmd)
         end },
         { "<leader>q",     ":q!<CR>"       },
         -- { "na",        "<c-a>"         },

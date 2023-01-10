@@ -25,8 +25,10 @@ set {
         { "v<cr>",    'vi"'   },
         { "c<cr>",    'ci"'   },
         -- INFO  in ''
-        { "y<space>", [[yi']] },
-        { "c<space>", [[ci']] },
+        { "y;", [[yi']] },
+        { "c;", [[ci']] },
+        { "d;", [[di']] },
+        { "v;", [[vi']] },
 
         -- INFO: resize
         { "<C-Down>",  "<C-w>-" },

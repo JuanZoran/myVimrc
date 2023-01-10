@@ -93,7 +93,7 @@ cmp.setup({
                 path        = "[Path]",
                 cmp_tabnine = "[TabNine]",
                 buffer      = "[Buffer]",
-                rg          = "[REG]",
+                -- rg          = "[REG]",
                 -- neorg       = "[Neorg]",
             })[entry.source.name]
             return vim_item
@@ -105,7 +105,7 @@ cmp.setup({
         { name = "cmp_tabnine", max_item_count = 5 },
         -- { name = "nvim_lua" },
         { name = "buffer", max_item_count = 4 },
-        { name = "rg", max_item_count = 4 },
+        -- { name = "rg", max_item_count = 4 },
         { name = "path" },
     },
     -- confirm_opts = {
