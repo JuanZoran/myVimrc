@@ -11,7 +11,3 @@ use {
 
 -- NOTE :better performance
 use("lewis6991/impatient.nvim")
-use {
-    "nathom/filetype.nvim",
-    config = [[ require 'plugins.base.filetype' ]]
-}
