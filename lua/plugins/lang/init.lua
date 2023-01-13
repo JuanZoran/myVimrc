@@ -64,6 +64,9 @@ use {
     "folke/neodev.nvim",
     config = function()
         require('neodev').setup {
+            library = {
+                plugins = false,
+            }
         }
     end
 }

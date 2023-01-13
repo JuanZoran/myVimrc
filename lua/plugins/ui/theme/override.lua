@@ -56,4 +56,8 @@ return {
     NormalFloat = {
         link = 'Normal'
     },
+    SagaBorder = {
+        fg = '#938aa9',
+        bg = 'NONE',
+    }
 }
