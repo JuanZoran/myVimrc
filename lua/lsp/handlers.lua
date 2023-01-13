@@ -47,20 +47,18 @@ M.on_attach = function(_, bufnr)
             { "<Leader>rn", "<cmd>Lspsaga rename<CR>",                  '凜 Rename'     },
             { "<Leader>ca", "<cmd>Lspsaga code_action<CR>",             ' Code Action' },
             -- NOTE :for text diagnostic
-            { "<Leader>dd", "<cmd>Lspsaga show_line_diagnostics<CR>",   ' check out line diagnostic'   },
-            { "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'          },
-            { "<Leader>dj", "<cmd>Lspsaga diagnostic_jump_prev<cr>",    ' 跳转到上一个诊断信息处'      },
-            { "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>",    ' 跳转到下一个诊断信息处'      },
-            { "<Leader>de", vim.diagnostic.open_float,                  ' 查看详细诊断信息'            },
-            { "<Leader>dm", vim.diagnostic.setqflist,                   ' 打开诊断列表'                },
-            { "<Leader>o", "<cmd>Lspsaga outline<CR>",                  ' Show the variables window'   },
-
-            { "gf", "<cmd>Lspsaga lsp_finder<cr>",                      ' 查看相关信息' },
-            { "gd", "<cmd>Lspsaga peek_definition<cr>",                 ' 查看定义'     },
-            { "gD", vim.lsp.buf.declaration,                            ' 查看声明'     },
-            { "gi", vim.lsp.buf.implementation,                         ' 查看实现'     },
-            { "gr", vim.lsp.buf.references,                             ' 查看所有引用' },
-
+            { "<Leader>dd", "<cmd>Lspsaga show_line_diagnostics<CR>",   ' check out line diagnostic'         },
+            { "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'       },
+            { "<Leader>dj", "<cmd>Lspsaga diagnostic_jump_prev<cr>",    ' 跳转到上一个诊断信息处' },
+            { "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>",    ' 跳转到下一个诊断信息处' },
+            -- { "<Leader>de", vim.diagnostic.open_float,                  ' 查看详细诊断信息'          },
+            { "<Leader>dm", '<Cmd>Lspsaga show_buf_diagnostics<CR>',                   ' 打开诊断列表' },
+            { "<Leader>o", "<cmd>Lspsaga outline<CR>",                  ' Show the variables window'         },
+            { "gf", "<cmd>Lspsaga lsp_finder<cr>",                      ' 查看相关信息'                },
+            { "gd", "<cmd>Lspsaga peek_definition<cr>",                 ' peek definition'               },
+            { "gD", '<Cmd>Lspsaga goto_definition<CR>',                            ' jump to definition' },
+            { "gi", '<Cmd>Lspsaga incoming_calls<CR>',                         ' incoming invoke'        },
+            { "gr", '<Cmd>Lspsaga outgoing_calls<CR>',                             ' outgoing invoke'    },
 
             {
                 "gh",

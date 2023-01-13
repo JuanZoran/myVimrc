@@ -14,11 +14,11 @@ local function diff_source()
 end
 
 local function lsp_is_active()
-    return vim.lsp.buf_get_clients() ~= nil
+    return vim.lsp.get_active_clients() ~= nil
 end
 
 local function get_lsp_staus()
-    local clients = vim.lsp.buf_get_clients()
+    local clients = vim.lsp.get_active_clients()
     local status = ''
     local tmp = {}
     for _, v in pairs(clients) do
@@ -79,50 +79,18 @@ require("lualine").setup({
             { 'b:gitsigns_head', icon = '' },
             { 'diff', source = diff_source },
         },
-        lualine_c = {
-            {
-                "filename",
-                path = 1,
-            },
-            -- 'lsp_progress',
-        },
     },
     winbar = {
         lualine_z = {
             lsp_status,
         },
-        lualine_b = {
-            {
-                "diagnostics",
-                -- Table of diagnostic sources, available sources are:
-                --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-                sources = { "nvim_diagnostic" },
-                -- Displays diagnostics for the defined severity types
-                sections = { "error", "warn", "info", "hint" },
-                diagnostics_color = {
-                    -- Same values as the general color option can be used here.
-                    error = "DiagnosticError", -- Changes diagnostics' error color.
-                    warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
-                    info = "DiagnosticInfo", -- Changes diagnostics' info color.
-                    hint = "DiagnosticHint", -- Changes diagnostics' hint color.
-                },
-                symbols = { error = icon.Error, warn = icon.Warn, info = icon.Info, hint = icon.Hint },
-                colored = false, -- Displays diagnostics status in color if set to true.
-                update_in_insert = false, -- Update diagnostics in insert mode.
-                always_visible = true, -- Show diagnostics even if there are none.
-            },
-            {
-                require("noice").api.status.mode.get, -- for macro
-                cond = require("noice").api.status.mode.has,
-                -- color = { fg = "#a7c080" },
-            },
-        },
 
         lualine_c = {
             {
-                require('lspsaga.symbolwinbar').get_symbol_node,
-                -- on_click = handler,
-            },
+                function()
+                    return require('lspsaga.symbolwinbar'):get_winbar()
+                end
+            }
         },
         lualine_a = {
             {
@@ -133,5 +101,5 @@ require("lualine").setup({
             },
         },
     },
-    extensions = { "nvim-tree", "quickfix" },
+    -- extensions = { "nvim-tree" },
 })

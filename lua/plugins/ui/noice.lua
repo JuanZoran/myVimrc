@@ -58,6 +58,7 @@ require("noice").setup({
                     win_options = {
                         winhighlight = { Normal = "Normal", FloatBorder = "NoiceCmdlinePopupBorder" },
                     },
+                    backend = 'cmp',
                 },
             },
         },

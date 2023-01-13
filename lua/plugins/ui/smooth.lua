@@ -1,5 +1,5 @@
 require('cinnamon').setup {
-    default_keymaps = false,   -- Create default keymaps.
+    default_keymaps = false, -- Create default keymaps.
     extra_keymaps = false,
     override_keymaps = false, -- whether to force mapping
     -- max_length = 500,
@@ -26,6 +26,12 @@ specs.setup {
     --     nofile = true,
     -- },
 }
+
+-- require('smoothcursor').setup {
+--     fancy = {
+--         enable = true,
+--     }
+-- }
 
 local show = specs.show_specs
 
@@ -140,7 +146,7 @@ end)
 -- Previous/next search result:
 
 vim.api.nvim_create_autocmd('WinEnter', {
-    callback = function ()
+    callback = function()
         if vim.bo.filetype ~= 'specs' then
             show()
         end
