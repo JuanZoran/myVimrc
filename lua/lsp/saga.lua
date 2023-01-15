@@ -1,6 +1,7 @@
 -- import lspsaga safely
 local ok, saga = pcall(require, "lspsaga")
 if not ok then
+    ---@diagnostic disable-next-line: param-type-mismatch
     vim.notify("saga error", "error")
     return
 end
@@ -41,7 +42,7 @@ saga.setup {
         in_select = true,
     },
     outline = {
-        win_position = 'right',
+        win_position = 'left',
         win_with = '',
         win_width = 30,
         show_detail = true,

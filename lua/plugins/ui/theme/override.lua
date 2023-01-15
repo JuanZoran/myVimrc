@@ -57,7 +57,11 @@ return {
         link = 'Normal'
     },
     SagaBorder = {
-        fg = '#938aa9',
+        fg = '#7c3aed',
+        -- fg = '#599eff',
         bg = 'NONE',
-    }
+    },
+    CodeActionText = {
+        fg = '#599eff',
+    },
 }

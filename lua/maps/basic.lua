@@ -12,7 +12,7 @@ set {
         -- INFO  in paragraph
         { "yp",       "yip"   },
         { "dp",       "dip"   },
-        { "vp",       "vip"   },
+        -- { "vp",       "vip"   },
         { "cp",       "cip"   },
         -- INFO  in word
         { "yw",       "yiw"   },
@@ -64,15 +64,12 @@ set {
     mode = 'i',
     map = {
         {'<C-a>', function ()
-            -- FIXME : not this first cols which has character
-            -- local text = 
-            local line = vim.fn.line('.')
-            vim.fn.cursor(line, 1)
+---@diagnostic disable-next-line: param-type-mismatch, undefined-field
+            local s = (vim.fn.getline('.')):find('%S')
+            vim.fn.cursor{vim.fn.line('.'), s or 0}
         end},
         {'<C-e>', function ()
-            local line = vim.fn.line('.')
-            local e = vim.fn.col('$')
-            vim.fn.cursor(line, e)
+            vim.fn.cursor{vim.fn.line('.'), vim.fn.col('$')}
         end},
         {'<C-b>', '<ESC>bi'},
         {'<C-f>', '<ESC>ea'},

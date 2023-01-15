@@ -2,7 +2,7 @@ local use = require("packer").use
 -- NOTE : ====================== Tools =====================
 use {
     "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
+   requires = "nvim-lua/plenary.nvim",
     config = [[require 'plugins.tools.todo-comments']]
 }
 
@@ -73,6 +73,7 @@ use {
         { 'n', 'mi' },
     },
     run = 'bash ./install.sh',
+    requires = 'kkharji/sqlite.lua',
     config = function()
         require "Trans".setup {}
         vim.keymap.set({ "v", 'n' }, "mm", '<Cmd>Translate<CR>', { desc = ' Translate' })
@@ -130,7 +131,10 @@ use {
 
 use {
     "ggandor/leap.nvim",
-    config = [[require 'plugins.tools.leap']]
+    config = [[require 'plugins.tools.leap']],
+    requires = {
+        'ggandor/flit.nvim',
+    }
 }
 
 -- | firenvim

@@ -2,13 +2,28 @@ require('cinnamon').setup {
     default_keymaps = false, -- Create default keymaps.
     extra_keymaps = false,
     override_keymaps = false, -- whether to force mapping
+    hide_cursor = true,
     -- max_length = 500,
     -- scroll_limit = 200,
 }
 
+-- Syntax: t[keys] = {function, {function arguments}}
+-- Use the "sine" easing function
+-- Use the "circular" easing function
+-- t['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '500', [['circular']]}}
+-- t['<C-f>'] = {'scroll', { 'vim.api.nvim_win_get_height(0)', 'true', '500', [['circular']]}}
+-- Pass "nil" to disable the easing animation (constant scrolling speed)
+-- t['<C-y>'] = {'scroll', {'-0.10', 'false', '100', nil}}
+-- t['<C-e>'] = {'scroll', { '0.10', 'false', '100', nil}}
+-- When no easing function is provided the default easing function (in this case "quadratic") will be used
+-- t['zt']    = {'zt', {'300'}}
+-- t['zz']    = {'zz', {'300'}}
+-- t['zb']    = {'zb', {'300'}}
+
 
 -- local distance = 10
 local specs = require('specs')
+local show = specs.show_specs
 specs.setup {
     show_jumps       = true,
     min_jump         = 30,
@@ -26,14 +41,6 @@ specs.setup {
     --     nofile = true,
     -- },
 }
-
--- require('smoothcursor').setup {
---     fancy = {
---         enable = true,
---     }
--- }
-
-local show = specs.show_specs
 
 
 local set = require('util').tmap
@@ -85,8 +92,8 @@ vim.keymap.set('n', 'N', function()
     Scroll('N', 1)
     show()
 end)
-
-
+--
+--
 vim.keymap.set('n', 'A', function()
     vim.defer_fn(show, 10)
     vim.api.nvim_feedkeys('A', 'n', false)
@@ -139,12 +146,6 @@ vim.keymap.set({ 'n', 'x' }, 'L', function()
 end)
 
 
--- Paragraph movements:
--- vim.keymap.set({ 'n', 'x' }, '{', "<Cmd>lua Scroll('{')<CR>")
--- vim.keymap.set({ 'n', 'x' }, '}', "<Cmd>lua Scroll('}')<CR>")
-
--- Previous/next search result:
-
 vim.api.nvim_create_autocmd('WinEnter', {
     callback = function()
         if vim.bo.filetype ~= 'specs' then
@@ -152,15 +153,6 @@ vim.api.nvim_create_autocmd('WinEnter', {
         end
     end
 })
-
--- vim.keymap.set('n', '*', "<Cmd>lua Scroll('*', 1)<CR>")
--- vim.keymap.set('n', '#', "<Cmd>lua Scroll('#', 1)<CR>")
--- vim.keymap.set('n', 'g*', "<Cmd>lua Scroll('g*', 1)<CR>")
--- vim.keymap.set('n', 'g#', "<Cmd>lua Scroll('g#', 1)<CR>")
---
--- Previous/next cursor location:
--- vim.keymap.set('n', '<C-o>', "<Cmd>lua Scroll('<C-o>', 1)<CR>")
-
 
 -- Screen scrolling:
 -- vim.keymap.set('n', 'zz', "<Cmd>lua Scroll('zz', 0, 1)<CR>")

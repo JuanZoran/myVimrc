@@ -7,6 +7,7 @@ local signs = {
     { name = "DiagnosticSignHint", text = icon.Hint },
     { name = "DiagnosticSignInfo", text = icon.Info },
 }
+
 for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
@@ -97,6 +98,7 @@ capabilities.textDocument.foldingRange = {
 -- NOTE  cmp config
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
+---@diagnostic disable-next-line: param-type-mismatch
         vim.notify('cmp_nvim_lsp error', 'Error')
         return
 end

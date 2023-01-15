@@ -5,11 +5,17 @@ ts.setup {
     sync_installl = false,
     highlight = {
         enable = true,
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
+    },
+    -- 启用增量选择
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = '<CR>',
+            node_incremental = '<CR>',
+            node_decremental = '<BS>',
+            scope_incremental = '<TAB>',
+        }
     },
     -- for ts-rainbow plugins
     rainbow = {
@@ -27,11 +33,7 @@ ts.setup {
         enable = true,
     },
     textobjects = require("plugins.lang.textobjects"),
-    -- neorg = {
-    --     enable = true,
-    -- },
     matchup = {
         enable = true,
     },
 }
-

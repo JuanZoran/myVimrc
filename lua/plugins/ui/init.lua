@@ -68,6 +68,7 @@ use {
     event = 'VimEnter',
     config = [[require 'plugins.ui.smooth']],
     requires = {
+        -- 'karb94/neoscroll.nvim',
         'declancm/cinnamon.nvim',
         'edluffy/specs.nvim',
     },

@@ -40,27 +40,19 @@ require("noice").setup({
                         height = "auto",
                     },
                 },
-                popupmenu = {
-                    relative = "editor",
-                    position = {
-                        row = 23,
-                        col = "50%",
-                    },
-                    size = {
-                        width = 60,
-                        height = "auto",
-                        max_height = 15,
-                    },
-                    border = {
-                        style = "rounded",
-                        padding = { 0, 1 },
-                    },
-                    win_options = {
-                        winhighlight = { Normal = "Normal", FloatBorder = "NoiceCmdlinePopupBorder" },
-                    },
-                    backend = 'cmp',
-                },
             },
         },
     },
 })
+
+vim.keymap.set({ "i", 'v' }, "<c-d>", function()
+    if not require("noice.lsp").scroll(4) then
+        return "<c-d>"
+    end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ "i", 'v' }, "<c-u>", function()
+    if not require("noice.lsp").scroll(-4) then
+        return "<c-u>"
+    end
+end, { silent = true, expr = true })

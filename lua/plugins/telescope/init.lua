@@ -61,18 +61,6 @@ use {
 
 
 use {
-    "nvim-telescope/telescope-frecency.nvim",
-    keys = {
-        { 'n', '<C-y>' },
-    },
-    requires = { "kkharji/sqlite.lua", opt = true },
-    config = function()
-        require("telescope").load_extension("frecency")
-        vim.keymap.set('n', '<C-y>', '<cmd>Telescope frecency<cr>') -- []Recently File Sorted by Frequency
-    end
-} -- list
-
-use {
     "AckslD/nvim-neoclip.lua",
     config = [[require 'plugins.telescope.neoclip']]
 }
