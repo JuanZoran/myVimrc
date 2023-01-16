@@ -14,7 +14,7 @@ require("nvim-autopairs").setup({
     },
 })
 
-require('nvim-autopairs').add_rules(require "nvim-autopairs.rules.endwise-lua")
+-- require('nvim-autopairs').add_rules(require "nvim-autopairs.rules.endwise-lua")
 
 -- local cmp_status, cmp = pcall(require, "cmp")
 -- if not cmp_status then

@@ -11,7 +11,7 @@ if not snip_status_ok then
 end
 
 local kind_icons = require('util').icon.code_icon
-cmp.setup({
+cmp.setup {
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -89,7 +89,8 @@ cmp.setup({
         { name = "path" },
         { name = "nvim_lsp", max_item_count = 5 },
         { name = "luasnip" },
-        { name = "cmp_tabnine", max_item_count = 5 },
+        -- { name = "cmp_tabnine", max_item_count = 5 },
+        { name = "cmp_tabnine" },
         { name = "buffer", max_item_count = 4 },
         -- { name = "rg", max_item_count = 4 },
     },
@@ -105,7 +106,11 @@ cmp.setup({
         --     side_padding = 0,
         -- },
     },
-})
+}
+
+-- TabNine
+local tabnine = require('cmp_tabnine.config')
+tabnine:setup({ max_lines = 1000, max_num_results = 10, sort = true })
 
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {
@@ -133,6 +138,6 @@ cmp.setup.cmdline(":", {
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
 )

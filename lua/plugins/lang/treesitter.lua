@@ -1,5 +1,4 @@
-local ts = require("nvim-treesitter.configs")
-ts.setup {
+require("nvim-treesitter.configs").setup {
     auto_install = true,
     -- ensure_installed = "cpp, python, go, lua, vim, markdown, bash",
     sync_installl = false,
@@ -29,8 +28,9 @@ ts.setup {
     indent = {
         enable = true,
     },
-    autopairs = {
-        enable = true,
-    },
     textobjects = require("plugins.lang.textobjects"),
+
+    endwise = {
+        enable = true,
+    }
 }

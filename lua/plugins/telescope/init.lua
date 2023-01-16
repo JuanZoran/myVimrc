@@ -66,13 +66,12 @@ use {
 }
 
 use {
-    "xiyaowong/telescope-emoji.nvim",
+    'nvim-telescope/telescope-symbols.nvim',
     keys = {
         'n', '<leader>tm'
     },
     config = function()
-        require("telescope").load_extension "emoji"
-        vim.keymap.set('n', '<leader>tm', '<cmd>Telescope emoji<cr>', { desc = '🤠Search Emoji' })
+        vim.keymap.set('n', '<leader>tm', '<cmd>Telescope symbols<cr>', { desc = '🤠Search Symbols' })
     end,
 }
 

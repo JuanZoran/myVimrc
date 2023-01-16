@@ -34,6 +34,7 @@ use {
     requires = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "p00f/nvim-ts-rainbow",
+        "RRethy/nvim-treesitter-endwise",
     }, -- rainbow pairs
     config = [[require("plugins.lang.treesitter")]]
 }
@@ -41,7 +42,7 @@ use {
 -- INFO make neovim has modernize folder
 use {
     "kevinhwang91/nvim-ufo",
-    requires = { "kevinhwang91/promise-async", module = 'promise-async' },
+    requires = { "kevinhwang91/promise-async", module = 'promise' },
     config = [[require 'plugins.lang.ufo']],
 }
 
@@ -52,9 +53,9 @@ use {
     "neovim/nvim-lspconfig", -- official lspconfig
     "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
     -- NOTE  Dap
-    -- 'jayp0521/mason-nvim-dap.nvim',
-    -- 'mfussenegger/nvim-dap',
-    -- 'rcarriga/nvim-dap-ui',
+    'jayp0521/mason-nvim-dap.nvim',
+    'mfussenegger/nvim-dap',
+    'rcarriga/nvim-dap-ui',
 }
 
 -- NOTE :====================== Completion =====================
@@ -92,10 +93,8 @@ use {
         { "tzachar/cmp-tabnine", after = "nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
         { "hrsh7th/cmp-path", after = "nvim-cmp" },
-        -- { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
         { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
         { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-        -- { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
     },
     event = { "cmdlineenter", "insertenter" }, -- lazy-load
     config = [[require "plugins.lang.cmp"]]

@@ -102,6 +102,13 @@ set{
 vim.keymap.set("n", "tx", ":r !figlet ")
 vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set("v", "<C-v>", '"+y')
+
+-- vim.keymap.set("n", "<Tab>", function ()
+--     print('tab')
+-- end)
+-- vim.keymap.set("i", "<C-i>", function ()
+--     print('<C-i>')
+-- end)
 -- vim.keymap.set("n", "<CR>", '/<++><CR>vf>c', {silent = true})
 
 
