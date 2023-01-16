@@ -13,7 +13,7 @@ for _, sign in ipairs(signs) do
 end
 
 
-local config = {
+vim.diagnostic.config {
     -- virtual_text = true, --- enable for diagnostic information
     virtual_text = { source = "always", prefix = icon.VirtualText },
 
@@ -26,16 +26,15 @@ local config = {
     severity_sort = true,
     float = {
         focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
+        style     = "minimal",
+        border    = "rounded",
+        source    = "always ",
+        header    = "",
         -- prefix = "🔔",
-        prefix = icon.LSPFloat,
+        prefix    = icon.LSPFloat,
     },
 }
 
-vim.diagnostic.config(config)
 
 ---@format disable
 M.on_attach = function(_, bufnr)
@@ -45,21 +44,21 @@ M.on_attach = function(_, bufnr)
         mode = "n",
         opt = { silent = true, buffer = bufnr },
         map = {
-            { "<Leader>rn", "<cmd>Lspsaga rename<CR>",                  '凜 Rename'     },
-            { "<Leader>ca", "<cmd>Lspsaga code_action<CR>",             ' Code Action' },
+            { "<Leader>rn" , "<cmd>Lspsaga rename<CR>                ",                 '凜 Rename'     },
+            { "<Leader>ca" , "<cmd>Lspsaga code_action<CR>           ",             ' Code Action'     },
+            { "<Leader>dd" , "<cmd>Lspsaga show_line_diagnostics<CR> ",   ' check out line diagnostic' },
+
             -- NOTE :for text diagnostic
-            { "<Leader>dd", "<cmd>Lspsaga show_line_diagnostics<CR>",   ' check out line diagnostic'         },
-            { "<Leader>dc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'       },
-            { "<Leader>dj", "<cmd>Lspsaga diagnostic_jump_prev<cr>",    ' 跳转到上一个诊断信息处' },
-            { "<Leader>dl", "<cmd>Lspsaga diagnostic_jump_next<cr>",    ' 跳转到下一个诊断信息处' },
-            -- { "<Leader>de", vim.diagnostic.open_float,                  ' 查看详细诊断信息'          },
-            { "<Leader>dm", '<Cmd>Lspsaga show_buf_diagnostics<CR>',                   ' 打开诊断列表' },
-            { "<Leader>o", "<cmd>Lspsaga outline<CR>",                  ' Show the variables window'         },
-            { "gf", "<cmd>Lspsaga lsp_finder<cr>",                      ' 查看相关信息'                },
-            { "gd", "<cmd>Lspsaga peek_definition<cr>",                 ' peek definition'               },
-            { "gD", '<Cmd>Lspsaga goto_definition<CR>',                            ' jump to definition' },
-            { "gi", '<Cmd>Lspsaga incoming_calls<CR>',                         ' incoming invoke'        },
-            { "gr", '<Cmd>Lspsaga outgoing_calls<CR>',                             ' outgoing invoke'    },
+            { "<Leader>dc"    , "<cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'       },
+            { "<Leader>dj"    , "<cmd>Lspsaga diagnostic_jump_prev<cr>",    ' 跳转到上一个诊断信息处' },
+            { "<Leader>dl"    , "<cmd>Lspsaga diagnostic_jump_next<cr>",    ' 跳转到下一个诊断信息处' },
+            { "<Leader>dm"    , '<Cmd>Lspsaga show_buf_diagnostics<CR>',    '  打开诊断列表' },
+            { "<Leader>o"     , "<cmd>Lspsaga outline<CR>         ", ' Show the variables window' },
+            { "gf"            , "<cmd>Lspsaga lsp_finder<cr>      ", ' Lspsaga Finder'            },
+            { "gd"            , "<cmd>Lspsaga peek_definition<cr> ", ' peek definition'           },
+            { "gD"            , '<Cmd>Lspsaga goto_definition<CR> ', ' jump to definition'        },
+            { "gi"            , '<Cmd>Lspsaga incoming_calls<CR>  ', ' incoming invoke'           },
+            { "gr"            , '<Cmd>Lspsaga outgoing_calls<CR>  ', ' outgoing invoke'           },
 
             {
                 "gh",

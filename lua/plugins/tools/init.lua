@@ -44,7 +44,7 @@ use {
 -- NOTE : for align
 vim.keymap.set(
     'x', '<leader>=', function()
-    require 'align'.align_to_string(false, true, true)
+    require 'align'.align_to_string(true, true, true)
 end)
 
 -- vim.keymap.set(
