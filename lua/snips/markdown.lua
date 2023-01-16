@@ -6,8 +6,7 @@ local filetypes = {
     "markdown",
     "cpp",
     "c",
-    -- "javascript",
-    -- "rust",
+    'json',
 }
 
 local snips = {}

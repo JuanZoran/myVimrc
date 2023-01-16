@@ -1,12 +1,12 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
-    vim.notify("cmp error", "error")
+    vim.notify("cmp not found")
     return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
-    vim.notify("luasnip error", "error")
+    vim.notify("luasnip not found")
     return
 end
 
@@ -18,22 +18,21 @@ cmp.setup({
         end,
     },
     experimental = {
-        -- native_menu = false,
         ghost_text = true,
     },
     mapping = {
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping {
             i = function(_)
                 if luasnip.choice_active() then
                     luasnip.change_choice()
                 else
----@diagnostic disable-next-line: missing-parameter
+                    ---@diagnostic disable-next-line: missing-parameter
                     cmp.mapping.complete()()
                 end
             end,
----@diagnostic disable-next-line: missing-parameter
+            ---@diagnostic disable-next-line: missing-parameter
             c = cmp.mapping.complete()
         },
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
@@ -46,7 +45,6 @@ cmp.setup({
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<C-o>"] = cmp.mapping.confirm({ select = true }),
         ["<C-e>"] = cmp.mapping(function(fallback)
-            -- TODO: config some
             if luasnip.jumpable(1) then
                 luasnip.jump(1)
             else
@@ -54,7 +52,6 @@ cmp.setup({
             end
         end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
-            -- TODO: config some
             if cmp.visible() then
                 cmp.select_next_item()
             else
@@ -69,16 +66,6 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        -- ["<C-i>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
         ["<C-k>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "!" }),
     },
 
@@ -91,29 +78,21 @@ cmp.setup({
             vim_item.menu = ({
                 luasnip     = "[Snippet]",
                 nvim_lsp    = "[LSP]",
-                -- nvim_lua    = "[NVIM]",
                 path        = "[Path]",
                 cmp_tabnine = "[TabNine]",
                 buffer      = "[Buffer]",
-                -- rg          = "[REG]",
-                -- neorg       = "[Neorg]",
             })[entry.source.name]
             return vim_item
         end,
     },
     sources = {
+        { name = "path" },
         { name = "nvim_lsp", max_item_count = 5 },
         { name = "luasnip" },
         { name = "cmp_tabnine", max_item_count = 5 },
-        -- { name = "nvim_lua" },
         { name = "buffer", max_item_count = 4 },
         -- { name = "rg", max_item_count = 4 },
-        { name = "path" },
     },
-    -- confirm_opts = {
-    --     behavior = cmp.ConfirmBehavior.Replace,
-    --     select = false,
-    -- },
     window = {
         documentation = cmp.config.window.bordered(),
         completion = cmp.config.window.bordered(),
@@ -121,7 +100,7 @@ cmp.setup({
         --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         -- },
         -- completion = {
-        --     winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+        --     winhighlight = "Normal:Normal,FloatBorder:Visual,Search:None",
         --     col_offset = -3,
         --     side_padding = 0,
         -- },
@@ -150,3 +129,10 @@ cmp.setup.cmdline(":", {
         },
     }),
 })
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)

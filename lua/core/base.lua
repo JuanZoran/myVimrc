@@ -79,7 +79,6 @@ g.did_install_syntax_menu = 1
 local disabled_built_ins = {
     "spellfile_plugin",
     "syntax_completion",
-    "filetypes",
     "2html_plugin",
     "getscript",
     "getscriptPlugin",

@@ -4,20 +4,20 @@ vim.api.nvim_create_autocmd('BufRead', {
     command = [[silent! loadview]]
 })
 
-vim.api.nvim_create_autocmd({'BufWrite', 'QuitPre'}, {
+vim.api.nvim_create_autocmd({ 'BufWrite', 'QuitPre' }, {
     group = View,
     command = [[silent! mkview | SessionSave]]
 })
 
--- 设置firenvim的大小
-vim.cmd [[
-function! OnUIEnter(event) abort
-  if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
-    set lines=40 columns=120
-  endif
-endfunction
-autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
-]]
+-- -- 设置firenvim的大小
+-- vim.cmd [[
+-- function! OnUIEnter(event) abort
+--   if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
+--     set lines=40 columns=120
+--   endif
+-- endfunction
+-- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+-- ]]
 
 -- Don't auto comment when o
 vim.api.nvim_create_autocmd("FileType", { command = [[set formatoptions-=cro]] })
@@ -45,26 +45,28 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 
 -- INFO 中文输入法切换的问题
-local fcitx = vim.api.nvim_create_augroup("Fcitx5", { clear = true })
-local state = ''
-vim.api.nvim_create_autocmd('InsertLeave', {
-    group = fcitx,
-    pattern = '*',
-    callback = function()
-        state = vim.fn.system('fcitx5-remote')
-        os.execute('fcitx5-remote -c')
-    end,
-})
+if vim.fn.executable('fcitx5-remote') then
+    local fcitx = vim.api.nvim_create_augroup("Fcitx5", { clear = true })
+    local state = ''
+    vim.api.nvim_create_autocmd('InsertLeave', {
+        group = fcitx,
+        pattern = '*',
+        callback = function()
+            state = io.popen('fcitx5-remote'):read('*a')
+            os.execute('fcitx5-remote -c')
+        end,
+    })
 
-vim.api.nvim_create_autocmd('InsertEnter', {
-    group = fcitx,
-    pattern = '*',
-    callback = function()
-        if state == '2\n' then
-            os.execute('fcitx5-remote -o')
-        end
-    end,
-})
+    vim.api.nvim_create_autocmd('InsertEnter', {
+        group = fcitx,
+        pattern = '*',
+        callback = function()
+            if state == '2\n' then
+                os.execute('fcitx5-remote -o')
+            end
+        end,
+    })
+end
 
 -- INFO : store Position
 -- vim.api.nvim_create_autocmd(

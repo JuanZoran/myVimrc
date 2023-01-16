@@ -33,7 +33,4 @@ ts.setup {
         enable = true,
     },
     textobjects = require("plugins.lang.textobjects"),
-    matchup = {
-        enable = true,
-    },
 }

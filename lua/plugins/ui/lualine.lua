@@ -1,8 +1,6 @@
-local icon = require("util").icon
-
-
 -- TODO : lsp server Name
 local function diff_source()
+    ---@diagnostic disable-next-line: undefined-field
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
         return {
@@ -13,24 +11,36 @@ local function diff_source()
     end
 end
 
-local function lsp_is_active()
-    return vim.lsp.get_active_clients() ~= nil
-end
-
 local function get_lsp_staus()
     local clients = vim.lsp.get_active_clients()
-    local status = ''
     local tmp = {}
-    for _, v in pairs(clients) do
-        table.insert(tmp, v.name)
+    for i, v in pairs(clients) do
+        tmp[i] = v.name
     end
-    status = table.concat(tmp, '  ')
-    return status
+
+    local status = table.concat(tmp, '  ')
+
+    return (({
+        ['c']      = 'ﭰ',
+        ['c++']    = 'ﭱ',
+        ['go']     = 'ﳑ',
+        ['python'] = ' ',
+        ['html']   = ' ',
+        ['lua']    = ' ',
+        ['sh']     = ' ',
+    })[vim.bo.filetype] or '') .. status
+end
+
+local function memory_use()
+    local use = (1 - (vim.loop.get_free_memory() / vim.loop.get_total_memory())) * 100
+    return ' Memory: ' .. ('%.2f'):format(use) --[[  .. '%' ]]
 end
 
 local lsp_status = {
     get_lsp_staus,
-    cond = lsp_is_active,
+    cond = function()
+        return vim.lsp.get_active_clients() ~= nil
+    end,
     color = {
         fg = '#000000', bg = '#10B981'
     },
@@ -75,12 +85,16 @@ require("lualine").setup({
     },
     sections = {
         lualine_b = {
-            -- "branch",
-            { 'b:gitsigns_head', icon = '' },
+            { 'b:gitsigns_head', icon = ' ' },
             { 'diff', source = diff_source },
         },
     },
     winbar = {
+        lualine_y = {
+            {
+                memory_use,
+            },
+        },
         lualine_z = {
             lsp_status,
         },
@@ -94,7 +108,9 @@ require("lualine").setup({
         },
         lualine_a = {
             {
-                "os.date[[%A %H:%M]]",
+                function()
+                    return '盛' .. os.date('%A %H:%M')
+                end,
                 color = {
                     fg = '#000000', bg = '#10B981'
                 },
