@@ -20,7 +20,6 @@ require('cinnamon').setup {
 -- t['zz']    = {'zz', {'300'}}
 -- t['zb']    = {'zb', {'300'}}
 
-
 -- local distance = 10
 local specs = require('specs')
 local show = specs.show_specs
@@ -36,84 +35,42 @@ specs.setup {
         fader = require('specs').linear_fader,
         resizer = require('specs').shrink_resizer
     },
-    ignore_filetypes = {},
-    -- ignore_buftypes  = {
-    --     nofile = true,
-    -- },
+    ignore_buftypes  = {
+        nofile = true,
+    },
 }
-
 
 local set = require('util').tmap
 set {
-    mode = "", -- be appended to other operator
+    mode = {'n', 'x', 'o'}, -- be appended to other operator
     opt = nil,
     map = {
-        { "J", "0" },
-        { "L", "$" },
-        { "k", "j" },
         { "i", "k" },
+        { "k", "j" },
         { "j", "h" },
+        -- { "h", "i" },
+        -- { "H", "I" },
     }
 }
-
--- DEFAULT_KEYMAPS:
--- Half-window movements:
--- vim.keymap.set({ 'n', 'x' }, 'I', function()
---     vim.defer_fn(show, 10)
---     -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-d>'), 'n', true)
---     -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-u>zz', true, false, true), 'n', false)
---     -- vim.
---     vim.cmd[[lua Scroll('<C-u>', 1, 1)]]
---     -- Scroll('<C-u>', 1, 1)
--- end)
-
--- vim.keymap.set({ 'n', 'x' }, 'K', function()
---     vim.defer_fn(show, 10)
---     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-d>zz', true, false, true), 'n', false)
---     -- vim.cmd[[lua Scroll('<C-d>', 1, 1)]]
--- end)
-
-
--- vim.keymap.set({ 'n', 'x' }, 'I', "<C-u>")
--- vim.keymap.set({ 'n', 'x' }, 'K', "<C-d>")
-
--- vim.keymap.set({ 'n', 'x' }, '<ScrollWheelUp>', "<Cmd>lua Scroll('<ScrollWheelUp>')<CR>")
--- vim.keymap.set({ 'n', 'x' }, '<ScrollWheelDown>', "<Cmd>lua Scroll('<ScrollWheelDown>')<CR>")
-
-vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
-vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
-
-vim.keymap.set('n', 'n', function()
-    Scroll('n', 1)
-    show()
-end)
-
-vim.keymap.set('n', 'N', function()
-    Scroll('N', 1)
-    show()
-end)
---
---
-vim.keymap.set('n', 'A', function()
-    vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('A', 'n', false)
-end)
-
-
-vim.keymap.set('n', 'cc', function()
-    vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('cc', 'n', false)
-end)
 
 vim.keymap.set('n', 'H', function()
     vim.defer_fn(show, 10)
     vim.api.nvim_feedkeys('I', 'n', false)
 end)
 
--- EXTRA_KEYMAPS:
--- Start/end of file and line number movements:
--- vim.keymap.set({ 'n', 'x' }, 'gg', "<Cmd>lua Scroll('gg')<CR>")
--- vim.keymap.set({ 'n', 'x' }, 'G', "<Cmd>lua Scroll('G', 0, 1)<CR>")
+vim.keymap.set('n', 'A', function()
+    vim.defer_fn(show, 10)
+    vim.api.nvim_feedkeys('A', 'n', false)
+end)
+
+vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
+vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
+
+
+vim.keymap.set('n', 'cc', function()
+    vim.defer_fn(show, 10)
+    vim.api.nvim_feedkeys('cc', 'n', false)
+end)
 
 
 vim.keymap.set({ 'n', 'x' }, 'G', function()
@@ -122,27 +79,24 @@ vim.keymap.set({ 'n', 'x' }, 'G', function()
 
 end)
 
--- vim.api.nvim_set_keymap('n', '<leader>v', ':lua require("specs").show_specs({width = 97, winhl = "Search", delay_ms = 610, inc_ms = 21})<CR>', { noremap = true, silent = true })
-
 vim.keymap.set({ 'n', 'x' }, 'gg', function()
     vim.defer_fn(show, 10)
     vim.api.nvim_feedkeys('gg', 'n', false)
 end)
 
-
 -- Start/end of line:
 vim.keymap.set({ 'n', 'x' }, 'J', function()
-    vim.api.nvim_feedkeys('0', 'n', false)
     if vim.fn.col('.') ~= 1 then
         vim.defer_fn(show, 10)
     end
+    vim.fn.cursor { vim.fn.line('.'), 1 }
 end)
 
 vim.keymap.set({ 'n', 'x' }, 'L', function()
-    vim.api.nvim_feedkeys('$', 'n', false)
     if vim.fn.col('.') ~= vim.fn.col('$') - 1 then
         vim.defer_fn(show, 10)
     end
+    vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
 end)
 
 
@@ -154,40 +108,13 @@ vim.api.nvim_create_autocmd('WinEnter', {
     end
 })
 
--- Screen scrolling:
--- vim.keymap.set('n', 'zz', "<Cmd>lua Scroll('zz', 0, 1)<CR>")
--- vim.keymap.set('n', 'zt', "<Cmd>lua Scroll('zt', 0, 1)<CR>")
--- vim.keymap.set('n', 'zb', "<Cmd>lua Scroll('zb', 0, 1)<CR>")
--- vim.keymap.set('n', 'z.', "<Cmd>lua Scroll('z.', 0, 1)<CR>")
--- vim.keymap.set('n', 'z<CR>', "<Cmd>lua Scroll('zt^', 0, 1)<CR>")
--- vim.keymap.set('n', 'z-', "<Cmd>lua Scroll('z-', 0, 1)<CR>")
--- vim.keymap.set('n', 'z^', "<Cmd>lua Scroll('z^', 0, 1)<CR>")
--- vim.keymap.set('n', 'z+', "<Cmd>lua Scroll('z+', 0, 1)<CR>")
--- vim.keymap.set('n', '<C-y>', "<Cmd>lua Scroll('<C-y>', 0, 1)<CR>")
--- vim.keymap.set('n', '<C-e>', "<Cmd>lua Scroll('<C-e>', 0, 1)<CR>")
-
--- Horizontal screen scrolling:
--- vim.keymap.set('n', 'zH', "<Cmd>lua Scroll('zH')<CR>")
--- vim.keymap.set('n', 'zL', "<Cmd>lua Scroll('zL')<CR>")
--- vim.keymap.set('n', 'zs', "<Cmd>lua Scroll('zs')<CR>")
--- vim.keymap.set('n', 'ze', "<Cmd>lua Scroll('ze')<CR>")
--- vim.keymap.set('n', 'zh', "<Cmd>lua Scroll('zh', 0, 1)<CR>")
--- vim.keymap.set('n', 'zl', "<Cmd>lua Scroll('zl', 0, 1)<CR>")
-
--- EXTENDED_KEYMAPS:
-
--- Up/down movements:
-
--- -- SCROLL_WHEEL_KEYMAPS:
 
 -- LSP_KEYMAPS:
-
 -- LSP go-to-definition:
 -- vim.keymap.set('n', 'gd', "<Cmd>lua Scroll('definition')<CR>")
 
 -- LSP go-to-declaration:
 -- vim.keymap.set('n', 'gD', "<Cmd>lua Scroll('declaration')<CR>")
-
 -- require("smoothcursor").setup {
 --     fancy = {
 --         enable = true,
@@ -200,3 +127,12 @@ vim.api.nvim_create_autocmd('WinEnter', {
 --         'specs',
 --     }
 -- }
+-- vim.keymap.set('n', 'n', function()
+--     Scroll('n', 1)
+--     show()
+-- end)
+--
+-- vim.keymap.set('n', 'N', function()
+--     Scroll('N', 1)
+--     show()
+-- end)

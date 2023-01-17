@@ -6,7 +6,6 @@ vim.g.maplocalleader = " "
 ---@format disable
 set {
     mode = 'n',
-    -- opt = opt,
     map = {
     -- INFO: tips
         -- INFO  in paragraph
@@ -40,16 +39,9 @@ set {
         -- { ";", "@" },
     }
 }
-set {
-    mode = "",
-    map = {
-        { "h", "i" },
-        { "H", "I" },
-    }
-}
 
 set {
-    mode = "v",
+    mode = "x",
     map = {
         { "<A-i>", ":m '<-2<CR>gv" },
         { "<A-k>", ":m '>+1<CR>gv" },

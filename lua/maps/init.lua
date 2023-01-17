@@ -1,7 +1,7 @@
 local set = require("util.map").set
 
 vim.keymap.set(
-    { "v", "o", "i" }, -- mode
+    { "x", "o", "i" }, -- mode
     "<C-s>",
     "<Esc>",
     { silent = true }
@@ -100,8 +100,8 @@ set{
 
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
-vim.keymap.set("v", "<C-c>", '"+y')
-vim.keymap.set("v", "<C-v>", '"+y')
+vim.keymap.set("x", "<C-c>", '"+y')
+vim.keymap.set("x", "<C-v>", '"+y')
 
 -- vim.keymap.set("n", "<Tab>", function ()
 --     print('tab')
@@ -110,7 +110,6 @@ vim.keymap.set("v", "<C-v>", '"+y')
 --     print('<C-i>')
 -- end)
 -- vim.keymap.set("n", "<CR>", '/<++><CR>vf>c', {silent = true})
-
 
 
 -- String value	Help page	Affected modes	Vimscript equivalent
