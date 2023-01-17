@@ -46,6 +46,7 @@ use {
     config = [[require 'plugins.lang.ufo']],
 }
 
+
 -- mason | lspconfig | mason-lspconfig
 use {
     "williamboman/mason.nvim", -- lsp manager

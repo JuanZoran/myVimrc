@@ -2,7 +2,7 @@ local use = require("packer").use
 -- NOTE : ====================== Tools =====================
 use {
     "folke/todo-comments.nvim",
-   requires = "nvim-lua/plenary.nvim",
+    requires = "nvim-lua/plenary.nvim",
     config = [[require 'plugins.tools.todo-comments']]
 }
 
@@ -47,17 +47,13 @@ vim.keymap.set(
     require 'align'.align_to_string(true, true, true)
 end)
 
--- vim.keymap.set(
---     'x', '<leader><leader>=', function()
---     require 'align'.align_to_char(1, false, true)
--- end)
 use {
     {
         'Vonr/align.nvim',
         module = 'align',
     },
 
-    { -- powerful comment with gc<char> | gb<char> | <leader>a
+    { -- powerful comment with gc<char> | gb<char> | <leader>A
         "numtostr/comment.nvim",
         config = [[require'plugins.tools.comment']],
     },
@@ -109,7 +105,7 @@ use {
     config = function()
         local m = require('trevj')
         m.setup {}
-        vim.keymap.set('n', '<leader>ff', m.format_at_cursor, { desc = '[]Open Format At Cursor' })
+        vim.keymap.set('n', '<leader>ff', m.format_at_cursor, { desc = ' Open Format At Cursor' })
     end, -- optional call for configurating non-default filetypes etc
 }
 
@@ -143,11 +139,8 @@ use {
     run = function()
         vim.fn["firenvim#install"](0)
     end,
+    module = 'firenvim',
 }
-
--- use {
---     'rhysd/vim-grammarous',
--- }
 
 -- INFO Markdown image preview
 -- use {

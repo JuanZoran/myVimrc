@@ -7,6 +7,7 @@ use {
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- fuzzy finder
         { 'nvim-telescope/telescope-ui-select.nvim', },
     },
+    branch = '0.1.x',
     config = [[require 'plugins.telescope.base']]
 }
 

@@ -1,5 +1,5 @@
 require("neoclip").setup {
-    history = 400,
+    history = 1000,
     enable_persistent_history = true,
     enable_macro_history = false,
     keys = {
@@ -29,4 +29,4 @@ require("neoclip").setup {
 }
 
 require("telescope").load_extension "neoclip"
-vim.keymap.set('n', '<leader><C-p>', '<cmd>Telescope neoclip<cr>', { desc = '📋Clipboard History' })
+vim.keymap.set('n', '<leader><C-p>', '<Cmd>Telescope neoclip<cr>', { desc = '📋Clipboard History' })
