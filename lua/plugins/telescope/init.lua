@@ -1,5 +1,4 @@
 local use = require("packer").use
-
 use {
     "nvim-telescope/telescope.nvim",
     requires = {
@@ -37,7 +36,7 @@ use {
 use {
     "ThePrimeagen/refactoring.nvim",
     keys = {
-        { 'v', '<Leader>rr' },
+        { 'x', '<Leader>rr' },
     },
     config = [[require 'plugins.telescope.refactor']]
 } -- list
@@ -81,9 +80,9 @@ use {
     keys = {
         'n', '<leader>tu'
     },
-          -- ["<cr>"] = require("telescope-undo.actions").yank_additions,
-          -- ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-          -- ["<C-cr>"] = require("telescope-undo.actions").restore,
+    -- ["<cr>"] = require("telescope-undo.actions").yank_additions,
+    -- ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+    -- ["<C-cr>"] = require("telescope-undo.actions").restore,
     config = function()
         require("telescope").setup {
             extensions = {
@@ -97,6 +96,6 @@ use {
             }
         }
         require("telescope").load_extension "undo"
-        vim.keymap.set('n', '<leader>tu', '<cmd>Telescope undo<cr>', { desc = '[]Undo History' })
+        vim.keymap.set('n', '<leader>tu', '<cmd>Telescope undo<cr>', { desc = ' Undo History' })
     end,
 }

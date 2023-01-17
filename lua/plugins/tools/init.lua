@@ -64,18 +64,19 @@ use {
 use {
     "/home/zoran/project/Neovim/Trans",
     keys = {
-        { 'v', 'mm' },
+        { 'x', 'mm' },
         { 'n', 'mm' },
         { 'n', 'mi' },
     },
     run = 'bash ./install.sh',
     requires = 'kkharji/sqlite.lua',
     config = function()
-        require "Trans".setup {}
-        vim.keymap.set({ "v", 'n' }, "mm", '<Cmd>Translate<CR>', { desc = ' Translate' })
+        require "Trans".setup()
+        vim.keymap.set({ "x", 'n' }, "mm", '<Cmd>Translate<CR>', { desc = ' Translate' })
         vim.keymap.set("n", "mi", "<Cmd>TranslateInput<CR>", { desc = ' Translate From Input' })
     end
 }
+
 
 use {
     "windwp/nvim-autopairs",
