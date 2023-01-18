@@ -1,9 +1,7 @@
 -- import lspsaga safely
 local ok, saga = pcall(require, "lspsaga")
 if not ok then
-    ---@diagnostic disable-next-line: param-type-mismatch
-    vim.notify("saga error", "error")
-    return
+    return vim.notify("saga not found")
 end
 
 saga.setup {
@@ -37,7 +35,7 @@ saga.setup {
         virtual_text = true,
     },
     rename = {
-        quit = '<C-c>',
+        quit = '<C-q>',
         exec = '<CR>',
         in_select = true,
     },

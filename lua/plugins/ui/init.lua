@@ -9,7 +9,6 @@ use {
     { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
 }
 
-
 use {
 
     "norcalli/nvim-colorizer.lua",
@@ -27,7 +26,6 @@ use {
         requires = { "kyazdani42/nvim-web-devicons" },
         config = [[require "plugins.ui.lualine"]],
     },
-
     { -- 文件树
         "nvim-tree/nvim-tree.lua",
         keys = { 'n', 'ww' },
@@ -49,10 +47,6 @@ use {
     config = [[require("plugins.ui.alpha")]],
 }
 
-
--- smooth scroll animation
-
-
 -- nice ui
 use {
     "folke/noice.nvim",
@@ -63,12 +57,12 @@ use {
     config = [[require "plugins.ui.noice"]]
 }
 
+-- smooth scroll animation
 use {
     'gen740/SmoothCursor.nvim',
     event = 'VimEnter',
     config = [[require 'plugins.ui.smooth']],
     requires = {
-        -- 'karb94/neoscroll.nvim',
         'declancm/cinnamon.nvim',
         'edluffy/specs.nvim',
     },

@@ -11,10 +11,3 @@ use {
 
 -- NOTE :better performance
 use("lewis6991/impatient.nvim")
-
-
--- vim.filetype.add {
---     extension = {
---         h = 'c'
---     }
--- }

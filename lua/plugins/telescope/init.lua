@@ -80,9 +80,6 @@ use {
     keys = {
         'n', '<leader>tu'
     },
-    -- ["<cr>"] = require("telescope-undo.actions").yank_additions,
-    -- ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
-    -- ["<C-cr>"] = require("telescope-undo.actions").restore,
     config = function()
         require("telescope").setup {
             extensions = {

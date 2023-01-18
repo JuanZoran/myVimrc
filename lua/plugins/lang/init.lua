@@ -18,12 +18,10 @@ use {
     run = 'bash ./install.sh',
     keys = {
         { 'n', '<leader><C-r>' },
-        { 'v', '<C-r>' },
+        { 'x', '<C-r>' },
     },
     config = [[require("plugins.lang.sniprun")]],
 }
-
-
 
 -- Treesitter
 use {
@@ -45,7 +43,6 @@ use {
     requires = { "kevinhwang91/promise-async", module = 'promise' },
     config = [[require 'plugins.lang.ufo']],
 }
-
 
 -- mason | lspconfig | mason-lspconfig
 use {
@@ -79,7 +76,6 @@ use {
     requires = {
         "rafamadriz/friendly-snippets"
     },
-    event = { 'insertenter', 'cmdlineenter' },
     after = 'nvim-cmp',
     config = function()
         require('snips').setup()
@@ -97,6 +93,6 @@ use {
         { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
         { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
     },
-    event = { "cmdlineenter", "insertenter" }, -- lazy-load
+    -- event = { "insertenter", "cmdlineenter" }, -- lazy-load
     config = [[require "plugins.lang.cmp"]]
 }

@@ -24,9 +24,9 @@ require('cinnamon').setup {
 local specs = require('specs')
 local show = specs.show_specs
 specs.setup {
-    show_jumps       = true,
-    min_jump         = 30,
-    popup            = {
+    show_jumps      = true,
+    min_jump        = 30,
+    popup           = {
         delay_ms = 0, -- delay before popup displays
         inc_ms = 10, -- time increments used for fade/resize effects
         blend = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
@@ -35,23 +35,32 @@ specs.setup {
         fader = require('specs').linear_fader,
         resizer = require('specs').shrink_resizer
     },
-    ignore_buftypes  = {
+    ignore_buftypes = {
         nofile = true,
     },
 }
 
-local set = require('util').tmap
+local set = require('util.map').set
 set {
-    mode = {'n', 'x', 'o'}, -- be appended to other operator
-    opt = nil,
+    mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
         { "i", "k" },
         { "k", "j" },
         { "j", "h" },
-        -- { "h", "i" },
+        { "h", "i" },
         -- { "H", "I" },
     }
 }
+
+
+set {
+    mode = 'o',
+    map = {
+        {'L', '$'},
+        {'J', '0'},
+    }
+}
+
 
 vim.keymap.set('n', 'H', function()
     vim.defer_fn(show, 10)
@@ -65,7 +74,6 @@ end)
 
 vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
-
 
 vim.keymap.set('n', 'cc', function()
     vim.defer_fn(show, 10)
@@ -107,7 +115,6 @@ vim.api.nvim_create_autocmd('WinEnter', {
         end
     end
 })
-
 
 -- LSP_KEYMAPS:
 -- LSP go-to-definition:

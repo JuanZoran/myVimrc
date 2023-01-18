@@ -77,10 +77,8 @@ use {
     end
 }
 
-
 use {
     "windwp/nvim-autopairs",
-    event = 'InsertEnter',
     config = [[require "plugins.tools.autopairs"]]
 }
 

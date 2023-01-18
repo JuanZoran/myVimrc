@@ -62,6 +62,15 @@ return {
         bg = 'NONE',
     },
     CodeActionText = {
-        fg = '#599eff',
+        fg = '#1e5cb3',
+    },
+    IlluminatedWordText = {
+        bg = '#1e5cb3',
+    },
+    IlluminatedWordRead = {
+        link = 'IlluminatedWordText',
+    },
+    IlluminatedWordWrite = {
+        link = 'IlluminatedWordText',
     },
 }
