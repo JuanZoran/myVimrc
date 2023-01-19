@@ -5,6 +5,5 @@ require('illuminate').configure {
         'lsp',
         'treesitter',
     },
-    -- delay: delay in milliseconds
     delay = 100,
 }

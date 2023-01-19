@@ -6,6 +6,7 @@ local use = require("packer").use
 use {
     {
         "rrethy/vim-illuminate",
+        config = [[require 'plugins.lang.illuminate']]
     },
     {
         "lukas-reineke/indent-blankline.nvim",

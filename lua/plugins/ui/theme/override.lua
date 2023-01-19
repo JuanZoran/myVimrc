@@ -65,7 +65,8 @@ return {
         fg = '#1e5cb3',
     },
     IlluminatedWordText = {
-        bg = '#1e5cb3',
+        bg = '#2d4f67',
+        -- bg = '#1e5cb3',
     },
     IlluminatedWordRead = {
         link = 'IlluminatedWordText',

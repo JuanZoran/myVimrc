@@ -96,30 +96,16 @@ use {
 }
 
 
-use {
-    'AckslD/nvim-trevJ.lua',
-    keys = {
-        { "n", "<leader>ff", },
-    },
-    config = function()
-        local m = require('trevj')
-        m.setup {}
-        vim.keymap.set('n', '<leader>ff', m.format_at_cursor, { desc = ' Open Format At Cursor' })
-    end, -- optional call for configurating non-default filetypes etc
-}
-
 -- Zen mode
 use {
     {
         "folke/zen-mode.nvim",
-        keys = {
-            { 'n', '<leader><leader>h' }
-        },
-        config = [[require 'plugins.tools.zen']]
+        keys = { { 'n', '<leader><leader>h' } },
+        config = [[require 'plugins.tools.zen']],
     },
     {
         "folke/twilight.nvim",
-        after = 'zen-mode.nvim',
+        module = 'twilight',
     },
 }
 
@@ -150,4 +136,16 @@ use {
 --     --         auto_display = true -- WIP automatic markdown image display, may be prone to breaking
 --     --     }
 --     -- end
+-- }
+
+-- use {
+--     'AckslD/nvim-trevJ.lua',
+--     keys = {
+--         { "n", "<leader>ff", },
+--     },
+--     config = function()
+--         local m = require('trevj')
+--         m.setup {}
+--         vim.keymap.set('n', '<leader>ff', m.format_at_cursor, { desc = ' Open Format At Cursor' })
+--     end, -- optional call for configurating non-default filetypes etc
 -- }

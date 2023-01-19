@@ -13,7 +13,7 @@ require("zen-mode").setup {
 }
 
 require("twilight").setup {
-    context = 30
+    context = 20,
 }
 
 vim.keymap.set('n', '<leader><leader>h', '<cmd>ZenMode<cr>')
