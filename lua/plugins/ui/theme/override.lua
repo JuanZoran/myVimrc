@@ -24,6 +24,7 @@ return {
         -- bg = '#7f52ff'
     },
     ['@variable'] = {
+        -- fg = '#b4d3a3',
         fg = '#ffa066',
     },
     CursorLine = {
@@ -73,5 +74,12 @@ return {
     },
     IlluminatedWordWrite = {
         link = 'IlluminatedWordText',
+    },
+    IndentBlanklineContextChar = {
+        fg = '#89e051'
+    },
+    IndentBlanklineContextStart = {
+        underline = true,
+        sp = '#89e051',
     },
 }

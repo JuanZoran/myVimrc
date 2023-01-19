@@ -1,29 +1,24 @@
 -- import lspsaga safely
-local ok, saga = pcall(require, "lspsaga")
-if not ok then
-    return vim.notify("saga not found")
-end
-
-saga.setup {
+require('lspsaga').setup {
     finder = {
         edit = { 'o', '<CR>' },
         vsplit = 'v',
         split = 's',
         tabe = 't',
-        quit = { 'q', '<ESC>' },
+        quit = '<C-q>',
     },
     definition = {
-        edit = '<C-d>o',
-        vsplit = '<C-d>v',
-        split = '<C-d>i',
-        tabe = '<C-d>t',
-        quit = 'q',
+        edit = '<C-o>',
+        vsplit = '<C-v>',
+        split = '<C-h>',
+        tabe = '<C-t>',
+        quit = '<C-q>',
         close = '<Esc>',
     },
     code_action = {
         num_shortcut = true,
         keys = {
-            quit = 'q',
+            quit = '<C-q>',
             exec = '<CR>',
         },
     },
@@ -38,6 +33,7 @@ saga.setup {
         quit = '<C-q>',
         exec = '<CR>',
         in_select = true,
+        whole_project = false,
     },
     outline = {
         win_position = 'left',
@@ -51,7 +47,7 @@ saga.setup {
         keys = {
             jump = 'o',
             expand_collaspe = 'u',
-            quit = 'q',
+            quit = '<C-q>',
         },
     },
     callhierarchy = {
@@ -62,7 +58,7 @@ saga.setup {
             split = 's',
             tabe = 't',
             jump = 'o',
-            quit = 'q',
+            quit = '<C-q>',
             expand_collaspe = 'u',
         },
     },
@@ -78,30 +74,5 @@ saga.setup {
         theme = 'round',
         -- border type can be single,double,rounded,solid,shadow.
         border = 'rounded',
-        winblend = 0,
-        expand = '',
-        collaspe = '',
-        preview = ' ',
-        code_action = '💡',
-        diagnostic = '🐞',
-        incoming = ' ',
-        outgoing = ' ',
-        colors = {
-            --float window normal bakcground color
-            normal_bg = '#1d1536',
-            --title background color
-            title_bg = '#afd700',
-            red = '#e95678',
-            magenta = '#b33076',
-            orange = '#FF8700',
-            yellow = '#f7bb3b',
-            green = '#afd700',
-            cyan = '#36d0e0',
-            blue = '#61afef',
-            purple = '#CBA6F7',
-            white = '#d1d4cf',
-            black = '#1c1c19',
-        },
-        kind = {},
     },
 }
