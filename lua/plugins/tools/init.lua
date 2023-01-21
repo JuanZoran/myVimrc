@@ -79,7 +79,7 @@ use {
 
 use {
     "windwp/nvim-autopairs",
-    config = [[require "plugins.tools.autopairs"]]
+    config = [[require "plugins.tools.autopairs"]],
 }
 
 -- Session
@@ -126,6 +126,7 @@ use {
     end,
     module = 'firenvim',
 }
+
 
 -- INFO Markdown image preview
 -- use {

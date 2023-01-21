@@ -51,6 +51,7 @@ vim.keymap.set({ "i", 'v' }, "<c-d>", function()
     end
 end, { silent = true, expr = true })
 
+
 vim.keymap.set({ "i", 'v' }, "<c-u>", function()
     if not require("noice.lsp").scroll(-4) then
         return "<c-u>"

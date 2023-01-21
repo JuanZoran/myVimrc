@@ -90,7 +90,20 @@ local snips = {
     parse("parse", [[parse("${1:trig}", "$2")]]),
     s("formatEnable", { t("---@format enable") }),
     s("formatDisable", { t("---@format disable") }),
-
+    s("nodis", { t("---@nodiscard") }),
+    s(
+        "class",
+        fmt('---@class {}', {
+            i(1, "name"),
+        })
+    ),
+    s(
+        "field",
+        fmt('---@field {} {}', {
+            i(1, "name"),
+            i(2, "type"),
+        })
+    ),
     -- TODO config with this
     -- s("auto-", fmt([[s("{}", {})]], {i(1, 'trigger'), i(2, "")} ))
 }
