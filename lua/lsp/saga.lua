@@ -33,7 +33,6 @@ require('lspsaga').setup {
         quit = '<C-q>',
         exec = '<CR>',
         in_select = true,
-        whole_project = false,
     },
     outline = {
         win_position = 'left',

@@ -6,7 +6,6 @@ vim.keymap.set(
     { silent = true }
 )
 
-
 require("maps.basic")
 
 ---@format disable
@@ -15,26 +14,25 @@ set {
     map = {
     -- INFO : about window
         {'w', '<cmd>WhichKey w<cr>'},
-        { "wo",       ":vsp<CR>",   ' 左右分屏'         },
-        { "wu",       ":sp<CR>",    ' 上下分屏'         },
-        { "wj",       "<C-w>h",     ' 跳转到左边窗口'   },
-        { "wl",       "<C-w>l",     ' 跳转到右边窗口'   },
-        { "wk",       "<C-w>j",     ' 跳转到下方窗口'   },
-        { "wi",       "<C-w>k",     ' 跳转到上方窗口'   },
-        { "wn",       ":only<CR>",  ' 关闭所有窗口'     },
-        { "w=",       "<C-w>=",     '屢恢复原来窗口尺寸' },
-        { "w<Down>",  "<C-w>J",     ' 窗口向下移动'     },
-        { "w<Up>",    "<C-w>K",     ' 窗口向上移动'     },
-        { "w<Left>",  "<C-w>H",     ' 窗口向左移动'     },
-        { "w<Right>", "<C-w>L",     ' 窗口向右移动'     },
+        { "wo",       ":vsp<CR>",   ' Split Window'            },
+        { "wj",       "<C-w>h",     ' Jump Left'               },
+        { "wl",       "<C-w>l",     ' Jump Right'              },
+        { "wk",       "<C-w>j",     ' Jump Down'               },
+        { "wi",       "<C-w>k",     ' Jump Up'                 },
+        { "wn",       ":only<CR>",  ' Close Another Window'    },
+        { "w=",       "<C-w>=",     '屢Resize Window'           },
+        { "w<Down>",  "<C-w>J",     ' Move Down'               },
+        { "w<Up>",    "<C-w>K",     ' Move Up'                 },
+        { "w<Left>",  "<C-w>H",     ' Move Left'               },
+        { "w<Right>", "<C-w>L",     ' Move Right'              },
+        { "wu",       ":sp<CR>",    ' Split Window Vertically' },
 
     -- INFO : command
-        { "wd",        ":close<CR>",    '[] 关闭当前窗口' },
-        { "<Leader>w", ":w<CR>"                       },
-        { "<Leader><leader>w", ":wqa<CR>" ,     '[] 保存关闭所有窗口'},
-        { "qw",        ":close<CR>"                   },
-        { "qd",        ":bdelete!<CR>"                },
-
+        { "wd",        ":close<CR>",        ' Close Current Window' },
+        { "<Leader>w", ":w<CR>",            ' Save Current Window'  },
+        { "<Leader><leader>w", ":wqa<CR>" , ' close all window'     },
+        { "qw",        ":close<CR>"    },
+        { "qd",        ":bdelete!<CR>" },
         { "<S-CR>",   "J",  },
     -- INFO : Bufferline
         { "<leader>b<left>",   ":BufferLineMovePrev<CR>",   '[]Move Buffer to Left'      },
@@ -45,18 +43,9 @@ set {
         { "<C-l>", ":BufferLineCycleNext<CR>" },
 
         -- 其他
-        { "<C-q>",     function () -- smart quit
-            local cmd
-            if vim.bo.buftype ~= 'nofile' and vim.bo.modifiable and vim.api.nvim_buf_line_count(0) ~= 1 and vim.fn.col('$') ~= 1 then
-                cmd = 'wq'
-            else
-                cmd = 'q!'
-            end
-            vim.cmd(cmd)
-        end },
-        { "<leader>q",     ":q!<CR>"       },
-        { "<Leader>p", ":PackerSync<CR>",  'מּ [Sync/Install] Plugin'            },
-        { "<Leader>ck", ":set spell!<CR>", '暈Toggle vim builtin spell checker' }
+        { "<C-q>", '<Cmd>q!<CR>'}, -- smart quit
+        { "<Leader>p", ":PackerSync<CR>",  '痢[Sync | Install] Plugin'          },
+        { "<Leader>ck", ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
         -- { "na",        "<c-a>"         },
         -- { "nh",        ":noh<CR>"      },
         ---------------------------

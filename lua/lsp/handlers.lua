@@ -30,8 +30,7 @@ vim.diagnostic.config {
         border    = "rounded",
         source    = "always ",
         header    = "",
-        -- prefix = "🔔",
-        prefix    = icon.LSPFloat,
+        prefix = "🔔",
     },
 }
 
@@ -44,21 +43,21 @@ M.on_attach = function(_, bufnr)
         mode = "n",
         opt = { silent = true, buffer = bufnr },
         map = {
-            { "<Leader>rn" , "<cmd>Lspsaga rename<CR>                ",                 '凜 Rename'     },
-            { "<Leader>ca" , "<cmd>Lspsaga code_action<CR>           ",             ' Code Action'     },
-            { "<Leader>dd" , "<cmd>Lspsaga show_line_diagnostics<CR> ",   ' check out line diagnostic' },
+            { "<Leader>rn" , "<Cmd>Lspsaga rename<CR>                ",   '凜 Rename'               },
+            { "<Leader>ca" , "<Cmd>Lspsaga code_action<CR>           ",   ' Code Action'               },
+            { "<Leader>dd" , "<Cmd>Lspsaga show_line_diagnostics<CR> ",   ' check out line diagnostic' },
 
             -- NOTE :for text diagnostic
-            { "<Leader>dc"    , "<cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'       },
-            { "<Leader>dj"    , "<cmd>Lspsaga diagnostic_jump_prev<cr>",    ' 跳转到上一个诊断信息处' },
-            { "<Leader>dl"    , "<cmd>Lspsaga diagnostic_jump_next<cr>",    ' 跳转到下一个诊断信息处' },
-            { "<Leader>dm"    , '<Cmd>Lspsaga show_buf_diagnostics<CR>',    '  打开诊断列表' },
-            { "<Leader>o"     , "<cmd>Lspsaga outline<CR>         ", ' Show the variables window' },
-            { "gf"            , "<cmd>Lspsaga lsp_finder<cr>      ", ' Lspsaga Finder'            },
-            { "gd"            , "<cmd>Lspsaga peek_definition<cr> ", ' peek definition'           },
-            { "gD"            , '<Cmd>Lspsaga goto_definition<CR> ', ' jump to definition'        },
-            { "gi"            , '<Cmd>Lspsaga incoming_calls<CR>  ', ' incoming invoke'           },
-            { "gr"            , '<Cmd>Lspsaga outgoing_calls<CR>  ', ' outgoing invoke'           },
+            { "<Leader>dc" , "<Cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'       },
+            { "<Leader>dj" , "<Cmd>Lspsaga diagnostic_jump_prev<CR>",    ' 跳转到上一个诊断信息处' },
+            { "<Leader>dl" , "<Cmd>Lspsaga diagnostic_jump_next<CR>",    ' 跳转到下一个诊断信息处' },
+            { "<Leader>dm" , '<Cmd>Lspsaga show_buf_diagnostics<CR>',    '  打开诊断列表' },
+            { "<Leader>o"  , "<Cmd>Lspsaga outline<CR>         ", ' Show the variables window' },
+            { "gf"         , "<Cmd>Lspsaga lsp_finder<cr>      ", ' Lspsaga Finder'            },
+            { "gd"         , "<Cmd>Lspsaga peek_definition<cr> ", ' peek definition'           },
+            { "gD"         , '<Cmd>Lspsaga goto_definition<CR> ', ' jump to definition'        },
+            { "gi"         , '<Cmd>Lspsaga incoming_calls<CR>  ', ' incoming invoke'           },
+            { "gr"         , '<Cmd>Lspsaga outgoing_calls<CR>  ', ' outgoing invoke'           },
 
             {
                 "gh",
@@ -69,8 +68,9 @@ M.on_attach = function(_, bufnr)
                         vim.cmd [[Lspsaga hover_doc]]
                     end
                 end,
-                ' 查看悬浮文档',
+                ' hover',
             },
+
             {
                 "==",
                 function()
@@ -95,11 +95,10 @@ capabilities.textDocument.foldingRange = {
 }
 
 -- NOTE  cmp config
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
----@diagnostic disable-next-line: param-type-mismatch
-        vim.notify('cmp_nvim_lsp error', 'Error')
-        return
+local _, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not _ then
+    vim.notify('cmp_nvim_lsp error')
+    return
 end
 capabilities.textDocument.publishDiagnostics.codeActionsInline = true
 

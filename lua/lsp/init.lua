@@ -26,7 +26,7 @@ require("mason-lspconfig").setup {
 -- import lspconfig plugin safely
 local lspconfig_status, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status then
-    vim.notify("lspconfig error", "error")
+    vim.notify("lspconfig error")
     return
 end
 
@@ -75,6 +75,7 @@ return {
                 exsit:close()
                 return
             end
+
             local new_conf = io.open(new_file, 'a')
             assert(new_conf ~= nil)
             new_conf:write(default_conf)
