@@ -21,13 +21,15 @@ local function get_lsp_staus()
     local status = table.concat(tmp, '  ')
 
     return (({
-        ['c']      = 'ﭰ',
-        ['c++']    = 'ﭱ',
-        ['go']     = 'ﳑ',
-        ['python'] = ' ',
-        ['html']   = ' ',
-        ['lua']    = ' ',
-        ['sh']     = ' ',
+        ['c']          = 'ﭰ',
+        ['c++']        = 'ﭱ',
+        ['go']         = 'ﳑ',
+        ['python']     = ' ',
+        ['html']       = ' ',
+        ['lua']        = ' ',
+        ['sh']         = ' ',
+        ['javascript'] = ' ',
+        ['markdown']   = ' ',
     })[vim.bo.filetype] or '') .. status
 end
 
