@@ -21,8 +21,8 @@ local function get_lsp_staus()
     local status = table.concat(tmp, '  ')
 
     return (({
-        ['c']          = 'ﭰ',
-        ['c++']        = 'ﭱ',
+        ['c']          = ' ﭰ ',
+        ['cpp']        = ' ',
         ['go']         = 'ﳑ',
         ['python']     = ' ',
         ['html']       = ' ',

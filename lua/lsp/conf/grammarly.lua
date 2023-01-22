@@ -1,3 +1,3 @@
 return {
-    -- TODO <++>
+    autostart = false,
 }

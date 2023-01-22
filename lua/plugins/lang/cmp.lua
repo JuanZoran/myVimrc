@@ -96,14 +96,18 @@ cmp.setup {
     window = {
         documentation = cmp.config.window.bordered(),
         completion = cmp.config.window.bordered(),
-        -- documentation = {
-        --     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        -- },
-        -- completion = {
-        --     winhighlight = "Normal:Normal,FloatBorder:Visual,Search:None",
-        --     col_offset = -3,
-        --     side_padding = 0,
-        -- },
+    },
+    sorting = {
+        comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.recently_used,
+            require("clangd_extensions.cmp_scores"),
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
     },
 }
 

@@ -1,5 +1,3 @@
--- Remove annoying indent jumping
--- vim.bo.cinoptions = vim.bo.cinoptions .. "L0"
-
 -- switch header / source
-vim.keymap.set({ "i", "n" }, "<C-k>", "<cmd>ClangdSwitchSourceHeader<CR>", { buffer = true })
+vim.keymap.set({ "i", "n" }, "<C-k>", "<Cmd>ClangdSwitchSourceHeader<CR>", { buffer = true })
+vim.keymap.set("n", "<leader>k", "<Cmd>ClangdMemoryUsage<CR>", { buffer = true })
