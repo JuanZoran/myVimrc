@@ -8,9 +8,7 @@ ml.setup {
     automatic_installation = false,
 }
 
--- import lspconfig plugin safely
 local lspconfig = require "lspconfig"
-
 local handler = require("lsp.handlers")
 
 --- 自动启动
@@ -24,13 +22,7 @@ for _, server in ipairs(servers) do
 
     local status, conf_opts = pcall(require, 'lsp.conf.' .. server)
     if status then
-        for k, v in pairs(conf_opts) do
-            if type(v) == 'table' then
-                opts[k] = opts[k] and vim.tbl_deep_extend("force", opts[k], v) or v
-            else
-                opts[k] = v
-            end
-        end
+        opts = vim.tbl_extend("error", opts, conf_opts)
     end
 
     if server == 'clangd' then
@@ -45,7 +37,6 @@ for _, server in ipairs(servers) do
                 },
             }
         }
-
     else
         lspconfig[server].setup(opts)
     end
