@@ -1,7 +1,7 @@
 local specs = require('specs')
 local show = specs.show_specs
 specs.setup {
-    show_jumps      = true,
+    show_jumps      = false,
     min_jump        = 30,
     popup           = {
         delay_ms = 0, -- delay before popup displays
@@ -17,42 +17,39 @@ specs.setup {
     },
 }
 
-if 1 == 1 then
-    require('cinnamon').setup {
-        default_keymaps = false, -- Create default keymaps.
-        extra_keymaps = false,
-        override_keymaps = false, -- whether to force mapping
-        hide_cursor = true,
-        default_delay = 8,        -- The default delay (in ms) between each line when scrolling.
-    }
+require('cinnamon').setup {
+    default_keymaps = false, -- Create default keymaps.
+    extra_keymaps = false,
+    override_keymaps = false, -- whether to force mapping
+    hide_cursor = true,
+    default_delay = 6, -- The default delay (in ms) between each line when scrolling.
+}
 
-    vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
-    vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
+vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
+vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 
--- elseif mode == 2 then
-    require('smoothcursor').setup {
-        fancy = {
-            -- head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
-            enable = true
-        },
+require('smoothcursor').setup {
+    speed = 40, -- max is 100 to stick to your current position
+    intervals = 35, -- tick intervalI
+    disable_float_win = true, -- disable on float window
+    linehl = 'CursorLine',
+    -- fancy = {
+    --     head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+    --     enable = false
+    -- },
+}
 
-        speed = 30, -- max is 100 to stick to your current position
-        intervals = 35, -- tick intervalI
-        disable_float_win = true, -- disable on float window
-        -- linehl = 'CursorLine',
-    }
-    -- vim.keymap.set({ 'n', 'x' }, 'I', function()
-    --     vim.defer_fn(show, 10)
-    --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-u>', true, false, true), 'n', false)
-    --     vim.api.nvim_feedkeys('zz', 'n', false)
-    -- end)
+-- vim.keymap.set({ 'n', 'x' }, 'I', function()
+--     vim.defer_fn(show, 10)
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-u>', true, false, true), 'n', false)
+--     vim.api.nvim_feedkeys('zz', 'n', false)
+-- end)
 
-    -- vim.keymap.set({ 'n', 'x' }, 'K', function()
-    --     vim.defer_fn(show, 10)
-    --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-d>', true, false, true), 'n', false)
-    --     vim.api.nvim_feedkeys('zz', 'n', false)
-    -- end)
-end
+-- vim.keymap.set({ 'n', 'x' }, 'K', function()
+--     vim.defer_fn(show, 10)
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-d>', true, false, true), 'n', false)
+--     vim.api.nvim_feedkeys('zz', 'n', false)
+-- end)
 
 
 

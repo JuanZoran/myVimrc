@@ -37,13 +37,14 @@ api.nvim_create_autocmd("BufEnter", {
 
 
 -- INFO 中文输入法切换的问题
+local times = 0
 if vim.fn.executable('fcitx5-remote') then
     local state = ''
     api.nvim_create_autocmd('InsertLeave', {
         group = group,
         pattern = '*',
         callback = function()
-            vim.opt_local.cursorline = true
+            vim.cmd [[SmoothCursorStart]]
             state = io.popen('fcitx5-remote'):read('*a')
             os.execute('fcitx5-remote -c')
         end,
@@ -53,23 +54,30 @@ if vim.fn.executable('fcitx5-remote') then
         group = group,
         pattern = '*',
         callback = function()
-            vim.opt_local.cursorline = false
-            if state == '2\n' then
-                os.execute('fcitx5-remote -o')
+            if times > 1 then
+                if state == '2\n' then
+                    os.execute('fcitx5-remote -o')
+                end
+                -- vim.opt_local.cursorline = false
+                vim.cmd [[SmoothCursorStop]]
+
+            else
+                times = times + 1
             end
         end,
     })
 end
+vim.opt.cursorline = false
 
 
 -- INFO cursorline
-api.nvim_create_autocmd('FileType', {
-    group = group,
-    pattern = "TelescopePrompt",
-    callback = function()
-        vim.opt_local.cursorline = false
-    end,
-})
+-- api.nvim_create_autocmd('FileType', {
+--     group = group,
+--     pattern = "TelescopePrompt",
+--     callback = function()
+--         vim.opt_local.cursorline = false
+--     end,
+-- })
 
 -- INFO : store Position
 -- api.nvim_create_autocmd(
@@ -89,4 +97,3 @@ api.nvim_create_autocmd('FileType', {
 -- endfunction
 -- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 -- ]]
-
