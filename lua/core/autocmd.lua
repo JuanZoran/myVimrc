@@ -58,9 +58,7 @@ if vim.fn.executable('fcitx5-remote') then
                 if state == '2\n' then
                     os.execute('fcitx5-remote -o')
                 end
-                -- vim.opt_local.cursorline = false
                 vim.cmd [[SmoothCursorStop]]
-
             else
                 times = times + 1
             end

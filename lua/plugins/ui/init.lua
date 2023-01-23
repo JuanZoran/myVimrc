@@ -28,7 +28,6 @@ use {
     },
     { -- 文件树
         "nvim-tree/nvim-tree.lua",
-        keys = { 'n', 'ww' },
         config = [[require "plugins.ui.nvim_tree"]],
         tag = "nightly", -- optional, updated every week. (see issue #1193)
     },
@@ -60,7 +59,6 @@ use {
 -- smooth scroll animation
 use {
     'gen740/SmoothCursor.nvim',
-    event = 'VimEnter',
     config = [[require 'plugins.ui.smooth']],
     requires = {
         'declancm/cinnamon.nvim',

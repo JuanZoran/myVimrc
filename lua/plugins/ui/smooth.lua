@@ -33,11 +33,16 @@ require('smoothcursor').setup {
     intervals = 35, -- tick intervalI
     disable_float_win = true, -- disable on float window
     linehl = 'CursorLine',
+
+    disable_filetypes = {
+        'alpha',
+    }
     -- fancy = {
     --     head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
     --     enable = false
     -- },
 }
+
 
 -- vim.keymap.set({ 'n', 'x' }, 'I', function()
 --     vim.defer_fn(show, 10)
