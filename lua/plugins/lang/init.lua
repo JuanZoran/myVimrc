@@ -32,7 +32,7 @@ use {
     end,
     requires = {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "p00f/nvim-ts-rainbow",
+        "mrjones2014/nvim-ts-rainbow",
         "RRethy/nvim-treesitter-endwise",
     }, -- rainbow pairs
     config = [[require("plugins.lang.treesitter")]]

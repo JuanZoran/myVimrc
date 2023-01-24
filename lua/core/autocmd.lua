@@ -9,6 +9,7 @@ api.nvim_create_autocmd('BufRead', {
 api.nvim_create_autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     command = [[silent! mkview | SessionSave]]
+    -- command = [[silent! mkview]]
 })
 
 -- Don't auto comment when o

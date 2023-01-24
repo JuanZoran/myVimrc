@@ -3,20 +3,20 @@ return {
         fg = '#000000',
         bg = "#519aba",
     },
-    Pmenu = {
-        fg = '#A6ACCD',
-        bg = 'NONE',
-    },
-    PmenuSel = {
-        bold = true,
-        fg = '#1d202f',
-        bg = '#89e051',
-    },
+    -- Pmenu = {
+    --     fg = '#A6ACCD',
+    --     bg = 'NONE',
+    -- },
+    -- PmenuSel = {
+    --     bold = true,
+    --     fg = '#1d202f',
+    --     bg = '#89e051',
+    -- },
 
-    IncSearch = {
-        fg = "#0f0f15",
-        bg = "#10B981",
-    },
+    -- IncSearch = {
+    --     fg = "#0f0f15",
+    --     bg = "#10B981",
+    -- },
     MoreMsg = { -- for ufo virtual text
         fg = '#599eff',
         bold = true,
@@ -26,13 +26,12 @@ return {
         fg = '#ffa066',
     },
 
-    -- CursorLine = {
-    --     bg = '#2e3a4d',
-    -- },
-
-    TermCursor = {
-        link = 'Cursor'
+    CursorLine = {
+        bg = '#2e3a4d',
     },
+    -- TermCursor = {
+    --     link = 'Cursor'
+    -- },
     Cursor = {
         bg = '#58a6ff',
     },

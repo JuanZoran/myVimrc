@@ -1,6 +1,7 @@
 -- NOTE mouse events can be attached to bufferline: see help bufferline-hover-events
 -- help for `bufferline-configturation`
 require("bufferline").setup {
+    highlights = require("catppuccin.groups.integrations.bufferline").get(),
     options = {
         -- -- use nvim native lsp
         -- FIX  it doesn't work

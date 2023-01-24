@@ -73,5 +73,7 @@ require('lspsaga').setup {
         theme = 'round',
         -- border type can be single,double,rounded,solid,shadow.
         border = 'rounded',
+        colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+        kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
     },
 }

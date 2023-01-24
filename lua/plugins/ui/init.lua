@@ -3,11 +3,12 @@ local use = require("packer").use
 
 -- NOTE : Theme
 use {
-    { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = false, },
+    { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = true, },
     { "sainnhe/everforest", config = [[require 'plugins.ui.theme.everforest']], opt = true, },
     { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
     { "Mofiqul/dracula.nvim", config = [[require 'plugins.ui.theme.dracula']], opt = true },
     { "AlexvZyl/nordic.nvim", config = [[require 'plugins.ui.theme.nordic']], opt = true },
+    { "catppuccin/nvim", as = "catppuccin", config = [[require 'plugins.ui.theme.catp']], opt = false }
 }
 
 use {
@@ -36,6 +37,7 @@ use {
     { -- 标签栏
         "akinsho/bufferline.nvim",
         tag = "v3.*",
+        events = 'VimEnter',
         requires = "nvim-tree/nvim-web-devicons",
         config = [[require "plugins.ui.bufferline"]],
     },
