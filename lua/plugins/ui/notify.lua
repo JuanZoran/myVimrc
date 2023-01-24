@@ -1,7 +1,6 @@
-local notify = require("notify")
 local icons = require('util').icon
 
-notify.setup {
+require("notify").setup {
     ---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
     stages = "slide",
     ---@usage Function called when a new window is opened, use for changing win settings/config

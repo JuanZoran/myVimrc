@@ -4,9 +4,10 @@ local use = require("packer").use
 -- NOTE : Theme
 use {
     { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = false, },
-    { "marko-cerovac/material.nvim", config = [[require 'plugins.ui.theme.material']], opt = true, },
     { "sainnhe/everforest", config = [[require 'plugins.ui.theme.everforest']], opt = true, },
     { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
+    { "Mofiqul/dracula.nvim", config = [[require 'plugins.ui.theme.dracula']], opt = true },
+    { "AlexvZyl/nordic.nvim", config = [[require 'plugins.ui.theme.nordic']], opt = true },
 }
 
 use {
@@ -41,11 +42,6 @@ use {
 }
 
 
-use {
-    'goolord/alpha-nvim',
-    config = [[require("plugins.ui.alpha")]],
-}
-
 -- nice ui
 use {
     "folke/noice.nvim",
@@ -57,11 +53,18 @@ use {
 }
 
 -- smooth scroll animation
-use {
-    'gen740/SmoothCursor.nvim',
-    config = [[require 'plugins.ui.smooth']],
-    requires = {
-        'declancm/cinnamon.nvim',
-        'edluffy/specs.nvim',
-    },
-}
+if not vim.g.neovide then
+    use {
+        'goolord/alpha-nvim',
+        config = [[require("plugins.ui.alpha")]],
+    }
+
+    use {
+        'gen740/SmoothCursor.nvim',
+        config = [[require 'plugins.ui.smooth']],
+        requires = {
+            'declancm/cinnamon.nvim',
+            'edluffy/specs.nvim',
+        },
+    }
+end

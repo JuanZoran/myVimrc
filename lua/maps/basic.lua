@@ -65,7 +65,5 @@ set {
         end},
         {'<C-b>', '<ESC>bi'},
         {'<C-f>', '<ESC>ea'},
-        {'<C-n>', '<ESC>o'},
-        {'<C-p>', '<ESC>O'},
     }
 }

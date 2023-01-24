@@ -59,7 +59,7 @@ vim.keymap.set('n', '<leader><leader>d', function()
         format_item = function(file)
             return toPattern(file)
         end,
-    }, function (file)
+    }, function(file)
         os.execute(('rm %s/%s'):format(template_dir, file))
     end)
 end, { desc = '❌Remove Template' })

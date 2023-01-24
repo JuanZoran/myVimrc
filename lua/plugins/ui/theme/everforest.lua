@@ -12,4 +12,4 @@ vim.g.everforest_spell_foreground          = "colored"
 -- vim.g.everforest_show_eob = 0
 -- vim.g.everforest_cursor = "red" -- only work for gui
 
-vim.cmd [[colorscheme everforest]]
+vim.cmd.colorscheme 'everforest'

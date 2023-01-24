@@ -1,19 +1,22 @@
 -- packer init
 vim.cmd [[packadd packer.nvim]]
 
+
+local neovide = vim.g.neovide
+local source = neovide and 'neovide/compiled' or 'plugins/base/compiled'
+
 require("packer").init {
     display = {
         open_fn = function()
             return require("packer.util").float { border = "rounded" }
         end,
     },
-    compile_path = vim.fn.stdpath('config') .. '/lua/plugins/base/' .. 'compiled.lua',
-    -- profile = {
-    --     enable = true,
-    --     threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
-    -- },
+    compile_path = vim.fn.stdpath('config') .. '/lua/' .. source .. '.lua',
+    auto_remove = not neovide,
 }
 
+
+require(source)
 require("plugins.base")
 require("plugins.ui")
 require("plugins.tools")

@@ -37,45 +37,69 @@ api.nvim_create_autocmd("BufEnter", {
 
 
 -- INFO 中文输入法切换的问题
-local times = 0
 if vim.fn.executable('fcitx5-remote') then
     local state = ''
-    api.nvim_create_autocmd('InsertLeave', {
-        group = group,
-        pattern = '*',
-        callback = function()
-            vim.cmd [[SmoothCursorStart]]
-            state = io.popen('fcitx5-remote'):read('*a')
-            os.execute('fcitx5-remote -c')
-        end,
-    })
+    if vim.g.neovide then
+        api.nvim_create_autocmd('InsertLeave', {
+            group = group,
+            pattern = '*',
+            callback = function()
+                state = io.popen('fcitx5-remote'):read('*a')
+                os.execute('fcitx5-remote -c')
+            end,
+        })
 
-    api.nvim_create_autocmd('InsertEnter', {
-        group = group,
-        pattern = '*',
-        callback = function()
-            if times > 1 then
+        api.nvim_create_autocmd('InsertEnter', {
+            group = group,
+            pattern = '*',
+            callback = function()
                 if state == '2\n' then
                     os.execute('fcitx5-remote -o')
                 end
-                vim.cmd [[SmoothCursorStop]]
-            else
-                times = times + 1
-            end
-        end,
-    })
+            end,
+        })
+
+    else
+        local times = 0
+        api.nvim_create_autocmd('InsertLeave', {
+            group = group,
+            pattern = '*',
+            callback = function()
+                vim.cmd [[SmoothCursorStart]]
+                state = io.popen('fcitx5-remote'):read('*a')
+                os.execute('fcitx5-remote -c')
+            end,
+        })
+
+        api.nvim_create_autocmd('InsertEnter', {
+            group = group,
+            pattern = '*',
+            callback = function()
+                if times > 1 then
+                    if state == '2\n' then
+                        os.execute('fcitx5-remote -o')
+                    end
+                    vim.cmd [[SmoothCursorStop]]
+                else
+                    times = times + 1
+                end
+            end,
+        })
+    end
 end
 vim.opt.cursorline = false
 
 
 -- INFO cursorline
--- api.nvim_create_autocmd('FileType', {
---     group = group,
---     pattern = "TelescopePrompt",
---     callback = function()
---         vim.opt_local.cursorline = false
---     end,
--- })
+api.nvim_create_autocmd('CmdlineEnter', {
+    group = group,
+    command = "SmoothCursorStop",
+})
+
+api.nvim_create_autocmd('CmdlineLeave', {
+    group = group,
+    command = "SmoothCursorStart",
+})
 
 -- INFO : store Position
 -- api.nvim_create_autocmd(

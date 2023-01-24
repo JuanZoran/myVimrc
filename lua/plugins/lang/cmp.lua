@@ -10,6 +10,7 @@ if not snip_status_ok then
     return
 end
 
+
 local kind_icons = require('util').icon.code_icon
 cmp.setup {
     snippet = {

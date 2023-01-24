@@ -26,9 +26,9 @@ set {
         { "w<Left>",  "<C-w>H",     ' Move Left'               },
         { "w<Right>", "<C-w>L",     ' Move Right'              },
         { "wu",       ":sp<CR>",    ' Split Window Vertically' },
+        { "wd",        ":close<CR>",        ' Close Current Window' },
 
     -- INFO : command
-        { "wd",        ":close<CR>",        ' Close Current Window' },
         { "<Leader>w", ":w<CR>",            ' Save Current Window'  },
         { "<Leader><leader>w", ":wqa<CR>" , ' close all window'     },
         { "qw",        ":close<CR>"    },
@@ -60,10 +60,6 @@ set {
 set{
     mode = 'i',
     map = {
-        -- { "<C-f>", ":FloatermNew ranger<CR>", { desc = ' Ranger' } },
-        -- { "<C-g>", "<Esc><cmd>FloatermNew lazygit<CR>" },
-        -- { "<C-d>", "<Esc><cmd>FloatermToggle<CR>"      },
-        -- { "<C-;>", "<Esc>/<++><CR>vf>c" },
         { "<C-CR>", "<Esc>/<++><CR>vf>c" },
         { "<C-j>", "<Left>" },
         { "<C-l>", "<Right>" },
@@ -75,16 +71,6 @@ set{
 -- 单独情况设置
 vim.keymap.set("n", "tx", ":r !figlet ")
 vim.keymap.set("x", "<C-c>", '"+y')
-vim.keymap.set("x", "<C-v>", '"+y')
-
--- vim.keymap.set("n", "<Tab>", function ()
---     print('tab')
--- end)
--- vim.keymap.set("i", "<C-i>", function ()
---     print('<C-i>')
--- end)
--- vim.keymap.set("n", "<CR>", '/<++><CR>vf>c', {silent = true})
-
 
 -- String value	Help page	Affected modes	Vimscript equivalent
 -- '' (an empty string)	mapmode-nvo	Normal, Visual, Select, Operator-pending	:map

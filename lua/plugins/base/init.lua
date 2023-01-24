@@ -1,6 +1,5 @@
 local use = require("packer").use
 -- NOTE : load the packer compiled file
-require("plugins.base.compiled")
 
 use("wbthomason/packer.nvim")
 

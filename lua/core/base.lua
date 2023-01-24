@@ -1,5 +1,10 @@
 local opt = vim.opt
 
+if vim.g.neovide then
+    opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h10'
+    vim.g.neovide_transparency = 0.5
+end
+
 opt.termguicolors = true
 opt.autoread = true
 opt.number = true
@@ -51,19 +56,19 @@ opt.foldenable     = true
 
 opt.splitbelow = true
 opt.splitright = true
-opt.wrap = false
+opt.wrap       = false
 -- opt.autochdir     = true
 opt.helplang   = "cn"
 opt.updatetime = 200
 -- opt.equalalways = false -- I don't like my windows changing all the time
-opt.undofile = true
-opt.undodir = vim.fn.expand('~/.vim/')
+opt.undofile   = true
+opt.undodir    = vim.fn.expand('~/.vim/')
 
 ---  SETTINGS  ---
 opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)
 vim.wo.signcolumn = "yes"
 
-opt.iskeyword:append('-')   -- 将word-word视为一个word, 方便daw
+opt.iskeyword:append('-') -- 将word-word视为一个word, 方便daw
 
 -----================ disabled some native =====================
 
@@ -120,7 +125,7 @@ end
 -- opt.list = true
 -- opt.listchars = "tab:▸ " -- Show tabs as '▸   ▸   '
 -- opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-opt.sessionoptions="buffers,curdir,folds,winsize,winpos,help"
+opt.sessionoptions = "buffers,curdir,folds,winsize,winpos,help"
 
 -- vim.opt.showtabline = 2 -- for 标签页面
 -- opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板
