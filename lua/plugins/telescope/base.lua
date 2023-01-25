@@ -113,7 +113,6 @@ telescope.load_extension("fzf")
 -- telescope.load_extension("project")
 
 
-
 -- INFO : key-bindings ==============================
 local set = require("util.map").set
 local builtin = require("telescope.builtin")

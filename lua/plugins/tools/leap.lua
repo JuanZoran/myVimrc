@@ -1,15 +1,3 @@
-local set = require("util.map").set
-
-set {
-    mode = '',
-    map = {
-        { '<leader>j', '<Plug>(leap-backward-to)', '⬅️ quick jump backward' },
-        { '<leader><leader>l', '<Plug>(leap-cross-window)', '💪quick jump cross window' },
-        { '<leader>l', '<Plug>(leap-forward-to)', '➡️ quick jump forward' },
-    }
-}
-
-
 vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Linenr' })
 vim.api.nvim_set_hl(0, 'LeapMatch', {
     fg = '#599eff',
@@ -18,24 +6,12 @@ vim.api.nvim_set_hl(0, 'LeapMatch', {
 })
 
 vim.api.nvim_set_hl(0, 'LeapLabelPrimary', {
-    -- fg = 'black',
     link = 'PmenuSel',
     bold = true,
     nocombine = true,
 })
 
 require('leap').opts.highlight_unlabeled_phase_one_targets = true
-
-require('flit').setup {
-    keys = { f = 'f', F = 'F', t = 't', T = 'T' },
-    -- A string like "nv", "nvo", "o", etc.
-    labeled_modes = "v",
-    multiline = true,
-    -- Like `leap`s similar argument (call-specific overrides).
-    -- E.g.: opts = { equivalence_classes = {} }
-    opts = {}
-}
-
 
 -- {
 --   ft = true,

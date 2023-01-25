@@ -1,6 +1,5 @@
 -- TODO : config gitsigns
-require("gitsigns").setup {
-}
+require("gitsigns").setup()
 
 local set = require("util.map").set
 

@@ -2,9 +2,6 @@ local nvim_tree = require("nvim-tree")
 local nvim_tree_config = require("nvim-tree.config")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
--- if not vim.g.vscode then
-vim.keymap.set('n', 'ww', '<cmd>NvimTreeToggle<cr>', { desc = ' 触发文件树' })
--- end
 
 local HEIGHT_RATIO = 0.8 -- You can change this
 local WIDTH_RATIO = 0.4 -- You can change this too
@@ -49,12 +46,6 @@ nvim_tree.setup {
         timeout = 500,
     },
     view = {
-        -- width = 30,
-        -- height = 30,
-        -- hide_root_folder = false,
-        -- side = "center",
-        -- auto_resize = true,
-        -- adaptive_size = true,
         mappings = {
             -- custom_only = true, -- 只用自定义的按键
             list = {
@@ -93,12 +84,6 @@ nvim_tree.setup {
             return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
         end,
     },
-    -- number = false,
-    -- relativenumber = false,
-    -- actions = {
-    --     quit_on_open = true,
-    --     window_picker = { enable = true },
-    -- },
     renderer = {
         highlight_git = true,
         root_folder_modifier = ":t",

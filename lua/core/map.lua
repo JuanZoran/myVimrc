@@ -1,4 +1,3 @@
-
 local function set(map)
     local s = vim.keymap.set
     local opt = { silent = true }
@@ -41,7 +40,8 @@ set {
         { "<C-l>", "<Cmd>BufferLineCycleNext<CR>" },
 
         { "<C-q>", '<Cmd>q!<CR>' },
-        { "<Leader>p", ":PackerSync<CR>", '痢[Sync | Install] Plugin' },
+
+        { "<Leader>p", "<Cmd>Lazy sync<CR>", '痢[Sync | Install] Plugin' },
         { "<Leader>ck", ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
 
         { "yp", "yip" },
@@ -74,7 +74,7 @@ set {
     }
 }
 
-if not vim.g.neovide then
+if vim.g.neovide then
     set {
         mode = { 'n', 'x', 'o' }, -- be appended to other operator
         map = {

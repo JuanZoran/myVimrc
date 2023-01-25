@@ -1,5 +1,6 @@
 local specs = require('specs')
 local show = specs.show_specs
+
 specs.setup {
     show_jumps      = false,
     min_jump        = 30,

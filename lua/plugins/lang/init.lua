@@ -1,20 +1,43 @@
 return {
     {
         "rrethy/vim-illuminate",
-        config = function() require 'plugins.lang.illuminate' end
+        config = function()
+            require('illuminate').configure {
+                providers = { 'lsp', 'treesitter', },
+                delay = 100,
+            }
+        end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        config = function() require 'plugins.lang.indent' end,
+        opts = {
+            space_char_blankline = " ",
+            show_current_context = true,
+            show_current_context_start = true,
+        },
     },
+
     {
         'michaelb/sniprun',
         build = 'bash ./install.sh',
-        keys = {
-            '<leader><C-r>',
-            { '<C-r>', mode = 'x' },
+        opts = {
+            display = {
+                "TempFloatingWindow", --# display results in a floating window
+                "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
+            },
+            snipruncolors = {
+                SniprunVirtualTextOk  = { bg = "#89e051", fg = '#1d202f' },
+                SniprunFloatingWinOk  = { fg = "#599eff" },
+                SniprunVirtualTextErr = { bg = "#881515", fg = "#000000", ctermbg = "DarkRed", cterfg = "Black" },
+                SniprunFloatingWinErr = { fg = "#881515", ctermfg = "DarkRed" },
+            },
+            borders = 'rounded', --# display borders around floating windows
         },
-        config = function() require("plugins.lang.sniprun") end,
+
+        keys = {
+            { '<leader><C-r>', '<Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
+            { '<C-r>', mode = 'x', '<Esc><Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
+        },
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -30,44 +53,41 @@ return {
     },
 
     {
+        --- TODO :
         "kevinhwang91/nvim-ufo",
         dependencies = { "kevinhwang91/promise-async" },
         config = function() require 'plugins.lang.ufo' end,
     },
 
-    "williamboman/mason.nvim", -- lsp manager
-    "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
-    "neovim/nvim-lspconfig", -- official lspconfig
-    "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
-    'p00f/clangd_extensions.nvim',
 
-    -- NOTE  Dap
-    'jayp0521/mason-nvim-dap.nvim',
-    'mfussenegger/nvim-dap',
-    'rcarriga/nvim-dap-ui',
+    {
+        "williamboman/mason.nvim",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
+            "neovim/nvim-lspconfig", -- official lspconfig
+            "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
+            'p00f/clangd_extensions.nvim',
+
+            -- NOTE  Dap
+            'jayp0521/mason-nvim-dap.nvim',
+            'mfussenegger/nvim-dap',
+            'rcarriga/nvim-dap-ui',
+        }
+    }, -- lsp manager
 
     {
         "folke/neodev.nvim",
-        config = function()
-            require('neodev').setup {
-                library = {
-                    plugins = false,
-                }
+        opts = {
+            library = {
+                plugins = false,
             }
-        end
+        },
     },
 
-    {
-        "L3mon4d3/luasnip",
-        dependencies = {
-            "rafamadriz/friendly-snippets"
-        },
-        config = function()
-            require('snips').setup()
-        end
-    },
+
     {
         "hrsh7th/nvim-cmp",
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
             "hrsh7th/cmp-buffer",
             { "tzachar/cmp-tabnine", build = 'bash install.sh' },
@@ -75,6 +95,13 @@ return {
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
+            {
+                "L3mon4d3/luasnip",
+                init = function()
+                    require('snips').setup()
+                end,
+            },
+            "rafamadriz/friendly-snippets"
         },
         config = function() require "plugins.lang.cmp" end
     }
