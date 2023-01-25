@@ -1,15 +1,33 @@
 local use = require("packer").use
 -- NOTE :====================== ui =====================
+-- smooth scroll animation
 
+if vim.g.neovide then
+    use { "catppuccin/nvim", as = "catppuccin", config = [[require 'plugins.ui.theme.catp']] }
+else
 -- NOTE : Theme
-use {
-    { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = true, },
-    { "sainnhe/everforest", config = [[require 'plugins.ui.theme.everforest']], opt = true, },
-    { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
-    { "Mofiqul/dracula.nvim", config = [[require 'plugins.ui.theme.dracula']], opt = true },
-    { "AlexvZyl/nordic.nvim", config = [[require 'plugins.ui.theme.nordic']], opt = true },
-    { "catppuccin/nvim", as = "catppuccin", config = [[require 'plugins.ui.theme.catp']], opt = false }
-}
+    use {
+        { "rebelot/kanagawa.nvim", config = [[require 'plugins.ui.theme.kanagawa']], opt = false, },
+        { "sainnhe/everforest", config = [[require 'plugins.ui.theme.everforest']], opt = true, },
+        { "projekt0n/github-nvim-theme", config = [[require 'plugins.ui.theme.github']], opt = true },
+        { "Mofiqul/dracula.nvim", config = [[require 'plugins.ui.theme.dracula']], opt = true },
+        { "AlexvZyl/nordic.nvim", config = [[require 'plugins.ui.theme.nordic']], opt = true },
+        { "catppuccin/nvim", as = "catppuccin" }
+        -- { "catppuccin/nvim", as = "catppuccin", config = [[require 'plugins.ui.theme.catp']], opt = true }
+    }
+    use {
+        'gen740/SmoothCursor.nvim',
+        config = [[require 'plugins.ui.smooth']],
+        cond = function ()
+            return not vim.g.neovide
+        end,
+        requires = {
+            'declancm/cinnamon.nvim',
+            'edluffy/specs.nvim',
+        },
+    }
+end
+
 
 use {
 
@@ -44,6 +62,11 @@ use {
 }
 
 
+use {
+    'goolord/alpha-nvim',
+    config = [[require("plugins.ui.alpha")]],
+}
+
 -- nice ui
 use {
     "folke/noice.nvim",
@@ -53,20 +76,3 @@ use {
     },
     config = [[require "plugins.ui.noice"]]
 }
-
--- smooth scroll animation
-if not vim.g.neovide then
-    use {
-        'goolord/alpha-nvim',
-        config = [[require("plugins.ui.alpha")]],
-    }
-
-    use {
-        'gen740/SmoothCursor.nvim',
-        config = [[require 'plugins.ui.smooth']],
-        requires = {
-            'declancm/cinnamon.nvim',
-            'edluffy/specs.nvim',
-        },
-    }
-end

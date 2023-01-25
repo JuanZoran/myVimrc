@@ -55,7 +55,6 @@ use {
     config = [[require 'plugins.telescope.harpoon']],
     requires = { {
         "theprimeagen/harpoon",
-        opt = true
     } }
 } -- list
 

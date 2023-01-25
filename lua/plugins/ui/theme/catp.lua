@@ -4,7 +4,7 @@ require("catppuccin").setup({
         light = "latte",
         dark = "mocha",
     },
-    transparent_background = true,
+    transparent_background = not vim.g.neovide,
     show_end_of_buffer = false, -- show the '~' characters after the end of buffers
     term_colors = true,
     dim_inactive = {
@@ -19,7 +19,7 @@ require("catppuccin").setup({
         conditionals = { "italic" },
         loops = {},
         functions = {},
-        keywords = {'bold'},
+        keywords = {},
         strings = {},
         variables = {},
         numbers = { 'italic' },
@@ -41,9 +41,9 @@ require("catppuccin").setup({
         illuminate = false,
         markdown = true,
         mason = true,
-        noice = true,
+        -- noice = true,
         -- ts_rainbow = true,
-        -- treesitter = true,
+        treesitter = true,
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })

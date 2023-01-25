@@ -8,8 +8,7 @@ api.nvim_create_autocmd('BufRead', {
 
 api.nvim_create_autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
-    command = [[silent! mkview | SessionSave]]
-    -- command = [[silent! mkview]]
+    command = [[silent! mkview | silent! SessionSave]]
 })
 
 -- Don't auto comment when o
@@ -86,21 +85,21 @@ if vim.fn.executable('fcitx5-remote') then
                 end
             end,
         })
+
+        -- INFO cursorline
+        api.nvim_create_autocmd('CmdlineEnter', {
+            group = group,
+            command = "SmoothCursorStop",
+        })
+
+        api.nvim_create_autocmd('CmdlineLeave', {
+            group = group,
+            command = "SmoothCursorStart",
+        })
+        vim.opt.cursorline = false
     end
 end
-vim.opt.cursorline = false
 
-
--- INFO cursorline
-api.nvim_create_autocmd('CmdlineEnter', {
-    group = group,
-    command = "SmoothCursorStop",
-})
-
-api.nvim_create_autocmd('CmdlineLeave', {
-    group = group,
-    command = "SmoothCursorStart",
-})
 
 -- INFO : store Position
 -- api.nvim_create_autocmd(

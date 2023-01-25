@@ -1,4 +1,6 @@
--- import lspsaga safely
+local cs, colors = pcall(require, "catppuccin.groups.integrations.lsp_saga")
+local ks, kind = pcall(require, "catppuccin.groups.integrations.lsp_saga")
+
 require('lspsaga').setup {
     finder = {
         edit = { 'o', '<CR>' },
@@ -73,7 +75,7 @@ require('lspsaga').setup {
         theme = 'round',
         -- border type can be single,double,rounded,solid,shadow.
         border = 'rounded',
-        colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
-        kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+        colors = cs and colors.custom_colors() or nil,
+        kind = ks and kind.custom_kind() or nil,
     },
 }

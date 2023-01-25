@@ -92,11 +92,15 @@ cmp.setup {
         -- { name = "cmp_tabnine", max_item_count = 5 },
         { name = "cmp_tabnine" },
         { name = "buffer", max_item_count = 4 },
-        -- { name = "rg", max_item_count = 4 },
     },
     window = {
         documentation = cmp.config.window.bordered(),
-        completion = cmp.config.window.bordered(),
+        completion = {
+            border = 'rounded',
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+            col_offset = -3,
+            side_padding = 0,
+        },
     },
     sorting = {
         comparators = {

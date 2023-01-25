@@ -1,8 +1,9 @@
 local opt = vim.opt
 
 if vim.g.neovide then
-    opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h10'
-    vim.g.neovide_transparency = 0.5
+    opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h11'
+    vim.g.neovide_transparency = 1
+    vim.g.neovide_refresh_rate = 144
 end
 
 opt.termguicolors = true

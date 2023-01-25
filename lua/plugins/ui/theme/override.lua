@@ -1,30 +1,46 @@
 return {
     Visual = {
-        fg = '#000000',
-        bg = "#519aba",
+        bg = "#33467c",
     },
-    -- Pmenu = {
-    --     fg = '#A6ACCD',
-    --     bg = 'NONE',
-    -- },
-    -- PmenuSel = {
-    --     bold = true,
-    --     fg = '#1d202f',
-    --     bg = '#89e051',
-    -- },
+    Pmenu = {
+        fg = '#A6ACCD',
+        bg = 'NONE',
+    },
+    PmenuSel = {
+        bold = true,
+        fg = '#1d202f',
+        bg = '#89e051',
+    },
 
-    -- IncSearch = {
-    --     fg = "#0f0f15",
-    --     bg = "#10B981",
-    -- },
+    IncSearch = {
+        fg = "#0f0f15",
+        bg = "#10B981",
+    },
     MoreMsg = { -- for ufo virtual text
         fg = '#599eff',
         bold = true,
     },
     ['@variable'] = {
-        -- fg = '#b4d3a3',
-        fg = '#ffa066',
+        fg = '#f4b085',
     },
+
+    -- ['@function.builtin'] = {
+    --     fg = '#d24e75',
+    -- },
+
+    -- ['@function'] = {
+    --     fg = '#957FB8',
+    -- },
+    -- ['@keyword.return'] = {
+    --     fg = '#FF5D62',
+    --     italic = true,
+    -- },
+
+    -- ['@keyword'] = {
+    --     -- fg = '#b4d3a3',
+    --     fg = '#e26c74',
+    -- },
+
 
     CursorLine = {
         bg = '#2e3a4d',
@@ -36,7 +52,7 @@ return {
         bg = '#58a6ff',
     },
     FloatBorder = {
-        fg = '#54546d',
+        fg = '#89B4FA',
         bg = 'NONE',
     },
     FloatTitle = {
