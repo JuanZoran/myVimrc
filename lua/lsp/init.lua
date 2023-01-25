@@ -20,8 +20,8 @@ for _, server in ipairs(servers) do
         handlers = handler.handlers
     }
 
-    local status, conf_opts = pcall(require, 'lsp.conf.' .. server)
-    if status then
+    local _, conf_opts = pcall(require, 'lsp.conf.' .. server)
+    if _ then
         opts = vim.tbl_extend("error", opts, conf_opts)
     end
 

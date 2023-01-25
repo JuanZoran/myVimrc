@@ -1,3 +1,4 @@
+
 local function set(map)
     local s = vim.keymap.set
     local opt = { silent = true }
@@ -7,8 +8,6 @@ local function set(map)
     end
 end
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 set {
     mode = 'n',
@@ -75,7 +74,7 @@ set {
     }
 }
 
-if vim.g.neovide then
+if not vim.g.neovide then
     set {
         mode = { 'n', 'x', 'o' }, -- be appended to other operator
         map = {

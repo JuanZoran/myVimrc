@@ -1,52 +1,40 @@
-local use = require("packer").use
-
--- NOTE : ====================== Syntax =====================
--- cursor-word highlighting
--- Pretty Indent
-use {
+return {
     {
         "rrethy/vim-illuminate",
-        config = [[require 'plugins.lang.illuminate']]
+        config = function() require 'plugins.lang.illuminate' end
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        config = [[require 'plugins.lang.indent']],
+        config = function() require 'plugins.lang.indent' end,
     },
-}
-
-use {
-    'michaelb/sniprun',
-    run = 'bash ./install.sh',
-    keys = {
-        { 'n', '<leader><C-r>' },
-        { 'x', '<C-r>' },
+    {
+        'michaelb/sniprun',
+        build = 'bash ./install.sh',
+        keys = {
+            '<leader><C-r>',
+            { '<C-r>', mode = 'x' },
+        },
+        config = function() require("plugins.lang.sniprun") end,
     },
-    config = [[require("plugins.lang.sniprun")]],
-}
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = function()
+            require("nvim-treesitter.install").update({ with_sync = true })
+        end,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "mrjones2014/nvim-ts-rainbow",
+            "RRethy/nvim-treesitter-endwise",
+        }, -- rainbow pairs
+        config = function() require("plugins.lang.treesitter") end
+    },
 
--- Treesitter
-use {
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-        require("nvim-treesitter.install").update({ with_sync = true })
-    end,
-    requires = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        "mrjones2014/nvim-ts-rainbow",
-        "RRethy/nvim-treesitter-endwise",
-    }, -- rainbow pairs
-    config = [[require("plugins.lang.treesitter")]]
-}
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = { "kevinhwang91/promise-async" },
+        config = function() require 'plugins.lang.ufo' end,
+    },
 
--- INFO make neovim has modernize folder
-use {
-    "kevinhwang91/nvim-ufo",
-    requires = { "kevinhwang91/promise-async", module = 'promise' },
-    config = [[require 'plugins.lang.ufo']],
-}
-
--- mason | lspconfig | mason-lspconfig
-use {
     "williamboman/mason.nvim", -- lsp manager
     "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
     "neovim/nvim-lspconfig", -- official lspconfig
@@ -57,45 +45,37 @@ use {
     'jayp0521/mason-nvim-dap.nvim',
     'mfussenegger/nvim-dap',
     'rcarriga/nvim-dap-ui',
-}
 
--- NOTE :====================== Completion =====================
-
-
-use {
-    "folke/neodev.nvim",
-    config = function()
-        require('neodev').setup {
-            library = {
-                plugins = false,
+    {
+        "folke/neodev.nvim",
+        config = function()
+            require('neodev').setup {
+                library = {
+                    plugins = false,
+                }
             }
-        }
-    end
-}
-
--- LuaSnip
-use {
-    "L3mon4d3/luasnip",
-    requires = {
-        "rafamadriz/friendly-snippets"
+        end
     },
-    after = 'nvim-cmp',
-    config = function()
-        require('snips').setup()
-    end
-}
 
--- NOTE : a super powerful completion engine for neovim
-use {
-    "hrsh7th/nvim-cmp",
-    requires = {
-        { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-        { "tzachar/cmp-tabnine", after = "nvim-cmp" },
-        { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
-        { "hrsh7th/cmp-path", after = "nvim-cmp" },
-        { "saadparwaiz1/cmp_luasnip", after = "luasnip" },
-        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+    {
+        "L3mon4d3/luasnip",
+        dependencies = {
+            "rafamadriz/friendly-snippets"
+        },
+        config = function()
+            require('snips').setup()
+        end
     },
-    -- event = { "insertenter", "cmdlineenter" }, -- lazy-load
-    config = [[require "plugins.lang.cmp"]]
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            { "tzachar/cmp-tabnine", build = 'bash install.sh' },
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-path",
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-cmdline",
+        },
+        config = function() require "plugins.lang.cmp" end
+    }
 }

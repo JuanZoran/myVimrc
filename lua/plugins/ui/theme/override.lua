@@ -1,3 +1,35 @@
+local C = {
+    rosewater = "#F4DBD6",
+    flamingo = "#F0C6C6",
+    pink = "#F5BDE6",
+    mauve = "#C6A0F6",
+    red = "#ED8796",
+    maroon = "#EE99A0",
+    peach = "#F5A97F",
+    yellow = "#EED49F",
+    green = "#A6DA95",
+    teal = "#8BD5CA",
+    sky = "#91D7E3",
+    sapphire = "#7DC4E4",
+    blue = "#8AADF4",
+    lavender = "#B7BDF8",
+
+    text = "#CAD3F5",
+    subtext1 = "#B8C0E0",
+    subtext0 = "#A5ADCB",
+    overlay2 = "#939AB7",
+    overlay1 = "#8087A2",
+    overlay0 = "#6E738D",
+    surface2 = "#5B6078",
+    surface1 = "#494D64",
+    surface0 = "#363A4F",
+
+    base = "#24273A",
+    mantle = "#1E2030",
+    crust = "#181926",
+}
+
+
 return {
     Visual = {
         bg = "#33467c",
@@ -24,32 +56,17 @@ return {
         fg = '#f4b085',
     },
 
-    -- ['@function.builtin'] = {
-    --     fg = '#d24e75',
-    -- },
-
-    -- ['@function'] = {
-    --     fg = '#957FB8',
-    -- },
-    -- ['@keyword.return'] = {
-    --     fg = '#FF5D62',
-    --     italic = true,
-    -- },
-
-    -- ['@keyword'] = {
-    --     -- fg = '#b4d3a3',
-    --     fg = '#e26c74',
-    -- },
-
-
     CursorLine = {
         bg = '#2e3a4d',
     },
-    -- TermCursor = {
-    --     link = 'Cursor'
-    -- },
     Cursor = {
         bg = '#58a6ff',
+    },
+    TermCursor = {
+        link = 'Cursor'
+    },
+    CursorIM = {
+        link = 'Cursor',
     },
     FloatBorder = {
         fg = '#89B4FA',
@@ -87,4 +104,32 @@ return {
         underline = true,
         sp = '#89e051',
     },
+
+    -- kind support
+    CmpItemKindSnippet = { fg = C.mauve },
+    CmpItemKindKeyword = { fg = C.red },
+    CmpItemKindText = { fg = C.teal },
+    CmpItemKindMethod = { fg = C.blue },
+    CmpItemKindConstructor = { fg = C.blue },
+    CmpItemKindFunction = { fg = C.blue },
+    CmpItemKindFolder = { fg = C.blue },
+    CmpItemKindModule = { fg = C.blue },
+    CmpItemKindConstant = { fg = C.peach },
+    CmpItemKindField = { fg = C.green },
+    CmpItemKindProperty = { fg = C.green },
+    CmpItemKindEnum = { fg = C.green },
+    CmpItemKindUnit = { fg = C.green },
+    CmpItemKindClass = { fg = C.yellow },
+    CmpItemKindVariable = { fg = C.flamingo },
+    CmpItemKindFile = { fg = C.blue },
+    CmpItemKindInterface = { fg = C.yellow },
+    CmpItemKindColor = { fg = C.red },
+    CmpItemKindReference = { fg = C.red },
+    CmpItemKindEnumMember = { fg = C.red },
+    CmpItemKindStruct = { fg = C.blue },
+    CmpItemKindValue = { fg = C.peach },
+    CmpItemKindEvent = { fg = C.blue },
+    CmpItemKindOperator = { fg = C.blue },
+    CmpItemKindTypeParameter = { fg = C.blue },
+    CmpItemKindCopilot = { fg = C.teal },
 }
