@@ -29,7 +29,6 @@ return {
         -- extended to include preceding or succeeding whitespace. Succeeding
         -- whitespace has priority in order to act similarly to eg the built-in
         -- `ap`.
-        --
         -- Can also be a function which gets passed a table with the keys
         -- * query_string: eg '@function.inner'
         -- * selection_mode: eg 'v'

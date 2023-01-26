@@ -7,6 +7,21 @@ local function set(map)
     end
 end
 
+if vim.g.neovide then
+    set {
+        mode = { 'n', 'x', 'o' }, -- be appended to other operator
+        map = {
+            { "i", "k" },
+            { "k", "j" },
+            { "j", "h" },
+            { "h", "i" },
+            { 'L', '$' },
+            { 'J', '0' },
+            { 'I', '<C-u>zz' },
+            { 'K', '<C-d>zz' },
+        }
+    }
+end
 
 set {
     mode = 'n',
@@ -41,7 +56,7 @@ set {
 
         { "<C-q>", '<Cmd>q!<CR>' },
 
-        { "<Leader>p", "<Cmd>Lazy sync<CR>", '痢[Sync | Install] Plugin' },
+        { "<Leader>p", "<Cmd>Lazy<CR>", '痢[Sync | Install] Plugin' },
         { "<Leader>ck", ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
 
         { "yp", "yip" },
@@ -69,26 +84,12 @@ set {
         { "<C-Up>", "<C-w>+" },
         { "<C-Right>", "<C-w>>" },
         { "<C-Left>", "<C-w><" },
+        { "Z", 'zf' },
 
         { "<leader>a", "@", 'macro' },
     }
 }
 
-if vim.g.neovide then
-    set {
-        mode = { 'n', 'x', 'o' }, -- be appended to other operator
-        map = {
-            { "i", "k" },
-            { "k", "j" },
-            { "j", "h" },
-            { "h", "i" },
-            { 'L', '$' },
-            { 'J', '0' },
-            { 'I', '<C-u>zz' },
-            { 'K', '<C-d>zz' },
-        }
-    }
-end
 
 set {
     mode = 'i',
@@ -121,7 +122,8 @@ set {
         { "<", "<gv" },
         { "<C-c>", [["+y]] },
         { "p", [["_dP]] },
-    }
+        { "za", "zf" },
+    },
 }
 
 vim.keymap.set(

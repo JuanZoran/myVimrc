@@ -21,7 +21,6 @@ return {
         -- 更详细的补全信息
         "--completion-style=detailed",
 
-        --
         "--header-insertion-decorators",
 
         -- 补全头文件的形式

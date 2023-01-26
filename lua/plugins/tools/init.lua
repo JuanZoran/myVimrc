@@ -13,8 +13,11 @@ return {
 
     {
         "iamcco/markdown-preview.nvim",
+        keys = {
+            { 'mp', '<Plug>MarkdownPreviewToggle', buffer = true }
+        },
         ft = { "markdown", "md" },
-        build = vim.fn["mkdp#util#install"],
+        build = function() vim.fn["mkdp#util#install"]() end,
     },
 
     {
@@ -130,25 +133,39 @@ return {
         dependencies = {
             {
                 'ggandor/flit.nvim',
+                keys = {
+                    'f', 'F', 't', 'T'
+                },
                 opts = {
-                    keys = { f = 'f', F = 'F', t = 't', T = 'T' },
                     -- A string like "nv", "nvo", "o", etc.
                     labeled_modes = "v",
                     multiline = true,
-                    -- Like `leap`s similar argument (call-specific overrides).
-                    -- E.g.: opts = { equivalence_classes = {} }
-                    opts = {}
                 }
             },
         }
     },
+
     {
-        dir = "~/project/Neovim/Trans",
+        'echasnovski/mini.surround',
+        event = 'VeryLazy',
+        config = function()
+            require('mini.surround').setup {
+                mappings = {
+                    suffix_last = 'p', -- Suffix to search with "prev" method
+                    suffix_next = 'n', -- Suffix to search with "next" method
+                }
+            }
+        end,
+    },
+
+    {
+        "JuanZoran/Trans.nvim",
         keys = {
             { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
             { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
         },
-        dependencies = 'kkharji/sqlite.lua',
+        dependencies = { 'kkharji/sqlite.lua', lazy = true },
         config = true,
+        dev = true,
     }
 }

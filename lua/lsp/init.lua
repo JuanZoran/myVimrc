@@ -1,20 +1,13 @@
 --- TODO :lualine show lspname
 require("lsp.saga")
-require("lsp.mason")
 
-local ml = require("mason-lspconfig")
-local servers = ml.get_installed_servers()
-ml.setup {
-    automatic_installation = false,
-}
-
+local servers = require("mason-lspconfig").get_installed_servers()
 local lspconfig = require "lspconfig"
 local handler = require("lsp.handlers")
 
 --- 自动启动
-local opts = {}
 for _, server in ipairs(servers) do
-    opts = {
+    local opts = {
         on_attach = handler.on_attach,
         capabilities = handler.capabilities,
         handlers = handler.handlers
@@ -41,6 +34,7 @@ for _, server in ipairs(servers) do
         lspconfig[server].setup(opts)
     end
 end
+
 
 --     -- TODO  load conf
 local registry = require("mason-registry")

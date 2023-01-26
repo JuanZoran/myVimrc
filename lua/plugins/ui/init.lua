@@ -7,7 +7,7 @@ return {
         priority = 1000, -- make sure to load this before all the other start plugins
     },
 
-    { "catppuccin/nvim", lazy = true },
+    { "catppuccin/nvim", lazy = true, name = 'catppuccin' },
 
     {
         'gen740/SmoothCursor.nvim',
@@ -24,7 +24,6 @@ return {
     },
 
     {
-
         "norcalli/nvim-colorizer.lua",
         cmd = "ColorizerToggle",
         config = true,
@@ -51,10 +50,8 @@ return {
         tag = "nightly", -- optional, updated every week. (see issue #1193)
     },
 
-
     { -- 标签栏
         "akinsho/bufferline.nvim",
-        requires = "nvim-tree/nvim-web-devicons",
         opts = {
             -- highlights = require("catppuccin.groups.integrations.bufferline").get(),
             options = {

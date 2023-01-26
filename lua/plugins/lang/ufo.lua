@@ -3,9 +3,6 @@ vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor)
 vim.keymap.set("n", "zj", require("ufo").goPreviousClosedFold)
 vim.keymap.set("n", "zl", require("ufo").goNextClosedFold)
-vim.keymap.set("n", "Z", 'zf')
-vim.keymap.set("v", "za", "zf")
-
 
 -- INFO : virtual Text hint
 local handler = function(virtText, lnum, endLnum, width, truncate)
@@ -51,8 +48,6 @@ require('ufo').setup {
 -- INFO open Fold hl
 vim.api.nvim_set_hl(0, 'UfoFoldedBg', {
     link = 'IncSearch',
-    -- fg = 113,
-    -- bg = '#89e051',
 })
 
 

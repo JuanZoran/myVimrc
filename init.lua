@@ -21,20 +21,62 @@ local install = M.commands.install
 install.key = 'Y'
 install.key_plugin = 'y'
 
+
 require("lazy").setup('plugins', {
     default = {
-        version = "*", -- enable this to try installing the latest stable versions of plugins
+        lazy = true,
+    },
+    install = {
+        colorscheme = { "kanagawa", 'habamax' },
     },
     ui = {
         border = "rounded",
     },
-    -- dev = {
-    --     -- directory where you store your local plugin projects
-    --     path = "~/project/Neovim",
-    --     ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-    --     patterns = {}, -- For example {"folke"}
-    --     fallback = false, -- Fallback to git when local plugin doesn't exist
-    -- },
+    checker = {
+        enable = true,
+        frequency = 240,
+    },
+    performance = {
+        cache = {
+            enabled = true,
+            -- disable_events = {},
+        },
+        rtp = {
+            disabled_plugins = {
+                "spellfile_plugin",
+                "syntax_completion",
+                "2html_plugin",
+                "getscript",
+                "getscriptPlugin",
+                "gzip",
+                "logipat",
+                "netrw",
+                "netrwPlugin",
+                "netrwSettings",
+                "netrwFileHandlers",
+                "matchit",
+                "matchparen",
+                "tar",
+                "tarPlugin",
+                "rrhelper",
+                "shada",
+                "vimball",
+                "vimballPlugin",
+                "tohtml",
+                "tutor",
+                "zip",
+                "zipPlugin",
+            },
+        }
+    },
+    dev = {
+        -- directory where you store your local plugin projects
+        path = "~/project/Neovim",
+        ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+        patterns = { 'JuanZoran' }, -- For example {"folke"}
+        fallback = true, -- Fallback to git when local plugin doesn't exist
+    },
+    debug = false,
 })
 
 require('core')

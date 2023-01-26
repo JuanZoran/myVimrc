@@ -8,10 +8,10 @@ require("persisted").setup {
     on_autoload_no_session = function()
         print('Session Not Exist')
     end,
+    autosave = false, -- automatically save session files when exiting Neovim
     -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
     -- command = "VimLeavePre", -- the autocommand for which the session is saved
     -- silent = false, -- silent nvim message when sourcing session file
-    autosave = false, -- automatically save session files when exiting Neovim
     -- should_autosave = nil, -- function to determine if a session should be autosaved
     -- autoload = false, -- automatically load the session for the cwd on Neovim startup
     -- follow_cwd = true, -- change session file name to match current working directory if it changes
@@ -28,5 +28,4 @@ require("persisted").setup {
 }
 
 require("telescope").load_extension("persisted") -- To load the telescope extension
-
 vim.keymap.set('n', '<leader>ss', '<CMD>Telescope persisted<CR>', { desc = 'Check out the Session' })

@@ -15,6 +15,11 @@ opt.relativenumber = true
 opt.showmode = false
 opt.ruler = false
 
+opt.splitkeep = "screen"
+opt.shortmess:append { W = true, I = true, c = true, C = true }
+opt.grepprg = "rg --vimgrep"
+opt.confirm = true -- Confirm to save changes before exiting modified buffer
+
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 
@@ -29,13 +34,13 @@ opt.cmdheight = 0
 opt.pumheight = 10
 opt.ignorecase = true
 opt.smartcase = true
+
 -- opt.hidden = true
 -- opt.title = true -- for show current dir
 opt.timeoutlen = 500 --default value = 1000
 opt.ttimeout = true
 opt.ttimeoutlen = 50 --default value = 1000
 opt.hlsearch = false
--- opt.paste = true
 
 -- Cool floating window popup menu for completion on command line
 opt.tabstop     = 4
@@ -43,7 +48,6 @@ opt.softtabstop = 4
 opt.shiftwidth  = 4
 opt.expandtab   = true
 opt.completeopt = { "menu", "menuone", "noselect" }
-opt.shortmess   = 'aoOTIcF'
 opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 
 
@@ -73,44 +77,11 @@ opt.iskeyword:append('-') -- 将word-word视为一个word, 方便daw
 
 -----================ disabled some native =====================
 
-local g = vim.g
 -- vim.o.showmode = false
-g.did_install_default_menus = 1
-g.did_install_syntax_menu = 1
+vim.g.did_install_default_menus = 1
+vim.g.did_install_syntax_menu = 1
 ----============  disable end  ===========-------
 
-
--- Uncomment this if you define your own filetypes in `after/ftplugin`
--- Disable some builtin vim plugins
-local disabled_built_ins = {
-    "spellfile_plugin",
-    "syntax_completion",
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "matchit",
-    "matchparen",
-    "tar",
-    "tarPlugin",
-    "rrhelper",
-    "shada",
-    "vimball",
-    "vimballPlugin",
-    "tohtml",
-    "tutor",
-    "zip",
-    "zipPlugin",
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
-end
 
 -- vim.opt.formatoptions:remove("o")
 -- 	- "a" -- Auto formatting is BAD.

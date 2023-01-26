@@ -1,6 +1,7 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
+        -- cmd = 'Telescope',
         dependencies = {
             "nvim-lua/plenary.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- fuzzy finder
@@ -17,13 +18,6 @@ return {
         },
     },
 
-    -- {
-    --     "nvim-telescope/telescope-project.nvim",
-    --     keys = {
-    --         { '<C-p>', '<cmd>Telescope project<cr>', desc = '[] select project' },
-    --     },
-    -- }, --
-
     {
         "ThePrimeagen/refactoring.nvim",
         keys = {
@@ -36,25 +30,37 @@ return {
         end,
     }, --
 
-    -- {
-    --     "brandoncc/telescope-harpoon.nvim", -- list
-    --     keys = {
-    --         '<Leader>hh',
-    --         '<Leader>hi',
-    --         '<Leader>hj',
-    --         '<Leader>hl',
-    --         '<Leader>hc',
-    --         '<Leader>hm',
-    --     },
-    --     config = function() require 'plugins.telescope.harpoon' end,
-    --     dependencies = { {
-    --         "theprimeagen/harpoon",
-    --     } }
-    -- }, -- list
-
     {
         "AckslD/nvim-neoclip.lua",
-        config = function() require 'plugins.telescope.neoclip' end
+        event = 'VeryLazy',
+        opts = {
+            history = 500,
+            enable_persistent_history = true,
+            enable_macro_history = false,
+            keys = {
+                telescope = {
+                    i = {
+                        select = '<cr>',
+                        paste = '<c-o>',
+                        paste_behind = '<c-p>',
+                        replay = '<c-r>', -- replay a macro
+                        delete = '<c-d>', -- delete an entry
+                    },
+                    n = {
+                        select = '<cr>',
+                        paste = 'p',
+                        paste_behind = 'P',
+                        replay = 'r',
+                        delete = 'd',
+                    },
+                },
+            },
+        },
+        config = function(_, opts)
+            require('neoclip').setup(opts)
+            require("telescope").load_extension "neoclip"
+            vim.keymap.set('n', '<leader><C-p>', '<Cmd>Telescope neoclip<cr>', { desc = '📋Clipboard History' })
+        end
     },
 
     {

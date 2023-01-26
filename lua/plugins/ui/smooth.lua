@@ -31,6 +31,7 @@ vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua re
 vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 
 require('smoothcursor').setup {
+    autostart = false,
     speed = 50, -- max is 100 to stick to your current position
     intervals = 30, -- tick intervalI
     disable_float_win = true, -- disable on float window
@@ -38,27 +39,12 @@ require('smoothcursor').setup {
     disabled_filetypes = {
         'alpha',
         'TelescopePrompt'
-    }
-    -- fancy = {
-    --     head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
-    --     enable = false
-    -- },
+    },
+    fancy = {
+        head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+        enable = false
+    },
 }
-
-
--- vim.keymap.set({ 'n', 'x' }, 'I', function()
---     vim.defer_fn(show, 10)
---     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-u>', true, false, true), 'n', false)
---     vim.api.nvim_feedkeys('zz', 'n', false)
--- end)
-
--- vim.keymap.set({ 'n', 'x' }, 'K', function()
---     vim.defer_fn(show, 10)
---     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-d>', true, false, true), 'n', false)
---     vim.api.nvim_feedkeys('zz', 'n', false)
--- end)
-
-
 
 local set = require('util.map').set
 set {

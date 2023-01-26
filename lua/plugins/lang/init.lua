@@ -1,11 +1,12 @@
 return {
     {
         "rrethy/vim-illuminate",
-        config = function()
-            require('illuminate').configure {
-                providers = { 'lsp', 'treesitter', },
-                delay = 100,
-            }
+        opts = {
+            providers = { 'lsp', 'treesitter', },
+            delay = 200,
+        },
+        config = function(_, opts)
+            require('illuminate').configure(opts)
         end,
     },
     {
@@ -39,11 +40,11 @@ return {
             { '<C-r>', mode = 'x', '<Esc><Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
         },
     },
+
     {
         "nvim-treesitter/nvim-treesitter",
-        build = function()
-            require("nvim-treesitter.install").update({ with_sync = true })
-        end,
+        build = ':TSUpdate',
+        event = 'BufReadPost',
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "mrjones2014/nvim-ts-rainbow",
@@ -55,25 +56,62 @@ return {
     {
         --- TODO :
         "kevinhwang91/nvim-ufo",
-        dependencies = { "kevinhwang91/promise-async" },
+        dependencies = { "kevinhwang91/promise-async", lazy = true },
         config = function() require 'plugins.lang.ufo' end,
     },
 
-
     {
-        "williamboman/mason.nvim",
+        "neovim/nvim-lspconfig", -- official lspconfig
         dependencies = {
-            "williamboman/mason-lspconfig.nvim", -- make bridge between lspconfig and mason
-            "neovim/nvim-lspconfig", -- official lspconfig
             "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
             'p00f/clangd_extensions.nvim',
-
-            -- NOTE  Dap
-            'jayp0521/mason-nvim-dap.nvim',
-            'mfussenegger/nvim-dap',
-            'rcarriga/nvim-dap-ui',
+            {
+                "williamboman/mason.nvim",
+                opts = {
+                    ui = {
+                        border = "rounded",
+                        keymaps = {
+                            -- Keymap to expand a package
+                            toggle_package_expand = "o",
+                            -- Keymap to install the package under the current cursor position
+                            install_package = "<Leader>i",
+                            -- Keymap to reinstall/update the package under the current cursor position
+                            update_package = "u",
+                            -- Keymap to check for new version for the package under the current cursor position
+                            check_package_version = "c",
+                            -- Keymap to update all installed packages
+                            update_all_packages = "U",
+                            -- Keymap to check which installed packages are outdated
+                            check_outdated_packages = "C",
+                            -- Keymap to uninstall a package
+                            uninstall_package = "d",
+                            -- Keymap to cancel a package installation
+                            cancel_installation = "<C-c>",
+                            -- Keymap to apply language filter
+                            apply_language_filter = "<C-f>",
+                        },
+                    },
+                }
+            },
+            {
+                "williamboman/mason-lspconfig.nvim",
+                opts = {
+                    automatic_installation = false,
+                }
+            },
         }
     }, -- lsp manager
+
+
+
+    {
+        'mfussenegger/nvim-dap',
+        dependencies = {
+            'jayp0521/mason-nvim-dap.nvim',
+            'rcarriga/nvim-dap-ui',
+        },
+        lazy = true,
+    },
 
     {
         "folke/neodev.nvim",
@@ -98,7 +136,7 @@ return {
             {
                 "L3mon4d3/luasnip",
                 init = function()
-                    require('snips').setup()
+                    require('snips')
                 end,
             },
             "rafamadriz/friendly-snippets"

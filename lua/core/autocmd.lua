@@ -25,6 +25,13 @@ api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
+-- resize splits if window got resized
+api.nvim_create_autocmd({ "VimResized" }, {
+    callback = function()
+        vim.cmd("tabdo wincmd =")
+    end,
+})
+
 
 -- NOTE  Snip Utility
 api.nvim_create_autocmd("BufEnter", {
@@ -39,76 +46,39 @@ api.nvim_create_autocmd("BufEnter", {
 -- INFO 中文输入法切换的问题
 if vim.fn.executable('fcitx5-remote') then
     local state = ''
-    if vim.g.neovide then
-        api.nvim_create_autocmd('InsertLeave', {
-            group = group,
-            pattern = '*',
-            callback = function()
-                state = io.popen('fcitx5-remote'):read('*a')
-                os.execute('fcitx5-remote -c')
-            end,
-        })
+    api.nvim_create_autocmd('InsertLeave', {
+        group = group,
+        pattern = '*',
+        callback = function()
+            state = io.popen('fcitx5-remote'):read('*a')
+            os.execute('fcitx5-remote -c')
+        end,
+    })
 
-        api.nvim_create_autocmd('InsertEnter', {
-            group = group,
-            pattern = '*',
-            callback = function()
-                if state == '2\n' then
-                    os.execute('fcitx5-remote -o')
-                end
-            end,
-        })
-
-    else
-        local times = 0
-        api.nvim_create_autocmd('InsertLeave', {
-            group = group,
-            pattern = '*',
-            callback = function()
-                vim.cmd [[SmoothCursorStart]]
-                state = io.popen('fcitx5-remote'):read('*a')
-                os.execute('fcitx5-remote -c')
-            end,
-        })
-
-        api.nvim_create_autocmd('InsertEnter', {
-            group = group,
-            pattern = '*',
-            callback = function()
-                if times > 1 then
-                    if state == '2\n' then
-                        os.execute('fcitx5-remote -o')
-                    end
-                    vim.cmd [[SmoothCursorStop]]
-                else
-                    times = times + 1
-                end
-            end,
-        })
-
-        -- INFO cursorline
-        api.nvim_create_autocmd('CmdlineEnter', {
-            group = group,
-            command = "SmoothCursorStop",
-        })
-
-        api.nvim_create_autocmd('CmdlineLeave', {
-            group = group,
-            command = "SmoothCursorStart",
-        })
-        vim.opt.cursorline = false
-    end
+    api.nvim_create_autocmd('InsertEnter', {
+        group = group,
+        pattern = '*',
+        callback = function()
+            if state == '2\n' then
+                os.execute('fcitx5-remote -o')
+            end
+        end,
+    })
 end
 
 
 -- INFO : store Position
--- api.nvim_create_autocmd(
---     "BufReadPost",
---     {
---         group = api.nvim_create_augroup('Position', { clear = true }),
---         command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]
---     }
--- )
+-- go to last loc when opening a buffer
+-- api.nvim_create_autocmd("BufReadPost", {
+--   callback = function()
+--     local mark = vim.api.nvim_buf_get_mark(0, '"')
+--     local lcount = vim.api.nvim_buf_line_count(0)
+--     if mark[1] > 0 and mark[1] <= lcount then
+--       pcall(vim.api.nvim_win_set_cursor, 0, mark)
+--     end
+--   end,
+-- })
+
 
 -- -- 设置firenvim的大小
 -- vim.cmd [[
