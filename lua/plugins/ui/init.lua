@@ -1,22 +1,31 @@
 return {
     {
         "rebelot/kanagawa.nvim",
+        -- lazy = true,
         config = function()
             require 'plugins.ui.theme.kanagawa'
         end,
-        priority = 1000, -- make sure to load this before all the other start plugins
+        priority = 1000,
     },
 
-    { "catppuccin/nvim", lazy = true, name = 'catppuccin' },
+    {
+        "JuanZoran/catppuccin",
+        lazy = true,
+        dev = true,
+        -- config = function ()
+        --     require('catppuccin').setup()
+        --     vim.cmd.colorscheme('catppuccin')
+        -- end,
+    },
+
+    ---- Corlorscheme
 
     {
         'gen740/SmoothCursor.nvim',
         config = function()
             require 'plugins.ui.smooth'
         end,
-        cond = function()
-            return not vim.g.neovide
-        end,
+        cond = not vim.g.neovide,
         dependencies = {
             'declancm/cinnamon.nvim',
             'edluffy/specs.nvim',
@@ -100,7 +109,6 @@ return {
         },
         config = function() require "plugins.ui.noice" end
     },
-
     -- { "sainnhe/everforest", config = function() require 'plugins.ui.theme.everforest' end, opt = true, },
     -- { "projekt0n/github-nvim-theme", config = function() require 'plugins.ui.theme.github' end, opt = true },
     -- { "Mofiqul/dracula.nvim", config = function() require 'plugins.ui.theme.dracula' end, opt = true },

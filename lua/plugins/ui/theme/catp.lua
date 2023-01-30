@@ -36,13 +36,10 @@ require("catppuccin").setup({
         nvimtree = true,
         telescope = true,
         notify = true,
-        mini = false,
         which_key = true,
         illuminate = false,
         markdown = true,
         mason = true,
-        -- noice = true,
-        -- ts_rainbow = true,
         treesitter = true,
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },

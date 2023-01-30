@@ -60,6 +60,7 @@ return {
             require('neoclip').setup(opts)
             require("telescope").load_extension "neoclip"
             vim.keymap.set('n', '<leader><C-p>', '<Cmd>Telescope neoclip<cr>', { desc = '📋Clipboard History' })
+            vim.keymap.set('n', '<leader>P', '<Cmd>Telescope neoclip unnamed<cr>', { desc = '📋Clipboard History for system' })
         end
     },
 

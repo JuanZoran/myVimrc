@@ -18,6 +18,15 @@ return {
         },
         ft = { "markdown", "md" },
         build = function() vim.fn["mkdp#util#install"]() end,
+        dependencies = {
+            {
+                'dhruvasagar/vim-table-mode',
+                ft = { "markdown", "md" },
+                -- keys = {
+                -- {'<C-t>', '<>'}
+                -- }
+            }
+        }
     },
 
     {
@@ -55,6 +64,7 @@ return {
         }
     },
 
+
     { -- powerful comment with gc<char> | gb<char> | <leader>A
         "numtostr/comment.nvim",
         keys = {
@@ -63,7 +73,7 @@ return {
         opts = {
             ignore = '^$',
             extra = {
-                -- -Add comment on the line above
+                ---Add comment on the line above
                 above = "gcO",
                 ---Add comment on the line below
                 below = "gco",
@@ -75,7 +85,7 @@ return {
 
     {
         "windwp/nvim-autopairs",
-        opts = {
+        config = {
             -- check_ts = true,
             enable_abbr = true,
             fast_wrap = {
@@ -126,9 +136,10 @@ return {
         "ggandor/leap.nvim",
         config = function() require 'plugins.tools.leap' end,
         keys = {
-            { mode = '', '<leader>j', '<Plug>(leap-backward-to)', desc = '⬅️ quick jump backward' },
-            { mode = '', '<leader><leader>l', '<Plug>(leap-cross-window)', desc = '💪quick jump cross window' },
-            { mode = '', '<leader>l', '<Plug>(leap-forward-to)', desc = '➡️ quick jump forward' },
+            { mode = { 'x', 'o', 'n' }, '<leader>j', '<Plug>(leap-backward-to)', desc = '⬅️ quick jump backward' },
+            { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)',
+                desc = '💪quick jump cross window' },
+            { mode = { 'x', 'o', 'n' }, '<leader>l', '<Plug>(leap-forward-to)', desc = '➡️ quick jump forward' },
         },
         dependencies = {
             {
@@ -165,7 +176,17 @@ return {
             { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
         },
         dependencies = { 'kkharji/sqlite.lua', lazy = true },
-        config = true,
+        config = {
+            hover = {
+                spinner = 'moon'
+            },
+            engine = {
+                baidu = {
+                    appid = '20220910001338724',
+                    appPasswd = 'EKnyuuJQeVn7DLxeIH7F'
+                }
+            }
+        },
         dev = true,
     }
 }

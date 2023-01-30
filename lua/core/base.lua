@@ -15,8 +15,7 @@ opt.relativenumber = true
 opt.showmode = false
 opt.ruler = false
 
-opt.splitkeep = "screen"
-opt.shortmess:append { W = true, I = true, c = true, C = true }
+-- opt.shortmess:append { W = true, I = true, c = true, C = true }
 opt.grepprg = "rg --vimgrep"
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 

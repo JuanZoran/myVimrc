@@ -22,14 +22,14 @@ local function get_lsp_staus()
 
     return (({
         ['c']          = ' ﭰ ',
-        ['cpp']        = ' ',
-        ['go']         = 'ﳑ',
-        ['python']     = ' ',
-        ['html']       = ' ',
-        ['lua']        = ' ',
-        ['sh']         = ' ',
-        ['javascript'] = ' ',
-        ['markdown']   = ' ',
+        ['cpp']        = '  ',
+        ['go']         = ' ﳑ ',
+        ['python']     = '  ',
+        ['html']       = '  ',
+        ['lua']        = '  ',
+        ['sh']         = '  ',
+        ['javascript'] = '  ',
+        ['markdown']   = '  ',
     })[vim.bo.filetype] or '') .. status
 end
 
@@ -101,13 +101,6 @@ require("lualine").setup({
             lsp_status,
         },
 
-        lualine_c = {
-            {
-                function()
-                    return require('lspsaga.symbolwinbar'):get_winbar()
-                end
-            }
-        },
         lualine_a = {
             {
                 function()

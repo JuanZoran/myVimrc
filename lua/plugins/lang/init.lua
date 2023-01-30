@@ -125,7 +125,7 @@ return {
 
     {
         "hrsh7th/nvim-cmp",
-        event = { 'InsertEnter', 'CmdlineEnter' },
+        event = 'InsertEnter',
         dependencies = {
             "hrsh7th/cmp-buffer",
             { "tzachar/cmp-tabnine", build = 'bash install.sh' },

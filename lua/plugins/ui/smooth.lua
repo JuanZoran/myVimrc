@@ -107,7 +107,9 @@ end)
 
 
 map({ 'n', 'x' }, 'L', function()
-    if vim.fn.col('.') ~= vim.fn.col('$') - 1 then
+    local _cur = vim.fn.col('.')
+    local _end = vim.fn.col('$') - 1
+    if _end ~= 0 and _cur ~= _end then
         vim.defer_fn(show, 10)
         vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
     end
