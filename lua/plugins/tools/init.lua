@@ -173,6 +173,7 @@ return {
         "JuanZoran/Trans.nvim",
         keys = {
             { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
+            { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = ' 自动发音' },
             { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
         },
         dependencies = { 'kkharji/sqlite.lua', lazy = true },

@@ -97,6 +97,11 @@ require("lualine").setup({
                 memory_use,
             },
         },
+        -- lualine_c = {
+        --     function()
+        --         return require('lspsaga.symbolwinbar'):get_winbar()
+        --     end
+        -- },
         lualine_z = {
             lsp_status,
         },

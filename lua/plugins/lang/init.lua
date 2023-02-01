@@ -121,18 +121,16 @@ return {
             }
         },
     },
-
-
     {
         "hrsh7th/nvim-cmp",
-        event = 'InsertEnter',
+        event = {'InsertEnter', 'CmdlineEnter'},
         dependencies = {
             "hrsh7th/cmp-buffer",
-            { "tzachar/cmp-tabnine", build = 'bash install.sh' },
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
+            { "jcdickinson/codeium.nvim", config = true },
             {
                 "L3mon4d3/luasnip",
                 init = function()

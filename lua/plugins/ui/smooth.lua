@@ -18,33 +18,34 @@ specs.setup {
     },
 }
 
-
 require('cinnamon').setup {
     default_keymaps = false, -- Create default keymaps.
     extra_keymaps = false,
     override_keymaps = false, -- whether to force mapping
     hide_cursor = true,
-    default_delay = 6, -- The default delay (in ms) between each line when scrolling.
+    default_delay = 4, -- The default delay (in ms) between each line when scrolling.
 }
 
 vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 
-require('smoothcursor').setup {
-    autostart = false,
-    speed = 50, -- max is 100 to stick to your current position
-    intervals = 30, -- tick intervalI
-    disable_float_win = true, -- disable on float window
-    linehl = 'CursorLine',
-    disabled_filetypes = {
-        'alpha',
-        'TelescopePrompt'
-    },
-    fancy = {
-        head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
-        enable = false
-    },
-}
+if false then
+    require('smoothcursor').setup {
+        autostart = true,
+        speed = 50, -- max is 100 to stick to your current position
+        intervals = 30, -- tick intervalI
+        disable_float_win = true, -- disable on float window
+        linehl = 'CursorLine',
+        disabled_filetypes = {
+            'alpha',
+            'TelescopePrompt'
+        },
+        fancy = {
+            head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+            enable = false
+        },
+    }
+end
 
 local set = require('util.map').set
 set {

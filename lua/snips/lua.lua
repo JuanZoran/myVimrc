@@ -78,6 +78,14 @@ local snips = {
             i(1, "module"),
         })
     ),
+
+    s(
+        "lc",
+        fmt('local {} = {}', {
+            l(l._1:match("[^.]*$"), 1),
+            i(1, "name"),
+        })
+    ),
     parse("s", "s('$1', $2)"),
     parse("lm", [[
         local M = {}

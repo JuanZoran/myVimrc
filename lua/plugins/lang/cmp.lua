@@ -1,15 +1,5 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-    vim.notify("cmp not found")
-    return
-end
-
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-    vim.notify("luasnip not found")
-    return
-end
-
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 
 local kind_icons = require('util').icon.code_icon
 cmp.setup {
@@ -25,7 +15,7 @@ cmp.setup {
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping {
-            i = function(_)
+            i = function()
                 if luasnip.choice_active() then
                     luasnip.change_choice()
                 else
@@ -37,7 +27,7 @@ cmp.setup {
             c = cmp.mapping.complete()
         },
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ["<C-j>"] = cmp.mapping({
+        ["<C-c>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         }),
@@ -76,22 +66,21 @@ cmp.setup {
             -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             vim_item.menu = ({
-                luasnip     = "[Snippet]",
-                nvim_lsp    = "[LSP]",
-                path        = "[Path]",
-                cmp_tabnine = "[TabNine]",
-                buffer      = "[Buffer]",
+                luasnip  = "[Snippet]",
+                nvim_lsp = "[LSP]",
+                path     = "[Path]",
+                buffer   = "[Buffer]",
+                codeium  = '[Codeium]',
             })[entry.source.name]
             return vim_item
         end,
     },
     sources = {
         { name = "path" },
-        { name = "nvim_lsp", max_item_count = 5 },
-        { name = "luasnip" },
-        -- { name = "cmp_tabnine", max_item_count = 5 },
-        { name = "cmp_tabnine" },
-        { name = "buffer", max_item_count = 4 },
+        { name = "nvim_lsp", max_item_count = 3 },
+        { name = "luasnip", max_item_count = 3 },
+        { name = "codeium" },
+        { name = "buffer", max_item_count = 3 },
     },
     window = {
         documentation = cmp.config.window.bordered(),
@@ -117,8 +106,8 @@ cmp.setup {
 }
 
 -- TabNine
-local tabnine = require('cmp_tabnine.config')
-tabnine:setup({ max_lines = 1000, max_num_results = 10, sort = true })
+-- local tabnine = require('cmp_tabnine.config')
+-- tabnine:setup({ max_lines = 1000, max_num_results = 10, sort = true })
 
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {

@@ -26,6 +26,7 @@ end
 set {
     mode = 'n',
     map = {
+        { 'U', 'Vp', },
         { "wo", ":vsp<CR>", ' Split Window' },
         { "wu", ":sp<CR>", ' Split Window Vertically' },
         { "wj", "<C-w>h", ' Jump Left' },
@@ -101,7 +102,7 @@ set {
         { '<C-f>', '<ESC>ea' },
         { '<C-a>', function()
             ---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-            local s = (vim.fn.getline('.')):find('%S')
+            local s = (vim.api.nvim_get_current_line()):find('%S')
             vim.fn.cursor { vim.fn.line('.'), s or 0 }
         end },
         { '<C-e>', function()

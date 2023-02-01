@@ -21,13 +21,13 @@ return {
     ---- Corlorscheme
 
     {
-        'gen740/SmoothCursor.nvim',
+        'declancm/cinnamon.nvim',
         config = function()
             require 'plugins.ui.smooth'
         end,
         cond = not vim.g.neovide,
         dependencies = {
-            'declancm/cinnamon.nvim',
+            'gen740/SmoothCursor.nvim',
             'edluffy/specs.nvim',
         },
     },
@@ -97,6 +97,7 @@ return {
             {
                 "rcarriga/nvim-notify",
                 opts = {
+                    level = vim.log.INFO,
                     stages = "slide",
                     timeout = 2000,
                     icons = {
