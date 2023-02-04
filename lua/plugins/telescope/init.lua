@@ -17,19 +17,6 @@ local zoxide = {
     },
 }
 
-
-local refactor = {
-    "ThePrimeagen/refactoring.nvim",
-    keys = {
-        { mode = 'x', '<Leader>rr', function()
-            require('telescope').extensions.refactoring.refactors()
-        end, desc = '🎈Refactoring Operations' },
-    },
-    config = function()
-        require('telescope').load_extension("refactoring")
-    end,
-}
-
 local neoclip = {
     "AckslD/nvim-neoclip.lua",
     event = 'VeryLazy',
@@ -96,7 +83,6 @@ local undo = {
 return {
     telescope,
     zoxide,
-    refactor,
     neoclip,
     symbols,
     undo,

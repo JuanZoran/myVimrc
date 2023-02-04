@@ -137,13 +137,23 @@ local surround = {
 
 local session = {
     "olimorris/persisted.nvim",
+    event = 'VeryLazy',
     config = function() require 'plugins.tools.session' end,
 }
 
 local gitsigns = {
     "lewis6991/gitsigns.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-    config = function() require 'plugins.tools.gitsigns' end,
+    event = 'VeryLazy',
+    keys = {
+        { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
+        { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },
+        { '<leader>gs', '<Cmd>Gitsigns show<CR>' },
+        { '<leader>gr', '<Cmd>Gitsigns reset_buffer<CR>' },
+    },
+    opts = {
+        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    },
 }
 
 local zen_mode = {

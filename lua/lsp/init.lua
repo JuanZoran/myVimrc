@@ -30,6 +30,7 @@ for _, server in ipairs(servers) do
                 },
             }
         }
+
     else
         lspconfig[server].setup(opts)
     end

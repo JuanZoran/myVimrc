@@ -71,6 +71,9 @@ local neodev = {
 
 local trouble = {
     "folke/trouble.nvim",
+    keys = {
+        { '<leader>df', '<Cmd>TroubleToggle <CR>', desc = 'Toggle QuickFix' }
+    },
     opts = {
         action_keys = { -- key mappings for actions in the trouble list
             close = "q", -- close the list
@@ -92,9 +95,6 @@ local trouble = {
             next = "k" -- next item
         },
     },
-    keys = {
-        { '<leader>df', '<Cmd>TroubleToggle <CR>', desc = 'Toggle QuickFix' }
-    },
 }
 
 
@@ -106,6 +106,37 @@ local lspconfig = {
     }
 }
 
+local null_ls = {
+    'jose-elias-alvarez/null-ls.nvim',
+    event = 'VeryLazy',
+    config = function()
+        local nl = require("null-ls")
+        nl.setup {
+            sources = {
+                -- nl.builtins.code_actions.gitsigns,
+                nl.builtins.formatting.prettier,
+                nl.builtins.formatting.shfmt,
+                -- nl.builtins.code_actions.refactoring,
+                -- nl.builtins.code_actions.shellcheck,
+            },
+        }
+    end,
+}
+
+local refactor = {
+    "ThePrimeagen/refactoring.nvim",
+    keys = {
+        { mode = 'x', '<Leader>rr', function()
+            require('telescope').extensions.refactoring.refactors()
+        end, desc = '🎈Refactoring Operations' },
+    },
+    config = function()
+        require("refactoring").setup()
+        require('telescope').load_extension('refactoring')
+    end,
+}
+
+
 return {
     illuminate,
     sniprun,
@@ -115,6 +146,8 @@ return {
     neodev,
     trouble,
     lspconfig, -- lsp manager
+    null_ls,
+    refactor,
     {
         "williamboman/mason.nvim",
         opts = {
