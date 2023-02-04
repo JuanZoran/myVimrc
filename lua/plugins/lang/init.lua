@@ -1,65 +1,81 @@
-return {
-    {
-        "rrethy/vim-illuminate",
-        opts = {
+local sniprun = {
+    'michaelb/sniprun',
+    build = 'bash ./install.sh',
+    keys = {
+        { '<leader><C-r>', '<Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
+        { '<C-r>', mode = 'x', '<Esc><Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
+    },
+    opts = {
+        display = {
+            "TempFloatingWindow", --# display results in a floating window
+            "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
+        },
+        snipruncolors = {
+            SniprunVirtualTextOk  = { bg = "#89e051", fg = '#1d202f' },
+            SniprunFloatingWinOk  = { fg = "#599eff" },
+            SniprunVirtualTextErr = { bg = "#881515", fg = "#000000", ctermbg = "DarkRed", cterfg = "Black" },
+            SniprunFloatingWinErr = { fg = "#881515", ctermfg = "DarkRed" },
+        },
+        borders = 'rounded',
+    } --# display borders around floating windows
+}
+
+local illuminate = {
+    "rrethy/vim-illuminate",
+    config = function()
+        require('illuminate').configure {
             providers = { 'lsp', 'treesitter', },
             delay = 200,
-        },
-        config = function(_, opts)
-            require('illuminate').configure(opts)
-        end,
-    },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        opts = {
-            space_char_blankline = " ",
-            show_current_context = true,
-            show_current_context_start = true,
-        },
-    },
+        }
+    end,
+}
 
-    {
-        'michaelb/sniprun',
-        build = 'bash ./install.sh',
-        config = {
-            display = {
-                "TempFloatingWindow", --# display results in a floating window
-                "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
+local indent = {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+        space_char_blankline = " ",
+        show_current_context = true,
+        show_current_context_start = true,
+    },
+}
+
+local treesitter = {
+    "nvim-treesitter/nvim-treesitter",
+    build = ':TSUpdate',
+    event = 'BufReadPost',
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        "mrjones2014/nvim-ts-rainbow",
+        "RRethy/nvim-treesitter-endwise",
+    }, -- rainbow pairs
+    config = function() require("plugins.lang.treesitter") end
+}
+
+local ufo = {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async", lazy = true },
+    config = function() require 'plugins.lang.ufo' end,
+}
+
+local neodev = {
+    "folke/neodev.nvim",
+    opts = {
+        library = {
+            plugins = {
+                'nvim-dap-ui',
             },
-            snipruncolors = {
-                SniprunVirtualTextOk  = { bg = "#89e051", fg = '#1d202f' },
-                SniprunFloatingWinOk  = { fg = "#599eff" },
-                SniprunVirtualTextErr = { bg = "#881515", fg = "#000000", ctermbg = "DarkRed", cterfg = "Black" },
-                SniprunFloatingWinErr = { fg = "#881515", ctermfg = "DarkRed" },
-            },
-            borders = 'rounded', --# display borders around floating windows
-        },
-
-        keys = {
-            { '<leader><C-r>', '<Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
-            { '<C-r>', mode = 'x', '<Esc><Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
-        },
+            types = true,
+        }
     },
+}
 
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ':TSUpdate',
-        event = 'BufReadPost',
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            "mrjones2014/nvim-ts-rainbow",
-            "RRethy/nvim-treesitter-endwise",
-        }, -- rainbow pairs
-        config = function() require("plugins.lang.treesitter") end
-    },
-
-    {
-        --- TODO :
-        "kevinhwang91/nvim-ufo",
-        dependencies = { "kevinhwang91/promise-async", lazy = true },
-        config = function() require 'plugins.lang.ufo' end,
-    },
-
+return {
+    illuminate,
+    sniprun,
+    indent,
+    treesitter,
+    ufo,
+    neodev,
     {
         "neovim/nvim-lspconfig", -- official lspconfig
         dependencies = {
@@ -99,19 +115,6 @@ return {
             { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = false, } },
         }
     },
-
-    {
-        "folke/neodev.nvim",
-        opts = {
-            library = {
-                plugins = {
-                    'nvim-dap-ui',
-                },
-                types = true,
-            }
-        },
-    },
-
     {
         "L3mon4d3/luasnip",
         init = function()
