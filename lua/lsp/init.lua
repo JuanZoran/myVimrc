@@ -43,13 +43,8 @@ registry:on("package:uninstall:success", function(pkg)
     local native_name = package_to_lspconfig[pkg.name]
     if native_name then
         vim.ui.select(
-            {
-                'Remove your configuration for this Lsp',
-                'Skip',
-            },
-            {
-                prompt = 'Whether should remove the configuration ?',
-            },
+            { 'Remove your configuration for this Lsp', 'Skip', },
+            { prompt = 'Whether should remove the configuration ?', },
             function(select)
                 if select ~= 'Skip' then
                     local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath('config') .. '/lua/lsp/conf', native_name))

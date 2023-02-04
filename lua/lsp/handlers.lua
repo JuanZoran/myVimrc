@@ -1,6 +1,4 @@
-local M = {}
 local icon = require("util").icon
-
 local signs = {
     { name = "DiagnosticSignError", text = icon.Error },
     { name = "DiagnosticSignWarn", text = icon.Warn },
@@ -8,15 +6,15 @@ local signs = {
     { name = "DiagnosticSignInfo", text = icon.Info },
 }
 
+local def = vim.fn.sign_define
 for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    def(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
 
 vim.diagnostic.config {
     -- virtual_text = true, --- enable for diagnostic information
     virtual_text = { source = "always", prefix = icon.VirtualText },
-
     -- show signs
     signs = {
         active = signs,
@@ -30,11 +28,11 @@ vim.diagnostic.config {
         border    = "rounded",
         source    = "always ",
         header    = "",
-        prefix = "🔔",
+        prefix    = "🔔",
     },
 }
 
-
+local M = {}
 ---@format disable
 M.on_attach = function(_, bufnr)
     -- NOTE Keymap
@@ -62,8 +60,7 @@ M.on_attach = function(_, bufnr)
             {
                 "gh",
                 function ()
-                    local winid = require('ufo').peekFoldedLinesUnderCursor()
-                    if not winid then
+                    if not require('ufo').peekFoldedLinesUnderCursor() then
                         -- choose one of coc.nvim and nvim lsp
                         vim.cmd [[Lspsaga hover_doc]]
                     end
@@ -73,17 +70,11 @@ M.on_attach = function(_, bufnr)
 
             {
                 "==",
-                function()
-                    vim.lsp.buf.format({ async = true, })
-                end,
+                function() vim.lsp.buf.format({ async = true, buffer = bufnr}) end,
                 ' formatting buffer' ,
             }
         }
     }
-    -- TODO mapping for edit lsp config
-    -- vim.keymap('n', '<leader><leader>l', function ()
-    --     vim.cmd ('e %s'):format()
-    -- end)
 end
 ---@format enable
 
@@ -94,12 +85,7 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
--- NOTE  cmp config
-local _, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not _ then
-    vim.notify('cmp_nvim_lsp error')
-    return
-end
+local cmp_nvim_lsp = require("cmp_nvim_lsp")
 capabilities.textDocument.publishDiagnostics.codeActionsInline = true
 
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)

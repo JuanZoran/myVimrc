@@ -44,7 +44,7 @@ api.nvim_create_autocmd("BufEnter", {
 
 
 -- INFO 中文输入法切换的问题
-if vim.fn.executable('fcitx5-remote') then
+if vim.fn.executable('fcitx5-remote') == 1 then
     local state = ''
     api.nvim_create_autocmd('InsertLeave', {
         group = group,
