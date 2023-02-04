@@ -17,7 +17,7 @@ opt.ruler = false
 
 -- opt.shortmess:append { W = true, I = true, c = true, C = true }
 opt.grepprg = "rg --vimgrep"
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
+-- opt.confirm = true -- Confirm to save changes before exiting modified buffer
 
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"

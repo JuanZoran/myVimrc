@@ -1,6 +1,5 @@
 require("nvim-treesitter.configs").setup {
     auto_install = true,
-    -- ensure_installed = "cpp, python, go, lua, vim, markdown, bash",
     sync_installl = false,
     highlight = {
         enable = true,

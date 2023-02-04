@@ -21,7 +21,7 @@ return {
     {
         'michaelb/sniprun',
         build = 'bash ./install.sh',
-        opts = {
+        config = {
             display = {
                 "TempFloatingWindow", --# display results in a floating window
                 "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
@@ -65,65 +65,66 @@ return {
         dependencies = {
             "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
             'p00f/clangd_extensions.nvim',
-            {
-                "williamboman/mason.nvim",
-                opts = {
-                    ui = {
-                        border = "rounded",
-                        keymaps = {
-                            -- Keymap to expand a package
-                            toggle_package_expand = "o",
-                            -- Keymap to install the package under the current cursor position
-                            install_package = "<Leader>i",
-                            -- Keymap to reinstall/update the package under the current cursor position
-                            update_package = "u",
-                            -- Keymap to check for new version for the package under the current cursor position
-                            check_package_version = "c",
-                            -- Keymap to update all installed packages
-                            update_all_packages = "U",
-                            -- Keymap to check which installed packages are outdated
-                            check_outdated_packages = "C",
-                            -- Keymap to uninstall a package
-                            uninstall_package = "d",
-                            -- Keymap to cancel a package installation
-                            cancel_installation = "<C-c>",
-                            -- Keymap to apply language filter
-                            apply_language_filter = "<C-f>",
-                        },
-                    },
-                }
-            },
-            {
-                "williamboman/mason-lspconfig.nvim",
-                opts = {
-                    automatic_installation = false,
-                }
-            },
         }
     }, -- lsp manager
 
-
-
     {
-        'mfussenegger/nvim-dap',
-        dependencies = {
-            'jayp0521/mason-nvim-dap.nvim',
-            'rcarriga/nvim-dap-ui',
+        "williamboman/mason.nvim",
+        opts = {
+            ui = {
+                border = "rounded",
+                keymaps = {
+                    -- Keymap to expand a package
+                    toggle_package_expand = "o",
+                    -- Keymap to install the package under the current cursor position
+                    install_package = "<Leader>i",
+                    -- Keymap to reinstall/update the package under the current cursor position
+                    update_package = "u",
+                    -- Keymap to check for new version for the package under the current cursor position
+                    check_package_version = "c",
+                    -- Keymap to update all installed packages
+                    update_all_packages = "U",
+                    -- Keymap to check which installed packages are outdated
+                    check_outdated_packages = "C",
+                    -- Keymap to uninstall a package
+                    uninstall_package = "d",
+                    -- Keymap to cancel a package installation
+                    cancel_installation = "<C-c>",
+                    -- Keymap to apply language filter
+                    apply_language_filter = "<C-f>",
+                },
+            },
         },
-        lazy = true,
+        dependencies = {
+            { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = false, } },
+        }
     },
 
     {
         "folke/neodev.nvim",
         opts = {
             library = {
-                plugins = false,
+                plugins = {
+                    'nvim-dap-ui',
+                },
+                types = true,
             }
         },
     },
+
+    {
+        "L3mon4d3/luasnip",
+        init = function()
+            require('snips')
+        end,
+        dependencies = {
+            "rafamadriz/friendly-snippets"
+        }
+    },
+
     {
         "hrsh7th/nvim-cmp",
-        event = {'InsertEnter', 'CmdlineEnter'},
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lsp",
@@ -131,13 +132,6 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
             { "jcdickinson/codeium.nvim", config = true },
-            {
-                "L3mon4d3/luasnip",
-                init = function()
-                    require('snips')
-                end,
-            },
-            "rafamadriz/friendly-snippets"
         },
         config = function() require "plugins.lang.cmp" end
     }
