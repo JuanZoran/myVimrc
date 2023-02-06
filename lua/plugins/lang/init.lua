@@ -1,4 +1,5 @@
-local sniprun = {
+local plugins = require("util.plugin")()
+plugins:add {
     'michaelb/sniprun',
     build = 'bash ./install.sh',
     keys = {
@@ -20,7 +21,7 @@ local sniprun = {
     } --# display borders around floating windows
 }
 
-local illuminate = {
+plugins:add {
     "rrethy/vim-illuminate",
     config = function()
         require('illuminate').configure {
@@ -30,7 +31,7 @@ local illuminate = {
     end,
 }
 
-local indent = {
+plugins:add {
     "lukas-reineke/indent-blankline.nvim",
     opts = {
         space_char_blankline = " ",
@@ -39,7 +40,7 @@ local indent = {
     },
 }
 
-local treesitter = {
+plugins:add {
     "nvim-treesitter/nvim-treesitter",
     build = ':TSUpdate',
     event = 'BufReadPost',
@@ -51,13 +52,13 @@ local treesitter = {
     config = function() require("plugins.lang.treesitter") end
 }
 
-local ufo = {
+plugins:add {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async", lazy = true },
     config = function() require 'plugins.lang.ufo' end,
 }
 
-local neodev = {
+plugins:add {
     "folke/neodev.nvim",
     opts = {
         library = {
@@ -69,7 +70,7 @@ local neodev = {
     },
 }
 
-local trouble = {
+plugins:add {
     "folke/trouble.nvim",
     keys = {
         { '<leader>df', '<Cmd>TroubleToggle <CR>', desc = 'Toggle QuickFix' }
@@ -98,7 +99,7 @@ local trouble = {
 }
 
 
-local lspconfig = {
+plugins:add {
     "neovim/nvim-lspconfig", -- official lspconfig
     dependencies = {
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
@@ -106,7 +107,7 @@ local lspconfig = {
     }
 }
 
-local null_ls = {
+plugins:add {
     'jose-elias-alvarez/null-ls.nvim',
     event = 'VeryLazy',
     config = function()
@@ -123,7 +124,7 @@ local null_ls = {
     end,
 }
 
-local refactor = {
+plugins:add {
     "ThePrimeagen/refactoring.nvim",
     keys = {
         { mode = 'x', '<Leader>rr', function()
@@ -136,9 +137,9 @@ local refactor = {
     end,
 }
 
-
-local luasnip = {
+plugins:add {
     "L3mon4d3/luasnip",
+    lazy = true,
     config = function()
         local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"
         local ls = require "luasnip"
@@ -168,66 +169,55 @@ local luasnip = {
         vim.keymap.set('n', '<leader><cr>', require "luasnip.loaders.from_lua".edit_snippet_files)
     end,
     dependencies = {
-        "rafamadriz/friendly-snippets"
+        "rafamadriz/friendly-snippets",
     }
 }
 
 
-return {
-    illuminate,
-    sniprun,
-    indent,
-    treesitter,
-    ufo,
-    neodev,
-    trouble,
-    lspconfig, -- lsp manager
-    null_ls,
-    refactor,
-    {
-        "williamboman/mason.nvim",
-        opts = {
-            ui = {
-                border = "rounded",
-                keymaps = {
-                    -- Keymap to expand a package
-                    toggle_package_expand = "o",
-                    -- Keymap to install the package under the current cursor position
-                    install_package = "<Leader>i",
-                    -- Keymap to reinstall/update the package under the current cursor position
-                    update_package = "u",
-                    -- Keymap to check for new version for the package under the current cursor position
-                    check_package_version = "c",
-                    -- Keymap to update all installed packages
-                    update_all_packages = "U",
-                    -- Keymap to check which installed packages are outdated
-                    check_outdated_packages = "C",
-                    -- Keymap to uninstall a package
-                    uninstall_package = "d",
-                    -- Keymap to cancel a package installation
-                    cancel_installation = "<C-c>",
-                    -- Keymap to apply language filter
-                    apply_language_filter = "<C-f>",
-                },
+plugins:add {
+    "williamboman/mason.nvim",
+    opts = {
+        ui = {
+            border = "rounded",
+            keymaps = {
+                -- Keymap to expand a package
+                toggle_package_expand = "o",
+                -- Keymap to install the package under the current cursor position
+                install_package = "<Leader>i",
+                -- Keymap to reinstall/update the package under the current cursor position
+                update_package = "u",
+                -- Keymap to check for new version for the package under the current cursor position
+                check_package_version = "c",
+                -- Keymap to update all installed packages
+                update_all_packages = "U",
+                -- Keymap to check which installed packages are outdated
+                check_outdated_packages = "C",
+                -- Keymap to uninstall a package
+                uninstall_package = "d",
+                -- Keymap to cancel a package installation
+                cancel_installation = "<C-c>",
+                -- Keymap to apply language filter
+                apply_language_filter = "<C-f>",
             },
         },
-        dependencies = {
-            { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = false, } },
-        }
     },
-
-    {
-        "hrsh7th/nvim-cmp",
-        event = { 'InsertEnter', 'CmdlineEnter' },
-        dependencies = {
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-path",
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-cmdline",
-            { "jcdickinson/codeium.nvim", config = true },
-            luasnip,
-        },
-        config = function() require "plugins.lang.cmp" end
+    dependencies = {
+        { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = false, } },
     }
 }
+
+plugins:add {
+    "hrsh7th/nvim-cmp",
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    dependencies = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-cmdline",
+        { "jcdickinson/codeium.nvim", config = true },
+    },
+    config = function() require "plugins.lang.cmp" end
+}
+
+return plugins

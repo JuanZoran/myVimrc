@@ -1,4 +1,5 @@
-local telescope = {
+local plugins = require("util.plugin")()
+plugins:add {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -9,15 +10,14 @@ local telescope = {
     config = function() require 'plugins.telescope.base' end
 }
 
-
-local zoxide = {
+plugins:add {
     "jvgrootveld/telescope-zoxide", -- powerful cd
     keys = {
         { '<leader>cd', '<cmd>Telescope zoxide list<cr>', desc = ' Cd recently directory', }
     },
 }
 
-local neoclip = {
+plugins:add {
     "AckslD/nvim-neoclip.lua",
     event = 'VeryLazy',
     opts = {
@@ -53,7 +53,7 @@ local neoclip = {
 
 }
 
-local symbols = {
+plugins:add {
     'nvim-telescope/telescope-symbols.nvim',
     keys = {
         { '<leader>tm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' }
@@ -61,7 +61,7 @@ local symbols = {
 }
 
 
-local undo = {
+plugins:add {
     "debugloop/telescope-undo.nvim",
     keys = {
         { '<leader>tu', '<cmd>Telescope undo<cr>', desc = ' Undo History' }
@@ -80,10 +80,4 @@ local undo = {
     end,
 }
 
-return {
-    telescope,
-    zoxide,
-    neoclip,
-    symbols,
-    undo,
-}
+return plugins

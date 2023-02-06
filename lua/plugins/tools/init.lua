@@ -1,4 +1,6 @@
-local Trans = {
+local plugins = require("util.plugin")()
+
+plugins:add {
     "JuanZoran/Trans.nvim",
     keys = {
         { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
@@ -20,20 +22,19 @@ local Trans = {
     dev = true,
 }
 
-local todo = {
+plugins:add {
     "folke/todo-comments.nvim",
     event = 'VeryLazy',
     dependencies = "nvim-lua/plenary.nvim",
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
-local which_key = {
+plugins:add {
     "folke/which-key.nvim",
     config = function() require "plugins.tools.which-key" end,
 }
 
-
-local markdown = {
+plugins:add {
     "iamcco/markdown-preview.nvim",
     keys = {
         { 'mp', '<Plug>MarkdownPreviewToggle', buffer = true }
@@ -50,14 +51,14 @@ local markdown = {
     }
 }
 
-local ts_action = {
+plugins:add {
     'CKolkey/ts-node-action',
     keys = {
         { "<leader>u", function() require("ts-node-action").node_action() end, desc = "🌀Trigger Node Action", }
     },
 }
 
-local toggleterm = {
+plugins:add {
     'akinsho/toggleterm.nvim',
     keys = {
         '<C-d>',
@@ -75,14 +76,14 @@ local toggleterm = {
     },
 }
 
-local align = {
+plugins:add {
     'Vonr/align.nvim',
     keys = {
         { mode = 'x', "<leader>=", function() require 'align'.align_to_string(true, true, true) end, }
     }
 }
 
-local comment = { -- powerful comment with gc<char> | gb<char> | <leader>A
+plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
     "numtostr/Comment.nvim",
     keys = {
         { 'gc', mode = { 'n', 'x' } },
@@ -101,7 +102,7 @@ local comment = { -- powerful comment with gc<char> | gb<char> | <leader>A
     },
 }
 
-local autopair = {
+plugins:add {
     "windwp/nvim-autopairs",
     opts = {
         -- check_ts = true,
@@ -123,7 +124,7 @@ local autopair = {
 }
 
 
-local surround = {
+plugins:add {
     'echasnovski/mini.surround',
     event = 'VeryLazy',
     config = function()
@@ -136,7 +137,7 @@ local surround = {
     end,
 }
 
-local session = {
+plugins:add {
     -- "olimorris/persisted.nvim",
     -- cmd = 'SessionLoad',
     -- config = function() require 'plugins.tools.session' end,
@@ -148,7 +149,7 @@ local session = {
 }
 
 
-local gitsigns = {
+plugins:add {
     "lewis6991/gitsigns.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     event = 'VeryLazy',
@@ -163,7 +164,7 @@ local gitsigns = {
     },
 }
 
-local zen_mode = {
+plugins:add {
     "folke/zen-mode.nvim",
     keys = { '<leader><leader>h', '<Cmd>ZenMode<CR>' },
     dependencies = {
@@ -176,7 +177,7 @@ local zen_mode = {
 }
 
 
-local leap = {
+plugins:add {
     "ggandor/leap.nvim",
     config = function() require 'plugins.tools.leap' end,
     keys = {
@@ -196,19 +197,4 @@ local leap = {
     },
 }
 
-return {
-    Trans,
-    todo,
-    which_key,
-    markdown,
-    ts_action,
-    toggleterm,
-    align,
-    comment,
-    autopair,
-    session,
-    gitsigns,
-    zen_mode,
-    leap,
-    surround,
-}
+return plugins

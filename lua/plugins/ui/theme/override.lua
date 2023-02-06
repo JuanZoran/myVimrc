@@ -56,6 +56,10 @@ return {
         fg = '#f4b085',
     },
 
+    DashboardHeader = {
+        -- link = 'MoreMsg',
+        fg = '#ff5d62'
+    },
     -- ['Identifier'] = {
     --     fg = '#f4b085',
     -- },

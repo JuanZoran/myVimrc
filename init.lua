@@ -21,7 +21,6 @@ local install = M.commands.install
 install.key = 'Y'
 install.key_plugin = 'y'
 
-
 require("lazy").setup('plugins', {
     default = {
         lazy = true,
