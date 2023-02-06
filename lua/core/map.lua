@@ -88,6 +88,7 @@ set {
         { "Z", 'zf' },
 
         { "<leader>a", "@", 'macro' },
+        { "<C-CR>", "/<++><CR>vf>c" },
     }
 }
 

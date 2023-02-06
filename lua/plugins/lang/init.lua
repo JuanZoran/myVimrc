@@ -4,7 +4,7 @@ plugins:add {
     build = 'bash ./install.sh',
     keys = {
         { '<leader><C-r>', '<Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
-        { '<C-r>', mode = 'x', '<Esc><Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
+        { '<C-r>',         mode = 'x',         '<Esc><Cmd>SnipRun<CR>',     desc = '💪Execute Snippet' },
     },
     opts = {
         display = {
@@ -139,6 +139,7 @@ plugins:add {
 
 plugins:add {
     "L3mon4d3/luasnip",
+    version = "<CurrentMajor>.*",
     lazy = true,
     config = function()
         local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"

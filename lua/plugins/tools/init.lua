@@ -3,8 +3,8 @@ local plugins = require("util.plugin")()
 plugins:add {
     "JuanZoran/Trans.nvim",
     keys = {
-        { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
-        { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = ' 自动发音' },
+        { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = ' Translate' },
+        { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = ' 自动发音' },
         { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
     dependencies = { 'kkharji/sqlite.lua', lazy = true },
@@ -36,16 +36,17 @@ plugins:add {
 
 plugins:add {
     "iamcco/markdown-preview.nvim",
-    keys = {
-        { 'mp', '<Plug>MarkdownPreviewToggle', buffer = true }
-    },
     ft = { "markdown", "md" },
+    keys = {
+        { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' }
+    },
     build = function() vim.fn["mkdp#util#install"]() end,
     dependencies = {
         {
             'dhruvasagar/vim-table-mode',
-            lazy = true,
-            -- TODO :
+            keys = {
+                { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
+            },
         },
 
     }
@@ -138,14 +139,10 @@ plugins:add {
 }
 
 plugins:add {
-    -- "olimorris/persisted.nvim",
+    "olimorris/persisted.nvim",
     -- cmd = 'SessionLoad',
-    -- config = function() require 'plugins.tools.session' end,
-    'glepnir/dbsession.nvim',
-    opts = {
-        dir = vim.fn.stdpath('data') .. '/sessions/',
-        auto_save_on_exit = true,
-    },
+    event = 'VimEnter',
+    config = function() require 'plugins.tools.session' end,
 }
 
 
@@ -184,7 +181,7 @@ plugins:add {
         { mode = { 'x', 'o', 'n' }, '<leader>j', '<Plug>(leap-backward-to)', desc = '⬅️ quick jump backward' },
         { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)',
             desc = '💪quick jump cross window' },
-        { mode = { 'x', 'o', 'n' }, '<leader>l', '<Plug>(leap-forward-to)', desc = '➡️ quick jump forward' },
+        { mode = { 'x', 'o', 'n' }, '<leader>l', '<Plug>(leap-forward-to)',  desc = '➡️ quick jump forward' },
     },
     dependencies = {
         'ggandor/flit.nvim',

@@ -8,7 +8,7 @@ require("persisted").setup {
     on_autoload_no_session = function()
         print('Session Not Exist')
     end,
-    autosave = false, -- automatically save session files when exiting Neovim
+    autosave = true, -- automatically save session files when exiting Neovim
     -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
     -- command = "VimLeavePre", -- the autocommand for which the session is saved
     -- silent = false, -- silent nvim message when sourcing session file

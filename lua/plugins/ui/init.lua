@@ -15,6 +15,7 @@ plugins:add {
 }
 
 
+
 plugins:add {
     'declancm/cinnamon.nvim',
     config = function()
@@ -61,7 +62,7 @@ plugins:add { -- 标签栏
             show_buffer_close_icons = true,
             show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
             modified_icon = "💌",
-            separator_style = "slant", -- slant, padded_slant | triky
+            separator_style = "triky", -- slant, padded_slant | triky
             offsets = {
                 {
                     filetype = "NvimTree",
@@ -78,6 +79,7 @@ plugins:add { -- 标签栏
         },
     }
 }
+
 
 plugins:add {
     'goolord/alpha-nvim',

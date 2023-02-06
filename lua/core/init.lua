@@ -4,4 +4,3 @@ require 'core.autocmd'
 
 require 'template'
 require 'lsp'
-require 'snips'
