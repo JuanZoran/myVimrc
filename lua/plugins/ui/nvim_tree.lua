@@ -2,7 +2,6 @@ local nvim_tree = require("nvim-tree")
 local nvim_tree_config = require("nvim-tree.config")
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-
 local HEIGHT_RATIO = 0.8 -- You can change this
 local WIDTH_RATIO = 0.4 -- You can change this too
 
@@ -11,14 +10,7 @@ nvim_tree.setup {
     respect_buf_cwd = true,
     disable_netrw = true,
     hijack_netrw = true,
-    -- open_on_setup = false,
-    ignore_ft_on_setup = {
-        "startify",
-        "dashboard",
-        "alpha",
-    },
     -- sort_by = "name",
-    -- auto_close = true, has been removed
     open_on_tab = false,
     -- hijack_cursor = false,
     update_cwd = true,
@@ -61,15 +53,15 @@ nvim_tree.setup {
         float = {
             enable = true,
             open_win_config = function()
-                local screen_w = vim.opt.columns:get()
-                local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+                local opt = vim.opt
+                local screen_w = opt.columns:get()
+                local screen_h = opt.lines:get() - opt.cmdheight:get()
                 local window_w = screen_w * WIDTH_RATIO
                 local window_h = screen_h * HEIGHT_RATIO
                 local window_w_int = math.floor(window_w)
                 local window_h_int = math.floor(window_h)
                 local center_x = (screen_w - window_w) / 2
-                local center_y = ((vim.opt.lines:get() - window_h) / 2)
-                    - vim.opt.cmdheight:get()
+                local center_y = ((opt.lines:get() - window_h) / 2) - opt.cmdheight:get()
                 return {
                     border = 'rounded',
                     relative = 'editor',

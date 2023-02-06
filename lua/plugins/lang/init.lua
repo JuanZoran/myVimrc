@@ -137,6 +137,42 @@ local refactor = {
 }
 
 
+local luasnip = {
+    "L3mon4d3/luasnip",
+    config = function()
+        local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"
+        local ls = require "luasnip"
+        local types = require "luasnip.util.types"
+        ls.config.set_config {
+            history = true,
+            updateevents = "TextChanged,TextChangedI",
+            region_check_events = "CursorHold,InsertLeave",
+            delete_check_events = "TextChanged,InsertEnter",
+            -- enable_autosnippets = true,
+            -- store_selection_keys = "<C-q>",
+            ext_opts = {
+                [types.choiceNode] = {
+                    active = {
+                        virt_text = { { " Your Choice", "Title" } }, -- yellow
+                    },
+                },
+                [types.insertNode] = {
+                    active = {
+                        virt_text = { { " Insert", "Function" } }, -- purple
+                    },
+                },
+            },
+        }
+        require("luasnip.loaders.from_vscode").lazy_load()
+        require("luasnip.loaders.from_lua").lazy_load { paths = snippets_folder }
+        vim.keymap.set('n', '<leader><cr>', require "luasnip.loaders.from_lua".edit_snippet_files)
+    end,
+    dependencies = {
+        "rafamadriz/friendly-snippets"
+    }
+}
+
+
 return {
     illuminate,
     sniprun,
@@ -179,15 +215,6 @@ return {
             { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = false, } },
         }
     },
-    {
-        "L3mon4d3/luasnip",
-        init = function()
-            require('snips')
-        end,
-        dependencies = {
-            "rafamadriz/friendly-snippets"
-        }
-    },
 
     {
         "hrsh7th/nvim-cmp",
@@ -199,6 +226,7 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
             { "jcdickinson/codeium.nvim", config = true },
+            luasnip,
         },
         config = function() require "plugins.lang.cmp" end
     }

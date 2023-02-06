@@ -43,9 +43,10 @@ local markdown = {
     dependencies = {
         {
             'dhruvasagar/vim-table-mode',
-            ft = { "markdown", "md" },
+            lazy = true,
             -- TODO :
-        }
+        },
+
     }
 }
 
@@ -136,10 +137,16 @@ local surround = {
 }
 
 local session = {
-    "olimorris/persisted.nvim",
-    event = 'VeryLazy',
-    config = function() require 'plugins.tools.session' end,
+    -- "olimorris/persisted.nvim",
+    -- cmd = 'SessionLoad',
+    -- config = function() require 'plugins.tools.session' end,
+    'glepnir/dbsession.nvim',
+    opts = {
+        dir = vim.fn.stdpath('data') .. '/sessions/',
+        auto_save_on_exit = true,
+    },
 }
+
 
 local gitsigns = {
     "lewis6991/gitsigns.nvim",
