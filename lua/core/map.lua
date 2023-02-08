@@ -46,17 +46,9 @@ set {
         { "<Leader><leader>w", ":wqa<CR>", ' close all window' },
         { "qw", ":close<CR>" },
         { "qd", ":bdelete!<CR>" },
+
         { "<S-CR>", "J", },
-
-        { "<leader>b<left>", ":BufferLineMovePrev<CR>", '[]Move Buffer to Left' },
-        { "<leader>b<right>", ":BufferLineMoveNext<CR>", '[]Move Buffer to Right' },
-        { "<Leader>bb", ":BufferLinePickClose<CR>", '﫧 Pick a Buffer to delete' },
-
-        { "<C-j>", "<Cmd>BufferLineCyclePrev<CR>" },
-        { "<C-l>", "<Cmd>BufferLineCycleNext<CR>" },
-
         { "<C-q>", '<Cmd>q!<CR>' },
-
         { "<Leader>p", "<Cmd>Lazy<CR>", '痢[Sync | Install] Plugin' },
         { "<Leader>ck", ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
 
@@ -129,7 +121,7 @@ set {
 }
 
 vim.keymap.set(
-    { "x", "o", "i" }, -- mode
+    { --[[ "x" ,]] "o", "i" }, -- mode
     "<C-s>",
     "<Esc>",
     { silent = true }

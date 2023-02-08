@@ -56,6 +56,14 @@ plugins:add { -- 文件树
 
 plugins:add { -- 标签栏
     "akinsho/bufferline.nvim",
+    keys = {
+        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",  desc = '[]Move Buffer to Left' },
+        { "<leader>b<right>", ":BufferLineMoveNext<CR>",  desc = '[]Move Buffer to Right' },
+        { "<Leader>bb",       ":BufferLinePickClose<CR>", desc = '﫧 Pick a Buffer to delete' },
+        { "<C-j>", "<Cmd>BufferLineCyclePrev<CR>" },
+        { "<C-l>", "<Cmd>BufferLineCycleNext<CR>" },
+    },
+    lazy = false,
     opts = {
         -- highlights = require("catppuccin.groups.integrations.bufferline").get(),
         options = {

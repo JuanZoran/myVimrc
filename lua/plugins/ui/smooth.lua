@@ -58,7 +58,6 @@ set {
     }
 }
 
-
 set {
     mode = 'o',
     map = {
