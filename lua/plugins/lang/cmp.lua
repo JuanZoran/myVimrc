@@ -1,7 +1,27 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-
+local copilot = require('copilot.suggestion')
 local kind_icons = require('util').icon.code_icon
+
+local view = {
+    luasnip  = "[Snippet]",
+    nvim_lsp = "[LSP]",
+    path     = "[Path]",
+    buffer   = "[Buffer]",
+    copilot  = "[Copilot]",
+    -- codeium  = '[Codeium]',
+}
+
+local source = {
+    -- { name = "copilot", },
+    { name = "nvim_lsp", max_item_count = 3 },
+    { name = "path" },
+    { name = "luasnip",  max_item_count = 3 },
+    -- { name = "codeium" },
+    { name = "buffer",   max_item_count = 3 },
+}
+
+
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -9,15 +29,17 @@ cmp.setup {
         end,
     },
     experimental = {
-        ghost_text = true,
+        ghost_text = false,
     },
     mapping = {
         ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs( -1), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping {
             i = function()
                 if luasnip.choice_active() then
                     luasnip.change_choice()
+                elseif copilot.is_visible() then
+                    copilot.next()
                 else
                     ---@diagnostic disable-next-line: missing-parameter
                     cmp.mapping.complete()()
@@ -43,8 +65,8 @@ cmp.setup {
             end
         end, { "i", "s" }),
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
+            if copilot.is_visible() then
+                copilot.accept()
             else
                 fallback()
             end
@@ -65,23 +87,11 @@ cmp.setup {
             -- Kind icons
             -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-            vim_item.menu = ({
-                luasnip  = "[Snippet]",
-                nvim_lsp = "[LSP]",
-                path     = "[Path]",
-                buffer   = "[Buffer]",
-                codeium  = '[Codeium]',
-            })[entry.source.name]
+            vim_item.menu = view[entry.source.name]
             return vim_item
         end,
     },
-    sources = {
-        { name = "path" },
-        { name = "nvim_lsp", max_item_count = 3 },
-        { name = "luasnip", max_item_count = 3 },
-        { name = "codeium" },
-        { name = "buffer", max_item_count = 3 },
-    },
+    sources = source,
     window = {
         documentation = cmp.config.window.bordered(),
         completion = {
@@ -92,22 +102,22 @@ cmp.setup {
         },
     },
     sorting = {
+        priority_weight = 2,
         comparators = {
+            -- Below is the default comparitor list and order for nvim-cmp
             cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
             cmp.config.compare.exact,
+            cmp.config.compare.score,
             cmp.config.compare.recently_used,
-            require("clangd_extensions.cmp_scores"),
+            cmp.config.compare.locality,
             cmp.config.compare.kind,
             cmp.config.compare.sort_text,
             cmp.config.compare.length,
             cmp.config.compare.order,
         },
-    },
+    }
 }
-
--- TabNine
--- local tabnine = require('cmp_tabnine.config')
--- tabnine:setup({ max_lines = 1000, max_num_results = 10, sort = true })
 
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {

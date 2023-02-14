@@ -219,7 +219,26 @@ plugins:add {
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
-        { "jcdickinson/codeium.nvim", config = true },
+
+        -- { "jcdickinson/codeium.nvim", config = true },
+        {
+            "zbirenbaum/copilot.lua",
+            opts = {
+                panel = { enabled = false },
+                auto_refresh = true,
+                suggestion = {
+                    enable = true,
+                    auto_trigger = true,
+                    keymap = {
+                        accept = false,
+                        next = false,
+                    }
+                },
+                filetypes = {
+                    markdown = true,
+                },
+            },
+        },
     },
     config = function() require "plugins.lang.cmp" end
 }
