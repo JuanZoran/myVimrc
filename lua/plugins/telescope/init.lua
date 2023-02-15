@@ -13,7 +13,7 @@ plugins:add {
 plugins:add {
     "jvgrootveld/telescope-zoxide", -- powerful cd
     keys = {
-        { '<leader>cd', '<cmd>Telescope zoxide list<cr>', desc = ' Cd recently directory', }
+        { '<leader>cd', '<Cmd>Telescope zoxide list<CR>', desc = ' Cd recently directory', }
     },
 }
 
@@ -28,7 +28,7 @@ plugins:add {
 plugins:add {
     "debugloop/telescope-undo.nvim",
     keys = {
-        { '<leader>tu', '<cmd>Telescope undo<cr>', desc = ' Undo History' }
+        { '<leader>tu', '<Cmd>Telescope undo<CR>', desc = ' Undo History' }
     },
     config = function()
         require("telescope").setup {
