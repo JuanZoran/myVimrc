@@ -29,7 +29,7 @@ require("lazy").setup('plugins', {
         colorscheme = { "kanagawa", 'habamax' },
     },
     ui = {
-        size = { width = 0.85, height = 0.85 },
+        size = { width = 0.9, height = 0.85 },
         border = "rounded",
     },
     checker = {
