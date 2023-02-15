@@ -1,27 +1,5 @@
 local plugins = require("util.plugin")()
 plugins:add {
-    'michaelb/sniprun',
-    build = 'bash ./install.sh',
-    keys = {
-        { '<leader><C-r>', '<Cmd>SnipRun<CR>', desc = '💪Execute Snippet' },
-        { '<C-r>',         mode = 'x',         '<Esc><Cmd>SnipRun<CR>',     desc = '💪Execute Snippet' },
-    },
-    opts = {
-        display = {
-            "TempFloatingWindow", --# display results in a floating window
-            "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
-        },
-        snipruncolors = {
-            SniprunVirtualTextOk  = { bg = "#89e051", fg = '#1d202f' },
-            SniprunFloatingWinOk  = { fg = "#599eff" },
-            SniprunVirtualTextErr = { bg = "#881515", fg = "#000000", ctermbg = "DarkRed", cterfg = "Black" },
-            SniprunFloatingWinErr = { fg = "#881515", ctermfg = "DarkRed" },
-        },
-        borders = 'rounded',
-    } --# display borders around floating windows
-}
-
-plugins:add {
     "rrethy/vim-illuminate",
     config = function()
         require('illuminate').configure {
@@ -103,7 +81,7 @@ plugins:add {
     "neovim/nvim-lspconfig", -- official lspconfig
     dependencies = {
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
-        'p00f/clangd_extensions.nvim',
+        -- 'p00f/clangd_extensions.nvim',
     }
 }
 
@@ -121,19 +99,6 @@ plugins:add {
                 -- nl.builtins.code_actions.shellcheck,
             },
         }
-    end,
-}
-
-plugins:add {
-    "ThePrimeagen/refactoring.nvim",
-    keys = {
-        { mode = 'x', '<Leader>rr', function()
-            require('telescope').extensions.refactoring.refactors()
-        end, desc = '🎈Refactoring Operations' },
-    },
-    config = function()
-        require("refactoring").setup()
-        require('telescope').load_extension('refactoring')
     end,
 }
 

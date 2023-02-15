@@ -1,28 +1,6 @@
 local plugins = require("util.plugin")()
 
 plugins:add {
-    "JuanZoran/Trans.nvim",
-    keys = {
-        { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = ' Translate' },
-        { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = ' 自动发音' },
-        { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
-    },
-    dependencies = { 'kkharji/sqlite.lua', lazy = true },
-    opts = {
-        hover = {
-            spinner = 'moon'
-        },
-        engine = {
-            baidu = {
-                appid = '20220910001338724',
-                appPasswd = 'EKnyuuJQeVn7DLxeIH7F'
-            }
-        }
-    },
-    dev = true,
-}
-
-plugins:add {
     "folke/todo-comments.nvim",
     event = 'VeryLazy',
     dependencies = "nvim-lua/plenary.nvim",
@@ -100,21 +78,13 @@ plugins:add {
 
 
 plugins:add {
-    "iamcco/markdown-preview.nvim",
-    ft = { "markdown", "md" },
-    keys = {
-        { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' }
-    },
-    build = function() vim.fn["mkdp#util#install"]() end,
-    dependencies = {
-        {
-            'dhruvasagar/vim-table-mode',
-            keys = {
-                { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
-            },
+    {
+        'dhruvasagar/vim-table-mode',
+        keys = {
+            { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
         },
-
-    }
+        ft = { 'md', 'markdown' },
+    },
 }
 
 plugins:add {
@@ -144,7 +114,6 @@ plugins:add {
         }
     },
 }
-
 
 plugins:add {
     'Vonr/align.nvim',
@@ -209,44 +178,44 @@ plugins:add {
 }
 
 
-plugins:add {
-    "olimorris/persisted.nvim",
-    -- cmd = 'SessionLoad',
-    event = 'VimEnter',
-    keys = {
-        { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
-    },
-    config = function()
-        require("telescope").load_extension("persisted") -- To load the telescope extension
-        require("persisted").setup {
-            use_git_branch = true, -- create session files based on the branch of the git enabled repository
-            should_autosave = function()
-                -- do not autosave if the alpha dashboard is the current filetype
-                return vim.bo.filetype ~= 'alpha'
-            end,
-            on_autoload_no_session = function()
-                print('Session Not Exist')
-            end,
-            autosave = true, -- automatically save session files when exiting Neovim
-            -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
-            -- command = "VimLeavePre", -- the autocommand for which the session is saved
-            -- silent = false, -- silent nvim message when sourcing session file
-            -- should_autosave = nil, -- function to determine if a session should be autosaved
-            -- autoload = false, -- automatically load the session for the cwd on Neovim startup
-            -- follow_cwd = true, -- change session file name to match current working directory if it changes
-            -- allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
-            -- ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
-            -- before_save = nil, -- function to run before the session is saved to disk
-            -- after_save = nil, -- function to run after the session is saved to disk
-            -- after_source = nil, -- function to run after the session is sourced
-            -- telescope = { -- options for the telescope extension
-            --     before_source = nil, -- function to run before the session is sourced via telescope
-            --     after_source = nil, -- function to run after the session is sourced via telescope
-            --     reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
-            -- },
-        }
-    end
-}
+-- plugins:add {
+--     "olimorris/persisted.nvim",
+--     -- cmd = 'SessionLoad',
+--     event = 'VimEnter',
+--     keys = {
+--         { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
+--     },
+--     config = function()
+--         require("telescope").load_extension("persisted") -- To load the telescope extension
+--         require("persisted").setup {
+--             use_git_branch = true, -- create session files based on the branch of the git enabled repository
+--             should_autosave = function()
+--                 -- do not autosave if the alpha dashboard is the current filetype
+--                 return vim.bo.filetype ~= 'alpha'
+--             end,
+--             on_autoload_no_session = function()
+--                 print('Session Not Exist')
+--             end,
+--             autosave = true, -- automatically save session files when exiting Neovim
+--             -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
+--             -- command = "VimLeavePre", -- the autocommand for which the session is saved
+--             -- silent = false, -- silent nvim message when sourcing session file
+--             -- should_autosave = nil, -- function to determine if a session should be autosaved
+--             -- autoload = false, -- automatically load the session for the cwd on Neovim startup
+--             -- follow_cwd = true, -- change session file name to match current working directory if it changes
+--             -- allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
+--             -- ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
+--             -- before_save = nil, -- function to run before the session is saved to disk
+--             -- after_save = nil, -- function to run after the session is saved to disk
+--             -- after_source = nil, -- function to run after the session is sourced
+--             -- telescope = { -- options for the telescope extension
+--             --     before_source = nil, -- function to run before the session is sourced via telescope
+--             --     after_source = nil, -- function to run after the session is sourced via telescope
+--             --     reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
+--             -- },
+--         }
+--     end
+-- }
 
 
 plugins:add {

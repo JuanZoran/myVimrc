@@ -121,7 +121,7 @@ set {
 }
 
 vim.keymap.set(
-    { --[[ "x" ,]] "o", "i" }, -- mode
+    { "x", "o", "i" }, -- mode
     "<C-s>",
     "<Esc>",
     { silent = true }

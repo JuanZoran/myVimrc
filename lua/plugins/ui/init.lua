@@ -1,11 +1,5 @@
 local plugins = require("util.plugin")()
 plugins:add {
-    "JuanZoran/catppuccin",
-    lazy = true,
-    dev = true,
-}
-
-plugins:add {
     "rebelot/kanagawa.nvim",
     -- lazy = true,
     config = function()
@@ -13,7 +7,6 @@ plugins:add {
     end,
     priority = 1000,
 }
-
 
 
 plugins:add {
