@@ -84,6 +84,19 @@ plugins:add {
             { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
         },
         ft = { 'md', 'markdown' },
+        dependencies = {
+            'ellisonleao/glow.nvim',
+            opts = {
+                border = 'rounded',
+                style = 'dark',
+                width = 100,
+                width_ratio = 0.9,
+                height_ratio = 0.85,
+            },
+            keys = {
+                { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' },
+            },
+        }
     },
 }
 

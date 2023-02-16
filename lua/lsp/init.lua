@@ -12,30 +12,38 @@ for _, server in ipairs(servers) do
         capabilities = handler.capabilities,
         handlers = handler.handlers
     }
-
     local _, conf_opts = pcall(require, 'lsp.conf.' .. server)
     if _ then
         opts = vim.tbl_extend("error", opts, conf_opts)
     end
 
-    if server == 'clangd' then
-        require("clangd_extensions").setup {
-            server = opts,
-            extensions = {
-                memory_usage = {
-                    border = "rounded",
-                },
-                symbol_info = {
-                    border = "rounded",
-                },
-            }
-        }
-
-    else
-        lspconfig[server].setup(opts)
-    end
+    lspconfig[server].setup(opts)
 end
 
+if vim.fn.executable('clangd') == 1 then
+    local opts = {
+        on_attach = handler.on_attach,
+        capabilities = handler.capabilities,
+        handlers = handler.handlers
+    }
+
+    opts.capabilities.offsetEncoding = 'utf-8'
+    local _, conf = pcall(require, 'lsp.conf.clangd')
+    if _ then
+        opts = vim.tbl_extend("error", opts, conf)
+    end
+    require("clangd_extensions").setup {
+        server = opts,
+        extensions = {
+            memory_usage = {
+                border = "rounded",
+            },
+            symbol_info = {
+                border = "rounded",
+            },
+        }
+    }
+end
 
 --     -- TODO  load conf
 local registry = require("mason-registry")

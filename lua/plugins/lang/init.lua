@@ -81,7 +81,7 @@ plugins:add {
     "neovim/nvim-lspconfig", -- official lspconfig
     dependencies = {
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
-        -- 'p00f/clangd_extensions.nvim',
+        'p00f/clangd_extensions.nvim',
     }
 }
 
