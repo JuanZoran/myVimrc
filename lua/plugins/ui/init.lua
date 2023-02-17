@@ -1,25 +1,27 @@
 local plugins = require("util.plugin")()
-plugins:add {
-    "rebelot/kanagawa.nvim",
-    -- lazy = true,
-    config = function()
-        require 'plugins.ui.theme.kanagawa'
-    end,
-    priority = 1000,
-}
-
 
 plugins:add {
-    'declancm/cinnamon.nvim',
-    config = function()
-        require 'plugins.ui.smooth'
-    end,
-    cond = not vim.g.neovide,
-    dependencies = {
-        'gen740/SmoothCursor.nvim',
-        'edluffy/specs.nvim',
+    'folke/tokyonight.nvim',
+    lazy = false,
+    opts = {
+        style = 'night',
+        transparent = true,
+        on_highlights = function(hl)
+            hl['@variable'] = {
+                fg = '#f4b085',
+            }
+
+            hl.Cursor = {
+                bg = '#2e3a4d',
+            }
+        end
     },
+    config = function(_, opts)
+        require('tokyonight').setup(opts)
+        vim.cmd.colorscheme('tokyonight')
+    end
 }
+
 
 plugins:add {
     "norcalli/nvim-colorizer.lua",
@@ -50,13 +52,13 @@ plugins:add { -- 文件树
 plugins:add { -- 标签栏
     "akinsho/bufferline.nvim",
     keys = {
-        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",  desc = '[]Move Buffer to Left' },
-        { "<leader>b<right>", ":BufferLineMoveNext<CR>",  desc = '[]Move Buffer to Right' },
-        { "<Leader>bb",       ":BufferLinePickClose<CR>", desc = '﫧 Pick a Buffer to delete' },
-        { "<C-j>", "<Cmd>BufferLineCyclePrev<CR>" },
-        { "<C-l>", "<Cmd>BufferLineCycleNext<CR>" },
+        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",     desc = '[]Move Buffer to Left' },
+        { "<leader>b<right>", ":BufferLineMoveNext<CR>",     desc = '[]Move Buffer to Right' },
+        { "<Leader>bb",       ":BufferLinePickClose<CR>",    desc = '﫧 Pick a Buffer to delete' },
+        { "<C-j>",            "<Cmd>BufferLineCyclePrev<CR>" },
+        { "<C-l>",            "<Cmd>BufferLineCycleNext<CR>" },
     },
-    lazy = false,
+    event = 'VeryLazy',
     opts = {
         -- highlights = require("catppuccin.groups.integrations.bufferline").get(),
         options = {
@@ -83,90 +85,12 @@ plugins:add { -- 标签栏
 
 
 plugins:add {
+    event = 'VimEnter',
     'goolord/alpha-nvim',
     cond = true,
     config = function() require("plugins.ui.alpha") end,
 }
 
--- plugins:add '                                '
--- -@format disable
--- plugins:add {
---     'glepnir/dashboard-nvim',
---     event = 'VimEnter',
---     opts = {
---         -- config
---         -- theme = 'hyper',
---         theme = 'doom',
---         config = {
---             header = {
---                 "    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ",
---                 "    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ",
---                 "   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ",
---                 "   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ",
---                 "  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ",
---                 "  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ",
---                 " ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ",
---                 " ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ",
---                 " ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ",
---                 " ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ",
---                 "  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ",
---                 "   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ",
---                 "     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ",
---                 "        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁     ⢀⣠⣴ ",
---                 " ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ",
---             },
---             -- shortcut = {
---             --     { desc = ' Update',        group = 'MoreMsg', action = 'Lazy update',          key = 'u'  },
---             --     { desc = '📄 Find File',    group = 'MoreMsg', action = 'Telescope find_files', key = 'f', },
---             --     { desc = '🥂 Recent File',  group = 'MoreMsg', action = 'Telescope oldfiles',   key = 'r', },
---             --     { desc = '💻 Load Session', group = 'MoreMsg', action = 'SessionLoad',          key = 's', },
---             --     { desc = '🏓 Quit',         group = 'MoreMsg', action = 'q',                    key = 'q', },
---             -- },
---             center = {
---                 {
---                     icon = '📄',
---                     icon_hl = 'Title',
---                     desc = '> Find File' .. indent,
---                     desc_hl = 'MoreMsg',
---                     key = 'f',
---                     keymap = 'SPC t f',
---                     key_hl = 'Number',
---                     action = 'Telescope find_files'
---                 },
---                 {
---                     icon = '🥂',
---                     desc = '> Recent File' .. indent,
---                     desc_hl = 'MoreMsg',
---                     key = 'r',
---                     keymap = '<C-u>',
---                     key_hl = 'Number',
---                     action = 'Telescope oldfiles'
---                 },
---                 {
---                     icon = '🏓',
---                     desc_hl = 'MoreMsg',
---                     desc = '> Quit' .. indent,
---                     action = 'q',
---                     key = 'q',
---                 },
---                 {
---                     icon = '💻',
---                     desc_hl = 'MoreMsg',
---                     desc = '> Session' .. indent,
---                     action = 'SessionLoad',
---                     key = 's',
---                 },
---             },
---             mru = {
---                 limit = 5,
---                 icon = '🌳',
---             },
---             -- week_header = {
---             --     enable = true,
---             -- },
---         },
---     },
--- }
 plugins:add {
     "folke/noice.nvim",
     dependencies = {
@@ -187,4 +111,27 @@ plugins:add {
     },
     config = function() require "plugins.ui.noice" end
 }
+
+-- plugins:add {
+--     "rebelot/kanagawa.nvim",
+--     lazy = false,
+--     config = function()
+--         require 'plugins.ui.theme.kanagawa'
+--     end,
+--     priority = 1000,
+-- }
+
+
+-- plugins:add {
+--     'declancm/cinnamon.nvim',
+--     config = function()
+--         require 'plugins.ui.smooth'
+--     end,
+--     -- lazy = true,
+--     event = 'VeryLazy',
+--     dependencies = {
+--         'gen740/SmoothCursor.nvim',
+--         'edluffy/specs.nvim',
+--     },
+-- }
 return plugins
