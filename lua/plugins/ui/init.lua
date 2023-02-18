@@ -1,6 +1,51 @@
 local plugins = require("util.plugin")()
 
 plugins:add {
+    "catppuccin/nvim",
+    lazy = false,
+    name = "catppuccin",
+    opts = {
+        -- flavour = 'macchiato',
+        transparent_background = true,
+        custom_highlights = function()
+            return require('plugins.ui.theme.override')
+        end,
+        integrations = {
+            cmp = true,
+            gitsigns = true,
+            nvimtree = true,
+            treesitter = true,
+            telescope = true,
+            notify = true,
+            mini = false,
+            noice = true,
+            ts_rainbow = true,
+            lsp_trouble = true,
+            markdown = true,
+            -- illuminate = true,
+            -- which_key = true,
+            -- mason = true,
+            -- indent_blankline = {
+            --     enable = true,
+            --     colored_indent_levels = true,
+            -- },
+            native_lsp = {
+                enabled = true,
+            },
+            navic = {
+                enabled = true,
+            },
+            -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+        },
+    },
+    config = function(_, opts)
+        require('catppuccin').setup(opts)
+        vim.cmd.colorscheme 'catppuccin'
+    end,
+    priority = 1000,
+}
+
+plugins:add {
     'declancm/cinnamon.nvim',
     cond = function()
         local cond = true
@@ -38,7 +83,7 @@ plugins:add {
 
 plugins:add {
     'folke/tokyonight.nvim',
-    lazy = false,
+    lazy = true,
     opts = {
         style = 'night',
         transparent = true,

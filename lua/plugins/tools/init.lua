@@ -7,7 +7,6 @@ plugins:add {
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
-
 plugins:add {
     "folke/which-key.nvim",
     opts = {
@@ -258,6 +257,16 @@ plugins:add {
     },
 }
 
+plugins:add {
+    "LudoPinelli/comment-box.nvim",
+    keys = {
+        { mode = { 'n', 'x' }, "<leader>rk", "<Cmd>lua require('comment-box').accbox()<CR>", desc = "Comment Center Box" },
+        { mode = { 'n', 'x' }, "<leader>rj", "<Cmd>lua require('comment-box').lbox()<CR>", desc = "Comment Left Aligned Text" },
+        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>", desc = "Comment Center Line" },
+        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>", desc = "Comment Center Line" },
+        -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
+    }
+}
 
 plugins:add {
     "ggandor/leap.nvim",
