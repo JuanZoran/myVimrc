@@ -113,7 +113,6 @@ plugins:add {
                 { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
             },
         },
-
     }
 }
 
@@ -123,7 +122,6 @@ plugins:add {
         { "<leader>u", function() require("ts-node-action").node_action() end, desc = "🌀Trigger Node Action", }
     },
 }
-
 
 local lazygit
 plugins:add {
@@ -208,6 +206,16 @@ plugins:add {
     end
 }
 
+plugins:add {
+    "LudoPinelli/comment-box.nvim",
+    keys = {
+        { mode = { 'n', 'x' }, "<leader>rk", "<Cmd>lua require('comment-box').accbox()<CR>", desc = "Comment Center Box" },
+        { mode = { 'n', 'x' }, "<leader>rj", "<Cmd>lua require('comment-box').lbox()<CR>", desc = "Comment Left Aligned Text" },
+        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>", desc = "Comment Center Line" },
+        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>", desc = "Comment Center Line" },
+        -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
+    }
+}
 
 plugins:add {
     "olimorris/persisted.nvim",

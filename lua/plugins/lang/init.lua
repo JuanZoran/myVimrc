@@ -31,14 +31,6 @@ plugins:add {
     end,
 }
 
-plugins:add {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-        space_char_blankline = " ",
-        show_current_context = true,
-        show_current_context_start = true,
-    },
-}
 
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
@@ -101,10 +93,11 @@ plugins:add {
 
 plugins:add {
     "neovim/nvim-lspconfig", -- official lspconfig
+    -- event = {'BufReadPre', 'BufNewFile'},
     dependencies = {
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
         'p00f/clangd_extensions.nvim',
-    }
+    },
 }
 
 plugins:add {
@@ -117,6 +110,7 @@ plugins:add {
                 -- nl.builtins.code_actions.gitsigns,
                 nl.builtins.formatting.prettier,
                 nl.builtins.formatting.shfmt,
+                nl.builtins.formatting.black,
                 -- nl.builtins.code_actions.refactoring,
                 -- nl.builtins.code_actions.shellcheck,
             },

@@ -46,7 +46,6 @@ opt.tabstop     = 4
 opt.softtabstop = 4
 opt.shiftwidth  = 4
 opt.expandtab   = true
-opt.completeopt = { "menu", "menuone", "noselect" }
 opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 
 

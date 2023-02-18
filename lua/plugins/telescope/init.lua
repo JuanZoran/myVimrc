@@ -80,4 +80,12 @@ plugins:add {
     end,
 }
 
+
+plugins:add {
+    'renerocksai/telekasten.nvim',
+    keys = {
+        { 'mn', '<cmd>Telekasten panel<cr>', desc = '📚Telekasten' }
+    },
+}
+
 return plugins

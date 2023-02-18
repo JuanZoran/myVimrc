@@ -46,7 +46,7 @@ M.on_attach = function(_, bufnr)
             { "<Leader>dd" , "<Cmd>Lspsaga show_line_diagnostics<CR> ",   ' check out line diagnostic' },
 
             -- NOTE :for text diagnostic
-            { "<Leader>dc" , "<Cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'       },
+            { "<Leader>dc" , "<Cmd>Lspsaga show_cursor_diagnostics<CR>", ' 查看光标处诊断信息'     },
             { "<Leader>dj" , "<Cmd>Lspsaga diagnostic_jump_prev<CR>",    ' 跳转到上一个诊断信息处' },
             { "<Leader>dl" , "<Cmd>Lspsaga diagnostic_jump_next<CR>",    ' 跳转到下一个诊断信息处' },
             { "<Leader>dm" , '<Cmd>Lspsaga show_buf_diagnostics<CR>',    '  打开诊断列表' },

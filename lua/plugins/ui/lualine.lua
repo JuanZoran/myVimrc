@@ -21,16 +21,16 @@ local function get_lsp_staus()
     local status = table.concat(tmp, '  ')
 
     return (({
-        ['c']          = ' ﭰ ',
-        ['cpp']        = '  ',
-        ['go']         = ' ﳑ ',
-        ['python']     = '  ',
-        ['html']       = '  ',
-        ['lua']        = '  ',
-        ['sh']         = '  ',
-        ['javascript'] = '  ',
-        ['markdown']   = '  ',
-    })[vim.bo.filetype] or '') .. status
+            ['c']          = ' ﭰ ',
+            ['cpp']        = '  ',
+            ['go']         = ' ﳑ ',
+            ['python']     = '  ',
+            ['html']       = '  ',
+            ['lua']        = '  ',
+            ['sh']         = '  ',
+            ['javascript'] = '  ',
+            ['markdown']   = '  ',
+        })[vim.bo.filetype] or '') .. status
 end
 
 local function memory_use()
@@ -60,6 +60,7 @@ require("lualine").setup({
             right = '',
             left = '',
         },
+        globalstatus = true,
         theme = "auto",
         disabled_filetypes = {
             statusline = {
@@ -88,20 +89,13 @@ require("lualine").setup({
     sections = {
         lualine_b = {
             { 'b:gitsigns_head', icon = ' ' },
-            { 'diff', source = diff_source },
+            { 'diff',            source = diff_source },
         },
     },
     winbar = {
         lualine_y = {
-            {
-                memory_use,
-            },
+            memory_use,
         },
-        -- lualine_c = {
-        --     function()
-        --         return require('lspsaga.symbolwinbar'):get_winbar()
-        --     end
-        -- },
         lualine_z = {
             lsp_status,
         },
@@ -128,5 +122,10 @@ require("lualine").setup({
                 color = { fg = "#ff9e64" },
             }
         },
+        -- lualine_c = {
+        --     function()
+        --         return require('lspsaga.symbolwinbar'):get_winbar()
+        --     end
+        -- },
     },
 })
