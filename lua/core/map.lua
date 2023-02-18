@@ -8,20 +8,6 @@ local function set(map)
 end
 
 set {
-    mode = { 'n', 'x', 'o' }, -- be appended to other operator
-    map = {
-        { "i", "k" },
-        { "k", "j" },
-        { "j", "h" },
-        { "h", "i" },
-        { 'L', '$' },
-        { 'J', '0' },
-        { 'I', '<C-u>zz' },
-        { 'K', '<C-d>zz' },
-    }
-}
-
-set {
     mode = 'n',
     map = {
         { 'U',                 'Vp', },

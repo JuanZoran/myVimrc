@@ -1,6 +1,42 @@
 local plugins = require("util.plugin")()
 
 plugins:add {
+    'declancm/cinnamon.nvim',
+    cond = function()
+        local cond = true
+        if not cond then
+            local map = {
+                mode = { 'n', 'x', 'o' }, -- be appended to other operator
+                map = {
+                    { "i", "k" },
+                    { "k", "j" },
+                    { "j", "h" },
+                    { "h", "i" },
+                    { 'L', '$' },
+                    { 'J', '0' },
+                    { 'I', '<C-u>zz' },
+                    { 'K', '<C-d>zz' },
+                }
+            }
+            local s = vim.keymap.set
+            for _, v in ipairs(map.map) do
+                s(map.mode, v[1], v[2])
+            end
+        end
+        return cond
+    end,
+    config = function()
+        require 'plugins.ui.smooth'
+    end,
+    -- lazy = true,
+    event = 'VeryLazy',
+    dependencies = {
+        'gen740/SmoothCursor.nvim',
+        'edluffy/specs.nvim',
+    },
+}
+
+plugins:add {
     'folke/tokyonight.nvim',
     lazy = false,
     opts = {
@@ -12,7 +48,7 @@ plugins:add {
             }
 
             hl.Cursor = {
-                bg = '#2e3a4d',
+                bg = '#58a6ff',
             }
         end
     },
@@ -119,19 +155,5 @@ plugins:add {
 --         require 'plugins.ui.theme.kanagawa'
 --     end,
 --     priority = 1000,
--- }
-
-
--- plugins:add {
---     'declancm/cinnamon.nvim',
---     config = function()
---         require 'plugins.ui.smooth'
---     end,
---     -- lazy = true,
---     event = 'VeryLazy',
---     dependencies = {
---         'gen740/SmoothCursor.nvim',
---         'edluffy/specs.nvim',
---     },
 -- }
 return plugins

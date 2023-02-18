@@ -45,6 +45,15 @@ if vim.fn.executable('clangd') == 1 then
     }
 end
 
+if vim.fn.executable('marksman') == 1 then
+    local opts = {
+        on_attach = handler.on_attach,
+        capabilities = handler.capabilities,
+        handlers = handler.handlers
+    }
+    lspconfig.marksman.setup(opts)
+end
+
 --     -- TODO  load conf
 local registry = require("mason-registry")
 local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
