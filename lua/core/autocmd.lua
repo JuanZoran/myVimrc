@@ -67,9 +67,9 @@ if vim.fn.executable('fcitx5-remote') == 1 then
 end
 
 
--- INFO : store Position
--- go to last loc when opening a buffer
--- api.nvim_create_autocmd("BufReadPost", {
+-- -- go to last loc when opening a buffer
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   group = augroup("last_loc"),
 --   callback = function()
 --     local mark = vim.api.nvim_buf_get_mark(0, '"')
 --     local lcount = vim.api.nvim_buf_line_count(0)
@@ -78,7 +78,6 @@ end
 --     end
 --   end,
 -- })
-
 
 -- -- 设置firenvim的大小
 -- vim.cmd [[

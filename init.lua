@@ -26,7 +26,7 @@ require("lazy").setup('plugins', {
         lazy = true,
     },
     install = {
-        colorscheme = { "kanagawa", 'habamax' },
+        colorscheme = { 'catppuccin',"kanagawa", 'habamax' },
     },
     ui = {
         size = { width = 0.85, height = 0.85 },

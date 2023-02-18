@@ -52,8 +52,7 @@ local lsp_status = {
     }, -- Determines what separator to use for the component.
 }
 
-
-require("lualine").setup({
+require("lualine").setup {
     options = {
         -- component_separators = { left = '', right = '' },
         section_separators = {
@@ -122,10 +121,14 @@ require("lualine").setup({
                 color = { fg = "#ff9e64" },
             }
         },
-        -- lualine_c = {
-        --     function()
-        --         return require('lspsaga.symbolwinbar'):get_winbar()
-        --     end
-        -- },
+        lualine_c = {
+            {
+                require('nvim-navic').get_location,
+                conf = require('nvim-navic').is_available,
+            }
+            --     function()
+            --         return require('lspsaga.symbolwinbar'):get_winbar()
+            --     end
+        },
     },
-})
+}
