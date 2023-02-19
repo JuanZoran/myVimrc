@@ -3,12 +3,12 @@ local plugins = require("util.plugin")()
 plugins:add {
     "folke/todo-comments.nvim",
     event = 'VeryLazy',
-    dependencies = "nvim-lua/plenary.nvim",
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
 plugins:add {
     "folke/which-key.nvim",
+    event = 'VeryLazy',
     opts = {
         plugins = {
             marks = false, -- shows a list of your marks on ' and `
@@ -77,26 +77,24 @@ plugins:add {
 
 
 plugins:add {
-    {
-        'dhruvasagar/vim-table-mode',
-        keys = {
-            { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
-        },
-        ft = { 'md', 'markdown' },
-        dependencies = {
-            'ellisonleao/glow.nvim',
-            opts = {
-                border = 'rounded',
-                style = 'dark',
-                width = 100,
-                width_ratio = 0.9,
-                height_ratio = 0.85,
-            },
-            keys = {
-                { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' },
-            },
-        }
+    'dhruvasagar/vim-table-mode',
+    keys = {
+        { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
     },
+    ft = { 'md', 'markdown' },
+    dependencies = {
+        'ellisonleao/glow.nvim',
+        opts = {
+            border = 'rounded',
+            style = 'dark',
+            width = 100,
+            width_ratio = 0.9,
+            height_ratio = 0.85,
+        },
+        keys = {
+            { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' },
+        },
+    }
 }
 
 plugins:add {
@@ -155,6 +153,7 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 plugins:add {
     "windwp/nvim-autopairs",
+    event = 'InsertEnter',
     opts = {
         -- check_ts = true,
         enable_abbr = true,
@@ -187,6 +186,63 @@ plugins:add {
             }
         }
     end
+}
+
+
+plugins:add {
+    "lewis6991/gitsigns.nvim",
+    event = 'VeryLazy',
+    keys = {
+        { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
+        { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },
+        { '<leader>gs', '<Cmd>Gitsigns show<CR>' },
+        { '<leader>gr', '<Cmd>Gitsigns reset_buffer<CR>' },
+    },
+    opts = {
+        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    },
+}
+
+plugins:add {
+    "folke/zen-mode.nvim",
+    keys = { '<leader><leader>h', '<Cmd>ZenMode<CR>' },
+    dependencies = {
+        "folke/twilight.nvim",
+        opts = { context = 20 },
+    },
+    opts = {
+        window = { width = 0.85, },
+    },
+}
+
+plugins:add {
+    "LudoPinelli/comment-box.nvim",
+    keys = {
+        { mode = { 'n', 'x' }, "<leader>rk", "<Cmd>lua require('comment-box').accbox()<CR>", desc = "Comment Center Box" },
+        { mode = { 'n', 'x' }, "<leader>rj", "<Cmd>lua require('comment-box').lbox()<CR>",   desc = "Comment Left Aligned Text" },
+        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>",  desc = "Comment Center Line" },
+        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>",   desc = "Comment Center Line" },
+        -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
+    }
+}
+
+plugins:add {
+    "ggandor/leap.nvim",
+    config = function() require 'plugins.tools.leap' end,
+    keys = {
+        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = '⬅️ quick jump backward' },
+        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = '💪quick jump cross window' },
+        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = '➡️ quick jump forward' },
+    },
+    dependencies = {
+        'ggandor/flit.nvim',
+        keys = { 'f', 'F', 't', 'T' },
+        opts = {
+            -- A string like "nv", "nvo", "o", etc.
+            labeled_modes = "v",
+            multiline = true,
+        }
+    },
 }
 
 
@@ -228,63 +284,4 @@ plugins:add {
 --         }
 --     end
 -- }
-
-
-plugins:add {
-    "lewis6991/gitsigns.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    event = 'VeryLazy',
-    keys = {
-        { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
-        { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },
-        { '<leader>gs', '<Cmd>Gitsigns show<CR>' },
-        { '<leader>gr', '<Cmd>Gitsigns reset_buffer<CR>' },
-    },
-    opts = {
-        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-    },
-}
-
-plugins:add {
-    "folke/zen-mode.nvim",
-    keys = { '<leader><leader>h', '<Cmd>ZenMode<CR>' },
-    dependencies = {
-        "folke/twilight.nvim",
-        opts = { context = 20 },
-    },
-    opts = {
-        window = { width = 0.85, },
-    },
-}
-
-plugins:add {
-    "LudoPinelli/comment-box.nvim",
-    keys = {
-        { mode = { 'n', 'x' }, "<leader>rk", "<Cmd>lua require('comment-box').accbox()<CR>", desc = "Comment Center Box" },
-        { mode = { 'n', 'x' }, "<leader>rj", "<Cmd>lua require('comment-box').lbox()<CR>", desc = "Comment Left Aligned Text" },
-        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>", desc = "Comment Center Line" },
-        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>", desc = "Comment Center Line" },
-        -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
-    }
-}
-
-plugins:add {
-    "ggandor/leap.nvim",
-    config = function() require 'plugins.tools.leap' end,
-    keys = {
-        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = '⬅️ quick jump backward' },
-        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = '💪quick jump cross window' },
-        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = '➡️ quick jump forward' },
-    },
-    dependencies = {
-        'ggandor/flit.nvim',
-        keys = { 'f', 'F', 't', 'T' },
-        opts = {
-            -- A string like "nv", "nvo", "o", etc.
-            labeled_modes = "v",
-            multiline = true,
-        }
-    },
-}
-
 return plugins

@@ -1,4 +1,8 @@
 local plugins = require("util.plugin")()
+plugins:add {
+    'kyazdani42/nvim-web-devicons',
+    lazy = true,
+}
 
 plugins:add {
     "catppuccin/nvim",
@@ -17,11 +21,16 @@ plugins:add {
             treesitter = true,
             telescope = true,
             notify = true,
-            mini = false,
             noice = true,
             ts_rainbow = true,
             lsp_trouble = true,
             markdown = true,
+            native_lsp = {
+                enabled = true,
+            },
+            navic = {
+                enabled = true,
+            },
             -- illuminate = true,
             -- which_key = true,
             -- mason = true,
@@ -29,12 +38,6 @@ plugins:add {
             --     enable = true,
             --     colored_indent_levels = true,
             -- },
-            native_lsp = {
-                enabled = true,
-            },
-            navic = {
-                enabled = true,
-            },
             -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
     },
@@ -45,48 +48,54 @@ plugins:add {
     priority = 1000,
 }
 
+-- local cond = false
+-- if not cond then
+local map = {
+    mode = { 'n', 'x', 'o' }, -- be appended to other operator
+    map = {
+        { "i", "k" },
+        { "k", "j" },
+        { "j", "h" },
+        { "h", "i" },
+        { 'L', '$' },
+        { 'J', '0' },
+        { 'I', '<C-u>zz' },
+        { 'K', '<C-d>zz' },
+    }
+}
+local s = vim.keymap.set
+for _, v in ipairs(map.map) do
+    s(map.mode, v[1], v[2])
+end
+
 plugins:add {
-    'declancm/cinnamon.nvim',
-    cond = function()
-        local cond = true
-        if not cond then
-            local map = {
-                mode = { 'n', 'x', 'o' }, -- be appended to other operator
-                map = {
-                    { "i", "k" },
-                    { "k", "j" },
-                    { "j", "h" },
-                    { "h", "i" },
-                    { 'L', '$' },
-                    { 'J', '0' },
-                    { 'I', '<C-u>zz' },
-                    { 'K', '<C-d>zz' },
-                }
-            }
-            local s = vim.keymap.set
-            for _, v in ipairs(map.map) do
-                s(map.mode, v[1], v[2])
-            end
-        end
-        return cond
-    end,
-    config = function()
-        require 'plugins.ui.smooth'
-    end,
-    -- lazy = true,
+    'gen740/SmoothCursor.nvim',
+    name = 'smoothcursor',
     event = 'VeryLazy',
-    dependencies = {
-        'gen740/SmoothCursor.nvim',
-        'edluffy/specs.nvim',
+    opts = {
+        autostart = true,
+        speed = 30, -- max is 100 to stick to your current position
+        intervals = 30, -- tick intervalI
+        disable_float_win = true, -- disable on float window
+        linehl = 'CursorLine',
+        disabled_filetypes = {
+            'alpha',
+            'TelescopePrompt'
+        },
+        fancy = {
+            head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+            enable = true
+        },
     },
 }
+
 
 plugins:add {
     'folke/tokyonight.nvim',
     lazy = true,
     opts = {
         style = 'night',
-        transparent = true,
+        transparent = false,
         on_highlights = function(hl)
             hl['@variable'] = {
                 fg = '#f4b085',
@@ -111,13 +120,6 @@ plugins:add {
 }
 
 
-plugins:add { -- 状态栏
-    "nvim-lualine/lualine.nvim",
-    dependencies = "kyazdani42/nvim-web-devicons",
-    config = function()
-        require "plugins.ui.lualine"
-    end,
-}
 
 plugins:add { -- 文件树
     "nvim-tree/nvim-tree.lua",
@@ -172,8 +174,34 @@ plugins:add {
     config = function() require("plugins.ui.alpha") end,
 }
 
+
+plugins:add { -- 状态栏
+    "nvim-lualine/lualine.nvim",
+    event = 'VeryLazy',
+    dependencies = {
+        'SmiteshP/nvim-navic',
+        opts = {
+            separator = ' >> ',
+            highlight = true,
+            depth_limit = 5,
+        },
+        init = function()
+            require('lsp.handlers').attach(function(client, bufnr)
+                if client.server_capabilities.documentSymbolProvider then
+                    require('nvim-navic').attach(client, bufnr)
+                end
+            end)
+        end,
+    },
+    config = function()
+        require "plugins.ui.lualine"
+    end,
+}
+
+
 plugins:add {
     "folke/noice.nvim",
+    event = 'VeryLazy',
     dependencies = {
         "muniftanjim/nui.nvim",
         {
@@ -190,8 +218,60 @@ plugins:add {
             },
         },
     },
-    config = function() require "plugins.ui.noice" end
+    opts = {
+        -- you can enable a preset for easier configuration
+        lsp = {
+            -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+            progress = {
+                enabled = true,
+                -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
+                -- See the section on formatting for more details on how to customize.
+                format = "lsp_progress",
+                format_done = "lsp_progress_done",
+                throttle = 1000 / 30, -- frequency to update lsp progress message
+                view = "mini",
+            },
+            override = {
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                ["vim.lsp.util.stylize_markdown"] = true,
+                ["cmp.entry.get_documentation"] = true,
+            },
+        },
+        presets = {
+            bottom_search = false, -- use a classic bottom cmdline for search
+            long_message_to_split = true, -- long messages will be sent to a split
+            inc_rename = false, -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true, -- add a border to hover docs and signature help
+            command_palette = {
+                views = {
+                    cmdline_popup = {
+                        position = {
+                            row = "50%",
+                            col = "50%",
+                        },
+                        size = {
+                            min_width = 60,
+                            width = "auto",
+                            height = "auto",
+                        },
+                    },
+                },
+            },
+        },
+    }
 }
+
+-- plugins:add {
+--     'declancm/cinnamon.nvim',
+--     cond = cond,
+--     config = function()
+--         require 'plugins.ui.smooth'
+--     end,
+--     event = 'VeryLazy',
+--     dependencies = {
+--         'edluffy/specs.nvim',
+--     },
+-- }
 
 -- plugins:add {
 --     "rebelot/kanagawa.nvim",

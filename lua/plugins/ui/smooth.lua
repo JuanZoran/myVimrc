@@ -89,7 +89,6 @@ end)
 map({ 'n', 'x' }, 'G', function()
     vim.defer_fn(show, 10)
     vim.api.nvim_feedkeys('G', 'n', false)
-
 end)
 
 map({ 'n', 'x' }, 'gg', function()

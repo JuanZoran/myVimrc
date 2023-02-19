@@ -74,6 +74,10 @@ return {
         fg = '#f55385',
         italic = true,
     },
+
+    ['@conditional']         = {
+        fg = '#f55385',
+    },
     -- FloatBorder                 = {
     --     fg = '#89B4FA',
     --     bg = 'NONE',

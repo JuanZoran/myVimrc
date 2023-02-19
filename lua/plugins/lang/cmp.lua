@@ -32,8 +32,17 @@ cmp.setup {
         ghost_text = false,
     },
     mapping = {
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs( -1), { "i", "c" }),
+        ["<C-d>"] = cmp.mapping(function()
+            if not require("noice.lsp").scroll(4) then
+                cmp.mapping.scroll_docs(1)
+            end
+        end, { 'i', 's' }),
+
+        ["<C-u>"] = cmp.mapping(function()
+            if not require("noice.lsp").scroll(-4) then
+                cmp.mapping.scroll_docs(-1)
+            end
+        end, { 'i', 's' }),
         ["<C-Space>"] = cmp.mapping {
             i = function()
                 if luasnip.choice_active() then

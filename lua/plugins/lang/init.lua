@@ -1,6 +1,7 @@
 local plugins = require("util.plugin")()
 plugins:add {
     "rrethy/vim-illuminate",
+    event = 'BufReadPre',
     config = function()
         require('illuminate').configure {
             providers = { 'lsp', 'treesitter', },
@@ -14,14 +15,14 @@ plugins:add {
     opts = {
         space_char_blankline = " ",
         show_current_context = true,
-        show_current_context_start = true,
+        show_current_context_start = false,
     },
 }
 
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
     build = ':TSUpdate',
-    event = 'BufReadPost',
+    event = 'VimEnter',
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "mrjones2014/nvim-ts-rainbow",
@@ -32,7 +33,8 @@ plugins:add {
 
 plugins:add {
     "kevinhwang91/nvim-ufo",
-    dependencies = { "kevinhwang91/promise-async", lazy = true },
+    event = 'VeryLazy',
+    dependencies = "kevinhwang91/promise-async",
     config = function() require 'plugins.lang.ufo' end,
 }
 
@@ -40,9 +42,7 @@ plugins:add {
     "folke/neodev.nvim",
     opts = {
         library = {
-            plugins = {
-                'nvim-dap-ui',
-            },
+            plugins = false,
             types = true,
         }
     },
@@ -82,7 +82,7 @@ plugins:add {
     dependencies = {
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
         'p00f/clangd_extensions.nvim',
-    }
+    },
 }
 
 plugins:add {
@@ -102,12 +102,13 @@ plugins:add {
     end,
 }
 
+
 plugins:add {
     "L3mon4d3/luasnip",
     lazy = true,
     keys = {
-        { mode = 'x', '<S-CR>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
-        { mode = 'i', '<S-CR>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
+        { mode = 'x', '<C-l>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
+        { mode = 'i', '<C-l>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
     config = function()
         local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"

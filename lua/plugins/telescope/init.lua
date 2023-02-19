@@ -1,10 +1,17 @@
 local plugins = require("util.plugin")()
+
+plugins:add {
+    "nvim-lua/plenary.nvim",
+    lazy = true,
+}
+
 plugins:add {
     "nvim-telescope/telescope.nvim",
+    event = 'VeryLazy',
     dependencies = {
-        "nvim-lua/plenary.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- fuzzy finder
-        'nvim-telescope/telescope-ui-select.nvim'
+        'nvim-telescope/telescope-ui-select.nvim',
+
     },
     branch = '0.1.x',
     config = function() require 'plugins.telescope.base' end
