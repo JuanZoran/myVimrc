@@ -124,7 +124,7 @@ require("lualine").setup {
         lualine_c = {
             {
                 require('nvim-navic').get_location,
-                conf = require('nvim-navic').is_available,
+                cond = require('nvim-navic').is_available,
             }
             --     function()
             --         return require('lspsaga.symbolwinbar'):get_winbar()

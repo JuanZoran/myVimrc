@@ -23,6 +23,7 @@ plugins:add {
 
 plugins:add {
     "rrethy/vim-illuminate",
+    event = 'BufReadPre',
     config = function()
         require('illuminate').configure {
             providers = { 'lsp', 'treesitter', },
@@ -46,21 +47,11 @@ plugins:add {
 
 plugins:add {
     "kevinhwang91/nvim-ufo",
-    dependencies = { "kevinhwang91/promise-async", lazy = true },
+    event = 'VeryLazy',
+    dependencies = "kevinhwang91/promise-async",
     config = function() require 'plugins.lang.ufo' end,
 }
 
-plugins:add {
-    "folke/neodev.nvim",
-    opts = {
-        library = {
-            plugins = {
-                'nvim-dap-ui',
-            },
-            types = true,
-        }
-    },
-}
 
 plugins:add {
     "folke/trouble.nvim",
@@ -97,6 +88,10 @@ plugins:add {
     dependencies = {
         "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
         'p00f/clangd_extensions.nvim',
+        {
+            "folke/neodev.nvim",
+            opts = { library = { plugins = { 'nvim-dap-ui', }, types = true, } },
+        }
     },
 }
 

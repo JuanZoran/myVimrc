@@ -25,13 +25,12 @@ plugins:add {
 plugins:add {
     "folke/todo-comments.nvim",
     event = 'VeryLazy',
-    dependencies = "nvim-lua/plenary.nvim",
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
-
 plugins:add {
     "folke/which-key.nvim",
+    event = 'VeryLazy',
     opts = {
         plugins = {
             marks = false, -- shows a list of your marks on ' and `
@@ -172,6 +171,7 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 plugins:add {
     "windwp/nvim-autopairs",
+    event = 'InsertEnter',
     opts = {
         -- check_ts = true,
         enable_abbr = true,
@@ -191,7 +191,6 @@ plugins:add {
     },
 }
 
-
 plugins:add {
     'echasnovski/mini.surround',
     event = 'VeryLazy',
@@ -210,17 +209,18 @@ plugins:add {
     "LudoPinelli/comment-box.nvim",
     keys = {
         { mode = { 'n', 'x' }, "<leader>rk", "<Cmd>lua require('comment-box').accbox()<CR>", desc = "Comment Center Box" },
-        { mode = { 'n', 'x' }, "<leader>rj", "<Cmd>lua require('comment-box').lbox()<CR>", desc = "Comment Left Aligned Text" },
-        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>", desc = "Comment Center Line" },
-        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>", desc = "Comment Center Line" },
+        { mode = { 'n', 'x' }, "<leader>rj", "<Cmd>lua require('comment-box').lbox()<CR>",   desc = "Comment Left Aligned Text" },
+        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>",  desc = "Comment Center Line" },
+        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>",   desc = "Comment Center Line" },
         -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
     }
 }
 
+
 plugins:add {
     "olimorris/persisted.nvim",
     -- cmd = 'SessionLoad',
-    event = 'VimEnter',
+    event = 'VeryLazy',
     keys = {
         { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
     },
@@ -259,7 +259,6 @@ plugins:add {
 
 plugins:add {
     "lewis6991/gitsigns.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
     event = 'VeryLazy',
     keys = {
         { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },

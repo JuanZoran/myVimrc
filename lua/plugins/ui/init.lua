@@ -26,6 +26,12 @@ plugins:add {
             ts_rainbow = true,
             lsp_trouble = true,
             markdown = true,
+            native_lsp = {
+                enabled = true,
+            },
+            navic = {
+                enabled = true,
+            },
             -- illuminate = true,
             -- which_key = true,
             -- mason = true,
@@ -33,12 +39,6 @@ plugins:add {
             --     enable = true,
             --     colored_indent_levels = true,
             -- },
-            native_lsp = {
-                enabled = true,
-            },
-            navic = {
-                enabled = true,
-            },
             -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
     },
@@ -61,6 +61,7 @@ plugins:add {
 
 plugins:add {
     'declancm/cinnamon.nvim',
+    event = 'VeryLazy',
     config = function()
         require 'plugins.ui.smooth'
     end,
@@ -76,7 +77,6 @@ plugins:add {
     cmd = "ColorizerToggle",
     config = true,
 }
-
 
 plugins:add { -- 状态栏
     "nvim-lualine/lualine.nvim",
@@ -162,12 +162,14 @@ plugins:add { -- 标签栏
 
 plugins:add {
     'goolord/alpha-nvim',
+    event = 'VimEnter',
     cond = true,
     config = function() require("plugins.ui.alpha") end,
 }
 
 plugins:add {
     "folke/noice.nvim",
+    event = 'VeryLazy',
     dependencies = {
         "muniftanjim/nui.nvim",
         {
