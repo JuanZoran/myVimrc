@@ -69,6 +69,55 @@ for _, v in ipairs(map.map) do
 end
 
 plugins:add {
+    'JuanZoran/specs.nvim',
+    keys = {
+        { mode = { 'n', 'x' }, 'H', function()
+            vim.defer_fn(require('specs').show_specs, 10)
+            vim.api.nvim_feedkeys('I', 'n', false)
+        end },
+
+        { mode = { 'n', 'x' }, 'A', function()
+            vim.defer_fn(require('specs').show_specs, 10)
+            vim.api.nvim_feedkeys('A', 'n', false)
+        end },
+
+        { mode = { 'n', 'x' }, 'J', function()
+            if vim.fn.col('.') ~= 1 then
+                vim.defer_fn(require('specs').show_specs, 10)
+                vim.fn.cursor { vim.fn.line('.'), 1 }
+            end
+        end },
+
+        { mode = { 'n', 'x' }, 'L', function()
+            local _cur = vim.fn.col('.')
+            local _end = vim.fn.col('$') - 1
+            if _end ~= 0 and _cur ~= _end then
+                vim.defer_fn(require("specs").show_specs, 10)
+                vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
+            end
+        end },
+    },
+    opts = function()
+        return {
+            show_jumps      = false,
+            min_jump        = 30,
+            popup           = {
+                delay_ms = 0, -- delay before popup displays
+                inc_ms = 10, -- time increments used for fade/resize effects
+                blend = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                width = 10,
+                winhl = "Cursor",
+                fader = require('specs').linear_fader,
+                resizer = require('specs').shrink_resizer
+            },
+            ignore_buftypes = {
+                nofile = true,
+            },
+        }
+    end,
+}
+
+plugins:add {
     'gen740/SmoothCursor.nvim',
     name = 'smoothcursor',
     event = 'VeryLazy',
@@ -261,17 +310,6 @@ plugins:add {
     }
 }
 
--- plugins:add {
---     'declancm/cinnamon.nvim',
---     cond = cond,
---     config = function()
---         require 'plugins.ui.smooth'
---     end,
---     event = 'VeryLazy',
---     dependencies = {
---         'edluffy/specs.nvim',
---     },
--- }
 
 -- plugins:add {
 --     "rebelot/kanagawa.nvim",
