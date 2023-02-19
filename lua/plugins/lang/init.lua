@@ -107,8 +107,8 @@ plugins:add {
     "L3mon4d3/luasnip",
     lazy = true,
     keys = {
-        { mode = 'x', '<C-l>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
-        { mode = 'i', '<C-l>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
+        { mode = 'x', '<C-q>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
+        { mode = 'i', '<C-q>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
     config = function()
         local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"
