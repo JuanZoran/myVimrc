@@ -21,6 +21,25 @@ local source = {
     { name = "buffer",   max_item_count = 3 },
 }
 
+local next = cmp.mapping {
+    i = function()
+        if cmp.visible() then
+            cmp.select_next_item()
+        else
+            cmp.mapping.complete()()
+        end
+    end,
+}
+
+local prev = cmp.mapping {
+    i = function()
+        if cmp.visible() then
+            cmp.select_prev_item()
+        else
+            cmp.mapping.complete()()
+        end
+    end,
+}
 
 cmp.setup {
     completion = {
@@ -35,16 +54,16 @@ cmp.setup {
         ghost_text = false,
     },
     mapping = {
-        ["<C-d>"] = cmp.mapping(function()
-            if not require("noice.lsp").scroll(4) then
-                cmp.mapping.scroll_docs(1)
+        ["<C-d>"] = function(fallback)
+            if not require("noice.lsp").scroll(4) and not cmp.scroll_docs(4) then
+                fallback()
             end
-        end, { "i", "c" }),
-        ["<C-u>"] = cmp.mapping(function()
-            if not require("noice.lsp").scroll( -4) then
-                cmp.mapping.scroll_docs( -1)
+        end,
+        ["<C-u>"] = function(fallback)
+            if not require("noice.lsp").scroll( -4) and not cmp.scroll_docs( -4) then
+                fallback()
             end
-        end, { "i", "c" }),
+        end,
         ["<C-Space>"] = cmp.mapping {
             i = function()
                 if luasnip.choice_active() then
@@ -78,20 +97,15 @@ cmp.setup {
         ["<Tab>"] = cmp.mapping(function(fallback)
             if copilot.is_visible() then
                 copilot.accept()
+            elseif cmp.visible() then
+                cmp.select_next_item()
             else
                 fallback()
             end
         end, { "i", "s" }),
-        ["<C-p>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        ["<C-k>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "!" }),
+        ["<C-p>"] = prev,
+        ["<C-k>"] = next,
     },
-
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)

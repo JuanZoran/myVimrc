@@ -104,8 +104,9 @@ plugins:add {
             sources = {
                 -- nl.builtins.code_actions.gitsigns,
                 nl.builtins.formatting.prettier,
-                nl.builtins.formatting.shfmt,
                 nl.builtins.formatting.black,
+                nl.builtins.formatting.beautysh
+                -- nl.builtins.formatting.shfmt,
                 -- nl.builtins.code_actions.refactoring,
                 -- nl.builtins.code_actions.shellcheck,
             },
