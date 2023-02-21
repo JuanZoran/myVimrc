@@ -102,7 +102,6 @@ plugins:add {
     end,
 }
 
-
 plugins:add {
     "L3mon4d3/luasnip",
     lazy = true,

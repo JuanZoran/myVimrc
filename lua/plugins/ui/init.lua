@@ -58,7 +58,7 @@ local map = {
         { "j", "h" },
         { "h", "i" },
         { 'L', '$' },
-        { 'J', '0' },
+        { 'J', '^' },
         { 'I', '<C-u>zz' },
         { 'K', '<C-d>zz' },
     }
@@ -68,32 +68,36 @@ for _, v in ipairs(map.map) do
     s(map.mode, v[1], v[2])
 end
 
+
+local api = vim.api
+local fn = vim.fn
 plugins:add {
     'JuanZoran/specs.nvim',
     keys = {
         { mode = { 'n', 'x' }, 'H', function()
             vim.defer_fn(require('specs').show_specs, 10)
-            vim.api.nvim_feedkeys('I', 'n', false)
+            api.nvim_feedkeys('I', 'n', false)
         end },
 
         { mode = { 'n', 'x' }, 'A', function()
             vim.defer_fn(require('specs').show_specs, 10)
-            vim.api.nvim_feedkeys('A', 'n', false)
+            api.nvim_feedkeys('A', 'n', false)
         end },
 
         { mode = { 'n', 'x' }, 'J', function()
-            if vim.fn.col('.') ~= 1 then
+            local col = (vim.api.nvim_get_current_line()):find('%S')
+            if col ~= vim.fn.col('.') then
                 vim.defer_fn(require('specs').show_specs, 10)
-                vim.fn.cursor { vim.fn.line('.'), 1 }
+                api.nvim_feedkeys('^', 'n', false)
             end
         end },
 
         { mode = { 'n', 'x' }, 'L', function()
-            local _cur = vim.fn.col('.')
-            local _end = vim.fn.col('$') - 1
+            local _cur = fn.col('.')
+            local _end = fn.col('$') - 1
             if _end ~= 0 and _cur ~= _end then
                 vim.defer_fn(require("specs").show_specs, 10)
-                vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
+                fn.cursor { fn.line('.'), fn.col('$') }
             end
         end },
     },
