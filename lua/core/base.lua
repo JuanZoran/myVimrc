@@ -1,11 +1,4 @@
 local opt = vim.opt
-
-if vim.g.neovide then
-    opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h11'
-    vim.g.neovide_transparency = 1
-    vim.g.neovide_refresh_rate = 144
-end
-
 opt.termguicolors = true
 opt.autoread = true
 opt.number = true
@@ -77,8 +70,10 @@ opt.iskeyword:append('-') -- 将word-word视为一个word, 方便daw
 -----================ disabled some native =====================
 
 -- vim.o.showmode = false
-vim.g.did_install_default_menus = 1
-vim.g.did_install_syntax_menu = 1
+local g = vim.g
+g.did_install_default_menus = 1
+g.did_install_syntax_menu = 1
+-- g.clipboard = 'termux'
 ----============  disable end  ===========-------
 
 

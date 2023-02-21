@@ -14,7 +14,6 @@ api.nvim_create_autocmd({ 'BufWrite', 'QuitPre' }, {
 -- Don't auto comment when o
 api.nvim_create_autocmd("FileType", { command = [[set formatoptions-=cro]] })
 
-
 api.nvim_create_autocmd("TextYankPost", {
     group = group,
     callback = function()
@@ -32,7 +31,6 @@ api.nvim_create_autocmd({ "VimResized" }, {
     end,
 })
 
-
 -- NOTE  Snip Utility
 api.nvim_create_autocmd("BufEnter", {
     group = group,
@@ -41,7 +39,6 @@ api.nvim_create_autocmd("BufEnter", {
         vim.keymap.set('n', '<CR>', '/-- End Snippets --<CR>:noh<CR>2<Up>o', { silent = true, buffer = true })
     end,
 })
-
 
 -- INFO 中文输入法切换的问题
 if vim.fn.executable('fcitx5-remote') == 1 then

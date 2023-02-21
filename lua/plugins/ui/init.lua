@@ -48,97 +48,6 @@ plugins:add {
     priority = 1000,
 }
 
--- local cond = false
--- if not cond then
-local map = {
-    mode = { 'n', 'x', 'o' }, -- be appended to other operator
-    map = {
-        { "i", "k" },
-        { "k", "j" },
-        { "j", "h" },
-        { "h", "i" },
-        { 'L', '$' },
-        { 'J', '0' },
-        { 'I', '<C-u>zz' },
-        { 'K', '<C-d>zz' },
-    }
-}
-local s = vim.keymap.set
-for _, v in ipairs(map.map) do
-    s(map.mode, v[1], v[2])
-end
-
-plugins:add {
-    'JuanZoran/specs.nvim',
-    keys = {
-        { mode = { 'n', 'x' }, 'H', function()
-            vim.defer_fn(require('specs').show_specs, 10)
-            vim.api.nvim_feedkeys('I', 'n', false)
-        end },
-
-        { mode = { 'n', 'x' }, 'A', function()
-            vim.defer_fn(require('specs').show_specs, 10)
-            vim.api.nvim_feedkeys('A', 'n', false)
-        end },
-
-        { mode = { 'n', 'x' }, 'J', function()
-            if vim.fn.col('.') ~= 1 then
-                vim.defer_fn(require('specs').show_specs, 10)
-                vim.fn.cursor { vim.fn.line('.'), 1 }
-            end
-        end },
-
-        { mode = { 'n', 'x' }, 'L', function()
-            local _cur = vim.fn.col('.')
-            local _end = vim.fn.col('$') - 1
-            if _end ~= 0 and _cur ~= _end then
-                vim.defer_fn(require("specs").show_specs, 10)
-                vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
-            end
-        end },
-    },
-    opts = function()
-        return {
-            show_jumps      = false,
-            min_jump        = 30,
-            popup           = {
-                delay_ms = 0, -- delay before popup displays
-                inc_ms = 10, -- time increments used for fade/resize effects
-                blend = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
-                width = 10,
-                winhl = "Cursor",
-                fader = require('specs').linear_fader,
-                resizer = require('specs').shrink_resizer
-            },
-            ignore_buftypes = {
-                nofile = true,
-            },
-        }
-    end,
-}
-
-plugins:add {
-    'gen740/SmoothCursor.nvim',
-    name = 'smoothcursor',
-    event = 'VeryLazy',
-    opts = {
-        autostart = true,
-        speed = 30, -- max is 100 to stick to your current position
-        intervals = 30, -- tick intervalI
-        disable_float_win = true, -- disable on float window
-        linehl = 'CursorLine',
-        disabled_filetypes = {
-            'alpha',
-            'TelescopePrompt'
-        },
-        fancy = {
-            head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
-            enable = true
-        },
-    },
-}
-
-
 plugins:add {
     'folke/tokyonight.nvim',
     lazy = true,
@@ -310,6 +219,110 @@ plugins:add {
     }
 }
 
+
+
+-- if true then
+--     plugins:add {
+--         'JuanZoran/specs.nvim',
+--         dependencies = 'declancm/cinnamon.nvim',
+--         config = function()
+--             require('plugins.ui.smooth')
+--         end
+--     }
+--     return plugins
+-- end
+
+
+-- local cond = false
+-- if not cond then
+local map = {
+    mode = { 'n', 'x', 'o' }, -- be appended to other operator
+    map = {
+        { "i", "k" },
+        { "k", "j" },
+        { "j", "h" },
+        { "h", "i" },
+        { 'L', '$' },
+        { 'J', '0' },
+        { 'I', '<C-u>zz' },
+        { 'K', '<C-d>zz' },
+    }
+}
+local s = vim.keymap.set
+for _, v in ipairs(map.map) do
+    s(map.mode, v[1], v[2])
+end
+
+plugins:add {
+    'JuanZoran/specs.nvim',
+    event = 'VeryLazy',
+    keys = {
+        { mode = { 'n', 'x' }, 'H', function()
+            vim.defer_fn(require('specs').show_specs, 10)
+            vim.api.nvim_feedkeys('I', 'n', false)
+        end },
+
+        { mode = { 'n', 'x' }, 'A', function()
+            vim.defer_fn(require('specs').show_specs, 10)
+            vim.api.nvim_feedkeys('A', 'n', false)
+        end },
+
+        { mode = { 'n', 'x' }, 'J', function()
+            if vim.fn.col('.') ~= 1 then
+                vim.defer_fn(require('specs').show_specs, 10)
+                vim.fn.cursor { vim.fn.line('.'), 1 }
+            end
+        end },
+
+        { mode = { 'n', 'x' }, 'L', function()
+            local _cur = vim.fn.col('.')
+            local _end = vim.fn.col('$') - 1
+            if _end ~= 0 and _cur ~= _end then
+                vim.defer_fn(require("specs").show_specs, 10)
+                vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
+            end
+        end },
+    },
+    opts = function()
+        return {
+            show_jumps      = false,
+            min_jump        = 30,
+            popup           = {
+                delay_ms = 0, -- delay before popup displays
+                inc_ms = 10, -- time increments used for fade/resize effects
+                blend = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                width = 10,
+                winhl = "Cursor",
+                fader = require('specs').linear_fader,
+                resizer = require('specs').shrink_resizer
+            },
+            ignore_buftypes = {
+                nofile = true,
+            },
+        }
+    end,
+}
+
+plugins:add {
+    'gen740/SmoothCursor.nvim',
+    name = 'smoothcursor',
+    event = 'VeryLazy',
+    opts = {
+        autostart = true,
+        speed = 30, -- max is 100 to stick to your current position
+        intervals = 30, -- tick intervalI
+        disable_float_win = true, -- disable on float window
+        linehl = 'CursorLine',
+        disabled_filetypes = {
+            'alpha',
+            'TelescopePrompt'
+        },
+        fancy = {
+            head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+            enable = true
+        },
+    },
+}
 
 -- plugins:add {
 --     "rebelot/kanagawa.nvim",
