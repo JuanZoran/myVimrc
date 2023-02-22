@@ -104,15 +104,22 @@ plugins:add { -- 状态栏
     end,
 }
 
-plugins:add { -- 文件树
-    "nvim-tree/nvim-tree.lua",
+-- Unless you are still migrating, remove the deprecated commands from v1.x
+vim.g.neo_tree_remove_legacy_commands = 1
+plugins:add {
+    "nvim-neo-tree/neo-tree.nvim",
+    lazy = false,
     keys = {
-        { '<C-w><C-w>', '<Cmd>NvimTreeToggle<CR>', desc = ' 触发文件树' }
+        { '<C-w><C-w>', '<Cmd>Neotree reveal toggle<CR>',     desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',    desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>', desc = '📁Neo-tree Git Status' },
+        { '<C-w>d',     '<Cmd>Neotree dir=./<CR>',     desc = '📁File Explorer in buffer dir' },
+        { '<C-w>f',     ':Neotree dir=~/',             desc = '📁File Explorer from HOME' },
     },
-    config = function()
-        require "plugins.ui.nvim_tree"
-    end,
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
+    branch = "v2.x",
+    opts = function()
+        return require('plugins.ui.neo-tree')
+    end
 }
 
 plugins:add { -- 标签栏
@@ -146,14 +153,8 @@ plugins:add { -- 标签栏
                 show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
                 modified_icon = "💌",
                 -- separator_style = "triky", -- slant, padded_slant | triky
-                offsets = {
-                    {
-                        filetype = "NvimTree",
-                        text = "File Explorer",
-                        highlight = "Directory",
-                        text_align = "center",
-                    },
-                },
+                -- offsets = {
+                -- },
             },
         }
     end
@@ -235,7 +236,7 @@ if vim.env.TERM == 'xterm-kitty' then
         event = 'BufReadPre',
         dependencies = "edluffy/hologram.nvim",
         keys = {
-            {'<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets'}
+            { '<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets' }
         },
         opts = {
             -- col = 10,
@@ -244,9 +245,9 @@ if vim.env.TERM == 'xterm-kitty' then
                 avoid_statusline = true,
             },
         },
-        config = function (_, opts)
+        config = function(_, opts)
             require("pets").setup(opts)
-            vim.cmd[[PetsNew cat]]
+            vim.cmd [[PetsNew cat]]
         end,
     }
 end

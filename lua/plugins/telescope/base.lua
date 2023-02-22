@@ -111,31 +111,36 @@ telescope.load_extension("fzf")
 -- telescope.load_extension("noice")
 -- telescope.load_extension("project")
 
-
 -- INFO : key-bindings ==============================
 local set = require("util.map").set
 local builtin = require("telescope.builtin")
 set {
     mode = 'n',
     map = {
-        { "<C-f>", builtin.find_files },
-        { "<leader>th", builtin.help_tags, ' Check out all tags' },
-        { "<leader>tH", builtin.highlights, '[] Check out all highlights' },
-        { "<leader>tf", builtin.git_files, ' Search text in current buffer' },
-        { "<leader>tt", builtin.live_grep, ' Search text in cucurrent directory' },
+        { "<C-f>",      builtin.find_files },
+        { "<leader>th", builtin.help_tags,                 ' Check out all tags' },
+        { "<leader>tH", builtin.highlights,                '[] Check out all highlights' },
+        { "<leader>tf", builtin.git_files,                 ' Search text in current buffer' },
+        { "<leader>tt", builtin.live_grep,                 ' Search text in cucurrent directory' },
         { "<leader>gf", builtin.current_buffer_fuzzy_find, '[]Search Git File' },
-        { "<leader>ts", builtin.spell_suggest, '益spell suggestions about cursor word' },
-        { "<leader>tr", builtin.treesitter, '滑Have a look at the tags provided by 滑' },
-        { "<leader>te", builtin.diagnostics, ' take a look' },
-        { "<leader>tc", builtin.commands, 'גּ Check out commands' },
-        { "<leader>ti", builtin.jumplist, ' Get jumplist[C-i]' },
+        { "<leader>ts", builtin.spell_suggest,             '益spell suggestions about cursor word' },
+        { "<leader>tr", builtin.treesitter,                '滑Have a look at the tags provided by 滑' },
+        { "<leader>te", builtin.diagnostics,               ' take a look' },
+        { "<leader>tc", builtin.commands,                  'גּ Check out commands' },
+        { "<leader>ti", builtin.jumplist,                  ' Get jumplist[C-i]' },
+        { "<leader>tk", builtin.keymaps,                   ' Check out keymaps[S-C-/]' },
         -- { "<leader>tu" , builtin.oldfiles,                  ' Check out edited files[C-u]'            },
-        { "<leader>tk", builtin.keymaps, ' Check out keymaps[C-/]' },
-        { "<C-b>", builtin.marks, '[]Check out Marks' },
+        { '<leader>fd', function()
+            builtin.find_files {
+                cwd = vim.fn.stdpath('config') .. '/lua'
+            }
+        end, desc = ' Dotfiles search' },
 
-        { "<C-u>", builtin.oldfiles },
-        { "<C-o>", builtin.jumplist },
-        { "<C-_>", builtin.keymaps } -- for C-/
+        { "<C-b>",   builtin.marks,   '[]Check out Marks' },
+        { "<C-u>",   builtin.oldfiles },
+        { "<C-o>",   builtin.jumplist },
+        { "<C-/>",   builtin.commands }, -- for C-/
+        { "<S-C-/>", builtin.keymaps }, -- for C-/
     }
 }
 -- vim.keymap.set("n", "<Leader>T", ":Telescope ")

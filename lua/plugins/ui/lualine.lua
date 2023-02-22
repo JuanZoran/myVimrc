@@ -11,26 +11,27 @@ local function diff_source()
     end
 end
 
+
+local icon = {
+    ['c']          = ' ﭰ ',
+    ['cpp']        = '  ',
+    ['go']         = ' ﳑ ',
+    ['python']     = '  ',
+    ['html']       = '  ',
+    ['lua']        = '  ',
+    ['sh']         = '  ',
+    ['javascript'] = '  ',
+    ['markdown']   = '  ',
+}
+
 local function get_lsp_staus()
     local clients = vim.lsp.get_active_clients()
     local tmp = {}
     for i, v in pairs(clients) do
         tmp[i] = v.name
     end
-
     local status = table.concat(tmp, '  ')
-
-    return (({
-            ['c']          = ' ﭰ ',
-            ['cpp']        = '  ',
-            ['go']         = ' ﳑ ',
-            ['python']     = '  ',
-            ['html']       = '  ',
-            ['lua']        = '  ',
-            ['sh']         = '  ',
-            ['javascript'] = '  ',
-            ['markdown']   = '  ',
-        })[vim.bo.filetype] or '') .. status
+    return (icon[vim.bo.filetype] or '') .. status
 end
 
 local function memory_use()
