@@ -1,4 +1,4 @@
-require('lspsaga').setup {
+return {
     finder = {
         edit = { 'o', '<CR>' },
         vsplit = 'v',

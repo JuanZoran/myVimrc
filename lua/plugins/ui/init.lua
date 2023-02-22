@@ -91,7 +91,7 @@ plugins:add { -- 状态栏
             },
             init = function()
                 -- vim.g.navic_silence = true
-                require("lsp.handlers").attach(function(client, buffer)
+                require("plugins.lsp.handlers").attach(function(client, buffer)
                     if client.server_capabilities.documentSymbolProvider then
                         require("nvim-navic").attach(client, buffer)
                     end
