@@ -105,18 +105,26 @@ plugins:add {
 }
 
 
-local lazygit
+--- Toggleterm warpper
+---@param cmd string Terminal command
+local toggle = function(cmd)
+    local term
+    return function()
+        if not term then
+            term = require('toggleterm.terminal').Terminal:new { cmd = cmd, hidden = true }
+        end
+        term:toggle()
+    end
+end
 plugins:add {
     'akinsho/toggleterm.nvim',
     keys = {
         '<C-d>',
-        { '<C-g>', function()
-            if not lazygit then lazygit = require('toggleterm.terminal').Terminal:new({ cmd = "lazygit", hidden = true }) end
-            lazygit:toggle()
-        end },
+        { '<C-g>', toggle('lazygit'), desc = 'Toggle Lazygit' },
+        -- { '<C-s>', toggle('nnn'), desc = 'Toggle ranger' },
     },
     opts = {
-        open_mapping = [[<C-d>]],
+        open_mapping = '<C-d>',
         autochdir = true,
         direction = 'float', --[[ 'vertical' | 'horizontal' | 'tab' | 'float', ]]
         float_opts = {
@@ -130,6 +138,14 @@ plugins:add {
     keys = {
         { mode = 'x', "<leader>=", function() require 'align'.align_to_string(true, true, true) end, }
     }
+}
+
+-- search/replace in multiple files
+plugins:add {
+    "windwp/nvim-spectre",
+    keys = {
+        { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
 }
 
 plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
@@ -176,7 +192,7 @@ plugins:add {
 
 plugins:add {
     'echasnovski/mini.surround',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     config = function()
         -- NOTE : special name
         require('mini.surround').setup {
@@ -191,7 +207,7 @@ plugins:add {
 
 plugins:add {
     "lewis6991/gitsigns.nvim",
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     keys = {
         { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
         { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },

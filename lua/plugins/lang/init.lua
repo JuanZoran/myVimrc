@@ -1,51 +1,38 @@
 local plugins = require("util.plugin")()
 plugins:add {
-    "rrethy/vim-illuminate",
-    event = 'BufReadPre',
-    config = function()
-        require('illuminate').configure {
-            providers = { 'lsp', 'treesitter', },
-            delay = 200,
-        }
-    end,
-}
-
-plugins:add {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-        space_char_blankline = " ",
-        show_current_context = true,
-        show_current_context_start = false,
-    },
-}
-
-plugins:add {
     "nvim-treesitter/nvim-treesitter",
     build = ':TSUpdate',
-    event = 'VimEnter',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "mrjones2014/nvim-ts-rainbow",
         "RRethy/nvim-treesitter-endwise",
+        {
+            "kevinhwang91/nvim-ufo",
+            dependencies = "kevinhwang91/promise-async",
+            config = function() require 'plugins.lang.ufo' end,
+        },
+
+        {
+            "rrethy/vim-illuminate",
+            config = function()
+                require('illuminate').configure {
+                    providers = { 'lsp', 'treesitter', },
+                    delay = 200,
+                }
+            end,
+        },
+
+        {
+            "lukas-reineke/indent-blankline.nvim",
+            opts = {
+                space_char_blankline = " ",
+                show_current_context = true,
+                show_current_context_start = false,
+            },
+        }
     }, -- rainbow pairs
     config = function() require("plugins.lang.treesitter") end
-}
-
-plugins:add {
-    "kevinhwang91/nvim-ufo",
-    event = 'VeryLazy',
-    dependencies = "kevinhwang91/promise-async",
-    config = function() require 'plugins.lang.ufo' end,
-}
-
-plugins:add {
-    "folke/neodev.nvim",
-    opts = {
-        library = {
-            plugins = false,
-            types = true,
-        }
-    },
 }
 
 plugins:add {
@@ -76,31 +63,6 @@ plugins:add {
     },
 }
 
-
-plugins:add {
-    "neovim/nvim-lspconfig", -- official lspconfig
-    dependencies = {
-        "glepnir/lspsaga.nvim", -- pretty ui for [code-action | hover-text | ....]
-        'p00f/clangd_extensions.nvim',
-    },
-}
-
-plugins:add {
-    'jose-elias-alvarez/null-ls.nvim',
-    event = 'VeryLazy',
-    config = function()
-        local nl = require("null-ls")
-        nl.setup {
-            sources = {
-                -- nl.builtins.code_actions.gitsigns,
-                nl.builtins.formatting.prettier,
-                nl.builtins.formatting.shfmt,
-                -- nl.builtins.code_actions.refactoring,
-                -- nl.builtins.code_actions.shellcheck,
-            },
-        }
-    end,
-}
 
 plugins:add {
     "L3mon4d3/luasnip",
@@ -137,42 +99,7 @@ plugins:add {
         require("luasnip.loaders.from_lua").lazy_load { paths = snippets_folder }
         vim.keymap.set('n', '<leader><cr>', require "luasnip.loaders.from_lua".edit_snippet_files)
     end,
-    dependencies = {
-        "rafamadriz/friendly-snippets",
-    }
-}
-
-
-plugins:add {
-    "williamboman/mason.nvim",
-    opts = {
-        ui = {
-            border = "rounded",
-            keymaps = {
-                -- Keymap to expand a package
-                toggle_package_expand = "o",
-                -- Keymap to install the package under the current cursor position
-                install_package = "<Leader>i",
-                -- Keymap to reinstall/update the package under the current cursor position
-                update_package = "u",
-                -- Keymap to check for new version for the package under the current cursor position
-                check_package_version = "c",
-                -- Keymap to update all installed packages
-                update_all_packages = "U",
-                -- Keymap to check which installed packages are outdated
-                check_outdated_packages = "C",
-                -- Keymap to uninstall a package
-                uninstall_package = "d",
-                -- Keymap to cancel a package installation
-                cancel_installation = "<C-c>",
-                -- Keymap to apply language filter
-                apply_language_filter = "<C-f>",
-            },
-        },
-    },
-    dependencies = {
-        { "williamboman/mason-lspconfig.nvim", opts = { automatic_installation = false, } },
-    }
+    dependencies = "rafamadriz/friendly-snippets",
 }
 
 plugins:add {

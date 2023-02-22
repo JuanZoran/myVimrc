@@ -32,7 +32,6 @@ api.nvim_create_autocmd({ "VimResized" }, {
     end,
 })
 
-
 -- NOTE  Snip Utility
 api.nvim_create_autocmd("BufEnter", {
     group = group,

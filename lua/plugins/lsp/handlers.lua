@@ -5,12 +5,10 @@ local signs = {
     { name = "DiagnosticSignHint",  text = icon.Hint },
     { name = "DiagnosticSignInfo",  text = icon.Info },
 }
-
 local def = vim.fn.sign_define
 for _, sign in ipairs(signs) do
     def(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
-
 
 vim.diagnostic.config {
     -- virtual_text = true, --- enable for diagnostic information
@@ -32,7 +30,6 @@ vim.diagnostic.config {
     },
 }
 
-local M = {}
 local list = {
     function(_, bufnr)
         -- NOTE Keymap
@@ -76,30 +73,23 @@ local list = {
             }
         }
     end
-
 }
 
-M.attach = function(func)
-    list[#list + 1] = func
-end
 
----@format disable
-M.on_attach = function(client, bufnr)
-    for _, f in ipairs(list) do
-        f(client, bufnr)
-    end
-end ---@format enable
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
--- NOTE : Make UFO use Lsp for fold
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
+return {
+    ---add attach function
+    ---@param func function
+    attach = function(func)
+        list[#list + 1] = func
+    end,
+    on_attach = function(client, bufnr)
+        for _, process in ipairs(list) do
+            process(client, bufnr)
+        end
+    end,
+    capabilities = function()
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.publishDiagnostics.codeActionsInline = true
+        return require("cmp_nvim_lsp").default_capabilities(capabilities)
+    end,
 }
-
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-capabilities.textDocument.publishDiagnostics.codeActionsInline = true
-
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
-return M
