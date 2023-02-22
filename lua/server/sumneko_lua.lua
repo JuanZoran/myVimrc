@@ -1,3 +1,4 @@
+-- NOTE :it has been setuped by `neodev.nvim`
 return {
     settings = {
         Lua = {

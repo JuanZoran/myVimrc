@@ -39,7 +39,6 @@ set {
         { "<C-w><Up>",         "<C-w>K",          ' Move Up' },
         { "<C-w><Left>",       "<C-w>H",          ' Move Left' },
         { "<C-w><Right>",      "<C-w>L",          ' Move Right' },
-        { "<C-w>d",            ":close<CR>",      ' Close Current Window' },
 
         -- INFO : command
         { "<Leader>w",         ":w<CR>",          ' Save Current Window' },
@@ -110,8 +109,8 @@ set {
 set {
     mode = "x",
     map = {
-        { "<A-i>", ":m '<-2<CR>gv" },
-        { "<A-k>", ":m '>+1<CR>gv" },
+        { "<A-i>", ":m '<-2<CR>gv=gv" },
+        { "<A-k>", ":m '>+1<CR>gv=gv" },
         { ">",     ">gv" },
         { "<",     "<gv" },
         { "<C-c>", [["+y]] },

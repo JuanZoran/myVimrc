@@ -7,7 +7,7 @@ plugins:add {
         { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = ' 自动发音' },
         { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
-    dependencies = { 'kkharji/sqlite.lua', lazy = true },
+    dependencies = 'kkharji/sqlite.lua',
     opts = {
         hover = {
             spinner = 'moon'
@@ -122,23 +122,41 @@ plugins:add {
     },
 }
 
-local lazygit
+
+
+--- Toggleterm warpper
+---@param cmd string Terminal command
+local toggle = function(cmd)
+    local term
+    return function()
+        if not term then
+            term = require('toggleterm.terminal').Terminal:new { cmd = cmd, hidden = true }
+        end
+        term:toggle()
+    end
+end
 plugins:add {
     'akinsho/toggleterm.nvim',
     keys = {
         '<C-d>',
-        { '<C-g>', function()
-            if not lazygit then lazygit = require('toggleterm.terminal').Terminal:new({ cmd = "lazygit", hidden = true }) end
-            lazygit:toggle()
-        end },
+        { '<C-g>', toggle('lazygit'), desc = 'Toggle Lazygit' },
+        { '<C-s>', toggle('ranger'), desc = 'Toggle ranger' },
     },
     opts = {
-        open_mapping = [[<C-d>]],
+        open_mapping = '<C-d>',
         autochdir = true,
         direction = 'float', --[[ 'vertical' | 'horizontal' | 'tab' | 'float', ]]
         float_opts = {
             border = 'curved'
         }
+    },
+}
+
+-- search/replace in multiple files
+plugins:add {
+    "windwp/nvim-spectre",
+    keys = {
+        { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
 }
 

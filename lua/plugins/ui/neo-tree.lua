@@ -43,47 +43,44 @@ return {
             nowait = true,
         },
         mappings = {
-            ["<space>"] = {
-                "toggle_node",
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-            },
-            ["<cr>"] = "open",
-            ["o"] = "open",
-            ["<esc>"] = "revert_preview",
-            ["P"] = { "toggle_preview", config = { use_float = true } },
-            ["l"] = "focus_preview",
-            ["O"] = "open_split",
-            -- ["S"] = "split_with_window_picker",
-            ["U"] = "open_vsplit",
-            -- ["s"] = "vsplit_with_window_picker",
-            ["t"] = "open_tabnew",
             -- ["<cr>"] = "open_drop",
             -- ["t"] = "open_tab_drop",
-            ["w"] = "open_with_window_picker",
-            ["C"] = "close_node",
-            ["z"] = "close_all_nodes",
-            --["Z"] = "expand_all_nodes",
-            ["R"] = "refresh",
-            ["a"] = {
+            ["<space>"] = 'none',
+            ["<cr>"]    = "open",
+            ["o"]       = "open",
+            ["<esc>"]   = "revert_preview",
+            ["P"]       = { "toggle_preview", config = { use_float = true } },
+            ["l"]       = "focus_preview",
+            ["O"]       = "open_split",
+            ["S"]       = "split_with_window_picker",
+            ["U"]       = "open_vsplit",
+            ["s"]       = "vsplit_with_window_picker",
+            ["t"]       = "open_tabnew",
+            ["w"]       = "open_with_window_picker",
+            ["C"]       = "close_node",
+            ["z"]       = "close_all_nodes",
+            ["Z"] = "expand_all_nodes",
+            ["R"]       = "refresh",
+            ["a"]       = {
                 "add",
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
                 config = {
                     show_path = "none", -- "none", "relative", "absolute"
                 }
             },
-            ["A"] = "add_directory", -- also accepts the config.show_path and config.insert_as options.
-            ["d"] = "delete",
-            ["r"] = "rename",
-            ["y"] = "copy_to_clipboard",
-            ["x"] = "cut_to_clipboard",
-            ["p"] = "paste_from_clipboard",
-            ["c"] = "copy", -- takes text input for destination, also accepts the config.show_path and config.insert_as options
-            ["m"] = "move", -- takes text input for destination, also accepts the config.show_path and config.insert_as options
-            ["e"] = "toggle_auto_expand_width",
-            ["q"] = "close_window",
-            ["?"] = "show_help",
-            ["<"] = "prev_source",
-            [">"] = "next_source",
+            ["A"]       = "add_directory", -- also accepts the config.show_path and config.insert_as options.
+            ["d"]       = "delete",
+            ["r"]       = "rename",
+            ["y"]       = "copy_to_clipboard",
+            ["x"]       = "cut_to_clipboard",
+            ["p"]       = "paste_from_clipboard",
+            ["c"]       = "copy", -- takes text input for destination, also accepts the config.show_path and config.insert_as options
+            ["m"]       = "move", -- takes text input for destination, also accepts the config.show_path and config.insert_as options
+            ["e"]       = "toggle_auto_expand_width",
+            ["q"]       = "close_window",
+            ["?"]       = "show_help",
+            ["<"]       = "prev_source",
+            [">"]       = "next_source",
         },
     },
     buffers = {
@@ -118,10 +115,10 @@ return {
                 ["H"] = "toggle_hidden",
                 ["f"] = "fuzzy_finder",
                 ["F"] = "fuzzy_finder_directory",
-                --["/"] = "filter_as_you_type", -- this was the default until v1.28
-                ["/"] = "filter_on_submit",
+                -- ["/"] = "filter_on_submit",
+                ["/"] = "filter_as_you_type", -- this was the default until v1.28
                 ["<C-x>"] = "clear_filter",
-                ["<bs>"] = "navigate_up",
+                ["u"] = "navigate_up",
                 ["."] = "set_root",
                 ["[g"] = "prev_git_modified",
                 ["]g"] = "next_git_modified",

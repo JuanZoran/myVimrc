@@ -3,45 +3,45 @@ plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
 }
-
 plugins:add {
     "catppuccin/nvim",
-    lazy = false,
+    event = 'VimEnter',
     name = "catppuccin",
-    opts = {
-        flavour = 'macchiato',
-        transparent_background = true,
-        custom_highlights = function()
-            return require('plugins.ui.theme.override')
-        end,
-        integrations = {
-            cmp = true,
-            gitsigns = true,
-            nvimtree = true,
-            treesitter = true,
-            telescope = true,
-            notify = true,
-            mini = false,
-            noice = true,
-            ts_rainbow = true,
-            lsp_trouble = true,
-            markdown = true,
-            native_lsp = {
-                enabled = true,
+    opts = function()
+        return {
+            flavour = 'macchiato',
+            transparent_background = true,
+            custom_highlights = require('plugins.ui.theme.override')
+            ,
+            integrations = {
+                cmp = true,
+                gitsigns = true,
+                nvimtree = true,
+                treesitter = true,
+                telescope = true,
+                notify = true,
+                mini = false,
+                noice = true,
+                ts_rainbow = true,
+                lsp_trouble = true,
+                markdown = true,
+                native_lsp = {
+                    enabled = true,
+                },
+                navic = {
+                    enabled = true,
+                },
+                -- illuminate = true,
+                -- which_key = true,
+                -- mason = true,
+                -- indent_blankline = {
+                --     enable = true,
+                --     colored_indent_levels = true,
+                -- },
+                -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
             },
-            navic = {
-                enabled = true,
-            },
-            -- illuminate = true,
-            -- which_key = true,
-            -- mason = true,
-            -- indent_blankline = {
-            --     enable = true,
-            --     colored_indent_levels = true,
-            -- },
-            -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-        },
-    },
+        }
+    end,
     config = function(_, opts)
         require('catppuccin').setup(opts)
         vim.cmd.colorscheme 'catppuccin'
@@ -81,40 +81,48 @@ plugins:add {
 plugins:add { -- 状态栏
     "nvim-lualine/lualine.nvim",
     event = 'VeryLazy',
-    dependencies = {
-        {
-            'SmiteshP/nvim-navic',
-            opts = {
-                separator = " >> ",
-                highlight = true,
-                depth_limit = 5,
-            },
-            init = function()
-                -- vim.g.navic_silence = true
-                require("plugins.lsp.handlers").attach(function(client, buffer)
-                    if client.server_capabilities.documentSymbolProvider then
-                        require("nvim-navic").attach(client, buffer)
-                    end
-                end)
-            end,
-        },
-    },
     config = function()
         require('plugins.ui.lualine')
     end,
 }
 
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.g.neo_tree_remove_legacy_commands = 1
+plugins:add {
+    'SmiteshP/nvim-navic',
+    lazy = true,
+    opts = {
+        separator = " >> ",
+        highlight = true,
+        depth_limit = 5,
+    },
+    init = function()
+        -- vim.g.navic_silence = true
+        require("plugins.lsp.handlers").attach(function(client, buffer)
+            if client.server_capabilities.documentSymbolProvider then
+                require("nvim-navic").attach(client, buffer)
+            end
+        end)
+    end,
+}
+
 plugins:add {
     "nvim-neo-tree/neo-tree.nvim",
-    lazy = false,
+    init = function()
+        -- Unless you are still migrating, remove the deprecated commands from v1.x
+        vim.g.neo_tree_remove_legacy_commands = 1
+        if vim.fn.argc() == 1 then
+            ---@diagnostic disable-next-line: param-type-mismatch
+            local stat = vim.loop.fs_stat(vim.fn.argv(0))
+            if stat and stat.type == "directory" then
+                require("neo-tree")
+            end
+        end
+    end,
     keys = {
-        { '<C-w><C-w>', '<Cmd>Neotree reveal toggle<CR>',     desc = '📁Toggle File Explorer' },
-        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',    desc = '📁Neo-tree Buffers' },
-        { '<C-w>g',     '<Cmd>Neotree git_status<CR>', desc = '📁Neo-tree Git Status' },
-        { '<C-w>d',     '<Cmd>Neotree dir=./<CR>',     desc = '📁File Explorer in buffer dir' },
-        { '<C-w>f',     ':Neotree dir=~/',             desc = '📁File Explorer from HOME' },
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',        desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',       desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',    desc = '📁Neo-tree Git Status' },
+        { '<C-w>d',     '<Cmd>Neotree reveal dir=./<CR>', desc = '📁File Explorer in buffer dir' },
+        { '<C-w>f',     ':Neotree dir=~/',                desc = '📁File Explorer from HOME' },
     },
     branch = "v2.x",
     opts = function()
@@ -251,117 +259,5 @@ if vim.env.TERM == 'xterm-kitty' then
         end,
     }
 end
-
-
-plugins:add {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-        space_char_blankline = " ",
-        show_current_context = true,
-        show_current_context_start = true,
-    },
-}
-
--- plugins:add {
---     "echasnovski/mini.indentscope",
---     version = false, -- wait till new 0.7.0 release to put it back on semver
---     event = { "BufReadPre", "BufNewFile" },
---     opts = {
---         -- symbol = "▏",
---         symbol = "│",
---         options = { try_as_border = true },
---     },
---     config = function(_, opts)
---         vim.api.nvim_create_autocmd("FileType", {
---             pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
---             callback = function()
---                 vim.b.miniindentscope_disable = true
---             end,
---         })
---         require("mini.indentscope").setup(opts)
---     end,
--- }
-
-
--- plugins:add '                                '
--- -@format disable
--- plugins:add {
---     'glepnir/dashboard-nvim',
---     event = 'VimEnter',
---     opts = {
---         -- config
---         -- theme = 'hyper',
---         theme = 'doom',
---         config = {
---             header = {
---                 "    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ",
---                 "    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ",
---                 "   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ",
---                 "   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ",
---                 "  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ",
---                 "  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ",
---                 " ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ",
---                 " ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ",
---                 " ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ",
---                 " ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ",
---                 "  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ",
---                 "   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ",
---                 "     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ",
---                 "        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁     ⢀⣠⣴ ",
---                 " ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ",
---             },
---             -- shortcut = {
---             --     { desc = ' Update',        group = 'MoreMsg', action = 'Lazy update',          key = 'u'  },
---             --     { desc = '📄 Find File',    group = 'MoreMsg', action = 'Telescope find_files', key = 'f', },
---             --     { desc = '🥂 Recent File',  group = 'MoreMsg', action = 'Telescope oldfiles',   key = 'r', },
---             --     { desc = '💻 Load Session', group = 'MoreMsg', action = 'SessionLoad',          key = 's', },
---             --     { desc = '🏓 Quit',         group = 'MoreMsg', action = 'q',                    key = 'q', },
---             -- },
---             center = {
---                 {
---                     icon = '📄',
---                     icon_hl = 'Title',
---                     desc = '> Find File' .. indent,
---                     desc_hl = 'MoreMsg',
---                     key = 'f',
---                     keymap = 'SPC t f',
---                     key_hl = 'Number',
---                     action = 'Telescope find_files'
---                 },
---                 {
---                     icon = '🥂',
---                     desc = '> Recent File' .. indent,
---                     desc_hl = 'MoreMsg',
---                     key = 'r',
---                     keymap = '<C-u>',
---                     key_hl = 'Number',
---                     action = 'Telescope oldfiles'
---                 },
---                 {
---                     icon = '🏓',
---                     desc_hl = 'MoreMsg',
---                     desc = '> Quit' .. indent,
---                     action = 'q',
---                     key = 'q',
---                 },
---                 {
---                     icon = '💻',
---                     desc_hl = 'MoreMsg',
---                     desc = '> Session' .. indent,
---                     action = 'SessionLoad',
---                     key = 's',
---                 },
---             },
---             mru = {
---                 limit = 5,
---                 icon = '🌳',
---             },
---             -- week_header = {
---             --     enable = true,
---             -- },
---         },
---     },
--- }
-
 
 return plugins

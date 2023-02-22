@@ -36,20 +36,26 @@ plugins:add {
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
     build = ':TSUpdate',
-    event = 'BufReadPost',
+    event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "mrjones2014/nvim-ts-rainbow",
         "RRethy/nvim-treesitter-endwise",
+        {
+            "lukas-reineke/indent-blankline.nvim",
+            opts = {
+                space_char_blankline = " ",
+                show_current_context = true,
+                show_current_context_start = true,
+            },
+        },
+        {
+            "kevinhwang91/nvim-ufo",
+            dependencies = "kevinhwang91/promise-async",
+            config = function() require 'plugins.lang.ufo' end,
+        }
     }, -- rainbow pairs
     config = function() require("plugins.lang.treesitter") end
-}
-
-plugins:add {
-    "kevinhwang91/nvim-ufo",
-    event = 'VeryLazy',
-    dependencies = "kevinhwang91/promise-async",
-    config = function() require 'plugins.lang.ufo' end,
 }
 
 

@@ -12,7 +12,7 @@ plugins:add {
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- fuzzy finder
         'nvim-telescope/telescope-ui-select.nvim'
     },
-    branch = '0.1.x',
+    version = false,
     config = function() require 'plugins.telescope.base' end
 }
 

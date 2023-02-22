@@ -1,16 +1,72 @@
+local config = function()
+    local handler = require("plugins.lsp.handlers")
+    local opts = {
+        on_attach = handler.on_attach,
+        capabilities = handler.capabilities,
+        handlers = handler.handlers
+    }
+
+    require('mason-lspconfig').setup_handlers {
+        function(server)
+            local _, conf_opts = pcall(require, 'server.' .. server)
+            local conf = _ and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
+            require('lspconfig')[server].setup(conf)
+        end,
+        ['clangd'] = function()
+            local _, conf_opts = pcall(require, 'server.clangd')
+            local conf = _ and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
+            require("clangd_extensions").setup {
+                server = conf,
+                extensions = {
+                    memory_usage = {
+                        border = "rounded",
+                    },
+                    symbol_info = {
+                        border = "rounded",
+                    },
+                }
+            }
+        end,
+    }
+
+    --     -- TODO  load conf
+    local registry = require("mason-registry")
+    local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
+    registry:on("package:uninstall:success", function(pkg)
+        local native_name = package_to_lspconfig[pkg.name]
+        if native_name then
+            vim.ui.select(
+                { 'Remove your configuration for this Lsp', 'Skip', },
+                { prompt = 'Whether should remove the configuration ?', },
+                function(select)
+                    if select ~= 'Skip' then
+                        local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath('config') .. '/lua/lsp/conf',
+                            native_name))
+                        vim.notify(('%s configuration removed %s'):format(pkg.name,
+                            (res and 'successfully' or 'failed')))
+                    else
+                        vim.notify('Skip ...')
+                    end
+                end
+            )
+        end
+    end)
+end
+
+
 return {
     "neovim/nvim-lspconfig", -- official lspconfig
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
         'p00f/clangd_extensions.nvim',
         {
-            "glepnir/lspsaga.nvim",
-            opts = function()
-                return require('plugins.lang.saga')
-            end
+            "glepnir/lspsaga.nvim", opts = function()
+            return require('plugins.lang.saga')
+        end,
         }, -- pretty ui for [code-action | hover-text | ....]
         {
             "williamboman/mason.nvim",
+            cmd = 'Mason',
             opts = {
                 ui = {
                     border = "rounded",
@@ -37,65 +93,11 @@ return {
                 },
             },
         },
-        "williamboman/mason-lspconfig.nvim",
+        { "williamboman/mason-lspconfig.nvim", cmd = 'LspInstall', config = true },
         {
             "folke/neodev.nvim",
             opts = { library = { plugins = { 'nvim-dap-ui', }, types = true, } },
         },
     },
-    config = function()
-        local handler = require("plugins.lsp.handlers")
-        local opts = {
-            on_attach = handler.on_attach,
-            capabilities = handler.capabilities,
-            handlers = handler.handlers
-        }
-
-
-        require('mason-lspconfig').setup_handlers {
-            function(server)
-                local _, conf_opts = pcall(require, 'server.' .. server)
-                local conf = _ and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
-                require('lspconfig')[server].setup(conf)
-            end,
-            ['clangd'] = function()
-                local _, conf_opts = pcall(require, 'server.clangd')
-                local conf = _ and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
-                require("clangd_extensions").setup {
-                    server = conf,
-                    extensions = {
-                        memory_usage = {
-                            border = "rounded",
-                        },
-                        symbol_info = {
-                            border = "rounded",
-                        },
-                    }
-                }
-            end,
-        }
-
-        --     -- TODO  load conf
-        local registry = require("mason-registry")
-        local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
-        registry:on("package:uninstall:success", function(pkg)
-            local native_name = package_to_lspconfig[pkg.name]
-            if native_name then
-                vim.ui.select(
-                    { 'Remove your configuration for this Lsp', 'Skip', },
-                    { prompt = 'Whether should remove the configuration ?', },
-                    function(select)
-                        if select ~= 'Skip' then
-                            local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath('config') .. '/lua/lsp/conf',
-                                native_name))
-                            vim.notify(('%s configuration removed %s'):format(pkg.name,
-                                (res and 'successfully' or 'failed')))
-                        else
-                            vim.notify('Skip ...')
-                        end
-                    end
-                )
-            end
-        end)
-    end
+    config = config,
 }

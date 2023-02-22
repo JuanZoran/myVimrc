@@ -11,6 +11,10 @@ local function diff_source()
     end
 end
 
+local function memory_use()
+    local use = (1 - (vim.loop.get_free_memory() / vim.loop.get_total_memory())) * 100
+    return ' Memory: ' .. ('%.2f'):format(use) --[[  .. '%' ]]
+end
 
 local icon = {
     ['c']          = ' ﭰ ',
@@ -24,44 +28,30 @@ local icon = {
     ['markdown']   = '  ',
 }
 
-local function get_lsp_staus()
-    local clients = vim.lsp.get_active_clients()
-    local tmp = {}
-    for i, v in pairs(clients) do
-        tmp[i] = v.name
-    end
-    local status = table.concat(tmp, '  ')
-    return (icon[vim.bo.filetype] or '') .. status
-end
-
-local function memory_use()
-    local use = (1 - (vim.loop.get_free_memory() / vim.loop.get_total_memory())) * 100
-    return ' Memory: ' .. ('%.2f'):format(use) --[[  .. '%' ]]
-end
-
 local lsp_status = {
-    get_lsp_staus,
-    cond = function()
-        return vim.lsp.get_active_clients() ~= nil
+    function()
+        local clients = vim.lsp.get_active_clients()
+        local tmp = {}
+        for i, v in pairs(clients) do
+            tmp[i] = v.name
+        end
+        local status = table.concat(tmp, '  ')
+        return (icon[vim.bo.filetype] or '') .. status
     end,
     color = {
         fg = '#000000', bg = '#10B981'
     },
-    separator = {
-        left = '',
-        right = '',
-    }, -- Determines what separator to use for the component.
 }
 
 require("lualine").setup {
     options = {
         -- component_separators = { left = '', right = '' },
+        theme = "auto",
         section_separators = {
             right = '',
             left = '',
         },
-        globalstatus = true,
-        theme = "auto",
+        -- globalstatus = false,
         disabled_filetypes = {
             statusline = {
                 "alpha",
@@ -74,7 +64,6 @@ require("lualine").setup {
                 "alpha",
                 "help",
                 "packer",
-                "NvimTree",
                 "lspsagaoutline",
                 "toggleterm",
                 "dap-repl",
@@ -99,7 +88,6 @@ require("lualine").setup {
         lualine_z = {
             lsp_status,
         },
-
         lualine_a = {
             {
                 function()
@@ -116,20 +104,13 @@ require("lualine").setup {
                 cond = require("noice").api.status.mode.has,
                 color = { fg = "#ff9e64" },
             },
-            {
-                require("lazy.status").updates,
-                cond = require("lazy.status").has_updates,
-                color = { fg = "#ff9e64" },
-            }
         },
         lualine_c = {
             {
                 require('nvim-navic').get_location,
                 cond = require('nvim-navic').is_available,
             }
-            --     function()
-            --         return require('lspsaga.symbolwinbar'):get_winbar()
-            --     end
         },
     },
+    -- extensions = { 'neo-tree' }
 }

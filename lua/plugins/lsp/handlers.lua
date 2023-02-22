@@ -30,7 +30,6 @@ vim.diagnostic.config {
     },
 }
 
-local M = {}
 local list = {
     function(_, bufnr)
         -- NOTE Keymap
@@ -76,27 +75,20 @@ local list = {
     end
 }
 
----add attach function
----@param func any
-M.attach = function(func)
-    list[#list + 1] = func
-end
-
-M.on_attach = function(client, bufnr)
-    for _, process in ipairs(list) do
-        process(client, bufnr)
-    end
-end
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- NOTE : Make UFO use Lsp for fold
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-}
-
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
 capabilities.textDocument.publishDiagnostics.codeActionsInline = true
-M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-return M
+return {
+    ---add attach function
+    ---@param func function
+    attach = function(func)
+        list[#list + 1] = func
+    end,
+    on_attach = function(client, bufnr)
+        for _, process in ipairs(list) do
+            process(client, bufnr)
+        end
+    end,
+    capabilities = capabilities,
+}
