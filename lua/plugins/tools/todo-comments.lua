@@ -34,7 +34,7 @@ require("todo-comments").setup {
         -- before = "", -- "fg" or "bg" or empty
         keyword = "wide_bg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
         -- after = "fg", -- "fg" or "bg" or empty
-        pattern = [[.*<(KEYWORDS)\s]], -- pattern or table of patterns, used for highlightng (vim regex)
+        pattern = [[.*<(KEYWORDS)\s?]], -- pattern or table of patterns, used for highlightng (vim regex)
         -- comments_only = true, -- uses treesitter to match keywords in comments only
         -- max_line_len = 400, -- ignore lines longer than this
         -- exclude = {}, -- list of file types to exclude highlighting
@@ -65,7 +65,9 @@ require("todo-comments").setup {
     -- },
 }
 
-vim.keymap.set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment" })
-vim.keymap.set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
-vim.keymap.set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>", { desc = "show all TODOs" })
-vim.keymap.set("n", "<Leader>td", "<cmd>TodoTelescope<cr>", { desc = "search todos by telescope" })
+local set = vim.keymap.set
+set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment" })
+set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
+
+set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>",            { desc = "show all TODOs" })
+set("n", "<Leader>td", "<cmd>TodoTelescope<cr>",           { desc = "search todos by telescope" })

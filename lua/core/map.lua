@@ -11,19 +11,18 @@ set {
     mode = 'n',
     map = {
         { 'U',                 'Vp', },
-        { "wo",                ":vsp<CR>",        ' Split Window' },
-        { "wu",                ":sp<CR>",         ' Split Window Vertically' },
-        { "wj",                "<C-w>h",          ' Jump Left' },
-        { "wl",                "<C-w>l",          ' Jump Right' },
-        { "wk",                "<C-w>j",          ' Jump Down' },
-        { "wi",                "<C-w>k",          ' Jump Up' },
-        { "wn",                ":only<CR>",       ' Close Another Window' },
-        { "w=",                "<C-w>=",          '屢Resize Window' },
-        { "w<Down>",           "<C-w>J",          ' Move Down' },
-        { "w<Up>",             "<C-w>K",          ' Move Up' },
-        { "w<Left>",           "<C-w>H",          ' Move Left' },
-        { "w<Right>",          "<C-w>L",          ' Move Right' },
-        { "wd",                ":close<CR>",      ' Close Current Window' },
+        { "<C-w>o",            ":vsp<CR>",        ' Split Window' },
+        { "<C-w>u",            ":sp<CR>",         ' Split Window Vertically' },
+        { "<C-w>j",            "<C-w>h",          ' Jump Left' },
+        { "<C-w>l",            "<C-w>l",          ' Jump Right' },
+        { "<C-w>k",            "<C-w>j",          ' Jump Down' },
+        { "<C-w>i",            "<C-w>k",          ' Jump Up' },
+        { "<C-w>n",            ":only<CR>",       ' Close Another Window' },
+        { "<C-w>=",            "<C-w>=",          '屢Resize Window' },
+        { "<C-w><Down>",       "<C-w>J",          ' Move Down' },
+        { "<C-w><Up>",         "<C-w>K",          ' Move Up' },
+        { "<C-w><Left>",       "<C-w>H",          ' Move Left' },
+        { "<C-w><Right>",      "<C-w>L",          ' Move Right' },
 
         -- INFO : command
         { "<Leader>w",         ":w<CR>",          ' Save Current Window' },
@@ -85,17 +84,17 @@ set {
         { '<C-e>', function()
             vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
         end },
+        { '<C-v>', '"+p' }
     }
     -- {"<++>", "<++>"},
     -- {"<++>", "<++>"},
 }
 
-
 set {
     mode = "x",
     map = {
-        { "<A-i>", ":m '<-2<CR>gv" },
-        { "<A-k>", ":m '>+1<CR>gv" },
+        { "<A-i>", ":m '<-2<CR>gv=gv" },
+        { "<A-k>", ":m '>+1<CR>gv=gv" },
         { ">",     ">gv" },
         { "<",     "<gv" },
         { "<C-c>", [["+y]] },

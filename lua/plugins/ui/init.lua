@@ -6,41 +6,43 @@ plugins:add {
 
 plugins:add {
     "catppuccin/nvim",
-    lazy = false,
+    event = 'VimEnter',
     name = "catppuccin",
-    opts = {
-        -- flavour = 'macchiato',
-        transparent_background = true,
-        custom_highlights = function()
-            return require('plugins.ui.theme.override')
-        end,
-        integrations = {
-            cmp = true,
-            gitsigns = true,
-            nvimtree = true,
-            treesitter = true,
-            telescope = true,
-            notify = true,
-            noice = true,
-            ts_rainbow = true,
-            lsp_trouble = true,
-            markdown = true,
-            native_lsp = {
-                enabled = true,
+    opts = function()
+        return {
+            -- flavour = 'macchiato',
+            transparent_background = true,
+            custom_highlights = require('plugins.ui.theme.override')
+            ,
+            integrations = {
+                cmp = true,
+                gitsigns = true,
+                nvimtree = true,
+                treesitter = true,
+                telescope = true,
+                notify = true,
+                mini = false,
+                noice = true,
+                ts_rainbow = true,
+                lsp_trouble = true,
+                markdown = true,
+                native_lsp = {
+                    enabled = true,
+                },
+                navic = {
+                    enabled = true,
+                },
+                -- illuminate = true,
+                -- which_key = true,
+                -- mason = true,
+                -- indent_blankline = {
+                --     enable = true,
+                --     colored_indent_levels = true,
+                -- },
+                -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
             },
-            navic = {
-                enabled = true,
-            },
-            -- illuminate = true,
-            -- which_key = true,
-            -- mason = true,
-            -- indent_blankline = {
-            --     enable = true,
-            --     colored_indent_levels = true,
-            -- },
-            -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-        },
-    },
+        }
+    end,
     config = function(_, opts)
         require('catppuccin').setup(opts)
         vim.cmd.colorscheme 'catppuccin'
@@ -48,27 +50,6 @@ plugins:add {
     priority = 1000,
 }
 
-plugins:add {
-    'folke/tokyonight.nvim',
-    lazy = true,
-    opts = {
-        style = 'night',
-        transparent = false,
-        on_highlights = function(hl)
-            hl['@variable'] = {
-                fg = '#f4b085',
-            }
-
-            hl.Cursor = {
-                bg = '#58a6ff',
-            }
-        end
-    },
-    config = function(_, opts)
-        require('tokyonight').setup(opts)
-        vim.cmd.colorscheme('tokyonight')
-    end
-}
 
 
 plugins:add {
@@ -77,85 +58,102 @@ plugins:add {
     config = true,
 }
 
-
-
-plugins:add { -- 文件树
-    "nvim-tree/nvim-tree.lua",
-    keys = {
-        { 'ww', '<Cmd>NvimTreeToggle<CR>', desc = ' 触发文件树' }
-    },
-    config = function()
-        require "plugins.ui.nvim_tree"
-    end,
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
-}
-
 plugins:add { -- 标签栏
     "akinsho/bufferline.nvim",
     keys = {
-        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",     desc = '[]Move Buffer to Left' },
-        { "<leader>b<right>", ":BufferLineMoveNext<CR>",     desc = '[]Move Buffer to Right' },
-        { "<Leader>bb",       ":BufferLinePickClose<CR>",    desc = '﫧 Pick a Buffer to delete' },
+        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
+        { "<leader>b<right>", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
+        { "<Leader>bb",       ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
+        { "<leader>bp",       "<Cmd>BufferLineTogglePin<CR>" },
+        { "<leader>bP",       "<Cmd>BufferLineGroupClose ungrouped<CR>" },
         { "<C-j>",            "<Cmd>BufferLineCyclePrev<CR>" },
         { "<C-l>",            "<Cmd>BufferLineCycleNext<CR>" },
     },
     event = 'VeryLazy',
-    opts = {
-        -- highlights = require("catppuccin.groups.integrations.bufferline").get(),
-        options = {
-            show_buffer_close_icons = true,
-            show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
-            modified_icon = "💌",
-            separator_style = "triky", -- slant, padded_slant | triky
-            offsets = {
-                {
-                    filetype = "NvimTree",
-                    text = "File Explorer",
-                    highlight = "Directory",
-                    text_align = "center",
-                },
+    opts = function()
+        return {
+            highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            options = {
+                diagnostics = "nvim_lsp",
+                always_show_bufferline = true,
+                diagnostics_indicator = function(_, _, diagnostics_dict)
+                    local s = " "
+                    for e, n in pairs(diagnostics_dict) do
+                        local sym = e == "error" and " "
+                            or (e == "warning" and " " or "")
+                        s = s .. n .. sym
+                    end
+                    return vim.trim(s)
+                end,
+                show_buffer_close_icons = true,
+                show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
+                modified_icon = "💌",
+                -- separator_style = "triky", -- slant, padded_slant | triky
+                -- offsets = {
+                -- },
             },
-            hover = {
-                enabled = true,
-                delay = 200,
-                reveal = { 'close' }
-            },
-        },
-    }
+        }
+    end
 }
 
 
 plugins:add {
     event = 'VimEnter',
     'goolord/alpha-nvim',
-    cond = true,
     config = function() require("plugins.ui.alpha") end,
 }
-
 
 plugins:add { -- 状态栏
     "nvim-lualine/lualine.nvim",
     event = 'VeryLazy',
-    dependencies = {
-        'SmiteshP/nvim-navic',
-        opts = {
-            separator = ' >> ',
-            highlight = true,
-            depth_limit = 5,
-        },
-        init = function()
-            require('lsp.handlers').attach(function(client, bufnr)
-                if client.server_capabilities.documentSymbolProvider then
-                    require('nvim-navic').attach(client, bufnr)
-                end
-            end)
-        end,
-    },
     config = function()
         require "plugins.ui.lualine"
     end,
 }
 
+plugins:add {
+    'SmiteshP/nvim-navic',
+    lazy = true,
+    opts = {
+        separator = " >> ",
+        highlight = true,
+        depth_limit = 5,
+    },
+    init = function()
+        -- vim.g.navic_silence = true
+        require("plugins.lsp.handlers").attach(function(client, buffer)
+            if client.server_capabilities.documentSymbolProvider then
+                require("nvim-navic").attach(client, buffer)
+            end
+        end)
+    end,
+}
+
+plugins:add {
+    "nvim-neo-tree/neo-tree.nvim",
+    init = function()
+        -- Unless you are still migrating, remove the deprecated commands from v1.x
+        vim.g.neo_tree_remove_legacy_commands = 1
+        if vim.fn.argc() == 1 then
+            ---@diagnostic disable-next-line: param-type-mismatch
+            local stat = vim.loop.fs_stat(vim.fn.argv(0))
+            if stat and stat.type == "directory" then
+                require("neo-tree")
+            end
+        end
+    end,
+    keys = {
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',        desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',       desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',    desc = '📁Neo-tree Git Status' },
+        { '<C-w>d',     '<Cmd>Neotree reveal dir=./<CR>', desc = '📁File Explorer in buffer dir' },
+        { '<C-w>f',     ':Neotree dir=~/',                desc = '📁File Explorer from HOME' },
+    },
+    branch = "v2.x",
+    opts = function()
+        return require('plugins.ui.neo-tree')
+    end
+}
 
 plugins:add {
     "folke/noice.nvim",
@@ -220,21 +218,6 @@ plugins:add {
 }
 
 
-
--- if true then
---     plugins:add {
---         'JuanZoran/specs.nvim',
---         dependencies = 'declancm/cinnamon.nvim',
---         config = function()
---             require('plugins.ui.smooth')
---         end
---     }
---     return plugins
--- end
-
-
--- local cond = false
--- if not cond then
 local map = {
     mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
@@ -255,7 +238,6 @@ end
 
 plugins:add {
     'JuanZoran/specs.nvim',
-    event = 'VeryLazy',
     keys = {
         { mode = { 'n', 'x' }, 'H', function()
             vim.defer_fn(require('specs').show_specs, 10)
@@ -324,12 +306,26 @@ plugins:add {
     },
 }
 
--- plugins:add {
---     "rebelot/kanagawa.nvim",
---     lazy = false,
---     config = function()
---         require 'plugins.ui.theme.kanagawa'
---     end,
---     priority = 1000,
--- }
+plugins:add {
+    'folke/tokyonight.nvim',
+    lazy = true,
+    opts = {
+        style = 'night',
+        transparent = false,
+        on_highlights = function(hl)
+            hl['@variable'] = {
+                fg = '#f4b085',
+            }
+
+            hl.Cursor = {
+                bg = '#58a6ff',
+            }
+        end
+    },
+    config = function(_, opts)
+        require('tokyonight').setup(opts)
+        vim.cmd.colorscheme('tokyonight')
+    end
+}
+
 return plugins
