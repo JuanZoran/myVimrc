@@ -107,7 +107,7 @@ plugins:add { -- 状态栏
 plugins:add { -- 文件树
     "nvim-tree/nvim-tree.lua",
     keys = {
-        { 'ww', '<Cmd>NvimTreeToggle<CR>', desc = ' 触发文件树' }
+        { '<C-w><C-w>', '<Cmd>NvimTreeToggle<CR>', desc = ' 触发文件树' }
     },
     config = function()
         require "plugins.ui.nvim_tree"
@@ -228,6 +228,28 @@ plugins:add {
         },
     }
 }
+
+if vim.env.TERM == 'xterm-kitty' then
+    plugins:add {
+        "giusgad/pets.nvim",
+        event = 'BufReadPre',
+        dependencies = "edluffy/hologram.nvim",
+        keys = {
+            {'<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets'}
+        },
+        opts = {
+            -- col = 10,
+            row = 5,
+            popup = {
+                avoid_statusline = true,
+            },
+        },
+        config = function (_, opts)
+            require("pets").setup(opts)
+            vim.cmd[[PetsNew cat]]
+        end,
+    }
+end
 
 
 plugins:add {
