@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local icon = require("util").icon
 local signs = {
     { name = "DiagnosticSignError", text = icon.Error },

@@ -122,36 +122,6 @@ plugins:add {
     },
 }
 
-
-
---- Toggleterm warpper
----@param cmd string Terminal command
-local toggle = function(cmd)
-    local term
-    return function()
-        if not term then
-            term = require('toggleterm.terminal').Terminal:new { cmd = cmd, hidden = true }
-        end
-        term:toggle()
-    end
-end
-plugins:add {
-    'akinsho/toggleterm.nvim',
-    keys = {
-        '<C-d>',
-        { '<C-g>', toggle('lazygit'), desc = 'Toggle Lazygit' },
-        { '<C-s>', toggle('ranger'),  desc = 'Toggle ranger' },
-    },
-    opts = {
-        open_mapping = '<C-d>',
-        autochdir = true,
-        direction = 'float', --[[ 'vertical' | 'horizontal' | 'tab' | 'float', ]]
-        float_opts = {
-            border = 'curved'
-        }
-    },
-}
-
 -- search/replace in multiple files
 plugins:add {
     "windwp/nvim-spectre",

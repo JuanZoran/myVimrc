@@ -241,7 +241,8 @@ plugins:add {
 if vim.env.TERM == 'xterm-kitty' then
     plugins:add {
         "giusgad/pets.nvim",
-        event = 'BufReadPre',
+        -- event = 'BufReadPre',
+        cond = false,
         dependencies = "edluffy/hologram.nvim",
         keys = {
             { '<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets' }

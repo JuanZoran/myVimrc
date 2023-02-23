@@ -34,20 +34,22 @@ local config = function()
     local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
     registry:on("package:uninstall:success", function(pkg)
         local native_name = package_to_lspconfig[pkg.name]
+        local process = function(select)
+            if select ~= 'Skip' then
+                local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath('config') .. '/lua/lsp/conf',
+                    native_name))
+                vim.notify(('%s configuration removed %s'):format(pkg.name,
+                    (res and 'successfully' or 'failed')))
+            else
+                vim.notify('Skip ...')
+            end
+        end
+
         if native_name then
             vim.ui.select(
                 { 'Remove your configuration for this Lsp', 'Skip', },
                 { prompt = 'Whether should remove the configuration ?', },
-                function(select)
-                    if select ~= 'Skip' then
-                        local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath('config') .. '/lua/lsp/conf',
-                            native_name))
-                        vim.notify(('%s configuration removed %s'):format(pkg.name,
-                            (res and 'successfully' or 'failed')))
-                    else
-                        vim.notify('Skip ...')
-                    end
-                end
+                process
             )
         end
     end)
