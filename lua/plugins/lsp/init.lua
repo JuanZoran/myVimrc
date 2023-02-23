@@ -2,7 +2,7 @@ local config = function()
     local handler = require("plugins.lsp.handlers")
     local opts = {
         on_attach = handler.on_attach,
-        capabilities = handler.capabilities,
+        capabilities = handler.get_capabilities(),
         handlers = handler.handlers
     }
 
@@ -53,7 +53,6 @@ local config = function()
     end)
 end
 
-
 return {
     "neovim/nvim-lspconfig", -- official lspconfig
     event = { 'BufReadPre', 'BufNewFile' },
@@ -98,6 +97,19 @@ return {
             "folke/neodev.nvim",
             opts = { library = { plugins = { 'nvim-dap-ui', }, types = true, } },
         },
+        {
+            'jose-elias-alvarez/null-ls.nvim',
+            config = function()
+                local nl = require("null-ls")
+                nl.setup {
+                    sources = {
+                        nl.builtins.formatting.prettier,
+                        nl.builtins.formatting.black,
+                        nl.builtins.formatting.beautysh
+                    },
+                }
+            end,
+        }
     },
     config = config,
 }

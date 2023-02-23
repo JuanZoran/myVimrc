@@ -87,22 +87,6 @@ plugins:add {
     },
 }
 
-
-plugins:add {
-    'jose-elias-alvarez/null-ls.nvim',
-    event = 'VeryLazy',
-    config = function()
-        local nl = require("null-ls")
-        nl.setup {
-            sources = {
-                nl.builtins.formatting.prettier,
-                nl.builtins.formatting.black,
-                nl.builtins.formatting.beautysh
-            },
-        }
-    end,
-}
-
 plugins:add {
     "ThePrimeagen/refactoring.nvim",
     keys = {

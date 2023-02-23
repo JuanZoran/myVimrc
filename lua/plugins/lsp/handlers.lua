@@ -75,10 +75,6 @@ local list = {
     end
 }
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.publishDiagnostics.codeActionsInline = true
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
 return {
     ---add attach function
     ---@param func function
@@ -90,5 +86,9 @@ return {
             process(client, bufnr)
         end
     end,
-    capabilities = capabilities,
+    get_capabilities = function()
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities.textDocument.publishDiagnostics.codeActionsInline = true
+        return require("cmp_nvim_lsp").default_capabilities(capabilities)
+    end,
 }
