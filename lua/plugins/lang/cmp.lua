@@ -21,25 +21,21 @@ local source = {
     { name = "buffer",   max_item_count = 3 },
 }
 
-local next = cmp.mapping {
-    i = function()
-        if cmp.visible() then
-            cmp.select_next_item()
-        else
-            cmp.mapping.complete()()
-        end
-    end,
-}
+local next = cmp.mapping(function()
+    if cmp.visible() then
+        cmp.select_next_item()
+    else
+        cmp.mapping.complete()()
+    end
+end, { 'i', 'c' })
 
-local prev = cmp.mapping {
-    i = function()
-        if cmp.visible() then
-            cmp.select_prev_item()
-        else
-            cmp.mapping.complete()()
-        end
-    end,
-}
+local prev = cmp.mapping(function()
+    if cmp.visible() then
+        cmp.select_prev_item()
+    else
+        cmp.mapping.complete()()
+    end
+end, { 'i', 'c' })
 
 cmp.setup {
     completion = {

@@ -64,12 +64,12 @@ set {
 }
 
 set {
-    mode = {'n', 't'},
+    mode = { 'n', 't' },
     map = {
-        { "<C-w>j",       "<Cmd>wincmd h<Cr>",    ' Jump Left' },
-        { "<C-w>l",       "<Cmd>wincmd l<Cr>",    ' Jump Right' },
-        { "<C-w>k",       "<Cmd>wincmd j<Cr>",    ' Jump Down' },
-        { "<C-w>i",       "<Cmd>wincmd k<Cr>",    ' Jump Up' },
+        { "<C-w>j", "<Cmd>wincmd h<Cr>", ' Jump Left' },
+        { "<C-w>l", "<Cmd>wincmd l<Cr>", ' Jump Right' },
+        { "<C-w>k", "<Cmd>wincmd j<Cr>", ' Jump Down' },
+        { "<C-w>i", "<Cmd>wincmd k<Cr>", ' Jump Up' },
     }
 }
 
@@ -86,10 +86,10 @@ set {
         { "<C-w><Right>", "<C-w>L",    ' Move Right' },
 
         -- INFO: resize
-        { "<C-Down>",          "<C-w>-" },
-        { "<C-Up>",            "<C-w>+" },
-        { "<C-Right>",         "<C-w>>" },
-        { "<C-Left>",          "<C-w><" },
+        { "<C-Down>",     "<C-w>-" },
+        { "<C-Up>",       "<C-w>+" },
+        { "<C-Right>",    "<C-w>>" },
+        { "<C-Left>",     "<C-w><" },
     }
 }
 
@@ -115,6 +115,14 @@ set {
     -- {"<++>", "<++>"},
 }
 
+-- set {
+--     mode = 'c',
+--     map = {
+--         { "<C-j>", "<Left>" },
+--         { "<C-l>", "<Right>" },
+--     }
+-- }
+
 
 set {
     mode = "x",
@@ -129,9 +137,4 @@ set {
     },
 }
 
-vim.keymap.set(
-    { "x", "o", "i" }, -- mode
-    "<C-s>",
-    "<Esc>",
-    { silent = true }
-)
+vim.keymap.set({ "x", "o", "i", "c" }, "<C-s>", "<Esc>")
