@@ -11,8 +11,8 @@ if vim.g.neovide then
     set {
         mode = { 'n', 'x', 'o' }, -- be appended to other operator
         map = {
-            { "i", "k" },
-            { "k", "j" },
+            { "i", "gk" },
+            { "k", "gj" },
             { "j", "h" },
             { "h", "i" },
             { 'L', '$' },
@@ -60,6 +60,9 @@ set {
         { "Z",                 'zf' },
         { "<leader>a",         "@",               'macro' },
         { "<C-CR>",            "/<++><CR>vf>c" },
+        { "<C-w>o",       ":vsp<CR>",          ' Split Window' },
+        { "<C-w>u",       ":sp<CR>",           ' Split Window Vertically' },
+        { "<C-w>n",       ":only<CR>",         ' Close Another Window' },
     }
 }
 
@@ -70,26 +73,17 @@ set {
         { "<C-w>l", "<Cmd>wincmd l<Cr>", ' Jump Right' },
         { "<C-w>k", "<Cmd>wincmd j<Cr>", ' Jump Down' },
         { "<C-w>i", "<Cmd>wincmd k<Cr>", ' Jump Up' },
-    }
-}
-
-set {
-    mode = 'n',
-    map = {
-        { "<C-w>o",       ":vsp<CR>",  ' Split Window' },
-        { "<C-w>u",       ":sp<CR>",   ' Split Window Vertically' },
-        { "<C-w>n",       ":only<CR>", ' Close Another Window' },
-        { "<C-w>=",       "<C-w>=",    '屢Resize Window' },
-        { "<C-w><Down>",  "<C-w>J",    ' Move Down' },
-        { "<C-w><Up>",    "<C-w>K",    ' Move Up' },
-        { "<C-w><Left>",  "<C-w>H",    ' Move Left' },
-        { "<C-w><Right>", "<C-w>L",    ' Move Right' },
-
         -- INFO: resize
-        { "<C-Down>",     "<C-w>-" },
-        { "<C-Up>",       "<C-w>+" },
-        { "<C-Right>",    "<C-w>>" },
-        { "<C-Left>",     "<C-w><" },
+        { "<C-Down>",     "<Cmd>wincmd -<CR>" },
+        { "<C-Up>",       "<Cmd>wincmd +<CR>" },
+        { "<C-Right>",    "<Cmd>wincmd ><CR>" },
+        { "<C-Left>",     "<Cmd>wincmd <<CR>" },
+
+        { "<C-w><Down>",  "<Cmd>wincmd J<CR>", ' Move Down' },
+        { "<C-w><Up>",    "<Cmd>wincmd K<CR>", ' Move Up' },
+        { "<C-w><Left>",  "<Cmd>wincmd H<CR>", ' Move Left' },
+        { "<C-w><Right>", "<Cmd>wincmd L<CR>", ' Move Right' },
+        { "<C-w>=",       "<Cmd>wincmd =<CR>", '屢Resize Window' },
     }
 }
 
