@@ -11,8 +11,7 @@ plugins:add {
         return {
             flavour = 'macchiato',
             transparent_background = true,
-            custom_highlights = require('plugins.ui.theme.override')
-            ,
+            custom_highlights = require('plugins.ui.theme.override'),
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -79,21 +78,25 @@ plugins:add {
         "CccPick",
         "CccConvert",
     },
-    ft = { 'css', 'html' },
+    ft = { 'css', 'html', },
     config = function(plugin)
         local ccc = require("ccc")
         local mapping = ccc.mapping
         ccc.setup {
-            highlighter = {
-                auto_enable = true,
-                filetypes = plugin.ft,
-            },
             mappings = {
                 j = mapping.decrease1,
                 h = mapping.toggle_input_mode,
                 i = 'k',
+                ['<C-q>'] = mapping.quit,
             }
         }
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = plugin.ft,
+            command = [[CccHighlighterEnable]],
+        })
+        -- if vim.tbl_contains(plugin.ft, vim.bo.filetype) then
+        --     vim.cmd [[CccHighlighterEnable]]
+        -- end
     end,
 }
 
@@ -143,12 +146,13 @@ plugins:add {
             end
         end
     end,
+    cmd = 'Neotree',
     keys = {
-        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',        desc = '📁Toggle File Explorer' },
-        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',       desc = '📁Neo-tree Buffers' },
-        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',    desc = '📁Neo-tree Git Status' },
-        { '<C-w>d',     '<Cmd>Neotree reveal dir=./<CR>', desc = '📁File Explorer in buffer dir' },
-        { '<C-w>f',     ':Neotree dir=~/',                desc = '📁File Explorer from HOME' },
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                         desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                        desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                     desc = '📁Neo-tree Git Status' },
+        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                          desc = '📁File Explorer from HOME' },
+        { '<C-w>d',     '<Cmd>Neotree reveal reveal_force_cwd toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
     },
     branch = "v2.x",
     opts = function()
@@ -264,27 +268,27 @@ plugins:add {
     }
 }
 
-if vim.env.TERM == 'xterm-kitty' then
-    plugins:add {
-        "giusgad/pets.nvim",
-        event = 'BufReadPre',
-        cond = false,
-        dependencies = "edluffy/hologram.nvim",
-        keys = {
-            { '<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets' }
-        },
-        opts = {
-            -- col = 10,
-            row = 5,
-            popup = {
-                avoid_statusline = true,
-            },
-        },
-        config = function(_, opts)
-            require("pets").setup(opts)
-            vim.cmd [[PetsNew cat]]
-        end,
-    }
-end
+-- if vim.env.TERM == 'xterm-kitty' then
+--     plugins:add {
+--         "giusgad/pets.nvim",
+--         event = 'BufReadPre',
+--         cond = true,
+--         dependencies = "giusgad/hologram.nvim",
+--         keys = {
+--             { '<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets' }
+--         },
+--         opts = {
+--             -- col = 10,
+--             row = 5,
+--             popup = {
+--                 avoid_statusline = true,
+--             },
+--         },
+--         config = function(_, opts)
+--             require("pets").setup(opts)
+--             vim.cmd [[PetsNew cat]]
+--         end,
+--     }
+-- end
 
 return plugins

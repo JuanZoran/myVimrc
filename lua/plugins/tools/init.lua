@@ -161,7 +161,7 @@ plugins:add {
     "windwp/nvim-autopairs",
     event = 'InsertEnter',
     opts = {
-        -- check_ts = true,
+        check_ts = true,
         enable_abbr = true,
         fast_wrap = {
             map = "<C-r>",
@@ -285,5 +285,6 @@ plugins:add {
         }
     },
 }
+
 
 return plugins

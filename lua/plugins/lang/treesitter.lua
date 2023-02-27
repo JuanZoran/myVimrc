@@ -38,8 +38,7 @@ require("nvim-treesitter.configs").setup {
         enable = true,
     },
     textobjects = require("plugins.lang.textobjects"),
-
     endwise = {
         enable = true,
-    }
+    },
 }

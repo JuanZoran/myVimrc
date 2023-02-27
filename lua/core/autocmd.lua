@@ -33,7 +33,7 @@ autocmd("TextYankPost", {
 })
 
 -- resize splits if window got resized
-autocmd({ "VimResized" }, {
+autocmd("VimResized", {
     callback = function()
         vim.cmd("tabdo wincmd =")
     end,

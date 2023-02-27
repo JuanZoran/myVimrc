@@ -32,6 +32,17 @@ plugins:add {
     end,
 }
 
+plugins:add {
+    "windwp/nvim-ts-autotag",
+    config = true,
+    ft = { 'html', 'css' },
+    dependencies = {
+        'ray-x/web-tools.nvim',
+        config = true,
+    }
+}
+
+
 
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
@@ -39,7 +50,7 @@ plugins:add {
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        "mrjones2014/nvim-ts-rainbow",
+        'HiPhish/nvim-ts-rainbow2',
         "RRethy/nvim-treesitter-endwise",
         {
             "lukas-reineke/indent-blankline.nvim",
@@ -114,9 +125,9 @@ plugins:add {
         local types = require "luasnip.util.types"
         ls.config.set_config {
             history = true,
-            updateevents = "TextChanged,TextChangedI",
-            region_check_events = "CursorHold,InsertLeave",
-            delete_check_events = "TextChanged,InsertEnter",
+            updateevents = { "TextChanged", "TextChangedI" },
+            region_check_events = { "CursorHold", "InsertLeave" },
+            delete_check_events = { "TextChanged", "InsertEnter" },
             -- enable_autosnippets = true,
             -- store_selection_keys = "<C-q>",
             ext_opts = {
@@ -136,9 +147,7 @@ plugins:add {
         require("luasnip.loaders.from_lua").lazy_load { paths = snippets_folder }
         vim.keymap.set('n', '<leader><cr>', require "luasnip.loaders.from_lua".edit_snippet_files)
     end,
-    dependencies = {
-        "rafamadriz/friendly-snippets",
-    }
+    dependencies = "rafamadriz/friendly-snippets",
 }
 
 plugins:add {
