@@ -76,7 +76,7 @@ dashboard.section.buttons.val = {
     dashboard.button("r", "🥂  > Recent File", ":Telescope oldfiles<CR>"),
     dashboard.button("<CR>", "💻  > Load Session", '<Cmd>SessionLoad<CR>'),
     dashboard.button("s", "💻  > Load Session Last", '<Cmd>SessionLoadLast<CR>'),
-    dashboard.button("u", "鈴  > LazyVim Update", '<Cmd>Lazy update<CR>'),
+    dashboard.button("u", "鈴  > Lazy Update", '<Cmd>Lazy update<CR>'),
     dashboard.button("q", "🏓  > Quit", ":qa<CR>"),
     -- dashboard.button("a", "🌆  > Into Ranger", "<cmd>FloatermNew ranger<CR>"),
 }

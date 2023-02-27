@@ -103,6 +103,7 @@ plugins:add {
 plugins:add {
     "L3mon4d3/luasnip",
     lazy = true,
+    -- build = "make install_jsregexp",
     keys = {
         { mode = 'x', '<C-q>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
         { mode = 'i', '<C-q>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },

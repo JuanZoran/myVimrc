@@ -1,36 +1,32 @@
----@diagnostic disable: undefined-global
-local icon = require("util").icon
-local signs = {
-    { name = "DiagnosticSignError", text = icon.Error },
-    { name = "DiagnosticSignWarn",  text = icon.Warn },
-    { name = "DiagnosticSignHint",  text = icon.Hint },
-    { name = "DiagnosticSignInfo",  text = icon.Info },
-}
-local def = vim.fn.sign_define
-for _, sign in ipairs(signs) do
-    def(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
+-- ---@diagnostic disable: undefined-global
+-- local icon = require("util").icon
+-- local signs = {
+--     { name = "DiagnosticSignError", text = icon.Error },
+--     { name = "DiagnosticSignWarn",  text = icon.Warn },
+--     { name = "DiagnosticSignHint",  text = icon.Hint },
+--     { name = "DiagnosticSignInfo",  text = icon.Info },
+-- }
+-- local def = vim.fn.sign_define
+-- for _, sign in ipairs(signs) do
+--     def(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+-- end
 
 vim.diagnostic.config {
-    -- virtual_text = true, --- enable for diagnostic information
-    virtual_text = { source = "always", prefix = icon.VirtualText },
-    -- show signs
-    signs = {
-        active = signs,
-    },
     update_in_insert = true,
-    underline = false,
     severity_sort = true,
     float = {
-        focusable = false,
-        style     = "minimal",
-        border    = "rounded",
-        source    = "always ",
-        header    = "",
-        prefix    = "🔔",
+        style  = "minimal",
+        border = "rounded",
     },
+    virtual_text = {
+        source = "always",
+        prefix = ' ',
+    },
+    -- signs = {
+    --     active = signs,
+    -- },
+    -- underline = true,
 }
-
 local list = {
     function(_, bufnr)
         -- NOTE Keymap

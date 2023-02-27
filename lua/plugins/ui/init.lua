@@ -51,7 +51,7 @@ plugins:add {
 
 plugins:add {
     "rebelot/kanagawa.nvim",
-    lazy = true,
+    cond = false,
     config = function()
         require 'plugins.ui.theme.kanagawa'
     end,
@@ -73,9 +73,35 @@ plugins:add {
 }
 
 plugins:add {
-    "norcalli/nvim-colorizer.lua",
-    cmd = "ColorizerToggle",
+    "uga-rosa/ccc.nvim",
+    cmd = {
+        'CccHighlighterToggle',
+        "CccPick",
+        "CccConvert",
+    },
+    ft = { 'css', 'html' },
+    config = function(plugin)
+        local ccc = require("ccc")
+        local mapping = ccc.mapping
+        ccc.setup {
+            highlighter = {
+                auto_enable = true,
+                filetypes = plugin.ft,
+            },
+            mappings = {
+                j = mapping.decrease1,
+                h = mapping.toggle_input_mode,
+                i = 'k',
+            }
+        }
+    end,
+}
+
+
+plugins:add {
+    'beauwilliams/focus.nvim',
     config = true,
+    event = 'WinNew'
 }
 
 plugins:add { -- 状态栏
@@ -242,7 +268,7 @@ if vim.env.TERM == 'xterm-kitty' then
     plugins:add {
         "giusgad/pets.nvim",
         event = 'BufReadPre',
-        cond = true,
+        cond = false,
         dependencies = "edluffy/hologram.nvim",
         keys = {
             { '<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets' }

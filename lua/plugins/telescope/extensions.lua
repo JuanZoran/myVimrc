@@ -47,7 +47,7 @@ plugins:add {
 plugins:add {
     'nvim-telescope/telescope-symbols.nvim',
     keys = {
-        { '<leader>tm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' }
+        { '<leader>mm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' }
     },
 }
 

@@ -254,7 +254,9 @@ plugins:add {
 
 plugins:add {
     "folke/zen-mode.nvim",
-    keys = { '<leader><leader>h', '<Cmd>ZenMode<CR>' },
+    keys = {
+        { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' }
+    },
     dependencies = {
         "folke/twilight.nvim",
         opts = { context = 20 },
