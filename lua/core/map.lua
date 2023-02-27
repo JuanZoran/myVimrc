@@ -11,25 +11,11 @@ set {
     mode = 'n',
     map = {
         { 'U',                 'Vp', },
-        { "<C-w>o",            ":vsp<CR>",        ' Split Window' },
-        { "<C-w>u",            ":sp<CR>",         ' Split Window Vertically' },
-        { "<C-w>j",            "<C-w>h",          ' Jump Left' },
-        { "<C-w>l",            "<C-w>l",          ' Jump Right' },
-        { "<C-w>k",            "<C-w>j",          ' Jump Down' },
-        { "<C-w>i",            "<C-w>k",          ' Jump Up' },
-        { "<C-w>n",            ":only<CR>",       ' Close Another Window' },
-        { "<C-w>=",            "<C-w>=",          '屢Resize Window' },
-        { "<C-w><Down>",       "<C-w>J",          ' Move Down' },
-        { "<C-w><Up>",         "<C-w>K",          ' Move Up' },
-        { "<C-w><Left>",       "<C-w>H",          ' Move Left' },
-        { "<C-w><Right>",      "<C-w>L",          ' Move Right' },
-
         -- INFO : command
         { "<Leader>w",         ":w<CR>",          ' Save Current Window' },
         { "<Leader><leader>w", ":wqa<CR>",        ' close all window' },
         { "qw",                ":close<CR>" },
         { "qd",                ":bdelete!<CR>" },
-
         { "<S-CR>",            "J", },
         { "<C-q>",             '<Cmd>q!<CR>' },
         { "<Leader>p",         "<Cmd>Lazy<CR>",   '痢[Sync | Install] Plugin' },
@@ -55,15 +41,33 @@ set {
         { "d;",                [[di']] },
         { "v;",                [[vi']] },
 
-        -- INFO: resize
-        { "<C-Down>",          "<C-w>-" },
-        { "<C-Up>",            "<C-w>+" },
-        { "<C-Right>",         "<C-w>>" },
-        { "<C-Left>",          "<C-w><" },
         { "Z",                 'zf' },
-
         { "<leader>a",         "@",               'macro' },
         { "<C-CR>",            "/<++><CR>vf>c" },
+        { "<C-w>o",            ":vsp<CR>",        ' Split Window' },
+        { "<C-w>u",            ":sp<CR>",         ' Split Window Vertically' },
+        { "<C-w>n",            ":only<CR>",       ' Close Another Window' },
+    }
+}
+
+set {
+    mode = { 'n', 't' },
+    map = {
+        { "<C-w>j", "<Cmd>wincmd h<Cr>", ' Jump Left' },
+        { "<C-w>l", "<Cmd>wincmd l<Cr>", ' Jump Right' },
+        { "<C-w>k", "<Cmd>wincmd j<Cr>", ' Jump Down' },
+        { "<C-w>i", "<Cmd>wincmd k<Cr>", ' Jump Up' },
+        -- INFO: resize
+        { "<C-Down>",     "<Cmd>wincmd -<CR>" },
+        { "<C-Up>",       "<Cmd>wincmd +<CR>" },
+        { "<C-Right>",    "<Cmd>wincmd ><CR>" },
+        { "<C-Left>",     "<Cmd>wincmd <<CR>" },
+
+        { "<C-w><Down>",  "<Cmd>wincmd J<CR>", ' Move Down' },
+        { "<C-w><Up>",    "<Cmd>wincmd K<CR>", ' Move Up' },
+        { "<C-w><Left>",  "<Cmd>wincmd H<CR>", ' Move Left' },
+        { "<C-w><Right>", "<Cmd>wincmd L<CR>", ' Move Right' },
+        { "<C-w>=",       "<Cmd>wincmd =<CR>", '屢Resize Window' },
     }
 }
 
@@ -90,6 +94,15 @@ set {
     -- {"<++>", "<++>"},
 }
 
+
+-- set {
+--     mode = 'c',
+--     map = {
+--         { "<C-j>",  "<Left>" },
+--         { "<C-l>",  "<Right>" },
+--     }
+-- }
+
 set {
     mode = "x",
     map = {
@@ -103,9 +116,5 @@ set {
     },
 }
 
-vim.keymap.set(
-    { "x", "o", "i" }, -- mode
-    "<C-s>",
-    "<Esc>",
-    { silent = true }
-)
+
+vim.keymap.set({ "x", "o", "i", "c" }, "<C-s>", "<Esc>")

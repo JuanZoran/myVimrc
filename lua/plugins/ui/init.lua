@@ -50,12 +50,35 @@ plugins:add {
     priority = 1000,
 }
 
-
+plugins:add {
+    'beauwilliams/focus.nvim',
+    config = true,
+    event = 'WinNew'
+}
 
 plugins:add {
-    "norcalli/nvim-colorizer.lua",
-    cmd = "ColorizerToggle",
-    config = true,
+    "uga-rosa/ccc.nvim",
+    cmd = {
+        'CccHighlighterToggle',
+        "CccPick",
+        "CccConvert",
+    },
+    ft = { 'css', 'html' },
+    config = function(plugin)
+        local ccc = require("ccc")
+        local mapping = ccc.mapping
+        ccc.setup {
+            mappings = {
+                j = mapping.decrease1,
+                h = mapping.toggle_input_mode,
+                i = 'k',
+            }
+        }
+        vim.api.nvim_create_autocmd('Filetype', {
+            pattern = plugin.ft,
+            command = 'CccHighlighterEnable',
+        })
+    end,
 }
 
 plugins:add { -- 标签栏
@@ -285,6 +308,8 @@ plugins:add {
     end,
 }
 
+
+
 plugins:add {
     'gen740/SmoothCursor.nvim',
     name = 'smoothcursor',
@@ -305,6 +330,18 @@ plugins:add {
         },
     },
 }
+
+-- plugins:add {
+--     'declancm/cinnamon.nvim',
+--     event = 'VeryLazy',
+--     config = function()
+--         require 'plugins.ui.smooth'
+--     end,
+--     dependencies = {
+--         'gen740/SmoothCursor.nvim',
+--         'edluffy/specs.nvim',
+--     },
+-- }
 
 plugins:add {
     'folke/tokyonight.nvim',

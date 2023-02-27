@@ -63,21 +63,6 @@ plugins:add {
     },
 }
 
-plugins:add {
-    'jose-elias-alvarez/null-ls.nvim',
-    event = 'VeryLazy',
-    config = function()
-        local nl = require("null-ls")
-        nl.setup {
-            sources = {
-                nl.builtins.formatting.prettier,
-                nl.builtins.formatting.beautysh,
-                nl.builtins.formatting.black,
-            },
-        }
-    end,
-}
-
 
 plugins:add {
     "L3mon4d3/luasnip",
@@ -92,9 +77,9 @@ plugins:add {
         local types = require "luasnip.util.types"
         ls.config.set_config {
             history = true,
-            updateevents = "TextChanged,TextChangedI",
-            region_check_events = "CursorHold,InsertLeave",
-            delete_check_events = "TextChanged,InsertEnter",
+            updateevents = { "TextChanged", "TextChangedI" },
+            region_check_events = { "CursorHold", "InsertLeave" },
+            delete_check_events = { "TextChanged", "InsertEnter" },
             -- enable_autosnippets = true,
             -- store_selection_keys = "<C-q>",
             ext_opts = {

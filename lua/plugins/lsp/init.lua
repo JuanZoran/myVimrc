@@ -2,7 +2,7 @@ local config = function()
     local handler = require("plugins.lsp.handlers")
     local opts = {
         on_attach = handler.on_attach,
-        capabilities = handler.capabilities,
+        capabilities = handler.get_capabilities(),
         handlers = handler.handlers
     }
 
@@ -80,6 +80,19 @@ return {
         {
             "folke/neodev.nvim",
             opts = { library = { plugins = false, types = true, } },
+        },
+        {
+            'jose-elias-alvarez/null-ls.nvim',
+            config = function()
+                local nl = require("null-ls")
+                nl.setup {
+                    sources = {
+                        nl.builtins.formatting.prettier,
+                        nl.builtins.formatting.beautysh,
+                        nl.builtins.formatting.black,
+                    },
+                }
+            end,
         },
     },
     config = config

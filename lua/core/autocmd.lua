@@ -1,20 +1,28 @@
 local api = vim.api
+local autocmd = api.nvim_create_autocmd
 
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
-api.nvim_create_autocmd('BufRead', {
+autocmd('BufRead', {
     group = group,
     command = [[silent! loadview]]
 })
 
-api.nvim_create_autocmd({ 'BufWrite', 'QuitPre' }, {
+-- set tabstop size for markdown and html file
+autocmd("FileType", {
+    group = group,
+    pattern = { "markdown", "html" },
+    command = [[setlocal tabstop=2 shiftwidth=2]],
+})
+
+autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     command = [[silent! mkview]]
 })
 
 -- Don't auto comment when o
-api.nvim_create_autocmd("FileType", { command = [[set formatoptions-=cro]] })
+autocmd("FileType", { command = [[set formatoptions-=cro]] })
 
-api.nvim_create_autocmd("TextYankPost", {
+autocmd("TextYankPost", {
     group = group,
     callback = function()
         vim.highlight.on_yank {
@@ -25,14 +33,15 @@ api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- resize splits if window got resized
-api.nvim_create_autocmd({ "VimResized" }, {
+autocmd({ "VimResized" }, {
     callback = function()
         vim.cmd("tabdo wincmd =")
     end,
 })
 
+
 -- NOTE  Snip Utility
-api.nvim_create_autocmd("BufEnter", {
+autocmd("BufEnter", {
     group = group,
     pattern = "*/snips/*.lua",
     callback = function()
@@ -40,10 +49,11 @@ api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
--- INFO 中文输入法切换的问题
+
+-- INFO Fix Input Method Switch
 if vim.fn.executable('fcitx5-remote') == 1 then
     local state = ''
-    api.nvim_create_autocmd('InsertLeave', {
+    autocmd('InsertLeave', {
         group = group,
         pattern = '*',
         callback = function()
@@ -52,7 +62,7 @@ if vim.fn.executable('fcitx5-remote') == 1 then
         end,
     })
 
-    api.nvim_create_autocmd('InsertEnter', {
+    autocmd('InsertEnter', {
         group = group,
         pattern = '*',
         callback = function()
@@ -64,9 +74,9 @@ if vim.fn.executable('fcitx5-remote') == 1 then
 end
 
 
--- INFO : store Position
--- go to last loc when opening a buffer
--- api.nvim_create_autocmd("BufReadPost", {
+-- -- go to last loc when opening a buffer
+-- autocmd("BufReadPost", {
+--   group = augroup("last_loc"),
 --   callback = function()
 --     local mark = vim.api.nvim_buf_get_mark(0, '"')
 --     local lcount = vim.api.nvim_buf_line_count(0)
@@ -75,7 +85,6 @@ end
 --     end
 --   end,
 -- })
-
 
 -- -- 设置firenvim的大小
 -- vim.cmd [[
@@ -86,3 +95,4 @@ end
 -- endfunction
 -- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 -- ]]
+-- Don't auto comment when o

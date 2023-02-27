@@ -2,7 +2,7 @@ local plugins = require("util.plugin")()
 
 plugins:add {
     "folke/todo-comments.nvim",
-    event = 'VeryLazy',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
@@ -75,7 +75,6 @@ plugins:add {
     }
 }
 
-
 plugins:add {
     'dhruvasagar/vim-table-mode',
     keys = {
@@ -101,34 +100,6 @@ plugins:add {
     'CKolkey/ts-node-action',
     keys = {
         { "<leader>u", function() require("ts-node-action").node_action() end, desc = "🌀Trigger Node Action", }
-    },
-}
-
---- Toggleterm warpper
----@param cmd string Terminal command
-local toggle = function(cmd)
-    local term
-    return function()
-        if not term then
-            term = require('toggleterm.terminal').Terminal:new { cmd = cmd, hidden = true }
-        end
-        term:toggle()
-    end
-end
-plugins:add {
-    'akinsho/toggleterm.nvim',
-    keys = {
-        '<C-d>',
-        { '<C-g>', toggle('lazygit'), desc = 'Toggle Lazygit' },
-        -- { '<C-s>', toggle('nnn'), desc = 'Toggle ranger' },
-    },
-    opts = {
-        open_mapping = '<C-d>',
-        autochdir = true,
-        direction = 'float', --[[ 'vertical' | 'horizontal' | 'tab' | 'float', ]]
-        float_opts = {
-            border = 'curved'
-        }
     },
 }
 
@@ -170,7 +141,7 @@ plugins:add {
     "windwp/nvim-autopairs",
     event = 'InsertEnter',
     opts = {
-        -- check_ts = true,
+        check_ts = true,
         enable_abbr = true,
         fast_wrap = {
             map = "<C-r>",
@@ -206,7 +177,7 @@ plugins:add {
 
 plugins:add {
     "lewis6991/gitsigns.nvim",
-    event = 'VeryLazy',
+    event = { 'BufReadPre', 'BufNewFile' },
     keys = {
         { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
         { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },
@@ -261,42 +232,33 @@ plugins:add {
 }
 
 
--- plugins:add {
---     "olimorris/persisted.nvim",
---     -- cmd = 'SessionLoad',
---     event = 'VimEnter',
---     keys = {
---         { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
---     },
---     config = function()
---         require("telescope").load_extension("persisted") -- To load the telescope extension
---         require("persisted").setup {
---             use_git_branch = true, -- create session files based on the branch of the git enabled repository
---             should_autosave = function()
---                 -- do not autosave if the alpha dashboard is the current filetype
---                 return vim.bo.filetype ~= 'alpha'
---             end,
---             on_autoload_no_session = function()
---                 print('Session Not Exist')
---             end,
---             autosave = true, -- automatically save session files when exiting Neovim
---             -- save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
---             -- command = "VimLeavePre", -- the autocommand for which the session is saved
---             -- silent = false, -- silent nvim message when sourcing session file
---             -- should_autosave = nil, -- function to determine if a session should be autosaved
---             -- autoload = false, -- automatically load the session for the cwd on Neovim startup
---             -- follow_cwd = true, -- change session file name to match current working directory if it changes
---             -- allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
---             -- ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
---             -- before_save = nil, -- function to run before the session is saved to disk
---             -- after_save = nil, -- function to run after the session is saved to disk
---             -- after_source = nil, -- function to run after the session is sourced
---             -- telescope = { -- options for the telescope extension
---             --     before_source = nil, -- function to run before the session is sourced via telescope
---             --     after_source = nil, -- function to run after the session is sourced via telescope
---             --     reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
---             -- },
---         }
---     end
--- }
+plugins:add {
+    "olimorris/persisted.nvim",
+    cmd = { 'SessionLoad', 'SessionLoadLast' },
+    keys = {
+        { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
+    },
+    opts = {
+        use_git_branch = true, -- create session files based on the branch of the git enabled repository
+        should_autosave = function()
+            -- do not autosave if the alpha dashboard is the current filetype
+            return vim.bo.filetype ~= 'alpha'
+        end,
+        on_autoload_no_session = function()
+            print('Session Not Exist')
+        end,
+        autosave = false, -- automatically save session files when exiting Neovim
+    },
+    init = function()
+        vim.api.nvim_create_autocmd('VimLeavePre', {
+            callback = function()
+                require('persisted').save()
+            end,
+        })
+    end,
+    config = function(_, opts)
+        require("telescope").load_extension("persisted") -- To load the telescope extension
+        require("persisted").setup(opts)
+    end,
+}
 return plugins

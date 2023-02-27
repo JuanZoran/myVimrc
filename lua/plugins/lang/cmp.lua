@@ -13,16 +13,34 @@ local view = {
 }
 
 local source = {
-    -- { name = "copilot", },
     { name = "nvim_lsp", max_item_count = 3 },
     { name = "path" },
     { name = "luasnip",  max_item_count = 3 },
+    -- { name = "copilot", },
     -- { name = "codeium" },
     { name = "buffer",   max_item_count = 3 },
 }
 
+local next = cmp.mapping(function()
+    if cmp.visible() then
+        cmp.select_next_item()
+    else
+        cmp.mapping.complete()()
+    end
+end, { 'i', 'c' })
+
+local prev = cmp.mapping(function()
+    if cmp.visible() then
+        cmp.select_prev_item()
+    else
+        cmp.mapping.complete()()
+    end
+end, { 'i', 'c' })
 
 cmp.setup {
+    completion = {
+        completeopt = "menu,menuone,noselect",
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -32,17 +50,17 @@ cmp.setup {
         ghost_text = false,
     },
     mapping = {
-        ["<C-d>"] = cmp.mapping(function()
-            if not require("noice.lsp").scroll(4) then
-                cmp.mapping.scroll_docs(1)
+        ["<C-d>"] = cmp.mapping(function(fallback)
+            if not require("noice.lsp").scroll(4) and not cmp.scroll_docs(4) then
+                fallback()
             end
-        end, { 'i', 's' }),
+        end, { 'i', 'c' }),
 
-        ["<C-u>"] = cmp.mapping(function()
-            if not require("noice.lsp").scroll(-4) then
-                cmp.mapping.scroll_docs(-1)
+        ["<C-u>"] = cmp.mapping(function(fallback)
+            if not require("noice.lsp").scroll( -4) and not cmp.scroll_docs( -4) then
+                fallback()
             end
-        end, { 'i', 's' }),
+        end, { 'i', 'c' }),
         ["<C-Space>"] = cmp.mapping {
             i = function()
                 if luasnip.choice_active() then
@@ -67,27 +85,24 @@ cmp.setup {
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<C-o>"] = cmp.mapping.confirm({ select = true }),
         ["<C-e>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(1) then
-                luasnip.jump(1)
+            if luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
         end, { "i", "s" }),
+
         ["<Tab>"] = cmp.mapping(function(fallback)
             if copilot.is_visible() then
                 copilot.accept()
+            elseif cmp.visible() then
+                cmp.select_next_item()
             else
                 fallback()
             end
         end, { "i", "s" }),
-        ["<C-p>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        ["<C-k>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "!" }),
+        ["<C-p>"] = prev,
+        ["<C-k>"] = next,
     },
 
     formatting = {
