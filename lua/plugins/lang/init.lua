@@ -105,6 +105,7 @@ plugins:add {
 plugins:add {
     "hrsh7th/nvim-cmp",
     event = { 'InsertEnter', 'CmdlineEnter' },
+    version = false,
     dependencies = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
