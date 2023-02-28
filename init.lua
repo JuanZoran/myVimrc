@@ -21,12 +21,15 @@ local install = M.commands.install
 install.key = 'Y'
 install.key_plugin = 'y'
 
-require("lazy").setup('plugins', {
+require("lazy").setup({
+    { import = 'plugins' },
+    { import = 'plugins.telescope.extensions' },
+}, {
     default = {
         lazy = true,
     },
     install = {
-        colorscheme = { 'catppuccin',"kanagawa", 'habamax' },
+        colorscheme = { 'catppuccin', "kanagawa", 'habamax' },
     },
     ui = {
         size = { width = 0.85, height = 0.85 },

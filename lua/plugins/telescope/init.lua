@@ -1,5 +1,3 @@
-local plugins = require('plugins.telescope.extensions')
-
 local keys = {
     { "<leader>th", '<Cmd>Telescope help_tags <CR>',                                                desc = ' Check out all tags' },
     { "<leader>tH", '<Cmd>Telescope highlights <CR>',                                               desc = '[] Check out all highlights' },
@@ -114,8 +112,7 @@ local config = function()
     telescope.load_extension("fzf")
 end
 
-
-plugins:add {
+return {
     "nvim-telescope/telescope.nvim",
     cmd = 'Telescope',
     dependencies = {
@@ -127,5 +124,3 @@ plugins:add {
     version = false,
     config = config,
 }
-
-return plugins
