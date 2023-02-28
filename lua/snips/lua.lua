@@ -44,7 +44,7 @@ local snips = {
                 }
             )
             ),
-        ]]   ,
+        ]],
             {
                 i(1, "trig"), -- 1
                 rep(1), -- 2
@@ -59,20 +59,20 @@ local snips = {
                 i(3, "body here"), -- 6
                 i(4, "args"), -- 7
             }
-            -- ,{
-            --     trim_empty = false,
-            -- }
+        -- ,{
+        --     trim_empty = false,
+        -- }
         )
     ),
     s(
-        "creturn",
+        "return",
         fmt('---@return {} {}', {
             i(1, "type"),
             i(2, "message"),
         })
     ),
     s(
-        "rq",
+        "require",
         fmt('local {} = require("{}")', {
             l(l._1:match("[^./]*$"), 1),
             i(1, "module"),
@@ -80,7 +80,7 @@ local snips = {
     ),
 
     s(
-        "lc",
+        "local",
         fmt('local {} = {}', {
             l(l._1:match("[^.]*$"), 1),
             i(1, "name"),
@@ -112,10 +112,7 @@ local snips = {
             i(2, "type"),
         })
     ),
-    -- TODO config with this
-    -- s("auto-", fmt([[s("{}", {})]], {i(1, 'trigger'), i(2, "")} ))
 }
-
 
 -- End Snippets --
 return snips
