@@ -11,20 +11,12 @@ local filetypes = {
 
 local snips = {}
 
-for _, value in pairs(filetypes) do
-    local codesnip = s(
-        value,
-        fmt(
-            string.format(
-[[```%s
-	{}
-```]]            ,
-                value),
-            { i(1, "") }
-        )
-    )
-
-    table.insert(snips, codesnip)
+for index, value in ipairs(filetypes) do
+    snips[index] = s(value, fmt(([[
+    ```%s
+    {}
+    ```
+    ]]):format(value), i(1)))
 end
 
 -- table.insert(MD, s(

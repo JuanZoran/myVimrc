@@ -71,6 +71,7 @@ plugins:add {
         { mode = 'x', '<C-q>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
         { mode = 'i', '<C-q>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
+    build = 'make install_jsregexp',
     config = function()
         local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"
         local ls = require "luasnip"

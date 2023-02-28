@@ -25,6 +25,7 @@ return {
 
         -- 补全头文件的形式
         "--header-insertion=iwyu", -- include what you use
+        '--offset-encoding=utf-16',
 
         -- 启用这项时，补全函数时，将会给参数提供占位符，键入后按 Tab 可以切换到下一占位符
         "--function-arg-placeholders=true",

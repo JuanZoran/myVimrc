@@ -73,7 +73,21 @@ opt.iskeyword:append('-') -- 将word-word视为一个word, 方便daw
 local g = vim.g
 g.did_install_default_menus = 1
 g.did_install_syntax_menu = 1
--- g.clipboard = 'termux'
+
+-- -- use termux clipboard
+-- g.clipboard = {
+--   name = "termux",
+--   copy = {
+--     ["+"] = "termux-clipboard-set",
+--     ["*"] = "termux-clipboard-set",
+--   },
+--   paste = {
+--     ["+"] = "termux-clipboard-get",
+--     ["*"] = "termux-clipboard-get",
+--   },
+--   cache_enabled = 0,
+-- }
+
 ----============  disable end  ===========-------
 
 

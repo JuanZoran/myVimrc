@@ -72,7 +72,7 @@ local snips = {
         })
     ),
     s(
-        "rq",
+        "require",
         fmt('local {} = require("{}")', {
             l(l._1:match("[^./]*$"), 1),
             i(1, "module"),
@@ -80,7 +80,7 @@ local snips = {
     ),
 
     s(
-        "lc",
+        "local",
         fmt('local {} = {}', {
             l(l._1:match("[^.]*$"), 1),
             i(1, "name"),
@@ -98,7 +98,7 @@ local snips = {
     parse("parse", [[parse("${1:trig}", "$2")]]),
     s("formatEnable", { t("---@format enable") }),
     s("formatDisable", { t("---@format disable") }),
-    s("nodis", { t("---@nodiscard") }),
+    s("nodiscard", { t("---@nodiscard") }),
     s(
         "class",
         fmt('---@class {}', {

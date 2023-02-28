@@ -41,10 +41,8 @@ local bash_command = {
 }
 
 
-for _, v in ipairs(bash_command) do
-    -- s({ trig = "pwd" }, { f(bash, {}) }),
-    -- table.insert(snips, s({ trig = v }, { f(bash) }))
-    table.insert(snips, s(v, { f(bash) }))
+for i, v in ipairs(bash_command) do
+    snips[i] = s(v, { f(bash) })
 end
 
 

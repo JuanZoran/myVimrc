@@ -38,9 +38,6 @@ local prev = cmp.mapping(function()
 end, { 'i', 'c' })
 
 cmp.setup {
-    completion = {
-        completeopt = "menu,menuone,noselect",
-    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
