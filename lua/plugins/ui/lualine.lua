@@ -110,7 +110,7 @@ require("lualine").setup({
         lualine_a = {
             {
                 function()
-                    return '盛' .. os.date('%A %H:%M')
+                    return ' 盛  ' .. os.date('%A %H:%M')
                 end,
                 color = {
                     fg = '#000000', bg = '#10B981'

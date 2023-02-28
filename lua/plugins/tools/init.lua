@@ -121,8 +121,8 @@ plugins:add {
 plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
     "numtostr/Comment.nvim",
     keys = {
-        { 'gc', mode = { 'n', 'x' } },
-        '<leader>A',
+        { 'gc',        mode = { 'n', 'x' } },
+        { '<leader>A', desc = 'Add Comment at end of line' },
     },
     opts = {
         ignore = '^$',
@@ -191,7 +191,9 @@ plugins:add {
 
 plugins:add {
     "folke/zen-mode.nvim",
-    keys = { '<leader><leader>h', '<Cmd>ZenMode<CR>' },
+    keys = {
+        { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' }
+    },
     dependencies = {
         "folke/twilight.nvim",
         opts = { context = 20 },

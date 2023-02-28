@@ -18,8 +18,6 @@ local keys = {
     { "<C-u>",      '<Cmd>Telescope oldfiles<Cr>' },
     { "<C-o>",      '<Cmd>Telescope jumplist<Cr>' },
     { "<C-f>",      '<Cmd>Telescope find_files<CR>', },
-    { "<C-/>",      '<leader>tc' }, -- for C-/
-    { "<S-C-/>",    '<leader>tk',                                                                   remap = true }, -- for C-/
 }
 
 
@@ -59,35 +57,32 @@ local config = function()
                 },
 
                 n = {
-                    ["<C-s>"] = actions.close,
-                    ["<CR>"] = actions.select_default,
-                    ["<C-x>"] = actions.select_horizontal,
-                    ["<C-v>"] = actions.select_vertical,
-                    ["<C-t>"] = actions.select_tab,
+                    ["<C-s>"]   = actions.close,
+                    ["<CR>"]    = actions.select_default,
+                    ["<C-x>"]   = actions.select_horizontal,
+                    ["<C-v>"]   = actions.select_vertical,
+                    ["<C-t>"]   = actions.select_tab,
 
-                    ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                    ["<Tab>"]   = actions.toggle_selection + actions.move_selection_worse,
                     ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                    ["<C-q>"] = actions.close,
-                    ["<C-o>"] = actions.send_to_qflist + actions.open_qflist,
-                    ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                    ["<C-q>"]   = actions.close,
+                    ["<C-o>"]   = actions.send_to_qflist + actions.open_qflist,
+                    ["<M-q>"]   = actions.send_selected_to_qflist + actions.open_qflist,
 
-                    ["k"] = actions.move_selection_next,
-                    ["i"] = actions.move_selection_previous,
-                    ["I"] = actions.move_to_top,
+                    ["k"]       = actions.move_selection_next,
+                    ["i"]       = actions.move_selection_previous,
+                    ["I"]       = actions.move_to_top,
                     -- ["M"] = actions.move_to_middle,
-                    ["K"] = actions.move_to_bottom,
+                    ["K"]       = actions.move_to_bottom,
 
-                    ["<Down>"] = actions.move_selection_next,
-                    ["<Up>"] = actions.move_selection_previous,
-                    ["gg"] = actions.move_to_top,
-                    ["G"] = actions.move_to_bottom,
+                    ["gg"]      = actions.move_to_top,
+                    ["G"]       = actions.move_to_bottom,
+                    ["<Up>"]    = actions.move_selection_previous,
+                    ["<Down>"]  = actions.move_selection_next,
 
-                    ["<C-i>"] = actions.preview_scrolling_up,
-                    ["<C-k>"] = actions.preview_scrolling_down,
-                    -- ["<PageUp>"] = actions.results_scrolling_up,
-                    -- ["<PageDown>"] = actions.results_scrolling_down,
-
-                    ["?"] = actions.which_key,
+                    ["<C-i>"]   = actions.preview_scrolling_up,
+                    ["<C-k>"]   = actions.preview_scrolling_down,
+                    ["?"]       = actions.which_key,
                 },
             },
         },
