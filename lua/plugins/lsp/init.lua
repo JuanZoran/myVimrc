@@ -91,6 +91,12 @@ return {
                         nl.builtins.formatting.beautysh,
                         nl.builtins.formatting.black,
                     },
+                    on_attach = function(server, bufnr)
+                        if server.server_capabilities.documentFormattingProvider then
+                            vim.keymap.set('n', '==', function() vim.lsp.buf.format({ async = true, buffer = bufnr }) end,
+                                { desc = ' formatting buffer' })
+                        end
+                    end
                 }
             end,
         },
