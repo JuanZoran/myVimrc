@@ -7,17 +7,18 @@ autocmd('BufRead', {
     command = [[silent! loadview]]
 })
 
--- set tabstop size for markdown and html file
-autocmd("FileType", {
-    group = group,
-    pattern = { "markdown", "html" },
-    command = [[setlocal tabstop=2 shiftwidth=2]],
-})
-
 autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     command = [[silent! mkview]]
 })
+
+
+-- set tabstop size for markdown and html file
+-- autocmd("FileType", {
+--     group = group,
+--     pattern = { "markdown", "html" },
+--     command = [[setlocal tabstop=2 shiftwidth=2]],
+-- })
 
 -- Don't auto comment when o
 autocmd("FileType", { command = [[set formatoptions-=cro]] })

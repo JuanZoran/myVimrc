@@ -97,18 +97,25 @@ return {
         { "williamboman/mason-lspconfig.nvim", cmd = 'LspInstall', config = true },
         {
             "folke/neodev.nvim",
-            opts = { library = { plugins = { 'nvim-dap-ui', }, types = true, } },
+            opts = { library = { plugins = { 'nvim-dap-ui', }, } },
         },
         {
             'jose-elias-alvarez/null-ls.nvim',
             config = function()
-                local nl = require("null-ls")
-                nl.setup {
+                local null_ls = require("null-ls")
+                local formatting = null_ls.builtins.formatting
+                null_ls.setup {
                     sources = {
-                        nl.builtins.formatting.prettier,
-                        nl.builtins.formatting.black,
-                        nl.builtins.formatting.beautysh
+                        formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
+                        formatting.black.with { extra_args = { '--fast' } },
+                        formatting.beautysh
                     },
+                    on_attach = function(server, bufnr)
+                        if server.server_capabilities.documentFormattingProvider then
+                            vim.keymap.set('n', '==', function() vim.lsp.buf.format({ async = true, buffer = bufnr }) end,
+                                { desc = ' formatting buffer' })
+                        end
+                    end
                 }
             end,
         }

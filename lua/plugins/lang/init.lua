@@ -137,14 +137,10 @@ plugins:add {
             "zbirenbaum/copilot.lua",
             opts = {
                 panel = { enabled = false },
-                auto_refresh = true,
                 suggestion = {
                     enable = true,
                     auto_trigger = true,
-                    keymap = {
-                        accept = false,
-                        next = false,
-                    }
+                    keymap = false
                 },
                 filetypes = {
                     markdown = true,

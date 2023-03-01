@@ -90,7 +90,7 @@ cmp.setup {
                 fallback()
             end
         end, { "i", "s" }),
-        ['<C-j>'] = function (fallback)
+        ['<S-C-e>'] = function (fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
