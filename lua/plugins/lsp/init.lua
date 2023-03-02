@@ -8,7 +8,7 @@ local config = function()
 
     local setup = function(server)
         local _, conf_opts = pcall(require, 'server.' .. server)
-        local conf = _ and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
+        local conf = (_ and conf_opts) and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
         require('lspconfig')[server].setup(conf)
     end
 
@@ -84,12 +84,13 @@ return {
         {
             'jose-elias-alvarez/null-ls.nvim',
             config = function()
-                local nl = require("null-ls")
-                nl.setup {
+                local null_ls = require("null-ls")
+                local formatting = null_ls.builtins.formatting
+                null_ls.setup {
                     sources = {
-                        nl.builtins.formatting.prettier,
-                        nl.builtins.formatting.beautysh,
-                        nl.builtins.formatting.black,
+                        formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
+                        formatting.black.with { extra_args = { '--fast' } },
+                        formatting.beautysh
                     },
                     on_attach = function(server, bufnr)
                         if server.server_capabilities.documentFormattingProvider then

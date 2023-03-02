@@ -24,7 +24,6 @@
 
 
 
-
 local snips = {
     s(
         "sn",
@@ -53,7 +52,7 @@ local snips = {
                 c(2, -- 5
                     {
                         i(1, 'fmt'),
-                        -- i(nil, 'fmta'),
+                        i(nil, 'fmta'),
                     }
                 ),
                 i(3, "body here"), -- 6
@@ -115,7 +114,6 @@ local snips = {
     -- TODO config with this
     -- s("auto-", fmt([[s("{}", {})]], {i(1, 'trigger'), i(2, "")} ))
 }
-
 
 -- End Snippets --
 return snips
