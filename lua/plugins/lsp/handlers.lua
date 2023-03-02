@@ -18,6 +18,7 @@ vim.diagnostic.config {
 
 local list = {
     function(_, bufnr)
+        -- vim.pretty_print(_)
         -- NOTE Keymap
         local set = require("util.map").set
         set {

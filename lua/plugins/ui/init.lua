@@ -169,8 +169,8 @@ plugins:add {
         { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',        desc = '📁Toggle File Explorer' },
         { '<C-w>b',     '<Cmd>Neotree buffers<CR>',       desc = '📁Neo-tree Buffers' },
         { '<C-w>g',     '<Cmd>Neotree git_status<CR>',    desc = '📁Neo-tree Git Status' },
-        { '<C-w>d',     '<Cmd>Neotree reveal dir=./<CR>', desc = '📁File Explorer in buffer dir' },
         { '<C-w>f',     ':Neotree dir=~/',                desc = '📁File Explorer from HOME' },
+        { '<C-w>d',     '<Cmd>Neotree reveal dir=./ reveal_force_cwd<CR>', desc = '📁File Explorer in buffer dir' },
     },
     branch = "v2.x",
     opts = function()
@@ -313,7 +313,6 @@ plugins:add {
 }
 
 
-
 plugins:add {
     'gen740/SmoothCursor.nvim',
     name = 'smoothcursor',
@@ -330,6 +329,7 @@ plugins:add {
         },
         fancy = {
             head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+            -- head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
             enable = true
         },
     },
@@ -342,7 +342,6 @@ plugins:add {
 --         require 'plugins.ui.smooth'
 --     end,
 --     dependencies = {
---         'gen740/SmoothCursor.nvim',
 --         'edluffy/specs.nvim',
 --     },
 -- }

@@ -7,6 +7,27 @@ plugins:add {
 }
 
 plugins:add {
+    'JuanZoran/Trans.nvim',
+    keys = {
+        { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
+    },
+    opts = {
+        hover = {
+            spinner = 'moon',
+            auto_play = false,
+        },
+        engine = {
+            baidu = {
+                appid = '20220910001338724',
+                appPasswd = 'EKnyuuJQeVn7DLxeIH7F'
+            }
+        }
+    },
+    dev = true,
+}
+
+
+plugins:add {
     "folke/which-key.nvim",
     event = 'VeryLazy',
     opts = {
