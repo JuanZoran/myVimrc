@@ -1,15 +1,15 @@
--- TODO: config
-local util = require "lspconfig.util"
 return {
-    cmd = { "gopls", "serve" },
-    filetypes = { "go", "gomod" },
-    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
         gopls = {
+            experimentalPostfixCompletions = true,
             analyses = {
                 unusedparams = true,
+                shadow = true,
             },
             staticcheck = true,
         },
     },
+    init_options = {
+        usePlaceholders = true,
+    }
 }

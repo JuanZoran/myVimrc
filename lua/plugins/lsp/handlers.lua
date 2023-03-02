@@ -28,7 +28,7 @@ vim.diagnostic.config {
     -- underline = true,
 }
 local list = {
-    function(_, bufnr)
+    function(server, bufnr)
         -- NOTE Keymap
         local set = require("util.map").set
         set {
