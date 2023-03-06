@@ -35,7 +35,11 @@ plugins:add {
 local frontend = { 'html', 'css' }
 plugins:add {
     "windwp/nvim-ts-autotag",
-    config = true,
+    config = function(plugin)
+        require('nvim-ts-autotag').setup {
+            filetypes = plugin.ft
+        }
+    end,
     ft = frontend,
 }
 
@@ -66,6 +70,8 @@ plugins:add {
         "nvim-treesitter/nvim-treesitter-textobjects",
         'HiPhish/nvim-ts-rainbow2',
         "RRethy/nvim-treesitter-endwise",
+        { 'nvim-treesitter/nvim-treesitter-context', config = true },
+
         {
             "lukas-reineke/indent-blankline.nvim",
             opts = {

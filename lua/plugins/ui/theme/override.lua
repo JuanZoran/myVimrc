@@ -74,6 +74,10 @@ return {
         fg = '#f55385',
         italic = true,
     },
+
+    -- ['@constant.builtin'] = {
+    --     fg = '#000000',
+    -- }
     -- FloatBorder                 = {
     --     fg = '#89B4FA',
     --     bg = 'NONE',

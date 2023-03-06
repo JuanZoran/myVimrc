@@ -30,6 +30,7 @@ plugins:add {
                 navic = {
                     enabled = true,
                 },
+                treesitter_context = true,
                 -- illuminate = true,
                 -- which_key = true,
                 -- mason = true,
