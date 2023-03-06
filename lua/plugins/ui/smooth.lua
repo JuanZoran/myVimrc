@@ -6,8 +6,8 @@ specs.setup {
     min_jump        = 30,
     popup           = {
         delay_ms = 0, -- delay before popup displays
-        inc_ms = 10, -- time increments used for fade/resize effects
-        blend = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
+        inc_ms = 10,  -- time increments used for fade/resize effects
+        blend = 85,   -- starting blend, between 0-100 (fully transparent), see :h winblend
         width = 10,
         winhl = "Cursor",
         fader = require('specs').linear_fader,
@@ -19,40 +19,40 @@ specs.setup {
 }
 
 require('cinnamon').setup {
-    default_keymaps = false, -- Create default keymaps.
+    default_keymaps = false,  -- Create default keymaps.
     extra_keymaps = false,
     override_keymaps = false, -- whether to force mapping
     hide_cursor = true,
-    default_delay = 4, -- The default delay (in ms) between each line when scrolling.
+    default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
 }
 
 vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 
-if false then
-    require('smoothcursor').setup {
-        autostart = true,
-        speed = 50, -- max is 100 to stick to your current position
-        intervals = 30, -- tick intervalI
-        disable_float_win = true, -- disable on float window
-        linehl = 'CursorLine',
-        disabled_filetypes = {
-            'alpha',
-            'TelescopePrompt'
-        },
-        fancy = {
-            head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
-            enable = false
-        },
-    }
-end
+-- require('smoothcursor').setup {
+--     autostart = true,
+--     speed = 50,                   -- max is 100 to stick to your current position
+--     intervals = 30,               -- tick intervalI
+--     disable_float_win = true,     -- disable on float window
+--     linehl = 'CursorLine',
+--     disabled_filetypes = {
+--         'alpha',
+--         'TelescopePrompt'
+--     },
+--     fancy = {
+--         head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+--         enable = false
+--     },
+-- }
+
 
 local set = require('util.map').set
 set {
     mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
-        { "i", "gk" }, -- for better move (warp)
+        { "i", "gk" },        -- for better move (warp)
         { "k", "gj" },
+
         { "j", "h" },
         { "h", "i" },
     }
@@ -65,7 +65,6 @@ set {
         { 'J', '^' },
     }
 }
-
 
 local map = vim.keymap.set
 local api = vim.api

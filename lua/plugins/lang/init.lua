@@ -8,7 +8,7 @@ plugins:add {
     },
     opts = {
         display = {
-            "TempFloatingWindow", --# display results in a floating window
+            "TempFloatingWindow",     --# display results in a floating window
             "LongTempFloatingWindow", --# same as above, but only long results. To use with VirtualText[Ok/Err]
         },
         snipruncolors = {
@@ -32,15 +32,31 @@ plugins:add {
     end,
 }
 
+local frontend = { 'html', 'css' }
 plugins:add {
     "windwp/nvim-ts-autotag",
     config = true,
-    ft = { 'html', 'css' },
+    ft = frontend,
+}
+
+plugins:add {
+    'ray-x/web-tools.nvim',
+    cmd = 'BrowserPreview',
+    config = true,
     dependencies = {
-        'ray-x/web-tools.nvim',
-        config = true,
+        "https://git.sr.ht/~nedia/auto-save.nvim",
+        ft = frontend,
+        opts = {
+            save_fn = function()
+                if vim.tbl_contains(frontend, vim.bo.filetype) then
+                    vim.cmd [[w]]
+                end
+            end,
+        }
     }
 }
+
+
 
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
@@ -74,24 +90,25 @@ plugins:add {
         { '<leader>df', '<Cmd>TroubleToggle <CR>', desc = 'Toggle QuickFix' }
     },
     opts = {
-        action_keys = { -- key mappings for actions in the trouble list
-            close = "q", -- close the list
-            cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-            refresh = "r", -- manually refresh
+        action_keys = {
+            -- key mappings for actions in the trouble list
+            close = "q",                         -- close the list
+            cancel = "<esc>",                    -- cancel the preview and get back to your last window / buffer / cursor
+            refresh = "r",                       -- manually refresh
             jump = { "<cr>", "<tab>", '<C-o>' }, -- jump to the diagnostic or open / close folds
-            open_split = { "do" }, -- open buffer in new split
-            open_vsplit = { "du" }, -- open buffer in new vsplit
-            open_tab = { "dk" }, -- open buffer in new tab
-            jump_close = { "o" }, -- jump to the diagnostic and close the list
-            toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-            toggle_preview = "P", -- toggle auto_preview
-            hover = "gh", -- opens a small popup with the full multiline message
-            preview = "p", -- preview the diagnostic location
-            close_folds = { "zM", "zm" }, -- close all folds
-            open_folds = { "zR", "zr" }, -- open all folds
-            toggle_fold = { "zA", "za" }, -- toggle fold of current file
-            previous = "i", -- previous item
-            next = "k" -- next item
+            open_split = { "do" },               -- open buffer in new split
+            open_vsplit = { "du" },              -- open buffer in new vsplit
+            open_tab = { "dk" },                 -- open buffer in new tab
+            jump_close = { "o" },                -- jump to the diagnostic and close the list
+            toggle_mode = "m",                   -- toggle between "workspace" and "document" diagnostics mode
+            toggle_preview = "P",                -- toggle auto_preview
+            hover = "gh",                        -- opens a small popup with the full multiline message
+            preview = "p",                       -- preview the diagnostic location
+            close_folds = { "zM", "zm" },        -- close all folds
+            open_folds = { "zR", "zr" },         -- open all folds
+            toggle_fold = { "zA", "za" },        -- toggle fold of current file
+            previous = "i",                      -- previous item
+            next = "k"                           -- next item
         },
     },
 }
@@ -99,9 +116,14 @@ plugins:add {
 plugins:add {
     "ThePrimeagen/refactoring.nvim",
     keys = {
-        { mode = 'x', '<Leader>rr', function()
-            require('telescope').extensions.refactoring.refactors()
-        end, desc = '🎈Refactoring Operations' },
+        {
+            mode = 'x',
+            '<Leader>rr',
+            function()
+                require('telescope').extensions.refactoring.refactors()
+            end,
+            desc = '🎈Refactoring Operations'
+        },
     },
     config = function()
         require("refactoring").setup()

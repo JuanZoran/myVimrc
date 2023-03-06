@@ -68,6 +68,7 @@ plugins:add {
     dependencies = {
         'gen740/SmoothCursor.nvim',
         'edluffy/specs.nvim',
+        -- 'rainbowhxch/accelerated-jk.nvim',
     },
 }
 
@@ -83,20 +84,17 @@ plugins:add {
         local ccc = require("ccc")
         local mapping = ccc.mapping
         ccc.setup {
+            highlighter = {
+                auto_enable = true,
+                filetypes = plugin.ft,
+            },
             mappings = {
                 j = mapping.decrease1,
                 h = mapping.toggle_input_mode,
                 i = 'k',
-                ['<C-q>'] = mapping.quit,
+                    ['<C-q>'] = mapping.quit,
             }
         }
-        vim.api.nvim_create_autocmd('FileType', {
-            pattern = plugin.ft,
-            command = [[CccHighlighterEnable]],
-        })
-        -- if vim.tbl_contains(plugin.ft, vim.bo.filetype) then
-        --     vim.cmd [[CccHighlighterEnable]]
-        -- end
     end,
 }
 
@@ -104,7 +102,11 @@ plugins:add {
 plugins:add {
     'beauwilliams/focus.nvim',
     config = true,
-    event = 'WinNew'
+    event = 'WinNew',
+    -- dependencies = {
+    --     "nvim-zh/colorful-winsep.nvim",
+    --     config = true
+    -- }
 }
 
 plugins:add { -- 状态栏
@@ -238,16 +240,16 @@ plugins:add {
                 view = "mini",
             },
             override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
             },
         },
         presets = {
-            bottom_search = false, -- use a classic bottom cmdline for search
+            bottom_search = false,        -- use a classic bottom cmdline for search
             long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true, -- add a border to hover docs and signature help
+            inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true,        -- add a border to hover docs and signature help
             command_palette = {
                 views = {
                     cmdline_popup = {

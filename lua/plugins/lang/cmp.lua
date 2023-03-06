@@ -13,8 +13,7 @@ local view = {
 }
 
 local source = {
-    { name = "nvim_lsp", max_item_count = 5 },
-    -- { name = "nvim_lsp",  },
+    { name = "nvim_lsp",  },
     { name = "path" },
     { name = "luasnip",  max_item_count = 5 },
     { name = "buffer",   max_item_count = 3 },
