@@ -7,11 +7,12 @@ local filetypes = {
     "cpp",
     "c",
     'json',
+    'html',
 }
 
 local snips = {}
-
 for index, value in ipairs(filetypes) do
+    -- TODO :
     snips[index] = s(value, fmt(([[
     ```%s
     {}
@@ -26,6 +27,5 @@ end
 --     i(2, "path/to/img"),
 --   })
 -- ))
-
 
 return snips

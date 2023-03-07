@@ -20,7 +20,6 @@ local config = function()
     if exist('clangd') == 1 then
         local _, conf_opts = pcall(require, 'server.clangd')
         local conf = _ and vim.tbl_extend("error", vim.deepcopy(opts), conf_opts) or opts
-        -- conf.capabilities.offsetEncoding = 'utf-8'
         require("clangd_extensions").setup {
             server = conf,
             extensions = {

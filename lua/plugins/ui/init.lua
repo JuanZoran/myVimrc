@@ -3,17 +3,15 @@ plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
 }
-
 plugins:add {
     "catppuccin/nvim",
     event = 'VimEnter',
     name = "catppuccin",
     opts = function()
         return {
-            -- flavour = 'macchiato',
+            flavour = 'macchiato',
             transparent_background = true,
-            custom_highlights = require('plugins.ui.theme.override')
-            ,
+            custom_highlights = require('plugins.ui.theme.override'),
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -32,6 +30,7 @@ plugins:add {
                 navic = {
                     enabled = true,
                 },
+                treesitter_context = true,
                 -- illuminate = true,
                 -- which_key = true,
                 -- mason = true,
@@ -50,11 +49,6 @@ plugins:add {
     priority = 1000,
 }
 
-plugins:add {
-    'beauwilliams/focus.nvim',
-    config = true,
-    event = 'WinNew'
-}
 
 plugins:add {
     "uga-rosa/ccc.nvim",
@@ -63,68 +57,25 @@ plugins:add {
         "CccPick",
         "CccConvert",
     },
-    ft = { 'css', 'html' },
+    ft = { 'css', 'html', },
     config = function(plugin)
         local ccc = require("ccc")
         local mapping = ccc.mapping
         ccc.setup {
+            highlighter = {
+                auto_enable = true,
+                filetypes = plugin.ft,
+            },
             mappings = {
                 j = mapping.decrease1,
                 h = mapping.toggle_input_mode,
                 i = 'k',
+                    ['<C-q>'] = mapping.quit,
             }
         }
-        vim.api.nvim_create_autocmd('Filetype', {
-            pattern = plugin.ft,
-            command = 'CccHighlighterEnable',
-        })
     end,
 }
 
-plugins:add { -- 标签栏
-    "akinsho/bufferline.nvim",
-    keys = {
-        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
-        { "<leader>b<right>", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
-        { "<Leader>bb",       ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
-        { "<leader>bp",       "<Cmd>BufferLineTogglePin<CR>" },
-        { "<leader>bP",       "<Cmd>BufferLineGroupClose ungrouped<CR>" },
-        { "<C-j>",            "<Cmd>BufferLineCyclePrev<CR>" },
-        { "<C-l>",            "<Cmd>BufferLineCycleNext<CR>" },
-    },
-    event = 'VeryLazy',
-    opts = function()
-        return {
-            highlights = require("catppuccin.groups.integrations.bufferline").get(),
-            options = {
-                diagnostics = "nvim_lsp",
-                always_show_bufferline = true,
-                diagnostics_indicator = function(_, _, diagnostics_dict)
-                    local s = " "
-                    for e, n in pairs(diagnostics_dict) do
-                        local sym = e == "error" and " "
-                            or (e == "warning" and " " or "")
-                        s = s .. n .. sym
-                    end
-                    return vim.trim(s)
-                end,
-                show_buffer_close_icons = true,
-                show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
-                modified_icon = "💌",
-                -- separator_style = "triky", -- slant, padded_slant | triky
-                -- offsets = {
-                -- },
-            },
-        }
-    end
-}
-
-
-plugins:add {
-    event = 'VimEnter',
-    'goolord/alpha-nvim',
-    config = function() require("plugins.ui.alpha") end,
-}
 
 plugins:add { -- 状态栏
     "nvim-lualine/lualine.nvim",
@@ -165,6 +116,7 @@ plugins:add {
             end
         end
     end,
+    cmd = 'Neotree',
     keys = {
         { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',        desc = '📁Toggle File Explorer' },
         { '<C-w>b',     '<Cmd>Neotree buffers<CR>',       desc = '📁Neo-tree Buffers' },
@@ -176,6 +128,50 @@ plugins:add {
     opts = function()
         return require('plugins.ui.neo-tree')
     end
+}
+
+plugins:add { -- 标签栏
+    "akinsho/bufferline.nvim",
+    keys = {
+        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
+        { "<leader>b<right>", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
+        { "<Leader>bb",       ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
+        { "<leader>bp",       "<Cmd>BufferLineTogglePin<CR>" },
+        { "<leader>bP",       "<Cmd>BufferLineGroupClose ungrouped<CR>" },
+        { "<C-j>",            "<Cmd>BufferLineCyclePrev<CR>" },
+        { "<C-l>",            "<Cmd>BufferLineCycleNext<CR>" },
+    },
+    event = 'VeryLazy',
+    opts = function()
+        return {
+            highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            options = {
+                diagnostics = "nvim_lsp",
+                always_show_bufferline = true,
+                diagnostics_indicator = function(_, _, diagnostics_dict)
+                    local s = " "
+                    for e, n in pairs(diagnostics_dict) do
+                        local sym = e == "error" and " "
+                            or (e == "warning" and " " or "")
+                        s = s .. n .. sym
+                    end
+                    return vim.trim(s)
+                end,
+                show_buffer_close_icons = true,
+                show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
+                modified_icon = "💌",
+                -- separator_style = "triky", -- slant, padded_slant | triky
+                -- offsets = {
+                -- },
+            },
+        }
+    end
+}
+
+plugins:add {
+    'goolord/alpha-nvim',
+    event = 'VimEnter',
+    config = function() require("plugins.ui.alpha") end,
 }
 
 plugins:add {
@@ -193,7 +189,7 @@ plugins:add {
                     ERROR = "🥵",
                     WARN = "🫢",
                     INFO = "🤔",
-                }
+                },
             },
         },
     },

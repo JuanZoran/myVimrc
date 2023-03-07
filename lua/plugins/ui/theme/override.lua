@@ -75,9 +75,9 @@ return {
         italic = true,
     },
 
-    ['@conditional']         = {
-        fg = '#f55385',
-    },
+    -- ['@constant.builtin'] = {
+    --     fg = '#000000',
+    -- }
     -- FloatBorder                 = {
     --     fg = '#89B4FA',
     --     bg = 'NONE',

@@ -1,3 +1,4 @@
-./plugin
-./spell
-./lazy-lock.json
+.gitignore
+spell/
+package-lock.json
+lazy-lock.json

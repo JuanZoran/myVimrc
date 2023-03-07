@@ -64,9 +64,7 @@ local header = {
         ' ⣿⣿⣿⣿⢹⣿⣿⢮⣚⡛⠒⠛⢛⣋⣶⣿⣿⣿⣿⣿⣟⣱⠿⣿⣿⠟⣡⣺⢿  ',
     }
 }
-
 dashboard.section.header.val = header[2]
-
 
 -- TODO : config this for image preview
 -- Set menu

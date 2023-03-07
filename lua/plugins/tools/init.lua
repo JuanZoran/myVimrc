@@ -1,16 +1,11 @@
 local plugins = require("util.plugin")()
 
 plugins:add {
-    "folke/todo-comments.nvim",
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function() require 'plugins.tools.todo-comments' end,
-}
-
-plugins:add {
     'JuanZoran/Trans.nvim',
     keys = {
         { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
     },
+    dependencies = 'kkharji/sqlite.lua',
     opts = {
         hover = {
             spinner = 'moon',
@@ -26,6 +21,11 @@ plugins:add {
     dev = true,
 }
 
+plugins:add {
+    "folke/todo-comments.nvim",
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function() require 'plugins.tools.todo-comments' end,
+}
 
 plugins:add {
     "folke/which-key.nvim",
@@ -86,7 +86,6 @@ plugins:add {
             filetypes = {},
             buftypes = { "TelescopePrompt", "NvimTree" },
         },
-
         -- triggers = {"<leader>"} -- or specify a list manually
         -- icons = {
         --     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -96,12 +95,13 @@ plugins:add {
     }
 }
 
+
 plugins:add {
     'dhruvasagar/vim-table-mode',
+    ft = { "markdown", "md" },
     keys = {
         { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
     },
-    ft = { 'md', 'markdown' },
     dependencies = {
         'ellisonleao/glow.nvim',
         opts = {
@@ -124,11 +124,12 @@ plugins:add {
     },
 }
 
+-- search/replace in multiple files
 plugins:add {
     'Vonr/align.nvim',
     keys = {
         { mode = 'x', "<leader>=", function() require 'align'.align_to_string(true, true, true) end, }
-    }
+    },
 }
 
 -- search/replace in multiple files
@@ -145,18 +146,30 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
         { 'gc',        mode = { 'n', 'x' } },
         { '<leader>A', desc = 'Add Comment at end of line' },
     },
-    opts = {
-        ignore = '^$',
-        extra = {
-            ---Add comment on the line above
-            above = "gcO",
-            ---Add comment on the line below
-            below = "gco",
-            ---Add comment at the end of line
-            eol = "<Leader>A",
-        },
-    },
+    opts = function()
+        return {
+            ignore = '^$',
+            extra = {
+                ---Add comment on the line above
+                above = "gcO",
+                ---Add comment on the line below
+                below = "gco",
+                ---Add comment at the end of line
+                eol = "<Leader>A",
+            },
+            pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        }
+    end,
+    dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
 }
+
+
+plugins:add {
+    'jackMort/ChatGPT.nvim',
+    cmd = 'ChatGPT',
+    config = true,
+}
+
 
 plugins:add {
     "windwp/nvim-autopairs",
@@ -180,10 +193,11 @@ plugins:add {
     },
 }
 
-
 plugins:add {
     'echasnovski/mini.surround',
-    event = 'BufReadPre',
+    keys = {
+        { mode = { 'n', 'x' }, 's' }
+    },
     config = function()
         -- NOTE : special name
         require('mini.surround').setup {
@@ -195,44 +209,6 @@ plugins:add {
     end
 }
 
-
-plugins:add {
-    'sindrets/diffview.nvim',
-    cmd = 'DiffviewOpen',
-    keys = {
-        { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',  desc = 'Toggle Diff Files' },
-        { '<Leader>dF', '<Cmd>DiffviewFileHitory %<CR>', desc = 'Open Diff History For Current File' },
-    }
-}
-
-plugins:add {
-    "lewis6991/gitsigns.nvim",
-    event = { 'BufReadPre', 'BufNewFile' },
-    keys = {
-        { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
-        { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },
-        { '<leader>gs', '<Cmd>Gitsigns show<CR>' },
-        { '<leader>gr', '<Cmd>Gitsigns reset_buffer<CR>' },
-    },
-    opts = {
-        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-    },
-}
-
-plugins:add {
-    "folke/zen-mode.nvim",
-    keys = {
-        { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' }
-    },
-    dependencies = {
-        "folke/twilight.nvim",
-        opts = { context = 20 },
-    },
-    opts = {
-        window = { width = 0.85, },
-    },
-}
-
 plugins:add {
     "LudoPinelli/comment-box.nvim",
     keys = {
@@ -241,26 +217,28 @@ plugins:add {
         { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>",  desc = "Comment Center Line" },
         { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>",   desc = "Comment Center Line" },
         -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
-    }
+    },
 }
 
 plugins:add {
-    "ggandor/leap.nvim",
-    config = function() require 'plugins.tools.leap' end,
+    'sindrets/diffview.nvim',
+    cmd = 'DiffviewOpen',
     keys = {
-        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = '⬅️ quick jump backward' },
-        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = '💪quick jump cross window' },
-        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = '➡️ quick jump forward' },
+        { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',  desc = 'Toggle Diff Files' },
+        { '<Leader>dF', '<Cmd>DiffviewFileHitory %<CR>', desc = 'Open Diff History For Current File' },
     },
-    dependencies = {
-        'ggandor/flit.nvim',
-        keys = { 'f', 'F', 't', 'T' },
-        opts = {
-            -- A string like "nv", "nvo", "o", etc.
-            labeled_modes = "v",
-            multiline = true,
+    opts = function()
+        local action = require('diffview.actions')
+        return {
+            keymaps = {
+                file_panel = {
+                    ['k'] = action.next_entry,
+                    ['i'] = action.prev_entry,
+                    ['<leader><leader>'] = action.listing_style,
+                },
+            }
         }
-    },
+    end,
 }
 
 
@@ -293,4 +271,55 @@ plugins:add {
         require("persisted").setup(opts)
     end,
 }
+
+
+plugins:add {
+    "lewis6991/gitsigns.nvim",
+    event = { 'BufReadPre', 'BufNewFile' },
+    keys = {
+        { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
+        { '<leader>gd', '<Cmd>Gitsigns diffthis<CR>' },
+        { '<leader>gs', '<Cmd>Gitsigns show<CR>' },
+        { '<leader>gr', '<Cmd>Gitsigns reset_buffer<CR>' },
+    },
+    opts = {
+        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    },
+}
+
+plugins:add {
+    "folke/zen-mode.nvim",
+    keys = {
+        { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' }
+    },
+    dependencies = {
+        "folke/twilight.nvim",
+        opts = { context = 20 },
+    },
+    opts = {
+        window = { width = 0.85, },
+    },
+}
+
+
+plugins:add {
+    "ggandor/leap.nvim",
+    config = function() require 'plugins.tools.leap' end,
+    keys = {
+        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = '⬅️ quick jump backward' },
+        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = '💪quick jump cross window' },
+        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = '➡️ quick jump forward' },
+    },
+    dependencies = {
+        'ggandor/flit.nvim',
+        keys = { 'f', 'F', 't', 'T' },
+        opts = {
+            -- A string like "nv", "nvo", "o", etc.
+            labeled_modes = "v",
+            multiline = true,
+        }
+    },
+}
+
+
 return plugins

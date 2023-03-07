@@ -1,4 +1,14 @@
 require("nvim-treesitter.configs").setup {
+    ensure_installed = {
+        'markdown',
+        'markdown_inline',
+        'regex',
+        'help',
+        'lua',
+        'python',
+        'cpp',
+        'c',
+    },
     auto_install = true,
     sync_installl = false,
     highlight = {
@@ -28,8 +38,11 @@ require("nvim-treesitter.configs").setup {
         enable = true,
     },
     textobjects = require("plugins.lang.textobjects"),
-
     endwise = {
         enable = true,
-    }
+    },
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+    },
 }

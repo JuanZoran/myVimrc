@@ -35,6 +35,17 @@ plugins:add {
     config = function() require("plugins.lang.treesitter") end
 }
 
+local frontend = { 'html', 'css' }
+plugins:add {
+    "windwp/nvim-ts-autotag",
+    config = function(plugin)
+        require('nvim-ts-autotag').setup {
+            filetypes = plugin.ft
+        }
+    end,
+    ft = frontend,
+}
+
 plugins:add {
     "folke/trouble.nvim",
     keys = {
@@ -67,11 +78,11 @@ plugins:add {
 plugins:add {
     "L3mon4d3/luasnip",
     lazy = true,
+    build = 'make install_jsregexp',
     keys = {
         { mode = 'x', '<C-q>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
         { mode = 'i', '<C-q>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
-    build = 'make install_jsregexp',
     config = function()
         local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"
         local ls = require "luasnip"
@@ -121,10 +132,7 @@ plugins:add {
                 suggestion = {
                     enable = true,
                     auto_trigger = true,
-                    keymap = {
-                        accept = false,
-                        next = false,
-                    }
+                    keymap = false,
                 },
                 filetypes = {
                     markdown = true,

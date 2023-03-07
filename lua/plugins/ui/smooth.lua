@@ -51,8 +51,9 @@ local set = require('util.map').set
 set {
     mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
-        { "i", "k" },
-        { "k", "j" },
+        { "i", "gk" },        -- for better move (warp)
+        { "k", "gj" },
+
         { "j", "h" },
         { "h", "i" },
     }
@@ -62,10 +63,9 @@ set {
     mode = 'o',
     map = {
         { 'L', '$' },
-        { 'J', '0' },
+        { 'J', '^' },
     }
 }
-
 
 local map = vim.keymap.set
 

@@ -12,7 +12,6 @@ return {
             -- nvim_buf_set_keymap) which plugins like which-key display
             ["ac"] = { query = "@class.outer", desc = "Select outer part of a class region" },
         },
-
         -- INFO : some explain
         -- You can choose the select mode (default is charwise 'v')
         -- Can also be a function which gets passed a table with the keys

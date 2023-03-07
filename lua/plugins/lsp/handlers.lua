@@ -14,11 +14,8 @@ vim.diagnostic.config {
     -- },
     -- underline = true,
 }
-
-
 local list = {
     function(_, bufnr)
-        -- vim.pretty_print(_)
         -- NOTE Keymap
         local set = require("util.map").set
         set {
@@ -61,7 +58,6 @@ local list = {
         }
     end
 }
-
 
 return {
     ---add attach function
