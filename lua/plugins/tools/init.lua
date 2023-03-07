@@ -197,6 +197,15 @@ plugins:add {
 
 
 plugins:add {
+    'sindrets/diffview.nvim',
+    cmd = 'DiffviewOpen',
+    keys = {
+        { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',  desc = 'Toggle Diff Files' },
+        { '<Leader>dF', '<Cmd>DiffviewFileHitory %<CR>', desc = 'Open Diff History For Current File' },
+    }
+}
+
+plugins:add {
     "lewis6991/gitsigns.nvim",
     event = { 'BufReadPre', 'BufNewFile' },
     keys = {
