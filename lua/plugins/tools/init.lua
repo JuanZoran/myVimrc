@@ -162,7 +162,7 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 plugins:add {
     'jackMort/ChatGPT.nvim',
-    cmd = 'ChatGPT',
+    cmd = { 'ChatGPT', 'ChatGPTActAs', 'ChatGPTEditWithInstructions' },
     config = true,
 }
 
@@ -219,6 +219,40 @@ plugins:add {
         { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>",  desc = "Comment Center Line" },
         { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>",   desc = "Comment Center Line" },
         -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
+    },
+}
+
+plugins:add {
+    'sindrets/diffview.nvim',
+    cmd = 'DiffviewOpen',
+    keys = {
+        { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',  desc = 'Toggle Diff Files' },
+        { '<Leader>dF', '<Cmd>DiffviewFileHitory %<CR>', desc = 'Open Diff History For Current File' },
+    },
+    opts = function()
+        local action = require('diffview.actions')
+        return {
+            keymaps = {
+                file_panel = {
+                        ['k'] = action.next_entry,
+                        ['i'] = action.prev_entry,
+                        ['<leader><leader>'] = action.listing_style,
+                },
+            }
+        }
+    end,
+}
+
+plugins:add {
+    'glepnir/nerdicons.nvim',
+    keys = {
+        { '<leader>ni', '<Cmd>NerdIcons<CR>', desc = 'NerdIcons' },
+    },
+    opts = {
+        border = 'rounded',
+        down = '<C-k>',
+        up = '<C-i>',
+        copy = '<C-o>',
     },
 }
 

@@ -46,10 +46,10 @@ return {
         { '<C-s>', function()
             ranger:toggle()
         end, desc = 'Toggle Ranger' },
-        { '<C-e><C-e>', '<Cmd>ToggleTermSendCurrentLine<CR>',       desc = 'Toggle ranger' },
-        { '<C-e>k',     '<Cmd>ToggleTerm direction=horizontal<CR>', desc = 'Toggle ranger' },
-        { '<C-e>l',     '<Cmd>ToggleTerm direction=vertical<CR>',   desc = 'Toggle ranger' },
-        { '<C-e>i',     '<Cmd>ToggleTerm direction=float<CR>',      desc = 'Toggle ranger' },
+        { '<C-e>u',     '<Cmd>ToggleTerm direction=horizontal<CR>', desc = 'Toggle Terminal horizontal' },
+        { '<C-e>o',     '<Cmd>ToggleTerm direction=vertical<CR>',   desc = 'Toggle Terminal vertical' },
+        { '<C-e>i',     '<Cmd>ToggleTerm direction=float<CR>',      desc = 'Toggle Terminal float' },
+        -- { '<C-e><C-e>', '<Cmd>ToggleTermSendCurrentLine<CR>',       desc = 'Send Current Line' },
     },
     opts = {
         size = function(term)

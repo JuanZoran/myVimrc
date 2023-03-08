@@ -3,6 +3,8 @@ plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
 }
+
+
 plugins:add {
     "catppuccin/nvim",
     event = 'VimEnter',
@@ -15,13 +17,14 @@ plugins:add {
             integrations = {
                 cmp = true,
                 gitsigns = true,
-                nvimtree = true,
                 treesitter = true,
+                telekasten = true,
                 telescope = true,
                 notify = true,
                 mini = false,
-                noice = true,
-                ts_rainbow = true,
+                -- noice = true,
+                neotree = true,
+                ts_rainbow2 = true,
                 lsp_trouble = true,
                 markdown = true,
                 native_lsp = {
@@ -50,10 +53,11 @@ plugins:add {
 }
 
 plugins:add {
-    "rebelot/kanagawa.nvim",
+    'folke/tokyonight.nvim',
+    event = 'VimEnter',
     cond = false,
     config = function()
-        require 'plugins.ui.theme.kanagawa'
+        vim.cmd.colorscheme('tokyonight')
     end,
     priority = 1000,
 }
@@ -101,13 +105,9 @@ plugins:add {
 
 
 plugins:add {
-    'beauwilliams/focus.nvim',
+    "nvim-zh/colorful-winsep.nvim",
     config = true,
     event = 'WinNew',
-    -- dependencies = {
-    --     "nvim-zh/colorful-winsep.nvim",
-    --     config = true
-    -- }
 }
 
 plugins:add { -- 状态栏

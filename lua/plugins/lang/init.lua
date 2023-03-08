@@ -44,6 +44,8 @@ plugins:add {
 }
 
 plugins:add {
+    -- "gen4438/bracey.vim",
+    -- build = 'npm install --prefix server',
     'ray-x/web-tools.nvim',
     cmd = 'BrowserPreview',
     config = true,

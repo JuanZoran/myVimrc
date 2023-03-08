@@ -1,4 +1,7 @@
 return {
+    diagnostic = {
+        on_insert = false,
+    },
     finder = {
         edit = { 'o', '<CR>' },
         vsplit = 'v',

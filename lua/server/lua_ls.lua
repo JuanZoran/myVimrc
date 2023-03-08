@@ -32,9 +32,9 @@ local opts = {
             "dbus",
             "drawin",
         },
-        neededFileStatus = {
-                ["codestyle-check"] = "Opened",
-        },
+        -- neededFileStatus = {
+        --         ["codestyle-check"] = "Opened",
+        -- },
     },
     format = {
         defaultConfig = {

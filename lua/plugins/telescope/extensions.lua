@@ -45,14 +45,6 @@ plugins:add {
 }
 
 plugins:add {
-    'nvim-telescope/telescope-symbols.nvim',
-    keys = {
-        { '<leader>mm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' }
-    },
-}
-
-
-plugins:add {
     "debugloop/telescope-undo.nvim",
     keys = {
         { '<leader>tu', '<cmd>Telescope undo<cr>', desc = ' Undo History' }
