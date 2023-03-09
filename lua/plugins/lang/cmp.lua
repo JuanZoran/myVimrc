@@ -8,7 +8,7 @@ local view = {
     nvim_lsp = "[LSP]",
     path     = "[Path]",
     buffer   = "[Buffer]",
-    copilot  = "[Copilot]",
+    -- copilot  = "[Copilot]",
     -- codeium  = '[Codeium]',
 }
 

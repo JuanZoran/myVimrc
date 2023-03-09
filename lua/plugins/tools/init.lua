@@ -175,7 +175,6 @@ plugins:add {
     }
 }
 
-
 plugins:add {
     "windwp/nvim-autopairs",
     event = 'InsertEnter',
