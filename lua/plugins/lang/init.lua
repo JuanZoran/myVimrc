@@ -92,6 +92,7 @@ plugins:add {
 }
 
 
+
 plugins:add {
     "folke/trouble.nvim",
     keys = {

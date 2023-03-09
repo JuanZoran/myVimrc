@@ -168,6 +168,15 @@ plugins:add {
 
 
 plugins:add {
+    'mfussenegger/nvim-treehopper',
+    keys = {
+        { mode = 'x', 'm', ":<C-U>lua require('tsht').nodes()<CR>", silent = true },
+        { mode = 'o', 'm', function() require('tsht').nodes() end, },
+    }
+}
+
+
+plugins:add {
     "windwp/nvim-autopairs",
     event = 'InsertEnter',
     opts = {
