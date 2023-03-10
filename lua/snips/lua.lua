@@ -112,7 +112,15 @@ local snips = {
             i(2, "type"),
         })
     ),
+ --    s({ trig = "c(%d+)", regTrig = true }, {
+	-- 	t("will only expand for even numbers"),
+	-- }, {
+	-- 	condition = function(line_to_cursor, matched_trigger, captures)
+	-- 		return tonumber(captures[1]) % 2 == 0
+	-- 	end,
+	-- }),
 }
+
 
 -- End Snippets --
 return snips

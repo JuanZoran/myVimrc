@@ -162,10 +162,12 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 plugins:add {
     'jackMort/ChatGPT.nvim',
-    cmd = { 'ChatGPT', 'ChatGPTActAs', 'ChatGPTEditWithInstructions' },
+    cmd = { 'ChatGPT', 'ChatGPTActAs', },
+    keys = {
+        { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
+    },
     config = true,
 }
-
 
 plugins:add {
     'mfussenegger/nvim-treehopper',
@@ -204,14 +206,10 @@ plugins:add {
     },
     config = function()
         -- NOTE : special name
-        require('mini.surround').setup {
-            mappings = {
-                suffix_last = 'p', -- Suffix to search with "prev" method
-                suffix_next = 'n', -- Suffix to search with "next" method
-            }
-        }
+        require('mini.surround').setup {}
     end
 }
+
 
 plugins:add {
     "LudoPinelli/comment-box.nvim",
@@ -242,9 +240,9 @@ plugins:add {
         return {
             keymaps = {
                 file_panel = {
-                        ['k'] = action.next_entry,
-                        ['i'] = action.prev_entry,
-                        ['<leader><leader>'] = action.listing_style,
+                    ['k'] = action.next_entry,
+                    ['i'] = action.prev_entry,
+                    ['<leader><leader>'] = action.listing_style,
                 },
             }
         }

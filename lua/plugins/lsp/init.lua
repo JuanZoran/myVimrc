@@ -61,9 +61,10 @@ return {
     dependencies = {
         'p00f/clangd_extensions.nvim',
         {
-            "glepnir/lspsaga.nvim", opts = function()
-            return require('plugins.lang.saga')
-        end,
+            "glepnir/lspsaga.nvim",
+            opts = function()
+                return require('plugins.lang.saga')
+            end,
         }, -- pretty ui for [code-action | hover-text | ....]
         {
             "williamboman/mason.nvim",
@@ -97,7 +98,7 @@ return {
         { "williamboman/mason-lspconfig.nvim", cmd = 'LspInstall', config = true },
         {
             "folke/neodev.nvim",
-            opts = { library = { plugins = { 'nvim-dap-ui', }, } },
+            opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' }, } },
         },
         {
             'jose-elias-alvarez/null-ls.nvim',
