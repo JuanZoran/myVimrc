@@ -20,7 +20,6 @@ set {
         { "<C-q>",             '<Cmd>q!<CR>' },
         { "<Leader>p",         "<Cmd>Lazy<CR>",   '痢[Sync | Install] Plugin' },
         { "<Leader>ck",        ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
-
         { "yp",                "yip" },
         { "dp",                "dip" },
         -- { "vp",       "vip"   },
@@ -53,10 +52,10 @@ set {
 set {
     mode = { 'n', 't' },
     map = {
-        { "<C-w>j", "<Cmd>wincmd h<Cr>", ' Jump Left' },
-        { "<C-w>l", "<Cmd>wincmd l<Cr>", ' Jump Right' },
-        { "<C-w>k", "<Cmd>wincmd j<Cr>", ' Jump Down' },
-        { "<C-w>i", "<Cmd>wincmd k<Cr>", ' Jump Up' },
+        { "<C-w>j",       "<Cmd>wincmd h<Cr>", ' Jump Left' },
+        { "<C-w>l",       "<Cmd>wincmd l<Cr>", ' Jump Right' },
+        { "<C-w>k",       "<Cmd>wincmd j<Cr>", ' Jump Down' },
+        { "<C-w>i",       "<Cmd>wincmd k<Cr>", ' Jump Up' },
         -- INFO: resize
         { "<C-Down>",     "<Cmd>wincmd -<CR>" },
         { "<C-Up>",       "<Cmd>wincmd +<CR>" },
@@ -103,6 +102,7 @@ set {
 --     }
 -- }
 
+
 set {
     mode = "x",
     map = {
@@ -115,6 +115,5 @@ set {
         { "za",    "zf" },
     },
 }
-
 
 vim.keymap.set({ "x", "o", "i", "c" }, "<C-s>", "<Esc>")

@@ -15,11 +15,12 @@ return {
         fg = "#0f0f15",
         bg = "#10B981",
     },
-    MoreMsg                     = { -- for ufo virtual text
+    MoreMsg                     = {
+        -- for ufo virtual text
         fg = '#599eff',
         bold = true,
     },
-    ['@variable']               = {
+        ['@variable']           = {
         fg = '#f4b085',
     },
     DashboardHeader             = {
@@ -66,17 +67,23 @@ return {
         underline = true,
         sp = '#89e051',
     },
-    ['@property']               = {
-        fg = "#E6C384",
-        -- fg = "#b392f0",
-    },
-    ['@keyword.return']         = {
+        ['@keyword.return'] = {
         fg = '#f55385',
         italic = true,
     },
-    -- ['@constant.builtin'] = {
-    --     fg = '#000000',
-    -- }
+        ['@constant.builtin'] = {
+        fg = '#83aaff',
+        italic = true,
+    },
+        ['@lsp.type.property'] = {
+        fg = "#E6C384",
+        -- fg = "#b392f0",
+    },
+    -- ['@property']               = {
+    --     fg = "#E6C384",
+    --     -- fg = "#b392f0",
+    -- },
+
     -- FloatBorder                 = {
     --     fg = '#89B4FA',
     --     bg = 'NONE',
@@ -86,3 +93,4 @@ return {
     --     bg = 'NONE',
     -- },
 }
+

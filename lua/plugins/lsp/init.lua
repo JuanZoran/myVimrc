@@ -44,7 +44,7 @@ return {
             "glepnir/lspsaga.nvim",
             opts = function()
                 return require('plugins.lang.saga')
-            end
+            end,
         }, -- pretty ui for [code-action | hover-text | ....]
         {
             "williamboman/mason.nvim",
@@ -78,7 +78,7 @@ return {
         { "williamboman/mason-lspconfig.nvim", cmd = 'LspInstall', config = true },
         {
             "folke/neodev.nvim",
-            opts = { library = { plugins = false, types = true, } },
+            opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' }, } },
         },
         {
             'jose-elias-alvarez/null-ls.nvim',
@@ -89,7 +89,8 @@ return {
                     sources = {
                         formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
                         formatting.black.with { extra_args = { '--fast' } },
-                        formatting.beautysh
+                        formatting.beautysh,
+
                     },
                     on_attach = function(server, bufnr)
                         if server.server_capabilities.documentFormattingProvider then
@@ -99,7 +100,7 @@ return {
                     end
                 }
             end,
-        },
+        }
     },
-    config = config
+    config = config,
 }

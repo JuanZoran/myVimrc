@@ -8,7 +8,7 @@ local menu = {
     nvim_lsp = "[LSP]",
     path     = "[Path]",
     buffer   = "[Buffer]",
-    copilot  = "[Copilot]",
+    -- copilot  = "[Copilot]",
     -- codeium  = '[Codeium]',
 }
 
@@ -36,6 +36,9 @@ local prev = cmp.mapping(function()
 end, { 'i', 'c' })
 
 cmp.setup {
+    completion = {
+        completeopt = "menu,menuone,noselect",
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -50,9 +53,8 @@ cmp.setup {
                 fallback()
             end
         end, { 'i', 'c' }),
-
         ["<C-u>"] = cmp.mapping(function(fallback)
-            if not require("noice.lsp").scroll( -4) and not cmp.scroll_docs( -4) then
+            if not require("noice.lsp").scroll(-4) and not cmp.scroll_docs(-4) then
                 fallback()
             end
         end, { 'i', 'c' }),
@@ -86,7 +88,6 @@ cmp.setup {
                 fallback()
             end
         end, { "i", "s" }),
-
         ["<Tab>"] = cmp.mapping(function(fallback)
             if copilot.is_visible() then
                 copilot.accept()
@@ -99,7 +100,6 @@ cmp.setup {
         ["<C-p>"] = prev,
         ["<C-k>"] = next,
     },
-
     formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
@@ -137,6 +137,7 @@ cmp.setup {
         },
     }
 }
+
 
 -- `/` cmdline setup.
 cmp.setup.cmdline("/", {

@@ -117,6 +117,7 @@ plugins:add {
     }
 }
 
+-- search/replace in multiple files
 plugins:add {
     'CKolkey/ts-node-action',
     keys = {
@@ -126,18 +127,17 @@ plugins:add {
 
 -- search/replace in multiple files
 plugins:add {
-    'Vonr/align.nvim',
-    keys = {
-        { mode = 'x', "<leader>=", function() require 'align'.align_to_string(true, true, true) end, }
-    },
-}
-
--- search/replace in multiple files
-plugins:add {
     "windwp/nvim-spectre",
     keys = {
         { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
+}
+
+plugins:add {
+    'Vonr/align.nvim',
+    keys = {
+        { mode = 'x', "<leader>=", function() require 'align'.align_to_string(true, true, true) end, }
+    }
 }
 
 plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
@@ -166,10 +166,20 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 plugins:add {
     'jackMort/ChatGPT.nvim',
-    cmd = 'ChatGPT',
+    cmd = { 'ChatGPT', 'ChatGPTActAs', },
+    keys = {
+        { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
+    },
     config = true,
 }
 
+plugins:add {
+    'mfussenegger/nvim-treehopper',
+    keys = {
+        { mode = 'x', 'm', ":<C-U>lua require('tsht').nodes()<CR>", silent = true },
+        { mode = 'o', 'm', function() require('tsht').nodes() end, },
+    }
+}
 
 plugins:add {
     "windwp/nvim-autopairs",
@@ -200,12 +210,7 @@ plugins:add {
     },
     config = function()
         -- NOTE : special name
-        require('mini.surround').setup {
-            mappings = {
-                suffix_last = 'p', -- Suffix to search with "prev" method
-                suffix_next = 'n', -- Suffix to search with "next" method
-            }
-        }
+        require('mini.surround').setup {}
     end
 }
 
@@ -255,7 +260,7 @@ plugins:add {
             return vim.bo.filetype ~= 'alpha'
         end,
         on_autoload_no_session = function()
-            print('Session Not Exist')
+            vim.notify('Session Not Exist')
         end,
         autosave = false, -- automatically save session files when exiting Neovim
     },
@@ -267,6 +272,7 @@ plugins:add {
         })
     end,
     config = function(_, opts)
+        vim.opt.sessionoptions = "buffers,curdir,folds,winsize,winpos,help"
         require("telescope").load_extension("persisted") -- To load the telescope extension
         require("persisted").setup(opts)
     end,

@@ -1,4 +1,42 @@
 local plugins = require("util.plugin")()
+
+
+local exclude_ft = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" }
+local indent = {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+        -- char = "▏",
+        char = "│",
+        filetype_exclude = exclude_ft,
+        show_trailing_blankline_indent = false,
+        show_current_context = false,
+    },
+    dependencies = {
+        "echasnovski/mini.indentscope",
+        version = false, -- wait till new 0.7.0 release to put it back on semver
+        opts = {
+            mappings = {
+                object_scope = 'hi',
+            },
+            -- symbol = "▏",
+            symbol = "│",
+            options = { try_as_border = true },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = exclude_ft,
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
+        end,
+        config = function(_, opts)
+            require("mini.indentscope").setup(opts)
+        end,
+    },
+}
+
+
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
     build = ':TSUpdate',
@@ -7,6 +45,9 @@ plugins:add {
         "nvim-treesitter/nvim-treesitter-textobjects",
         "mrjones2014/nvim-ts-rainbow",
         "RRethy/nvim-treesitter-endwise",
+        { 'nvim-treesitter/nvim-treesitter-context', config = true },
+
+        indent,
         {
             "kevinhwang91/nvim-ufo",
             dependencies = "kevinhwang91/promise-async",
@@ -22,15 +63,6 @@ plugins:add {
                 }
             end,
         },
-
-        {
-            "lukas-reineke/indent-blankline.nvim",
-            opts = {
-                space_char_blankline = " ",
-                show_current_context = true,
-                show_current_context_start = false,
-            },
-        }
     }, -- rainbow pairs
     config = function() require("plugins.lang.treesitter") end
 }
@@ -52,24 +84,25 @@ plugins:add {
         { '<leader>df', '<Cmd>TroubleToggle <CR>', desc = 'Toggle QuickFix' }
     },
     opts = {
-        action_keys = { -- key mappings for actions in the trouble list
-            close = "q", -- close the list
-            cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
-            refresh = "r", -- manually refresh
+        action_keys = {
+                                                 -- key mappings for actions in the trouble list
+            close = "q",                         -- close the list
+            cancel = "<esc>",                    -- cancel the preview and get back to your last window / buffer / cursor
+            refresh = "r",                       -- manually refresh
             jump = { "<cr>", "<tab>", '<C-o>' }, -- jump to the diagnostic or open / close folds
-            open_split = { "do" }, -- open buffer in new split
-            open_vsplit = { "du" }, -- open buffer in new vsplit
-            open_tab = { "dk" }, -- open buffer in new tab
-            jump_close = { "o" }, -- jump to the diagnostic and close the list
-            toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-            toggle_preview = "P", -- toggle auto_preview
-            hover = "gh", -- opens a small popup with the full multiline message
-            preview = "p", -- preview the diagnostic location
-            close_folds = { "zM", "zm" }, -- close all folds
-            open_folds = { "zR", "zr" }, -- open all folds
-            toggle_fold = { "zA", "za" }, -- toggle fold of current file
-            previous = "i", -- previous item
-            next = "k" -- next item
+            open_split = { "do" },               -- open buffer in new split
+            open_vsplit = { "du" },              -- open buffer in new vsplit
+            open_tab = { "dk" },                 -- open buffer in new tab
+            jump_close = { "o" },                -- jump to the diagnostic and close the list
+            toggle_mode = "m",                   -- toggle between "workspace" and "document" diagnostics mode
+            toggle_preview = "P",                -- toggle auto_preview
+            hover = "gh",                        -- opens a small popup with the full multiline message
+            preview = "p",                       -- preview the diagnostic location
+            close_folds = { "zM", "zm" },        -- close all folds
+            open_folds = { "zR", "zr" },         -- open all folds
+            toggle_fold = { "zA", "za" },        -- toggle fold of current file
+            previous = "i",                      -- previous item
+            next = "k"                           -- next item
         },
     },
 }
@@ -124,6 +157,8 @@ plugins:add {
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
+
+        -- { "jcdickinson/codeium.nvim", config = true },
         {
             "zbirenbaum/copilot.lua",
             opts = {
@@ -139,7 +174,6 @@ plugins:add {
                 },
             },
         },
-        -- { "jcdickinson/codeium.nvim", config = true },
     },
     config = function() require "plugins.lang.cmp" end
 }

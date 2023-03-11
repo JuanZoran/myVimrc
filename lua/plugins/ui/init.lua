@@ -3,6 +3,8 @@ plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
 }
+
+
 plugins:add {
     "catppuccin/nvim",
     event = 'VimEnter',
@@ -15,13 +17,14 @@ plugins:add {
             integrations = {
                 cmp = true,
                 gitsigns = true,
-                nvimtree = true,
                 treesitter = true,
+                telekasten = true,
                 telescope = true,
                 notify = true,
                 mini = false,
-                noice = true,
-                ts_rainbow = true,
+                -- noice = true,
+                ts_rainbow2 = true,
+                neotree = true,
                 lsp_trouble = true,
                 markdown = true,
                 native_lsp = {
@@ -70,18 +73,9 @@ plugins:add {
                 j = mapping.decrease1,
                 h = mapping.toggle_input_mode,
                 i = 'k',
-                    ['<C-q>'] = mapping.quit,
+                ['<C-q>'] = mapping.quit,
             }
         }
-    end,
-}
-
-
-plugins:add { -- 状态栏
-    "nvim-lualine/lualine.nvim",
-    event = 'VeryLazy',
-    config = function()
-        require "plugins.ui.lualine"
     end,
 }
 
@@ -90,6 +84,14 @@ plugins:add {
     'nvim-zh/colorful-winsep.nvim',
     config = true,
     event = 'WinNew',
+}
+
+plugins:add { -- 状态栏
+    "nvim-lualine/lualine.nvim",
+    event = 'VeryLazy',
+    config = function()
+        require "plugins.ui.lualine"
+    end,
 }
 
 plugins:add {
@@ -125,10 +127,10 @@ plugins:add {
     end,
     cmd = 'Neotree',
     keys = {
-        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',        desc = '📁Toggle File Explorer' },
-        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',       desc = '📁Neo-tree Buffers' },
-        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',    desc = '📁Neo-tree Git Status' },
-        { '<C-w>f',     ':Neotree dir=~/',                desc = '📁File Explorer from HOME' },
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                         desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                        desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                     desc = '📁Neo-tree Git Status' },
+        { '<C-w>f',     ':Neotree dir=~/',                                 desc = '📁File Explorer from HOME' },
         { '<C-w>d',     '<Cmd>Neotree reveal dir=./ reveal_force_cwd<CR>', desc = '📁File Explorer in buffer dir' },
     },
     branch = "v2.x",
@@ -220,10 +222,10 @@ plugins:add {
             },
         },
         presets = {
-            bottom_search = false, -- use a classic bottom cmdline for search
+            bottom_search = false,        -- use a classic bottom cmdline for search
             long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = false, -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true, -- add a border to hover docs and signature help
+            inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+            lsp_doc_border = true,        -- add a border to hover docs and signature help
             command_palette = {
                 views = {
                     cmdline_popup = {
@@ -268,32 +270,48 @@ local fn = vim.fn
 plugins:add {
     'JuanZoran/specs.nvim',
     keys = {
-        { mode = { 'n', 'x' }, 'H', function()
-            vim.defer_fn(require('specs').show_specs, 10)
-            api.nvim_feedkeys('I', 'n', false)
-        end },
-
-        { mode = { 'n', 'x' }, 'A', function()
-            vim.defer_fn(require('specs').show_specs, 10)
-            api.nvim_feedkeys('A', 'n', false)
-        end },
-
-        { mode = { 'n', 'x' }, 'J', function()
-            local pos = fn.getline('.'):find('%S')
-            if pos and fn.col('.') ~= pos then
+        {
+            mode = { 'n', 'x' },
+            'H',
+            function()
                 vim.defer_fn(require('specs').show_specs, 10)
-                fn.cursor { fn.line('.'), pos }
+                api.nvim_feedkeys('I', 'n', false)
             end
-        end },
+        },
 
-        { mode = { 'n', 'x' }, 'L', function()
-            local _cur = fn.col('.')
-            local _end = fn.col('$') - 1
-            if _end ~= 0 and _cur ~= _end then
-                vim.defer_fn(require("specs").show_specs, 10)
-                fn.cursor { fn.line('.'), fn.col('$') }
+        {
+            mode = { 'n', 'x' },
+            'A',
+            function()
+                vim.defer_fn(require('specs').show_specs, 10)
+                api.nvim_feedkeys('A', 'n', false)
             end
-        end },
+        },
+
+        {
+            mode = { 'n', 'x' },
+            'J',
+            function()
+                local pos = fn.getline('.'):find('%S')
+                if pos and fn.col('.') ~= pos then
+                    vim.defer_fn(require('specs').show_specs, 10)
+                    fn.cursor { fn.line('.'), pos }
+                end
+            end
+        },
+
+        {
+            mode = { 'n', 'x' },
+            'L',
+            function()
+                local _cur = fn.col('.')
+                local _end = fn.col('$') - 1
+                if _end ~= 0 and _cur ~= _end then
+                    vim.defer_fn(require("specs").show_specs, 10)
+                    fn.cursor { fn.line('.'), fn.col('$') }
+                end
+            end
+        },
     },
     opts = function()
         return {
@@ -301,8 +319,8 @@ plugins:add {
             min_jump        = 30,
             popup           = {
                 delay_ms = 0, -- delay before popup displays
-                inc_ms = 10, -- time increments used for fade/resize effects
-                blend = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                inc_ms = 10,  -- time increments used for fade/resize effects
+                blend = 85,   -- starting blend, between 0-100 (fully transparent), see :h winblend
                 width = 10,
                 winhl = "Cursor",
                 fader = require('specs').linear_fader,
@@ -322,8 +340,8 @@ plugins:add {
     event = 'VeryLazy',
     opts = {
         autostart = true,
-        speed = 30, -- max is 100 to stick to your current position
-        intervals = 30, -- tick intervalI
+        speed = 30,               -- max is 100 to stick to your current position
+        intervals = 30,           -- tick intervalI
         disable_float_win = true, -- disable on float window
         linehl = 'CursorLine',
         disabled_filetypes = {
