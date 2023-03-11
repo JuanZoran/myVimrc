@@ -3,7 +3,7 @@ local opts = {
         enable = true,
     },
     completion = {
-        postfix = ":",        -- for better completion
+        postfix        = ":", -- for better completion
         displayContext = 2,
         callSnippet    = "Both",
         keywordSnippet = "Both",
@@ -11,36 +11,11 @@ local opts = {
     -- hint = {
     --     enable = true,
     -- }
-
-    -- workspace = {
-    --     library = {
-    --         "/usr/share/awesome/lib",
-    --     },
-    --     checkThirdParty = false,
-    -- },
-    diagnostics = {
-        -- globals = {
-        --     "awesome",
-        --     "client",
-        --     "root",
-        --     "screen",
-        --     "mouse",
-        --     "tag",
-        --     "key",
-        --     "keygrabber",
-        --     "mousegrabber",
-        --     "dbus",
-        --     "drawin",
-        -- },
-        neededFileStatus = {
-                ["codestyle-check"] = "Opened",
-        },
-    },
     format = {
         defaultConfig = {
-            call_arg_parentheses                         = "remove",
-            trailing_table_separator                     = "always",
-            quote_style                                  = "double",
+            call_arg_parentheses     = "remove",
+            trailing_table_separator = "always",
+            quote_style              = "double",
             align_if_branch                              = true,
             space_before_open_square_bracket             = true,
             space_inside_function_call_parentheses       = true,

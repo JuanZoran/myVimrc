@@ -85,6 +85,13 @@ plugins:add { -- 状态栏
     end,
 }
 
+
+plugins:add {
+    'nvim-zh/colorful-winsep.nvim',
+    config = true,
+    event = 'WinNew',
+}
+
 plugins:add {
     'SmiteshP/nvim-navic',
     lazy = true,
