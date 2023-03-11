@@ -5,8 +5,8 @@ local opts = {
     completion = {
         postfix = ":",        -- for better completion
         displayContext = 2,
-        callSnippet    = "Both",
-        keywordSnippet = "Both",
+        callSnippet    = "Replace",
+        keywordSnippet = "Replace",
     },
     -- hint = {
     --     enable = true,

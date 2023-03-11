@@ -63,6 +63,41 @@ plugins:add {
 }
 
 
+local exclude_ft = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" }
+local indent = {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+        -- char = "▏",
+        char = "│",
+        filetype_exclude = exclude_ft,
+        show_trailing_blankline_indent = false,
+        show_current_context = false,
+    },
+    dependencies = {
+        "echasnovski/mini.indentscope",
+        version = false, -- wait till new 0.7.0 release to put it back on semver
+        opts = {
+            mappings = {
+                object_scope = 'hi',
+            },
+            -- symbol = "▏",
+            symbol = "│",
+            options = { try_as_border = true },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = exclude_ft,
+                callback = function()
+                    vim.b.miniindentscope_disable = true
+                end,
+            })
+        end,
+        config = function(_, opts)
+            require("mini.indentscope").setup(opts)
+        end,
+    },
+}
+
 
 plugins:add {
     "nvim-treesitter/nvim-treesitter",
@@ -74,14 +109,7 @@ plugins:add {
         "RRethy/nvim-treesitter-endwise",
         { 'nvim-treesitter/nvim-treesitter-context', config = true },
 
-        {
-            "lukas-reineke/indent-blankline.nvim",
-            opts = {
-                space_char_blankline = " ",
-                show_current_context = true,
-                show_current_context_start = true,
-            },
-        },
+        indent,
         {
             "kevinhwang91/nvim-ufo",
             dependencies = "kevinhwang91/promise-async",

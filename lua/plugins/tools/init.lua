@@ -267,7 +267,7 @@ plugins:add {
     "olimorris/persisted.nvim",
     cmd = { 'SessionLoad', 'SessionLoadLast' },
     keys = {
-        { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
+        { '<leader>ss', '<Cmd>Telescope persisted<CR>', desc = 'Check out the Session', }
     },
     opts = {
         use_git_branch = true, -- create session files based on the branch of the git enabled repository
@@ -276,7 +276,7 @@ plugins:add {
             return vim.bo.filetype ~= 'alpha'
         end,
         on_autoload_no_session = function()
-            print('Session Not Exist')
+            vim.notify('Session Not Exist')
         end,
         autosave = false, -- automatically save session files when exiting Neovim
     },
@@ -288,6 +288,7 @@ plugins:add {
         })
     end,
     config = function(_, opts)
+        vim.opt.sessionoptions = "buffers,curdir,folds,winsize,winpos,help"
         require("telescope").load_extension("persisted") -- To load the telescope extension
         require("persisted").setup(opts)
     end,
