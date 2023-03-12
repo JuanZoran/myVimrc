@@ -65,7 +65,9 @@ require("todo-comments").setup {
     -- },
 }
 
-vim.keymap.set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment" })
-vim.keymap.set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
-vim.keymap.set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>", { desc = "show all TODOs" })
-vim.keymap.set("n", "<Leader>td", "<cmd>TodoTelescope<cr>", { desc = "search todos by telescope" })
+local set = vim.keymap.set
+set("n", "<Leader>tl", require("todo-comments").jump_next, { desc = "Next todo comment" })
+set("n", "<Leader>tj", require("todo-comments").jump_prev, { desc = "Previous todo comment" })
+
+set("n", "<Leader>to", "<cmd>TodoQuickFix<cr>",            { desc = "show all TODOs" })
+set("n", "<Leader>td", "<cmd>TodoTelescope<cr>",           { desc = "search todos by telescope" })

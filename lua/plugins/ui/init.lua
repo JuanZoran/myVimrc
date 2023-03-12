@@ -97,7 +97,7 @@ plugins:add {
                 j = mapping.decrease1,
                 h = mapping.toggle_input_mode,
                 i = 'k',
-                    ['<C-q>'] = mapping.quit,
+                ['<C-q>'] = mapping.quit,
             }
         }
     end,
@@ -204,7 +204,6 @@ plugins:add { -- 标签栏
 plugins:add {
     'goolord/alpha-nvim',
     event = 'VimEnter',
-    cond = true,
     config = function() require("plugins.ui.alpha") end,
 }
 
@@ -218,7 +217,7 @@ plugins:add {
             opts = {
                 level = vim.log.INFO,
                 stages = "slide",
-                timeout = 3000,
+                timeout = 2000,
                 icons = {
                     ERROR = "🥵",
                     WARN = "🫢",
@@ -241,9 +240,9 @@ plugins:add {
                 view = "mini",
             },
             override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true,
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                ["vim.lsp.util.stylize_markdown"] = true,
+                ["cmp.entry.get_documentation"] = true,
             },
         },
         presets = {

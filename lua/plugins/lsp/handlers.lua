@@ -29,6 +29,7 @@ vim.diagnostic.config {
 }
 local list = {
     function(server, bufnr)
+        -- server.server_capabilities.semanticTokenProvider = nil
         -- NOTE Keymap
         local set = require("util.map").set
         set {

@@ -3,7 +3,7 @@ local luasnip = require("luasnip")
 local copilot = require('copilot.suggestion')
 local kind_icons = require('util').icon.code_icon
 
-local view = {
+local menu = {
     luasnip  = "[Snippet]",
     nvim_lsp = "[LSP]",
     path     = "[Path]",
@@ -13,10 +13,10 @@ local view = {
 }
 
 local source = {
-    { name = "nvim_lsp",  },
-    { name = "path" },
-    { name = "luasnip",  max_item_count = 5 },
-    { name = "buffer",   max_item_count = 3 },
+    { name = "nvim_lsp", max_item_count = 3, group_index = 1 },
+    { name = "path",     group_index = 1 },
+    { name = "luasnip",  max_item_count = 3, group_index = 1 },
+    { name = "buffer",   max_item_count = 3, group_index = 2 },
 }
 
 local next = cmp.mapping(function()
@@ -113,7 +113,7 @@ cmp.setup {
             -- Kind icons
             -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
             vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-            vim_item.menu = view[entry.source.name]
+            vim_item.menu = menu[entry.source.name]
             return vim_item
         end,
     },
@@ -170,8 +170,7 @@ cmp.setup.cmdline(":", {
 })
 
 -- If you want insert `(` after select function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
     'confirm_done',
-    cmp_autopairs.on_confirm_done()
+    require('nvim-autopairs.completion.cmp').on_confirm_done()
 )

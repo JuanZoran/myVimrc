@@ -9,15 +9,7 @@ plugins:add {
     },
     dependencies = 'kkharji/sqlite.lua',
     opts = {
-        hover = {
-            spinner = 'moon'
-        },
-        engine = {
-            baidu = {
-                appid = '20220910001338724',
-                appPasswd = 'EKnyuuJQeVn7DLxeIH7F'
-            }
-        }
+
     },
     dev = true,
 }
@@ -96,6 +88,10 @@ plugins:add {
     }
 }
 
+-- plugins:add {
+--     'toppair/peek.nvim',
+--     build = 'deno task --quiet build:fast',
+-- }
 
 plugins:add {
     "iamcco/markdown-preview.nvim",
@@ -139,8 +135,8 @@ plugins:add {
 plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
     "numtostr/Comment.nvim",
     keys = {
-        { 'gc', mode = { 'n', 'x' } },
-        '<leader>A',
+        { 'gc',        mode = { 'n', 'x' } },
+        { '<leader>A', desc = 'Add Comment at end of line' },
     },
     opts = function()
         return {
@@ -209,7 +205,6 @@ plugins:add {
         require('mini.surround').setup {}
     end
 }
-
 
 plugins:add {
     "LudoPinelli/comment-box.nvim",

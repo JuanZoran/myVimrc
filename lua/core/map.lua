@@ -36,7 +36,6 @@ set {
         { "<C-q>",             '<Cmd>q!<CR>' },
         { "<Leader>p",         "<Cmd>Lazy<CR>",   '痢[Sync | Install] Plugin' },
         { "<Leader>ck",        ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
-
         { "yp",                "yip" },
         { "dp",                "dip" },
         -- { "vp",       "vip"   },
@@ -60,19 +59,19 @@ set {
         { "Z",                 'zf' },
         { "<leader>a",         "@",               'macro' },
         { "<C-CR>",            "/<++><CR>vf>c" },
-        { "<C-w>o",       ":vsp<CR>",          ' Split Window' },
-        { "<C-w>u",       ":sp<CR>",           ' Split Window Vertically' },
-        { "<C-w>n",       ":only<CR>",         ' Close Another Window' },
+        { "<C-w>o",            ":vsp<CR>",        ' Split Window' },
+        { "<C-w>u",            ":sp<CR>",         ' Split Window Vertically' },
+        { "<C-w>n",            ":only<CR>",       ' Close Another Window' },
     }
 }
 
 set {
     mode = { 'n', 't' },
     map = {
-        { "<C-w>j", "<Cmd>wincmd h<Cr>", ' Jump Left' },
-        { "<C-w>l", "<Cmd>wincmd l<Cr>", ' Jump Right' },
-        { "<C-w>k", "<Cmd>wincmd j<Cr>", ' Jump Down' },
-        { "<C-w>i", "<Cmd>wincmd k<Cr>", ' Jump Up' },
+        { "<C-w>j",       "<Cmd>wincmd h<Cr>", ' Jump Left' },
+        { "<C-w>l",       "<Cmd>wincmd l<Cr>", ' Jump Right' },
+        { "<C-w>k",       "<Cmd>wincmd j<Cr>", ' Jump Down' },
+        { "<C-w>i",       "<Cmd>wincmd k<Cr>", ' Jump Up' },
         -- INFO: resize
         { "<C-Down>",     "<Cmd>wincmd -<CR>" },
         { "<C-Up>",       "<Cmd>wincmd +<CR>" },
@@ -104,16 +103,18 @@ set {
         { '<C-e>', function()
             vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
         end },
+
     }
     -- {"<++>", "<++>"},
     -- {"<++>", "<++>"},
 }
 
+
 -- set {
 --     mode = 'c',
 --     map = {
---         { "<C-j>", "<Left>" },
---         { "<C-l>", "<Right>" },
+--         { "<C-j>",  "<Left>" },
+--         { "<C-l>",  "<Right>" },
 --     }
 -- }
 
