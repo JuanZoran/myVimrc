@@ -9,7 +9,11 @@ plugins:add {
     },
     dependencies = 'kkharji/sqlite.lua',
     opts = {
-
+        frontend = {
+            hover = {
+                spinner = 'moon'
+            }
+        }
     },
     dev = true,
 }

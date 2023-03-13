@@ -63,6 +63,33 @@ plugins:add {
 }
 
 
+-- local indent = {
+--     "shellRaining/hlchunk.nvim",
+--     opts = {
+--         chunk = {
+--             enable = true,
+--             chars = {
+--                 horizontal_line = "─",
+--                 vertical_line = "│",
+--                 left_top = "┌",
+--                 left_bottom = "└",
+--                 right_arrow = "─",
+--             },
+--             style = "#00ffff",
+--         },
+--         indent = {
+--             enable = true,
+--         },
+--         line_num = {
+--             enable = false,
+--         },
+--         blank = {
+--             enable = false,
+--         }
+--     }
+-- }
+
+
 local exclude_ft = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" }
 local indent = {
     "lukas-reineke/indent-blankline.nvim",
@@ -80,8 +107,8 @@ local indent = {
             mappings = {
                 object_scope = 'hi',
             },
-            -- symbol = "▏",
-            symbol = "│",
+            symbol = "▏",
+            -- symbol = "│",
             options = { try_as_border = true },
         },
         init = function()
@@ -190,6 +217,15 @@ plugins:add {
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
+
+        -- {
+            -- "denstiny/cmp-dictionary-nanny",
+            -- build = 'bash ./install.sh',
+            -- opts = {
+                -- database_path = os.getenv('HOME') .. '/.vim/dict/ultimate.db',
+            -- },
+        -- },
+
 
         -- { "jcdickinson/codeium.nvim", config = true },
         {

@@ -160,7 +160,11 @@ plugins:add {
     branch = "v2.x",
     opts = function()
         return require('plugins.ui.neo-tree')
-    end
+    end,
+    dependencies = {
+        's1n7ax/nvim-window-picker',
+        config = true,
+    }
 }
 
 plugins:add { -- 标签栏
