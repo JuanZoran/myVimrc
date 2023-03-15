@@ -23,8 +23,8 @@ plugins:add {
                 notify = true,
                 mini = false,
                 -- noice = true,
-                ts_rainbow2 = true,
                 neotree = true,
+                ts_rainbow2 = true,
                 lsp_trouble = true,
                 markdown = true,
                 native_lsp = {
@@ -130,25 +130,29 @@ plugins:add {
         { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                         desc = '📁Toggle File Explorer' },
         { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                        desc = '📁Neo-tree Buffers' },
         { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                     desc = '📁Neo-tree Git Status' },
-        { '<C-w>f',     ':Neotree dir=~/',                                 desc = '📁File Explorer from HOME' },
-        { '<C-w>d',     '<Cmd>Neotree reveal dir=./ reveal_force_cwd<CR>', desc = '📁File Explorer in buffer dir' },
+        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                          desc = '📁File Explorer from HOME' },
+        { '<C-w>d',     '<Cmd>Neotree reveal reveal_force_cwd toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
     },
     branch = "v2.x",
     opts = function()
         return require('plugins.ui.neo-tree')
-    end
+    end,
+    dependencies = {
+        's1n7ax/nvim-window-picker',
+        config = true,
+    }
 }
 
 plugins:add { -- 标签栏
     "akinsho/bufferline.nvim",
     keys = {
-        { "<leader>b<left>",  ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
-        { "<leader>b<right>", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
-        { "<Leader>bb",       ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
-        { "<leader>bp",       "<Cmd>BufferLineTogglePin<CR>" },
-        { "<leader>bP",       "<Cmd>BufferLineGroupClose ungrouped<CR>" },
-        { "<C-j>",            "<Cmd>BufferLineCyclePrev<CR>" },
-        { "<C-l>",            "<Cmd>BufferLineCycleNext<CR>" },
+        { "<leader>bj", ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
+        { "<leader>bl", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
+        { "<Leader>bb", ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
+        { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>" },
+        { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>" },
+        { "<C-j>",      "<Cmd>BufferLineCyclePrev<CR>" },
+        { "<C-l>",      "<Cmd>BufferLineCycleNext<CR>" },
     },
     event = 'VeryLazy',
     opts = function()

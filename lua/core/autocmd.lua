@@ -96,4 +96,3 @@ end
 -- endfunction
 -- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 -- ]]
--- Don't auto comment when o
