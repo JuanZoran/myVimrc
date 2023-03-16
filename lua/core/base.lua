@@ -38,8 +38,9 @@ opt.smartcase      = true
 -- opt.title = true -- for show current dir
 opt.timeoutlen     = 500 --default value = 1000
 opt.ttimeout       = true
-opt.ttimeoutlen    = 50 --default value = 1000
+opt.ttimeoutlen    = 50  --default value = 1000
 opt.hlsearch       = false
+
 
 -- Cool floating window popup menu for completion on command line
 opt.tabstop        = 4
@@ -66,7 +67,9 @@ opt.helplang       = "cn"
 opt.updatetime     = 200
 -- opt.equalalways = false -- I don't like my windows changing all the time
 opt.undofile       = true
-opt.undodir        = vim.fn.expand('~/.vim/')
+
+---@diagnostic disable-next-line: assign-type-mismatch
+opt.undodir        = os.getenv('HOME') .. '/.vim'
 
 ---  SETTINGS  ---
 opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)
@@ -82,7 +85,7 @@ vim.g.did_install_syntax_menu = 1
 ----============  disable end  ===========-------
 
 
--- vim.opt.formatoptions:remove("o")
+-- opt.formatoptions = 'jql'
 -- 	- "a" -- Auto formatting is BAD.
 -- 	- "t" -- Don't auto format my code. I got linters for that.
 -- 	+ "c" -- In general, I like it when comments respect textwidth
