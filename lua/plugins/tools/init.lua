@@ -3,20 +3,35 @@ local plugins = require("util.plugin")()
 plugins:add {
     "JuanZoran/Trans.nvim",
     keys = {
-        { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = ' Translate' },
-        { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = ' 自动发音' },
-        { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
+        { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
+        { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = ' 自动发音' },
+        {
+            'mi',
+            function()
+                package.loaded['Trans.test'] = false
+                require('Trans.test')
+            end,
+            desc = 'test'
+        },
+        -- { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
+    -- lazy = false,
     dependencies = 'kkharji/sqlite.lua',
     opts = {
         frontend = {
             hover = {
-                spinner = 'moon'
+                spinner = 'moon',
             }
         }
     },
     dev = true,
 }
+
+plugins:add {
+    'tweekmonster/helpful.vim',
+    cmd = 'HelpfulVersion',
+}
+
 
 plugins:add {
     "folke/todo-comments.nvim",
