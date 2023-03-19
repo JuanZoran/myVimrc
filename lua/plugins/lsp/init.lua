@@ -110,6 +110,7 @@ return {
                         formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
                         formatting.black.with { extra_args = { '--fast' } },
                         formatting.beautysh,
+                        -- formatting.stylua,
                         -- null_ls.builtins.completion.luasnip,
                     },
                     on_attach = function(server, bufnr)

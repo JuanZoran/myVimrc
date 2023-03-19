@@ -1,4 +1,4 @@
-local lazygit
+local lazygit, ranger
 
 local config = function(_, opts)
     require("toggleterm").setup(opts)
@@ -7,7 +7,13 @@ local config = function(_, opts)
         cmd = 'lazygit',
         hidden = true,
     }
+
+    ranger = t:new {
+        cmd = 'ranger',
+        hidden = true,
+    }
 end
+
 
 local flatten = {
     'willothy/flatten.nvim',
@@ -52,16 +58,11 @@ local toggleterm = {
     cmd = 'ToggleTerm',
     keys = {
         '<C-d>',
-        {
-            '<C-g>',
-            function()
-                lazygit:toggle()
-            end,
-            desc = 'Toggle Lazygit'
-        },
-        { '<C-e>u', '<Cmd>ToggleTerm direction=horizontal<CR>', desc = 'Toggle Terminal horizontal' },
-        { '<C-e>o', '<Cmd>ToggleTerm direction=vertical<CR>',   desc = 'Toggle Terminal vertical' },
-        { '<C-e>i', '<Cmd>ToggleTerm direction=float<CR>',      desc = 'Toggle Terminal float' },
+        { '<C-g>',     function() lazygit:toggle() end,            desc = 'Toggle Lazygit' },
+        { '<leader>R', function() ranger:toggle() end,             desc = 'Toggle Lazygit' },
+        { '<C-e>u',    '<Cmd>ToggleTerm direction=horizontal<CR>', desc = 'Toggle Terminal horizontal' },
+        { '<C-e>o',    '<Cmd>ToggleTerm direction=vertical<CR>',   desc = 'Toggle Terminal vertical' },
+        { '<C-e>i',    '<Cmd>ToggleTerm direction=float<CR>',      desc = 'Toggle Terminal float' },
         -- { '<C-e><C-e>', '<Cmd>ToggleTermSendCurrentLine<CR>',       desc = 'Send Current Line' },
     },
     opts = {
@@ -81,4 +82,7 @@ local toggleterm = {
     config = config
 }
 
-return { flatten, toggleterm }
+return {
+    flatten,
+    toggleterm,
+}

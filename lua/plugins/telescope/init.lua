@@ -105,14 +105,10 @@ local config = function()
                     ["<C-x>"]   = actions.select_horizontal,
                     ["<C-v>"]   = actions.select_vertical,
                     ["<C-t>"]   = actions.select_tab,
+                    ["<C-u>"]   = false,
                     -- ["<C-e>"] = actions.preview_scrolling_up,
                     -- ["<C-d>"] = actions.preview_scrolling_down,
-
-                    -- ["<PageUp>"] = actions.results_scrolling_up,
-                    -- ["<Pa geDown>"] = actions.results_scrolling_down,
                     ["<C-o>"]   = actions.send_to_qflist + actions.open_qflist,
-                    ["<Tab>"]   = actions.toggle_selection + actions.move_selection_worse,
-                    ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
                     ["<C-g>"]   = actions.send_to_qflist + actions.open_qflist,
                     ["<M-q>"]   = actions.send_selected_to_qflist + actions.open_qflist,
                     --["<C-l>"] = actions.complete_tag,
@@ -124,8 +120,6 @@ local config = function()
                     ["<C-x>"] = actions.select_horizontal,
                     ["<C-v>"] = actions.select_vertical,
                     ["<C-t>"] = actions.select_tab,
-                    ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                    ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
                     ["<C-q>"] = actions.close,
                     ["<C-o>"] = actions.send_to_qflist + actions.open_qflist,
                     ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
@@ -140,9 +134,6 @@ local config = function()
                     ["G"] = actions.move_to_bottom,
                     ["<C-i>"] = actions.preview_scrolling_up,
                     ["<C-k>"] = actions.preview_scrolling_down,
-                    -- ["<PageUp>"] = actions.results_scrolling_up,
-                    -- ["<PageDown>"] = actions.results_scrolling_down,
-
                     ["?"] = actions.which_key,
                 },
             },
@@ -151,7 +142,7 @@ local config = function()
             ['ui-select'] = { require('telescope.themes').get_dropdown() },
             project = {
                 theme = "dropdown",
-                sync_with_nvim_tree = true,
+                hidden_files = true,
             },
             fzf = {
                 fuzzy = true,                   -- false will only do exact matching

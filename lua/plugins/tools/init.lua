@@ -22,7 +22,8 @@ plugins:add {
             hover = {
                 spinner = 'moon',
             }
-        }
+        },
+        -- backend_order = { 'youdao', 'baidu' },
     },
     dev = true,
 }
