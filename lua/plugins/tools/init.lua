@@ -18,6 +18,12 @@ plugins:add {
 }
 
 plugins:add {
+    'tweekmonster/helpful.vim',
+    cmd = 'HelpfulVersion',
+}
+
+
+plugins:add {
     "folke/todo-comments.nvim",
     event = { 'BufReadPre', 'BufNewFile' },
     config = function() require 'plugins.tools.todo-comments' end,
@@ -125,6 +131,11 @@ plugins:add {
     "windwp/nvim-spectre",
     keys = {
         { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+        {
+            '<leader>sw',
+            function() require("spectre").open_visual { select_word = true } end,
+            desc = "Search current word",
+        }
     },
 }
 
@@ -248,7 +259,7 @@ plugins:add {
     "olimorris/persisted.nvim",
     cmd = { 'SessionLoad', 'SessionLoadLast' },
     keys = {
-        { '<leader>ss', '<CMD>Telescope persisted<CR>', desc = 'Check out the Session', }
+        { '<leader>ss', '<Cmd>Telescope persisted<CR>', desc = 'Check out the Session', }
     },
     opts = {
         use_git_branch = true, -- create session files based on the branch of the git enabled repository

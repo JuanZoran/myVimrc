@@ -62,10 +62,10 @@ set {
         { "<C-Right>",    "<Cmd>wincmd ><CR>" },
         { "<C-Left>",     "<Cmd>wincmd <<CR>" },
 
-        { "<C-w><Down>",  "<Cmd>wincmd J<CR>", ' Move Down' },
-        { "<C-w><Up>",    "<Cmd>wincmd K<CR>", ' Move Up' },
-        { "<C-w><Left>",  "<Cmd>wincmd H<CR>", ' Move Left' },
-        { "<C-w><Right>", "<Cmd>wincmd L<CR>", ' Move Right' },
+        { "<C-w>K",  "<Cmd>wincmd J<CR>", ' Move Down' },
+        { "<C-w>I",    "<Cmd>wincmd K<CR>", ' Move Up' },
+        { "<C-w>J",  "<Cmd>wincmd H<CR>", ' Move Left' },
+        { "<C-w>L", "<Cmd>wincmd L<CR>", ' Move Right' },
         { "<C-w>=",       "<Cmd>wincmd =<CR>", '屢Resize Window' },
     }
 }

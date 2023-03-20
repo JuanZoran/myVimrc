@@ -52,6 +52,14 @@ plugins:add {
     },
 }
 
+plugins:add {
+    "nvim-telescope/telescope-project.nvim",
+    keys = {
+        { '<C-p>', function() require 'telescope'.extensions.project.project {} end },
+    },
+}
+
+
 
 plugins:add {
     "debugloop/telescope-undo.nvim",

@@ -197,7 +197,7 @@ plugins:add {
             opts = {
                 level = vim.log.INFO,
                 stages = "slide",
-                timeout = 2000,
+                timeout = 1500,
                 icons = {
                     ERROR = "🥵",
                     WARN = "🫢",
