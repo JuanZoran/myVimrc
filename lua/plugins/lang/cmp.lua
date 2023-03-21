@@ -16,6 +16,7 @@ local source = {
     { name = "nvim_lsp", max_item_count = 3, group_index = 1 },
     { name = "path",     group_index = 1 },
     { name = "luasnip",  max_item_count = 3, group_index = 1 },
+    -- { name = "rime" },
     { name = "buffer",   max_item_count = 3, group_index = 2 },
 }
 
@@ -54,7 +55,7 @@ cmp.setup {
             end
         end,
         ["<C-u>"] = function(fallback)
-            if not require("noice.lsp").scroll( -4) and not cmp.scroll_docs( -4) then
+            if not require("noice.lsp").scroll(-4) and not cmp.scroll_docs(-4) then
                 fallback()
             end
         end,
@@ -88,7 +89,7 @@ cmp.setup {
                 fallback()
             end
         end, { "i", "s" }),
-        ['<S-C-e>'] = function (fallback)
+        ['<S-C-e>'] = function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -128,12 +129,12 @@ cmp.setup {
         },
     },
     sorting = {
-        priority_weight = 2,
         comparators = {
             -- Below is the default comparitor list and order for nvim-cmp
+            -- require('cmp_rime.compare').order,
             cmp.config.compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
             cmp.config.compare.exact,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
             cmp.config.compare.score,
             cmp.config.compare.recently_used,
             cmp.config.compare.locality,

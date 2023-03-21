@@ -217,15 +217,17 @@ plugins:add {
         "hrsh7th/cmp-path",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-cmdline",
-
         -- {
-        --     "denstiny/cmp-dictionary-nanny",
-        --     build = 'bash ./install.sh',
+        --     'yao-weijie/cmp-rime',
+        --     keys = {
+        --         { mode = 'i', '<C-;>', function() require("cmp_rime").mapping.toggle()  end },
+        --     },
         --     opts = {
-        --         database_path = os.getenv('HOME') .. '/.vim/dict/ultimate.db',
+        --         libpath = '/usr/lib/x86_64-linux-gnu/librime.so.1.7.3',
+        --         -- preselect = false, -- 预选中rime 返回的第一项,可以直接空格上屏
+        --         -- auto_commit = true, -- 自动上屏
         --     },
         -- },
-
 
         -- { "jcdickinson/codeium.nvim", config = true },
         {

@@ -219,7 +219,7 @@ plugins:add {
         {
             "rcarriga/nvim-notify",
             opts = {
-                level = vim.log.INFO,
+                level = vim.log.levels.INFO,
                 stages = "slide",
                 timeout = 1500,
                 icons = {
@@ -236,8 +236,6 @@ plugins:add {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             progress = {
                 enabled = true,
-                -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
-                -- See the section on formatting for more details on how to customize.
                 format = "lsp_progress",
                 format_done = "lsp_progress_done",
                 throttle = 1000 / 30, -- frequency to update lsp progress message
@@ -252,7 +250,6 @@ plugins:add {
         presets = {
             bottom_search = false,        -- use a classic bottom cmdline for search
             long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = false,           -- enables an input dialog for inc-rename.nvim
             lsp_doc_border = true,        -- add a border to hover docs and signature help
             command_palette = {
                 views = {
