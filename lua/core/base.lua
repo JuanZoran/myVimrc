@@ -36,18 +36,18 @@ opt.smartcase      = true
 
 -- opt.hidden = true
 -- opt.title = true -- for show current dir
-opt.timeoutlen     = 500 --default value = 1000
+opt.timeoutlen     = 400 --default value = 1000
 opt.ttimeout       = true
 opt.ttimeoutlen    = 50  --default value = 1000
 opt.hlsearch       = false
 
 
 -- Cool floating window popup menu for completion on command line
-opt.tabstop        = 4
-opt.completeopt    = "menu,menuone,noselect"
-opt.softtabstop    = 4
-opt.shiftwidth     = 4
-opt.expandtab      = true
+opt.tabstop     = 4
+opt.completeopt = "menu,menuone,noselect"
+opt.softtabstop = 4
+opt.shiftwidth  = 4
+opt.expandtab   = true
 opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
 
 
@@ -65,16 +65,17 @@ opt.wrap           = false
 -- opt.autochdir     = true
 opt.helplang       = "cn"
 opt.updatetime     = 200
--- opt.equalalways = false -- I don't like my windows changing all the time
+opt.equalalways    = true -- auto resize window
 opt.undofile       = true
+opt.cpoptions:append('>') -- :help cpoptions
 
 ---@diagnostic disable-next-line: assign-type-mismatch
-opt.undodir        = os.getenv('HOME') .. '/.vim'
+opt.undodir = os.getenv('HOME') .. '/.vim'
 
 
 -- opt.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
-  -- \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  -- \,sm:block-blinkwait175-blinkoff150-blinkon175
+-- \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+-- \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 ---  SETTINGS  ---
 opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)

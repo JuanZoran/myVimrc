@@ -3,7 +3,7 @@ local autocmd = api.nvim_create_autocmd
 
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
 
--- go to last loc when opening a buffer
+-- Go to last loc when opening a buffer
 -- autocmd("BufReadPost", {
 --     group = group,
 --     callback = function()

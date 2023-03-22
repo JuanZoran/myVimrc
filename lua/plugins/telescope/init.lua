@@ -91,11 +91,11 @@ local config = function()
         defaults = {
             prompt_prefix = " ",
             selection_caret = " ",
-            path_display = { "smart" },
-            layout_strategy = "horizontal",
-            layout_config = { prompt_position = "top" },
-            sorting_strategy = "ascending",
-            winblend = 0,
+            -- path_display = { "smart" },
+            -- layout_strategy = "horizontal",
+            -- layout_config = { prompt_position = "top" },
+            -- sorting_strategy = "ascending",
+            -- winblend = 0,
             mappings = {
                 i = {
                     ["<C-h>"]  = actions.cycle_history_next,

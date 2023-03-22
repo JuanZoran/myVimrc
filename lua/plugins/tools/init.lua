@@ -3,15 +3,15 @@ local plugins = require("util.plugin")()
 plugins:add {
     "JuanZoran/Trans.nvim",
     keys = {
-        { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = ' Translate' },
-        { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = ' 自动发音' },
+        { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = 'Translate' },
+        { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = 'Auto Play' },
         {
             'mi',
             function()
                 package.loaded['Trans.test'] = false
                 require('Trans.test')
             end,
-            desc = 'test'
+            desc = 'Trans test'
         },
         -- { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
@@ -44,26 +44,6 @@ plugins:add {
     "folke/which-key.nvim",
     event = 'VeryLazy',
     opts = {
-        plugins = {
-            marks = false,        -- shows a list of your marks on ' and `
-            registers = false,    -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-            spelling = {
-                enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-                suggestions = 30, -- how many suggestions should be shown in the list?
-            },
-            presets = {
-                operators = true,     -- adds help for operators like d, y, ... and registers them for motion / text object completion
-                motions = true,       -- adds help for motions
-                text_objects = false, -- help for text objects triggered after entering an operator
-                windows = false,      -- default bindings on <c-w>
-                nav = false,          -- misc bindings to work with windows
-                z = true,             -- bindings for folds, spelling and others prefixed with z
-                g = true,             -- bindings for prefixed with g
-            },
-        },
-        -- add operators that will trigger motion and text object completion
-        -- to enable all native operators, set the preset / operators plugin above
-        operators = { gc = "Comments", },
         popup_mappings = {
             scroll_up = "<c-i>",   -- binding to scroll up inside the popup
             scroll_down = "<c-k>", -- binding to scroll down inside the popup
@@ -74,44 +54,40 @@ plugins:add {
             spacing = 3,                                                                         -- spacing between columns
             align = "left",                                                                      -- align columns left, center or right
         },
-        ignore_missing = false,                                                                  -- enable this to hide mappings for which you didn't specify a label
         hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "require" }, -- hide mapping boilerplate
-        show_help = true,                                                                        -- show help message on the command line when the popup is visible
-        show_keys = true,                                                                        -- show the currently pressed key and its label as a message in the command line
-        triggers = "auto",                                                                       -- automatically setup triggers
         triggers_blacklist = {
-            -- list of mode / prefixes that should never be hooked by WhichKey
-            -- this is mostly relevant for key maps that start with a native binding
-            -- most people should not need to change this
             i = { "i", "k" },
             v = { "i", "k" },
         },
         window = {
-            border = "single",        -- none, single, double, shadow
-            position = "bottom",      -- bottom, top
-            margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
-            padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-            winblend = 0
+            border = "single", -- none, single, double, shadow
         },
-        -- disable the WhichKey popup for certain buf types and file types.
-        -- Disabled by deafult for Telescope
+        -- operators = {
+        --     gc = "Comments",
+        -- },
+        plugins = {
+            marks = true,         -- shows a list of your marks on ' and `
+            registers = true,     -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+            spelling = {
+                enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+                suggestions = 20, -- how many suggestions should be shown in the list?
+            },
+            presets = {
+                operators = true,     -- adds help for operators like d, y, ... and registers them for motion / text object completion
+                motions = true,       -- adds help for motions
+                text_objects = false, -- help for text objects triggered after entering an operator
+                windows = true,       -- default bindings on <c-w>
+                nav = true,           -- misc bindings to work with windows
+                z = true,             -- bindings for folds, spelling and others prefixed with z
+                g = true,             -- bindings for prefixed with g
+            },
+        },
         disable = {
             filetypes = {},
-            buftypes = { "TelescopePrompt", "NvimTree" },
+            buftypes = { "TelescopePrompt", }
         },
-        -- triggers = {"<leader>"} -- or specify a list manually
-        -- icons = {
-        --     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-        --     separator = "", -- symbol used between a key and it's label
-        --     group = "", -- symbol prepended to a group
-        -- },
     }
 }
-
--- plugins:add {
---     'toppair/peek.nvim',
---     build = 'deno task --quiet build:fast',
--- }
 
 plugins:add {
     "iamcco/markdown-preview.nvim",
@@ -133,7 +109,7 @@ plugins:add {
 plugins:add {
     'CKolkey/ts-node-action',
     keys = {
-        { "<leader>u", function() require("ts-node-action").node_action() end, desc = "🌀Trigger Node Action", }
+        { "<leader>u", function() require("ts-node-action").node_action() end, desc = "Trigger Node Action", }
     },
 }
 
@@ -205,7 +181,7 @@ plugins:add {
         check_ts = true,
         enable_abbr = true,
         fast_wrap = {
-            map = "<C-r>",
+            map = "<C-;>",
             chars = { "{", "[", "(", '"', "'", "<" },
             pattern = [=[[%'%"%)%>%]%)%}%,]]=],
             offset = 1, -- Offset from pattern match
@@ -239,8 +215,7 @@ plugins:add {
             mode = { 'n', 'x' },
             "<leader>rj",
             "<Cmd>lua require('comment-box').lbox()<CR>",
-            desc =
-            "Comment Left Aligned Text"
+            desc = "Comment Left Aligned Text",
         },
         { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>",  desc = "Comment Center Line" },
         { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>",   desc = "Comment Center Line" },
@@ -268,6 +243,8 @@ plugins:add {
         }
     end,
 }
+
+
 
 plugins:add {
     'glepnir/nerdicons.nvim',
@@ -329,10 +306,12 @@ plugins:add {
     },
 }
 
+
+
 plugins:add {
     "folke/zen-mode.nvim",
     keys = {
-        { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' }
+        { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' },
     },
     dependencies = {
         "folke/twilight.nvim",
@@ -348,9 +327,9 @@ plugins:add {
     "ggandor/leap.nvim",
     config = function() require 'plugins.tools.leap' end,
     keys = {
-        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = '⬅️ quick jump backward' },
-        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = '💪quick jump cross window' },
-        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = '➡️ quick jump forward' },
+        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = 'Jump backward' },
+        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = 'Jump cross window' },
+        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = 'Jump forward' },
     },
     dependencies = {
         'ggandor/flit.nvim',

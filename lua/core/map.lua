@@ -7,38 +7,22 @@ local function set(map)
     end
 end
 
-if vim.g.neovide then
-    set {
-        mode = { 'n', 'x', 'o' }, -- be appended to other operator
-        map = {
-            { "i", "gk" },
-            { "k", "gj" },
-            { "j", "h" },
-            { "h", "i" },
-            { 'L', '$' },
-            { 'J', '0' },
-            { 'I', '<C-u>zz' },
-            { 'K', '<C-d>zz' },
-        }
-    }
-end
-
 set {
     mode = 'n',
     map = {
-        { 'U',                 'Vp', },
-        -- INFO : command
-        { "<Leader>w",         ":w<CR>",          ' Save Current Window' },
-        { "<Leader><leader>w", ":wqa<CR>",        ' close all window' },
-        { "qw",                ":close<CR>" },
-        { "qd",                ":bdelete!<CR>" },
+        { 'U',                 'VP', },
         { "<S-CR>",            "J", },
+        { "<Leader>w",         "<Cmd>w<CR>",          'Save Current Window' },
+        { "<Leader><leader>w", "<Cmd>wqa<CR>",        'Save and quit all window' },
+        { "<Leader>ck",        "<Cmd>set spell!<CR>", 'Toggle builtin spell checker' },
+        { "qd",                "<Cmd>bdelete!<CR>" },
+        { "<Leader>p",         "<Cmd>Lazy<CR>",       'Plugin Manager' },
         { "<C-q>",             '<Cmd>q!<CR>' },
-        { "<Leader>p",         "<Cmd>Lazy<CR>",   '痢[Sync | Install] Plugin' },
-        { "<Leader>ck",        ":set spell!<CR>", '暈Toggle vim builtin spell checker' },
+
         { "yp",                "yip" },
         { "dp",                "dip" },
         -- { "vp",       "vip"   },
+
         { "cp",                "cip" },
         -- INFO  in word
         { "yw",                "yiw" },
@@ -57,32 +41,33 @@ set {
         { "v;",                [[vi']] },
 
         { "Z",                 'zf' },
-        { "<leader>a",         "@",               'macro' },
         { "<C-CR>",            "/<++><CR>vf>c" },
-        { "<C-w>o",            ":vsp<CR>",        ' Split Window' },
-        { "<C-w>u",            ":sp<CR>",         ' Split Window Vertically' },
-        { "<C-w>n",            ":only<CR>",       ' Close Another Window' },
+        { "<leader>a",         "@",                   'Macro' },
+        { "<C-w>o",            "<Cmd>vsp<CR>",        'Split Window' },
+        { "<C-w>u",            "<Cmd>sp<CR>",         'Split Window Vertically' },
+        { "<C-w>n",            "<Cmd>only<CR>",       'Close Another Window' },
     }
 }
+
 
 set {
     mode = { 'n', 't' },
     map = {
-        { "<C-w>j",       "<Cmd>wincmd h<Cr>", ' Jump Left' },
-        { "<C-w>l",       "<Cmd>wincmd l<Cr>", ' Jump Right' },
-        { "<C-w>k",       "<Cmd>wincmd j<Cr>", ' Jump Down' },
-        { "<C-w>i",       "<Cmd>wincmd k<Cr>", ' Jump Up' },
-        -- INFO: resize
-        { "<C-Down>",     "<Cmd>wincmd -<CR>" },
-        { "<C-Up>",       "<Cmd>wincmd +<CR>" },
-        { "<C-Right>",    "<Cmd>wincmd ><CR>" },
-        { "<C-Left>",     "<Cmd>wincmd <<CR>" },
+        { "<C-w>j",    "<Cmd>wincmd h<Cr>", 'Left' },
+        { "<C-w>l",    "<Cmd>wincmd l<Cr>", 'Right' },
+        { "<C-w>k",    "<Cmd>wincmd j<Cr>", 'Down' },
+        { "<C-w>i",    "<Cmd>wincmd k<Cr>", 'Up' },
+        -- INFO : resize
+        { "<C-Down>",  "<Cmd>wincmd -<CR>" },
+        { "<C-Up>",    "<Cmd>wincmd +<CR>" },
+        { "<C-Right>", "<Cmd>wincmd ><CR>" },
+        { "<C-Left>",  "<Cmd>wincmd <<CR>" },
 
-        { "<C-w>K",  "<Cmd>wincmd J<CR>", ' Move Down' },
-        { "<C-w>I",    "<Cmd>wincmd K<CR>", ' Move Up' },
-        { "<C-w>J",  "<Cmd>wincmd H<CR>", ' Move Left' },
-        { "<C-w>L", "<Cmd>wincmd L<CR>", ' Move Right' },
-        { "<C-w>=",       "<Cmd>wincmd =<CR>", '屢Resize Window' },
+        { "<C-w>K",    "<Cmd>wincmd J<CR>", 'Move Down' },
+        { "<C-w>I",    "<Cmd>wincmd K<CR>", 'Move Up' },
+        { "<C-w>J",    "<Cmd>wincmd H<CR>", 'Move Left' },
+        { "<C-w>L",    "<Cmd>wincmd L<CR>", 'Move Right' },
+        { "<C-w>=",    "<Cmd>wincmd =<CR>", 'Resize Window' },
     }
 }
 
@@ -109,16 +94,6 @@ set {
     -- {"<++>", "<++>"},
 }
 
-
--- set {
---     mode = 'c',
---     map = {
---         { "<C-j>",  "<Left>" },
---         { "<C-l>",  "<Right>" },
---     }
--- }
-
-
 set {
     mode = "x",
     map = {
@@ -127,7 +102,7 @@ set {
         { ">",     ">gv" },
         { "<",     "<gv" },
         { "<C-c>", [["+y]] },
-        { "p",     [["_dP]] },
+        { "p",     "P" },
         { "za",    "zf" },
     },
 }
