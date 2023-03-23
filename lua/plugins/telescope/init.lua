@@ -169,7 +169,12 @@ return {
     dependencies = {
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, -- fuzzy finder
         'nvim-telescope/telescope-ui-select.nvim',
-        "nvim-lua/plenary.nvim",
+        {
+            "nvim-lua/plenary.nvim",
+            keys = {
+                { ";t", '<Plug>PlenaryTestFile', 'Test Plugin' }
+            }
+        },
     },
     keys = keys,
     version = false,

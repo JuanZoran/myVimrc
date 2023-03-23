@@ -3,17 +3,10 @@ local plugins = require("util.plugin")()
 plugins:add {
     "JuanZoran/Trans.nvim",
     keys = {
-        { 'mm', mode = { 'n', 'x' }, '<Cmd>Translate<CR>', desc = 'Translate' },
-        { 'mk', mode = { 'n', 'x' }, '<Cmd>TransPlay<CR>', desc = 'Auto Play' },
-        {
-            'mi',
-            function()
-                package.loaded['Trans.test'] = false
-                require('Trans.test')
-            end,
-            desc = 'Trans test'
-        },
-        -- { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
+        { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = 'Translate' },
+        { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = 'Auto Play' },
+        -- { 'mi', function() end, desc = 'Trans test' },
+        { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
     -- lazy = false,
     dependencies = 'kkharji/sqlite.lua',
