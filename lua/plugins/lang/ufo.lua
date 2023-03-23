@@ -1,8 +1,9 @@
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-vim.keymap.set("n", "zp", require("ufo").peekFoldedLinesUnderCursor)
-vim.keymap.set("n", "zj", require("ufo").goPreviousClosedFold)
-vim.keymap.set("n", "zl", require("ufo").goNextClosedFold)
+local set = vim.keymap.set
+set('n', 'zR', require 'ufo'.openAllFolds)
+set('n', 'zM', require 'ufo'.closeAllFolds)
+set('n', 'zp', require 'ufo'.peekFoldedLinesUnderCursor)
+set('n', 'zj', require 'ufo'.goPreviousClosedFold)
+set('n', 'zl', require 'ufo'.goNextClosedFold)
 
 -- INFO : virtual Text hint
 local handler = function(virtText, lnum, endLnum, width, truncate)
@@ -34,14 +35,14 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 end
 
 -- global handler
-require('ufo').setup {
+require 'ufo'.setup {
     fold_virt_text_handler = handler,
     open_fold_hl_timeout = 250,
     preview = {
         mappings = {
             scrollU = 'I',
             scrollD = 'K'
-        }
+        },
     },
 }
 

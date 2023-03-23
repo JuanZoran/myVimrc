@@ -6,7 +6,7 @@ local M
 local function dedent(lines)
     local ind_size = math.huge
     for i, _ in ipairs(lines) do
-        local i1, i2 = lines[i]:find("^%s*[^%s]")
+        local i1, i2 = lines[i]:find '^%s*[^%s]'
         if i1 and i2 < ind_size then
             ind_size = i2
         end
@@ -17,9 +17,9 @@ local function dedent(lines)
 end
 
 function M.dedent(s)
-    local lst = vim.split(s, "\n")
+    local lst = vim.split(s, '\n')
     dedent(lst)
-    return table.concat(lst, "\n")
+    return table.concat(lst, '\n')
 end
 
 return M

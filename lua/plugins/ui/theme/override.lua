@@ -1,6 +1,6 @@
 return {
     Visual                      = {
-        bg = "#33467c",
+        bg = '#33467c',
     },
     Pmenu                       = {
         fg = '#A6ACCD',
@@ -12,15 +12,15 @@ return {
         bg = '#89e051',
     },
     IncSearch                   = {
-        fg = "#0f0f15",
-        bg = "#10B981",
+        fg = '#0f0f15',
+        bg = '#10B981',
     },
     MoreMsg                     = {
         -- for ufo virtual text
         fg = '#599eff',
         bold = true,
     },
-        ['@variable']           = {
+    ['@variable']               = {
         fg = '#f4b085',
     },
     DashboardHeader             = {
@@ -67,16 +67,16 @@ return {
         underline = true,
         sp = '#89e051',
     },
-        ['@keyword.return'] = {
+    ['@keyword.return']         = {
         fg = '#f55385',
         italic = true,
     },
-        ['@constant.builtin'] = {
+    ['@constant.builtin']       = {
         fg = '#83aaff',
         italic = true,
     },
-        ['@lsp.type.property'] = {
-        fg = "#E6C384",
+    ['@lsp.type.property']      = {
+        fg = '#E6C384',
         -- fg = "#b392f0",
     },
     -- ['@property']               = {
@@ -93,4 +93,3 @@ return {
     --     bg = 'NONE',
     -- },
 }
-

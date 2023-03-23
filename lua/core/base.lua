@@ -9,18 +9,18 @@ opt.showmode       = false
 opt.ruler          = false
 
 -- opt.shortmess:append { W = true, I = true, c = true, C = true }
-opt.grepprg        = "rg --vimgrep"
+opt.grepprg        = 'rg --vimgrep'
 -- opt.confirm = true -- Confirm to save changes before exiting modified buffer
 
-opt.encoding       = "utf-8"
-opt.fileencoding   = "utf-8"
+opt.encoding       = 'utf-8'
+opt.fileencoding   = 'utf-8'
 
 -- opt.smarttab = false
 opt.scrolloff      = 10
 opt.sidescrolloff  = 10
 opt.swapfile       = false
 
-opt.mouse          = "a"
+opt.mouse          = 'a'
 
 opt.cmdheight      = 0
 opt.pumheight      = 10
@@ -37,11 +37,11 @@ opt.hlsearch       = false
 
 -- Cool floating window popup menu for completion on command line
 opt.tabstop     = 4
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = 'menu,menuone,noselect'
 opt.softtabstop = 4
 opt.shiftwidth  = 4
 opt.expandtab   = true
-opt.whichwrap:append("<,>,[,],h,l") -- 可以从当前行直接前往上一行
+opt.whichwrap:append '<,>,[,],h,l'  -- 可以从当前行直接前往上一行
 
 
 opt.cursorline     = true
@@ -56,20 +56,20 @@ opt.splitbelow     = true
 opt.splitright     = true
 opt.wrap           = false
 -- opt.autochdir     = true
-opt.helplang       = "cn"
+opt.helplang       = 'cn'
 opt.updatetime     = 200
 -- opt.equalalways = false -- I don't like my windows changing all the time
 opt.undofile       = true
-opt.cpoptions:append('>') -- :help cpoptions
+opt.cpoptions:append '>'  -- :help cpoptions
 
 ---@diagnostic disable-next-line: assign-type-mismatch
-opt.undodir = os.getenv('HOME') .. '/.vim'
+opt.undodir = os.getenv 'HOME' .. '/.vim'
 
 ---  SETTINGS  ---
-opt.spelllang:append("cjk") -- disable spellchecking for asian characters (VIM algorithm does not support it)
-vim.wo.signcolumn = "yes"
+opt.spelllang:append 'cjk'  -- disable spellchecking for asian characters (VIM algorithm does not support it)
+vim.wo.signcolumn = 'yes'
 
-opt.iskeyword:append('-') -- 将word-word视为一个word, 方便daw
+opt.iskeyword:append '-'  -- 将word-word视为一个word, 方便daw
 
 -----================ disabled some native =====================
 

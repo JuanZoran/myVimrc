@@ -1,22 +1,22 @@
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-local copilot = require('copilot.suggestion')
-local kind_icons = require('util').icon.code_icon
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+local copilot = require 'copilot.suggestion'
+local kind_icons = require 'util'.icon.code_icon
 
 local menu = {
-    luasnip  = "[Snippet]",
-    nvim_lsp = "[LSP]",
-    path     = "[Path]",
-    buffer   = "[Buffer]",
+    luasnip  = '[Snippet]',
+    nvim_lsp = '[LSP]',
+    path     = '[Path]',
+    buffer   = '[Buffer]',
     -- copilot  = "[Copilot]",
     -- codeium  = '[Codeium]',
 }
 
 local source = {
-    { name = "nvim_lsp", max_item_count = 3, group_index = 1 },
-    { name = "path",     group_index = 1 },
-    { name = "luasnip",  max_item_count = 3, group_index = 1 },
-    { name = "buffer",   max_item_count = 3, group_index = 2 },
+    { name = 'nvim_lsp', max_item_count = 3, group_index = 1 },
+    { name = 'path',     group_index = 1 },
+    { name = 'luasnip',  max_item_count = 3, group_index = 1 },
+    { name = 'buffer',   max_item_count = 3, group_index = 2 },
 }
 
 local next = cmp.mapping(function()
@@ -37,7 +37,7 @@ end, { 'i', 'c' })
 
 cmp.setup {
     completion = {
-        completeopt = "menu,menuone,noselect",
+        completeopt = 'menu,menuone,noselect',
     },
     snippet = {
         expand = function(args)
@@ -48,17 +48,17 @@ cmp.setup {
         ghost_text = false,
     },
     mapping = {
-        ["<C-d>"] = function(fallback)
-            if not require("noice.lsp").scroll(4) and not cmp.scroll_docs(4) then
+        ['<C-d>'] = function(fallback)
+            if not require 'noice.lsp'.scroll(4) and not cmp.scroll_docs(4) then
                 fallback()
             end
         end,
-        ["<C-u>"] = function(fallback)
-            if not require("noice.lsp").scroll( -4) and not cmp.scroll_docs( -4) then
+        ['<C-u>'] = function(fallback)
+            if not require 'noice.lsp'.scroll(-4) and not cmp.scroll_docs(-4) then
                 fallback()
             end
         end,
-        ["<C-Space>"] = cmp.mapping {
+        ['<C-Space>'] = cmp.mapping {
             i = function()
                 if luasnip.choice_active() then
                     luasnip.change_choice()
@@ -70,25 +70,25 @@ cmp.setup {
                 end
             end,
             ---@diagnostic disable-next-line: missing-parameter
-            c = cmp.mapping.complete()
+            c = cmp.mapping.complete(),
         },
-        ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-        ["<C-c>"] = cmp.mapping({
+        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        ['<C-c>'] = cmp.mapping {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
-        }),
+        },
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<C-o>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-e>"] = cmp.mapping(function(fallback)
+        ['<CR>'] = cmp.mapping.confirm { select = false },
+        ['<C-o>'] = cmp.mapping.confirm { select = true },
+        ['<C-e>'] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable() then
                 luasnip.jump(1)
             else
                 fallback()
             end
-        end, { "i", "s" }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        end, { 'i', 's' }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
             if copilot.is_visible() then
                 copilot.accept()
             elseif cmp.visible() then
@@ -96,16 +96,16 @@ cmp.setup {
             else
                 fallback()
             end
-        end, { "i", "s" }),
-        ["<C-p>"] = prev,
-        ["<C-k>"] = next,
+        end, { 'i', 's' }),
+        ['<C-p>'] = prev,
+        ['<C-k>'] = next,
     },
     formatting = {
-        fields = { "kind", "abbr", "menu" },
+        fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
             -- Kind icons
             -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
             vim_item.menu = menu[entry.source.name]
             return vim_item
         end,
@@ -115,7 +115,7 @@ cmp.setup {
         documentation = cmp.config.window.bordered(),
         completion = {
             border = 'rounded',
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+            winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel',
             col_offset = -3,
             side_padding = 0,
         },
@@ -134,28 +134,28 @@ cmp.setup {
             cmp.config.compare.length,
             cmp.config.compare.order,
         },
-    }
+    },
 }
 
 
 -- `/` cmdline setup.
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = "buffer" },
+        { name = 'buffer' },
     },
 })
 
 -- `:` cmdline setup.
-cmp.setup.cmdline(":", {
+cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = "path" },
+        { name = 'path' },
     }, {
         {
-            name = "cmdline",
+            name = 'cmdline',
             option = {
-                ignore_cmds = { "Man", "!" },
+                ignore_cmds = { 'Man', '!' },
             },
         },
     }),
@@ -164,5 +164,5 @@ cmp.setup.cmdline(":", {
 -- If you want insert `(` after select function or method item
 cmp.event:on(
     'confirm_done',
-    require('nvim-autopairs.completion.cmp').on_confirm_done()
+    require 'nvim-autopairs.completion.cmp'.on_confirm_done()
 )

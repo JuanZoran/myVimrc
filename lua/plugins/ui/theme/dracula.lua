@@ -1,4 +1,4 @@
-require('dracula').setup {
+require 'dracula'.setup {
 
     transparent_bg = true, -- default false
 
@@ -6,7 +6,7 @@ require('dracula').setup {
 
     italic_comment = true, -- default false
 
-    overrides = require('plugins.ui.theme.override')
+    overrides = require 'plugins.ui.theme.override'
 }
 
-vim.cmd[[colorscheme dracula]]
+vim.cmd [[colorscheme dracula]]

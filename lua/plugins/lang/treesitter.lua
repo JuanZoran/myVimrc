@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup {
+require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         'markdown',
         'markdown_inline',
@@ -23,7 +23,7 @@ require("nvim-treesitter.configs").setup {
             node_incremental = '<CR>',
             node_decremental = '<BS>',
             scope_incremental = '<TAB>',
-        }
+        },
     },
     -- for ts-rainbow plugins
     rainbow = {
@@ -37,7 +37,7 @@ require("nvim-treesitter.configs").setup {
     indent = {
         enable = true,
     },
-    textobjects = require("plugins.lang.textobjects"),
+    textobjects = require 'plugins.lang.textobjects',
     endwise = {
         enable = true,
     },

@@ -11,5 +11,5 @@ return {
     },
     init_options = {
         usePlaceholders = true, -- add parameter placeholders when completing a function
-    }
+    },
 }

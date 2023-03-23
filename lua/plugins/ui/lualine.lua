@@ -6,7 +6,7 @@ local function diff_source()
         return {
             added = gitsigns.added,
             modified = gitsigns.changed,
-            removed = gitsigns.removed
+            removed = gitsigns.removed,
         }
     end
 end
@@ -43,10 +43,10 @@ local lsp_status = {
     },
 }
 
-require("lualine").setup {
+require 'lualine'.setup {
     options = {
         -- component_separators = { left = '', right = '' },
-        theme = "auto",
+        theme = 'auto',
         section_separators = {
             right = '',
             left = '',
@@ -54,23 +54,23 @@ require("lualine").setup {
         -- globalstatus = false,
         disabled_filetypes = {
             statusline = {
-                "alpha",
-                "startuptime",
-                "toggleterm",
-                "lspsagaoutline",
+                'alpha',
+                'startuptime',
+                'toggleterm',
+                'lspsagaoutline',
             },
             winbar = {
-                "alpha",
-                "help",
-                "packer",
-                "lspsagaoutline",
-                "toggleterm",
-                "dap-repl",
-                "dapui_console",
-                "dapui_watches",
-                "dapui_stacks",
-                "dapui_breakpoints",
-                "dapui_scopes",
+                'alpha',
+                'help',
+                'packer',
+                'lspsagaoutline',
+                'toggleterm',
+                'dap-repl',
+                'dapui_console',
+                'dapui_watches',
+                'dapui_stacks',
+                'dapui_breakpoints',
+                'dapui_scopes',
             },
         },
     },
@@ -90,7 +90,7 @@ require("lualine").setup {
         lualine_a = {
             {
                 function()
-                    return '盛 ' .. os.date('%A %H:%M')
+                    return '盛 ' .. os.date '%A %H:%M'
                 end,
                 color = {
                     fg = '#000000', bg = '#10B981'
@@ -99,19 +99,19 @@ require("lualine").setup {
         },
         lualine_b = {
             {
-                require("noice").api.status.mode.get,
-                cond = require("noice").api.status.mode.has,
-                color = { fg = "#ff9e64" },
+                require 'noice'.api.status.mode.get,
+                cond = require 'noice'.api.status.mode.has,
+                color = { fg = '#ff9e64' },
             },
         },
         lualine_c = {
             {
                 function()
-                    return require('nvim-navic').get_location()
+                    return require 'nvim-navic'.get_location()
                 end,
                 -- require('nvim-navic').get_location,
-                cond = require('nvim-navic').is_available,
-            }
+                cond = require 'nvim-navic'.is_available,
+            },
         },
     },
     -- extensions = { 'neo-tree' }

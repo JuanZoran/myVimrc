@@ -4,47 +4,47 @@ local autocmd = api.nvim_create_autocmd
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
 autocmd('BufRead', {
     group = group,
-    command = [[silent! loadview]]
+    command = [[silent! loadview]],
 })
 
 autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
-    command = [[silent! mkview]]
+    command = [[silent! mkview]],
 })
 
 
 -- set tabstop size for markdown and html file
--- autocmd("FileType", {
---     group = group,
---     pattern = { "markdown", "html" },
---     command = [[setlocal tabstop=2 shiftwidth=2]],
--- })
+autocmd('FileType', {
+    group = group,
+    pattern = { 'yaml' },
+    command = [[setlocal tabstop=4 shiftwidth=4]],
+})
 
 -- Don't auto comment when o
-autocmd("FileType", { command = [[set formatoptions-=cro]] })
+autocmd('FileType', { command = [[set formatoptions-=cro]] })
 
-autocmd("TextYankPost", {
+autocmd('TextYankPost', {
     group = group,
     callback = function()
         vim.highlight.on_yank {
-            higroup = "IncSearch",
+            higroup = 'IncSearch',
             timeout = 250,
         }
     end,
 })
 
 -- resize splits if window got resized
-autocmd("VimResized", {
+autocmd('VimResized', {
     callback = function()
-        vim.cmd("tabdo wincmd =")
+        vim.cmd 'tabdo wincmd ='
     end,
 })
 
 
 -- NOTE  Snip Utility
-autocmd("BufEnter", {
+autocmd('BufEnter', {
     group = group,
-    pattern = "*/snips/*.lua",
+    pattern = '*/snips/*.lua',
     callback = function()
         vim.keymap.set('n', '<CR>', '/-- End Snippets --<CR>:noh<CR>2<Up>o', { silent = true, buffer = true })
     end,
@@ -52,13 +52,13 @@ autocmd("BufEnter", {
 
 
 -- INFO Fix Input Method Switch
-if vim.fn.executable('fcitx5-remote') == 1 then
+if vim.fn.executable 'fcitx5-remote' == 1 then
     local state = ''
     autocmd('InsertLeave', {
         group = group,
         callback = function()
-            state = io.popen('fcitx5-remote'):read('*a')
-            os.execute('fcitx5-remote -c')
+            state = io.popen 'fcitx5-remote':read '*a'
+            os.execute 'fcitx5-remote -c'
         end,
     })
 
@@ -66,7 +66,7 @@ if vim.fn.executable('fcitx5-remote') == 1 then
         group = group,
         callback = function()
             if state == '2\n' then
-                os.execute('fcitx5-remote -o')
+                os.execute 'fcitx5-remote -o'
             end
         end,
     })

@@ -1,7 +1,7 @@
 ---@diagnostic disable: unused-local, need-check-nil, undefined-global
 local snips = {}
 local function bash(_, snip)
-    local file = io.popen(snip.trigger, "r")
+    local file = io.popen(snip.trigger, 'r')
     local res = {}
     for line in file:lines() do
         table.insert(res, line)

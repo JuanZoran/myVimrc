@@ -1,4 +1,4 @@
-local plugins = require("util.plugin")()
+local plugins = require 'util.plugin'()
 plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
@@ -6,14 +6,14 @@ plugins:add {
 
 
 plugins:add {
-    "catppuccin/nvim",
+    'catppuccin/nvim',
     event = 'VimEnter',
-    name = "catppuccin",
+    name = 'catppuccin',
     opts = function()
         return {
             flavour = 'macchiato',
             transparent_background = true,
-            custom_highlights = require('plugins.ui.theme.override'),
+            custom_highlights = require 'plugins.ui.theme.override',
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -46,7 +46,7 @@ plugins:add {
         }
     end,
     config = function(_, opts)
-        require('catppuccin').setup(opts)
+        require 'catppuccin'.setup(opts)
         vim.cmd.colorscheme 'catppuccin'
     end,
     priority = 1000,
@@ -66,24 +66,24 @@ plugins:add {
             hl.Cursor = {
                 bg = '#58a6ff',
             }
-        end
+        end,
     },
     config = function(_, opts)
-        require('tokyonight').setup(opts)
-        vim.cmd.colorscheme('tokyonight')
-    end
+        require 'tokyonight'.setup(opts)
+        vim.cmd.colorscheme 'tokyonight'
+    end,
 }
 
 plugins:add {
-    "uga-rosa/ccc.nvim",
+    'uga-rosa/ccc.nvim',
     cmd = {
         'CccHighlighterToggle',
-        "CccPick",
-        "CccConvert",
+        'CccPick',
+        'CccConvert',
     },
-    ft = { 'css', 'html', },
+    ft = { 'css', 'html' },
     config = function(plugin)
-        local ccc = require("ccc")
+        local ccc = require 'ccc'
         local mapping = ccc.mapping
         ccc.setup {
             highlighter = {
@@ -95,7 +95,7 @@ plugins:add {
                 h = mapping.toggle_input_mode,
                 i = 'k',
                 ['<C-q>'] = mapping.quit,
-            }
+            },
         }
     end,
 }
@@ -108,23 +108,23 @@ plugins:add {
 }
 
 plugins:add { -- 状态栏
-    "nvim-lualine/lualine.nvim",
+    'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     config = function()
-        require "plugins.ui.lualine"
+        require 'plugins.ui.lualine'
     end,
     dependencies = {
         'SmiteshP/nvim-navic',
         opts = {
-            separator = " >> ",
+            separator = ' >> ',
             highlight = true,
             depth_limit = 5,
         },
         init = function()
             -- vim.g.navic_silence = true
-            require("plugins.lsp.handlers").attach(function(client, buffer)
+            require 'plugins.lsp.handlers'.attach(function(client, buffer)
                 if client.server_capabilities.documentSymbolProvider then
-                    require("nvim-navic").attach(client, buffer)
+                    require 'nvim-navic'.attach(client, buffer)
                 end
             end)
         end,
@@ -132,15 +132,15 @@ plugins:add { -- 状态栏
 }
 
 plugins:add {
-    "nvim-neo-tree/neo-tree.nvim",
+    'nvim-neo-tree/neo-tree.nvim',
     init = function()
         -- Unless you are still migrating, remove the deprecated commands from v1.x
         vim.g.neo_tree_remove_legacy_commands = 1
         if vim.fn.argc() == 1 then
             ---@diagnostic disable-next-line: param-type-mismatch
             local stat = vim.loop.fs_stat(vim.fn.argv(0))
-            if stat and stat.type == "directory" then
-                require("neo-tree")
+            if stat and stat.type == 'directory' then
+                require 'neo-tree'
             end
         end
     end,
@@ -152,75 +152,75 @@ plugins:add {
         { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                          desc = '📁File Explorer from HOME' },
         { '<C-w>d',     '<Cmd>Neotree reveal reveal_force_cwd toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
     },
-    branch = "v2.x",
+    branch = 'v2.x',
     opts = function()
-        return require('plugins.ui.neo-tree')
+        return require 'plugins.ui.neo-tree'
     end,
     dependencies = {
         's1n7ax/nvim-window-picker',
         config = true,
-    }
+    },
 }
 
 plugins:add { -- 标签栏
-    "akinsho/bufferline.nvim",
+    'akinsho/bufferline.nvim',
     keys = {
-        { "<leader>bj", ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
-        { "<leader>bl", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
-        { "<Leader>bb", ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
-        { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>" },
-        { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>" },
-        { "<C-j>",      "<Cmd>BufferLineCyclePrev<CR>" },
-        { "<C-l>",      "<Cmd>BufferLineCycleNext<CR>" },
+        { '<leader>bj', ':BufferLineMovePrev<CR>',                desc = '[]Move Buffer to Left' },
+        { '<leader>bl', ':BufferLineMoveNext<CR>',                desc = '[]Move Buffer to Right' },
+        { '<Leader>bb', ':BufferLinePickClose<CR>',               desc = '﫧 Pick a Buffer to delete' },
+        { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
+        { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },
+        { '<C-j>',      '<Cmd>BufferLineCyclePrev<CR>' },
+        { '<C-l>',      '<Cmd>BufferLineCycleNext<CR>' },
     },
     event = 'VeryLazy',
     opts = function()
         return {
-            highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            highlights = require 'catppuccin.groups.integrations.bufferline'.get(),
             options = {
-                diagnostics = "nvim_lsp",
+                diagnostics = 'nvim_lsp',
                 always_show_bufferline = true,
                 diagnostics_indicator = function(_, _, diagnostics_dict)
-                    local s = " "
+                    local s = ' '
                     for e, n in pairs(diagnostics_dict) do
-                        local sym = e == "error" and " "
-                            or (e == "warning" and " " or "")
+                        local sym = e == 'error' and ' '
+                            or (e == 'warning' and ' ' or '')
                         s = s .. n .. sym
                     end
                     return vim.trim(s)
                 end,
                 show_buffer_close_icons = true,
                 show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
-                modified_icon = "💌",
+                modified_icon = '💌',
                 -- separator_style = "triky", -- slant, padded_slant | triky
                 -- offsets = {
                 -- },
             },
         }
-    end
+    end,
 }
 
 plugins:add {
     'goolord/alpha-nvim',
     event = 'VimEnter',
-    config = function() require("plugins.ui.alpha") end,
+    config = function() require 'plugins.ui.alpha' end,
 }
 
 plugins:add {
-    "folke/noice.nvim",
+    'folke/noice.nvim',
     event = 'VeryLazy',
     dependencies = {
-        "muniftanjim/nui.nvim",
+        'muniftanjim/nui.nvim',
         {
-            "rcarriga/nvim-notify",
+            'rcarriga/nvim-notify',
             opts = {
                 level = vim.log.levels.INFO,
-                stages = "slide",
+                stages = 'slide',
                 timeout = 1500,
                 icons = {
-                    ERROR = "🥵",
-                    WARN = "🫢",
-                    INFO = "🤔",
+                    ERROR = '🥵',
+                    WARN = '🫢',
+                    INFO = '🤔',
                 },
             },
         },
@@ -233,15 +233,15 @@ plugins:add {
                 enabled = true,
                 -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
                 -- See the section on formatting for more details on how to customize.
-                format = "lsp_progress",
-                format_done = "lsp_progress_done",
+                format = 'lsp_progress',
+                format_done = 'lsp_progress_done',
                 throttle = 1000 / 30, -- frequency to update lsp progress message
-                view = "mini",
+                view = 'mini',
             },
             override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
+                ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+                ['vim.lsp.util.stylize_markdown'] = true,
+                ['cmp.entry.get_documentation'] = true,
             },
         },
         presets = {
@@ -253,34 +253,34 @@ plugins:add {
                 views = {
                     cmdline_popup = {
                         position = {
-                            row = "50%",
-                            col = "50%",
+                            row = '50%',
+                            col = '50%',
                         },
                         size = {
                             min_width = 60,
-                            width = "auto",
-                            height = "auto",
+                            width = 'auto',
+                            height = 'auto',
                         },
                     },
                 },
             },
         },
-    }
+    },
 }
 
 
 local map = {
     mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
-        { "i", "k" },
-        { "k", "j" },
-        { "j", "h" },
-        { "h", "i" },
+        { 'i', 'k' },
+        { 'k', 'j' },
+        { 'j', 'h' },
+        { 'h', 'i' },
         { 'L', '$' },
         { 'J', '0' },
         { 'I', '<C-u>zz' },
         { 'K', '<C-d>zz' },
-    }
+    },
 }
 local s = vim.keymap.set
 for _, v in ipairs(map.map) do
@@ -297,43 +297,43 @@ plugins:add {
             mode = { 'n', 'x' },
             'H',
             function()
-                vim.defer_fn(require('specs').show_specs, 10)
+                vim.defer_fn(require 'specs'.show_specs, 10)
                 api.nvim_feedkeys('I', 'n', false)
-            end
+            end,
         },
 
         {
             mode = { 'n', 'x' },
             'A',
             function()
-                vim.defer_fn(require('specs').show_specs, 10)
+                vim.defer_fn(require 'specs'.show_specs, 10)
                 api.nvim_feedkeys('A', 'n', false)
-            end
+            end,
         },
 
         {
             mode = { 'n', 'x' },
             'J',
             function()
-                local pos = api.nvim_get_current_line():find('%S')
-                if pos and fn.col('.') ~= pos then
-                    vim.defer_fn(require('specs').show_specs, 10)
-                    fn.cursor { fn.line('.'), pos }
+                local pos = api.nvim_get_current_line():find '%S'
+                if pos and fn.col '.' ~= pos then
+                    vim.defer_fn(require 'specs'.show_specs, 10)
+                    fn.cursor { fn.line '.', pos }
                 end
-            end
+            end,
         },
 
         {
             mode = { 'n', 'x' },
             'L',
             function()
-                local _cur = fn.col('.')
-                local _end = fn.col('$') - 1
+                local _cur = fn.col '.'
+                local _end = fn.col '$' - 1
                 if _end ~= 0 and _cur ~= _end then
-                    vim.defer_fn(require("specs").show_specs, 10)
-                    fn.cursor { fn.line('.'), fn.col('$') }
+                    vim.defer_fn(require 'specs'.show_specs, 10)
+                    fn.cursor { fn.line '.', fn.col '$' }
                 end
-            end
+            end,
         },
     },
     opts = function()
@@ -345,9 +345,9 @@ plugins:add {
                 inc_ms = 10,  -- time increments used for fade/resize effects
                 blend = 85,   -- starting blend, between 0-100 (fully transparent), see :h winblend
                 width = 10,
-                winhl = "Cursor",
-                fader = require('specs').linear_fader,
-                resizer = require('specs').shrink_resizer
+                winhl = 'Cursor',
+                fader = require 'specs'.linear_fader,
+                resizer = require 'specs'.shrink_resizer,
             },
             ignore_buftypes = {
                 nofile = true,
@@ -372,9 +372,9 @@ plugins:add {
             'TelescopePrompt'
         },
         fancy = {
-            head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+            head = { cursor = '▷', texthl = 'SmoothCursor', linehl = 'CursorLine' },
             -- head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
-            enable = true
+            enable = true,
         },
     },
 }

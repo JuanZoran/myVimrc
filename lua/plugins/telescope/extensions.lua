@@ -1,13 +1,13 @@
-local plugins = require("util.plugin")()
+local plugins = require 'util.plugin'()
 plugins:add {
-    "jvgrootveld/telescope-zoxide", -- powerful cd
+    'jvgrootveld/telescope-zoxide', -- powerful cd
     keys = {
-        { '<leader>cd', '<cmd>Telescope zoxide list<cr>', desc = ' Cd recently directory', }
+        { '<leader>cd', '<cmd>Telescope zoxide list<cr>', desc = ' Cd recently directory' },
     },
 }
 
 plugins:add {
-    "AckslD/nvim-neoclip.lua",
+    'AckslD/nvim-neoclip.lua',
     event = 'TextYankPost',
     keys = {
         { '<leader><C-p>', '<Cmd>Telescope neoclip<cr>',         desc = '📋Clipboard History' },
@@ -39,21 +39,21 @@ plugins:add {
     },
 
     config = function(_, opts)
-        require('neoclip').setup(opts)
-        require("telescope").load_extension "neoclip"
-    end
+        require 'neoclip'.setup(opts)
+        require 'telescope'.load_extension 'neoclip'
+    end,
 
 }
 
 plugins:add {
     'nvim-telescope/telescope-symbols.nvim',
     keys = {
-        { '<leader>mm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' }
+        { '<leader>mm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' },
     },
 }
 
 plugins:add {
-    "nvim-telescope/telescope-project.nvim",
+    'nvim-telescope/telescope-project.nvim',
     keys = {
         { '<C-p>', function() require 'telescope'.extensions.project.project {} end },
     },
@@ -62,28 +62,28 @@ plugins:add {
 
 
 plugins:add {
-    "debugloop/telescope-undo.nvim",
+    'debugloop/telescope-undo.nvim',
     keys = {
-        { '<leader>tu', '<cmd>Telescope undo<cr>', desc = ' Undo History' }
+        { '<leader>tu', '<cmd>Telescope undo<cr>', desc = ' Undo History' },
     },
     config = function()
-        require("telescope").setup {
+        require 'telescope'.setup {
             extensions = {
                 undo = {
                     mappings = {
-                        i = { ['<CR>'] = require("telescope-undo.actions").restore, },
-                    }
-                }
-            }
+                        i = { ['<CR>'] = require 'telescope-undo.actions'.restore },
+                    },
+                },
+            },
         }
-        require("telescope").load_extension "undo"
+        require 'telescope'.load_extension 'undo'
     end,
 }
 
 plugins:add {
     'renerocksai/telekasten.nvim',
     keys = {
-        { 'mn', '<cmd>Telekasten panel<cr>', desc = '📚Telekasten' }
+        { 'mn', '<cmd>Telekasten panel<cr>', desc = '📚Telekasten' },
     },
 }
 

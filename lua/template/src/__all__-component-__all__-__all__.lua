@@ -1,6 +1,6 @@
 local M = {}
 
-M.component = function (field)
+M.component = function(field)
     -- TODO : <++>
 end
 
