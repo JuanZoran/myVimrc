@@ -315,7 +315,7 @@ plugins:add {
             mode = { 'n', 'x' },
             'J',
             function()
-                local pos = fn.getline('.'):find('%S')
+                local pos = api.nvim_get_current_line():find('%S')
                 if pos and fn.col('.') ~= pos then
                     vim.defer_fn(require('specs').show_specs, 10)
                     fn.cursor { fn.line('.'), pos }
