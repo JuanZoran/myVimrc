@@ -82,8 +82,8 @@ cmp.setup {
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<C-o>"] = cmp.mapping.confirm({ select = true }),
         ["<C-e>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
+            if luasnip.locally_jumpable() then
+                luasnip.jump(1)
             else
                 fallback()
             end
@@ -121,7 +121,6 @@ cmp.setup {
         },
     },
     sorting = {
-        priority_weight = 2,
         comparators = {
             -- Below is the default comparitor list and order for nvim-cmp
             cmp.config.compare.offset,

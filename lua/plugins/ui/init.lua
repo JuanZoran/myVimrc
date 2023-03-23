@@ -52,6 +52,27 @@ plugins:add {
     priority = 1000,
 }
 
+plugins:add {
+    'folke/tokyonight.nvim',
+    lazy = true,
+    opts = {
+        style = 'night',
+        transparent = false,
+        on_highlights = function(hl)
+            hl['@variable'] = {
+                fg = '#f4b085',
+            }
+
+            hl.Cursor = {
+                bg = '#58a6ff',
+            }
+        end
+    },
+    config = function(_, opts)
+        require('tokyonight').setup(opts)
+        vim.cmd.colorscheme('tokyonight')
+    end
+}
 
 plugins:add {
     "uga-rosa/ccc.nvim",
@@ -92,24 +113,22 @@ plugins:add { -- 状态栏
     config = function()
         require "plugins.ui.lualine"
     end,
-}
-
-plugins:add {
-    'SmiteshP/nvim-navic',
-    lazy = true,
-    opts = {
-        separator = " >> ",
-        highlight = true,
-        depth_limit = 5,
+    dependencies = {
+        'SmiteshP/nvim-navic',
+        opts = {
+            separator = " >> ",
+            highlight = true,
+            depth_limit = 5,
+        },
+        init = function()
+            -- vim.g.navic_silence = true
+            require("plugins.lsp.handlers").attach(function(client, buffer)
+                if client.server_capabilities.documentSymbolProvider then
+                    require("nvim-navic").attach(client, buffer)
+                end
+            end)
+        end,
     },
-    init = function()
-        -- vim.g.navic_silence = true
-        require("plugins.lsp.handlers").attach(function(client, buffer)
-            if client.server_capabilities.documentSymbolProvider then
-                require("nvim-navic").attach(client, buffer)
-            end
-        end)
-    end,
 }
 
 plugins:add {
@@ -195,7 +214,7 @@ plugins:add {
         {
             "rcarriga/nvim-notify",
             opts = {
-                level = vim.log.INFO,
+                level = vim.log.levels.INFO,
                 stages = "slide",
                 timeout = 1500,
                 icons = {
@@ -371,26 +390,5 @@ plugins:add {
 --     },
 -- }
 
-plugins:add {
-    'folke/tokyonight.nvim',
-    lazy = true,
-    opts = {
-        style = 'night',
-        transparent = false,
-        on_highlights = function(hl)
-            hl['@variable'] = {
-                fg = '#f4b085',
-            }
-
-            hl.Cursor = {
-                bg = '#58a6ff',
-            }
-        end
-    },
-    config = function(_, opts)
-        require('tokyonight').setup(opts)
-        vim.cmd.colorscheme('tokyonight')
-    end
-}
 
 return plugins

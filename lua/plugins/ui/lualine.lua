@@ -13,7 +13,7 @@ end
 
 local function memory_use()
     local use = (1 - (vim.loop.get_free_memory() / vim.loop.get_total_memory())) * 100
-    return ' Memory: ' .. ('%.2f'):format(use) --[[  .. '%' ]]
+    return (' Memory: %.2f'):format(use) .. ' %%'
 end
 
 local icon = {
@@ -55,7 +55,6 @@ require("lualine").setup {
         disabled_filetypes = {
             statusline = {
                 "alpha",
-                -- "NvimTree",
                 "startuptime",
                 "toggleterm",
                 "lspsagaoutline",
@@ -107,7 +106,10 @@ require("lualine").setup {
         },
         lualine_c = {
             {
-                require('nvim-navic').get_location,
+                function()
+                    return require('nvim-navic').get_location()
+                end,
+                -- require('nvim-navic').get_location,
                 cond = require('nvim-navic').is_available,
             }
         },

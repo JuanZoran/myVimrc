@@ -56,7 +56,6 @@ if vim.fn.executable('fcitx5-remote') == 1 then
     local state = ''
     autocmd('InsertLeave', {
         group = group,
-        pattern = '*',
         callback = function()
             state = io.popen('fcitx5-remote'):read('*a')
             os.execute('fcitx5-remote -c')
@@ -65,7 +64,6 @@ if vim.fn.executable('fcitx5-remote') == 1 then
 
     autocmd('InsertEnter', {
         group = group,
-        pattern = '*',
         callback = function()
             if state == '2\n' then
                 os.execute('fcitx5-remote -o')
