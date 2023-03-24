@@ -1,4 +1,4 @@
-local plugins = require("util.plugin")()
+local plugins = require 'util.plugin'()
 plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
@@ -6,14 +6,14 @@ plugins:add {
 
 
 plugins:add {
-    "catppuccin/nvim",
+    'catppuccin/nvim',
     event = 'VimEnter',
-    name = "catppuccin",
+    name = 'catppuccin',
     opts = function()
         return {
             flavour = 'macchiato',
             transparent_background = true,
-            custom_highlights = require('plugins.ui.theme.override'),
+            custom_highlights = require 'plugins.ui.theme.override',
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -22,7 +22,6 @@ plugins:add {
                 telescope = true,
                 notify = true,
                 mini = false,
-                -- noice = true,
                 neotree = true,
                 ts_rainbow2 = true,
                 lsp_trouble = true,
@@ -34,6 +33,7 @@ plugins:add {
                     enabled = true,
                 },
                 treesitter_context = true,
+                -- noice = true,
                 -- illuminate = true,
                 -- which_key = true,
                 -- mason = true,
@@ -46,7 +46,7 @@ plugins:add {
         }
     end,
     config = function(_, opts)
-        require('catppuccin').setup(opts)
+        require 'catppuccin'.setup(opts)
         vim.cmd.colorscheme 'catppuccin'
     end,
     priority = 1000,
@@ -57,7 +57,7 @@ plugins:add {
     event = 'VimEnter',
     cond = false,
     config = function()
-        vim.cmd.colorscheme('tokyonight')
+        vim.cmd.colorscheme 'tokyonight'
     end,
     priority = 1000,
 }
@@ -78,15 +78,15 @@ plugins:add {
 }
 
 plugins:add {
-    "uga-rosa/ccc.nvim",
+    'uga-rosa/ccc.nvim',
     cmd = {
         'CccHighlighterToggle',
-        "CccPick",
-        "CccConvert",
+        'CccPick',
+        'CccConvert',
     },
-    ft = { 'css', 'html', },
+    ft = { 'css', 'html' },
     config = function(plugin)
-        local ccc = require("ccc")
+        local ccc = require 'ccc'
         local mapping = ccc.mapping
         ccc.setup {
             highlighter = {
@@ -98,23 +98,23 @@ plugins:add {
                 h = mapping.toggle_input_mode,
                 i = 'k',
                 ['<C-q>'] = mapping.quit,
-            }
+            },
         }
     end,
 }
 
 
 plugins:add {
-    "nvim-zh/colorful-winsep.nvim",
+    'nvim-zh/colorful-winsep.nvim',
     config = true,
     event = 'WinNew',
 }
 
 plugins:add { -- 状态栏
-    "nvim-lualine/lualine.nvim",
+    'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     config = function()
-        require('plugins.ui.lualine')
+        require 'plugins.ui.lualine'
     end,
 }
 
@@ -122,30 +122,30 @@ plugins:add {
     'SmiteshP/nvim-navic',
     lazy = true,
     opts = {
-        separator = " >> ",
+        separator = ' >> ',
         highlight = true,
         depth_limit = 5,
     },
     init = function()
         -- vim.g.navic_silence = true
-        require("plugins.lsp.handlers").attach(function(client, buffer)
+        require 'plugins.lsp.handlers'.attach(function(client, bufnr)
             if client.server_capabilities.documentSymbolProvider then
-                require("nvim-navic").attach(client, buffer)
+                require 'nvim-navic'.attach(client, bufnr)
             end
         end)
     end,
 }
 
 plugins:add {
-    "nvim-neo-tree/neo-tree.nvim",
+    'nvim-neo-tree/neo-tree.nvim',
     init = function()
         -- Unless you are still migrating, remove the deprecated commands from v1.x
         vim.g.neo_tree_remove_legacy_commands = 1
         if vim.fn.argc() == 1 then
             ---@diagnostic disable-next-line: param-type-mismatch
             local stat = vim.loop.fs_stat(vim.fn.argv(0))
-            if stat and stat.type == "directory" then
-                require("neo-tree")
+            if stat and stat.type == 'directory' then
+                require 'neo-tree'
             end
         end
     end,
@@ -157,75 +157,75 @@ plugins:add {
         { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                          desc = '📁File Explorer from HOME' },
         { '<C-w>d',     '<Cmd>Neotree reveal reveal_force_cwd toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
     },
-    branch = "v2.x",
+    branch = 'v2.x',
     opts = function()
-        return require('plugins.ui.neo-tree')
+        return require 'plugins.ui.neo-tree'
     end,
     dependencies = {
         's1n7ax/nvim-window-picker',
         config = true,
-    }
+    },
 }
 
 plugins:add { -- 标签栏
-    "akinsho/bufferline.nvim",
+    'akinsho/bufferline.nvim',
     keys = {
-        { "<leader>bj", ":BufferLineMovePrev<CR>",                desc = '[]Move Buffer to Left' },
-        { "<leader>bl", ":BufferLineMoveNext<CR>",                desc = '[]Move Buffer to Right' },
-        { "<Leader>bb", ":BufferLinePickClose<CR>",               desc = '﫧 Pick a Buffer to delete' },
-        { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>" },
-        { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>" },
-        { "<C-j>",      "<Cmd>BufferLineCyclePrev<CR>" },
-        { "<C-l>",      "<Cmd>BufferLineCycleNext<CR>" },
+        { '<leader>bj', ':BufferLineMovePrev<CR>',                desc = 'Move Buffer to Left' },
+        { '<leader>bl', ':BufferLineMoveNext<CR>',                desc = 'Move Buffer to Right' },
+        { '<Leader>bb', ':BufferLinePickClose<CR>',               desc = 'Pick a Buffer to delete' },
+        { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
+        { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },
+        { '<C-j>',      '<Cmd>BufferLineCyclePrev<CR>' },
+        { '<C-l>',      '<Cmd>BufferLineCycleNext<CR>' },
     },
     event = 'VeryLazy',
     opts = function()
         return {
-            highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            highlights = require 'catppuccin.groups.integrations.bufferline'.get(),
             options = {
-                diagnostics = "nvim_lsp",
+                diagnostics = 'nvim_lsp',
                 always_show_bufferline = true,
                 diagnostics_indicator = function(_, _, diagnostics_dict)
-                    local s = " "
+                    local s = ' '
                     for e, n in pairs(diagnostics_dict) do
-                        local sym = e == "error" and " "
-                            or (e == "warning" and " " or "")
+                        local sym = e == 'error' and ' '
+                            or (e == 'warning' and ' ' or '')
                         s = s .. n .. sym
                     end
                     return vim.trim(s)
                 end,
                 show_buffer_close_icons = true,
                 show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
-                modified_icon = "💌",
+                modified_icon = '💌',
                 -- separator_style = "triky", -- slant, padded_slant | triky
                 -- offsets = {
                 -- },
             },
         }
-    end
+    end,
 }
 
 plugins:add {
     'goolord/alpha-nvim',
     event = 'VimEnter',
-    config = function() require("plugins.ui.alpha") end,
+    config = function() require 'plugins.ui.alpha' end,
 }
 
 plugins:add {
-    "folke/noice.nvim",
+    'folke/noice.nvim',
     event = 'VeryLazy',
     dependencies = {
-        "muniftanjim/nui.nvim",
+        'muniftanjim/nui.nvim',
         {
-            "rcarriga/nvim-notify",
+            'rcarriga/nvim-notify',
             opts = {
                 level = vim.log.levels.INFO,
-                stages = "slide",
+                stages = 'slide',
                 timeout = 1500,
                 icons = {
-                    ERROR = "🥵",
-                    WARN = "🫢",
-                    INFO = "🤔",
+                    ERROR = '🥵',
+                    WARN = '🫢',
+                    INFO = '🤔',
                 },
             },
         },
@@ -236,15 +236,15 @@ plugins:add {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             progress = {
                 enabled = true,
-                format = "lsp_progress",
-                format_done = "lsp_progress_done",
+                format = 'lsp_progress',
+                format_done = 'lsp_progress_done',
                 throttle = 1000 / 30, -- frequency to update lsp progress message
-                view = "mini",
+                view = 'mini',
             },
             override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
+                ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+                ['vim.lsp.util.stylize_markdown'] = true,
+                ['cmp.entry.get_documentation'] = true,
             },
         },
         presets = {
@@ -255,19 +255,19 @@ plugins:add {
                 views = {
                     cmdline_popup = {
                         position = {
-                            row = "50%",
-                            col = "50%",
+                            row = '50%',
+                            col = '50%',
                         },
                         size = {
                             min_width = 60,
-                            width = "auto",
-                            height = "auto",
+                            width = 'auto',
+                            height = 'auto',
                         },
                     },
                 },
             },
         },
-    }
+    },
 }
 
 -- if vim.env.TERM == 'xterm-kitty' then

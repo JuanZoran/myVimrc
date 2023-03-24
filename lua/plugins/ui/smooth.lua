@@ -1,4 +1,4 @@
-local specs = require('specs')
+local specs = require 'specs'
 local show = specs.show_specs
 
 specs.setup {
@@ -9,16 +9,16 @@ specs.setup {
         inc_ms = 10,  -- time increments used for fade/resize effects
         blend = 85,   -- starting blend, between 0-100 (fully transparent), see :h winblend
         width = 10,
-        winhl = "Cursor",
-        fader = require('specs').linear_fader,
-        resizer = require('specs').shrink_resizer
+        winhl = 'Cursor',
+        fader = require 'specs'.linear_fader,
+        resizer = require 'specs'.shrink_resizer,
     },
     ignore_buftypes = {
         nofile = true,
     },
 }
 
-require('cinnamon').setup {
+require 'cinnamon'.setup {
     default_keymaps = false,  -- Create default keymaps.
     extra_keymaps = false,
     override_keymaps = false, -- whether to force mapping
@@ -46,16 +46,16 @@ vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua re
 -- }
 
 
-local set = require('util.map').set
+local set = require 'util.map'.set
 set {
     mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
-        { "i", "gk" },        -- for better move (warp)
-        { "k", "gj" },
+        { 'i', 'gk' },        -- for better move (warp)
+        { 'k', 'gj' },
 
-        { "j", "h" },
-        { "h", "i" },
-    }
+        { 'j', 'h' },
+        { 'h', 'i' },
+    },
 }
 
 set {
@@ -63,7 +63,7 @@ set {
     map = {
         { 'L', '$' },
         { 'J', '^' },
-    }
+    },
 }
 
 local map = vim.keymap.set
@@ -98,8 +98,8 @@ end)
 
 -- Start/end of line:
 map({ 'n', 'x' }, 'J', function()
-    local col = (api.nvim_get_current_line()):find('%S')
-    if col ~= vim.fn.col('.') then
+    local col = (api.nvim_get_current_line()):find '%S'
+    if col ~= vim.fn.col '.' then
         vim.defer_fn(show, 10)
         api.nvim_feedkeys('^', 'n', false)
     end
@@ -107,11 +107,11 @@ end)
 
 
 map({ 'n', 'x' }, 'L', function()
-    local _cur = vim.fn.col('.')
-    local _end = vim.fn.col('$') - 1
+    local _cur = vim.fn.col '.'
+    local _end = vim.fn.col '$' - 1
     if _end ~= 0 and _cur ~= _end then
         vim.defer_fn(show, 10)
-        vim.fn.cursor { vim.fn.line('.'), vim.fn.col('$') }
+        vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' }
     end
 end)
 
@@ -122,5 +122,5 @@ api.nvim_create_autocmd('WinEnter', {
         if vim.bo.filetype ~= 'specs' then
             show()
         end
-    end
+    end,
 })

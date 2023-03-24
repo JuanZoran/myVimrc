@@ -1,11 +1,11 @@
 ---@diagnostic disable: undefined-global
 -- code snippets
 local filetypes = {
-    "bash",
-    "lua",
-    "markdown",
-    "cpp",
-    "c",
+    'bash',
+    'lua',
+    'markdown',
+    'cpp',
+    'c',
     'json',
     'html',
 }

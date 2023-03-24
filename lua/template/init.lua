@@ -1,6 +1,6 @@
 -- INFO  Config
 local template = {}
-local template_dir = vim.fn.stdpath('config') .. '/lua/template/src'
+local template_dir = vim.fn.stdpath 'config' .. '/lua/template/src'
 local rule = {
     ['*'] = '__all__',
     ['/'] = '-',
@@ -66,6 +66,6 @@ end, { desc = '❌Remove Template' })
 
 -- NOTE Create New Template
 vim.keymap.set('n', '<leader><leader>t', function()
-    local newFile = toName(vim.fn.input('请输入模板生效的模式：'))
+    local newFile = toName(vim.fn.input '请输入模板生效的模式：')
     OpenSelectTemplate(newFile)
 end, { desc = '🔨Create New Template' })

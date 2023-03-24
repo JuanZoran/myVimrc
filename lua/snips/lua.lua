@@ -24,7 +24,7 @@
 
 local snips = {
     s(
-        "sn",
+        'sn',
         fmta(
         --======== snippet helper ========
             [[
@@ -43,19 +43,19 @@ local snips = {
             ),
         ]],
             {
-                i(1, "trig"), -- 1
-                rep(1), -- 2
-                t("[["), -- 3
-                t("]]"), -- 4
+                i(1, 'trig'), -- 1
+                rep(1),       -- 2
+                t '[[',       -- 3
+                t ']]',       -- 4
                 c(
-                    2, -- 5
+                    2,        -- 5
                     {
-                        i(1, "fmt"),
+                        i(1, 'fmt'),
                         -- i(nil, 'fmta'),
                     }
                 ),
-                i(3, "body here"), -- 6
-                i(4, "args"), -- 7
+                i(3, 'body here'), -- 6
+                i(4, 'args'),      -- 7
             }
         -- ,{
         --     trim_empty = false,
@@ -63,30 +63,30 @@ local snips = {
         )
     ),
     s(
-        "return",
-        fmt("---@return {} {}", {
-            i(1, "type"),
-            i(2, "message"),
+        'return',
+        fmt('---@return {} {}', {
+            i(1, 'type'),
+            i(2, 'message'),
         })
     ),
     s(
-        "require",
+        'require',
         fmt('local {} = require("{}")', {
-            l(l._1:match("[^./]*$"), 1),
-            i(1, "module"),
+            l(l._1:match '[^./]*$', 1),
+            i(1, 'module'),
         })
     ),
 
     s(
-        "local",
-        fmt("local {} = {}", {
-            l(l._1:match("[^.]*$"), 1),
-            i(1, "name"),
+        'local',
+        fmt('local {} = {}', {
+            l(l._1:match '[^.]*$', 1),
+            i(1, 'name'),
         })
     ),
-    parse("s", "s('$1', $2)"),
+    parse('s', "s('$1', $2)"),
     parse(
-        "lm",
+        'lm',
         [[
         local M = {}
 
@@ -95,22 +95,22 @@ local snips = {
         return M
     ]]
     ),
-    parse("cmd", "<Cmd>$1<CR>"),
-    parse("parse", [[parse("${1:trig}", "$2")]]),
-    s("formatEnable", { t("-- stylua: ignore end") }),
-    s("formatDisable", { t("-- stylua: ignore start") }),
-    s("nodis", { t("---@nodiscard") }),
+    parse('cmd', '<Cmd>$1<CR>'),
+    parse('parse', [[parse("${1:trig}", "$2")]]),
+    s('formatEnable', { t '-- stylua: ignore end' }),
+    s('formatDisable', { t '-- stylua: ignore start' }),
+    s('nodis', { t '---@nodiscard' }),
     s(
-        "class",
-        fmt("---@class {}", {
-            i(1, "name"),
+        'class',
+        fmt('---@class {}', {
+            i(1, 'name'),
         })
     ),
     s(
-        "field",
-        fmt("---@field {} {}", {
-            i(1, "name"),
-            i(2, "type"),
+        'field',
+        fmt('---@field {} {}', {
+            i(1, 'name'),
+            i(2, 'type'),
         })
     ),
     --    s({ trig = "c(%d+)", regTrig = true }, {

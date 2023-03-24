@@ -12,7 +12,7 @@ api.nvim_set_hl(0, 'LeapLabelPrimary', {
     nocombine = true,
 })
 
-require('leap').opts.highlight_unlabeled_phase_one_targets = true
+require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
 
 -- {
 --   ft = true,

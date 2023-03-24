@@ -1,4 +1,4 @@
-require('nordic').setup{
+require 'nordic'.setup {
 }
 
 

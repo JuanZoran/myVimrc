@@ -1,7 +1,7 @@
-local plugins = require("util.plugin")()
+local plugins = require 'util.plugin' ()
 
 plugins:add {
-    "JuanZoran/Trans.nvim",
+    'JuanZoran/Trans.nvim',
     keys = {
         { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = 'Translate' },
         { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = 'Auto Play' },
@@ -14,9 +14,9 @@ plugins:add {
         frontend = {
             hover = {
                 spinner = 'moon',
-            }
+            },
         },
-        -- backend_order = { 'youdao', 'baidu' },
+        dir = os.getenv 'HOME' .. '/.vim/dict'
     },
     dev = true,
 }
@@ -28,32 +28,32 @@ plugins:add {
 
 
 plugins:add {
-    "folke/todo-comments.nvim",
+    'folke/todo-comments.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
 plugins:add {
-    "folke/which-key.nvim",
+    'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {
         popup_mappings = {
-            scroll_up = "<c-i>",   -- binding to scroll up inside the popup
-            scroll_down = "<c-k>", -- binding to scroll down inside the popup
+            scroll_up = '<c-i>',   -- binding to scroll up inside the popup
+            scroll_down = '<c-k>', -- binding to scroll down inside the popup
         },
         layout = {
             height = { min = 4, max = 25 },                                                      -- min and max height of the columns
             width = { min = 20, max = 50 },                                                      -- min and max width of the columns
             spacing = 3,                                                                         -- spacing between columns
-            align = "left",                                                                      -- align columns left, center or right
+            align = 'left',                                                                      -- align columns left, center or right
         },
-        hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "require" }, -- hide mapping boilerplate
+        hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ', 'require' }, -- hide mapping boilerplate
         triggers_blacklist = {
-            i = { "i", "k" },
-            v = { "i", "k" },
+            i = { 'i', 'k' },
+            v = { 'i', 'k' },
         },
         window = {
-            border = "single", -- none, single, double, shadow
+            border = 'single', -- none, single, double, shadow
         },
         -- operators = {
         --     gc = "Comments",
@@ -77,18 +77,18 @@ plugins:add {
         },
         disable = {
             filetypes = {},
-            buftypes = { "TelescopePrompt", }
+            buftypes = { 'TelescopePrompt' },
         },
-    }
+    },
 }
 
 plugins:add {
-    "iamcco/markdown-preview.nvim",
-    ft = { "markdown", "md" },
+    'iamcco/markdown-preview.nvim',
+    ft = { 'markdown', 'md' },
     keys = {
-        { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' }
+        { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' },
     },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    build = function() vim.fn['mkdp#util#install']() end,
     dependencies = {
         {
             'dhruvasagar/vim-table-mode',
@@ -96,38 +96,38 @@ plugins:add {
                 { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
             },
         },
-    }
+    },
 }
 
 plugins:add {
     'CKolkey/ts-node-action',
     keys = {
-        { "<leader>u", function() require("ts-node-action").node_action() end, desc = "Trigger Node Action", }
+        { '<leader>u', function() require 'ts-node-action'.node_action() end, desc = 'Trigger Node Action' },
     },
 }
 
 -- search/replace in multiple files
 plugins:add {
-    "windwp/nvim-spectre", -- dependencies: rg, sed
+    'windwp/nvim-spectre', -- dependencies: rg, sed
     keys = {
-        { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+        { '<leader>sr', function() require 'spectre'.open() end, desc = 'Replace in files (Spectre)' },
         {
             '<leader>sw',
-            function() require("spectre").open_visual { select_word = true } end,
-            desc = "Search current word",
-        }
+            function() require 'spectre'.open_visual { select_word = true } end,
+            desc = 'Search current word',
+        },
     },
 }
 
 plugins:add {
     'Vonr/align.nvim',
     keys = {
-        { mode = 'x', "<leader>=", function() require 'align'.align_to_string(true, true, true) end, }
-    }
+        { mode = 'x', '<leader>=', function() require 'align'.align_to_string(true, true, true) end },
+    },
 }
 
 plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
-    "numtostr/Comment.nvim",
+    'numtostr/Comment.nvim',
     keys = {
         { 'gc',        mode = { 'n', 'x' } },
         { '<leader>A', desc = 'Add Comment at end of line' },
@@ -137,13 +137,13 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
             ignore = '^$',
             extra = {
                 ---Add comment on the line above
-                above = "gcO",
+                above = 'gcO',
                 ---Add comment on the line below
-                below = "gco",
+                below = 'gco',
                 ---Add comment at the end of line
-                eol = "<Leader>A",
+                eol = '<Leader>A',
             },
-            pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+            pre_hook = require 'ts_context_commentstring.integrations.comment_nvim'.create_pre_hook(),
         }
     end,
     dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
@@ -152,7 +152,7 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 plugins:add {
     'jackMort/ChatGPT.nvim',
-    cmd = { 'ChatGPT', 'ChatGPTActAs', },
+    cmd = { 'ChatGPT', 'ChatGPTActAs' },
     keys = {
         { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
     },
@@ -163,28 +163,28 @@ plugins:add {
     'mfussenegger/nvim-treehopper',
     keys = {
         { mode = 'x', 'm', ":<C-U>lua require('tsht').nodes()<CR>", silent = true },
-        { mode = 'o', 'm', function() require('tsht').nodes() end, },
-    }
+        { mode = 'o', 'm', function() require 'tsht'.nodes() end },
+    },
 }
 
 plugins:add {
-    "windwp/nvim-autopairs",
+    'windwp/nvim-autopairs',
     event = 'InsertEnter',
     opts = {
         check_ts = true,
         enable_abbr = true,
         fast_wrap = {
-            map = "<C-;>",
-            chars = { "{", "[", "(", '"', "'", "<" },
+            map = '<C-;>',
+            chars = { '{', '[', '(', '"', "'", '<' },
             pattern = [=[[%'%"%)%>%]%)%}%,]]=],
             offset = 1, -- Offset from pattern match
-            end_key = "l",
+            end_key = 'l',
             -- keys = "qwertyuiopzxcvbnmasdfghjkl",
-            keys = "uiopghjkl",
+            keys = 'uiopghjkl',
             check_comma = true,
-            highlight = "PmenuSel",
+            highlight = 'PmenuSel',
             -- highlight_grey = "LineNr",
-            highlight_grey = "Comment",
+            highlight_grey = 'Comment',
         },
     },
 }
@@ -192,26 +192,26 @@ plugins:add {
 plugins:add {
     'echasnovski/mini.surround',
     keys = {
-        { mode = { 'n', 'x' }, 's' }
+        { mode = { 'n', 'x' }, 's' },
     },
     config = function()
         -- NOTE : special name
-        require('mini.surround').setup {}
-    end
+        require 'mini.surround'.setup {}
+    end,
 }
 
 plugins:add {
-    "LudoPinelli/comment-box.nvim",
+    'LudoPinelli/comment-box.nvim',
     keys = {
-        { mode = { 'n', 'x' }, "<leader>rk", "<Cmd>lua require('comment-box').accbox()<CR>", desc = "Comment Center Box" },
+        { mode = { 'n', 'x' }, '<leader>rk', "<Cmd>lua require('comment-box').accbox()<CR>", desc = 'Comment Center Box' },
         {
             mode = { 'n', 'x' },
-            "<leader>rj",
+            '<leader>rj',
             "<Cmd>lua require('comment-box').lbox()<CR>",
-            desc = "Comment Left Aligned Text",
+            desc = 'Comment Left Aligned Text',
         },
-        { mode = { 'n', 'x' }, "<leader>rl", "<Cmd>lua require('comment-box').cline()<CR>",  desc = "Comment Center Line" },
-        { mode = { 'n', 'x' }, "<leader>ro", "<Cmd>lua require('comment-box').line()<CR>",   desc = "Comment Center Line" },
+        { mode = { 'n', 'x' }, '<leader>rl', "<Cmd>lua require('comment-box').cline()<CR>",  desc = 'Comment Center Line' },
+        { mode = { 'n', 'x' }, '<leader>ro', "<Cmd>lua require('comment-box').line()<CR>",   desc = 'Comment Center Line' },
         -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
     },
 }
@@ -224,7 +224,7 @@ plugins:add {
         { '<Leader>dF', '<Cmd>DiffviewFileHitory %<CR>', desc = 'Open Diff History For Current File' },
     },
     opts = function()
-        local action = require('diffview.actions')
+        local action = require 'diffview.actions'
         return {
             keymaps = {
                 file_panel = {
@@ -232,7 +232,7 @@ plugins:add {
                     ['i'] = action.prev_entry,
                     ['<leader><leader>'] = action.listing_style,
                 },
-            }
+            },
         }
     end,
 }
@@ -254,10 +254,10 @@ plugins:add {
 
 
 plugins:add {
-    "olimorris/persisted.nvim",
+    'olimorris/persisted.nvim',
     cmd = { 'SessionLoad', 'SessionLoadLast' },
     keys = {
-        { '<leader>ss', '<Cmd>Telescope persisted<CR>', desc = 'Check out the Session', }
+        { '<leader>ss', '<Cmd>Telescope persisted<CR>', desc = 'Check out the Session' },
     },
     opts = {
         use_git_branch = true, -- create session files based on the branch of the git enabled repository
@@ -266,27 +266,27 @@ plugins:add {
             return vim.bo.filetype ~= 'alpha'
         end,
         on_autoload_no_session = function()
-            vim.notify('Session Not Exist')
+            vim.notify 'Session Not Exist'
         end,
         autosave = false, -- automatically save session files when exiting Neovim
     },
     init = function()
         vim.api.nvim_create_autocmd('VimLeavePre', {
             callback = function()
-                require('persisted').save()
+                require 'persisted'.save()
             end,
         })
     end,
     config = function(_, opts)
-        vim.opt.sessionoptions = "buffers,curdir,folds,winsize,winpos,help"
-        require("telescope").load_extension("persisted") -- To load the telescope extension
-        require("persisted").setup(opts)
+        vim.opt.sessionoptions = 'buffers,curdir,folds,winsize,winpos,help'
+        require 'telescope'.load_extension 'persisted' -- To load the telescope extension
+        require 'persisted'.setup(opts)
     end,
 }
 
 
 plugins:add {
-    "lewis6991/gitsigns.nvim",
+    'lewis6991/gitsigns.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     keys = {
         { '<leader>gi', '<Cmd>Gitsigns preview_hunk_inline<CR>' },
@@ -302,22 +302,22 @@ plugins:add {
 
 
 plugins:add {
-    "folke/zen-mode.nvim",
+    'folke/zen-mode.nvim',
     keys = {
         { '<leader><leader>h', '<Cmd>ZenMode<CR>', desc = 'Toggle Zen Mode' },
     },
     dependencies = {
-        "folke/twilight.nvim",
+        'folke/twilight.nvim',
         opts = { context = 20 },
     },
     opts = {
-        window = { width = 0.85, },
+        window = { width = 0.85 },
     },
 }
 
 
 plugins:add {
-    "ggandor/leap.nvim",
+    'ggandor/leap.nvim',
     config = function() require 'plugins.tools.leap' end,
     keys = {
         { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = 'Jump backward' },
@@ -329,9 +329,9 @@ plugins:add {
         keys = { 'f', 'F', 't', 'T' },
         opts = {
             -- A string like "nv", "nvo", "o", etc.
-            labeled_modes = "v",
+            labeled_modes = 'v',
             multiline = true,
-        }
+        },
     },
 }
 

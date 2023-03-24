@@ -1,31 +1,31 @@
-local snippets_folder = vim.fn.stdpath "config" .. "/lua/snips"
-local ls = require "luasnip"
-local types = require "luasnip.util.types"
+local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
+local ls = require 'luasnip'
+local types = require 'luasnip.util.types'
 ls.config.set_config {
     -- enable_autosnippets = true,
     -- store_selection_keys = "<C-q>",
     -- jump_to_first_trigger = true, -- does not work
     history = true,
-    updateevents = { "TextChanged", "TextChangedI" },
-    region_check_events = { "CursorHold", "InsertLeave" },
-    delete_check_events = { "TextChanged", "InsertEnter" },
+    updateevents = { 'TextChanged', 'TextChangedI' },
+    region_check_events = { 'CursorHold', 'InsertLeave' },
+    delete_check_events = { 'TextChanged', 'InsertEnter' },
     ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = { { " Your Choice", "Title" } }, -- yellow
+                virt_text = { { ' Your Choice', 'Title' } }, -- yellow
             },
         },
         [types.insertNode] = {
             active = {
-                virt_text = { { " Insert", "Function" } }, -- purple
+                virt_text = { { ' Insert', 'Function' } }, -- purple
             },
         },
     },
 }
 
-require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_lua").lazy_load { paths = snippets_folder }
-vim.keymap.set('n', '<leader><cr>', require "luasnip.loaders.from_lua".edit_snippet_files,
+require 'luasnip.loaders.from_vscode'.lazy_load()
+require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
+vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files,
     { desc = 'Edit Snippet' })
 
 -- NOTE :Chioce Note Popup
