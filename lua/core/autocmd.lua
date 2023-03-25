@@ -80,14 +80,6 @@ if vim.fn.executable 'fcitx5-remote' == 1 then
 end
 
 
-
--- set tabstop size for markdown and html file
--- autocmd("FileType", {
---     group = group,
---     pattern = { "markdown", "html" },
---     command = [[setlocal tabstop=2 shiftwidth=2]],
--- })
-
 -- -- 设置firenvim的大小
 -- vim.cmd [[
 -- function! OnUIEnter(event) abort

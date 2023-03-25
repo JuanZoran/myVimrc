@@ -79,6 +79,7 @@ opt.undodir = os.getenv 'HOME' .. '/.vim'
 
 ---  SETTINGS  ---
 opt.spelllang:append 'cjk'  -- disable spellchecking for asian characters (VIM algorithm does not support it)
+-- vim.wo.signcolumn = 'auto'
 vim.wo.signcolumn = 'yes'
 
 opt.iskeyword:append '-'  -- 将word-word视为一个word, 方便daw

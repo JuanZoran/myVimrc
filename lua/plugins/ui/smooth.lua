@@ -26,6 +26,9 @@ require 'cinnamon'.setup {
     default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
 }
 
+-- vim.keymap.set({ 'n', 'x' }, 'j', "<Cmd>lua Scroll('h', 0, 1)<CR>")
+-- vim.keymap.set({ 'n', 'x' }, 'l', "<Cmd>lua Scroll('l', 0, 1)<CR>")
+
 vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 

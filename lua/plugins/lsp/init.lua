@@ -1,3 +1,21 @@
+vim.diagnostic.config {
+    update_in_insert = true,
+    severity_sort = true,
+    float = {
+        style  = 'minimal',
+        border = 'rounded',
+    },
+    -- virtual_lines = true,
+    virtual_text = {
+        source = 'always',
+        prefix = ' ',
+    },
+    -- signs = {
+    --     active = signs,
+    -- },
+    -- underline = true,
+}
+
 local config = function()
     local handler = require 'plugins.lsp.handlers'
     local opts = {
@@ -56,72 +74,85 @@ local config = function()
 end
 
 return {
-    'neovim/nvim-lspconfig', -- official lspconfig
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-        'p00f/clangd_extensions.nvim',
-        {
-            'glepnir/lspsaga.nvim',
-            opts = function()
-                return require 'plugins.lang.saga'
-            end,
-        }, -- pretty ui for [code-action | hover-text | ....]
-        {
-            'williamboman/mason.nvim',
-            cmd = 'Mason',
-            opts = {
-                ui = {
-                    border = 'rounded',
-                    keymaps = {
-                        -- Keymap to expand a package
-                        toggle_package_expand = 'o',
-                        -- Keymap to install the package under the current cursor position
-                        install_package = '<Leader>i',
-                        -- Keymap to reinstall/update the package under the current cursor position
-                        update_package = 'u',
-                        -- Keymap to check for new version for the package under the current cursor position
-                        check_package_version = 'c',
-                        -- Keymap to update all installed packages
-                        update_all_packages = 'U',
-                        -- Keymap to check which installed packages are outdated
-                        check_outdated_packages = 'C',
-                        -- Keymap to uninstall a package
-                        uninstall_package = 'd',
-                        -- Keymap to cancel a package installation
-                        cancel_installation = '<C-c>',
-                        -- Keymap to apply language filter
-                        apply_language_filter = '<C-f>',
+    {
+        'neovim/nvim-lspconfig', -- official lspconfig
+        event = { 'BufReadPre', 'BufNewFile' },
+        dependencies = {
+            'p00f/clangd_extensions.nvim',
+
+            {
+                'williamboman/mason.nvim',
+                cmd = 'Mason',
+                opts = {
+                    ui = {
+                        border = 'rounded',
+                        keymaps = {
+                            -- Keymap to expand a package
+                            toggle_package_expand = 'o',
+                            -- Keymap to install the package under the current cursor position
+                            install_package = '<Leader>i',
+                            -- Keymap to reinstall/update the package under the current cursor position
+                            update_package = 'u',
+                            -- Keymap to check for new version for the package under the current cursor position
+                            check_package_version = 'c',
+                            -- Keymap to update all installed packages
+                            update_all_packages = 'U',
+                            -- Keymap to check which installed packages are outdated
+                            check_outdated_packages = 'C',
+                            -- Keymap to uninstall a package
+                            uninstall_package = 'd',
+                            -- Keymap to cancel a package installation
+                            cancel_installation = '<C-c>',
+                            -- Keymap to apply language filter
+                            apply_language_filter = '<C-f>',
+                        },
                     },
                 },
             },
+            { 'williamboman/mason-lspconfig.nvim', cmd = 'LspInstall', config = true },
+            {
+                'folke/neodev.nvim',
+                opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' } } },
+            },
+            {
+                'jose-elias-alvarez/null-ls.nvim',
+                config = function()
+                    local null_ls = require 'null-ls'
+                    local formatting = null_ls.builtins.formatting
+                    null_ls.setup {
+                        sources = {
+                            formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
+                            formatting.black.with { extra_args = { '--fast' } },
+                            formatting.beautysh,
+                            -- formatting.stylua,
+                            -- null_ls.builtins.completion.luasnip,
+                        },
+                        on_attach = function(server, bufnr)
+                            if server.server_capabilities.documentFormattingProvider then
+                                vim.keymap.set('n', '==',
+                                    function() vim.lsp.buf.format { async = true, buffer = bufnr } end,
+                                    { desc = ' formatting buffer' })
+                            end
+                        end,
+                    }
+                end,
+            },
         },
-        { 'williamboman/mason-lspconfig.nvim', cmd = 'LspInstall', config = true },
-        {
-            'folke/neodev.nvim',
-            opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' } } },
-        },
-        {
-            'jose-elias-alvarez/null-ls.nvim',
-            config = function()
-                local null_ls = require 'null-ls'
-                local formatting = null_ls.builtins.formatting
-                null_ls.setup {
-                    sources = {
-                        formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
-                        formatting.black.with { extra_args = { '--fast' } },
-                        formatting.beautysh,
-                        -- formatting.stylua,
-                        -- null_ls.builtins.completion.luasnip,
-                    },
-                    on_attach = function(server, bufnr)
-                        if server.server_capabilities.documentFormattingProvider then
-                            vim.keymap.set('n', '==', function() vim.lsp.buf.format { async = true, buffer = bufnr } end,
-                                { desc = ' formatting buffer' })
-                        end
-                    end,
-                }
-            end,
-        },
+        config = config,
     },
-    config = config,
+    {
+        'glepnir/lspsaga.nvim',
+        event = { 'BufReadPre', 'BufReadPost' },
+        opts = function()
+            return require 'plugins.lsp.saga'
+        end,
+        dependencies = {
+            {
+                'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+                -- FIXME :
+                cond = false,
+                config = true,
+            },
+        }
+    }, -- pretty ui for [code-action | hover-text | ....]
 }

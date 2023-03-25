@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin'()
+local plugins = require 'util.plugin' ()
 plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
@@ -14,6 +14,12 @@ plugins:add {
             flavour = 'macchiato',
             transparent_background = true,
             custom_highlights = require 'plugins.ui.theme.override',
+            -- dim_inactive = {
+
+            --     enabled = false,
+            --     shade = 'dark',
+            --     percentage = 0.15,
+            -- },
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -110,13 +116,10 @@ plugins:add {
     event = 'WinNew',
 }
 
-plugins:add { -- 状态栏
-    'nvim-lualine/lualine.nvim',
-    event = 'VeryLazy',
-    config = function()
-        require 'plugins.ui.lualine'
-    end,
-}
+-- plugins:add {
+--     "samodostal/image.nvim",
+--     config = true,
+-- }
 
 plugins:add {
     'SmiteshP/nvim-navic',

@@ -76,8 +76,12 @@ return {
         italic = true,
     },
     ['@lsp.type.property']      = {
+        -- fg = '#8aadf4',
         fg = '#E6C384',
         -- fg = "#b392f0",
+    },
+    TroubleNormal               = {
+        link = 'Normal'
     },
     -- ['@property']               = {
     --     fg = "#E6C384",

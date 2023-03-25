@@ -1,104 +1,22 @@
--- TODO : lsp server Name
-local function diff_source()
-    ---@diagnostic disable-next-line: undefined-field
-    local gitsigns = vim.b.gitsigns_status_dict
-    if gitsigns then
-        return {
-            added = gitsigns.added,
-            modified = gitsigns.changed,
-            removed = gitsigns.removed,
-        }
-    end
-end
-
 local function memory_use()
     local use = (1 - (vim.loop.get_free_memory() / vim.loop.get_total_memory())) * 100
     return (' Memory: %.2f'):format(use) .. ' %%'
 end
 
-local icon = {
-    ['c']          = ' ﭰ ',
-    ['cpp']        = '  ',
-    ['go']         = ' ﳑ ',
-    ['python']     = '  ',
-    ['html']       = '  ',
-    ['lua']        = '  ',
-    ['sh']         = '  ',
-    ['javascript'] = '  ',
-    ['markdown']   = '  ',
-}
-
-local lsp_status = {
-    function()
-        local clients = vim.lsp.get_active_clients()
-        local tmp = {}
-        for i, v in pairs(clients) do
-            tmp[i] = v.name
-        end
-        local status = table.concat(tmp, '  ')
-        return (icon[vim.bo.filetype] or '') .. status
-    end,
-    color = {
-        fg = '#000000', bg = '#10B981'
-    },
-}
-
-require 'lualine'.setup {
-    options = {
-        -- component_separators = { left = '', right = '' },
-        theme = 'auto',
-        section_separators = {
-            right = '',
-            left = '',
-        },
-        -- globalstatus = false,
-        disabled_filetypes = {
-            statusline = {
-                'alpha',
-                -- "NvimTree",
-                'startuptime',
-                'toggleterm',
-                'lspsagaoutline',
-            },
-            winbar = {
-                'alpha',
-                'help',
-                'packer',
-                'lspsagaoutline',
-                'toggleterm',
-                'dap-repl',
-                'dapui_console',
-                'dapui_watches',
-                'dapui_stacks',
-                'dapui_breakpoints',
-                'dapui_scopes',
-            },
-        },
-    },
-    sections = {
-        lualine_b = {
-            { 'b:gitsigns_head', icon = ' ' },
-            { 'diff',            source = diff_source },
-        },
-    },
-    winbar = {
-        lualine_y = {
-            memory_use,
-        },
-        lualine_z = {
-            lsp_status,
-        },
+local function opts()
+    local winbar = {
         lualine_a = {
             {
                 function()
                     return '盛 ' .. os.date '%A %H:%M'
                 end,
                 color = {
-                    fg = '#000000', bg = '#10B981'
+                    fg = '#000000', bg = '#2bbb4f'
                 },
             },
         },
         lualine_b = {
+            { 'fancy_diagnostics' },
             {
                 require 'noice'.api.status.mode.get,
                 cond = require 'noice'.api.status.mode.has,
@@ -107,10 +25,81 @@ require 'lualine'.setup {
         },
         lualine_c = {
             {
-                function() return require 'nvim-navic'.get_location() end,  -- FIXME : why it is not working
+                function() return require 'nvim-navic'.get_location() end, -- FIXME : why it is not working
+                -- require 'nvim-navic'.get_location,
                 cond = require 'nvim-navic'.is_available,
             },
         },
+        lualine_y = {
+            memory_use,
+        },
+        lualine_z = {
+            {
+                'fancy_lsp_servers',
+                color = {
+                    fg = '#000000',
+                    bg = '#986FEC'
+                    -- fg = '#000000', bg = '#e27d60'
+                },
+            },
+        },
+    }
+
+    local sections = {
+        lualine_a = {
+            { 'fancy_mode', width = 6 },
+        },
+        lualine_b = {
+            { 'b:gitsigns_head', icon = ' ' },
+            { 'fancy_diff' },
+        },
+        lualine_c = {
+            { 'fancy_cwd', substitute_home = true },
+        },
+    }
+
+    return {
+        options = {
+            -- component_separators = { left = '', right = '' },
+            theme = 'auto',
+            section_separators = {
+                right = '',
+                left = '',
+            },
+            -- globalstatus = false,
+            disabled_filetypes = {
+                statusline = {
+                    'alpha',
+                    'toggleterm',
+                    'lspsagaoutline',
+                },
+                winbar = {
+                    'alpha',
+                    'help',
+                    'lspsagaoutline',
+                    'Trouble',
+                    'toggleterm',
+                    'dap-repl',
+                    'dapui_console',
+                    'dapui_watches',
+                    'dapui_stacks',
+                    'dapui_breakpoints',
+                    'dapui_scopes',
+                },
+            },
+        },
+        sections = sections,
+        winbar = winbar,
+        -- extensions = { 'neo-tree' }
+    }
+end
+
+
+return {
+    'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+        'meuter/lualine-so-fancy.nvim'
     },
-    -- extensions = { 'neo-tree' }
+    opts = opts,
 }
