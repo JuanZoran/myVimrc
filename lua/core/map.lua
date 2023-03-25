@@ -10,19 +10,20 @@ end
 set {
     mode = 'n',
     map = {
-        { 'U',                 'Vp' },
+        { 'U',                 'VP' },
         -- INFO : command
-        { '<Leader>w',         ':w<CR>',          ' Save Current Window' },
-        { '<Leader><leader>w', ':wqa<CR>',        ' close all window' },
-        { 'qw',                ':close<CR>' },
-        { 'qd',                ':bdelete!<CR>' },
-        { '<S-CR>',            'J' },
+        { '<Leader>w',         '<Cmd>w<CR>',          ' Save Current Window' },
+        { '<Leader><leader>w', '<Cmd>wqa<CR>',        ' close all window' },
+        { 'qw',                '<Cmd>close<CR>' },
+        { 'qd',                '<Cmd>bdelete!<CR>' },
+        { '<C-\'>',            'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',   '痢[Sync | Install] Plugin' },
         { '<Leader>ck',        ':set spell!<CR>', '暈Toggle vim builtin spell checker' },
         { 'yp',                'yip' },
         { 'dp',                'dip' },
         -- { "vp",       "vip"   },
+
         { 'cp',                'cip' },
         -- INFO  in word
         { 'yw',                'yiw' },
@@ -41,8 +42,8 @@ set {
         { 'v;',                [[vi']] },
 
         { 'Z',                 'zf' },
-        { '<leader>a',         '@',               'macro' },
         { '<C-CR>',            '/<++><CR>vf>c' },
+        { '<leader>a',         '@',               'macro' },
         { '<C-w>o',            ':vsp<CR>',        ' Split Window' },
         { '<C-w>u',            ':sp<CR>',         ' Split Window Vertically' },
         { '<C-w>n',            ':only<CR>',       ' Close Another Window' },

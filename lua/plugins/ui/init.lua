@@ -14,6 +14,12 @@ plugins:add {
             flavour = 'macchiato',
             transparent_background = true,
             custom_highlights = require 'plugins.ui.theme.override',
+            -- dim_inactive = {
+
+            --     enabled = false,
+            --     shade = 'dark',
+            --     percentage = 0.15,
+            -- },
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -22,7 +28,6 @@ plugins:add {
                 telescope = true,
                 notify = true,
                 mini = false,
-                -- noice = true,
                 neotree = true,
                 ts_rainbow2 = true,
                 lsp_trouble = true,
@@ -34,6 +39,7 @@ plugins:add {
                     enabled = true,
                 },
                 treesitter_context = true,
+                -- noice = true,
                 -- illuminate = true,
                 -- which_key = true,
                 -- mason = true,
@@ -105,30 +111,6 @@ plugins:add {
     'nvim-zh/colorful-winsep.nvim',
     config = true,
     event = 'WinNew',
-}
-
-plugins:add { -- 状态栏
-    'nvim-lualine/lualine.nvim',
-    event = 'VeryLazy',
-    config = function()
-        require 'plugins.ui.lualine'
-    end,
-    dependencies = {
-        'SmiteshP/nvim-navic',
-        opts = {
-            separator = ' >> ',
-            highlight = true,
-            depth_limit = 5,
-        },
-        init = function()
-            -- vim.g.navic_silence = true
-            require 'plugins.lsp.handlers'.attach(function(client, buffer)
-                if client.server_capabilities.documentSymbolProvider then
-                    require 'nvim-navic'.attach(client, buffer)
-                end
-            end)
-        end,
-    },
 }
 
 plugins:add {

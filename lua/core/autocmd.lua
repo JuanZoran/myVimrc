@@ -2,6 +2,19 @@ local api = vim.api
 local autocmd = api.nvim_create_autocmd
 
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
+
+-- Go to last loc when opening a buffer
+-- autocmd("BufReadPost", {
+--     group = group,
+--     callback = function()
+--         local mark = vim.api.nvim_buf_get_mark(0, '"')
+--         local lcount = vim.api.nvim_buf_line_count(0)
+--         if mark[1] > 0 and mark[1] <= lcount then
+--             pcall(vim.api.nvim_win_set_cursor, 0, mark)
+--         end
+--     end,
+-- })
+
 autocmd('BufRead', {
     group = group,
     command = [[silent! loadview]],
@@ -72,18 +85,6 @@ if vim.fn.executable 'fcitx5-remote' == 1 then
     })
 end
 
-
--- -- go to last loc when opening a buffer
--- autocmd("BufReadPost", {
---   group = augroup("last_loc"),
---   callback = function()
---     local mark = vim.api.nvim_buf_get_mark(0, '"')
---     local lcount = vim.api.nvim_buf_line_count(0)
---     if mark[1] > 0 and mark[1] <= lcount then
---       pcall(vim.api.nvim_win_set_cursor, 0, mark)
---     end
---   end,
--- })
 
 -- -- 设置firenvim的大小
 -- vim.cmd [[

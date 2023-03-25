@@ -25,6 +25,12 @@ plugins:add {
     cmd = 'HelpfulVersion',
 }
 
+plugins:add {
+    'chentoast/marks.nvim',
+    keys = { 'm', { 'gm', '`', remap = true } },
+    config = true,
+}
+
 
 plugins:add {
     'folke/todo-comments.nvim',
@@ -80,7 +86,6 @@ plugins:add {
         },
     },
 }
-
 
 plugins:add {
     'dhruvasagar/vim-table-mode',

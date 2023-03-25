@@ -3,25 +3,32 @@ return {
         on_insert = false,
     },
     finder = {
-        edit = { 'o', '<CR>' },
-        vsplit = 'v',
-        split = 's',
-        tabe = 't',
-        quit = '<C-q>',
+        keys = {
+            jump_to = 'g',
+            edit = { 'o', '<CR>' },
+            vsplit = 'wo',
+            split = 'wu',
+            tabe = 't',
+            tabnew = 'r',
+            quit = { 'q', '<ESC>' },
+            close_in_preview = '<ESC>'
+        },
     },
     definition = {
+        -- keys = {
         edit = '<C-o>',
         vsplit = '<C-v>',
         split = '<C-h>',
         tabe = '<C-t>',
         quit = '<C-q>',
         close = '<Esc>',
+        -- },
     },
     code_action = {
         num_shortcut = true,
         keys = {
             quit = '<C-q>',
-            exec = '<CR>',
+            exec = { '<CR>', '<C-o>' },
         },
     },
     lightbulb = {
@@ -34,6 +41,8 @@ return {
     rename = {
         quit = '<C-q>',
         exec = '<CR>',
+        mark = 'm',
+        confirm = '<CR>',
         in_select = true,
     },
     outline = {

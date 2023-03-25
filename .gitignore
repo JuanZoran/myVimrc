@@ -2,3 +2,5 @@
 spell/
 package-lock.json
 lazy-lock.json
+repro.lua
+.repro
