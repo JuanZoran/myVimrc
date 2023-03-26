@@ -159,7 +159,6 @@ local config = function()
     }
 
     local telescope = require 'telescope'
-    telescope.load_extension 'ui-select'
     telescope.load_extension 'fzf'
 end
 
@@ -168,7 +167,6 @@ return {
     cmd = 'Telescope',
     dependencies = {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }, -- fuzzy finder
-        'nvim-telescope/telescope-ui-select.nvim',
         {
             'nvim-lua/plenary.nvim',
             keys = {

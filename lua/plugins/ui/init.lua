@@ -116,29 +116,6 @@ plugins:add {
     event = 'WinNew',
 }
 
--- plugins:add {
---     "samodostal/image.nvim",
---     config = true,
--- }
-
-plugins:add {
-    'SmiteshP/nvim-navic',
-    lazy = true,
-    opts = {
-        separator = ' >> ',
-        highlight = true,
-        depth_limit = 5,
-    },
-    init = function()
-        -- vim.g.navic_silence = true
-        require 'plugins.lsp.handlers'.attach(function(client, bufnr)
-            if client.server_capabilities.documentSymbolProvider then
-                require 'nvim-navic'.attach(client, bufnr)
-            end
-        end)
-    end,
-}
-
 plugins:add {
     'nvim-neo-tree/neo-tree.nvim',
     init = function()

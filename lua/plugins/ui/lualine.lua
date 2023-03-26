@@ -99,7 +99,24 @@ return {
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     dependencies = {
-        'meuter/lualine-so-fancy.nvim'
+        'meuter/lualine-so-fancy.nvim',
+        {
+            'SmiteshP/nvim-navic',
+            lazy = true,
+            opts = {
+                separator = ' >> ',
+                highlight = true,
+                depth_limit = 5,
+            },
+            init = function()
+                -- vim.g.navic_silence = true
+                require 'plugins.lsp.handlers'.attach(function(client, bufnr)
+                    if client.server_capabilities.documentSymbolProvider then
+                        require 'nvim-navic'.attach(client, bufnr)
+                    end
+                end)
+            end,
+        },
     },
     opts = opts,
 }
