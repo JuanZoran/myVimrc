@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin'()
+local plugins = require 'util.plugin' ()
 
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
@@ -124,7 +124,7 @@ plugins:add {
             history = true,
             updateevents = { 'TextChanged', 'TextChangedI' },
             region_check_events = { 'CursorHold', 'InsertLeave' },
-            delete_check_events = { 'TextChanged', 'InsertEnter' },
+            delete_check_events = 'TextChanged',
             -- enable_autosnippets = true,
             -- store_selection_keys = "<C-q>",
             ext_opts = {

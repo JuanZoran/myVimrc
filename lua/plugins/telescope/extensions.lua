@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin'()
+local plugins = require 'util.plugin' ()
 plugins:add {
     'jvgrootveld/telescope-zoxide', -- powerful cd
     keys = {
@@ -57,6 +57,19 @@ plugins:add {
     keys = {
         { '<C-p>', function() require 'telescope'.extensions.project.project {} end },
     },
+}
+
+plugins:add {
+    'nvim-telescope/telescope-ui-select.nvim',
+    init = function()
+        ---@diagnostic disable-next-line: duplicate-set-field
+        vim.ui.select = function(...)
+            require 'lazy'.load { plugins = { 'telescope-ui-select.nvim' } }
+            return vim.ui.select(...)
+        end
+    end,
+    lazy = true,
+    config = function() require 'telescope'.load_extension 'ui-select' end,
 }
 
 
