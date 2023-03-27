@@ -1,3 +1,13 @@
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--     pattern = 'xmake.lua',
+--     callback = function ()
+--         require('neodev').register {
+--             name = 'lspconfig',
+--         }
+--     end
+-- })
+
+
 local opts = {
     completion = {
         postfix = ':', -- for better completion
@@ -8,24 +18,6 @@ local opts = {
     -- hint = {
     --     enable = true,
     -- }
-    diagnostics = {
-        globals = {
-            'awesome',
-            'client',
-            'root',
-            'screen',
-            'mouse',
-            'tag',
-            'key',
-            'keygrabber',
-            'mousegrabber',
-            'dbus',
-            'drawin',
-        },
-        -- neededFileStatus = {
-        --         ["codestyle-check"] = "Opened",
-        -- },
-    },
     format = {
         enable = true,
         defaultConfig = {

@@ -72,58 +72,31 @@ set {
 local map = vim.keymap.set
 local api = vim.api
 
-map('n', 'H', function()
+local function feedkey(key)
     vim.defer_fn(show, 10)
-    api.nvim_feedkeys('I', 'n', false)
-end)
+    api.nvim_feedkeys(key, 'n', false)
+end
 
-map('n', 'A', function()
-    vim.defer_fn(show, 10)
-    api.nvim_feedkeys('A', 'n', false)
-end)
-
-
-map('n', 'cc', function()
-    vim.defer_fn(show, 10)
-    api.nvim_feedkeys('cc', 'n', false)
-end)
-
-
-map({ 'n', 'x' }, 'G', function()
-    vim.defer_fn(show, 10)
-    api.nvim_feedkeys('G', 'n', false)
-end)
-
-map({ 'n', 'x' }, 'gg', function()
-    vim.defer_fn(show, 10)
-    api.nvim_feedkeys('gg', 'n', false)
-end)
+map('n', 'H', function() feedkey 'I' end)
+map('n', 'A', function() feedkey 'A' end)
+map('n', 'cc', function() feedkey 'cc' end)
+map({ 'n', 'x' }, 'G', function() feedkey 'G' end)
+map({ 'n', 'x' }, 'gg', function() feedkey 'gg' end)
 
 -- Start/end of line:
 map({ 'n', 'x' }, 'J', function()
     local col = (api.nvim_get_current_line()):find '%S'
-    if col ~= vim.fn.col '.' then
-        vim.defer_fn(show, 10)
-        api.nvim_feedkeys('^', 'n', false)
-    end
+    if col ~= vim.fn.col '.' then feedkey 'g^' end
 end)
-
 
 map({ 'n', 'x' }, 'L', function()
     local _cur = vim.fn.col '.'
     local _end = vim.fn.col '$' - 1
-    if _end ~= 0 and _cur ~= _end then
-        vim.defer_fn(show, 10)
-        vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' }
-    end
+    if _end ~= 0 and _cur ~= _end then feedkey 'g$' end
 end)
-
-
 
 api.nvim_create_autocmd('WinEnter', {
     callback = function()
-        if vim.bo.filetype ~= 'specs' then
-            show()
-        end
+        if vim.bo.filetype ~= 'specs' then show() end
     end,
 })
