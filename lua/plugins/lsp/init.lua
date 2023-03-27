@@ -111,6 +111,16 @@ return {
             },
             { 'williamboman/mason-lspconfig.nvim', cmd = 'LspInstall', config = true },
             {
+                'folke/neoconf.nvim',
+                opts = {
+                    import = {
+                        vscode = false, -- local .vscode/settings.json
+                        coc = false,    -- global/local coc-settings.json
+                        nlsp = false,   -- global/local nlsp-settings.nvim json settings
+                    },
+                },
+            },
+            {
                 'folke/neodev.nvim',
                 opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' } } },
             },
@@ -145,7 +155,7 @@ return {
     },
     {
         'glepnir/lspsaga.nvim',
-        event = { 'BufReadPre', 'BufReadPost' },
+        event = 'LspAttach',
         opts = function()
             return require 'plugins.lsp.saga'
         end,

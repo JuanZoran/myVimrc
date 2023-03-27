@@ -8,13 +8,6 @@ local opts = {
     -- hint = {
     --     enable = true,
     -- }
-
-    workspace = {
-        library = {
-            '/usr/share/awesome/lib',
-        },
-        checkThirdParty = false,
-    },
     diagnostics = {
         globals = {
             'awesome',
