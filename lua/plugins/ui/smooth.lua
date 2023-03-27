@@ -26,26 +26,28 @@ require 'cinnamon'.setup {
     default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
 }
 
+-- vim.keymap.set({ 'n', 'x' }, 'j', "<Cmd>lua Scroll('h', 0, 1)<CR>")
+-- vim.keymap.set({ 'n', 'x' }, 'l', "<Cmd>lua Scroll('l', 0, 1)<CR>")
+
 vim.keymap.set({ 'n', 'x' }, 'I', "<Cmd>lua Scroll('<C-u>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua require('specs').show_specs()<CR>")
 
-if false then
-    require 'smoothcursor'.setup {
-        autostart = true,
-        speed = 50,               -- max is 100 to stick to your current position
-        intervals = 30,           -- tick intervalI
-        disable_float_win = true, -- disable on float window
-        linehl = 'CursorLine',
-        disabled_filetypes = {
-            'alpha',
-            'TelescopePrompt'
-        },
-        fancy = {
-            head = { cursor = '▷', texthl = 'SmoothCursor', linehl = 'CursorLine' },
-            enable = false,
-        },
-    }
-end
+-- require('smoothcursor').setup {
+--     autostart = true,
+--     speed = 50,                   -- max is 100 to stick to your current position
+--     intervals = 30,               -- tick intervalI
+--     disable_float_win = true,     -- disable on float window
+--     linehl = 'CursorLine',
+--     disabled_filetypes = {
+--         'alpha',
+--         'TelescopePrompt'
+--     },
+--     fancy = {
+--         head = { cursor = "▷", texthl = "SmoothCursor", linehl = 'CursorLine' },
+--         enable = false
+--     },
+-- }
+
 
 local set = require 'util.map'.set
 set {
@@ -68,58 +70,33 @@ set {
 }
 
 local map = vim.keymap.set
+local api = vim.api
 
-map('n', 'H', function()
+local function feedkey(key)
     vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('I', 'n', false)
-end)
+    api.nvim_feedkeys(key, 'n', false)
+end
 
-map('n', 'A', function()
-    vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('A', 'n', false)
-end)
-
-
-map('n', 'cc', function()
-    vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('cc', 'n', false)
-end)
-
-
-map({ 'n', 'x' }, 'G', function()
-    vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('G', 'n', false)
-end)
-
-map({ 'n', 'x' }, 'gg', function()
-    vim.defer_fn(show, 10)
-    vim.api.nvim_feedkeys('gg', 'n', false)
-end)
+map('n', 'H', function() feedkey 'I' end)
+map('n', 'A', function() feedkey 'A' end)
+map('n', 'cc', function() feedkey 'cc' end)
+map({ 'n', 'x' }, 'G', function() feedkey 'G' end)
+map({ 'n', 'x' }, 'gg', function() feedkey 'gg' end)
 
 -- Start/end of line:
 map({ 'n', 'x' }, 'J', function()
-    if vim.fn.col '.' ~= 1 then
-        vim.defer_fn(show, 10)
-        vim.fn.cursor { vim.fn.line '.', 1 }
-    end
+    local col = (api.nvim_get_current_line()):find '%S'
+    if col ~= vim.fn.col '.' then feedkey 'g^' end
 end)
-
 
 map({ 'n', 'x' }, 'L', function()
     local _cur = vim.fn.col '.'
     local _end = vim.fn.col '$' - 1
-    if _end ~= 0 and _cur ~= _end then
-        vim.defer_fn(show, 10)
-        vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' }
-    end
+    if _end ~= 0 and _cur ~= _end then feedkey 'g$' end
 end)
 
-
-
-vim.api.nvim_create_autocmd('WinEnter', {
+api.nvim_create_autocmd('WinEnter', {
     callback = function()
-        if vim.bo.filetype ~= 'specs' then
-            show()
-        end
+        if vim.bo.filetype ~= 'specs' then show() end
     end,
 })

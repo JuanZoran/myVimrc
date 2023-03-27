@@ -26,12 +26,6 @@ autocmd({ 'BufWrite', 'QuitPre' }, {
 })
 
 
--- set tabstop size for markdown and html file
-autocmd('FileType', {
-    group = group,
-    pattern = { 'yaml' },
-    command = [[setlocal tabstop=4 shiftwidth=4]],
-})
 
 -- Don't auto comment when o
 autocmd('FileType', { command = [[set formatoptions-=cro]] })

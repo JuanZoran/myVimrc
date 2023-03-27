@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin'()
+local plugins = require 'util.plugin' ()
 plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
@@ -254,82 +254,69 @@ plugins:add {
 local map = {
     mode = { 'n', 'x', 'o' }, -- be appended to other operator
     map = {
-        { 'i', 'k' },
-        { 'k', 'j' },
+        { 'i', 'gk' },
+        { 'k', 'gj' },
         { 'j', 'h' },
         { 'h', 'i' },
-        { 'L', '$' },
-        { 'J', '0' },
+        { 'L', 'g$' },
+        { 'J', 'g^' },
         { 'I', '<C-u>zz' },
         { 'K', '<C-d>zz' },
     },
 }
+
 local s = vim.keymap.set
 for _, v in ipairs(map.map) do
     s(map.mode, v[1], v[2])
 end
 
-local api = vim.api
-local fn = vim.fn
-
 plugins:add {
     'JuanZoran/specs.nvim',
-    keys = {
-        {
-            mode = { 'n', 'x' },
-            'H',
-            function()
-                vim.defer_fn(require 'specs'.show_specs, 10)
-                api.nvim_feedkeys('I', 'n', false)
-            end,
-        },
-
-        {
-            mode = { 'n', 'x' },
-            'A',
-            function()
-                vim.defer_fn(require 'specs'.show_specs, 10)
-                api.nvim_feedkeys('A', 'n', false)
-            end,
-        },
-
-        {
-            mode = { 'n', 'x' },
-            'J',
-            function()
-                local pos = api.nvim_get_current_line():find '%S'
-                if pos and fn.col '.' ~= pos then
-                    vim.defer_fn(require 'specs'.show_specs, 10)
-                    fn.cursor { fn.line '.', pos }
-                end
-            end,
-        },
-
-        {
-            mode = { 'n', 'x' },
-            'L',
-            function()
-                local _cur = fn.col '.'
-                local _end = fn.col '$' - 1
-                if _end ~= 0 and _cur ~= _end then
-                    vim.defer_fn(require 'specs'.show_specs, 10)
-                    fn.cursor { fn.line '.', fn.col '$' }
-                end
-            end,
-        },
-    },
+    keys = function()
+        local show = require 'specs'.show_specs
+        local api = vim.api
+        local fn = vim.fn
+        local function feedkey(key)
+            vim.defer_fn(show, 10)
+            api.nvim_feedkeys(key, 'n', false)
+        end
+        return {
+            { 'H',                 function() feedkey 'I' end },
+            { 'A',                 function() feedkey 'A' end },
+            { 'cc',                function() feedkey 'cc' end },
+            { mode = { 'n', 'x' }, 'G',                        function() feedkey 'G' end },
+            { mode = { 'n', 'x' }, 'gg',                       function() feedkey 'gg' end },
+            {
+                mode = { 'n', 'x' },
+                'J',
+                function()
+                    local col = (api.nvim_get_current_line()):find '%S'
+                    if col ~= fn.col '.' then feedkey 'g^' end
+                end,
+            },
+            {
+                mode = { 'n', 'x' },
+                'L',
+                function()
+                    local _cur = fn.col '.'
+                    local _end = fn.col '$' - 1
+                    if _end ~= 0 and _cur ~= _end then feedkey 'g$' end
+                end,
+            },
+        }
+    end,
     opts = function()
         return {
             show_jumps      = false,
             min_jump        = 30,
             popup           = {
-                delay_ms = 0, -- delay before popup displays
-                inc_ms = 10,  -- time increments used for fade/resize effects
-                blend = 85,   -- starting blend, between 0-100 (fully transparent), see :h winblend
-                width = 10,
-                winhl = 'Cursor',
-                fader = require 'specs'.linear_fader,
-                resizer = require 'specs'.shrink_resizer,
+                delay_ms = 0,  -- delay before popup displays
+                inc_ms   = 10, -- time increments used for fade/resize effects
+                blend    = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                width    = 10,
+                winhl    = 'Cursor',
+                fader    = require 'specs'.linear_fader,
+                resizer  = require 'specs'.shrink_resizer,
             },
             ignore_buftypes = {
                 nofile = true,
@@ -341,7 +328,6 @@ plugins:add {
 
 plugins:add {
     'gen740/SmoothCursor.nvim',
-    name = 'smoothcursor',
     event = 'VeryLazy',
     opts = {
         autostart = true,
@@ -360,17 +346,6 @@ plugins:add {
         },
     },
 }
-
--- plugins:add {
---     'declancm/cinnamon.nvim',
---     event = 'VeryLazy',
---     config = function()
---         require 'plugins.ui.smooth'
---     end,
---     dependencies = {
---         'edluffy/specs.nvim',
---     },
--- }
 
 
 return plugins

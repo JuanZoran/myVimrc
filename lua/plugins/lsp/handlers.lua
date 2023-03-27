@@ -1,6 +1,5 @@
 local list = {
     function(_, bufnr)
-        -- server.server_capabilities.semanticTokenProvider = nil
         -- NOTE Keymap
         local set = require 'util.map'.set
         set {
@@ -10,7 +9,6 @@ local list = {
                 { '<Leader>rn', '<Cmd>Lspsaga rename ++project<CR>                ', '凜 Rename' },
                 { '<Leader>ca', '<Cmd>Lspsaga code_action<CR>           ',           ' Code Action' },
                 { '<Leader>dd', '<Cmd>Lspsaga show_line_diagnostics<CR> ',           ' check out line diagnostic' },
-
                 -- NOTE :for text diagnostic
                 { '<Leader>dc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>',          ' 查看光标处诊断信息' },
                 { '<Leader>dj', '<Cmd>Lspsaga diagnostic_jump_prev<CR>',             ' 跳转到上一个诊断信息处' },
@@ -57,7 +55,6 @@ return {
     end,
     get_capabilities = function()
         local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.publishDiagnostics.codeActionsInline = true
         return require 'cmp_nvim_lsp'.default_capabilities(capabilities)
     end,
 }

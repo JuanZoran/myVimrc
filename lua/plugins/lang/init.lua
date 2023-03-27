@@ -42,12 +42,11 @@ plugins:add {
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
+        indent,
         'nvim-treesitter/nvim-treesitter-textobjects',
         'HiPhish/nvim-ts-rainbow2',
         'RRethy/nvim-treesitter-endwise',
         { 'nvim-treesitter/nvim-treesitter-context', config = true },
-
-        indent,
         {
             'kevinhwang91/nvim-ufo',
             dependencies = 'kevinhwang91/promise-async',
@@ -117,7 +116,6 @@ plugins:add {
         { mode = 'i', '<C-q>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
     config = function()
-        local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
         local ls = require 'luasnip'
         local types = require 'luasnip.util.types'
         ls.config.set_config {
@@ -141,6 +139,7 @@ plugins:add {
             },
         }
         require 'luasnip.loaders.from_vscode'.lazy_load()
+        local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
         require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
         vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files)
     end,

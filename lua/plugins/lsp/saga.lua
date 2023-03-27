@@ -1,11 +1,8 @@
 return {
-    diagnostic = {
-        on_insert = false,
-    },
     finder = {
         keys = {
             jump_to = 'g',
-            edit = { 'o', '<CR>' },
+            expand_or_jump = 'o',
             vsplit = 'wo',
             split = 'wu',
             tabe = 't',
@@ -80,8 +77,6 @@ return {
         folder_level = 2,
     },
     ui = {
-        -- currently only round theme
-        theme = 'round',
         -- border type can be single,double,rounded,solid,shadow.
         border = 'rounded',
     },

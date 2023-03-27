@@ -41,6 +41,7 @@ return {
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             'p00f/clangd_extensions.nvim',
+
             {
                 'williamboman/mason.nvim',
                 cmd = 'Mason',
@@ -72,8 +73,18 @@ return {
             },
             { 'williamboman/mason-lspconfig.nvim', cmd = 'LspInstall', config = true },
             {
+                'folke/neoconf.nvim',
+                opts = {
+                    import = {
+                        vscode = false, -- local .vscode/settings.json
+                        coc = false,    -- global/local coc-settings.json
+                        nlsp = false,   -- global/local nlsp-settings.nvim json settings
+                    },
+                },
+            },
+            {
                 'folke/neodev.nvim',
-                opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' } } },
+                opts = { library = { plugins = { 'nvim-dap-ui', 'plenary.nvim' } } },
             },
             {
                 'jose-elias-alvarez/null-ls.nvim',
@@ -82,7 +93,10 @@ return {
                     local formatting = null_ls.builtins.formatting
                     null_ls.setup {
                         sources = {
-                            formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
+                            formatting.prettier.with { extra_args = function(opt)
+                                return { '--tab-width', opt.options.tabSize }
+                            end, },
+                            -- formatting.prettier.with { extra_args = { '--tab-width', vim.bo.shiftwidth } },
                             formatting.black.with { extra_args = { '--fast' } },
                             formatting.beautysh,
                             -- formatting.stylua,
@@ -103,7 +117,7 @@ return {
     },
     {
         'glepnir/lspsaga.nvim',
-        event = { 'BufReadPre', 'BufReadPost' },
+        event = 'LspAttach',
         opts = function()
             return require 'plugins.lsp.saga'
         end,
