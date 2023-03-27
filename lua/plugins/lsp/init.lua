@@ -121,7 +121,10 @@ return {
                     local formatting = null_ls.builtins.formatting
                     null_ls.setup {
                         sources = {
-                            formatting.prettier.with { extra_args = { '--tab-width', 4 } }, -- I prefer 4
+                            formatting.prettier.with { extra_args = function(opt)
+                                return { '--tab-width', opt.options.tabSize }
+                            end, },
+                            -- formatting.prettier.with { extra_args = { '--tab-width', vim.bo.shiftwidth } },
                             formatting.black.with { extra_args = { '--fast' } },
                             formatting.beautysh,
                             -- formatting.stylua,
@@ -153,6 +156,6 @@ return {
                 cond = false,
                 config = true,
             },
-        }
+        },
     }, -- pretty ui for [code-action | hover-text | ....]
 }

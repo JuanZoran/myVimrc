@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin'()
+local plugins = require 'util.plugin' ()
 plugins:add {
     'michaelb/sniprun',
     build = 'bash ./install.sh',
@@ -104,18 +104,17 @@ plugins:add {
     build = ':TSUpdate',
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
+        indent,
         'nvim-treesitter/nvim-treesitter-textobjects',
         'HiPhish/nvim-ts-rainbow2',
         'RRethy/nvim-treesitter-endwise',
         { 'nvim-treesitter/nvim-treesitter-context', config = true },
-
-        indent,
         {
             'kevinhwang91/nvim-ufo',
             dependencies = 'kevinhwang91/promise-async',
             config = function() require 'plugins.lang.ufo' end,
         },
-    }, -- rainbow pairs
+    },
     config = function() require 'plugins.lang.treesitter' end,
 }
 

@@ -5,7 +5,8 @@ return {
     finder = {
         keys = {
             jump_to = 'g',
-            edit = { 'o', '<CR>' },
+            expand_or_jump = 'o',
+            -- expand_or_jump = { 'o', '<CR>' },
             vsplit = 'wo',
             split = 'wu',
             tabe = 't',
@@ -80,8 +81,6 @@ return {
         folder_level = 2,
     },
     ui = {
-        -- currently only round theme
-        theme = 'round',
         -- border type can be single,double,rounded,solid,shadow.
         border = 'rounded',
     },
