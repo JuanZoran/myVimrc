@@ -1,23 +1,10 @@
--- vim.api.nvim_create_autocmd('BufReadPost', {
---     pattern = 'xmake.lua',
---     callback = function ()
---         require('neodev').register {
---             name = 'lspconfig',
---         }
---     end
--- })
-
-
 local opts = {
     completion = {
-        postfix = ':', -- for better completion
+        postfix        = ':', -- for better completion
         displayContext = 2,
-        callSnippet = 'Replace',
+        callSnippet    = 'Replace',
         keywordSnippet = 'Replace',
     },
-    -- hint = {
-    --     enable = true,
-    -- }
     format = {
         enable = true,
         defaultConfig = {
@@ -29,6 +16,7 @@ local opts = {
         },
     },
 }
+
 
 return {
     settings = {

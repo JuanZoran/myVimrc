@@ -1,12 +1,8 @@
 return {
-    diagnostic = {
-        on_insert = false,
-    },
     finder = {
         keys = {
             jump_to = 'g',
             expand_or_jump = 'o',
-            -- expand_or_jump = { 'o', '<CR>' },
             vsplit = 'wo',
             split = 'wu',
             tabe = 't',

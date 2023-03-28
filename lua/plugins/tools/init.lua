@@ -258,7 +258,6 @@ plugins:add {
     },
 }
 
-
 plugins:add {
     'olimorris/persisted.nvim',
     cmd = { 'SessionLoad', 'SessionLoadLast' },

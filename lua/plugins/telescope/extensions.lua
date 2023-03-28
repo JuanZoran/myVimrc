@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin'()
+local plugins = require 'util.plugin' ()
 plugins:add {
     'jvgrootveld/telescope-zoxide', -- powerful cd
     keys = {
@@ -13,7 +13,8 @@ plugins:add {
         { '<leader><C-p>', '<Cmd>Telescope neoclip<cr>',         desc = '📋Clipboard History' },
         { '<leader>P',     '<Cmd>Telescope neoclip unnamed<cr>', desc = '📋Clipboard History for system' },
     },
-
+    dependencies = 'kkharji/sqlite.lua',
+    version = false,
     opts = {
         history = 500,
         enable_persistent_history = true,

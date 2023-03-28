@@ -1,21 +1,3 @@
-vim.diagnostic.config {
-    update_in_insert = true,
-    severity_sort = true,
-    float = {
-        style  = 'minimal',
-        border = 'rounded',
-    },
-    -- virtual_lines = true,
-    virtual_text = {
-        source = 'always',
-        prefix = ' ',
-    },
-    -- signs = {
-    --     active = signs,
-    -- },
-    -- underline = true,
-}
-
 local config = function()
     local handler = require 'plugins.lsp.handlers'
     local opts = {
@@ -47,7 +29,7 @@ local config = function()
         end,
     }
 
-    --     -- TODO  load conf
+    -- TODO  load conf
     local registry = require 'mason-registry'
     local package_to_lspconfig = require 'mason-lspconfig.mappings.server'.package_to_lspconfig
     registry:on('package:uninstall:success', function(pkg)
@@ -122,7 +104,7 @@ return {
             },
             {
                 'folke/neodev.nvim',
-                opts = { library = { plugins = { 'nvim-dap-ui', 'plenary' } } },
+                opts = { library = { plugins = { 'nvim-dap-ui', 'plenary.nvim' } } },
             },
             {
                 'jose-elias-alvarez/null-ls.nvim',

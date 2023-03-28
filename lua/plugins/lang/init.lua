@@ -21,17 +21,6 @@ plugins:add {
     }, --# display borders around floating windows
 }
 
-plugins:add {
-    'rrethy/vim-illuminate',
-    event = 'BufReadPre',
-    config = function()
-        require 'illuminate'.configure {
-            providers = { 'lsp', 'treesitter' },
-            delay = 200,
-        }
-    end,
-}
-
 local frontend = { 'html', 'css' }
 plugins:add {
     'windwp/nvim-ts-autotag',
@@ -114,7 +103,17 @@ plugins:add {
             dependencies = 'kevinhwang91/promise-async',
             config = function() require 'plugins.lang.ufo' end,
         },
-    },
+
+        {
+            'rrethy/vim-illuminate',
+            config = function()
+                require 'illuminate'.configure {
+                    providers = { 'lsp', 'treesitter' },
+                    delay = 200,
+                }
+            end,
+        },
+    }, -- rainbow pairs
     config = function() require 'plugins.lang.treesitter' end,
 }
 
@@ -182,16 +181,20 @@ plugins:add {
 plugins:add {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
+    version = false,
     dependencies = {
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-path',
         'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-cmdline',
+
+        -- { "jcdickinson/codeium.nvim", config = true },
         {
             'zbirenbaum/copilot.lua',
             opts = {
                 panel = { enabled = false },
+                auto_refresh = true,
                 suggestion = {
                     enable = true,
                     auto_trigger = true,
@@ -202,7 +205,6 @@ plugins:add {
                 },
             },
         },
-        -- { "jcdickinson/codeium.nvim", config = true },
     },
     config = function() require 'plugins.lang.cmp' end,
 }

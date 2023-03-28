@@ -1,12 +1,11 @@
-local api = vim.api
-api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Linenr' })
-api.nvim_set_hl(0, 'LeapMatch', {
+local hl = vim.api.nvim_set_hl
+hl(0, 'LeapBackdrop', { link = 'Linenr' })
+hl(0, 'LeapMatch', {
     fg = '#599eff',
     bold = true,
     nocombine = true,
 })
-
-api.nvim_set_hl(0, 'LeapLabelPrimary', {
+hl(0, 'LeapLabelPrimary', {
     link = 'PmenuSel',
     bold = true,
     nocombine = true,
