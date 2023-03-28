@@ -22,7 +22,7 @@ local list = {
                 { 'gr',         '<Cmd>Lspsaga outgoing_calls<CR>  ',                 ' outgoing invoke' },
 
                 {
-                    'gh',
+                    '<C-k>',
                     function()
                         if not require 'ufo'.peekFoldedLinesUnderCursor() then
                             -- choose one of coc.nvim and nvim lsp
