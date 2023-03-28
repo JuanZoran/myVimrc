@@ -84,7 +84,12 @@ return {
             },
             {
                 'folke/neodev.nvim',
-                opts = { library = { plugins = { 'nvim-dap-ui', 'plenary.nvim' } } },
+                opts = {
+                    library = {
+                        enabled = true,
+                        plugins = { 'plenary.nvim' },
+                    },
+                },
             },
             {
                 'jose-elias-alvarez/null-ls.nvim',

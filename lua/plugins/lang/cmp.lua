@@ -13,10 +13,10 @@ local menu = {
 }
 
 local source = {
-    { name = 'nvim_lsp', max_item_count = 3, group_index = 1 },
-    { name = 'path',     group_index = 1 },
-    { name = 'luasnip',  max_item_count = 3, group_index = 1 },
-    { name = 'buffer',   max_item_count = 3, group_index = 2 },
+    { name = 'path' },
+    { name = 'nvim_lsp', group_index = 1 --[[  max_item_count = 8, ]] },
+    { name = 'luasnip',  group_index = 1,                             max_item_count = 4 },
+    { name = 'buffer',   group_index = 2,                             max_item_count = 4 },
 }
 
 local next = cmp.mapping(function()
@@ -35,10 +35,8 @@ local prev = cmp.mapping(function()
     end
 end, { 'i', 'c' })
 
+
 cmp.setup {
-    completion = {
-        completeopt = 'menu,menuone,noselect',
-    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -143,6 +141,7 @@ cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = 'buffer' },
+        { name = 'cmdline_history', max_item_count = 5 },
     },
 })
 
@@ -152,12 +151,8 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
         { name = 'path' },
     }, {
-        {
-            name = 'cmdline',
-            option = {
-                ignore_cmds = { 'Man', '!' },
-            },
-        },
+        { name = 'cmdline',         max_item_count = 5, option = { ignore_cmds = { 'Man', '!' } } },
+        { name = 'cmdline_history', max_item_count = 5 },
     }),
 })
 

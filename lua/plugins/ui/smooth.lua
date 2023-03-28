@@ -86,13 +86,13 @@ map({ 'n', 'x' }, 'gg', function() feedkey 'gg' end)
 -- Start/end of line:
 map({ 'n', 'x' }, 'J', function()
     local col = (api.nvim_get_current_line()):find '%S'
-    if col ~= vim.fn.col '.' then feedkey 'g^' end
+    if col ~= vim.fn.col '.' then feedkey(vim.wo.wrap and 'g^' or '^') end
 end)
 
 map({ 'n', 'x' }, 'L', function()
     local _cur = vim.fn.col '.'
     local _end = vim.fn.col '$' - 1
-    if _end ~= 0 and _cur ~= _end then feedkey 'g$' end
+    if _end ~= 0 and _cur ~= _end then feedkey(vim.wo.wrap and 'g$' or '$') end
 end)
 
 api.nvim_create_autocmd('WinEnter', {

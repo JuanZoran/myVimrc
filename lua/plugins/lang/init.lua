@@ -1,5 +1,15 @@
 local plugins = require 'util.plugin' ()
 
+local frontend = { 'html', 'css' }
+plugins:add {
+    'windwp/nvim-ts-autotag',
+    config = function(plugin)
+        require 'nvim-ts-autotag'.setup {
+            filetypes = plugin.ft,
+        }
+    end,
+    ft = frontend,
+}
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
@@ -66,16 +76,6 @@ plugins:add {
     config = function() require 'plugins.lang.treesitter' end,
 }
 
-local frontend = { 'html', 'css' }
-plugins:add {
-    'windwp/nvim-ts-autotag',
-    config = function(plugin)
-        require 'nvim-ts-autotag'.setup {
-            filetypes = plugin.ft,
-        }
-    end,
-    ft = frontend,
-}
 
 plugins:add {
     'folke/trouble.nvim',
@@ -146,7 +146,6 @@ plugins:add {
     dependencies = 'rafamadriz/friendly-snippets',
 }
 
-
 plugins:add {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
@@ -157,7 +156,7 @@ plugins:add {
         'hrsh7th/cmp-path',
         'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-cmdline',
-
+        'dmitmel/cmp-cmdline-history',
         -- { "jcdickinson/codeium.nvim", config = true },
         {
             'zbirenbaum/copilot.lua',

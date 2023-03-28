@@ -213,8 +213,6 @@ plugins:add {
             -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
             progress = {
                 enabled = true,
-                -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
-                -- See the section on formatting for more details on how to customize.
                 format = 'lsp_progress',
                 format_done = 'lsp_progress_done',
                 throttle = 1000 / 30, -- frequency to update lsp progress message
@@ -225,6 +223,10 @@ plugins:add {
                 ['vim.lsp.util.stylize_markdown'] = true,
                 ['cmp.entry.get_documentation'] = true,
             },
+        },
+        popupmenu = {
+            backend = 'cmp', -- backend to use to show regular cmdline completions
+            kind_icons = {}, -- set to `false` to disable icons
         },
         presets = {
             bottom_search = false,        -- use a classic bottom cmdline for search
@@ -291,7 +293,7 @@ plugins:add {
                 'J',
                 function()
                     local col = (api.nvim_get_current_line()):find '%S'
-                    if col ~= fn.col '.' then feedkey 'g^' end
+                    if col ~= vim.fn.col '.' then feedkey(vim.wo.wrap and 'g^' or '^') end
                 end,
             },
             {
@@ -300,7 +302,7 @@ plugins:add {
                 function()
                     local _cur = fn.col '.'
                     local _end = fn.col '$' - 1
-                    if _end ~= 0 and _cur ~= _end then feedkey 'g$' end
+                    if _end ~= 0 and _cur ~= _end then feedkey(vim.wo.wrap and 'g$' or '$') end
                 end,
             },
         }

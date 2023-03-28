@@ -6,37 +6,31 @@ local list = {
             mode = 'n',
             opt = { silent = true, buffer = bufnr },
             map = {
-                { '<Leader>rn', '<Cmd>Lspsaga rename ++project<CR>                ', '凜 Rename' },
-                { '<Leader>ca', '<Cmd>Lspsaga code_action<CR>           ',           ' Code Action' },
-                { '<Leader>dd', '<Cmd>Lspsaga show_line_diagnostics<CR> ',           ' check out line diagnostic' },
+                { '<Leader>rn', '<Cmd>Lspsaga rename ++project<CR>                ',                '凜 Rename' },
+                { '<Leader>ca', '<Cmd>Lspsaga code_action<CR>           ',                          ' Code Action' },
+                { '<Leader>dd', '<Cmd>Lspsaga show_line_diagnostics<CR> ',                          ' check out line diagnostic' },
                 -- NOTE :for text diagnostic
-                { '<Leader>dc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>',          ' 查看光标处诊断信息' },
-                { '<Leader>dj', '<Cmd>Lspsaga diagnostic_jump_prev<CR>',             ' 跳转到上一个诊断信息处' },
-                { '<Leader>dl', '<Cmd>Lspsaga diagnostic_jump_next<CR>',             ' 跳转到下一个诊断信息处' },
-                { '<Leader>dm', '<Cmd>Lspsaga show_buf_diagnostics<CR>',             '  打开诊断列表' },
-                { '<Leader>o',  '<Cmd>Lspsaga outline<CR>         ',                 ' Show the variables window' },
-                { 'gf',         '<Cmd>Lspsaga lsp_finder<cr>      ',                 ' Lspsaga Finder' },
-                { 'gd',         '<Cmd>Lspsaga peek_definition<cr> ',                 ' peek definition' },
-                { 'gD',         '<Cmd>Lspsaga goto_definition<CR> ',                 ' jump to definition' },
-                { 'gi',         '<Cmd>Lspsaga incoming_calls<CR>  ',                 ' incoming invoke' },
-                { 'gr',         '<Cmd>Lspsaga outgoing_calls<CR>  ',                 ' outgoing invoke' },
-
-                {
-                    'gh',
-                    function()
-                        if not require 'ufo'.peekFoldedLinesUnderCursor() then
-                            -- choose one of coc.nvim and nvim lsp
-                            vim.cmd [[Lspsaga hover_doc]]
-                        end
-                    end,
-                    ' hover',
-                },
-
-                {
-                    '==',
-                    function() vim.lsp.buf.format { async = true, buffer = bufnr } end,
-                    ' formatting buffer',
-                },
+                { '<Leader>dc', '<Cmd>Lspsaga show_cursor_diagnostics<CR>',                         ' 查看光标处诊断信息' },
+                { '<Leader>dj', '<Cmd>Lspsaga diagnostic_jump_prev<CR>',                            ' 跳转到上一个诊断信息处' },
+                { '<Leader>dl', '<Cmd>Lspsaga diagnostic_jump_next<CR>',                            ' 跳转到下一个诊断信息处' },
+                { '<Leader>dm', '<Cmd>Lspsaga show_buf_diagnostics<CR>',                            '  打开诊断列表' },
+                { '<Leader>o',  '<Cmd>Lspsaga outline<CR>         ',                                ' Show the variables window' },
+                { 'gf',         '<Cmd>Lspsaga lsp_finder<cr>      ',                                ' Lspsaga Finder' },
+                { 'gd',         '<Cmd>Lspsaga peek_definition<cr> ',                                ' peek definition' },
+                { 'gD',         '<Cmd>Lspsaga goto_definition<CR> ',                                ' jump to definition' },
+                { 'gi',         '<Cmd>Lspsaga incoming_calls<CR>  ',                                ' incoming invoke' },
+                { 'gr',         '<Cmd>Lspsaga outgoing_calls<CR>  ',                                ' outgoing invoke' },
+                { '==',         function() vim.lsp.buf.format { async = true, buffer = bufnr } end, ' formatting buffer' },
+                { '<C-k>', function()
+                    if not require 'ufo'.peekFoldedLinesUnderCursor() then
+                        vim.cmd [[Lspsaga hover_doc]]
+                    end
+                end, ' hover', },
+                { 'gh', function()
+                    if not require 'ufo'.peekFoldedLinesUnderCursor() then
+                        vim.cmd [[Lspsaga hover_doc]]
+                    end
+                end, ' hover', },
             },
         }
     end,

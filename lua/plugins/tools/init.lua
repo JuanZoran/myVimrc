@@ -111,13 +111,13 @@ plugins:add {
 plugins:add {
     'CKolkey/ts-node-action',
     keys = {
-        { '<leader>u', function() require 'ts-node-action'.node_action() end, desc = '🌀Trigger Node Action' },
+        { '<leader>u', function() require 'ts-node-action'.node_action() end, desc = 'Trigger Node Action' },
     },
 }
 
 -- search/replace in multiple files
 plugins:add {
-    'windwp/nvim-spectre',
+    'windwp/nvim-spectre', -- dependencies: rg, sed
     keys = {
         { '<leader>sr', function() require 'spectre'.open() end, desc = 'Replace in files (Spectre)' },
         {

@@ -1,9 +1,18 @@
 local opts = {
+    runtime = {
+        version = 'LuaJIT',
+    },
     completion = {
         postfix        = ':', -- for better completion
         displayContext = 2,
         callSnippet    = 'Replace',
         keywordSnippet = 'Replace',
+    },
+    workspace = {
+        userThirdParty = {
+            os.getenv 'HOME' .. '/.config/LLS-Addons',
+        },
+        -- checkThirdParty = true,
     },
     format = {
         enable = true,
@@ -22,4 +31,7 @@ return {
     settings = {
         Lua = opts,
     },
+    -- server_capabilities = {
+    --     documentFormattingProvider = false,
+    -- },
 }

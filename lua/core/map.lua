@@ -12,14 +12,14 @@ set {
     map = {
         { 'U',                 'VP' },
         -- INFO : command
-        { '<Leader>w',         '<Cmd>w<CR>',          ' Save Current Window' },
-        { '<Leader><leader>w', '<Cmd>wqa<CR>',        ' close all window' },
-        { 'qw',                '<Cmd>close<CR>' },
+        { '<Leader>w',         '<Cmd>w<CR>',       ' Save Current Window' },
+        { '<Leader><leader>w', '<Cmd>wqa<CR>',     ' close all window' },
+        { '<Leader>ck',        ':set spell!<CR>',  '暈Toggle vim builtin spell checker' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
-        { '<C-\'>',            'J' },
+        { '<Leader>p',         '<Cmd>Lazy<CR>',    '痢[Sync | Install] Plugin' },
+        { '<leader>J',         'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
-        { '<Leader>p',         '<Cmd>Lazy<CR>',   '痢[Sync | Install] Plugin' },
-        { '<Leader>ck',        ':set spell!<CR>', '暈Toggle vim builtin spell checker' },
+
         { 'yp',                'yip' },
         { 'dp',                'dip' },
         -- { "vp",       "vip"   },
@@ -43,10 +43,10 @@ set {
 
         { 'Z',                 'zf' },
         { '<C-CR>',            '/<++><CR>vf>c' },
-        { '<leader>a',         '@',               'macro' },
-        { '<C-w>o',            ':vsp<CR>',        ' Split Window' },
-        { '<C-w>u',            ':sp<CR>',         ' Split Window Vertically' },
-        { '<C-w>n',            ':only<CR>',       ' Close Another Window' },
+        { '<leader>a',         '@',                'Macro' },
+        { '<C-w>o',            ':vsp<CR>',         ' Split Window' },
+        { '<C-w>u',            ':sp<CR>',          ' Split Window Vertically' },
+        { '<C-w>n',            ':only<CR>',        ' Close Another Window' },
     },
 }
 
@@ -63,11 +63,11 @@ set {
         { '<C-Right>', '<Cmd>wincmd ><CR>' },
         { '<C-Left>',  '<Cmd>wincmd <<CR>' },
 
-        { '<C-w>K',    '<Cmd>wincmd J<CR>', ' Move Down' },
-        { '<C-w>I',    '<Cmd>wincmd K<CR>', ' Move Up' },
-        { '<C-w>J',    '<Cmd>wincmd H<CR>', ' Move Left' },
-        { '<C-w>L',    '<Cmd>wincmd L<CR>', ' Move Right' },
-        { '<C-w>=',    '<Cmd>wincmd =<CR>', '屢Resize Window' },
+        { '<C-w>K',    '<Cmd>wincmd J<CR>', 'Move Down' },
+        { '<C-w>I',    '<Cmd>wincmd K<CR>', 'Move Up' },
+        { '<C-w>J',    '<Cmd>wincmd H<CR>', 'Move Left' },
+        { '<C-w>L',    '<Cmd>wincmd L<CR>', 'Move Right' },
+        { '<C-w>=',    '<Cmd>wincmd =<CR>', 'Resize Window' },
     },
 }
 
@@ -93,16 +93,6 @@ set {
     -- {"<++>", "<++>"},
     -- {"<++>", "<++>"},
 }
-
-
--- set {
---     mode = 'c',
---     map = {
---         { "<C-j>",  "<Left>" },
---         { "<C-l>",  "<Right>" },
---     }
--- }
-
 
 set {
     mode = 'x',

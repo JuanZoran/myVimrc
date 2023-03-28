@@ -15,6 +15,7 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 --     end,
 -- })
 
+
 autocmd('BufRead', {
     group = group,
     command = [[silent! loadview]],
@@ -24,7 +25,6 @@ autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     command = [[silent! mkview]],
 })
-
 
 
 -- Don't auto comment when o
@@ -79,8 +79,27 @@ if vim.fn.executable 'fcitx5-remote' == 1 then
     })
 end
 
+-- INFO cursorline
+local set_cursorline = function(event, value, pattern)
+    autocmd(event, {
+        group = group,
+        pattern = pattern,
+        callback = function()
+            local filetype = vim.bo.filetype
+            if filetype ~= 'TelescopePrompt' and filetype ~= 'alpha'
+            then
+                vim.opt_local.cursorline = value
+            end
+        end,
+    })
+end
+-- set_cursorline("WinLeave", false)
+-- set_cursorline("WinEnter", true)
+set_cursorline('InsertEnter', false)
+set_cursorline('InsertLeave', true)
 
--- -- 设置firenvim的大小
+
+-- 设置firenvim的大小
 -- vim.cmd [[
 -- function! OnUIEnter(event) abort
 --   if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
