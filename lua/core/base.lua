@@ -44,7 +44,6 @@ opt.hlsearch       = false
 
 -- Cool floating window popup menu for completion on command line
 opt.tabstop     = 4
-opt.completeopt = 'menu,menuone,noselect'
 opt.softtabstop = 4
 opt.shiftwidth  = 4
 opt.expandtab   = true

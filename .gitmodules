@@ -1,0 +1,3 @@
+[submodule "lua/server/xmake-luals-addon"]
+	path = lua/server/xmake-luals-addon
+	url = /home/zoran/.config/nvim/lua/server/xmake-luals-addon

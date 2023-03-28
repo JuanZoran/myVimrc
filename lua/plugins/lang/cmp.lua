@@ -13,10 +13,10 @@ local menu = {
 }
 
 local source = {
-    { name = 'nvim_lsp', max_item_count = 3, group_index = 1 },
-    { name = 'path',     group_index = 1 },
-    { name = 'luasnip',  max_item_count = 3, group_index = 1 },
-    { name = 'buffer',   max_item_count = 3, group_index = 2 },
+    { name = 'path' },
+    { name = 'nvim_lsp', max_item_count = 8, group_index = 1 },
+    { name = 'luasnip',  max_item_count = 4, group_index = 1 },
+    { name = 'buffer',   max_item_count = 4, group_index = 2 },
 }
 
 local next = cmp.mapping(function()
@@ -35,10 +35,8 @@ local prev = cmp.mapping(function()
     end
 end, { 'i', 'c' })
 
+
 cmp.setup {
-    completion = {
-        completeopt = 'menu,menuone,noselect',
-    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
