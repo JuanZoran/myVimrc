@@ -177,7 +177,6 @@ plugins:add {
     dependencies = 'rafamadriz/friendly-snippets',
 }
 
-
 plugins:add {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
@@ -188,7 +187,7 @@ plugins:add {
         'hrsh7th/cmp-path',
         'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-cmdline',
-
+        'dmitmel/cmp-cmdline-history',
         -- { "jcdickinson/codeium.nvim", config = true },
         {
             'zbirenbaum/copilot.lua',

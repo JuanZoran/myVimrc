@@ -227,6 +227,10 @@ plugins:add {
                 ['cmp.entry.get_documentation'] = true,
             },
         },
+        popupmenu = {
+            backend = 'cmp', -- backend to use to show regular cmdline completions
+            kind_icons = {}, -- set to `false` to disable icons
+        },
         presets = {
             bottom_search = false,        -- use a classic bottom cmdline for search
             long_message_to_split = true, -- long messages will be sent to a split
@@ -249,28 +253,5 @@ plugins:add {
         },
     },
 }
-
--- if vim.env.TERM == 'xterm-kitty' then
---     plugins:add {
---         "giusgad/pets.nvim",
---         event = 'BufReadPre',
---         cond = true,
---         dependencies = "giusgad/hologram.nvim",
---         keys = {
---             { '<leader><leader>n', '<Cmd>PetsHideToggle<CR>', desc = '🛀 Toggle Pets' }
---         },
---         opts = {
---             -- col = 10,
---             row = 5,
---             popup = {
---                 avoid_statusline = true,
---             },
---         },
---         config = function(_, opts)
---             require("pets").setup(opts)
---             vim.cmd [[PetsNew cat]]
---         end,
---     }
--- end
 
 return plugins

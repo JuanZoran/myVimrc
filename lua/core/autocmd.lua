@@ -85,7 +85,9 @@ local set_cursorline = function(event, value, pattern)
         group = group,
         pattern = pattern,
         callback = function()
-            if vim.bo.filetype ~= 'TelescopePrompt' then
+            local filetype = vim.bo.filetype
+            if filetype ~= 'TelescopePrompt' and filetype ~= 'alpha'
+            then
                 vim.opt_local.cursorline = value
             end
         end,

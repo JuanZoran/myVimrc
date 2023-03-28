@@ -14,9 +14,9 @@ local menu = {
 
 local source = {
     { name = 'path' },
-    { name = 'nvim_lsp', max_item_count = 8, group_index = 1 },
-    { name = 'luasnip',  max_item_count = 4, group_index = 1 },
-    { name = 'buffer',   max_item_count = 4, group_index = 2 },
+    { name = 'nvim_lsp', group_index = 1 --[[  max_item_count = 8, ]] },
+    { name = 'luasnip',  group_index = 1,                             max_item_count = 4 },
+    { name = 'buffer',   group_index = 2,                             max_item_count = 4 },
 }
 
 local next = cmp.mapping(function()
@@ -148,6 +148,7 @@ cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
         { name = 'buffer' },
+        { name = 'cmdline_history', max_item_count = 5 },
     },
 })
 
@@ -157,12 +158,8 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
         { name = 'path' },
     }, {
-        {
-            name = 'cmdline',
-            option = {
-                ignore_cmds = { 'Man', '!' },
-            },
-        },
+        { name = 'cmdline',         max_item_count = 5, option = { ignore_cmds = { 'Man', '!' } } },
+        { name = 'cmdline_history', max_item_count = 5 },
     }),
 })
 

@@ -12,7 +12,7 @@ local opts = {
         userThirdParty = {
             os.getenv 'HOME' .. '/.config/LLS-Addons',
         },
-        -- checkThirdParty = false,
+        -- checkThirdParty = true,
     },
     format = {
         enable = true,
