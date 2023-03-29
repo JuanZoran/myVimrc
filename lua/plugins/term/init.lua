@@ -55,7 +55,7 @@ local flatten = {
 
 local toggleterm = {
     'akinsho/toggleterm.nvim',
-    cmd = 'ToggleTerm',
+    cmd = { 'ToggleTerm', 'TermExec' },
     keys = {
         '<C-d>',
         { '<C-g>',     function() lazygit:toggle() end,            desc = 'Toggle Lazygit' },
@@ -85,4 +85,45 @@ local toggleterm = {
 return {
     flatten,
     toggleterm,
+
+    {
+        'CRAG666/code_runner.nvim',
+        keys = {
+            { '<leader>rr', '<Cmd>RunCode<CR>', desc = 'Code Runner' },
+        },
+        opts = {
+            mode = 'toggleterm',
+            -- filetype = {
+            -- },
+        },
+    },
+
+    {
+        'SmiteshP/nvim-navbuddy',
+        init = function()
+            require 'plugins.lsp.handlers'.attach(function(client, bufnr)
+                require 'nvim-navbuddy'.attach(client, bufnr)
+            end)
+        end,
+        keys = {
+            { '<leader>k', '<Cmd>Navbuddy<CR>' },
+        },
+        opts = function()
+            local actions = require 'nvim-navbuddy.actions'
+            return {
+                window = {
+                    border = 'rounded',
+                    size = '65%',
+                },
+                mappings = {
+                    k = actions.next_sibling,     -- down
+                    i = actions.previous_sibling, -- up
+                    j = actions.parent,           -- Move to left panel
+                    l = actions.children,         -- Move to right panel
+                    h = actions.insert_name,      -- Insert at start of name
+                    H = actions.insert_scope,     -- Insert at start of scope
+                },
+            }
+        end,
+    },
 }

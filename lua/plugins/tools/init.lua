@@ -14,6 +14,10 @@ plugins:add {
         frontend = {
             hover = {
                 spinner = 'moon',
+                -- animation = {
+                --     open = false,
+                --     close = false,
+                -- }
             },
         },
         dir = os.getenv 'HOME' .. '/.vim/dict'

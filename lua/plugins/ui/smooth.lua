@@ -5,13 +5,13 @@ specs.setup {
     show_jumps      = false,
     min_jump        = 30,
     popup           = {
-        delay_ms = 0, -- delay before popup displays
-        inc_ms = 10,  -- time increments used for fade/resize effects
-        blend = 85,   -- starting blend, between 0-100 (fully transparent), see :h winblend
-        width = 10,
-        winhl = 'Cursor',
-        fader = require 'specs'.linear_fader,
-        resizer = require 'specs'.shrink_resizer,
+        delay_ms = 0,          -- delay before popup displays
+        inc_ms   = 11,         -- time increments used for fade/resize effects
+        blend    = 45,         -- starting blend, between 0-100 (fully transparent), see :h winblend
+        width    = 12,
+        winhl    = 'Cursor',
+        fader    = require 'specs'.linear_fader,
+        resizer  = require 'specs'.shrink_resizer,
     },
     ignore_buftypes = {
         nofile = true,

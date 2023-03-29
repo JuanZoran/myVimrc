@@ -1,89 +1,49 @@
 <!--toc:start-->
 
-- [配置结构](#配置结构)
-<!--toc:end-->
+## 一些基本的快捷键说明
 
-# 配置结构
+-   ijkl 用于上下左右移动
 
-```
-lua
-├── core
-│   ├── autocmd.lua
-│   ├── base.lua
-│   ├── init.lua
-│   └── map.lua
-├── lsp
-│   ├── conf
-│   │   ├── clangd.lua
-│   │   ├── gopls.lua
-│   │   ├── grammarly.lua
-│   │   └── sumneko_lua.lua
-│   ├── handlers.lua
-│   ├── init.lua
-│   └── saga.lua
-├── neovide
-│   └── compiled.lua
-├── plugins
-│   ├── dap
-│   │   └── init.lua
-│   ├── lang
-│   │   ├── cmp.lua
-│   │   ├── init.lua
-│   │   ├── textobjects.lua
-│   │   ├── treesitter.lua
-│   │   └── ufo.lua
-│   ├── telescope
-│   │   ├── base.lua
-│   │   ├── harpoon.lua
-│   │   ├── init.lua
-│   │   └── refactor.lua
-│   ├── tools
-│   │   ├── backup.lua
-│   │   ├── gitsigns.lua
-│   │   ├── init.lua
-│   │   ├── leap.lua
-│   │   ├── session.lua
-│   │   ├── todo-comments.lua
-│   │   └── which-key.lua
-│   └── ui
-│       ├── alpha.lua
-│       ├── init.lua
-│       ├── lualine.lua
-│       ├── noice.lua
-│       ├── nvim_tree.lua
-│       ├── smooth.lua
-│       └── theme
-│           ├── catp.lua
-│           ├── dracula.lua
-│           ├── everforest.lua
-│           ├── github.lua
-│           ├── kanagawa.lua
-│           ├── nordic.lua
-│           └── override.lua
-├── snips
-│   ├── all.lua
-│   ├── c.lua
-│   ├── cpp.lua
-│   ├── go.lua
-│   ├── init.lua
-│   ├── lua.lua
-│   ├── markdown.lua
-│   ├── python.lua
-│   └── sh.lua
-├── template
-│   ├── init.lua
-│   └── src
-│       ├── __all__.c
-│       ├── __all__-component-__all__-__all__.lua
-│       ├── __all__.gitignore
-│       ├── __all__-lsp-conf-__all__.lua
-│       ├── __all__.sh
-│       ├── __all__-snips-__all__.lua
-│       ├── __all__.zsh
-│       └── test___all__.cpp
-└── util
-    ├── init.lua
-    ├── map.lua
-    ├── plugin.lua
-    └── string.lua
-```
+-   h 代替了 i 的作用
+
+-   J 跳到行首
+
+-   L 跳到行尾
+
+-   I 向上滚动半屏
+
+-   K 向下滚动半屏
+
+-   **leader 键为空格**
+
+-   <C-q>强制退出
+
+-   <leader>w 保存
+
+-   insert 模式下, <C-j>是向左边移动光标, <C-l>是向右边移动光标
+
+-   补全选择
+
+    -   \<C-k> | Tab 向下选择
+
+        > 如果 copilot 的建议存在, 那么 tab 会优先接受 copilot 的建议, 如果不存在, 那么 Tab 会向下选择
+
+    -   \<C-p>向上选择
+
+        不使用\<C-i>向上选择是因为\<C-i>和 tab 的 keycode 是相同的, 映射到\<C-i>会导致向上选择
+        > Telescope里是\<C-i>向上选择
+
+    -   \<C-e>跳转到下一个 snippet 的位置或者跳到行尾
+
+        如果没有 snippet 那么就是跳到行尾
+
+    -   \<C-o>或者\<Cr>接受补全
+
+        \<C-o>: 没有选择的时候默认选择第一个  
+        \<CR>: 没有选择的时候则为换行
+        
+    -   \<C-d>和\<C-u> 补全有文档说明的时候, 用于文档窗口的上下翻页
+
+    -   \<C-Space>切换copilot的补全建议或者切换choice snippet或者展开补全
+
+    -   \<C-c>停止补全窗口

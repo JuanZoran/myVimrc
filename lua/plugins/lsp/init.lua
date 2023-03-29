@@ -91,7 +91,11 @@ return {
                     },
                 },
             },
-            { 'williamboman/mason-lspconfig.nvim', cmd = 'LspInstall', config = true },
+            {
+                'williamboman/mason-lspconfig.nvim',
+                cmd = 'LspInstall',
+                config = true,
+            },
             {
                 'folke/neoconf.nvim',
                 opts = {
