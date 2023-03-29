@@ -25,6 +25,7 @@ require 'lazy'.setup({
     { import = 'plugins' },
     { import = 'plugins.ui.lualine' },
     { import = 'plugins.telescope.extensions' },
+    { import = 'plugins.tools.extra' },
 }, {
     install = {
         colorscheme = { 'catppuccin', 'kanagawa', 'habamax' },

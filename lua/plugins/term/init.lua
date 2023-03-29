@@ -94,7 +94,7 @@ return {
         opts = {
             mode = 'toggleterm',
             filetype = {
-                cpp = 'xmake b && xmake r'
+                cpp = 'cd $dir && clang++ $fileName -o /tmp/$fileNameWithoutExt && /tmp/$fileNameWithoutExt',
             },
         },
     },
