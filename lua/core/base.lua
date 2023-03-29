@@ -47,7 +47,7 @@ opt.tabstop     = 4
 opt.softtabstop = 4
 opt.shiftwidth  = 4
 opt.expandtab   = true
-opt.whichwrap:append '<,>,[,],h,l'  -- 可以从当前行直接前往上一行
+opt.whichwrap:append '<,>,[,],h,l' -- 可以从当前行直接前往上一行
 
 
 opt.cursorline     = true
@@ -77,12 +77,13 @@ opt.undodir = os.getenv 'HOME' .. '/.vim'
 -- \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 ---  SETTINGS  ---
-opt.spelllang:append 'cjk'  -- disable spellchecking for asian characters (VIM algorithm does not support it)
+opt.spelllang:append 'cjk' -- disable spellchecking for asian characters (VIM algorithm does not support it)
 -- vim.wo.signcolumn = 'auto'
 vim.wo.signcolumn = 'yes'
 
-opt.iskeyword:append '-'  -- 将word-word视为一个word, 方便daw
+opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
 
+opt.viewoptions = 'cursor,folds'
 -----================ disabled some native =====================
 
 -- vim.o.showmode = false

@@ -93,8 +93,9 @@ return {
         },
         opts = {
             mode = 'toggleterm',
-            -- filetype = {
-            -- },
+            filetype = {
+                cpp = 'xmake b && xmake r'
+            },
         },
     },
 
