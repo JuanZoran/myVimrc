@@ -88,7 +88,7 @@ set {
         { '<C-e>', function()
             vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' }
         end, },
-        { '<C-v>', '"+p' },
+        { '<C-v>', '<C-r>+' },
     },
     -- {"<++>", "<++>"},
     -- {"<++>", "<++>"},

@@ -5,7 +5,6 @@ local config = function()
         capabilities = handler.get_capabilities(),
         handlers = handler.handlers,
     }
-
     local setup = function(server)
         local _, conf_opts = pcall(require, 'server.' .. server)
         local conf = (_ and conf_opts) and vim.tbl_extend('error', vim.deepcopy(opts), conf_opts) or opts

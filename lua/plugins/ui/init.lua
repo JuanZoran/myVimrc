@@ -174,6 +174,11 @@ plugins:add { -- 标签栏
                 show_buffer_close_icons = true,
                 show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
                 modified_icon = '💌',
+                numbers = function(opts)
+                    return string.format('%s·%s', opts.lower(opts.ordinal), opts.raise(opts.id))
+                end,
+                hover = { enabled = false },
+                enforce_regular_tabs = true,
                 -- separator_style = "triky", -- slant, padded_slant | triky
                 -- offsets = {
                 -- },
@@ -279,8 +284,9 @@ plugins:add {
         local api = vim.api
         local fn = vim.fn
         local function feedkey(key)
-            vim.defer_fn(show, 10)
+            -- api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), 'n', false)
             api.nvim_feedkeys(key, 'n', false)
+            vim.defer_fn(show, 10)
         end
         return {
             { 'H',                 function() feedkey 'I' end },
@@ -305,28 +311,26 @@ plugins:add {
                     if _end ~= 0 and _cur ~= _end then feedkey(vim.wo.wrap and 'g$' or '$') end
                 end,
             },
+            -- { mode = { 'n', 'x' }, 'I',                        function() feedkey '<C-u>zz' end },
+            -- { mode = { 'n', 'x' }, 'K',                        function() feedkey '<C-d>zz' end },
         }
     end,
     opts = function()
         return {
             show_jumps      = false,
-            min_jump        = 30,
             popup           = {
                 delay_ms = 0,  -- delay before popup displays
-                inc_ms   = 10, -- time increments used for fade/resize effects
-                blend    = 85, -- starting blend, between 0-100 (fully transparent), see :h winblend
-                width    = 10,
+                inc_ms   = 8,  -- time increments used for fade/resize effects
+                blend    = 40, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                width    = 13,
                 winhl    = 'Cursor',
                 fader    = require 'specs'.linear_fader,
                 resizer  = require 'specs'.shrink_resizer,
             },
-            ignore_buftypes = {
-                nofile = true,
-            },
+            ignore_buftypes = { nofile = true },
         }
     end,
 }
-
 
 plugins:add {
     'gen740/SmoothCursor.nvim',
@@ -336,14 +340,14 @@ plugins:add {
         speed = 30,               -- max is 100 to stick to your current position
         intervals = 30,           -- tick intervalI
         disable_float_win = true, -- disable on float window
-        linehl = 'CursorLine',
+        -- linehl = 'CursorLine',
         disabled_filetypes = {
             'alpha',
             'TelescopePrompt'
         },
         fancy = {
-            head = { cursor = '▷', texthl = 'SmoothCursor', linehl = 'CursorLine' },
-            -- head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+            -- head = { cursor = '▷', texthl = 'SmoothCursor', linehl = 'CursorLine' },
+            head = { cursor = '▷', texthl = 'SmoothCursor', linehl = nil },
             enable = true,
         },
     },
