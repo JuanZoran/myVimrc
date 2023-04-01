@@ -129,7 +129,7 @@ return {
                             formatting.black.with { extra_args = { '--fast' } },
                             formatting.beautysh,
                             -- formatting.stylua,
-                            -- null_ls.builtins.completion.luasnip,
+                            -- null_ls.builtins.diagnostics.zsh,
                         },
                         on_attach = function(server, bufnr)
                             if server.server_capabilities.documentFormattingProvider then

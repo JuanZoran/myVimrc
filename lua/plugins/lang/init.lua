@@ -51,6 +51,11 @@ plugins:add {
     },
 }
 
+plugins:add {
+    'wsdjeg/xmake.vim',
+    cmd = 'XMake',
+}
+
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {

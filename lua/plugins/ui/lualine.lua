@@ -66,7 +66,7 @@ local function opts()
                 right = '',
                 left = '',
             },
-            -- globalstatus = false,
+            globalstatus = true,
             disabled_filetypes = {
                 statusline = {
                     'alpha',
@@ -90,7 +90,7 @@ local function opts()
         },
         sections = sections,
         winbar = winbar,
-        -- extensions = { 'neo-tree' }
+        extensions = { 'trouble', 'lazy', 'neo-tree' },
     }
 end
 
