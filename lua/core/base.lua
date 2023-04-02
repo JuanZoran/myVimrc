@@ -37,7 +37,6 @@ opt.hlsearch       = false
 
 -- Cool floating window popup menu for completion on command line
 opt.tabstop     = 4
-opt.completeopt = 'menu,menuone,noselect'
 opt.softtabstop = 4
 opt.shiftwidth  = 4
 opt.expandtab   = true
@@ -67,10 +66,12 @@ opt.undodir = os.getenv 'HOME' .. '/.vim'
 
 ---  SETTINGS  ---
 opt.spelllang:append 'cjk'  -- disable spellchecking for asian characters (VIM algorithm does not support it)
+-- vim.wo.signcolumn = 'auto'
 vim.wo.signcolumn = 'yes'
 
 opt.iskeyword:append '-'  -- 将word-word视为一个word, 方便daw
 
+opt.viewoptions = 'cursor,folds'
 -----================ disabled some native =====================
 
 -- vim.o.showmode = false

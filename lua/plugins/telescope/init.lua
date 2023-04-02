@@ -1,47 +1,52 @@
 local keys = {
     {
         '<leader>th',
-        '<Cmd>Telescope help_tags <CR>',
+        '<Cmd>Telescope help_tags<CR>',
         desc = ' Check out all tags'
     },
     {
         '<leader>tH',
-        '<Cmd>Telescope highlights <CR>',
+        '<Cmd>Telescope highlights<CR>',
         desc = '[] Check out all highlights'
     },
     {
         '<leader>tf',
-        '<Cmd>Telescope git_files <CR>',
+        '<Cmd>Telescope git_files<CR>',
         desc = ' Search text in current buffer'
     },
     {
         '<leader>tt',
-        '<Cmd>Telescope live_grep <CR>',
+        '<Cmd>Telescope live_grep<CR>',
         desc = ' Search text in cucurrent directory'
     },
     {
         '<leader>gf',
-        '<Cmd>Telescope current_buffer_fuzzy_find <CR>',
+        '<Cmd>Telescope current_buffer_fuzzy_find<CR>',
         desc = '[]Search Git File'
     },
     {
         '<leader>ts',
-        '<Cmd>Telescope spell_suggest <CR>',
+        '<Cmd>Telescope spell_suggest<CR>',
         desc = '益spell suggestions about cursor word'
     },
     {
         '<leader>tr',
-        '<Cmd>Telescope treesitter <CR>',
+        '<Cmd>Telescope treesitter<CR>',
         desc = '滑Have a look at the tags provided by 滑'
     },
     {
         '<leader>te',
-        '<Cmd>Telescope diagnostics <CR>',
+        '<Cmd>Telescope diagnostics<CR>',
         desc = ' take a look'
     },
     {
         '<leader>tc',
-        '<Cmd>Telescope commands <CR>',
+        '<Cmd>Telescope commands<CR>',
+        desc = 'גּ Check out commands'
+    },
+    {
+        '<leader>cc',
+        '<Cmd>Telescope commands<CR>',
         desc = 'גּ Check out commands'
     },
     {
@@ -51,12 +56,12 @@ local keys = {
     },
     {
         '<leader>ti',
-        '<Cmd>Telescope jumplist <CR>',
-        desc = ' Get jumplist[C-i]'
+        '<Cmd>Telescope jumplist<CR>',
+        desc = ' Get jumplist'
     },
     {
         '<leader>tk',
-        '<Cmd>Telescope keymaps <CR>',
+        '<Cmd>Telescope keymaps<CR>',
         desc = ' Check out keymaps[S-C-/]'
     },
     {

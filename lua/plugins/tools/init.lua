@@ -4,21 +4,34 @@ plugins:add {
     'JuanZoran/Trans.nvim',
     keys = {
         { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = ' Translate' },
+        { 'mk', mode = { 'n', 'x' },       '<Cmd>TransPlay<CR>',             desc = 'Auto Play' },
         -- { 'mi', function() end, desc = 'Trans test' },
         { 'mi', '<Cmd>TranslateInput<CR>', desc = ' Translate From Input' },
     },
-    -- branch = '',
+    -- lazy = false,
     dependencies = 'kkharji/sqlite.lua',
     opts = {
         frontend = {
             hover = {
-                spinner = 'moon'
+                spinner = 'moon',
+                keymaps = {
+                    pageup       = '[[',
+                    pagedown     = ']]',
+                    pin          = '<leader>[',
+                    close        = '<leader>]',
+                    toggle_entry = '<leader>;',
+                },
+                -- animation = {
+                --     open = false,
+                --     close = false,
+                -- }
             },
         },
         dir = os.getenv 'HOME' .. '/.vim/dict',
     },
     dev = true,
 }
+
 
 plugins:add {
     'tweekmonster/helpful.vim',
@@ -39,71 +52,33 @@ plugins:add {
 }
 
 plugins:add {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
-    opts = {
-        popup_mappings = {
-            scroll_up = '<c-i>',   -- binding to scroll up inside the popup
-            scroll_down = '<c-k>', -- binding to scroll down inside the popup
-        },
-        layout = {
-            height = { min = 4, max = 25 },                                                      -- min and max height of the columns
-            width = { min = 20, max = 50 },                                                      -- min and max width of the columns
-            spacing = 3,                                                                         -- spacing between columns
-            align = 'left',                                                                      -- align columns left, center or right
-        },
-        hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ', 'require' }, -- hide mapping boilerplate
-        triggers_blacklist = {
-            i = { 'i', 'k' },
-            v = { 'i', 'k' },
-        },
-        window = {
-            border = 'single', -- none, single, double, shadow
-        },
-        -- operators = {
-        --     gc = "Comments",
-        -- },
-        plugins = {
-            marks = true,         -- shows a list of your marks on ' and `
-            registers = true,     -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-            spelling = {
-                enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-                suggestions = 20, -- how many suggestions should be shown in the list?
-            },
-            presets = {
-                operators = true,     -- adds help for operators like d, y, ... and registers them for motion / text object completion
-                motions = true,       -- adds help for motions
-                text_objects = false, -- help for text objects triggered after entering an operator
-                windows = true,       -- default bindings on <c-w>
-                nav = true,           -- misc bindings to work with windows
-                z = true,             -- bindings for folds, spelling and others prefixed with z
-                g = true,             -- bindings for prefixed with g
-            },
-        },
-        disable = {
-            filetypes = {},
-            buftypes = { 'TelescopePrompt' },
-        },
-    },
-}
-
-plugins:add {
     'dhruvasagar/vim-table-mode',
     ft = { 'markdown', 'md' },
     keys = {
         { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
     },
     dependencies = {
-        'ellisonleao/glow.nvim',
-        opts = {
-            border = 'rounded',
-            style = 'dark',
-            width = 100,
-            width_ratio = 0.9,
-            height_ratio = 0.85,
+        {
+            'ellisonleao/glow.nvim',
+            opts = { border = 'rounded', style = 'dark', width = 100, width_ratio = 0.9, height_ratio = 0.85 },
+            keys = { { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' } },
         },
-        keys = {
-            { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' },
+        {
+            'lukas-reineke/headlines.nvim',
+            config = function()
+                require 'headlines'.setup()
+                local set_hl = vim.api.nvim_set_hl
+                set_hl(0, 'CodeBlock', { bg = 'NONE' })
+                -- for i, color in ipairs {
+                --     { fg = '#a6d189', bg = 'NONE' },
+                --     { fg = '#8caaee', bg = 'NONE' },
+                --     { fg = '#e78284', bg = 'NONE' },
+                --     { fg = '#ca9ee6', bg = 'NONE' },
+                --     { fg = '#e5c890', bg = 'NONE' },
+                --     { fg = '#babbf1', bg = 'NONE' },
+                -- } do set_hl(0, 'Headline' .. i, color) end
+                -- set_hl(0, 'Headline', { link = 'Headline1' })
+            end,
         },
     },
 }
@@ -206,22 +181,50 @@ plugins:add {
     config = function()
         -- NOTE : special name
         require 'mini.surround'.setup {}
+        local set = vim.keymap.set
+        local opt = { remap = true }
+        for _, char in ipairs { 'sa', 'sd', 'sf', 'sF', 'sr' } do
+            set('x', char .. 'q', char .. "'", opt)
+        end
     end,
 }
 
 plugins:add {
     'LudoPinelli/comment-box.nvim',
     keys = {
-        { mode = { 'n', 'x' }, '<leader>rk', "<Cmd>lua require('comment-box').accbox()<CR>", desc = 'Comment Center Box' },
         {
             mode = { 'n', 'x' },
             '<leader>rj',
-            "<Cmd>lua require('comment-box').lbox()<CR>",
-            desc = 'Comment Left Aligned Text',
+            "<Cmd>lua require('comment-box').llbox()<CR>",
+            desc = 'Comment Left Box',
         },
-        { mode = { 'n', 'x' }, '<leader>rl', "<Cmd>lua require('comment-box').cline()<CR>",  desc = 'Comment Center Line' },
-        { mode = { 'n', 'x' }, '<leader>ro', "<Cmd>lua require('comment-box').line()<CR>",   desc = 'Comment Center Line' },
-        -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
+        {
+            mode = { 'n', 'x' },
+            '<leader>rk',
+            "<Cmd>lua require('comment-box').lcbox()<CR>",
+            desc = 'Comment Center Box'
+        },
+        {
+            mode = { 'n', 'x' },
+            '<leader>rl',
+            "<Cmd>lua require('comment-box').lrbox()<CR>",
+            desc = 'Comment Right Box'
+        },
+        {
+            '<leader>ru',
+            "<Cmd>lua require('comment-box').line()<CR>",
+            desc = 'Comment Left Line'
+        },
+        {
+            '<leader>ri',
+            "<Cmd>lua require('comment-box').cline()<CR>",
+            desc = 'Comment Center Line'
+        },
+        {
+            '<leader>ro',
+            "<Cmd>lua require('comment-box').rline()<CR>",
+            desc = 'Comment Right Line'
+        },
     },
 }
 
@@ -301,6 +304,18 @@ plugins:add {
     },
 }
 
+plugins:add {
+    'chrisgrieser/nvim-spider',
+    keys = {
+        { mode = { 'n', 'o', 'x' }, 'w',  "<Cmd>lua require('spider').motion('w')<CR>" },
+        { mode = { 'n', 'o', 'x' }, 'e',  "<Cmd>lua require('spider').motion('e')<CR>" },
+        { mode = { 'n', 'o', 'x' }, 'b',  "<Cmd>lua require('spider').motion('b')<CR>" },
+        { mode = { 'n', 'o', 'x' }, 'ge', "<Cmd>lua require('spider').motion('ge')<CR>" },
+    },
+}
+
+
+
 
 plugins:add {
     'folke/zen-mode.nvim',
@@ -316,15 +331,27 @@ plugins:add {
     },
 }
 
+plugins:add {
+    keys = {
+        { '<leader>hw', '<Cmd>HiMyWordsToggle<CR>', desc = 'Toggle Current Word Highlight' },
+        { '<leader>hn', '<Cmd>HiMyWordsClear<CR>',  desc = 'Clear Word Highlight' },
+    },
+    'dvoytik/hi-my-words.nvim',
+    config = true,
+}
+
+
 
 plugins:add {
     'ggandor/leap.nvim',
-    config = function() require 'plugins.tools.leap' end,
     keys = {
         { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = 'Jump backward' },
         { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = 'Jump cross window' },
         { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = 'Jump forward' },
     },
+    config = function()
+        require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
+    end,
     dependencies = {
         'ggandor/flit.nvim',
         keys = { 'f', 'F', 't', 'T' },

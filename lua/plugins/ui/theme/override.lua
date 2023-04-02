@@ -15,6 +15,9 @@ return {
         fg = '#0f0f15',
         bg = '#10B981',
     },
+    Search                      = {
+        link = 'IncSearch'
+    },
     MoreMsg                     = {
         -- for ufo virtual text
         fg = '#599eff',

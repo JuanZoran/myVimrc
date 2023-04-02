@@ -1,10 +1,14 @@
 local opts = {
-    runtime = {
-        version = 'LuaJIT',
+    codeLens = { enable = true },
+    runtime = { version = 'LuaJIT' },
+    hint = {
+        enable = true,
+        -- arrayIndex = 'Enable',
+        setType = true,
     },
     completion = {
         postfix        = ':', -- for better completion
-        displayContext = 2,
+        displayContext = 15,
         callSnippet    = 'Replace',
         keywordSnippet = 'Replace',
     },
@@ -12,7 +16,6 @@ local opts = {
         userThirdParty = {
             os.getenv 'HOME' .. '/.config/LLS-Addons',
         },
-        -- checkThirdParty = true,
     },
     format = {
         enable = true,

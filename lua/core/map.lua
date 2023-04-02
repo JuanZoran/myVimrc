@@ -12,10 +12,10 @@ set {
     map = {
         { 'U',                 'VP' },
         -- INFO : command
-        { '<Leader>w',         '<Cmd>w<CR>',       ' Save Current Window' },
-        { '<Leader><leader>w', '<Cmd>wqa<CR>',     ' close all window' },
-        { '<Leader>ck',        ':set spell!<CR>',  '暈Toggle vim builtin spell checker' },
+        { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
+        { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
+        { 'qw',                '<Cmd>close<CR>' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',    '痢[Sync | Install] Plugin' },
         { '<leader>J',         'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
@@ -36,10 +36,10 @@ set {
         { 'v<cr>',             'vi"' },
         { 'c<cr>',             'ci"' },
         -- INFO  in ''
-        { 'y;',                [[yi']] },
-        { 'c;',                [[ci']] },
-        { 'd;',                [[di']] },
-        { 'v;',                [[vi']] },
+        { 'yq',                [[yi']] },
+        { 'cq',                [[ci']] },
+        { 'dq',                [[di']] },
+        { 'vq',                [[vi']] },
 
         { 'Z',                 'zf' },
         { '<C-CR>',            '/<++><CR>vf>c' },
@@ -47,6 +47,15 @@ set {
         { '<C-w>o',            ':vsp<CR>',         ' Split Window' },
         { '<C-w>u',            ':sp<CR>',          ' Split Window Vertically' },
         { '<C-w>n',            ':only<CR>',        ' Close Another Window' },
+
+        { '<Leader>w', function()
+            if vim.api.nvim_buf_get_name(0) == '' then
+                local filename = vim.fn.input 'Save as: '
+                if filename ~= '' then vim.cmd('w ' .. filename) end
+            else
+                vim.cmd 'w'
+            end
+        end, 'Save Current Buffer' },
     },
 }
 
@@ -108,3 +117,4 @@ set {
 }
 
 vim.keymap.set({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
+vim.keymap.set('t', '<C-x>', '<Cmd>stopinsert<CR>')

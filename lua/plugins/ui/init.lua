@@ -4,41 +4,38 @@ plugins:add {
     lazy = true,
 }
 
-
 plugins:add {
     'catppuccin/nvim',
-    event = 'VimEnter',
     name = 'catppuccin',
+    event = 'VimEnter',
+    priority = 1000,
     opts = function()
         return {
-            flavour = 'macchiato',
+            flavour = 'frappe',
             transparent_background = true,
             custom_highlights = require 'plugins.ui.theme.override',
             -- dim_inactive = {
-
-            --     enabled = false,
+            --     enabled = true,
             --     shade = 'dark',
             --     percentage = 0.15,
             -- },
             integrations = {
-                cmp = true,
-                gitsigns = true,
-                treesitter = true,
-                telekasten = true,
-                telescope = true,
-                notify = true,
-                mini = false,
-                neotree = true,
+                cmp         = true,
+                leap        = true,
+                notify      = true,
+                neotree     = true,
+                gitsigns    = true,
+                markdown    = true,
+                telescope   = true,
+                headlines   = true,
+                treesitter  = true,
+                telekasten  = true,
                 ts_rainbow2 = true,
                 lsp_trouble = true,
-                markdown = true,
-                native_lsp = {
-                    enabled = true,
-                },
-                navic = {
-                    enabled = true,
-                },
-                treesitter_context = true,
+                native_lsp  = { enabled = true },
+                navic       = { enabled = true },
+                -- mini        = false,
+                -- treesitter_context = true,
                 -- noice = true,
                 -- illuminate = true,
                 -- which_key = true,
@@ -55,7 +52,6 @@ plugins:add {
         require 'catppuccin'.setup(opts)
         vim.cmd.colorscheme 'catppuccin'
     end,
-    priority = 1000,
 }
 
 plugins:add {
@@ -83,9 +79,11 @@ plugins:add {
 plugins:add {
     'uga-rosa/ccc.nvim',
     cmd = {
-        'CccHighlighterToggle',
-        'CccPick',
         'CccConvert',
+    },
+    keys = {
+        { '<leader>hl', '<Cmd>CccHighlighterToggle<CR>', desc = 'Buffer Color highlight' },
+        { '<leader>hp', '<Cmd>CccPick<CR>',              desc = 'Color Picker' },
     },
     ft = { 'css', 'html' },
     config = function(plugin)
@@ -128,11 +126,16 @@ plugins:add {
     end,
     cmd = 'Neotree',
     keys = {
-        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                         desc = '📁Toggle File Explorer' },
-        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                        desc = '📁Neo-tree Buffers' },
-        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                     desc = '📁Neo-tree Git Status' },
-        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                          desc = '📁File Explorer from HOME' },
-        { '<C-w>d',     '<Cmd>Neotree reveal reveal_force_cwd toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',     desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',    desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>', desc = '📁Neo-tree Git Status' },
+        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',      desc = '📁File Explorer from HOME' },
+        {
+            '<C-w>d',
+            '<Cmd>Neotree reveal_force_cwd dir=%:h toggle<CR>',
+            desc =
+            '📁Toggle File Explorer in buffer dir'
+        },
     },
     branch = 'v2.x',
     opts = function()
@@ -191,70 +194,6 @@ plugins:add {
     'goolord/alpha-nvim',
     event = 'VimEnter',
     config = function() require 'plugins.ui.alpha' end,
-}
-
-plugins:add {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-        'muniftanjim/nui.nvim',
-        {
-            'rcarriga/nvim-notify',
-            opts = {
-                level = vim.log.levels.INFO,
-                stages = 'slide',
-                timeout = 1500,
-                icons = {
-                    ERROR = '🥵',
-                    WARN = '🫢',
-                    INFO = '🤔',
-                },
-            },
-        },
-    },
-    opts = {
-        -- you can enable a preset for easier configuration
-        lsp = {
-            -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-            progress = {
-                enabled = true,
-                format = 'lsp_progress',
-                format_done = 'lsp_progress_done',
-                throttle = 1000 / 30, -- frequency to update lsp progress message
-                view = 'mini',
-            },
-            override = {
-                ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-                ['vim.lsp.util.stylize_markdown'] = true,
-                ['cmp.entry.get_documentation'] = true,
-            },
-        },
-        popupmenu = {
-            backend = 'cmp', -- backend to use to show regular cmdline completions
-            kind_icons = {}, -- set to `false` to disable icons
-        },
-        presets = {
-            bottom_search = false,        -- use a classic bottom cmdline for search
-            long_message_to_split = true, -- long messages will be sent to a split
-            inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-            lsp_doc_border = true,        -- add a border to hover docs and signature help
-            command_palette = {
-                views = {
-                    cmdline_popup = {
-                        position = {
-                            row = '50%',
-                            col = '50%',
-                        },
-                        size = {
-                            min_width = 60,
-                            width = 'auto',
-                            height = 'auto',
-                        },
-                    },
-                },
-            },
-        },
-    },
 }
 
 

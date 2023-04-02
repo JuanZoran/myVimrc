@@ -11,6 +11,11 @@ plugins:add {
     ft = frontend,
 }
 
+plugins:add {
+    'wsdjeg/xmake.vim',
+    cmd = 'XMake',
+}
+
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
     'lukas-reineke/indent-blankline.nvim',
@@ -169,7 +174,7 @@ plugins:add {
                     keymap = false,
                 },
                 filetypes = {
-                    markdown = true,
+                    ['*'] = true,
                 },
             },
         },

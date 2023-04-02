@@ -23,15 +23,15 @@ install.key_plugin = 'y'
 
 require 'lazy'.setup({
     { import = 'plugins' },
-    { import = 'plugins.ui.lualine' },
+    { import = 'plugins.ui.extra' },
     { import = 'plugins.telescope.extensions' },
+    { import = 'plugins.tools.extra' },
 }, {
     install = {
         colorscheme = { 'catppuccin', 'tokyonight', 'kanagawa', 'habamax' },
     },
     ui = {
         size = { width = 0.9, height = 0.85 },
-        -- border = "solid",
         border = 'rounded',
     },
     performance = {
