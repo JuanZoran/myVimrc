@@ -12,7 +12,6 @@ set {
     map = {
         { 'U',                 'VP' },
         -- INFO : command
-        { '<Leader>w',         '<Cmd>w<CR>',          'Save Current Window' },
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
@@ -47,6 +46,15 @@ set {
         { '<C-w>o',            '<Cmd>vsp<CR>',        'Split Window' },
         { '<C-w>u',            '<Cmd>sp<CR>',         'Split Window Vertically' },
         { '<C-w>n',            '<Cmd>only<CR>',       'Close Another Window' },
+
+        { '<Leader>w', function()
+            if vim.api.nvim_buf_get_name(0) == '' then
+                local filename = vim.fn.input 'Save as: '
+                if filename ~= '' then vim.cmd('w ' .. filename) end
+            else
+                vim.cmd 'w'
+            end
+        end, 'Save Current Buffer' },
     },
 }
 

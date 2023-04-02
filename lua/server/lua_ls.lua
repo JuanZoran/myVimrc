@@ -1,11 +1,11 @@
 local opts = {
-    -- codeLens = { enable = true },
+    codeLens = { enable = true },
     runtime = {
         version = 'LuaJIT',
     },
     completion = {
         postfix        = ':', -- for better completion
-        displayContext = 2,
+        displayContext = 15,
         callSnippet    = 'Replace',
         keywordSnippet = 'Replace',
     },
