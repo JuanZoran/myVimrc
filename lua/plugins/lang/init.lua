@@ -56,7 +56,6 @@ plugins:add {
     cmd = 'XMake',
 }
 
-
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
     'lukas-reineke/indent-blankline.nvim',

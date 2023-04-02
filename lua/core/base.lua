@@ -64,9 +64,9 @@ opt.wrap           = false
 -- opt.autochdir     = true
 opt.helplang       = 'cn'
 opt.updatetime     = 200
-opt.equalalways    = true -- auto resize window
+-- opt.equalalways    = true -- auto resize window
 opt.undofile       = true
-opt.cpoptions:append '>'  -- :help cpoptions
+opt.cpoptions:append '>' -- :help cpoptions
 
 ---@diagnostic disable-next-line: assign-type-mismatch
 opt.undodir = os.getenv 'HOME' .. '/.vim'

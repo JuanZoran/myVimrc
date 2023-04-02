@@ -11,12 +11,13 @@ set {
     mode = 'n',
     map = {
         { 'U',                 'VP' },
-        { '<S-CR>',            'J' },
+        -- INFO : command
         { '<Leader>w',         '<Cmd>w<CR>',          'Save Current Window' },
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
+        { '<leader>J',         'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 
         { 'yp',                'yip' },
@@ -107,3 +108,4 @@ set {
 }
 
 vim.keymap.set({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
+vim.keymap.set('t', '<S-C-s>', '<Cmd>stopinsert<CR>')

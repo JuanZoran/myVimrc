@@ -131,11 +131,11 @@ plugins:add {
     end,
     cmd = 'Neotree',
     keys = {
-        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                         desc = '📁Toggle File Explorer' },
-        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                        desc = '📁Neo-tree Buffers' },
-        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                     desc = '📁Neo-tree Git Status' },
-        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                          desc = '📁File Explorer from HOME' },
-        { '<C-w>d',     '<Cmd>Neotree reveal reveal_force_cwd toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                          desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                         desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                      desc = '📁Neo-tree Git Status' },
+        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                           desc = '📁File Explorer from HOME' },
+        { '<C-w>d',     '<Cmd>Neotree reveal_force_cwd dir=%:h toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
     },
     branch = 'v2.x',
     opts = function()
