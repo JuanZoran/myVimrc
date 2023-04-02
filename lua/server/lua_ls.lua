@@ -1,4 +1,5 @@
 local opts = {
+    -- codeLens = { enable = true },
     runtime = {
         version = 'LuaJIT',
     },
@@ -12,7 +13,6 @@ local opts = {
         userThirdParty = {
             os.getenv 'HOME' .. '/.config/LLS-Addons',
         },
-        -- checkThirdParty = true,
     },
     format = {
         enable = true,
