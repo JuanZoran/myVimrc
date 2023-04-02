@@ -128,7 +128,6 @@ plugins:add {
 }
 plugins:add {
     'glepnir/lspsaga.nvim',
-    event = 'LspAttach',
     opts = function()
         return require 'plugins.lsp.saga'
     end,
