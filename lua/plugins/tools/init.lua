@@ -183,6 +183,11 @@ plugins:add {
     config = function()
         -- NOTE : special name
         require 'mini.surround'.setup {}
+        local set = vim.keymap.set
+        local opt = { remap = true }
+        for _, char in ipairs { 'sa', 'sd', 'sf', 'sF', 'sr' } do
+            set('x', char .. 'q', char .. "'", opt)
+        end
     end,
 }
 
