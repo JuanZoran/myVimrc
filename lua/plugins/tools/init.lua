@@ -291,6 +291,7 @@ plugins:add {
         })
     end,
     config = function(_, opts)
+        -- test-cool-baar
         vim.opt.sessionoptions = 'buffers,curdir,folds,winsize,winpos,help'
         require 'telescope'.load_extension 'persisted' -- To load the telescope extension
         require 'persisted'.setup(opts)
@@ -320,6 +321,18 @@ plugins:add {
     },
 }
 
+plugins:add {
+    'chrisgrieser/nvim-spider',
+    keys = {
+        { mode = { 'n', 'o', 'x' }, 'w',  "<Cmd>lua require('spider').motion('w')<CR>" },
+        { mode = { 'n', 'o', 'x' }, 'e',  "<Cmd>lua require('spider').motion('e')<CR>" },
+        { mode = { 'n', 'o', 'x' }, 'b',  "<Cmd>lua require('spider').motion('b')<CR>" },
+        { mode = { 'n', 'o', 'x' }, 'ge', "<Cmd>lua require('spider').motion('ge')<CR>" },
+    },
+}
+
+
+
 
 plugins:add {
     'folke/zen-mode.nvim',
@@ -334,6 +347,16 @@ plugins:add {
         window = { width = 0.85 },
     },
 }
+
+plugins:add {
+    keys = {
+        { '<leader>hw', '<Cmd>HiMyWordsToggle<CR>', desc = 'Toggle Current Word Highlight' },
+        { '<leader>hn', '<Cmd>HiMyWordsClear<CR>',  desc = 'Clear Word Highlight' },
+    },
+    'dvoytik/hi-my-words.nvim',
+    config = true,
+}
+
 
 
 plugins:add {

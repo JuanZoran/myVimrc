@@ -47,6 +47,14 @@ local opts = {
             },
         },
     },
+    format = {
+        spinner = {
+            -- name = 'mindblown',
+            name = 'moon',
+            -- name = 'soccerHeader',
+            -- name = 'weather',
+        },
+    },
 }
 
 
@@ -93,4 +101,10 @@ return {
         },
     },
     opts = opts,
+    config = function(_, opt)
+        require 'noice'.setup(opt)
+        vim.keymap.set('c', '<S-Enter>', function()
+            require 'noice'.redirect(vim.fn.getcmdline())
+        end, { desc = 'Redirect Cmdline' })
+    end,
 }
