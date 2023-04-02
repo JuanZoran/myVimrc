@@ -105,7 +105,6 @@ return {
             lazy = true,
             opts = {
                 separator = ' >> ',
-                highlight = true,
                 depth_limit = 5,
             },
             init = function()

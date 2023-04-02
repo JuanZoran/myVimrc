@@ -6,38 +6,35 @@ plugins:add {
 
 plugins:add {
     'catppuccin/nvim',
-    event = 'VimEnter',
     name = 'catppuccin',
+    event = 'VimEnter',
+    priority = 1000,
     opts = function()
         return {
+            flavour = 'frappe',
+            transparent_background = true,
+            custom_highlights = require 'plugins.ui.theme.override',
             -- dim_inactive = {
             --     enabled = true,
             --     shade = 'dark',
             --     percentage = 0.15,
             -- },
-            flavour = 'macchiato',
-            transparent_background = true,
-            custom_highlights = require 'plugins.ui.theme.override',
             integrations = {
-                cmp = true,
-                gitsigns = true,
-                treesitter = true,
-                telekasten = true,
-                telescope = true,
-                notify = true,
-                mini = false,
-                neotree = true,
+                cmp         = true,
+                leap        = true,
+                notify      = true,
+                neotree     = true,
+                gitsigns    = true,
+                markdown    = true,
+                telescope   = true,
+                headlines   = true,
+                treesitter  = true,
+                telekasten  = true,
                 ts_rainbow2 = true,
                 lsp_trouble = true,
-                markdown = true,
-                native_lsp = {
-                    enabled = true,
-                },
-                navic = {
-                    enabled = true,
-                },
-                leap = true,
-                headlines = true,
+                native_lsp  = { enabled = true },
+                navic       = { enabled = true },
+                -- mini        = false,
                 -- treesitter_context = true,
                 -- noice = true,
                 -- illuminate = true,
@@ -55,7 +52,6 @@ plugins:add {
         require 'catppuccin'.setup(opts)
         vim.cmd.colorscheme 'catppuccin'
     end,
-    priority = 1000,
 }
 
 plugins:add {
@@ -133,11 +129,16 @@ plugins:add {
     end,
     cmd = 'Neotree',
     keys = {
-        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',                          desc = '📁Toggle File Explorer' },
-        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',                         desc = '📁Neo-tree Buffers' },
-        { '<C-w>g',     '<Cmd>Neotree git_status<CR>',                      desc = '📁Neo-tree Git Status' },
-        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',                           desc = '📁File Explorer from HOME' },
-        { '<C-w>d',     '<Cmd>Neotree reveal_force_cwd dir=%:h toggle<CR>', desc = '📁Toggle File Explorer in buffer dir' },
+        { '<C-w><C-w>', '<Cmd>Neotree toggle<CR>',     desc = '📁Toggle File Explorer' },
+        { '<C-w>b',     '<Cmd>Neotree buffers<CR>',    desc = '📁Neo-tree Buffers' },
+        { '<C-w>g',     '<Cmd>Neotree git_status<CR>', desc = '📁Neo-tree Git Status' },
+        { '<C-w>f',     '<Cmd>Neotree dir=~<CR>',      desc = '📁File Explorer from HOME' },
+        {
+            '<C-w>d',
+            '<Cmd>Neotree reveal_force_cwd dir=%:h toggle<CR>',
+            desc =
+            '📁Toggle File Explorer in buffer dir'
+        },
     },
     branch = 'v2.x',
     opts = function()
