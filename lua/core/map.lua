@@ -16,7 +16,8 @@ set {
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
-        { '<leader>J',         'J' },
+        -- { '<leader>J',         'J' },
+        { '<S-CR>',         'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 
         { 'yp',                'yip' },

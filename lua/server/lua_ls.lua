@@ -1,7 +1,10 @@
 local opts = {
     codeLens = { enable = true },
-    runtime = {
-        version = 'LuaJIT',
+    runtime = { version = 'LuaJIT' },
+    hint = {
+        enable = true,
+        arrayIndex = 'Enable',
+        setType = true,
     },
     completion = {
         postfix        = ':', -- for better completion
