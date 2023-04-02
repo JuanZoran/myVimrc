@@ -164,16 +164,39 @@ plugins:add {
 plugins:add {
     'LudoPinelli/comment-box.nvim',
     keys = {
-        { mode = { 'n', 'x' }, '<leader>rk', "<Cmd>lua require('comment-box').accbox()<CR>", desc = 'Comment Center Box' },
         {
             mode = { 'n', 'x' },
             '<leader>rj',
-            "<Cmd>lua require('comment-box').lbox()<CR>",
-            desc = 'Comment Left Aligned Text',
+            "<Cmd>lua require('comment-box').llbox()<CR>",
+            desc = 'Comment Left Box',
         },
-        { mode = { 'n', 'x' }, '<leader>rl', "<Cmd>lua require('comment-box').cline()<CR>",  desc = 'Comment Center Line' },
-        { mode = { 'n', 'x' }, '<leader>ro', "<Cmd>lua require('comment-box').line()<CR>",   desc = 'Comment Center Line' },
-        -- { mode = { 'n', 'x' }, "<leader>ru", "<Cmd>lua require('comment-box').acbox()<CR>", desc = "Comment Left Box" },
+        {
+            mode = { 'n', 'x' },
+            '<leader>rk',
+            "<Cmd>lua require('comment-box').lcbox()<CR>",
+            desc = 'Comment Center Box'
+        },
+        {
+            mode = { 'n', 'x' },
+            '<leader>rl',
+            "<Cmd>lua require('comment-box').lrbox()<CR>",
+            desc = 'Comment Right Box'
+        },
+        {
+            '<leader>ru',
+            "<Cmd>lua require('comment-box').line()<CR>",
+            desc = 'Comment Left Line'
+        },
+        {
+            '<leader>ri',
+            "<Cmd>lua require('comment-box').cline()<CR>",
+            desc = 'Comment Center Line'
+        },
+        {
+            '<leader>ro',
+            "<Cmd>lua require('comment-box').rline()<CR>",
+            desc = 'Comment Right Line'
+        },
     },
 }
 

@@ -48,28 +48,20 @@ return {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-            ['<leader>fl'] = '@function.outer',
-            ['<leader>cl'] = { query = '@class.outer', desc = 'Next class start' },
+            ['][f'] = '@function.outer',
+            ['][c'] = { query = '@class.outer', desc = 'Next class start' },
         },
         goto_next_end = {
-            ['<leader>fL'] = '@function.outer',
-            ['<leader>cL'] = '@class.outer',
+            [']]f'] = '@function.outer',
+            [']]c'] = '@class.outer',
         },
         goto_previous_start = {
-            ['<leader>fj'] = '@function.outer',
-            ['<leader>cj'] = '@class.outer',
+            ['[[f'] = '@function.outer',
+            ['[[c'] = '@class.outer',
         },
         goto_previous_end = {
-            ['<leader>fJ'] = '@function.outer',
-            ['<leader>cJ'] = '@class.outer',
+            ['[]f'] = '@function.outer',
+            ['[]c'] = '@class.outer',
         },
     },
-    -- lsp_interop = {
-    --     enable = true,
-    --     border = 'none',
-    --     peek_definition_code = {
-    --         ["<leader>pf"] = "@function.outer",
-    --         ["<leader>pc"] = "@class.outer"
-    --     }
-    -- }
 }

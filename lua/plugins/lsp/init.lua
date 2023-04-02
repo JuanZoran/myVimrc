@@ -149,6 +149,11 @@ plugins:add {
             require 'lsp-inlayhints'.on_attach(client, bufnr)
         end)
     end,
+    keys = {
+        {'<leader>hi', function ()
+            require'lsp-inlayhints'.toggle()
+        end, desc = 'Toggle Inlay Hints'},
+    },
     opts = {
         inlay_hints = {
             parameter_hints = {
@@ -163,7 +168,7 @@ plugins:add {
     config = function (_, opts)
         require('lsp-inlayhints').setup(opts)
         vim.api.nvim_set_hl(0, 'LspInlayHint', {
-            fg = '#96a0af'
+            fg = '#9692af'
         })
     end
 }

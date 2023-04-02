@@ -3,7 +3,7 @@ local opts = {
     runtime = { version = 'LuaJIT' },
     hint = {
         enable = true,
-        arrayIndex = 'Enable',
+        -- arrayIndex = 'Enable',
         setType = true,
     },
     completion = {
