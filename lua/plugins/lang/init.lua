@@ -204,7 +204,7 @@ plugins:add {
                     keymap = false,
                 },
                 filetypes = {
-                    markdown = true,
+                    ['*'] = true,
                 },
             },
         },

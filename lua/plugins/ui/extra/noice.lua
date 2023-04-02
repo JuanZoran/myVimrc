@@ -53,7 +53,11 @@ local opts = {
 local set_hl = vim.api.nvim_set_hl
 for hl, color in pairs {
     NoiceFormatProgressDone = {
-        fg = '#cad3f5',
+        -- bg = '#455c6d',
+        bg = '#d38aea',
+    },
+    NoiceFormatProgressTodo = {
+        -- bg = '#d38aea',
         bg = '#455c6d',
     },
     NoiceLspProgressTitle = {
@@ -66,16 +70,6 @@ for hl, color in pairs {
     NoiceLspProgressSpinner = {
         fg = '#d38aea'
     },
-    -- NoiceFormatProgressTodo = {
-    --     bg = '#599eff',
-    --     fg = '#599eff',
-    -- },
-    -- NoiceFormatConfirm = {
-    --     bg = '#599eff',
-    --     fg = '#599eff',
-    -- },
-
-
 } do set_hl(0, hl, color) end
 
 
