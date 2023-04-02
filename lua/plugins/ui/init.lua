@@ -179,6 +179,11 @@ plugins:add { -- 标签栏
                 show_buffer_close_icons = true,
                 show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
                 modified_icon = '💌',
+                numbers = function(opts)
+                    return string.format('%s·%s', opts.lower(opts.ordinal), opts.raise(opts.id))
+                end,
+                hover = { enabled = false },
+                enforce_regular_tabs = true,
                 -- separator_style = "triky", -- slant, padded_slant | triky
                 -- offsets = {
                 -- },

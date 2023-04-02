@@ -14,6 +14,13 @@ plugins:add {
         frontend = {
             hover = {
                 spinner = 'moon',
+                keymaps = {
+                    pageup       = '[[',
+                    pagedown     = ']]',
+                    pin          = '<leader>[',
+                    close        = '<leader>]',
+                    toggle_entry = '<leader>;',
+                },
                 -- animation = {
                 --     open = false,
                 --     close = false,
@@ -24,6 +31,7 @@ plugins:add {
     },
     dev = true,
 }
+
 
 plugins:add {
     'tweekmonster/helpful.vim',
