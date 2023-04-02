@@ -86,9 +86,11 @@ plugins:add {
 plugins:add {
     'uga-rosa/ccc.nvim',
     cmd = {
-        'CccHighlighterToggle',
-        'CccPick',
         'CccConvert',
+    },
+    keys = {
+        { '<leader>hl', '<Cmd>CccHighlighterToggle<CR>', desc = 'Buffer Color highlight' },
+        { '<leader>hp', '<Cmd>CccPick<CR>',              desc = 'Color Picker' },
     },
     ft = { 'css', 'html' },
     config = function(plugin)

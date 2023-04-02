@@ -57,15 +57,15 @@ for hl, color in pairs {
         bg = '#455c6d',
     },
     NoiceLspProgressTitle = {
-        fg = '#91d7e3',
+        fg = '#7ad7f3'
     },
     NoiceLspProgressClient = {
-        link = 'MoreMsg'
+        -- link = 'MoreMsg'
+        fg = '#d38aea'
     },
-    -- NoiceLspProgressSpinner = {
-    --     bg = '#599eff',
-    --     fg = '#599eff',
-    -- },
+    NoiceLspProgressSpinner = {
+        fg = '#d38aea'
+    },
     -- NoiceFormatProgressTodo = {
     --     bg = '#599eff',
     --     fg = '#599eff',

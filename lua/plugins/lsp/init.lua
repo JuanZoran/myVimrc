@@ -158,9 +158,14 @@ plugins:add {
                 prefix = 'type',
             },
             only_current_line = false,
-            highlight = 'Comment',
         },
     },
+    config = function (_, opts)
+        require('lsp-inlayhints').setup(opts)
+        vim.api.nvim_set_hl(0, 'LspInlayHint', {
+            fg = '#96a0af'
+        })
+    end
 }
 
 return {
