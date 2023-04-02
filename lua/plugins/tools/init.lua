@@ -65,6 +65,10 @@ plugins:add {
                 { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
             },
         },
+        {
+            'lukas-reineke/headlines.nvim',
+            config = true, -- or `opts = {}`
+        },
     },
 }
 

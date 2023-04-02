@@ -4,22 +4,20 @@ plugins:add {
     lazy = true,
 }
 
-
 plugins:add {
     'catppuccin/nvim',
     event = 'VimEnter',
     name = 'catppuccin',
     opts = function()
         return {
-            flavour = 'macchiato',
-            transparent_background = true,
-            custom_highlights = require 'plugins.ui.theme.override',
             -- dim_inactive = {
-
-            --     enabled = false,
+            --     enabled = true,
             --     shade = 'dark',
             --     percentage = 0.15,
             -- },
+            flavour = 'macchiato',
+            transparent_background = true,
+            custom_highlights = require 'plugins.ui.theme.override',
             integrations = {
                 cmp = true,
                 gitsigns = true,
@@ -39,6 +37,7 @@ plugins:add {
                     enabled = true,
                 },
                 treesitter_context = true,
+                headlines = true,
                 -- noice = true,
                 -- illuminate = true,
                 -- which_key = true,
