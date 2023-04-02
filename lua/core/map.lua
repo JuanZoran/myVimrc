@@ -15,6 +15,7 @@ set {
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
+        { 'qw',                '<Cmd>close<CR>' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
         -- { '<leader>J',         'J' },
         { '<S-CR>',         'J' },

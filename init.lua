@@ -23,7 +23,7 @@ install.key_plugin = 'y'
 
 require 'lazy'.setup({
     { import = 'plugins' },
-    { import = 'plugins.ui.lualine' },
+    { import = 'plugins.ui.extra' },
     { import = 'plugins.telescope.extensions' },
     { import = 'plugins.tools.extra' },
 }, {
