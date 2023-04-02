@@ -320,12 +320,14 @@ plugins:add {
 
 plugins:add {
     'ggandor/leap.nvim',
-    config = function() require 'plugins.tools.leap' end,
     keys = {
         { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = 'Jump backward' },
         { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = 'Jump cross window' },
         { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = 'Jump forward' },
     },
+    config = function()
+        require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
+    end,
     dependencies = {
         'ggandor/flit.nvim',
         keys = { 'f', 'F', 't', 'T' },

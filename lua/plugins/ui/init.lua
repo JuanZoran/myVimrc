@@ -36,8 +36,9 @@ plugins:add {
                 navic = {
                     enabled = true,
                 },
-                treesitter_context = true,
+                leap = true,
                 headlines = true,
+                -- treesitter_context = true,
                 -- noice = true,
                 -- illuminate = true,
                 -- which_key = true,
