@@ -26,7 +26,6 @@ local function opts()
         lualine_c = {
             {
                 function() return require 'nvim-navic'.get_location() end, -- FIXME : why it is not working
-                -- require 'nvim-navic'.get_location,
                 cond = require 'nvim-navic'.is_available,
             },
         },
@@ -104,6 +103,7 @@ return {
             'SmiteshP/nvim-navic',
             lazy = true,
             opts = {
+                highlight = true,
                 separator = ' >> ',
                 depth_limit = 5,
             },
