@@ -1,12 +1,4 @@
-local function set(map)
-    local s = vim.keymap.set
-    local opt = { silent = true }
-    for _, v in ipairs(map.map) do
-        opt.desc = v[3]
-        s(map.mode, v[1], v[2], opt)
-    end
-end
-
+local set = util.map_opt_with_desc
 set {
     mode = 'n',
     map = {
@@ -14,7 +6,7 @@ set {
         -- INFO : command
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
-        { '<Leader>p',         '<Cmd>Lazy<CR>',    '痢[Sync | Install] Plugin' },
+        { '<Leader>p',         '<Cmd>Lazy<CR>',       '痢[Sync | Install] Plugin' },
         { 'qq',                '<C-^>',               'Toggle Recent Buffer' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
@@ -45,10 +37,10 @@ set {
 
         { 'Z',                 'zf' },
         { '<C-CR>',            '/<++><CR>vf>c' },
-        { '<leader>a',         '@',                'Macro' },
-        { '<C-w>o',            ':vsp<CR>',         ' Split Window' },
-        { '<C-w>u',            ':sp<CR>',          ' Split Window Vertically' },
-        { '<C-w>n',            ':only<CR>',        ' Close Another Window' },
+        { '<leader>a',         '@',                   'Macro' },
+        { '<C-w>o',            '<Cmd>vsp<CR>',        ' Split Window' },
+        { '<C-w>u',            '<Cmd>sp<CR>',         ' Split Window Vertically' },
+        { '<C-w>n',            '<Cmd>only<CR>',       ' Close Another Window' },
 
         { '<Leader>w', function()
             if vim.api.nvim_buf_get_name(0) == '' then
@@ -108,8 +100,8 @@ set {
 set {
     mode = 'x',
     map = {
-        { '<A-i>', ":m '<-2<CR>gv=gv" },
-        { '<A-k>', ":m '>+1<CR>gv=gv" },
+        { '<A-i>', "<Cmd>m '<-2<CR>gv=gv" },
+        { '<A-k>', "<Cmd>m '>+1<CR>gv=gv" },
         { '>',     '>gv' },
         { '<',     '<gv' },
         { '<C-c>', [["+y]] },

@@ -87,6 +87,9 @@ return {
         link = 'Normal'
     },
     -- ['@property']               = {
+    NavicSeparator              = {
+        link = '@keyword',
+    },
     --     fg = "#E6C384",
     --     -- fg = "#b392f0",
     -- },

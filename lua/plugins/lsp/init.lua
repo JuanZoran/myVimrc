@@ -124,6 +124,7 @@ plugins:add {
     -- }, -- pretty ui for [code-action | hover-text | ....]
 }
 
+
 plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
     init = function()

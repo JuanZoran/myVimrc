@@ -1,5 +1,4 @@
-local icon = require 'util'.icon.comment
-
+local icon = util.icon.comment
 require 'todo-comments'.setup {
     -- signs = true, -- show icons in the signs column
     -- sign_priority = 8, -- sign priority
@@ -65,8 +64,9 @@ require 'todo-comments'.setup {
     -- },
 }
 
-local set = vim.keymap.set
-set('n', '<Leader>tl', require 'todo-comments'.jump_next, { desc = 'Next todo comment' })
-set('n', '<Leader>tj', require 'todo-comments'.jump_prev, { desc = 'Previous todo comment' })
-set('n', '<Leader>to', '<cmd>TodoQuickFix<cr>', { desc = 'show all TODOs' })
-set('n', '<Leader>td', '<cmd>TodoTelescope<cr>', { desc = 'search todos by telescope' })
+util.map {
+    { '<Leader>to', '<cmd>TodoQuickFix<cr>',           desc = 'show all TODOs' },
+    { '<Leader>td', '<cmd>TodoTelescope<cr>',          desc = 'search todos by telescope' },
+    { '<Leader>tl', require 'todo-comments'.jump_next, desc = 'Next todo comment' },
+    { '<Leader>tj', require 'todo-comments'.jump_prev, desc = 'Previous todo comment' },
+}

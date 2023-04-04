@@ -1,5 +1,5 @@
 require 'core.map'
 require 'core.autocmd'
 
-require 'template'
+-- require 'template'
 require 'core.base'

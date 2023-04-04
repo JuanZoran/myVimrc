@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
@@ -95,7 +95,7 @@ plugins:add {
     init = function()
         -- Unless you are still migrating, remove the deprecated commands from v1.x
         vim.g.neo_tree_remove_legacy_commands = 1
-        if vim.fn.argc() == 1 then
+        if vim.fn.argc() >= 1 then
             ---@diagnostic disable-next-line: param-type-mismatch
             local stat = vim.loop.fs_stat(vim.fn.argv(0))
             if stat and stat.type == 'directory' then require 'neo-tree' end

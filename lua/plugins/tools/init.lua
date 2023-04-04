@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 
 plugins:add {
     'JuanZoran/Trans.nvim',
@@ -28,6 +28,20 @@ plugins:add {
             },
         },
         dir = os.getenv 'HOME' .. '/.vim/dict',
+    },
+    dev = true,
+}
+
+plugins:add {
+    'JuanZoran/template',
+    lazy = false,
+    keys = {
+        { '<leader><leader>t',    function() require 'template'.create() end, desc = '🔨Create New Template' },
+        { '<leader><leader><CR>', function() require 'template'.select() end, desc = '🌳Edit Template' },
+        { '<leader><leader>d',    function() require 'template'.delete() end, desc = '❌Remove Template' },
+    },
+    opts = {
+        template_dir = vim.fn.stdpath 'config' .. '/lua/template',
     },
     dev = true,
 }
@@ -232,7 +246,7 @@ plugins:add {
     'sindrets/diffview.nvim',
     cmd = 'DiffviewOpen',
     keys = {
-        { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',  desc = 'Toggle Diff Files' },
+        { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',   desc = 'Toggle Diff Files' },
         { '<Leader>dF', '<Cmd>DiffviewFileHistory %<CR>', desc = 'Open Diff History For Current File' },
     },
     opts = function()
