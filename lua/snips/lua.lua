@@ -46,20 +46,17 @@ local snips = {
         })
     ),
     parse('s', "s('$1', $2)"),
-    parse(
-        'lm',
-        [[
+    parse('lm', [[
         local M = {}
 
         $1
 
         return M
-    ]]
-    ),
+    ]]),
     parse('cmd', '<Cmd>$1<CR>'),
     parse('parse', [[parse("${1:trig}", "$2")]]),
-    s('formatEnable', { t '-- stylua: ignore end' }),
-    s('formatDisable', { t '-- stylua: ignore start' }),
+    -- s('formatEnable', { t '-- stylua: ignore end' }),
+    -- s('formatDisable', { t '-- stylua: ignore start' }),
     s('nodis', { t '---@nodiscard' }),
     s(
         'class',
@@ -74,13 +71,6 @@ local snips = {
             i(2, 'type'),
         })
     ),
-    --    s({ trig = "c(%d+)", regTrig = true }, {
-    -- 	t("will only expand for even numbers"),
-    -- }, {
-    -- 	condition = function(line_to_cursor, matched_trigger, captures)
-    -- 		return tonumber(captures[1]) % 2 == 0
-    -- 	end,
-    -- }),
 }
 
 -- End Snippets --

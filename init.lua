@@ -1,3 +1,5 @@
+require 'util'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -28,7 +30,7 @@ require 'lazy'.setup({
     { import = 'plugins.tools.extra' },
 }, {
     install = {
-        colorscheme = { 'catppuccin', 'kanagawa', 'habamax' },
+        colorscheme = { 'catppuccin', 'tokyonight', 'kanagawa', 'habamax' },
     },
     git = {
         url_format = 'git@github.com:%s.git',
@@ -72,10 +74,10 @@ require 'lazy'.setup({
     },
     dev = {
         -- directory where you store your local plugin projects
-        path = '~/project/Neovim',
+        path = vim.fn.stdpath 'config' .. '/custom',
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = { 'JuanZoran' }, -- For example {"folke"}
-        fallback = true,            -- Fallback to git when local plugin doesn't exist
+        fallback = true,      -- Fallback to git when local plugin doesn't exist
     },
     debug = false,
 })

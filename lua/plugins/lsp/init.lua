@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 
 local config = function()
     local handler = require 'plugins.lsp.handlers'
@@ -11,7 +11,7 @@ local config = function()
     require 'mason-lspconfig'.setup_handlers {
         function(server)
             local _, conf_opts = pcall(require, 'server.' .. server)
-            local conf = _ and vim.tbl_extend('error', vim.deepcopy(opts), conf_opts) or opts
+            local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
             require 'lspconfig'[server].setup(conf)
         end,
     }
@@ -21,14 +21,14 @@ local config = function()
     registry:on('package:uninstall:success', function(pkg)
         local native_name = package_to_lspconfig[pkg.name]
         local process = function(select)
-            if select ~= 'Skip' then
-                local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath 'config' .. '/lua/lsp/conf',
-                    native_name))
-                vim.notify(('%s configuration removed %s'):format(pkg.name,
-                    (res and 'successfully' or 'failed')))
-            else
+            if select == 'Skip' then
                 vim.notify 'Skip ...'
+                return
             end
+            local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath 'config' .. '/lua/lsp/conf',
+                native_name))
+            vim.notify(('%s configuration removed %s'):format(pkg.name,
+                (res and 'successfully' or 'failed')))
         end
 
         if native_name then
@@ -131,14 +131,6 @@ plugins:add {
     opts = function()
         return require 'plugins.lsp.saga'
     end,
-    -- dependencies = {
-    --     {
-    --         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    --         -- FIXME :
-    --         cond = false,
-    --         config = true,
-    --     },
-    -- }, -- pretty ui for [code-action | hover-text | ....]
 }
 
 plugins:add {
@@ -149,9 +141,11 @@ plugins:add {
         end)
     end,
     keys = {
-        {'<leader>hi', function ()
-            require'lsp-inlayhints'.toggle()
-        end, desc = 'Toggle Inlay Hints'},
+        {
+            '<leader>hi',
+            function() require 'lsp-inlayhints'.toggle() end,
+            desc = 'Toggle Inlay Hints'
+        },
     },
     opts = {
         inlay_hints = {
@@ -164,13 +158,19 @@ plugins:add {
             only_current_line = false,
         },
     },
-    config = function (_, opts)
-        require('lsp-inlayhints').setup(opts)
-        vim.api.nvim_set_hl(0, 'LspInlayHint', {
-            fg = '#9692af'
-        })
-    end
+    config = function(plugin, opts)
+        require 'lsp-inlayhints'.setup(opts)
+        vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#9692af' })
+    end,
 }
+-- dependencies = {
+--     {
+--         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+--         -- FIXME :
+--         cond = false,
+--         config = true,
+--     },
+-- }, -- pretty ui for [code-action | hover-text | ....]
 
 return {
     'neovim/nvim-lspconfig', -- official lspconfig

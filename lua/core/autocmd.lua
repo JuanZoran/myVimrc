@@ -16,7 +16,7 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 -- })
 
 
-autocmd('BufRead', {
+autocmd('BufReadPost', {
     group = group,
     command = [[silent! loadview]],
 })
@@ -97,7 +97,6 @@ end
 -- set_cursorline("WinEnter", true)
 set_cursorline('InsertEnter', false)
 set_cursorline('InsertLeave', true)
-
 
 -- 设置firenvim的大小
 -- vim.cmd [[

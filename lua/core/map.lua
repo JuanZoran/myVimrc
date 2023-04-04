@@ -1,12 +1,4 @@
-local function set(map)
-    local s = vim.keymap.set
-    local opt = { silent = true }
-    for _, v in ipairs(map.map) do
-        opt.desc = v[3]
-        s(map.mode, v[1], v[2], opt)
-    end
-end
-
+local set = util.map_opt_with_desc
 set {
     mode = 'n',
     map = {
@@ -18,7 +10,7 @@ set {
         { 'qq',                '<C-^>',               'Toggle Recent Buffer' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
-        -- { '<leader>J',         'J' },
+        { '<leader>J',         'J' },
         { '<S-CR>',            'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 

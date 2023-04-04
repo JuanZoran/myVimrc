@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 
 plugins:add {
     'JuanZoran/Trans.nvim',
@@ -28,6 +28,20 @@ plugins:add {
             },
         },
         dir = os.getenv 'HOME' .. '/.vim/dict'
+    },
+    dev = true,
+}
+
+plugins:add {
+    'JuanZoran/template',
+    lazy = false,
+    keys = {
+        { '<leader><leader>t',    function() require 'template'.create() end, desc = '🔨Create New Template' },
+        { '<leader><leader><CR>', function() require 'template'.select() end, desc = '🌳Edit Template' },
+        { '<leader><leader>d',    function() require 'template'.delete() end, desc = '❌Remove Template' },
+    },
+    opts = {
+        template_dir = vim.fn.stdpath 'config' .. '/lua/template',
     },
     dev = true,
 }
@@ -252,20 +266,6 @@ plugins:add {
 }
 
 
-
-plugins:add {
-    'glepnir/nerdicons.nvim',
-    keys = {
-        { '<leader>ni', '<Cmd>NerdIcons<CR>', desc = 'NerdIcons' },
-    },
-    opts = {
-        border = 'rounded',
-        down = '<C-k>',
-        up = '<C-i>',
-        copy = '<C-o>',
-    },
-}
-
 plugins:add {
     'olimorris/persisted.nvim',
     cmd = { 'SessionLoad', 'SessionLoadLast' },
@@ -291,7 +291,6 @@ plugins:add {
         })
     end,
     config = function(_, opts)
-        -- test-cool-baar
         vim.opt.sessionoptions = 'buffers,curdir,folds,winsize,winpos,help'
         require 'telescope'.load_extension 'persisted' -- To load the telescope extension
         require 'persisted'.setup(opts)

@@ -1,7 +1,7 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local copilot = require 'copilot.suggestion'
-local kind_icons = require 'util'.icon.code_icon
+local kind_icons = util.icon.code_icon
 
 local menu = {
     luasnip  = '[Snippet]',

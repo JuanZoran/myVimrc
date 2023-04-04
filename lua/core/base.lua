@@ -64,7 +64,7 @@ opt.wrap           = false
 -- opt.autochdir     = true
 opt.helplang       = 'cn'
 opt.updatetime     = 200
--- opt.equalalways    = true -- auto resize window
+-- opt.equalalways = true -- auto resize window
 opt.undofile       = true
 opt.cpoptions:append '>' -- :help cpoptions
 

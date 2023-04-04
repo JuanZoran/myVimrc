@@ -58,4 +58,15 @@ function M.map(keymaps)
     end
 end
 
-return M
+---Map with description
+---@param args {map: {[1]:string, [2]:string|function, [3]:string?}[], opts: table?, mode?: mode|mode[]}
+function M.map_opt_with_desc(args)
+    local opts = args.opts or {}
+    local mode = args.mode or 'n'
+    for _, map in ipairs(args.map) do
+        opts.desc = map[3]
+        set(mode, map[1], map[2], opts)
+    end
+end
+
+_G.util = M
