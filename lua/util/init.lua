@@ -1,105 +1,61 @@
-local M = {}
+---@class util
+local M = setmetatable({}, {
+    __index = function(tbl, key)
+        local res = require('util.' .. key)
+        tbl[key] = res
+        return res
+    end,
+})
 
-local keymap = vim.keymap.set
-function M.tmap(arg) -- for better keymap-binding alias
-    for _, v in ipairs(arg.map) do
-        if v[3] then
-            keymap(arg.mode, v[1], v[2], vim.tbl_extend('force', arg.opt, v[3]))
-        else
-            keymap(arg.mode, v[1], v[2], arg.opt)
-        end
-    end
+---@alias mode
+---|'n'
+---|'v'
+---|'x'
+---|'s'
+---|'o'
+---|'i'
+---|'l'
+---|'c'
+---|'t'
+---|'!'
+
+---@class keymap
+---@field [1] string @lhs
+---@field [2] string|function @rhs
+---@field mode? mode|mode[]
+---@field noremap? boolean
+---@field silent? boolean
+---@field expr? boolean
+---@field nowait? boolean
+---@field script? boolean
+---@field unique? boolean
+---@field buffer? boolean
+
+
+local set = vim.keymap.set
+
+---Load single keymap
+---@param keymap keymap
+local function load_keymap(keymap)
+    local mode = keymap.mode or 'n'
+    local lhs = keymap[1]
+    local rhs = keymap[2]
+
+    keymap[1] = nil
+    keymap[2] = nil
+    keymap.mode = nil
+    set(mode, lhs, rhs, keymap)
 end
 
-function M.map(mode, option, ...) -- for better keymap-binding alias
-    local maps = { ... }
-    for _, v in ipairs(maps) do
-        if v[3] then
-            keymap(mode, v[1], v[2], vim.tbl_extend('force', option, v[3]))
-        else
-            keymap(mode, v[1], v[2], option)
-        end
+---Lazy Kyemap-like load utility
+---@param keymaps keymap|keymap[]
+function M.map(keymaps)
+    if type(keymaps[1]) == 'string' then
+        load_keymap(keymaps)
+    else
+        ---@cast keymaps keymap[]
+        for _, keymap in ipairs(keymaps) do load_keymap(keymap) end
     end
 end
-
--- TODO :
-M.icon = {
-    Error = '🥵',
-    Warn = '🫢',
-    Info = '🤔',
-    Hint = '👿',
-    VirtualText = '🧐',
-    LSPFloat = '🤓',
-    CodeAction = '🥳',
-    comment = {
-        Fix = '',
-        Debug = '🔧',
-        -- Trace = "🤠",
-        Todo = '🗒',
-        Hack = '✨',
-        Perf = '🤯',
-        Note = '✔️',
-        Test = '💯',
-    },
-    code_icon = {
-        File = '',
-        Folder = '',
-        Package = '',
-        Module = '',
-        Namespace = '',
-        Macro = '',
-        Class = '',
-        Constructor = '',
-        Field = '',
-        Property = '',
-        Method = '',
-        Struct = '',
-        Event = '',
-        Interface = '',
-        Enum = '',
-        EnumMember = '',
-        Constant = '',
-        Function = '',
-        TypeParameter = '',
-        Variable = '',
-        Operator = '',
-        Null = '',
-        Boolean = '',
-        Number = '',
-        String = '',
-        Keyword = '',
-        Array = '',
-        Object = '',
-        Text = '',
-        Snippet = '',
-        Copilot = '',
-        -- File = " ",
-        -- Module = " ",
-        -- Namespace = " ",
-        -- Package = " ",
-        -- Class = " ",
-        -- Method = " ",
-        -- Property = " ",
-        -- Field = " ",
-        -- Constructor = " ",
-        -- Enum = " ",
-        -- Interface = " ",
-        -- Function = " ",
-        -- Variable = " ",
-        -- Constant = " ",
-        -- String = " ",
-        -- Number = " ",
-        -- Boolean = " ",
-        -- Array = " ",
-        -- Object = " ",
-        -- Key = " ",
-        -- Null = " ",
-        -- EnumMember = " ",
-        -- Struct = " ",
-        -- Event = " ",
-        -- Operator = " ",
-        -- TypeParameter = " ",
-    },
-}
 
 return M

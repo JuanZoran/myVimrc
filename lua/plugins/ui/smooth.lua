@@ -1,5 +1,4 @@
-local specs = require 'specs'
-local show = specs.show_specs
+local specs = require 'specs' local show = specs.show_specs
 
 specs.setup {
     show_jumps      = false,
@@ -48,25 +47,17 @@ vim.keymap.set({ 'n', 'x' }, 'K', "<Cmd>lua Scroll('<C-d>', 1, 1)<CR><Cmd>lua re
 --     },
 -- }
 
-
-local set = require 'util.map'.set
-set {
-    mode = { 'n', 'x', 'o' }, -- be appended to other operator
-    map = {
-        { 'i', 'gk' },        -- for better move (warp)
-        { 'k', 'gj' },
-
-        { 'j', 'h' },
-        { 'h', 'i' },
-    },
+local mode = { 'n', 'x', 'o' }-- be appended to other operator
+util.map {
+    {mode = mode, 'i', 'gk' },        -- for better move (warp)
+    {mode = mode, 'k', 'gj' },
+    {mode = mode, 'j', 'h' },
+    {mode = mode, 'h', 'i' },
 }
 
-set {
-    mode = 'o',
-    map = {
-        { 'L', '$' },
-        { 'J', '^' },
-    },
+util.map {
+    {mode= 'o', 'L', '$' },
+    {mode= 'o', 'J', '^' },
 }
 
 local map = vim.keymap.set
