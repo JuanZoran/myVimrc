@@ -6,14 +6,7 @@ end
 local function opts()
     local winbar = {
         lualine_a = {
-            {
-                function()
-                    return '盛 ' .. os.date '%A %H:%M'
-                end,
-                color = {
-                    fg = '#000000', bg = '#2bbb4f'
-                },
-            },
+            function() return '盛 ' .. os.date '%A %H:%M' end,
         },
         lualine_b = {
             { 'fancy_diagnostics' },
@@ -26,7 +19,6 @@ local function opts()
         lualine_c = {
             {
                 function() return require 'nvim-navic'.get_location() end, -- FIXME : why it is not working
-                -- require 'nvim-navic'.get_location,
                 cond = require 'nvim-navic'.is_available,
             },
         },
@@ -66,7 +58,7 @@ local function opts()
                 right = '',
                 left = '',
             },
-            -- globalstatus = false,
+            globalstatus = true,
             disabled_filetypes = {
                 statusline = {
                     'alpha',
@@ -90,7 +82,7 @@ local function opts()
         },
         sections = sections,
         winbar = winbar,
-        -- extensions = { 'neo-tree' }
+        extensions = { 'trouble', 'lazy', 'neo-tree' },
     }
 end
 
@@ -104,8 +96,8 @@ return {
             'SmiteshP/nvim-navic',
             lazy = true,
             opts = {
-                separator = ' >> ',
                 highlight = true,
+                separator = ' >> ',
                 depth_limit = 5,
             },
             init = function()

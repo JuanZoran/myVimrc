@@ -19,9 +19,7 @@ local config = function()
         ['clangd']              = 'clangd',
         ['rust-analyzer']       = 'rust_analyzer',
         ['lua-language-server'] = 'lua_ls',
-    } do
-        if exist(binary_name) == 1 then setup(server_name) end
-    end
+    } do if exist(binary_name) == 1 then setup(server_name) end end
 
     require 'mason-lspconfig'.setup_handlers { setup }
 end

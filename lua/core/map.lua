@@ -14,9 +14,10 @@ set {
         -- INFO : command
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
+        { '<Leader>p',         '<Cmd>Lazy<CR>',    '痢[Sync | Install] Plugin' },
+        { 'qq',                '<C-^>',               'Toggle Recent Buffer' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
-        { '<Leader>p',         '<Cmd>Lazy<CR>',    '痢[Sync | Install] Plugin' },
         { '<leader>J',         'J' },
         -- { '<S-CR>',         'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },

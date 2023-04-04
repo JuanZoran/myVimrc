@@ -54,27 +54,6 @@ plugins:add {
     end,
 }
 
-plugins:add {
-    'folke/tokyonight.nvim',
-    lazy = true,
-    opts = {
-        style = 'night',
-        transparent = false,
-        on_highlights = function(hl)
-            hl['@variable'] = {
-                fg = '#f4b085',
-            }
-
-            hl.Cursor = {
-                bg = '#58a6ff',
-            }
-        end,
-    },
-    config = function(_, opts)
-        require 'tokyonight'.setup(opts)
-        vim.cmd.colorscheme 'tokyonight'
-    end,
-}
 
 plugins:add {
     'uga-rosa/ccc.nvim',
@@ -119,9 +98,7 @@ plugins:add {
         if vim.fn.argc() == 1 then
             ---@diagnostic disable-next-line: param-type-mismatch
             local stat = vim.loop.fs_stat(vim.fn.argv(0))
-            if stat and stat.type == 'directory' then
-                require 'neo-tree'
-            end
+            if stat and stat.type == 'directory' then require 'neo-tree' end
         end
     end,
     cmd = 'Neotree',
@@ -146,6 +123,7 @@ plugins:add {
         config = true,
     },
 }
+
 
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
@@ -192,104 +170,8 @@ plugins:add { -- 标签栏
 
 plugins:add {
     'goolord/alpha-nvim',
-    event = 'VimEnter',
+    cond = vim.fn.argc() == 0,
     config = function() require 'plugins.ui.alpha' end,
-}
-
-
-local map = {
-    mode = { 'n', 'x', 'o' }, -- be appended to other operator
-    map = {
-        { 'i', 'gk' },
-        { 'k', 'gj' },
-        { 'j', 'h' },
-        { 'h', 'i' },
-        { 'L', 'g$' },
-        { 'J', 'g^' },
-        { 'I', '<C-u>zz' },
-        { 'K', '<C-d>zz' },
-    },
-}
-
-local s = vim.keymap.set
-for _, v in ipairs(map.map) do
-    s(map.mode, v[1], v[2])
-end
-
-plugins:add {
-    'JuanZoran/specs.nvim',
-    keys = function()
-        local show = require 'specs'.show_specs
-        local api = vim.api
-        local fn = vim.fn
-        local function feedkey(key)
-            -- api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), 'n', false)
-            api.nvim_feedkeys(key, 'n', false)
-            vim.defer_fn(show, 10)
-        end
-        return {
-            { 'H',                 function() feedkey 'I' end },
-            { 'A',                 function() feedkey 'A' end },
-            { 'cc',                function() feedkey 'cc' end },
-            { mode = { 'n', 'x' }, 'G',                        function() feedkey 'G' end },
-            { mode = { 'n', 'x' }, 'gg',                       function() feedkey 'gg' end },
-            {
-                mode = { 'n', 'x' },
-                'J',
-                function()
-                    local col = (api.nvim_get_current_line()):find '%S'
-                    if col ~= vim.fn.col '.' then feedkey(vim.wo.wrap and 'g^' or '^') end
-                end,
-            },
-            {
-                mode = { 'n', 'x' },
-                'L',
-                function()
-                    local _cur = fn.col '.'
-                    local _end = fn.col '$' - 1
-                    if _end ~= 0 and _cur ~= _end then feedkey(vim.wo.wrap and 'g$' or '$') end
-                end,
-            },
-            -- { mode = { 'n', 'x' }, 'I',                        function() feedkey '<C-u>zz' end },
-            -- { mode = { 'n', 'x' }, 'K',                        function() feedkey '<C-d>zz' end },
-        }
-    end,
-    opts = function()
-        return {
-            show_jumps      = false,
-            popup           = {
-                delay_ms = 0,  -- delay before popup displays
-                inc_ms   = 8,  -- time increments used for fade/resize effects
-                blend    = 40, -- starting blend, between 0-100 (fully transparent), see :h winblend
-                width    = 13,
-                winhl    = 'Cursor',
-                fader    = require 'specs'.linear_fader,
-                resizer  = require 'specs'.shrink_resizer,
-            },
-            ignore_buftypes = { nofile = true },
-        }
-    end,
-}
-
-plugins:add {
-    'gen740/SmoothCursor.nvim',
-    event = 'VeryLazy',
-    opts = {
-        autostart = true,
-        speed = 30,               -- max is 100 to stick to your current position
-        intervals = 30,           -- tick intervalI
-        disable_float_win = true, -- disable on float window
-        -- linehl = 'CursorLine',
-        disabled_filetypes = {
-            'alpha',
-            'TelescopePrompt'
-        },
-        fancy = {
-            -- head = { cursor = '▷', texthl = 'SmoothCursor', linehl = 'CursorLine' },
-            head = { cursor = '▷', texthl = 'SmoothCursor', linehl = nil },
-            enable = true,
-        },
-    },
 }
 
 
