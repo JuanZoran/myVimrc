@@ -18,6 +18,7 @@ set {
         { 'qw',                '<Cmd>close<CR>' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',    '痢[Sync | Install] Plugin' },
         { '<leader>J',         'J' },
+        -- { '<S-CR>',         'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 
         { 'yp',                'yip' },

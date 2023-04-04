@@ -50,8 +50,8 @@ local opts = {
     format = {
         spinner = {
             -- name = 'mindblown',
-            name = 'moon',
-            -- name = 'soccerHeader',
+            -- name = 'moon',
+            name = 'soccerHeader',
             -- name = 'weather',
         },
     },

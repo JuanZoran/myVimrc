@@ -13,7 +13,7 @@ plugins:add {
     opts = {
         frontend = {
             hover = {
-                spinner = 'moon',
+                spinner = 'mindblown',
                 keymaps = {
                     pageup       = '[[',
                     pagedown     = ']]',
@@ -233,7 +233,7 @@ plugins:add {
     cmd = 'DiffviewOpen',
     keys = {
         { '<Leader>dw', '<Cmd>DiffviewToggleFiles<CR>',  desc = 'Toggle Diff Files' },
-        { '<Leader>dF', '<Cmd>DiffviewFileHitory %<CR>', desc = 'Open Diff History For Current File' },
+        { '<Leader>dF', '<Cmd>DiffviewFileHistory %<CR>', desc = 'Open Diff History For Current File' },
     },
     opts = function()
         local action = require 'diffview.actions'

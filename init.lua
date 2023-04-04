@@ -30,6 +30,9 @@ require 'lazy'.setup({
     install = {
         colorscheme = { 'catppuccin', 'tokyonight', 'kanagawa', 'habamax' },
     },
+    -- git = {
+        -- url_format
+    -- },
     ui = {
         size = { width = 0.9, height = 0.85 },
         border = 'rounded',
