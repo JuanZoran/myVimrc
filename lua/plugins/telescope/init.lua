@@ -85,8 +85,8 @@ local keys = {
     { '<C-u>',   '<Cmd>Telescope oldfiles<Cr>' },
     { '<C-o>',   '<Cmd>Telescope jumplist<Cr>' },
     { '<C-f>',   '<Cmd>Telescope find_files<CR>' },
-    { '<C-/>',   '<leader>tc' },                                  -- for C-/
-    { '<S-C-/>', '<leader>tk',                    remap = true }, -- for C-/
+    { '<C-/>',   '<leader>tc' },                                 -- for C-/
+    { '<S-C-/>', '<leader>tk',                   remap = true }, -- for C-/
 }
 
 
@@ -97,7 +97,7 @@ local config = function()
             prompt_prefix = ' ',
             selection_caret = ' ',
             path_display = {
-                "smart"
+                'smart'
             },
             -- layout_strategy = "horizontal",
             -- layout_config = { prompt_position = "top" },
@@ -164,7 +164,6 @@ local config = function()
             },
         },
     }
-
     local telescope = require 'telescope'
     telescope.load_extension 'fzf'
 end
@@ -177,11 +176,12 @@ return {
         {
             'nvim-lua/plenary.nvim',
             keys = {
-                { ';t', '<Plug>PlenaryTestFile', 'Test Plugin' },
+                { ';t', '<Plug>PlenaryTestFile', desc = 'Test Plugin' },
             },
         },
     },
     keys = keys,
     version = false,
     config = config,
+    import = 'plugins.telescope.extensions'
 }

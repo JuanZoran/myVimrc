@@ -59,7 +59,7 @@ function M.map(keymaps)
 end
 
 ---Map with description
----@param args {map: {[1]:string, [2]:string, [3]:string?}[], opts: table?, mode?: mode|mode[]}
+---@param args {map: {[1]:string, [2]:string|function, [3]:string?}[], opts: table?, mode?: mode|mode[]}
 function M.map_opt_with_desc(args)
     local opts = args.opts or {}
     local mode = args.mode or 'n'
@@ -68,5 +68,6 @@ function M.map_opt_with_desc(args)
         set(mode, map[1], map[2], opts)
     end
 end
+
 
 _G.util = M

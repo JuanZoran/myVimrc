@@ -1,6 +1,10 @@
 local plugins = util.plugin()
 
 plugins:add {
+    import = 'plugins.tools.extra'
+}
+
+plugins:add {
     'JuanZoran/Trans.nvim',
     keys = {
         { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = ' Translate' },
@@ -66,16 +70,16 @@ plugins:add {
 }
 
 plugins:add {
-    'dhruvasagar/vim-table-mode',
+    'ellisonleao/glow.nvim',
+    opts = { border = 'rounded', style = 'dark', width = 100, width_ratio = 0.9, height_ratio = 0.85 },
     ft = { 'markdown', 'md' },
-    keys = {
-        { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
-    },
+    keys = { { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' } },
     dependencies = {
         {
-            'ellisonleao/glow.nvim',
-            opts = { border = 'rounded', style = 'dark', width = 100, width_ratio = 0.9, height_ratio = 0.85 },
-            keys = { { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' } },
+            'dhruvasagar/vim-table-mode',
+            keys = {
+                { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
+            },
         },
         {
             'lukas-reineke/headlines.nvim',

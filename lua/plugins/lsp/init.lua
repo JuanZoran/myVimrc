@@ -9,7 +9,7 @@ local config = function()
     }
     local setup = function(server)
         local _, conf_opts = pcall(require, 'server.' .. server)
-        local conf = (_ and conf_opts) and vim.tbl_extend('error', vim.deepcopy(opts), conf_opts) or opts
+        local conf = (_ and conf_opts) and vim.tbl_extend('error', opts, conf_opts) or opts
         require 'lspconfig'[server].setup(conf)
     end
 
@@ -114,16 +114,7 @@ plugins:add {
     opts = function()
         return require 'plugins.lsp.saga'
     end,
-    -- dependencies = {
-    --     {
-    --         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    --         -- FIXME :
-    --         cond = false,
-    --         config = true,
-    --     },
-    -- }, -- pretty ui for [code-action | hover-text | ....]
 }
-
 
 plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
@@ -135,9 +126,7 @@ plugins:add {
     keys = {
         {
             '<leader>hi',
-            function()
-                require 'lsp-inlayhints'.toggle()
-            end,
+            function() require 'lsp-inlayhints'.toggle() end,
             desc = 'Toggle Inlay Hints'
         },
     },
@@ -154,11 +143,17 @@ plugins:add {
     },
     config = function(_, opts)
         require 'lsp-inlayhints'.setup(opts)
-        vim.api.nvim_set_hl(0, 'LspInlayHint', {
-            fg = '#9692af'
-        })
+        vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#9692af' })
     end,
 }
+-- dependencies = {
+--     {
+--         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+--         -- FIXME :
+--         cond = false,
+--         config = true,
+--     },
+-- }, -- pretty ui for [code-action | hover-text | ....]
 
 return {
     'neovim/nvim-lspconfig', -- official lspconfig

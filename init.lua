@@ -23,12 +23,7 @@ local install = M.commands.install
 install.key = 'Y'
 install.key_plugin = 'y'
 
-require 'lazy'.setup({
-    { import = 'plugins' },
-    { import = 'plugins.ui.extra' },
-    { import = 'plugins.telescope.extensions' },
-    { import = 'plugins.tools.extra' },
-}, {
+require 'lazy'.setup('plugins', {
     install = {
         colorscheme = { 'catppuccin', 'tokyonight', 'kanagawa', 'habamax' },
     },
@@ -77,7 +72,7 @@ require 'lazy'.setup({
         path = vim.fn.stdpath 'config' .. '/custom',
         ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
         patterns = { 'JuanZoran' }, -- For example {"folke"}
-        fallback = true,      -- Fallback to git when local plugin doesn't exist
+        fallback = true,            -- Fallback to git when local plugin doesn't exist
     },
     debug = false,
 })

@@ -5,6 +5,7 @@ plugins:add {
 }
 
 plugins:add {
+    import = 'plugins.ui.extra',
     'catppuccin/nvim',
     name = 'catppuccin',
     event = 'VimEnter',
@@ -173,6 +174,5 @@ plugins:add {
     cond = vim.fn.argc() == 0,
     config = function() require 'plugins.ui.alpha' end,
 }
-
 
 return plugins

@@ -11,7 +11,7 @@ set {
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
         { '<leader>J',         'J' },
-        -- { '<S-CR>',         'J' },
+        { '<S-CR>',            'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 
         { 'yp',                'yip' },
