@@ -1,6 +1,10 @@
 local plugins = util.plugin()
 
 plugins:add {
+    import = 'plugins.tools.extra'
+}
+
+plugins:add {
     'JuanZoran/Trans.nvim',
     keys = {
         { 'mm', mode = { 'n', 'x' },       '<Cmd>Translate<CR>',             desc = 'Translate' },
