@@ -174,8 +174,8 @@ plugins:add {
     lazy = true,
     build = 'make install_jsregexp',
     keys = {
-        { mode = 'x', '<C-q>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
-        { mode = 'i', '<C-q>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
+        { mode = 'x', '<C-x>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
+        { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
     config = function() require 'plugins.lang.luasnip' end,
     dependencies = 'rafamadriz/friendly-snippets',

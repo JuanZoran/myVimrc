@@ -6,14 +6,7 @@ end
 local function opts()
     local winbar = {
         lualine_a = {
-            {
-                function()
-                    return '盛 ' .. os.date '%A %H:%M'
-                end,
-                color = {
-                    fg = '#000000', bg = '#2bbb4f'
-                },
-            },
+            function() return '盛 ' .. os.date '%A %H:%M' end,
         },
         lualine_b = {
             { 'fancy_diagnostics' },

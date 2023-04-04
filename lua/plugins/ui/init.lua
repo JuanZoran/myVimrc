@@ -122,9 +122,7 @@ plugins:add {
         if vim.fn.argc() == 1 then
             ---@diagnostic disable-next-line: param-type-mismatch
             local stat = vim.loop.fs_stat(vim.fn.argv(0))
-            if stat and stat.type == 'directory' then
-                require 'neo-tree'
-            end
+            if stat and stat.type == 'directory' then require 'neo-tree' end
         end
     end,
     cmd = 'Neotree',
@@ -149,6 +147,7 @@ plugins:add {
         config = true,
     },
 }
+
 
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
@@ -195,7 +194,7 @@ plugins:add { -- 标签栏
 
 plugins:add {
     'goolord/alpha-nvim',
-    event = 'VimEnter',
+    cond = vim.fn.argc() == 0,
     config = function() require 'plugins.ui.alpha' end,
 }
 
