@@ -2,8 +2,9 @@ require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         'markdown',
         'markdown_inline',
+        'bash',
+        'vim',
         'regex',
-        'help',
         'lua',
         'python',
         'cpp',

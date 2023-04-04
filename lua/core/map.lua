@@ -14,11 +14,12 @@ set {
         -- INFO : command
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
+        { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
+        { 'qq',                '<C-^>',               'Toggle Recent Buffer' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
-        { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
         -- { '<leader>J',         'J' },
-        { '<S-CR>',         'J' },
+        { '<S-CR>',            'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 
         { 'yp',                'yip' },
@@ -118,4 +119,4 @@ set {
 }
 
 vim.keymap.set({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
-vim.keymap.set('t', '<S-C-s>', '<Cmd>stopinsert<CR>')
+vim.keymap.set('t', '<C-x>', '<Cmd>stopinsert<CR>')

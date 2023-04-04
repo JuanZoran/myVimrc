@@ -31,6 +31,9 @@ require 'lazy'.setup({
     install = {
         colorscheme = { 'catppuccin', 'kanagawa', 'habamax' },
     },
+    git = {
+        url_format = 'git@github.com:%s.git',
+    },
     ui = {
         size = { width = 0.85, height = 0.85 },
         border = 'rounded',
