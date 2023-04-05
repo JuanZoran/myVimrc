@@ -1,4 +1,5 @@
 local nxo = { 'n', 'x', 'o' }
+local nx = { 'n', 'x' }
 util.map {
     { mode = nxo, 'i', 'gk' },
     { mode = nxo, 'k', 'gj' },
@@ -26,10 +27,10 @@ local function keys()
         { 'H',  feedkey 'I' },
         { 'A',  feedkey 'A' },
         { 'cc', feedkey 'cc' },
-        { 'G',  feedkey 'G',  mode = { 'n', 'x' } },
-        { 'gg', feedkey 'gg', mode = { 'n', 'x' } },
+        { 'G',  feedkey 'G',  mode = nx },
+        { 'gg', feedkey 'gg', mode = nx },
         {
-            mode = { 'n', 'x' },
+            mode = nx,
             'J',
             function()
                 local col = (api.nvim_get_current_line()):find '%S'
@@ -37,7 +38,7 @@ local function keys()
             end,
         },
         {
-            mode = { 'n', 'x' },
+            mode = nx,
             'L',
             function()
                 local _cur = fn.col '.'
@@ -76,8 +77,8 @@ return {
             default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
         },
         keys = {
-            { 'I', "<Cmd>lua Scroll('<C-u>', 1, 0, 3)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = { 'n', 'x' } },
-            { 'K', "<Cmd>lua Scroll('<C-d>', 1, 0, 3)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = { 'n', 'x' } },
+            { 'I', "<Cmd>lua Scroll('<C-u>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
+            { 'K', "<Cmd>lua Scroll('<C-d>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
         },
     },
 }

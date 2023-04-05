@@ -55,8 +55,9 @@ local snips = {
     ]]),
     parse('cmd', '<Cmd>$1<CR>'),
     parse('parse', [[parse("${1:trig}", "$2")]]),
-    -- s('formatEnable', { t '-- stylua: ignore end' }),
-    -- s('formatDisable', { t '-- stylua: ignore start' }),
+    s('formate', { t '---@format enable' }),
+    s('formatd', { t '---@format disable' }),
+    s('formatdn', { t '---@format disable-next' }),
     s('nodis', { t '---@nodiscard' }),
     s(
         'class',

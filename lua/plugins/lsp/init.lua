@@ -72,6 +72,7 @@ plugins:add {
         },
     },
 }
+
 plugins:add {
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
@@ -101,9 +102,7 @@ plugins:add {
 }
 plugins:add {
     'glepnir/lspsaga.nvim',
-    opts = function()
-        return require 'plugins.lsp.saga'
-    end,
+    opts = function() return require 'plugins.lsp.saga' end,
 }
 
 plugins:add {
@@ -113,21 +112,13 @@ plugins:add {
             require 'lsp-inlayhints'.on_attach(client, bufnr)
         end)
     end,
-    keys = {
-        {
-            '<leader>hi',
-            function() require 'lsp-inlayhints'.toggle() end,
-            desc = 'Toggle Inlay Hints'
-        },
-    },
+    keys = { {
+        '<leader>hi', function() require 'lsp-inlayhints'.toggle() end, desc = 'Toggle Inlay Hints'
+    }, },
     opts = {
         inlay_hints = {
-            parameter_hints = {
-                prefix = 'param:',
-            },
-            type_hints = {
-                prefix = 'type',
-            },
+            parameter_hints = { prefix = 'param:' },
+            type_hints = { prefix = 'type' },
             only_current_line = false,
         },
     },

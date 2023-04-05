@@ -18,11 +18,11 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 
 autocmd('BufRead', {
     group = group,
-    command = [[silent! loadview]],
-    -- callback = function ()
-    --     vim.cmd[[silent! loadview]]
-        -- vim.opt_local.foldmethod = 'manual'
-    -- end
+    -- command = [[silent! loadview]],
+    callback = function ()
+        vim.cmd[[silent! loadview]]
+        vim.opt_local.hlsearch = false
+    end
 })
 
 autocmd({ 'BufWrite', 'QuitPre' }, {

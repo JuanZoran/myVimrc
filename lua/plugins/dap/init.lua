@@ -1,6 +1,5 @@
 ---@format disable
 local keys = {
-
     { '<C-k>',         '<Cmd>DapStepInto<CR>',                            desc = "Step Into"         },
     { '<leader>eo',    '<Cmd>DapStepOut<CR>',                             desc = "Step Out"          },
     { '<leader>eO',    '<Cmd>DapStepOver<CR>',                            desc = "Step Over"         },
@@ -73,9 +72,9 @@ end
 return {
     'mfussenegger/nvim-dap',
     dependencies = {
-        { 'rcarriga/nvim-dap-ui',              config = true },
-        { 'jayp0521/mason-nvim-dap.nvim',      config = true },
-        { 'jbyuki/one-small-step-for-vimkind', config = dap_lua },
+        { 'rcarriga/nvim-dap-ui',              config = true             },
+        { 'jayp0521/mason-nvim-dap.nvim',      config = true             },
+        { 'jbyuki/one-small-step-for-vimkind', config = dap_lua          },
         { 'theHamsta/nvim-dap-virtual-text',   opts = { commented = true } },
     },
     config = dap_config,

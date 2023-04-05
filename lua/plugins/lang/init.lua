@@ -1,20 +1,5 @@
 local plugins = require 'util.plugin' ()
 
-local frontend = { 'html', 'css' }
-plugins:add {
-    'windwp/nvim-ts-autotag',
-    config = function(plugin)
-        require 'nvim-ts-autotag'.setup {
-            filetypes = plugin.ft,
-        }
-    end,
-    ft = frontend,
-}
-
-plugins:add {
-    'wsdjeg/xmake.vim',
-    cmd = 'XMake',
-}
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
@@ -26,6 +11,7 @@ local indent = {
         show_trailing_blankline_indent = false,
         show_current_context = false,
     },
+
     dependencies = {
         'echasnovski/mini.indentscope',
         version = false, -- wait till new 0.7.0 release to put it back on semver
@@ -52,6 +38,7 @@ local indent = {
 }
 
 
+---@format disable-next
 plugins:add {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -62,21 +49,18 @@ plugins:add {
         'HiPhish/nvim-ts-rainbow2',
         'RRethy/nvim-treesitter-endwise',
         { 'nvim-treesitter/nvim-treesitter-context', config = true },
-        {
-            'kevinhwang91/nvim-ufo',
+
+        { 'kevinhwang91/nvim-ufo',
             dependencies = 'kevinhwang91/promise-async',
             config = function() require 'plugins.lang.ufo' end,
         },
 
-        {
-            'rrethy/vim-illuminate',
-            config = function()
-                require 'illuminate'.configure {
-                    providers = { 'lsp', 'treesitter' },
-                    delay = 200,
-                }
-            end,
-        },
+        { 'rrethy/vim-illuminate',
+            config = function() require 'illuminate'.configure {
+                providers = { 'lsp', 'treesitter' },
+                delay = 200,
+            }
+        end, },
     }, -- rainbow pairs
     config = function() require 'plugins.lang.treesitter' end,
 }
@@ -176,27 +160,36 @@ plugins:add {
     }, --# display borders around floating windows
 }
 
+---@format disable-next
 plugins:add {
     'ThePrimeagen/refactoring.nvim',
-    keys = {
-        {
-            mode = 'x',
-            '<Leader>rr',
-            function()
-                require 'telescope'.extensions.refactoring.refactors()
-            end,
-            desc = '🎈Refactoring Operations'
-        },
-    },
+    keys = { {
+        mode = 'x', '<Leader>rr',
+        function() require 'telescope'.extensions.refactoring.refactors() end,
+        desc = '🎈Refactoring Operations'
+    }, },
     config = function()
         require 'refactoring'.setup()
         require 'telescope'.load_extension 'refactoring'
     end,
 }
 
+local frontend = { 'html', 'css' }
 plugins:add {
-    -- "gen4438/bracey.vim",
-    -- build = 'npm install --prefix server',
+    'windwp/nvim-ts-autotag',
+    config = function(plugin)
+        require 'nvim-ts-autotag'.setup {
+            filetypes = plugin.ft,
+        }
+    end,
+    ft = frontend,
+}
+
+plugins:add {
+    'wsdjeg/xmake.vim',
+    cmd = 'XMake',
+}
+plugins:add {
     'ray-x/web-tools.nvim',
     cmd = 'BrowserPreview',
     config = true,

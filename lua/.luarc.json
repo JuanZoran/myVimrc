@@ -4,6 +4,7 @@
         "/home/zoran/.local/share/bob/nightly/nvim-linux64/share/nvim/runtime/lua",
         "/home/zoran/.local/share/nvim/lazy/plenary.nvim/lua",
         "/home/zoran/.config/nvim/lua",
+        "${3rd}/luv/library",
         "${3rd}/luv/library"
     ]
 }
