@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 
 local config = function()
     local handler = require 'plugins.lsp.handlers'
@@ -9,7 +9,7 @@ local config = function()
     }
     local setup = function(server)
         local _, conf_opts = pcall(require, 'server.' .. server)
-        local conf = (_ and conf_opts) and vim.tbl_extend('error', opts, conf_opts) or opts
+        local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
         require 'lspconfig'[server].setup(conf)
     end
 
@@ -82,6 +82,7 @@ plugins:add {
         },
     },
 }
+
 plugins:add {
     'jose-elias-alvarez/null-ls.nvim',
     config = function()
@@ -132,12 +133,8 @@ plugins:add {
     },
     opts = {
         inlay_hints = {
-            parameter_hints = {
-                prefix = 'param:',
-            },
-            type_hints = {
-                prefix = 'type',
-            },
+            parameter_hints = { prefix = 'param:' },
+            type_hints = { prefix = 'type' },
             only_current_line = false,
         },
     },

@@ -10,7 +10,6 @@ util.map {
     { mode = 'o', 'J', 'g^' },
 }
 
-
 local function keys()
     local show = function() require 'specs'.show_specs() end
     local api = vim.api
@@ -54,7 +53,7 @@ return {
     keys = keys,
     opts = function()
         return {
-            show_jumps      = false,
+           show_jumps      = false,
             popup           = {
                 delay_ms = 0,  -- delay before popup displays
                 inc_ms   = 8,  -- time increments used for fade/resize effects

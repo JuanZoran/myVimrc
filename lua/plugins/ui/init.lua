@@ -129,9 +129,9 @@ plugins:add {
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
     keys = {
-        { '<leader>bj', ':BufferLineMovePrev<CR>',                desc = '[]Move Buffer to Left' },
-        { '<leader>bl', ':BufferLineMoveNext<CR>',                desc = '[]Move Buffer to Right' },
-        { '<Leader>bb', ':BufferLinePickClose<CR>',               desc = '﫧 Pick a Buffer to delete' },
+        { '<leader>bj', ':BufferLineMovePrev<CR>',                desc = 'Move Buffer to Left' },
+        { '<leader>bl', ':BufferLineMoveNext<CR>',                desc = 'Move Buffer to Right' },
+        { '<Leader>bb', ':BufferLinePickClose<CR>',               desc = 'Pick a Buffer to delete' },
         { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
         { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },
         { '<C-j>',      '<Cmd>BufferLineCyclePrev<CR>' },

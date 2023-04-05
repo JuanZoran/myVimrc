@@ -14,7 +14,7 @@ for key, capture in pairs {
     d = '@conditional',
     l = '@loop',
     r = '@return',
-    e = '@parameter',
+    a = '@parameter',
 } do
     local outer = capture .. '.outer'
     local inner = capture .. '.inner'

@@ -90,6 +90,21 @@ return {
     NavicSeparator              = {
         link = '@keyword',
     },
+
+    CmpItemAbbr                 = {
+        fg = '#babbf1',
+    },
+    CmpItemAbbrMatch            = {
+        fg = '#EF9F76',
+        bold = true,
+    },
+    CmpItemMenu            = {
+        fg = '#81c8be',
+    },
+    CmpItemAbbrMatchFuzzy = {
+        link = "CmpItemAbbrMatch",
+    }
+
     --     fg = "#E6C384",
     --     -- fg = "#b392f0",
     -- },

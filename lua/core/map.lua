@@ -6,7 +6,7 @@ set {
         -- INFO : command
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
-        { '<Leader>p',         '<Cmd>Lazy<CR>',       '痢[Sync | Install] Plugin' },
+        { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
         { 'qq',                '<C-^>',               'Toggle Recent Buffer' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
@@ -38,9 +38,9 @@ set {
         { 'Z',                 'zf' },
         { '<C-CR>',            '/<++><CR>vf>c' },
         { '<leader>a',         '@',                   'Macro' },
-        { '<C-w>o',            '<Cmd>vsp<CR>',        ' Split Window' },
-        { '<C-w>u',            '<Cmd>sp<CR>',         ' Split Window Vertically' },
-        { '<C-w>n',            '<Cmd>only<CR>',       ' Close Another Window' },
+        { '<C-w>o',            '<Cmd>vsp<CR>',        'Split Window' },
+        { '<C-w>u',            '<Cmd>sp<CR>',         'Split Window Vertically' },
+        { '<C-w>n',            '<Cmd>only<CR>',       'Close Another Window' },
 
         { '<Leader>w', function()
             if vim.api.nvim_buf_get_name(0) == '' then
@@ -56,11 +56,11 @@ set {
 set {
     mode = { 'n', 't' },
     map = {
-        { '<C-w>j',    '<Cmd>wincmd h<Cr>', ' Jump Left' },
-        { '<C-w>l',    '<Cmd>wincmd l<Cr>', ' Jump Right' },
-        { '<C-w>k',    '<Cmd>wincmd j<Cr>', ' Jump Down' },
-        { '<C-w>i',    '<Cmd>wincmd k<Cr>', ' Jump Up' },
-        -- INFO: resize
+        { '<C-w>j',    '<Cmd>wincmd h<Cr>', 'Left' },
+        { '<C-w>l',    '<Cmd>wincmd l<Cr>', 'Right' },
+        { '<C-w>k',    '<Cmd>wincmd j<Cr>', 'Down' },
+        { '<C-w>i',    '<Cmd>wincmd k<Cr>', 'Up' },
+        -- INFO : resize
         { '<C-Down>',  '<Cmd>wincmd -<CR>' },
         { '<C-Up>',    '<Cmd>wincmd +<CR>' },
         { '<C-Right>', '<Cmd>wincmd ><CR>' },

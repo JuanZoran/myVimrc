@@ -1,19 +1,7 @@
-local plugins = require 'util.plugin' ()
-
-local frontend = { 'html', 'css' }
-plugins:add {
-    'windwp/nvim-ts-autotag',
-    config = function(plugin)
-        require 'nvim-ts-autotag'.setup {
-            filetypes = plugin.ft,
-        }
-    end,
-    ft = frontend,
-}
+local plugins = util.plugin()
 
 plugins:add {
-    'wsdjeg/xmake.vim',
-    cmd = 'XMake',
+    import = 'plugins.lang.extra',
 }
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
@@ -26,6 +14,7 @@ local indent = {
         show_trailing_blankline_indent = false,
         show_current_context = false,
     },
+
     dependencies = {
         'echasnovski/mini.indentscope',
         version = false, -- wait till new 0.7.0 release to put it back on semver
@@ -52,6 +41,7 @@ local indent = {
 }
 
 
+---@format disable-next
 plugins:add {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -62,21 +52,18 @@ plugins:add {
         'HiPhish/nvim-ts-rainbow2',
         'RRethy/nvim-treesitter-endwise',
         { 'nvim-treesitter/nvim-treesitter-context', config = true },
-        {
-            'kevinhwang91/nvim-ufo',
+
+        { 'kevinhwang91/nvim-ufo',
             dependencies = 'kevinhwang91/promise-async',
             config = function() require 'plugins.lang.ufo' end,
         },
 
-        {
-            'rrethy/vim-illuminate',
-            config = function()
-                require 'illuminate'.configure {
-                    providers = { 'lsp', 'treesitter' },
-                    delay = 200,
-                }
-            end,
-        },
+        { 'rrethy/vim-illuminate',
+            config = function() require 'illuminate'.configure {
+                providers = { 'lsp', 'treesitter' },
+                delay = 200,
+            }
+        end, },
     }, -- rainbow pairs
     config = function() require 'plugins.lang.treesitter' end,
 }
@@ -91,7 +78,7 @@ plugins:add {
         action_keys = {
             -- key mappings for actions in the trouble list
             close = 'q',                         -- close the list
-            cancel = '<esc>',                    -- cancel the preview and get back to your last window / buffer / cursor
+            cancel = '<Esc>',                    -- cancel the preview and get back to your last window / buffer / cursor
             refresh = 'r',                       -- manually refresh
             jump = { '<cr>', '<tab>', '<C-o>' }, -- jump to the diagnostic or open / close folds
             open_split = 'do',                   -- open buffer in new split
@@ -151,35 +138,19 @@ plugins:add {
     dependencies = 'rafamadriz/friendly-snippets',
 }
 
+local frontend = { 'html', 'css' }
 plugins:add {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    version = false,
-    dependencies = {
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-path',
-        'saadparwaiz1/cmp_luasnip',
-        'hrsh7th/cmp-cmdline',
-        'dmitmel/cmp-cmdline-history',
-        -- { "jcdickinson/codeium.nvim", config = true },
-        {
-            'zbirenbaum/copilot.lua',
-            opts = {
-                panel = { enabled = false },
-                auto_refresh = true,
-                suggestion = {
-                    enable = true,
-                    auto_trigger = true,
-                    keymap = false,
-                },
-                filetypes = {
-                    ['*'] = true,
-                },
-            },
-        },
-    },
-    config = function() require 'plugins.lang.cmp' end,
+    'windwp/nvim-ts-autotag',
+    config = function(plugin)
+        require 'nvim-ts-autotag'.setup {
+            filetypes = plugin.ft,
+        }
+    end,
+    ft = frontend,
 }
 
+plugins:add {
+    'wsdjeg/xmake.vim',
+    cmd = 'XMake',
+}
 return plugins
