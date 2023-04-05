@@ -1,46 +1,49 @@
-local s = vim.keymap.set
-local mode = { 'n', 'x', 'o' }
-for _, v in ipairs {
-    { 'i', 'gk' },
-    { 'k', 'gj' },
-    { 'j', 'h' },
-    { 'h', 'i' },
-    { 'L', 'g$' },
-    { 'J', 'g^' },
-    { 'I', '<C-u>zz' },
-    { 'K', '<C-d>zz' },
-} do s(mode, v[1], v[2]) end
+local nxo = { 'n', 'x', 'o' }
+util.map {
+    { mode = nxo, 'i', 'gk' },
+    { mode = nxo, 'k', 'gj' },
+    { mode = nxo, 'j', 'h' },
+    { mode = nxo, 'h', 'i' },
+    { mode = nxo, 'I', '<C-u>zz' },
+    { mode = nxo, 'K', '<C-d>zz' },
+    { mode = 'o', 'L', 'g$' },
+    { mode = 'o', 'J', 'g^' },
+}
+
 
 local function keys()
     local show = function() require 'specs'.show_specs() end
     local api = vim.api
     local fn = vim.fn
     local function feedkey(key)
-        api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), 'n', false)
-        -- api.nvim_feedkeys(key, 'n', false)
-        vim.defer_fn(show, 10)
+        return function()
+            -- api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), 'n', false)
+            api.nvim_feedkeys(key, 'n', false)
+            vim.defer_fn(show, 10)
+        end
     end
+    local nx = { 'n', 'x' }
     return {
-        { 'H',                 function() feedkey 'I' end },
-        { 'A',                 function() feedkey 'A' end },
-        { 'cc',                function() feedkey 'cc' end },
-        { mode = { 'n', 'x' }, 'G',                        function() feedkey 'G' end },
-        { mode = { 'n', 'x' }, 'gg',                       function() feedkey 'gg' end },
+        { 'H',  feedkey 'I' },
+        { 'A',  feedkey 'A' },
+        { 'cc', feedkey 'cc' },
+        { 'G',  feedkey 'G',  mode = nx },
+        { 'gg', feedkey 'gg', mode = nx },
         {
-            mode = { 'n', 'x' },
+            mode = nx,
             'J',
             function()
                 local col = (api.nvim_get_current_line()):find '%S'
-                if col ~= vim.fn.col '.' then feedkey(vim.wo.wrap and 'g^' or '^') end
+                if col ~= vim.fn.col '.' then feedkey(vim.wo.wrap and 'g^' or '^')() end
             end,
         },
         {
-            mode = { 'n', 'x' },
+            mode = nx,
             'L',
             function()
                 local _cur = fn.col '.'
                 local _end = fn.col '$' - 1
-                if _end ~= 0 and _cur ~= _end then feedkey(vim.wo.wrap and 'g$' or '$') end
+                if _end ~= 0 and _cur ~= _end then feedkey(vim.wo.wrap and 'g$' or '$')() end
             end,
         },
     }
@@ -82,7 +85,6 @@ return {
                     'TelescopePrompt'
                 },
                 fancy = {
-                    -- head = { cursor = '▷', texthl = 'SmoothCursor', linehl = 'CursorLine' },
                     head = { cursor = '▷', texthl = 'SmoothCursor', linehl = nil },
                     enable = true,
                 },
@@ -90,11 +92,3 @@ return {
         },
     },
 }
-
--- require 'cinnamon'.setup {
---     default_keymaps = false,  -- Create default keymaps.
---     extra_keymaps = false,
---     override_keymaps = false, -- whether to force mapping
---     hide_cursor = true,
---     default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
--- }

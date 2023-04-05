@@ -8,8 +8,6 @@ local menu = {
     nvim_lsp = '[LSP]',
     path     = '[Path]',
     buffer   = '[Buffer]',
-    -- copilot  = "[Copilot]",
-    -- codeium  = '[Codeium]',
 }
 
 local source = {
