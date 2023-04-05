@@ -1,5 +1,9 @@
 local plugins = util.plugin()
 
+plugins:add {
+    import = 'plugins.lang.extra',
+}
+
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
     'lukas-reineke/indent-blankline.nvim',
@@ -107,55 +111,6 @@ plugins:add {
     dependencies = 'rafamadriz/friendly-snippets',
 }
 
-plugins:add {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter', 'CmdlineEnter' },
-    version = false,
-    dependencies = {
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-path',
-        'saadparwaiz1/cmp_luasnip',
-        'hrsh7th/cmp-cmdline',
-        'dmitmel/cmp-cmdline-history',
-        {
-            'octaltree/cmp-look',
-            init = function()
-                vim.api.nvim_create_autocmd('FileType', {
-                    pattern = 'markdown',
-                    callback = function()
-                        require 'cmp'.setup.buffer {
-                            sources = {
-                                { name = 'path' },
-                                { name = 'nvim_lsp', group_index = 1 },
-                                { name = 'luasnip',  group_index = 1,   max_item_count = 4 },
-                                { name = 'buffer',   group_index = 2,   max_item_count = 4 },
-                                { name = 'look',     keyword_length = 3 },
-                            },
-                        }
-                    end,
-                })
-            end,
-        },
-        -- { "jcdickinson/codeium.nvim", config = true },
-        {
-            'zbirenbaum/copilot.lua',
-            opts = {
-                panel = { enabled = false },
-                auto_refresh = true,
-                suggestion = {
-                    enable = true,
-                    auto_trigger = true,
-                    keymap = false,
-                },
-                filetypes = {
-                    ['*'] = true,
-                },
-            },
-        },
-    },
-    config = function() require 'plugins.lang.cmp' end,
-}
 plugins:add {
     'michaelb/sniprun',
     build = 'bash ./install.sh',
