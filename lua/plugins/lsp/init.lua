@@ -7,38 +7,11 @@ local config = function()
         capabilities = handler.get_capabilities(),
         handlers = handler.handlers,
     }
-
-    require 'mason-lspconfig'.setup_handlers {
-        function(server)
-            local _, conf_opts = pcall(require, 'server.' .. server)
-            local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
-            require 'lspconfig'[server].setup(conf)
-        end,
-    }
-
-    local registry = require 'mason-registry'
-    local package_to_lspconfig = require 'mason-lspconfig.mappings.server'.package_to_lspconfig
-    registry:on('package:uninstall:success', function(pkg)
-        local native_name = package_to_lspconfig[pkg.name]
-        local process = function(select)
-            if select == 'Skip' then
-                vim.notify 'Skip ...'
-                return
-            end
-            local res = os.remove(('%s/%s.lua'):format(vim.fn.stdpath 'config' .. '/lua/lsp/conf',
-                native_name))
-            vim.notify(('%s configuration removed %s'):format(pkg.name,
-                (res and 'successfully' or 'failed')))
-        end
-
-        if native_name then
-            vim.ui.select(
-                { 'Remove your configuration for this Lsp', 'Skip' },
-                { prompt = 'Whether should remove the configuration ?' },
-                process
-            )
-        end
-    end)
+    require 'mason-lspconfig'.setup_handlers { function(server)
+        local _, conf_opts = pcall(require, 'server.' .. server)
+        local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
+        require 'lspconfig'[server].setup(conf)
+    end, }
 end
 
 plugins:add {
@@ -158,7 +131,7 @@ plugins:add {
             only_current_line = false,
         },
     },
-    config = function(plugin, opts)
+    config = function(_, opts)
         require 'lsp-inlayhints'.setup(opts)
         vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#9692af' })
     end,

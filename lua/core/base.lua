@@ -1,11 +1,4 @@
-local opt = vim.opt
-
-if vim.g.neovide then
-    opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h11'
-    vim.g.neovide_transparency = 1
-    vim.g.neovide_refresh_rate = 144
-end
-
+local opt          = vim.opt
 opt.termguicolors  = true
 opt.autoread       = true
 opt.number         = true
@@ -71,11 +64,6 @@ opt.cpoptions:append '>' -- :help cpoptions
 ---@diagnostic disable-next-line: assign-type-mismatch
 opt.undodir = os.getenv 'HOME' .. '/.vim'
 
-
--- opt.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
--- \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
--- \,sm:block-blinkwait175-blinkoff150-blinkon175
-
 ---  SETTINGS  ---
 opt.spelllang:append 'cjk' -- disable spellchecking for asian characters (VIM algorithm does not support it)
 -- vim.wo.signcolumn = 'auto'
@@ -92,7 +80,7 @@ vim.g.did_install_syntax_menu = 1
 ----============  disable end  ===========-------
 
 
--- opt.formatoptions = 'jql'
+-- vim.opt.formatoptions:remove("o")
 -- 	- "a" -- Auto formatting is BAD.
 -- 	- "t" -- Don't auto format my code. I got linters for that.
 -- 	+ "c" -- In general, I like it when comments respect textwidth
@@ -108,3 +96,14 @@ vim.g.did_install_syntax_menu = 1
 -- opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板
 -- vim.opt.pumblend = 17
 -- vim.opt.hidden = true -- I like having buffers stay around
+
+-- opt.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
+-- \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+-- \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+
+if vim.g.neovide then
+    opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h11'
+    vim.g.neovide_transparency = 1
+    vim.g.neovide_refresh_rate = 144
+end

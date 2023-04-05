@@ -52,9 +52,10 @@ require 'ufo'.setup {
 
 -- INFO open Fold hl
 local set_hl = vim.api.nvim_set_hl
-set_hl(0, 'UfoFoldedBg', { link = 'IncSearch' })
--- set_hl(0, 'UfoFoldedFg', { link = 'IncSearch' })
--- set_hl(0, 'UfoFoldedEllipsis', { link = 'IncSearch' })
+set_hl(0, 'Folded', {
+    bg = '#33467c',
+    bold = true,
+})
 
 
 -- INFO : some infomation for ufo

@@ -31,7 +31,7 @@ plugins:add {
                 -- }
             },
         },
-        dir = os.getenv 'HOME' .. '/.vim/dict'
+        dir = os.getenv 'HOME' .. '/.vim/dict',
     },
     dev = true,
 }
@@ -72,9 +72,7 @@ plugins:add {
 plugins:add {
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown', 'md' },
-    keys = {
-        { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' },
-    },
+    keys = { { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' } },
     build = function() vim.fn['mkdp#util#install']() end,
     dependencies = {
         {

@@ -100,8 +100,8 @@ set {
 set {
     mode = 'x',
     map = {
-        { '<A-i>', ":m '<-2<CR>gv=gv" },
-        { '<A-k>', ":m '>+1<CR>gv=gv" },
+        { '<A-i>', "<Cmd>m '<-2<CR>gv=gv" },
+        { '<A-k>', "<Cmd>m '>+1<CR>gv=gv" },
         { '>',     '>gv' },
         { '<',     '<gv' },
         { '<C-c>', [["+y]] },
