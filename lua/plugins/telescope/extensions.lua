@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 plugins:add {
     'jvgrootveld/telescope-zoxide', -- powerful cd
     keys = {

@@ -78,3 +78,11 @@ require 'lazy'.setup('plugins', {
 })
 
 require 'core'
+-- util.map {
+--     { mode = {'n', 'i'}, '<Tab>', function ()
+--         print('tab is pressed')
+--     end },
+--     { mode = {'n', 'i'}, '<C-I>', function ()
+--         print('<C-i> is pressed')
+--     end },
+-- }

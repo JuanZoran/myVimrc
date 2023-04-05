@@ -1,5 +1,4 @@
-local plugins = require 'util.plugin' ()
-
+local plugins = util.plugin()
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
@@ -75,7 +74,7 @@ plugins:add {
         action_keys = {
             -- key mappings for actions in the trouble list
             close = 'q',                         -- close the list
-            cancel = '<esc>',                    -- cancel the preview and get back to your last window / buffer / cursor
+            cancel = '<Esc>',                    -- cancel the preview and get back to your last window / buffer / cursor
             refresh = 'r',                       -- manually refresh
             jump = { '<cr>', '<tab>', '<C-o>' }, -- jump to the diagnostic or open / close folds
             open_split = 'do',                   -- open buffer in new split
@@ -119,6 +118,25 @@ plugins:add {
         'saadparwaiz1/cmp_luasnip',
         'hrsh7th/cmp-cmdline',
         'dmitmel/cmp-cmdline-history',
+        {
+            'octaltree/cmp-look',
+            init = function()
+                vim.api.nvim_create_autocmd('FileType', {
+                    pattern = 'markdown',
+                    callback = function()
+                        require 'cmp'.setup.buffer {
+                            sources = {
+                                { name = 'path' },
+                                { name = 'nvim_lsp', group_index = 1 },
+                                { name = 'luasnip',  group_index = 1,   max_item_count = 4 },
+                                { name = 'buffer',   group_index = 2,   max_item_count = 4 },
+                                { name = 'look',     keyword_length = 3 },
+                            },
+                        }
+                    end,
+                })
+            end,
+        },
         -- { "jcdickinson/codeium.nvim", config = true },
         {
             'zbirenbaum/copilot.lua',

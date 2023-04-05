@@ -24,9 +24,9 @@ local function keys()
         end
     end
     return {
-        { 'H',  feedkey 'I' },
         { 'A',  feedkey 'A' },
         { 'cc', feedkey 'cc' },
+        { 'H',  feedkey 'I',  mode = nx },
         { 'G',  feedkey 'G',  mode = nx },
         { 'gg', feedkey 'gg', mode = nx },
         {

@@ -8,15 +8,16 @@ local menu = {
     nvim_lsp = '[LSP]',
     path     = '[Path]',
     buffer   = '[Buffer]',
+    look     = '[Look]',
     -- copilot  = "[Copilot]",
     -- codeium  = '[Codeium]',
 }
 
 local source = {
     { name = 'path' },
-    { name = 'nvim_lsp', group_index = 1 --[[  max_item_count = 8, ]] },
-    { name = 'luasnip',  group_index = 1,                             max_item_count = 4 },
-    { name = 'buffer',   group_index = 2,                             max_item_count = 4 },
+    { name = 'nvim_lsp', group_index = 1 },
+    { name = 'luasnip',  group_index = 1, max_item_count = 4 },
+    { name = 'buffer',   group_index = 2, max_item_count = 4 },
 }
 
 local next = cmp.mapping(function()
@@ -35,6 +36,7 @@ local prev = cmp.mapping(function()
     end
 end, { 'i', 'c' })
 
+local compare = cmp.config.compare
 
 cmp.setup {
     snippet = {
@@ -108,9 +110,9 @@ cmp.setup {
     formatting = {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
-            -- Kind icons
-            -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            vim_item.kind =
+                kind_icons[vim_item.kind] .. ' ' .. vim_item.kind
+
             vim_item.menu = menu[entry.source.name]
             return vim_item
         end,
@@ -128,20 +130,21 @@ cmp.setup {
     sorting = {
         comparators = {
             -- Below is the default comparitor list and order for nvim-cmp
-            cmp.config.compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
+            compare.recently_used,
+            -- compare.locality,
+            compare.exact,
+            compare.length,
+            -- compare.offset,
+            -- compare.scopes, --this is commented in nvim-cmp too
+            -- compare.score,
+            -- compare.recently_used,
+            -- compare.locality,
+            -- compare.kind,
+            -- compare.sort_text,
+            -- compare.order,
         },
     },
 }
-
 
 -- `/` cmdline setup.
 cmp.setup.cmdline('/', {
@@ -155,12 +158,11 @@ cmp.setup.cmdline('/', {
 -- `:` cmdline setup.
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
+    sources = cmp.config.sources {
         { name = 'path' },
-    }, {
-        { name = 'cmdline',         max_item_count = 5, option = { ignore_cmds = { 'Man', '!' } } },
-        { name = 'cmdline_history', max_item_count = 5 },
-    }),
+        { name = 'cmdline',         option = { ignore_cmds = { 'Man', '!' } } },
+        { name = 'cmdline_history', option = { history_type = ':' },          max_item_count = 3 },
+    },
 })
 
 -- If you want insert `(` after select function or method item
