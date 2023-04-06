@@ -172,8 +172,8 @@ local opts = function()
                 -- fallback until when a sort function returns not nil
                 compare.kind,          -- lspkind defined by lsp protocol
                 compare.recently_used, -- based on last used
-                tabnine_compare,
                 compare.locality, -- position in buffer
+                tabnine_compare,
                 compare.score,
                 compare.exact,    -- match exact
             },
@@ -181,13 +181,13 @@ local opts = function()
     }
 end
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'markdown',
-    callback = function()
-        default_source[#default_source + 1] = { name = 'look' }
-        require 'cmp'.setup.buffer { sources = default_source }
-    end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = 'markdown',
+--     callback = function()
+--         default_source[#default_source + 1] = { name = 'look' }
+--         require 'cmp'.setup.buffer { sources = default_source }
+--     end,
+-- })
 
 
 local sources = {
@@ -217,7 +217,7 @@ local sources = {
             }
         end,
     },
-    'octaltree/cmp-look',
+    -- 'octaltree/cmp-look',
     -- { "jcdickinson/codeium.nvim", config = true },
     {
         'zbirenbaum/copilot.lua',
