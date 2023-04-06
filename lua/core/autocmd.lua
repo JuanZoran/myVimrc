@@ -19,10 +19,10 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 autocmd('BufRead', {
     group = group,
     -- command = [[silent! loadview]],
-    callback = function ()
-        vim.cmd[[silent! loadview]]
+    callback = function()
+        vim.cmd [[silent! loadview]]
         vim.opt_local.hlsearch = false
-    end
+    end,
 })
 
 autocmd({ 'BufWrite', 'QuitPre' }, {
@@ -31,8 +31,11 @@ autocmd({ 'BufWrite', 'QuitPre' }, {
 })
 
 
--- Don't auto comment when o
-autocmd('FileType', { command = [[set formatoptions-=cro]] })
+vim.keymap.set({ 'n', 'v' }, '=', 'gq')
+-- see :help fo-table
+-- no comment when pressing oO
+-- but still comment when pressing <Enter>
+autocmd('LspAttach', { command = [[set formatoptions=jqlr]] })
 
 autocmd('TextYankPost', {
     group = group,

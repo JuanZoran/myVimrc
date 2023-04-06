@@ -80,13 +80,14 @@ local keys = {
         '<Cmd>Telescope lsp_document_symbols<CR>',
         desc = '[]Check out Marks'
     },
+    { '<leader>T', ':Telescope ' },                               -- for C-/
 
     -- vim.keymap.set("n", "<Leader>T", ":Telescope ")
-    { '<C-u>',   '<Cmd>Telescope oldfiles<Cr>' },
-    { '<C-o>',   '<Cmd>Telescope jumplist<Cr>' },
-    { '<C-f>',   '<Cmd>Telescope find_files<CR>' },
-    { '<C-/>',   '<leader>tc' },                                 -- for C-/
-    { '<S-C-/>', '<leader>tk',                   remap = true }, -- for C-/
+    { '<C-u>',     '<Cmd>Telescope oldfiles<Cr>' },
+    { '<C-o>',     '<Cmd>Telescope jumplist<Cr>' },
+    { '<C-f>',     '<Cmd>Telescope find_files<CR>' },
+    { '<C-/>',     '<leader>tc' },                               -- for C-/
+    { '<S-C-/>',   '<leader>tk',                   remap = true }, -- for C-/
 }
 
 
