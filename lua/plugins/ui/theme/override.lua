@@ -90,9 +90,8 @@ return {
     NavicSeparator              = {
         link = '@keyword',
     },
-
     CmpItemAbbr                 = {
-        fg = '#babbf1',
+        fg = '#729ca4',
     },
     CmpItemAbbrMatch            = {
         fg = '#EF9F76',

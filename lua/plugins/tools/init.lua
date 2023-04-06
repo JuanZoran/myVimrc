@@ -19,6 +19,8 @@ plugins:add {
             hover = {
                 spinner = 'moon',
                 keymaps = {
+                    -- pageup       = '<C-u>',
+                    -- pagedown     = '<C-d>',
                     pageup       = '[[',
                     pagedown     = ']]',
                     pin          = '<leader>[',
