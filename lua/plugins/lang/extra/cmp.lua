@@ -162,8 +162,8 @@ local opts = function()
                 compare.recently_used,         -- based on last used
                 require 'cmp_tabnine.compare',
                 compare.score,
-                compare.exact,                 -- match exact
                 compare.locality,              -- position in buffer
+                compare.exact,                 -- match exact
                 -- compare.length, -- from shortest to longest
                 -- compare.sort_text, -- alphabet
                 -- compare.length, -- from shortest to longest
@@ -202,8 +202,7 @@ local sources = {
             })
         end,
         config = function()
-            local tabnine = require 'cmp_tabnine.config'
-            tabnine:setup {
+            require 'cmp_tabnine.config':setup {
                 max_lines = 1000,
                 max_num_results = 20,
                 sort = true,
