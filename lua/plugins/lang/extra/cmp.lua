@@ -176,9 +176,6 @@ local opts = function()
                 compare.locality, -- position in buffer
                 compare.score,
                 compare.exact,    -- match exact
-                -- compare.length, -- from shortest to longest
-                -- compare.sort_text, -- alphabet
-                -- compare.length, -- from shortest to longest
             },
         },
     }

@@ -74,24 +74,28 @@ set {
     },
 }
 
+local feedkey = function(key)
+    return function()
+        vim.api.nvim_buf_call(0, function()
+            vim.cmd([[norm! ]] .. key)
+        end)
+    end
+end
 
 set {
     mode = 'i',
     map = {
         { '<C-CR>', '<Esc>/<++><CR>vf>c' },
-        { '<C-j>',  '<Left>' },
-        { '<C-l>',  '<Right>' },
-        { '<C-b>',  '<ESC>bi' },
-        { '<C-f>',  '<ESC>ea' },
-        { '<C-a>', function()
-            ---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-            local s = (vim.api.nvim_get_current_line()):find '%S'
-            vim.fn.cursor { vim.fn.line '.', s or 0 }
-        end, },
-        { '<C-e>', function()
-            vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' }
-        end, },
-
+        { '<C-b>',  feedkey 'b' },
+        { '<C-f>',  feedkey 'w' },
+        { '<C-a>',  feedkey '^' },
+        { '<C-e>',  function() vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' } end },
+        -- { '<C-e>',  feedkey '$' },
+        -- { '<C-a>', function()
+        --     ---@diagnostic disable-next-line: param-type-mismatch, undefined-field
+        --     local s = (vim.api.nvim_get_current_line()):find '%S'
+        --     vim.fn.cursor { vim.fn.line '.', s or 0 }
+        -- end, },
     },
     -- {"<++>", "<++>"},
     -- {"<++>", "<++>"},
@@ -110,5 +114,8 @@ set {
     },
 }
 
-vim.keymap.set({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
-vim.keymap.set('t', '<C-x>', '<Cmd>stopinsert<CR>')
+local map = vim.keymap.set
+map({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
+map({ 'c', 't' }, '<C-x>', '<Cmd>stopinsert<CR>')
+map({ 'i', 'c' }, '<C-j>', '<Left>')
+map({ 'i', 'c' }, '<C-l>', '<Right>')
