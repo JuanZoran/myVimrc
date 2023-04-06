@@ -1,3 +1,4 @@
+*.json
 plugin
 spell
 repro.lua

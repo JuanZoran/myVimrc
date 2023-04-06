@@ -40,7 +40,6 @@ local indent = {
     },
 }
 
-
 ---@format disable-next
 plugins:add {
     'nvim-treesitter/nvim-treesitter',
@@ -68,6 +67,7 @@ plugins:add {
     config = function() require 'plugins.lang.treesitter' end,
 }
 
+-- write configuration for plugins here (if any)
 
 plugins:add {
     'folke/trouble.nvim',

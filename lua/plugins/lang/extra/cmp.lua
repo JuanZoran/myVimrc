@@ -126,6 +126,18 @@ local opts = function()
     )
 
     local compare = cmp.config.compare
+    local tabnine_compare = function(entry1, entry2)
+        if entry1.source.name == 'cmp_tabnine' and entry2.source.name == 'cmp_tabnine' then
+            if not entry1.completion_item.priority then
+                return false
+            elseif not entry2.completion_item.priority then
+                return true
+            else
+                return (entry1.completion_item.priority > entry2.completion_item.priority)
+            end
+        end
+    end
+
     return {
         snippet = {
             expand = function(args)
@@ -158,12 +170,12 @@ local opts = function()
             -- priority_weight = 10,
             comparators = {
                 -- fallback until when a sort function returns not nil
-                compare.kind,                  -- lspkind defined by lsp protocol
-                compare.recently_used,         -- based on last used
-                require 'cmp_tabnine.compare',
+                compare.kind,          -- lspkind defined by lsp protocol
+                compare.recently_used, -- based on last used
+                tabnine_compare,
+                compare.locality, -- position in buffer
                 compare.score,
-                compare.locality,              -- position in buffer
-                compare.exact,                 -- match exact
+                compare.exact,    -- match exact
                 -- compare.length, -- from shortest to longest
                 -- compare.sort_text, -- alphabet
                 -- compare.length, -- from shortest to longest
@@ -192,13 +204,9 @@ local sources = {
         'tzachar/cmp-tabnine',
         build = './install.sh',
         init = function()
-            local prefetch = vim.api.nvim_create_augroup('prefetch', { clear = true })
             vim.api.nvim_create_autocmd('BufRead', {
-                group = prefetch,
-                pattern = '*.py',
-                callback = function()
-                    require 'cmp_tabnine':prefetch(vim.fn.expand '%:p')
-                end,
+                group = vim.api.nvim_create_augroup('prefetch', { clear = true }),
+                callback = function() require 'cmp_tabnine':prefetch(vim.fn.expand '%:p') end,
             })
         end,
         config = function()
