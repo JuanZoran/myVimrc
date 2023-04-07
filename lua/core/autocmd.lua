@@ -22,6 +22,7 @@ autocmd('BufRead', {
     callback = function()
         vim.cmd [[silent! loadview]]
         vim.opt_local.hlsearch = false
+        vim.opt_local.foldmethod = 'manual'
     end,
 })
 

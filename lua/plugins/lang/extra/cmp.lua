@@ -39,18 +39,16 @@ local opts = function()
     end, { 'i', 'c' })
 
     local mapping = {
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-        -- ['<C-d>'] = function(fallback)
-        --     if not require 'noice.lsp'.scroll(4) then
-        --         fallback()
-        --     end
-        -- end,
-        -- ['<C-u>'] = function(fallback)
-        --     if not require 'noice.lsp'.scroll(-4) then
-        --         fallback()
-        --     end
-        -- end,
+        ['<C-d>'] = function(fallback)
+            if not require 'noice.lsp'.scroll(4) and cmp.mapping.scroll_docs(4) then
+                fallback()
+            end
+        end,
+        ['<C-u>'] = function(fallback)
+            if not require 'noice.lsp'.scroll(-4) and cmp.mapping.scroll_docs(-4) then
+                fallback()
+            end
+        end,
         ['<C-Space>'] = cmp.mapping {
             i = function()
                 if luasnip.choice_active() then
