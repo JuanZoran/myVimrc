@@ -40,7 +40,6 @@ local indent = {
     },
 }
 
-
 ---@format disable-next
 plugins:add {
     'nvim-treesitter/nvim-treesitter',

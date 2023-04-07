@@ -1,68 +1,118 @@
 return {
-    Visual                      = {
+    Visual   = {
         bg = '#33467c',
     },
-    Pmenu                       = {
+    Pmenu    = {
         fg = '#A6ACCD',
         bg = 'NONE',
     },
-    PmenuSel                    = {
+    PmenuSel = {
         bold = true,
         fg = '#1d202f',
         bg = '#89e051',
     },
-    IncSearch                   = {
+
+
+
+    IncSearch = {
         fg = '#0f0f15',
         bg = '#10B981',
     },
-    Search                      = {
+    Search    = {
         link = 'IncSearch'
     },
-    MoreMsg                     = {
+
+
+    MoreMsg = {
         -- for ufo virtual text
         fg = '#599eff',
         bold = true,
     },
-    ['@variable']               = {
-        fg = '#f4b085',
-    },
-    DashboardHeader             = {
-        -- link = 'MoreMsg',
-        fg = '#ff5d62'
-    },
-    CursorLine                  = {
+
+
+    CursorLine     = {
         bg = '#2e3a4d',
     },
-    Cursor                      = {
+    Cursor         = {
         bg = '#58a6ff',
     },
-    TermCursor                  = {
+    TermCursor     = {
         link = 'Cursor'
     },
-    CursorIM                    = {
+    CursorIM       = {
         link = 'Cursor',
     },
-    NormalFloat                 = {
+    NormalFloat    = {
         link = 'Normal'
     },
-    SagaBorder                  = {
+
+    -- DashboardHeader = {
+    --     -- link = 'MoreMsg',
+    --     fg = '#ff5d62'
+    -- },
+    SagaBorder     = {
         fg = '#7c3aed',
         -- fg = '#599eff',
         bg = 'NONE',
     },
-    CodeActionText              = {
+    CodeActionText = {
         fg = '#1e5cb3',
     },
-    IlluminatedWordText         = {
+    TroubleNormal  = {
+        link = 'Normal'
+    },
+    -- ['@property']               = {
+    NavicSeparator = {
+        link = '@keyword',
+    },
+
+
+    IlluminatedWordText  = {
         bg = '#2d4f67',
         -- bg = '#1e5cb3',
     },
-    IlluminatedWordRead         = {
+    IlluminatedWordRead  = {
         link = 'IlluminatedWordText',
     },
-    IlluminatedWordWrite        = {
+    IlluminatedWordWrite = {
         link = 'IlluminatedWordText',
     },
+
+
+    ['@variable']          = {
+        fg = '#f4b085',
+    },
+    ['@keyword.return']    = {
+        fg = '#f55385',
+        italic = true,
+    },
+    ['@constant.builtin']  = {
+        fg = '#83aaff',
+        italic = true,
+    },
+    ['@lsp.type.property'] = {
+        -- fg = '#8aadf4',
+        fg = '#E6C384',
+        -- fg = "#b392f0",
+    },
+
+
+
+    CmpItemAbbr           = {
+        fg = '#729ca4',
+    },
+    CmpItemAbbrMatch      = {
+        fg = '#EF9F76',
+        bold = true,
+    },
+    CmpItemMenu           = {
+        fg = '#81c8be',
+    },
+    CmpItemAbbrMatchFuzzy = {
+        link = 'CmpItemAbbrMatch',
+    },
+
+
     IndentBlanklineContextChar  = {
         fg = '#89e051'
     },
@@ -70,41 +120,6 @@ return {
         underline = true,
         sp = '#89e051',
     },
-    ['@keyword.return']         = {
-        fg = '#f55385',
-        italic = true,
-    },
-    ['@constant.builtin']       = {
-        fg = '#83aaff',
-        italic = true,
-    },
-    ['@lsp.type.property']      = {
-        -- fg = '#8aadf4',
-        fg = '#E6C384',
-        -- fg = "#b392f0",
-    },
-    TroubleNormal               = {
-        link = 'Normal'
-    },
-    -- ['@property']               = {
-    NavicSeparator              = {
-        link = '@keyword',
-    },
-
-    CmpItemAbbr                 = {
-        fg = '#babbf1',
-    },
-    CmpItemAbbrMatch            = {
-        fg = '#EF9F76',
-        bold = true,
-    },
-    CmpItemMenu            = {
-        fg = '#81c8be',
-    },
-    CmpItemAbbrMatchFuzzy = {
-        link = "CmpItemAbbrMatch",
-    }
-
     --     fg = "#E6C384",
     --     -- fg = "#b392f0",
     -- },

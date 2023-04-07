@@ -1,4 +1,4 @@
-local plugins = require 'util.plugin' ()
+local plugins = util.plugin()
 plugins:add {
     'jvgrootveld/telescope-zoxide', -- powerful cd
     keys = {
@@ -46,11 +46,15 @@ plugins:add {
 
 }
 
+---@format disable-next
 plugins:add {
     'nvim-telescope/telescope-symbols.nvim',
-    keys = {
-        { '<leader>mm', '<Cmd>Telescope symbols<CR>', desc = '🤠Search Symbols' },
-    },
+    keys = { {
+        '<leader>mm',
+        function()
+            require 'telescope.builtin'.symbols { sources = { 'emoji', 'kaomoji', 'gitmoji' } }
+        end, desc = '🤠Search Symbols'
+    }, },
 }
 
 plugins:add {

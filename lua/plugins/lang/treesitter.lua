@@ -7,6 +7,7 @@ require 'nvim-treesitter.configs'.setup {
         'regex',
         'lua',
         'python',
+        'yaml',
         'cpp',
         'c',
     },

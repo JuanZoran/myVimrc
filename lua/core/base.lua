@@ -57,7 +57,7 @@ opt.wrap           = false
 -- opt.autochdir     = true
 opt.helplang       = 'cn'
 opt.updatetime     = 200
--- opt.equalalways = true -- I don't like my windows changing all the time
+-- opt.equalalways = true -- auto resize window
 opt.undofile       = true
 opt.cpoptions:append '>' -- :help cpoptions
 
