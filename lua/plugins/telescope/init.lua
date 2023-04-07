@@ -12,7 +12,7 @@ local keys = {
     {
         '<leader>tf',
         '<Cmd>Telescope git_files<CR>',
-        desc = ' Search text in current buffer'
+        desc = '[]Search Git File'
     },
     {
         '<leader>tt',
@@ -22,7 +22,7 @@ local keys = {
     {
         '<leader>gf',
         '<Cmd>Telescope current_buffer_fuzzy_find<CR>',
-        desc = '[]Search Git File'
+        desc = ' Search text in current buffer'
     },
     {
         '<leader>ts',
@@ -80,14 +80,10 @@ local keys = {
         '<Cmd>Telescope lsp_document_symbols<CR>',
         desc = '[]Check out Marks'
     },
-    { '<leader>T', ':Telescope ' },                               -- for C-/
-
-    -- vim.keymap.set("n", "<Leader>T", ":Telescope ")
+    { '<leader>T', ':Telescope ' }, -- for C-/
     { '<C-u>',     '<Cmd>Telescope oldfiles<Cr>' },
     { '<C-o>',     '<Cmd>Telescope jumplist<Cr>' },
     { '<C-f>',     '<Cmd>Telescope find_files<CR>' },
-    { '<C-/>',     '<leader>tc' },                               -- for C-/
-    { '<S-C-/>',   '<leader>tk',                   remap = true }, -- for C-/
 }
 
 

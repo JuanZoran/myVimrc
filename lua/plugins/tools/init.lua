@@ -196,7 +196,12 @@ plugins:add {
 plugins:add {
     'echasnovski/mini.surround',
     keys = {
-        { mode = { 'n', 'x' }, 's' },
+        { 'sF', desc = 'Find' },
+        { 'sd', desc = 'Delete', mode = { 'x', 'n' } },
+        { 'sa', desc = 'Add',    mode = { 'x', 'n' } },
+        { 'sf', desc = 'find' },
+        { 'sr', desc = 'replace' },
+        { 's?', desc = 'custom', mode = 'x' },
     },
     config = function()
         -- NOTE : special name
