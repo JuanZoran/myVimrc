@@ -161,6 +161,9 @@ local opts = function()
                     (kind_icons[vim_item.kind] or '') .. ' ' .. vim_item.kind
 
                 vim_item.menu = menu[entry.source.name]
+                local max_width = math.floor(vim.o.columns * 0.4)
+                vim_item.abbr = #vim_item.abbr > max_width
+                    and vim_item.abbr:sub(1, max_width) .. ' 💤' or vim_item.abbr
                 return vim_item
             end,
         },
@@ -172,10 +175,10 @@ local opts = function()
                 -- fallback until when a sort function returns not nil
                 compare.kind,          -- lspkind defined by lsp protocol
                 compare.recently_used, -- based on last used
-                compare.locality, -- position in buffer
+                compare.locality,      -- position in buffer
                 tabnine_compare,
                 compare.score,
-                compare.exact,    -- match exact
+                compare.exact, -- match exact
             },
         },
     }
