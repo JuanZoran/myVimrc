@@ -20,10 +20,10 @@ local function config()
         popup      = {
             delay_ms = 0,  -- delay before popup displays
             inc_ms   = 8,  -- time increments used for fade/resize effects
-            blend    = 40, -- starting blend, between 0-100 (fully transparent), see :h winblend
+            blend    = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
             width    = 13,
             winhl    = 'Cursor',
-            fader    = require 'specs'.exp_fader,
+            fader    = require 'specs'.linear_fader,
             resizer  = require 'specs'.slide_resizer,
         },
     }
@@ -42,19 +42,29 @@ local function config()
     local long_jump = function()
         specs.show_specs {
             -- delay_ms = 10, -- delay before popup displays
-            inc_ms  = 8,  -- time increments used for fade/resize effects
-            blend   = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-            width   = 25,
+            inc_ms  = 13, -- time increments used for fade/resize effects
+            blend   = 50, -- starting blend, between 0-100 (fully transparent), see :h winblend
+            width   = 30,
             winhl   = 'Cursor',
-            fader   = specs.linear_fader,
+            fader   = specs.empty_fader,
             resizer = specs.shrink_resizer,
         }
     end
 
     util.map {
-        { 'H',  feedkey 'I' },
-        { 'A',  feedkey 'A' },
-        { 'cc', feedkey('cc', long_jump) },
+        { 'H', feedkey 'I' },
+        { 'A', feedkey 'A' },
+        { 'cc', feedkey('cc', function()
+            specs.show_specs {
+                -- delay_ms = 10, -- delay before popup displays
+                inc_ms  = 13, -- time increments used for fade/resize effects
+                blend   = 0, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                width   = 15,
+                winhl   = 'Cursor',
+                fader   = specs.empty_fader,
+                resizer = specs.shrink_resizer,
+            }
+        end), },
         { 'G',  feedkey('G', long_jump),  mode = nx },
         { 'gg', feedkey('gg', long_jump), mode = nx },
         {
