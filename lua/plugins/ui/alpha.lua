@@ -74,7 +74,7 @@ dashboard.section.buttons.val = {
     dashboard.button('f', '🎑  > Find File', '   <Cmd>Telescope find_files<CR>'),
     dashboard.button('r', '🥂  > Recent File', ' <Cmd>Telescope oldfiles<CR>'),
     dashboard.button('s', '🌆  > Load Session', '<Cmd>SessionLoad<CR>'),
-    dashboard.button('u', '鈴  > Lazy Update', '<Cmd>Lazy update<CR>'),
+    dashboard.button('u', '💤  > Lazy Update', '<Cmd>Lazy update<CR>'),
     dashboard.button('q', '🏓  > Quit', ':qa<CR>'),
     -- dashboard.button("a", "  > Into Ranger", "<cmd>FloatermNew ranger<CR>"),
 }
