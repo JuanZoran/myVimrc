@@ -155,13 +155,21 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
 
 
 plugins:add {
-    'jackMort/ChatGPT.nvim',
-    cmd = { 'ChatGPT', 'ChatGPTActAs' },
-    keys = {
-        { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
+    'archibate/nvim-gpt',
+    cond = false,
+    opts = {
+        model = 'balanced',
+        window_width = 45,
     },
-    config = true,
 }
+-- plugins:add {
+--     'jackMort/ChatGPT.nvim',
+--     cmd = { 'ChatGPT', 'ChatGPTActAs' },
+--     keys = {
+--         { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
+--     },
+--     config = true,
+-- }
 
 plugins:add {
     'mfussenegger/nvim-treehopper',
@@ -328,18 +336,6 @@ plugins:add {
         },
     },
 }
-
-plugins:add {
-    'chrisgrieser/nvim-spider',
-    keys = {
-        { mode = { 'n', 'o', 'x' }, 'w',  "<Cmd>lua require('spider').motion('w')<CR>" },
-        { mode = { 'n', 'o', 'x' }, 'e',  "<Cmd>lua require('spider').motion('e')<CR>" },
-        { mode = { 'n', 'o', 'x' }, 'b',  "<Cmd>lua require('spider').motion('b')<CR>" },
-        { mode = { 'n', 'o', 'x' }, 'ge', "<Cmd>lua require('spider').motion('ge')<CR>" },
-    },
-}
-
-
 
 
 plugins:add {

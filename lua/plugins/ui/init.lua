@@ -168,7 +168,6 @@ plugins:add { -- 标签栏
         }
     end,
 }
-
 plugins:add {
     'goolord/alpha-nvim',
     cond = vim.fn.argc() == 0,

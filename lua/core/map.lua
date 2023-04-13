@@ -119,3 +119,6 @@ map({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
 map({ 'c', 't' }, '<C-x>', '<Cmd>stopinsert<CR>')
 map({ 'i', 'c' }, '<C-j>', '<Left>')
 map({ 'i', 'c' }, '<C-l>', '<Right>')
+
+
+map({ 'n', 'x' }, '<C-h>', [[:s/\v]])

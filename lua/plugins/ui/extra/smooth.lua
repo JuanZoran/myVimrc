@@ -9,6 +9,7 @@ util.map {
     { mode = 'o', 'J', 'g^' },
     { mode = 'o', 'I', '<C-u>zz' },
     { mode = 'o', 'K', '<C-d>zz' },
+
 }
 
 
@@ -53,9 +54,9 @@ local function config()
     end
 
     util.map {
-        { 'H',  feedkey 'I' },
-        { 'A',  feedkey 'A' },
         { 'cc', feedkey('cc', long_jump) },
+        { 'H',  feedkey 'I',              mode = nx },
+        { 'A',  feedkey 'A',              mode = nx },
         { 'G',  feedkey('G', long_jump),  mode = nx },
         { 'gg', feedkey('gg', long_jump), mode = nx },
         {
@@ -94,11 +95,11 @@ return {
     {
         'declancm/cinnamon.nvim',
         opts = {
-            default_keymaps = false, -- Create default keymaps.
+            default_keymaps = false,  -- Create default keymaps.
             extra_keymaps = false,
             override_keymaps = false, -- whether to force mapping
             hide_cursor = true,
-            default_delay = 4,    -- The default delay (in ms) between each line when scrolling.
+            default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
         },
         keys = {
             { 'I', "<Cmd>lua Scroll('<C-u>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
