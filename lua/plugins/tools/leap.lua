@@ -1,15 +1,15 @@
-local hl = vim.api.nvim_set_hl
-hl(0, 'LeapBackdrop', { link = 'Linenr' })
-hl(0, 'LeapMatch', {
-    fg = '#599eff',
-    bold = true,
-    nocombine = true,
-})
-hl(0, 'LeapLabelPrimary', {
-    link = 'PmenuSel',
-    bold = true,
-    nocombine = true,
-})
+-- local hl = vim.api.nvim_set_hl
+-- hl(0, 'LeapBackdrop', { link = 'Linenr' })
+-- hl(0, 'LeapMatch', {
+--     fg = '#599eff',
+--     bold = true,
+--     nocombine = true,
+-- })
+-- hl(0, 'LeapLabelPrimary', {
+--     link = 'PmenuSel',
+--     bold = true,
+--     nocombine = true,
+-- })
 
 require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
 

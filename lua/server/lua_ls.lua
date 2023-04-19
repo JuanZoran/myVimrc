@@ -31,6 +31,10 @@ local opts = {
 
 
 return {
+    cmd = {
+        'lua-language-server',
+        '--locale=zh-cn'
+    },
     settings = {
         Lua = opts,
     },

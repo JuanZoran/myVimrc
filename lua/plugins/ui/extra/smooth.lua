@@ -42,23 +42,23 @@ local function config()
     local long_jump = function()
         specs.show_specs {
             -- delay_ms = 10, -- delay before popup displays
-            inc_ms  = 13, -- time increments used for fade/resize effects
-            blend   = 50, -- starting blend, between 0-100 (fully transparent), see :h winblend
-            width   = 30,
+            inc_ms  = 8,  -- time increments used for fade/resize effects
+            blend   = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+            width   = 25,
             winhl   = 'Cursor',
-            fader   = specs.empty_fader,
+            fader   = specs.linear_fader,
             resizer = specs.shrink_resizer,
         }
     end
 
     util.map {
-        { 'H', feedkey 'I' },
-        { 'A', feedkey 'A' },
+        { 'H', feedkey 'I', mode = nx },
+        { 'A', feedkey 'A', mode = nx },
         { 'cc', feedkey('cc', function()
             specs.show_specs {
                 -- delay_ms = 10, -- delay before popup displays
                 inc_ms  = 13, -- time increments used for fade/resize effects
-                blend   = 0, -- starting blend, between 0-100 (fully transparent), see :h winblend
+                blend   = 0,  -- starting blend, between 0-100 (fully transparent), see :h winblend
                 width   = 15,
                 winhl   = 'Cursor',
                 fader   = specs.empty_fader,

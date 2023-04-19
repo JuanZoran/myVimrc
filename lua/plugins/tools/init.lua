@@ -25,10 +25,6 @@ plugins:add {
                     close        = '<leader>]',
                     toggle_entry = '<leader>;',
                 },
-                -- animation = {
-                --     open = false,
-                --     close = false,
-                -- }
             },
         },
         dir = os.getenv 'HOME' .. '/.vim/dict',
@@ -70,10 +66,60 @@ plugins:add {
 }
 
 plugins:add {
-    'ellisonleao/glow.nvim',
-    opts = { border = 'rounded', style = 'dark', width = 100, width_ratio = 0.9, height_ratio = 0.85 },
+    'CKolkey/ts-node-action',
+    keys = {
+        { '<leader>u', function() require 'ts-node-action'.node_action() end, desc = 'Trigger Node Action' },
+    },
+}
+
+-- search/replace in multiple files
+plugins:add {
+    'windwp/nvim-spectre', -- dependencies: rg, sed
+    keys = {
+        { '<leader>sr', function() require 'spectre'.open() end, desc = 'Replace in files (Spectre)' },
+        {
+            '<leader>sw',
+            function() require 'spectre'.open_visual { select_word = true } end,
+            desc = 'Search current word',
+        },
+    },
+}
+
+plugins:add {
+    'Vonr/align.nvim',
+    keys = {
+        { mode = 'x', '<leader>=', function() require 'align'.align_to_string(true, true, true) end },
+    },
+}
+
+plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
+    'numtostr/Comment.nvim',
+    keys = {
+        { 'gc',        mode = { 'n', 'x' } },
+        { '<leader>A', desc = 'Add Comment at end of line' },
+    },
+    opts = function()
+        return {
+            ignore = '^$',
+            extra = {
+                ---Add comment on the line above
+                above = 'gcO',
+                ---Add comment on the line below
+                below = 'gco',
+                ---Add comment at the end of line
+                eol = '<Leader>A',
+            },
+            pre_hook = require 'ts_context_commentstring.integrations.comment_nvim'.create_pre_hook(),
+        }
+    end,
+    dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
+}
+
+plugins:add {
+    'iamcco/markdown-preview.nvim',
     ft = { 'markdown', 'md' },
-    keys = { { 'mp', '<Cmd>Glow<CR>', desc = 'Open Markdown Preview' } },
+    keys = { { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' } },
+    build = function() vim.fn['mkdp#util#install']() end, -- go to the plugin directory and run `npm install`
     dependencies = {
         {
             'dhruvasagar/vim-table-mode',
@@ -87,15 +133,6 @@ plugins:add {
                 require 'headlines'.setup()
                 local set_hl = vim.api.nvim_set_hl
                 set_hl(0, 'CodeBlock', { bg = 'NONE' })
-                -- for i, color in ipairs {
-                --     { fg = '#a6d189', bg = 'NONE' },
-                --     { fg = '#8caaee', bg = 'NONE' },
-                --     { fg = '#e78284', bg = 'NONE' },
-                --     { fg = '#ca9ee6', bg = 'NONE' },
-                --     { fg = '#e5c890', bg = 'NONE' },
-                --     { fg = '#babbf1', bg = 'NONE' },
-                -- } do set_hl(0, 'Headline' .. i, color) end
-                -- set_hl(0, 'Headline', { link = 'Headline1' })
             end,
         },
     },
@@ -326,18 +363,6 @@ plugins:add {
         },
     },
 }
-
-plugins:add {
-    'chrisgrieser/nvim-spider',
-    keys = {
-        { mode = { 'n', 'o', 'x' }, 'w',  "<Cmd>lua require('spider').motion('w')<CR>" },
-        { mode = { 'n', 'o', 'x' }, 'e',  "<Cmd>lua require('spider').motion('e')<CR>" },
-        { mode = { 'n', 'o', 'x' }, 'b',  "<Cmd>lua require('spider').motion('b')<CR>" },
-        { mode = { 'n', 'o', 'x' }, 'ge', "<Cmd>lua require('spider').motion('ge')<CR>" },
-    },
-}
-
-
 
 
 plugins:add {
