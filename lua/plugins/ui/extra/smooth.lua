@@ -5,10 +5,10 @@ util.map {
     { mode = nxo, 'k', 'gj' },
     { mode = nxo, 'j', 'h' },
     { mode = nxo, 'h', 'i' },
-    { mode = 'o', 'L', 'g$' },
-    { mode = 'o', 'J', 'g^' },
-    { mode = 'o', 'I', '<C-u>zz' },
-    { mode = 'o', 'K', '<C-d>zz' },
+    { mode = nxo, 'L', 'g$' },
+    { mode = nxo, 'J', 'g^' },
+    { mode = nxo, 'I', '<C-u>zz' },
+    { mode = nxo, 'K', '<C-d>zz' },
 
 }
 
@@ -90,10 +90,12 @@ end
 return {
     {
         'JuanZoran/specs.nvim',
+        cond = not vim.g.neovide,
         config = config,
     },
     {
         'declancm/cinnamon.nvim',
+        cond = not vim.g.neovide,
         opts = {
             default_keymaps = false,  -- Create default keymaps.
             extra_keymaps = false,
@@ -101,9 +103,12 @@ return {
             hide_cursor = true,
             default_delay = 4,        -- The default delay (in ms) between each line when scrolling.
         },
-        keys = {
-            { 'I', "<Cmd>lua Scroll('<C-u>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
-            { 'K', "<Cmd>lua Scroll('<C-d>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
-        },
+        config = function(_, opts)
+            require'cinnamon'.setup(opts)
+            util.map {
+                { 'I', "<Cmd>lua Scroll('<C-u>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
+                { 'K', "<Cmd>lua Scroll('<C-d>', 1, 0)<CR><Cmd>lua require('specs').show_specs()<CR>", mode = nx },
+            }
+        end,
     },
 }

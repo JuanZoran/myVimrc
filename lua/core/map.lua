@@ -46,6 +46,8 @@ set {
             if vim.api.nvim_buf_get_name(0) == '' then
                 local filename = vim.fn.input 'Save as: '
                 if filename ~= '' then vim.cmd('w ' .. filename) end
+            elseif util.firenvim then
+                vim.cmd [[wq]]
             else
                 vim.cmd 'w'
             end
@@ -122,3 +124,7 @@ map({ 'i', 'c' }, '<C-l>', '<Right>')
 
 
 map({ 'n', 'x' }, '<C-h>', [[:s/\v]])
+
+if vim.g.neovide then
+    map('i', '<C-V>', '<C-r>+')
+end

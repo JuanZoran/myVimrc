@@ -20,6 +20,8 @@ for i, v in ipairs(bash_command) do
     snips[i] = s(v, { f(bash) })
 end
 
+snips[#snips + 1] = s('zsh', { t '#!/usr/bin/env zsh' })
+
 
 -- End Snippets --
 return snips

@@ -4,6 +4,18 @@ plugins:add {
     import = 'plugins.lang.extra',
 }
 
+plugins:add {
+    'L3mon4d3/luasnip',
+    lazy = true,
+    build = 'make install_jsregexp',
+    keys = {
+        { mode = 'x', '<C-x>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
+        { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
+    },
+    config = function() require 'plugins.lang.luasnip' end,
+    dependencies = 'rafamadriz/friendly-snippets',
+}
+
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
     'lukas-reineke/indent-blankline.nvim',
@@ -50,7 +62,7 @@ plugins:add {
         'nvim-treesitter/nvim-treesitter-textobjects',
         'HiPhish/nvim-ts-rainbow2',
         'RRethy/nvim-treesitter-endwise',
-        { 'nvim-treesitter/nvim-treesitter-context', config = true },
+        { 'nvim-treesitter/nvim-treesitter-context', config = true},
 
         { 'kevinhwang91/nvim-ufo',
             dependencies = 'kevinhwang91/promise-async',
@@ -97,18 +109,6 @@ plugins:add {
     },
 }
 
-
-plugins:add {
-    'L3mon4d3/luasnip',
-    lazy = true,
-    build = 'make install_jsregexp',
-    keys = {
-        { mode = 'x', '<C-x>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
-        { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
-    },
-    config = function() require 'plugins.lang.luasnip' end,
-    dependencies = 'rafamadriz/friendly-snippets',
-}
 
 plugins:add {
     'michaelb/sniprun',

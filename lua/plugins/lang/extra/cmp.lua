@@ -6,6 +6,7 @@ local default_source = {
     { name = 'path' },
 }
 
+
 local opts = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
@@ -77,7 +78,7 @@ local opts = function()
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-C-e>'] = function(fallback)
+        ['<C-b>'] = function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -182,18 +183,9 @@ local opts = function()
     }
 end
 
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = 'markdown',
---     callback = function()
---         default_source[#default_source + 1] = { name = 'look' }
---         require 'cmp'.setup.buffer { sources = default_source }
---     end,
--- })
-
-
 local sources = {
     'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-nvim-lsp',
+    { 'hrsh7th/cmp-nvim-lsp', cond = not util.firenvim },
     'hrsh7th/cmp-path',
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-cmdline',
@@ -201,12 +193,12 @@ local sources = {
     {
         'tzachar/cmp-tabnine',
         build = './install.sh',
-        init = function()
-            vim.api.nvim_create_autocmd('BufRead', {
-                group = vim.api.nvim_create_augroup('prefetch', { clear = true }),
-                callback = function() require 'cmp_tabnine':prefetch(vim.fn.expand '%:p') end,
-            })
-        end,
+        -- init = function()
+        --     vim.api.nvim_create_autocmd('BufRead', {
+        --         group = vim.api.nvim_create_augroup('prefetch', { clear = true }),
+        --         callback = function() require 'cmp_tabnine':prefetch(vim.fn.expand '%:p') end,
+        --     })
+        -- end,
         config = function()
             require 'cmp_tabnine.config':setup {
                 max_lines = 1000,
@@ -236,7 +228,6 @@ local sources = {
         },
     },
 }
-
 
 
 return {

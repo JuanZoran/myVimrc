@@ -147,10 +147,8 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
                 ---Add comment at the end of line
                 eol = '<Leader>A',
             },
-            pre_hook = require 'ts_context_commentstring.integrations.comment_nvim'.create_pre_hook(),
         }
     end,
-    dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
 }
 
 
@@ -190,7 +188,7 @@ plugins:add {
             chars = { '{', '[', '(', '"', "'", '<' },
             pattern = [=[[%'%"%)%>%]%)%}%,]]=],
             offset = 1, -- Offset from pattern match
-            end_key = 'l',
+            end_key = ';',
             -- keys = "qwertyuiopzxcvbnmasdfghjkl",
             keys = 'uiopghjkl',
             check_comma = true,
@@ -361,6 +359,14 @@ plugins:add {
     config = true,
 }
 
+plugins:add {
+    'glacambre/firenvim',
+    cond = util.firenvim,
+    build = function()
+        require 'lazy'.load { plugins = 'firenvim', wait = true }
+        vim.fn['firenvim#install'](0)
+    end,
+}
 
 
 plugins:add {

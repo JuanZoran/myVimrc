@@ -4,7 +4,7 @@ local autocmd = api.nvim_create_autocmd
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
 
 -- Go to last loc when opening a buffer
--- autocmd("BufReadPost", {
+-- autocmd('BufReadPost', {
 --     group = group,
 --     callback = function()
 --         local mark = vim.api.nvim_buf_get_mark(0, '"')
@@ -15,21 +15,18 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 --     end,
 -- })
 
-
 autocmd('BufRead', {
     group = group,
-    -- command = [[silent! loadview]],
-    callback = function()
-        vim.cmd [[silent! loadview]]
-        vim.opt_local.hlsearch = false
-    end,
+    command = [[silent! loadview]],
 })
 
 autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
-    command = [[silent! mkview]],
+    callback = function()
+        if vim.opt_local.foldmethod == 'diff' then return end
+        vim.cmd[[silent! mkview]]
+    end,
 })
-
 
 vim.keymap.set({ 'n', 'v' }, '=', 'gq')
 -- see :help fo-table

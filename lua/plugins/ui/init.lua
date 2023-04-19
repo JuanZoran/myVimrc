@@ -5,15 +5,14 @@ plugins:add {
 }
 
 plugins:add {
-    import = 'plugins.ui.extra',
     'catppuccin/nvim',
     name = 'catppuccin',
     event = 'VimEnter',
     priority = 1000,
     opts = function()
         return {
-            flavour = 'frappe',
-            transparent_background = true,
+            flavour = 'mocha',
+            transparent_background = not vim.g.neovide,
             custom_highlights = require 'plugins.ui.theme.override',
             -- dim_inactive = {
             --     enabled = true,
@@ -57,6 +56,13 @@ plugins:add {
 
 
 plugins:add {
+    import = util.firenvim and 'plugins.ui.extra.smooth' or 'plugins.ui.extra',
+}
+
+--- If started by firenvim, then disable some plugins
+if util.firenvim then return plugins end
+
+plugins:add {
     'uga-rosa/ccc.nvim',
     cmd = {
         'CccConvert',
@@ -93,6 +99,7 @@ plugins:add {
 
 plugins:add {
     'nvim-neo-tree/neo-tree.nvim',
+    cond = not util.firenvim,
     init = function()
         -- Unless you are still migrating, remove the deprecated commands from v1.x
         vim.g.neo_tree_remove_legacy_commands = 1
@@ -170,7 +177,6 @@ plugins:add { -- 标签栏
 }
 plugins:add {
     'goolord/alpha-nvim',
-    cond = vim.fn.argc() == 0,
     config = function() require 'plugins.ui.alpha' end,
 }
 

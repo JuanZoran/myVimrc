@@ -1,3 +1,4 @@
+if util.firenvim then return {} end
 local plugins = util.plugin()
 
 local config = function()
