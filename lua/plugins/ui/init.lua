@@ -5,7 +5,6 @@ plugins:add {
 }
 
 plugins:add {
-    import = 'plugins.ui.extra',
     'catppuccin/nvim',
     name = 'catppuccin',
     event = 'VimEnter',
@@ -55,6 +54,10 @@ plugins:add {
     end,
 }
 
+
+plugins:add {
+    import = 'plugins.ui.extra',
+}
 
 plugins:add {
     'uga-rosa/ccc.nvim',

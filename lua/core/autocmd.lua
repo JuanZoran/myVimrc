@@ -1,6 +1,5 @@
 local api = vim.api
 local autocmd = api.nvim_create_autocmd
-
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
 
 -- Go to last loc when opening a buffer
@@ -20,7 +19,6 @@ autocmd('BufRead', {
     group = group,
     callback = function()
         vim.cmd [[silent! loadview]]
-        vim.cmd [[stopinsert]]
         vim.opt_local.hlsearch = false
     end,
 })
@@ -38,7 +36,8 @@ vim.keymap.set({ 'n', 'v' }, '=', 'gq')
 -- see :help fo-table
 -- no comment when pressing oO
 -- but still comment when pressing <Enter>
-autocmd('LspAttach', { command = [[set formatoptions=jqlr]] })
+-- autocmd('LspAttach', { command = [[set formatoptions=jqlr]] })
+autocmd('LspAttach', { command = [[set formatoptions=jql]] })
 
 autocmd('TextYankPost', {
     group = group,
@@ -107,13 +106,3 @@ end
 -- set_cursorline("WinEnter", true)
 set_cursorline('InsertEnter', false)
 set_cursorline('InsertLeave', true)
-
--- 设置firenvim的大小
--- vim.cmd [[
--- function! OnUIEnter(event) abort
---   if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
---     set lines=40 columns=120
---   endif
--- endfunction
--- autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
--- ]]

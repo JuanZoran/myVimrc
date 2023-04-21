@@ -23,15 +23,21 @@ local function opts()
             },
         },
         lualine_y = {
-            memory_use,
+            {
+                memory_use,
+                color = {
+                    fg = '#69bbae',
+                    -- bg = '#1e1e2e'
+                    bg = '#304263'
+                },
+            },
         },
         lualine_z = {
             {
                 'fancy_lsp_servers',
                 color = {
-                    fg = '#000000',
+                    fg = '#1e1e2e',
                     bg = '#986FEC'
-                    -- fg = '#000000', bg = '#e27d60'
                 },
             },
         },
@@ -42,7 +48,14 @@ local function opts()
             { 'fancy_mode', width = 6 },
         },
         lualine_b = {
-            { 'b:gitsigns_head', icon = ' ' },
+            {
+                'b:gitsigns_head',
+                icon = ' ',
+                color = {
+                    fg = '#69bbae',
+                    bg = '#1e1e2e'
+                },
+            },
             { 'fancy_diff' },
         },
         lualine_c = {
@@ -52,7 +65,7 @@ local function opts()
 
     return {
         options = {
-            -- component_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
             theme = 'auto',
             section_separators = {
                 right = '',

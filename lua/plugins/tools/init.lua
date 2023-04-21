@@ -66,60 +66,17 @@ plugins:add {
 }
 
 plugins:add {
-    'CKolkey/ts-node-action',
-    keys = {
-        { '<leader>u', function() require 'ts-node-action'.node_action() end, desc = 'Trigger Node Action' },
-    },
-}
-
--- search/replace in multiple files
-plugins:add {
-    'windwp/nvim-spectre', -- dependencies: rg, sed
-    keys = {
-        { '<leader>sr', function() require 'spectre'.open() end, desc = 'Replace in files (Spectre)' },
-        {
-            '<leader>sw',
-            function() require 'spectre'.open_visual { select_word = true } end,
-            desc = 'Search current word',
-        },
-    },
-}
-
-plugins:add {
-    'Vonr/align.nvim',
-    keys = {
-        { mode = 'x', '<leader>=', function() require 'align'.align_to_string(true, true, true) end },
-    },
-}
-
-plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
-    'numtostr/Comment.nvim',
-    keys = {
-        { 'gc',        mode = { 'n', 'x' } },
-        { '<leader>A', desc = 'Add Comment at end of line' },
-    },
-    opts = function()
-        return {
-            ignore = '^$',
-            extra = {
-                ---Add comment on the line above
-                above = 'gcO',
-                ---Add comment on the line below
-                below = 'gco',
-                ---Add comment at the end of line
-                eol = '<Leader>A',
-            },
-            pre_hook = require 'ts_context_commentstring.integrations.comment_nvim'.create_pre_hook(),
-        }
-    end,
-    dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
-}
-
-plugins:add {
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown', 'md' },
     keys = { { 'mp', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview' } },
     build = function() vim.fn['mkdp#util#install']() end, -- go to the plugin directory and run `npm install`
+    config = function()
+        vim.cmd [[
+        function! g:Open_browser(url)
+            execute ("!am start -n mark.via/mark.via.Shell -d ".a:url."")
+        endfunction
+        let g:mkdp_browserfunc = 'g:Open_browser' ]]
+    end,
     dependencies = {
         {
             'dhruvasagar/vim-table-mode',
@@ -182,21 +139,10 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
                 ---Add comment at the end of line
                 eol = '<Leader>A',
             },
-            pre_hook = require 'ts_context_commentstring.integrations.comment_nvim'.create_pre_hook(),
         }
     end,
-    dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
 }
 
-
-plugins:add {
-    'jackMort/ChatGPT.nvim',
-    cmd = { 'ChatGPT', 'ChatGPTActAs' },
-    keys = {
-        { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
-    },
-    config = true,
-}
 
 plugins:add {
     'mfussenegger/nvim-treehopper',

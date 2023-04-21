@@ -5,6 +5,38 @@ local default_source = {
     { name = 'buffer',      group_index = 2, max_item_count = 5 },
     { name = 'path' },
 }
+-- local start_rime = function()
+--     local client_id = vim.lsp.start_client {
+--         name = 'rime-ls',
+--         cmd = { 'rime_ls' },
+--         init_options = {
+--             enabled = false,                          -- 初始关闭, 手动开启
+--             shared_data_dir = '/usr/share/rime-data', -- rime 公共目录
+--             user_data_dir = '~/.local/share/rime-ls', -- 指定用户目录, 最好新建一个
+--             log_dir = '~/tmp/rime-ls',       -- 日志目录
+--             max_candidates = 10,                      -- [v0.2.0 后不再有用] 与 rime 的候选数量配置最好保持一致
+--             trigger_characters = {},                  -- 为空表示全局开启
+--             schema_trigger_character = '&',           -- [since v0.2.0] 当输入此字符串时请求补全会触发 “方案选单”
+--             always_incomplete = false,                -- [since v0.2.3] true 强制补全永远刷新整个列表，而不是使用过滤
+--             max_tokens = 0,                           -- [since v0.2.3] 大于 0 表示会在删除到这个字符个数的时候，重建所有候选词，而不使用删除字符操作
+--             preselect_first = false,                  -- [since v0.2.3] 是否默认第一个候选项是选中状态，default false
+--         },
+--     };
+--     if client_id then
+--         vim.lsp.buf_attach_client(0, client_id)
+--         vim.keymap.set('n', '<leader><leader>r',
+--             function() vim.lsp.buf.execute_command { command = 'rime-ls.toggle-rime' } end)
+--         vim.keymap.set('n', '<leader>rs',
+--             function() vim.lsp.buf.execute_command { command = 'rime-ls.sync-user-data' } end)
+--     end
+-- end
+
+-- -- 对每个文件都默认开启
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--     callback = start_rime,
+--     pattern = '*',
+-- })
+
 
 local opts = function()
     local cmp = require 'cmp'
@@ -77,7 +109,7 @@ local opts = function()
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-C-e>'] = function(fallback)
+        ['<C-b>'] = function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -148,6 +180,9 @@ local opts = function()
                     (kind_icons[vim_item.kind] or '') .. ' ' .. vim_item.kind
 
                 vim_item.menu = menu[entry.source.name]
+                local max_width = math.floor(vim.o.columns * 0.4)
+                vim_item.abbr = #vim_item.abbr > max_width
+                    and vim_item.abbr:sub(1, max_width) .. ' 💤' or vim_item.abbr
                 return vim_item
             end,
         },
@@ -157,17 +192,16 @@ local opts = function()
             -- priority_weight = 10,
             comparators = {
                 -- fallback until when a sort function returns not nil
-                compare.kind,                  -- lspkind defined by lsp protocol
-                compare.recently_used,         -- based on last used
-                compare.locality,              -- position in buffer
+                compare.kind,          -- lspkind defined by lsp protocol
+                compare.recently_used, -- based on last used
+                compare.locality,      -- position in buffer
                 -- tabnine_compare,
                 compare.score,
-                compare.exact,                 -- match exact
+                compare.exact, -- match exact
             },
         },
     }
 end
-
 
 
 local sources = {
@@ -194,7 +228,6 @@ local sources = {
         },
     },
 }
-
 
 
 return {
