@@ -18,6 +18,8 @@ local function opts()
         },
         lualine_c = {
             {
+                -- require 'nvim-navic'.get_location,
+                -- cond = require 'nvim-navic'.is_available,
                 function() return require 'nvim-navic'.get_location() end, -- FIXME : why it is not working
                 cond = require 'nvim-navic'.is_available,
             },

@@ -71,7 +71,8 @@ plugins:add {
 
         { 'rrethy/vim-illuminate',
             config = function() require 'illuminate'.configure {
-                providers = { 'lsp', 'treesitter' },
+                -- providers = { 'lsp', 'treesitter' },
+                large_file_curoff = 4000,
                 delay = 200,
             }
         end, },

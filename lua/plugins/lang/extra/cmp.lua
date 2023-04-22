@@ -41,12 +41,12 @@ local opts = function()
 
     local mapping = {
         ['<C-d>'] = function(fallback)
-            if not require 'noice.lsp'.scroll(4) and cmp.mapping.scroll_docs(4) then
+            if not require 'noice.lsp'.scroll(4) and not cmp.scroll_docs(4) then
                 fallback()
             end
         end,
         ['<C-u>'] = function(fallback)
-            if not require 'noice.lsp'.scroll(-4) and cmp.mapping.scroll_docs(-4) then
+            if not require 'noice.lsp'.scroll(-4) and not cmp.scroll_docs(-4) then
                 fallback()
             end
         end,
