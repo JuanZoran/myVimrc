@@ -108,6 +108,7 @@ plugins:add {
 
 plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
+    -- commit = '84ca3abe8aaecbb5b30ad89e4701d4a9c821b72c',
     init = function()
         require 'plugins.lsp.handlers'.attach(function(client, bufnr)
             require 'lsp-inlayhints'.on_attach(client, bufnr)

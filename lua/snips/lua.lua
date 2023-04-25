@@ -72,6 +72,27 @@ local snips = {
             i(2, 'type'),
         })
     ),
+
+    s(
+        'mt',
+        fmta([[
+        (function ()
+            ---@class <>
+            local mt = {
+
+            }
+            mt.__index = mt
+
+            return function()
+                return setmetatable({
+                }, mt)
+            end
+        end)()
+        ]], {
+            i(1, 'name'),
+        })
+    ),
+
 }
 
 -- End Snippets --

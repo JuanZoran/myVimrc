@@ -7,6 +7,19 @@ plugins:add {
 }
 
 plugins:add {
+    {
+        'mycf/telescope-fly.nvim',
+        config = function()
+            local telescope = require 'telescope'
+            telescope.load_extension 'fly'
+        end,
+        keys = {
+            { '<leader>fl', '<cmd>Telescope fly<cr>', mode = 'n', desc = '小鹤查形' },
+        },
+    },
+}
+
+plugins:add {
     'AckslD/nvim-neoclip.lua',
     event = 'TextYankPost',
     keys = {

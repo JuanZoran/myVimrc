@@ -127,6 +127,8 @@ map({ 'i', 'c' }, '<C-l>', '<Right>')
 
 map({ 'n', 'x' }, '<C-h>', [[:s/\v]])
 
+map('c', '<C-a>', '<Home>')
+
 if vim.g.neovide then
     map('i', '<C-V>', '<C-r>+')
 end

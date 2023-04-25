@@ -18,6 +18,8 @@ end
 local flatten = {
     'willothy/flatten.nvim',
     opts = {
+        nest_if_no_args = true,
+
         callbacks = {
             pre_open = function() -- Close toggleterm when an external open request is received
                 require 'toggleterm'.toggle(0)
@@ -79,13 +81,13 @@ local toggleterm = {
             border = 'rounded'
         },
     },
+    --- INFO : fix this 
+    dependencies = flatten,
     config = config,
 }
 
 return {
-    flatten,
     toggleterm,
-
     {
         'CRAG666/code_runner.nvim',
         keys = {
@@ -96,6 +98,7 @@ return {
             filetype = {
                 cpp = 'cd $dir && clang++ $fileName -o /tmp/$fileNameWithoutExt && /tmp/$fileNameWithoutExt',
             },
+
         },
     },
 
