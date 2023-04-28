@@ -55,6 +55,8 @@ local snips = {
     ]]),
     parse('cmd', '<Cmd>$1<CR>'),
     parse('parse', [[parse("${1:trig}", "$2")]]),
+    --- TODO : 
+    -- s('shebang', { t '---@format enable' }),
     s('formate', { t '---@format enable' }),
     s('formatd', { t '---@format disable' }),
     s('formatdn', { t '---@format disable-next' }),

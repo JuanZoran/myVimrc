@@ -5,37 +5,42 @@ local default_source = {
     { name = 'buffer',      group_index = 2, max_item_count = 5 },
     { name = 'path' },
 }
--- local start_rime = function()
---     local client_id = vim.lsp.start_client {
---         name = 'rime-ls',
---         cmd = { 'rime_ls' },
---         init_options = {
---             enabled = false,                          -- 初始关闭, 手动开启
---             shared_data_dir = '/usr/share/rime-data', -- rime 公共目录
---             user_data_dir = '~/.local/share/rime-ls', -- 指定用户目录, 最好新建一个
---             log_dir = '~/tmp/rime-ls',       -- 日志目录
---             max_candidates = 10,                      -- [v0.2.0 后不再有用] 与 rime 的候选数量配置最好保持一致
---             trigger_characters = {},                  -- 为空表示全局开启
---             schema_trigger_character = '&',           -- [since v0.2.0] 当输入此字符串时请求补全会触发 “方案选单”
---             always_incomplete = false,                -- [since v0.2.3] true 强制补全永远刷新整个列表，而不是使用过滤
---             max_tokens = 0,                           -- [since v0.2.3] 大于 0 表示会在删除到这个字符个数的时候，重建所有候选词，而不使用删除字符操作
---             preselect_first = false,                  -- [since v0.2.3] 是否默认第一个候选项是选中状态，default false
---         },
---     };
---     if client_id then
---         vim.lsp.buf_attach_client(0, client_id)
---         vim.keymap.set('n', '<leader><leader>r',
---             function() vim.lsp.buf.execute_command { command = 'rime-ls.toggle-rime' } end)
---         vim.keymap.set('n', '<leader>rs',
---             function() vim.lsp.buf.execute_command { command = 'rime-ls.sync-user-data' } end)
---     end
--- end
 
--- -- 对每个文件都默认开启
--- vim.api.nvim_create_autocmd('BufReadPost', {
---     callback = start_rime,
---     pattern = '*',
--- })
+
+local start_rime = function()
+    local lsp = vim.lsp
+    local client_id = lsp.start_client {
+        name = 'rime-ls',
+        cmd = { 'rime_ls' },
+        init_options = {
+            enabled = false,                                                     -- 初始关闭, 手动开启
+            shared_data_dir = '/data/data/com.termux/files/usr/share/rime-data', -- rime 公共目录
+            user_data_dir = '~/tmp/rime-ice',                                    -- 指定用户目录, 最好新建一个
+            log_dir = '~/tmp/rm_log',                                            -- 日志目录
+            max_candidates = 10,                                                 -- [v0.2.0 后不再有用] 与 rime 的候选数量配置最好保持一致
+            trigger_characters = {},                                             -- 为空表示全局开启
+            schema_trigger_character = '&',                                      -- [since v0.2.0] 当输入此字符串时请求补全会触发 “方案选单”
+            always_incomplete = false,                                           -- [since v0.2.3] true 强制补全永远刷新整个列表，而不是使用过滤
+            max_tokens = 0,                                                      -- [since v0.2.3] 大于 0 表示会在删除到这个字符个数的时候，重建所有候选词，而不使用删除字符操作
+            preselect_first = false,                                             -- [since v0.2.3] 是否默认第一个候选项是选中状态，default false
+        },
+    };
+    if client_id then
+        lsp.buf_attach_client(0, client_id)
+        local opts = { buffer = true }
+        vim.keymap.set('n', '<leader><leader>r',
+            function() lsp.buf.execute_command { command = 'rime-ls.toggle-rime' } end, opts)
+        vim.keymap.set('n', '<leader>rs',
+            function() lsp.buf.execute_command { command = 'rime-ls.sync-user-data' } end, opts)
+    end
+end
+
+
+-- 对每个文件都默认开启
+vim.api.nvim_create_autocmd('BufReadPost', {
+    callback = start_rime,
+})
+
 
 
 local opts = function()
@@ -73,6 +78,19 @@ local opts = function()
     local mapping = {
         ['<C-d>'] = function(fallback)
             if not require 'noice.lsp'.scroll(4) and cmp.mapping.scroll_docs(4) then
+                fallback()
+            end
+        end,
+        ['<Space>'] = function(fallback)
+            if not cmp.visible() or not cmp.core.view:get_selected_entry() then
+                fallback()
+            end
+
+            local entry = cmp.core.view:get_first_entry()
+            if entry and entry.source.name == 'nvim_lsp' and entry.source.source.client.config.name == 'rime-ls' then
+                cmp.core:confirm(entry, {})
+                -- vim.api.nvim_feedkeys(' ', 'n', true)
+            else
                 fallback()
             end
         end,
@@ -156,6 +174,19 @@ local opts = function()
     )
 
     local compare = cmp.config.compare
+    local function rime_comprare(entry1, entry2)
+        local rime1 = entry1.source.name == 'nvim_lsp' and entry1.source.source.client.config.name == 'rime-ls'
+        local rime2 = entry2.source.name == 'nvim_lsp' and entry2.source.source.client.config.name == 'rime-ls'
+
+        -- entry and entry.source.name == 'nvim_lsp' and entry.source.source.client.config.name == 'rime-ls' then
+        if rime1 and rime2 then
+            return entry1.id < entry2.id
+        elseif rime1 then
+            return true
+        else
+            return false
+        end
+    end
 
     return {
         snippet = {
@@ -192,6 +223,7 @@ local opts = function()
             -- priority_weight = 10,
             comparators = {
                 -- fallback until when a sort function returns not nil
+                rime_comprare,
                 compare.kind,          -- lspkind defined by lsp protocol
                 compare.recently_used, -- based on last used
                 compare.locality,      -- position in buffer
@@ -237,3 +269,206 @@ return {
     version = false,
     dependencies = sources,
 }
+
+
+--                 },
+--                 get_filter_text = "ceui",
+--                 get_offset = 1,
+--                 get_overwrite = <table 3>,
+--                 ["get_vim_item:1"] = {
+--                   abbr = "5. 策",
+--                   dup = 1,
+--                   empty = 1,
+--                   equal = 1,
+--                   kind = " Text",
+--                   menu = "[LSP]",
+--                   word = "策"
+--                 },
+--                 get_word = "策"
+--               },
+--               <metatable> = {
+--                 __index = <table 4>
+--               }
+--             },
+--             completion_item = <table 50>,
+--             confirmed = false,
+--             context = <table 5>,
+--             exact = true,
+--             id = 526,
+--             match_cache = {
+--               entries = {
+--                 ["ceui:0:0:1:0:0"] = {
+--                   matches = <51>{},
+--                   score = 29.2
+--                 }
+--               },
+--               <metatable> = {
+--                 __index = <table 4>
+--               }
+--             },
+--             matches = <table 51>,
+--             resolved_callbacks = {},
+--             resolving = false,
+--             score = 35.2,
+--             source = <table 8>,
+--             source_insert_range = <table 11>,
+--             source_offset = 1,
+--             source_replace_range = <table 14>,
+--             <metatable> = {
+--               __index = <table 19>
+--             }
+--           } }
+--       },
+--       <metatable> = {
+--         __index = <table 4>
+--       }
+--     },
+--     complete_dedup = <function 33>,
+--     completion_context = {
+--       triggerKind = 3
+--     },
+--     context = <table 5>,
+--     entries = { <table 1>, <table 40>, <table 43>, <table 46>, <table 49> },
+--     id = 6,
+--     incomplete = true,
+--     is_triggered_by_symbol = false,
+--     name = "nvim_lsp",
+--     offset = 1,
+--     request_offset = 1,
+--     revision = 4,
+--     source = {
+--       client = {
+--         _on_attach = <function 34>,
+--         attached_buffers = {
+--           [10] = true
+--         },
+--         cancel_request = <function 35>,
+--         commands = {},
+--         config = {
+--           cmd = { "rime_ls" },
+--           flags = {},
+--           get_language_id = <function 36>,
+--           init_options = {
+--             always_incomplete = false,
+--             enabled = false,
+--             log_dir = "~/tmp/rm_log",
+--             max_candidates = 10,
+--             max_tokens = 0,
+--             preselect_first = false,
+--             schema_trigger_character = "&",
+--             shared_data_dir = "/data/data/com.termux/files/usr/share/rime-data",
+--             trigger_characters = {},
+--             user_data_dir = "~/tmp/rime-ice"
+--           },
+--           name = "rime-ls",
+--           settings = {}
+--         },
+--         handlers = {},
+--         id = 1,
+--         initialized = true,
+--         is_stopped = <function 37>,
+--         messages = {
+--           messages = {},
+--           name = "rime-ls",
+--           progress = {
+--             ["rime-ls.toggle-rime"] = {
+--               done = true,
+--               message = "Rime is ON",
+--               title = "rime-ls.toggle-rime"
+--             }
+--           },
+--           status = {}
+--         },
+--         name = "rime-ls",
+--         notify = <function 38>,
+--         offset_encoding = "utf-16",
+--         request = <function 39>,
+--         request_sync = <function 40>,
+--         requests = {},
+--         rpc = {
+--           is_closing = <function 41>,
+--           notify = <function 42>,
+--           request = <function 43>,
+--           terminate = <function 44>
+--         },
+--         server_capabilities = {
+--           completionProvider = {
+--             resolveProvider = false,
+--             triggerCharacters = { ".", ",", "-", "=" }
+--           },
+--           executeCommandProvider = {
+--             commands = { "rime-ls.toggle-rime", "rime-ls.sync-user-data" },
+--             workDoneProgress = true
+--           },
+--           textDocumentSync = {
+--             change = 2,
+--             openClose = true,
+--             save = {
+--               includeText = false
+--             },
+--             willSave = false,
+--             willSaveWaitUntil = false
+--           },
+--           workspace = {
+--             workspaceFolders = {
+--               changeNotifications = true,
+--               supported = true
+--             }
+--           }
+--         },
+--         stop = <function 45>,
+--         supports_method = <function 46>
+--       },
+--       request_ids = {},
+--       <metatable> = {
+--         __index = {
+--           _get = <function 47>,
+--           _request = <function 48>,
+--           complete = <function 49>,
+--           execute = <function 50>,
+--           get_debug_name = <function 51>,
+--           get_keyword_pattern = <function 52>,
+--           get_position_encoding_kind = <function 53>,
+--           get_trigger_characters = <function 54>,
+--           is_available = <function 55>,
+--           new = <function 56>,
+--           resolve = <function 57>
+--         }
+--       }
+--     },
+--     status = 3,
+--     <metatable> = {
+--       __index = {
+--         SourceStatus = {
+--           COMPLETED = 3,
+--           FETCHING = 2,
+--           WAITING = 1
+--         },
+--         complete = <function 58>,
+--         execute = <function 59>,
+--         get_debug_name = <function 60>,
+--         get_default_insert_range = <function 61>,
+--         get_default_replace_range = <function 62>,
+--         get_entries = <function 63>,
+--         get_entry_filter = <function 64>,
+--         get_fetching_time = <function 65>,
+--         get_keyword_length = <function 66>,
+--         get_keyword_pattern = <function 67>,
+--         get_matching_config = <function 68>,
+--         get_position_encoding_kind = <function 69>,
+--         get_source_config = <function 70>,
+--         get_trigger_characters = <function 71>,
+--         is_available = <function 72>,
+--         new = <function 73>,
+--         reset = <function 74>,
+--         resolve = <function 75>
+--       }
+--     }
+--   },
+--   source_insert_range = <table 11>,
+--   source_offset = 1,
+--   source_replace_range = <table 14>,
+--   <metatable> = {
+--     __index = <table 19>
+--   }
+-- }
