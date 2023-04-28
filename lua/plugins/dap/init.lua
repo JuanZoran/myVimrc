@@ -52,6 +52,7 @@ plugins:add {
 
 return {
     'mfussenegger/nvim-dap',
+    -- cond = false,
     dependencies = plugins,
     config = function()
         local fn = vim.fn

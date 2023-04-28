@@ -31,9 +31,8 @@ local opts = {
 
 return {
     cmd = {
-        --- TODO :remove this when lua-language-server updates
-        '/home/zoran/Downloads/lua-language-server-f85e039-linux-x64/bin/lua-language-server',
-        '--locale=zh-cn'
+        'lua-language-server',
+        '--locale=zh-cn',
     },
     settings = {
         Lua = opts,

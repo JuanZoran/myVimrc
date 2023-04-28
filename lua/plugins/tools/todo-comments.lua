@@ -12,7 +12,7 @@ require 'todo-comments'.setup {
         },
         TODO = { icon = icon.Todo, color = 'info' },
         HACK = { icon = icon.Hack, --[[ color = "warning" ,]] alt = { 'EXAMPLE' } },
-        WARN = { icon = icon.Warn, color = 'warning', alt = { 'WARNING' } },
+        WARN = { icon = icon.Warn, color = 'warning', alt = { 'WARNING', 'DEBUG' } },
         PERF = { icon = icon.Perf, --[[ color = 'default', ]] alt = { 'OPTIMIZE' } },
         NOTE = { icon = icon.Note, color = 'hint', alt = { 'INFO' } },
         TEST = { icon = icon.Test, color = 'test', alt = { 'PASSED', 'FAILED' } },

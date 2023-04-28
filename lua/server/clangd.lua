@@ -3,7 +3,6 @@ return {
         'clangd',
         -- 后台自动分析文件(基于compile_command)
         '--background-index',
-        '--suggest-missing-includes',
         -- 补全头文件的形式
         '--header-insertion=iwyu', -- include what you use
         -- 开启clang-tidy
@@ -12,6 +11,7 @@ return {
         '--all-scopes-completion',
         '--cross-file-rename=true',
         -- 更详细的补全信息
+        '--suggest-missing-includes',
         '--completion-style=detailed',
         '--header-insertion-decorators',
         -- 启用这项时，补全函数时，将会给参数提供占位符，键入后按 Tab 可以切换到下一占位符

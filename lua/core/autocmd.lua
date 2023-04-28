@@ -17,14 +17,20 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 
 autocmd('BufRead', {
     group = group,
-    command = [[silent! loadview]],
+    callback = function()
+        vim.cmd [[silent! loadview]]
+        vim.opt_local.hlsearch = false
+    end,
 })
 
 autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     callback = function()
-        if vim.opt_local.foldmethod == 'diff' then return end
-        vim.cmd[[silent! mkview]]
+        if vim.opt.foldmethod == 'diff' then
+            vim.opt.foldmethod = 'manual'
+        end
+
+        vim.cmd [[silent! mkview]]
     end,
 })
 

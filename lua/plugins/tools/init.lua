@@ -151,24 +151,6 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
     end,
 }
 
-
-plugins:add {
-    'archibate/nvim-gpt',
-    cond = false,
-    opts = {
-        model = 'balanced',
-        window_width = 45,
-    },
-}
--- plugins:add {
---     'jackMort/ChatGPT.nvim',
---     cmd = { 'ChatGPT', 'ChatGPTActAs' },
---     keys = {
---         { mode = 'x', '<leader>ai', '<Cmd>ChatGPTEditWithInstructions<CR>', desc = 'Black Magic AI' },
---     },
---     config = true,
--- }
-
 plugins:add {
     'mfussenegger/nvim-treehopper',
     keys = {
