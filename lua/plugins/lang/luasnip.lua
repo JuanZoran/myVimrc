@@ -24,10 +24,10 @@ ls.config.set_config {
 }
 
 
-require 'luasnip.loaders.from_vscode'.lazy_load()
 require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
 vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files,
     { desc = 'Edit Snippet' })
+require 'luasnip.loaders.from_vscode'.lazy_load()
 
 -- NOTE :Chioce Note Popup
 -- local api = vim.api

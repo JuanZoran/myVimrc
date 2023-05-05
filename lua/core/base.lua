@@ -59,6 +59,8 @@ opt.helplang       = 'cn'
 opt.updatetime     = 200
 -- opt.equalalways = true -- auto resize window
 opt.undofile       = true
+opt.cindent        = true
+opt.smartindent    = true
 opt.cpoptions:append '>' -- :help cpoptions
 
 ---@diagnostic disable-next-line: assign-type-mismatch
@@ -67,14 +69,14 @@ opt.undodir = os.getenv 'HOME' .. '/.vim'
 ---  SETTINGS  ---
 opt.spelllang:append 'cjk' -- disable spellchecking for asian characters (VIM algorithm does not support it)
 -- vim.wo.signcolumn = 'auto'
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn           = 'yes'
 
-opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
+-- opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
 
 opt.viewoptions             = 'cursor,folds'
 -----================ disabled some native =====================
 
-local g = vim.g
+local g                     = vim.g
 -- vim.o.showmode = false
 g.did_install_default_menus = 1
 g.did_install_syntax_menu   = 1
