@@ -45,7 +45,7 @@ local keys = {
         desc = 'גּ Check out commands'
     },
     {
-        '<leader>cc',
+        '<C-S-p>',
         '<Cmd>Telescope commands<CR>',
         desc = 'גּ Check out commands'
     },

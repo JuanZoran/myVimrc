@@ -71,12 +71,14 @@ vim.wo.signcolumn = 'yes'
 
 opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
 
-opt.viewoptions = 'cursor,folds'
+opt.viewoptions             = 'cursor,folds'
 -----================ disabled some native =====================
 
+local g = vim.g
 -- vim.o.showmode = false
-vim.g.did_install_default_menus = 1
-vim.g.did_install_syntax_menu = 1
+g.did_install_default_menus = 1
+g.did_install_syntax_menu   = 1
+g.no_man_maps               = true
 ----============  disable end  ===========-------
 
 
@@ -101,9 +103,8 @@ vim.g.did_install_syntax_menu = 1
 -- \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 -- \,sm:block-blinkwait175-blinkoff150-blinkon175
 
-
-if vim.g.neovide then
+if g.neovide then
     opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h12'
-    vim.g.neovide_transparency = 0.8
-    vim.g.neovide_refresh_rate = 100
+    g.neovide_transparency = 0.8
+    g.neovide_refresh_rate = 100
 end

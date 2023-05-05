@@ -13,7 +13,19 @@ plugins:add {
         { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
     config = function() require 'plugins.lang.luasnip' end,
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+        'rafamadriz/friendly-snippets',
+    },
+}
+
+plugins:add {
+    'danymat/neogen',
+    keys = {
+        { '<leader>gg', '<Cmd>Neogen<Cr>', desc = 'Generate Snippet' },
+    },
+    config = {
+        snippet_engine = 'luasnip',
+    },
 }
 
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
@@ -105,7 +117,7 @@ plugins:add {
             open_folds = { 'zR', 'zr' },         -- open all folds
             toggle_fold = 'za',                  -- toggle fold of current file
             previous = 'i',                      -- previous item
-            next = 'k'                           -- next item
+            next = 'k',                          -- next item
         },
     },
 }
@@ -178,4 +190,6 @@ plugins:add {
         },
     },
 }
+
+
 return plugins
