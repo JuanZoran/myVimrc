@@ -36,9 +36,9 @@ require 'nvim-treesitter.configs'.setup {
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
     },
-    -- indent = {
-    --     enable = true,
-    -- },
+    indent = {
+        enable = true,
+    },
     textobjects = require 'plugins.lang.textobjects',
     endwise = {
         enable = true,

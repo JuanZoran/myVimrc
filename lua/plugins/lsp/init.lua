@@ -87,6 +87,7 @@ plugins:add {
                 -- formatting.prettier.with { extra_args = { '--tab-width', vim.bo.shiftwidth } },
                 formatting.black.with { extra_args = { '--fast' } },
                 formatting.beautysh,
+                -- null_ls.builtins.code_actions.ts_node_action,
                 -- formatting.stylua,
                 -- null_ls.builtins.diagnostics.zsh,
             },

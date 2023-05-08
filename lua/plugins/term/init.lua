@@ -1,5 +1,4 @@
 local lazygit, ranger
-
 local config = function(_, opts)
     require 'toggleterm'.setup(opts)
     local t = require 'toggleterm.terminal'.Terminal
@@ -17,9 +16,9 @@ end
 
 local flatten = {
     'willothy/flatten.nvim',
+    lazy = false,
     opts = {
         nest_if_no_args = true,
-
         callbacks = {
             pre_open = function() -- Close toggleterm when an external open request is received
                 require 'toggleterm'.toggle(0)
