@@ -1,7 +1,7 @@
 local plugins = util.plugin()
 
 plugins:add {
-    import = 'plugins.tools.extra'
+    import = 'plugins.tools.extra',
 }
 
 plugins:add {
@@ -143,7 +143,6 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
     end,
 }
 
-
 plugins:add {
     'mfussenegger/nvim-treehopper',
     keys = {
@@ -208,28 +207,28 @@ plugins:add {
             mode = { 'n', 'x' },
             '<leader>rk',
             "<Cmd>lua require('comment-box').lcbox()<CR>",
-            desc = 'Comment Center Box'
+            desc = 'Comment Center Box',
         },
         {
             mode = { 'n', 'x' },
             '<leader>rl',
             "<Cmd>lua require('comment-box').lrbox()<CR>",
-            desc = 'Comment Right Box'
+            desc = 'Comment Right Box',
         },
         {
             '<leader>ru',
             "<Cmd>lua require('comment-box').line()<CR>",
-            desc = 'Comment Left Line'
+            desc = 'Comment Left Line',
         },
         {
             '<leader>ri',
             "<Cmd>lua require('comment-box').cline()<CR>",
-            desc = 'Comment Center Line'
+            desc = 'Comment Center Line',
         },
         {
             '<leader>ro',
             "<Cmd>lua require('comment-box').rline()<CR>",
-            desc = 'Comment Right Line'
+            desc = 'Comment Right Line',
         },
     },
 }
@@ -357,5 +356,19 @@ plugins:add {
     },
 }
 
+
+
+plugins:add {
+    'CRAG666/code_runner.nvim',
+    keys = {
+        { '<leader>rr', '<Cmd>RunCode<CR>', desc = 'Code Runner' },
+    },
+    opts = {
+        mode = 'toggleterm',
+        filetype = {
+            cpp = 'xmake -r && xmake run $end',
+        },
+    },
+}
 
 return plugins

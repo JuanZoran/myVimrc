@@ -44,7 +44,7 @@ plugins:add {
                 -- Keymap to check which installed packages are outdated
                 check_outdated_packages = 'C',
                 -- Keymap to uninstall a package
-                uninstall_package = 'd',
+                uninstall_package = 'x',
                 -- Keymap to cancel a package installation
                 cancel_installation = '<C-c>',
                 -- Keymap to apply language filter
@@ -151,6 +151,35 @@ plugins:add {
 --         config = true,
 --     },
 -- }, -- pretty ui for [code-action | hover-text | ....]
+
+plugins:add {
+    'SmiteshP/nvim-navbuddy',
+    init = function()
+        require 'plugins.lsp.handlers'.attach(function(client, bufnr)
+            require 'nvim-navbuddy'.attach(client, bufnr)
+        end)
+    end,
+    keys = {
+        { '<leader>k', '<Cmd>Navbuddy<CR>' },
+    },
+    opts = function()
+        local actions = require 'nvim-navbuddy.actions'
+        return {
+            window = {
+                border = 'rounded',
+                size = '65%',
+            },
+            mappings = {
+                k = actions.next_sibling,         -- down
+                i = actions.previous_sibling,     -- up
+                j = actions.parent,               -- Move to left panel
+                l = actions.children,             -- Move to right panel
+                h = actions.insert_name,          -- Insert at start of name
+                H = actions.insert_scope,         -- Insert at start of scope
+            },
+        }
+    end,
+}
 
 return {
     'neovim/nvim-lspconfig', -- official lspconfig

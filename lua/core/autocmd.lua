@@ -14,7 +14,6 @@ local group = api.nvim_create_augroup('UserDefine', { clear = true })
 --     end,
 -- })
 
-
 autocmd('BufRead', {
     group = group,
     callback = function()
@@ -26,11 +25,13 @@ autocmd('BufRead', {
 autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     callback = function()
-        if vim.opt_local.foldmethod == 'diff' then return end
+        if vim.opt.foldmethod == 'diff' then
+            vim.opt.foldmethod = 'manual'
+        end
+
         vim.cmd [[silent! mkview]]
     end,
 })
-
 
 vim.keymap.set({ 'n', 'v' }, '=', 'gq')
 -- see :help fo-table

@@ -71,12 +71,14 @@ vim.wo.signcolumn = 'yes'
 
 opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
 
-opt.viewoptions = 'cursor,folds'
+opt.viewoptions             = 'cursor,folds'
 -----================ disabled some native =====================
 
+local g                     = vim.g
 -- vim.o.showmode = false
-vim.g.did_install_default_menus = 1
-vim.g.did_install_syntax_menu = 1
+g.did_install_default_menus = 1
+g.did_install_syntax_menu   = 1
+g.no_man_maps               = true
 ----============  disable end  ===========-------
 
 

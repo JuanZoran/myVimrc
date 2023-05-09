@@ -4,6 +4,55 @@ plugins:add {
     import = 'plugins.lang.extra',
 }
 
+plugins:add {
+    'L3mon4d3/luasnip',
+    lazy = true,
+    build = 'make install_jsregexp',
+    keys = {
+        { mode = 'x', '<C-x>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
+        { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
+    },
+    config = function()
+        local ls = require 'luasnip'
+        local types = require 'luasnip.util.types'
+        ls.config.set_config {
+            history = true,
+            updateevents = { 'TextChanged', 'TextChangedI' },
+            region_check_events = { 'CursorHold', 'InsertLeave' },
+            delete_check_events = 'TextChanged',
+            -- enable_autosnippets = true,
+            -- store_selection_keys = "<C-q>",
+            ext_opts = {
+                [types.choiceNode] = {
+                    active = {
+                        virt_text = { { ' Your Choice', 'Title' } }, -- yellow
+                    },
+                },
+                [types.insertNode] = {
+                    active = {
+                        virt_text = { { ' Insert', 'Function' } }, -- purple
+                    },
+                },
+            },
+        }
+        require 'luasnip.loaders.from_vscode'.lazy_load()
+        local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
+        require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
+        vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files)
+    end,
+    dependencies = 'rafamadriz/friendly-snippets',
+}
+
+plugins:add {
+    'danymat/neogen',
+    keys = {
+        { '<leader>gg', '<Cmd>Neogen<Cr>', desc = 'Generate Snippet' },
+    },
+    config = {
+        snippet_engine = 'luasnip',
+    },
+}
+
 local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
     'lukas-reineke/indent-blankline.nvim',
@@ -59,7 +108,7 @@ plugins:add {
 
         { 'rrethy/vim-illuminate',
             config = function() require 'illuminate'.configure {
-                providers = { 'lsp', 'treesitter' },
+                -- providers = { 'lsp', 'treesitter' },
                 large_file_curoff = 4000,
                 delay = 200,
             }
@@ -93,50 +142,12 @@ plugins:add {
             open_folds = { 'zR', 'zr' },         -- open all folds
             toggle_fold = 'za',                  -- toggle fold of current file
             previous = 'i',                      -- previous item
-            next = 'k'                           -- next item
+            next = 'k',                          -- next item
         },
     },
 }
 
 
-plugins:add {
-    'L3mon4d3/luasnip',
-    lazy = true,
-    build = 'make install_jsregexp',
-    keys = {
-        { mode = 'x', '<C-x>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
-        { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
-    },
-    config = function()
-        local ls = require 'luasnip'
-        local types = require 'luasnip.util.types'
-        ls.config.set_config {
-            history = true,
-            updateevents = { 'TextChanged', 'TextChangedI' },
-            region_check_events = { 'CursorHold', 'InsertLeave' },
-            delete_check_events = 'TextChanged',
-            -- enable_autosnippets = true,
-            -- store_selection_keys = "<C-q>",
-            ext_opts = {
-                [types.choiceNode] = {
-                    active = {
-                        virt_text = { { ' Your Choice', 'Title' } }, -- yellow
-                    },
-                },
-                [types.insertNode] = {
-                    active = {
-                        virt_text = { { ' Insert', 'Function' } }, -- purple
-                    },
-                },
-            },
-        }
-        require 'luasnip.loaders.from_vscode'.lazy_load()
-        local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
-        require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
-        vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files)
-    end,
-    dependencies = 'rafamadriz/friendly-snippets',
-}
 
 local frontend = { 'html', 'css' }
 plugins:add {

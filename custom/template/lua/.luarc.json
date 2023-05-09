@@ -1,9 +1,0 @@
-{
-    "workspace.library": [
-        "/data/data/com.termux/files/home/.local/share/nvim/lazy/neodev.nvim/types/nightly",
-        "/data/data/com.termux/files/usr/share/nvim/runtime/lua",
-        "/data/data/com.termux/files/home/.local/share/nvim/lazy/plenary.nvim/lua",
-        "/data/data/com.termux/files/home/.config/nvim/custom/template/lua",
-        "${3rd}/luv/library"
-    ]
-}
