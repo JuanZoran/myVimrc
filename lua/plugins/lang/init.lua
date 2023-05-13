@@ -1,4 +1,4 @@
-local plugins = util.plugin()
+local plugins = util.list()
 
 plugins:add {
     import = 'plugins.lang.extra',
@@ -23,7 +23,7 @@ plugins:add {
     keys = {
         { '<leader>gg', '<Cmd>Neogen<Cr>', desc = 'Generate Snippet' },
     },
-    config = {
+    opts = {
         snippet_engine = 'luasnip',
     },
 }

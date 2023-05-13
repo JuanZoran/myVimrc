@@ -1,4 +1,4 @@
-local plugins = util.plugin()
+local plugins = util.list()
 plugins:add {
     'kyazdani42/nvim-web-devicons',
     lazy = true,
@@ -119,7 +119,7 @@ plugins:add {
             '<C-w>d',
             '<Cmd>Neotree reveal_force_cwd dir=%:h toggle<CR>',
             desc =
-            '📁Toggle File Explorer in buffer dir'
+            '📁Toggle File Explorer in buffer dir',
         },
     },
     branch = 'v2.x',
@@ -175,6 +175,25 @@ plugins:add { -- 标签栏
         }
     end,
 }
+
+
+plugins:add {
+    'medwatt/tabulous',
+    event = 'BufWinEnter',
+    keys = {
+        { '<leader><C-o>', '<Cmd>TabulousCreateNewTab<Cr>' },
+        { '<leader><C-d>', '<Cmd>TabulousDeleteTab<Cr>' },
+        { '<leader><C-j>', '<Cmd>tabnext<Cr>' },
+        { '<leader><C-l>', '<Cmd>tabprevious<Cr>' },
+    },
+    cmd = {
+        'TabulousSaveSession',
+        'TabulousLoadSession',
+    },
+    opts = {
+    },
+}
+
 plugins:add {
     'goolord/alpha-nvim',
     config = function() require 'plugins.ui.alpha' end,

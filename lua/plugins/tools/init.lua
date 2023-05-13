@@ -1,4 +1,4 @@
-local plugins = util.plugin()
+local plugins = util.list()
 
 plugins:add {
     import = 'plugins.tools.extra',
@@ -371,7 +371,6 @@ plugins:add {
         },
     },
 }
-
 
 
 plugins:add {

@@ -92,7 +92,14 @@ local snips = {
             i(1, 'name'),
         })
     ),
-
+    -- s({ trig = 'te(%d)', regTrig = true }, f(function(args, snip)
+    --     return 'result:' .. snip.captures[1] .. '()'
+    -- end)),
+    -- postfix('fuck', {
+    --     f(function(_, parent)
+    --         return '[' .. parent.snippet.env.POSTFIX_MATCH .. ']'
+    --     end, {}),
+    -- }),
 }
 
 -- End Snippets --

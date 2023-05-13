@@ -104,6 +104,13 @@ local override = {
     ['@lsp.type.property'] = {
         fg = c.peach,
     },
+    ['@lsp.type.enum'] = {
+        -- link = 'enum',
+        fg = '#94e2d5',
+    },
+    -- ['@lsp.type.enumMember'] = {
+    --     link = 'enumMember',
+    -- },
 
     CmpItemAbbr            = {
         fg = c.sapphire,

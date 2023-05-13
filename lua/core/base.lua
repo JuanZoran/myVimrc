@@ -3,7 +3,6 @@ opt.termguicolors  = true
 opt.autoread       = true
 opt.number         = true
 opt.relativenumber = true
-
 -- lualine did
 opt.showmode       = false
 opt.ruler          = false
@@ -31,7 +30,7 @@ opt.smartcase      = true
 -- opt.title = true -- for show current dir
 opt.timeoutlen     = 400 --default value = 1000
 opt.ttimeout       = true
-opt.ttimeoutlen    = 50  --default value = 1000
+opt.ttimeoutlen    = 100 --default value = 1000
 opt.hlsearch       = false
 
 
@@ -39,6 +38,7 @@ opt.hlsearch       = false
 opt.tabstop     = 4
 opt.softtabstop = 4
 opt.shiftwidth  = 4
+opt.textwidth   = 80
 opt.expandtab   = true
 opt.whichwrap:append '<,>,[,],h,l' -- 可以从当前行直接前往上一行
 

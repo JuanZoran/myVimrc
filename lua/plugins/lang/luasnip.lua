@@ -1,11 +1,8 @@
 local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
 local ls = require 'luasnip'
 local types = require 'luasnip.util.types'
+
 ls.config.set_config {
-    -- enable_autosnippets = true,
-    -- store_selection_keys = "<C-q>",
-    -- jump_to_first_trigger = true, -- does not work
-    history = true,
     updateevents = { 'TextChanged', 'TextChangedI' },
     region_check_events = { 'CursorHold', 'InsertLeave' },
     delete_check_events = { 'TextChanged', 'InsertEnter' },

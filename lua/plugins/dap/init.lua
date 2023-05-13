@@ -1,4 +1,4 @@
-local plugins = util.plugin()
+local plugins = util.list()
 local keys = {
     { '<leader>ek',    '<Cmd>DapStepOver<CR>',                              desc = 'Step Over' },
     { '<leader>es',    '<Cmd>DapStepInto<CR>',                              desc = 'Step Into' },
@@ -89,7 +89,7 @@ local config = function()
     end
 
     dap.listeners.before.event_terminated['dapui_config'] = function()
-        print('close')
+        print 'close'
         dapui.close()
     end
     dap.listeners.before.event_exited['dapui_config'] = function()
@@ -135,6 +135,13 @@ plugins:add {
     },
 }
 
+plugins:add {
+    'LiadOz/nvim-dap-repl-highlights',
+    build = 'TSInstall dap_repl',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    opts = {
+    },
+}
 
 
 

@@ -72,8 +72,10 @@ local opts = function()
         ['<CR>'] = cmp.mapping.confirm { select = false },
         ['<C-o>'] = cmp.mapping.confirm { select = true },
         ['<C-e>'] = cmp.mapping(function(fallback)
-            if luasnip.locally_jumpable() then
-                luasnip.jump(1)
+            if luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
+                -- if luasnip.locally_jumpable() then
+                --     luasnip.jump(1)
             else
                 fallback()
             end
@@ -172,9 +174,9 @@ local opts = function()
             -- priority_weight = 10,
             comparators = {
                 -- fallback until when a sort function returns not nil
-                compare.kind,          -- lspkind defined by lsp protocol
                 compare.recently_used, -- based on last used
                 compare.locality,      -- position in buffer
+                compare.kind,          -- lspkind defined by lsp protocol
                 tabnine_compare,
                 compare.score,
                 compare.exact, -- match exact
@@ -193,12 +195,6 @@ local sources = {
     {
         'tzachar/cmp-tabnine',
         build = './install.sh',
-        -- init = function()
-        --     vim.api.nvim_create_autocmd('BufRead', {
-        --         group = vim.api.nvim_create_augroup('prefetch', { clear = true }),
-        --         callback = function() require 'cmp_tabnine':prefetch(vim.fn.expand '%:p') end,
-        --     })
-        -- end,
         config = function()
             require 'cmp_tabnine.config':setup {
                 max_lines = 1000,
@@ -228,7 +224,6 @@ local sources = {
         },
     },
 }
-
 
 return {
     'hrsh7th/nvim-cmp',

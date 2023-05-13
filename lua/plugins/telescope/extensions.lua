@@ -1,4 +1,4 @@
-local plugins = util.plugin()
+local plugins = util.list()
 plugins:add {
     'jvgrootveld/telescope-zoxide', -- powerful cd
     keys = {

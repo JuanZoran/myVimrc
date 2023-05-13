@@ -90,6 +90,7 @@ return {
             'rcarriga/nvim-notify',
             opts = {
                 level = vim.log.levels.INFO,
+                -- stages = 'fade_in_slide_out',
                 stages = 'slide',
                 timeout = 1500,
                 icons = {

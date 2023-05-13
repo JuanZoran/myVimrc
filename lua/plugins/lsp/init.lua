@@ -1,5 +1,5 @@
 if util.firenvim then return {} end
-local plugins = util.plugin()
+local plugins = util.list()
 
 local config = function()
     local handler = require 'plugins.lsp.handlers'
