@@ -69,7 +69,7 @@ plugins:add {
     opts = {
         library = {
             enabled = true,
-            plugins = { 'plenary.nvim' },
+            plugins = { 'plenary.nvim', 'luasnip' },
         },
     },
 }
@@ -157,12 +157,12 @@ plugins:add {
                 size = '65%',
             },
             mappings = {
-                k = actions.next_sibling,         -- down
-                i = actions.previous_sibling,     -- up
-                j = actions.parent,               -- Move to left panel
-                l = actions.children,             -- Move to right panel
-                h = actions.insert_name,          -- Insert at start of name
-                H = actions.insert_scope,         -- Insert at start of scope
+                k = actions.next_sibling,     -- down
+                i = actions.previous_sibling, -- up
+                j = actions.parent,           -- Move to left panel
+                l = actions.children,         -- Move to right panel
+                h = actions.insert_name,      -- Insert at start of name
+                H = actions.insert_scope,     -- Insert at start of scope
             },
         }
     end,

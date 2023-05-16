@@ -20,12 +20,4 @@ for index, value in ipairs(filetypes) do
     ]]):format(value), i(1)))
 end
 
--- table.insert(MD, s(
---   "img",
---   fmt([[ ![{}]({}) ]], {
---     i(1, "imagename"),
---     i(2, "path/to/img"),
---   })
--- ))
-
 return snips

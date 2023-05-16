@@ -1,5 +1,5 @@
 ---@diagnostic disable: unused-local, need-check-nil, undefined-global
-local snips = {}
+local snips = util.list()
 local function bash(_, snip)
     local file = io.popen(snip.trigger, 'r')
     local res = {}
@@ -14,14 +14,35 @@ local bash_command = {
     'pwd',
 }
 
-for i, v in ipairs(bash_command) do
+for _, v in ipairs(bash_command) do
     -- s({ trig = "pwd" }, { f(bash, {}) }),
     -- table.insert(snips, s({ trig = v }, { f(bash) }))
-    snips[i] = s(v, { f(bash) })
+    snips:add(s(v, { f(bash) }))
 end
 
-snips[#snips + 1] = s('zsh', { t '#!/usr/bin/env zsh' })
+snips:add(s('zsh', { t '#!/usr/bin/env zsh' }))
 
+-- postfix('fuck', {
+--     f(function(_, parent)
+--         return '[' .. parent.snippet.env.POSTFIX_MATCH .. ']'
+--     end, {}),
+-- }),
+
+-- INFO :Add pairs utility
+local pair_snip = {
+    -- ['.q'] = "'<++>'",
+    -- ['.p'] = '(<++>)',
+    -- ['.b'] = '[<++>]',
+    -- ['.B'] = '{<++>}',
+}
+
+-- for trig, pattern in pairs(pair_snip) do
+-- end
+
+-- snips:add(postfix '.q', { f(function(_, parent)
+
+--     return
+-- end), })
 
 -- End Snippets --
 return snips

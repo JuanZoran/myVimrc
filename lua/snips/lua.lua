@@ -24,13 +24,6 @@
 
 local snips = {
     s(
-        'return',
-        fmt('---@return {} {}', {
-            i(1, 'type'),
-            i(2, 'message'),
-        })
-    ),
-    s(
         'require',
         fmt('local {} = require("{}")', {
             l(l._1:match '[^./]*$', 1),
@@ -38,14 +31,6 @@ local snips = {
         })
     ),
 
-    s(
-        'local',
-        fmt('local {} = {}', {
-            l(l._1:match '[^.]*$', 1),
-            i(1, 'name'),
-        })
-    ),
-    parse('s', "s('$1', $2)"),
     parse('lm', [[
         local M = {}
 
@@ -53,25 +38,7 @@ local snips = {
 
         return M
     ]]),
-    parse('cmd', '<Cmd>$1<CR>'),
-    parse('parse', [[parse("${1:trig}", "$2")]]),
-    s('formate', { t '---@format enable' }),
-    s('formatd', { t '---@format disable' }),
-    s('formatdn', { t '---@format disable-next' }),
-    s('nodis', { t '---@nodiscard' }),
-    s(
-        'class',
-        fmt('---@class {}', {
-            i(1, 'name'),
-        })
-    ),
-    s(
-        'field',
-        fmt('---@field {} {}', {
-            i(1, 'name'),
-            i(2, 'type'),
-        })
-    ),
+
 
     s(
         'mt',
@@ -92,15 +59,42 @@ local snips = {
             i(1, 'name'),
         })
     ),
-    -- s({ trig = 'te(%d)', regTrig = true }, f(function(args, snip)
-    --     return 'result:' .. snip.captures[1] .. '()'
-    -- end)),
-    -- postfix('fuck', {
-    --     f(function(_, parent)
-    --         return '[' .. parent.snippet.env.POSTFIX_MATCH .. ']'
-    --     end, {}),
-    -- }),
+    parse('parse', [[parse("${1:trig}", "$2")]]),
+    parse('snip', [[snips:add(${1})]]),
+
+
+    pos('.lo', 'local <++> ='),
+    pos('.ps', 'pairs(<++>)'),
+    pos('.ip', 'ipairs(<++>)'),
+    pos('.co', '---@<++> '),
+    pos('.cmd', '<Cmd><++><CR>'),
+    pos('.req', 'local <++> = require("<++>")'),
+
+
+
+    s('formate', { t '---@format enable' }),
+    s('formatd', { t '---@format disable' }),
+    s('formatdn', { t '---@format disable-next' }),
+    -- s('nodis', { t '---@nodiscard' }),
 }
+
+-- s(
+--     'local',
+--     fmt('local {} = {}', {
+--         l(l._1:match '[^.]*$', 1),
+--         i(1, 'name'),
+--     })
+-- ),
+-- parse('s', "s('$1', $2)"),
+-- s(
+--     'return',
+--     fmt('---@return {} {}', {
+--         i(1, 'type'),
+--         i(2, 'message'),
+--     })
+-- ),
+
+
 
 -- End Snippets --
 return snips

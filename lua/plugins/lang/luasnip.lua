@@ -18,13 +18,24 @@ ls.config.set_config {
             },
         },
     },
+    snip_env = {
+        pos = function(trig, pattern)
+            return require 'luasnip.extras.postfix'.postfix(trig, {
+                require 'luasnip.nodes.functionNode'.F(function(_, parent)
+                    return pattern:gsub('<%+%+>', parent.snippet.env.POSTFIX_MATCH)
+                end),
+            })
+        end,
+    },
 }
+
 
 
 require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
 vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files,
     { desc = 'Edit Snippet' })
-require 'luasnip.loaders.from_vscode'.lazy_load()
+
+-- require 'luasnip.loaders.from_vscode'.lazy_load()
 
 -- NOTE :Chioce Note Popup
 -- local api = vim.api

@@ -1,11 +1,10 @@
 {
     "workspace.library": [
         "/home/zoran/.local/share/nvim/lazy/neodev.nvim/types/nightly",
-        "/home/zoran/.local/share/bob/nightly/nvim-linux64/share/nvim/runtime/lua",
+        "/home/zoran/.local/share/bob/nightly-O4CDdPZI/nvim-linux64/share/nvim/runtime/lua",
         "/home/zoran/.local/share/nvim/lazy/plenary.nvim/lua",
+        "/home/zoran/.local/share/nvim/lazy/luasnip/lua",
         "/home/zoran/.config/nvim/lua",
-        "${3rd}/luv/library",
         "${3rd}/luv/library"
-    ],
-    "workspace.checkThirdParty": false
+    ]
 }
