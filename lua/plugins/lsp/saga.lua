@@ -101,6 +101,6 @@ return {
     ui = {
         -- border type can be single,double,rounded,solid,shadow.
         border = 'rounded',
-        kind = require 'catppuccin.groups.integrations.lsp_saga'.custom_kind(),
+        -- kind = require 'catppuccin.groups.integrations.lsp_saga'.custom_kind(),
     },
 }

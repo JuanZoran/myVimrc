@@ -3,7 +3,6 @@ opt.termguicolors  = true
 opt.autoread       = true
 opt.number         = true
 opt.relativenumber = true
-
 -- lualine did
 opt.showmode       = false
 opt.ruler          = false
@@ -39,6 +38,7 @@ opt.hlsearch       = false
 opt.tabstop     = 4
 opt.softtabstop = 4
 opt.shiftwidth  = 4
+opt.textwidth   = 80
 opt.expandtab   = true
 opt.whichwrap:append '<,>,[,],h,l' -- 可以从当前行直接前往上一行
 
@@ -59,6 +59,8 @@ opt.helplang       = 'cn'
 opt.updatetime     = 200
 -- opt.equalalways = true -- auto resize window
 opt.undofile       = true
+opt.cindent        = true
+opt.smartindent    = true
 opt.cpoptions:append '>' -- :help cpoptions
 
 ---@diagnostic disable-next-line: assign-type-mismatch

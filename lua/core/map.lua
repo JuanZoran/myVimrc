@@ -49,7 +49,7 @@ set {
             else
                 vim.cmd 'w'
             end
-        end, 'Save Current Buffer' },
+        end, 'Save Current Buffer', },
     },
 }
 
@@ -96,7 +96,7 @@ set {
         --     local s = (vim.api.nvim_get_current_line()):find '%S'
         --     vim.fn.cursor { vim.fn.line '.', s or 0 }
         -- end, },
-        { '<C-v>', '<C-r>+' },
+        { '<C-v>',  '<C-r>+' },
     },
     -- {"<++>", "<++>"},
     -- {"<++>", "<++>"},

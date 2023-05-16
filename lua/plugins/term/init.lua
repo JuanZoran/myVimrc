@@ -17,6 +17,7 @@ end
 
 local flatten = {
     'willothy/flatten.nvim',
+    lazy = false,
     opts = {
         callbacks = {
             pre_open = function() -- Close toggleterm when an external open request is received

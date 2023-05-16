@@ -1,5 +1,6 @@
 local api = vim.api
 local autocmd = api.nvim_create_autocmd
+
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
 
 -- Go to last loc when opening a buffer

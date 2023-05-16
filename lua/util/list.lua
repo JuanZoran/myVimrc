@@ -8,7 +8,7 @@ local meta = {
 meta.__index = meta
 
 ---@class util
----@field plugin fun(): table
+---@field list fun(): table
 return function()
     return setmetatable({
         size = 0,

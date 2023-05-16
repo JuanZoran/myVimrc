@@ -1,14 +1,9 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua.diagnostics.globals": [
-        "vim",
-        "Scroll"
-    ],
     "workspace.library": [
-        "${3rd}/luv/library",
-        "/data/data/com.termux/files/home/.local/share/nvim/lazy/neodev.nvim/types/nightly",
+        "/data/data/com.termux/files/home/.local/share/nvim/lazy/neodev.nvim/types/stable",
         "/data/data/com.termux/files/usr/share/nvim/runtime/lua",
         "/data/data/com.termux/files/home/.local/share/nvim/lazy/plenary.nvim/lua",
-        "/data/data/com.termux/files/home/.config/nvim/lua"
+        "/data/data/com.termux/files/home/.config/nvim/lua",
+        "${3rd}/luv/library"
     ]
 }

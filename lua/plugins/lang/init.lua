@@ -1,4 +1,4 @@
-local plugins = util.plugin()
+local plugins = util.list()
 
 plugins:add {
     import = 'plugins.lang.extra',
@@ -16,12 +16,12 @@ plugins:add {
         local ls = require 'luasnip'
         local types = require 'luasnip.util.types'
         ls.config.set_config {
-            history = true,
+            history = false,
             updateevents = { 'TextChanged', 'TextChangedI' },
             region_check_events = { 'CursorHold', 'InsertLeave' },
             delete_check_events = 'TextChanged',
             -- enable_autosnippets = true,
-            -- store_selection_keys = "<C-q>",
+            -- store_selection_keys = "<C-e>",
             ext_opts = {
                 [types.choiceNode] = {
                     active = {
@@ -34,11 +34,20 @@ plugins:add {
                     },
                 },
             },
+            snip_env = {
+                pos = function(trig, pattern)
+                    return require 'luasnip.extras.postfix'.postfix(trig, {
+                        require 'luasnip.nodes.functionNode'.F(function(_, parent)
+                            return pattern:gsub('<%+%+>', parent.snippet.env.POSTFIX_MATCH)
+                        end),
+                    })
+                end,
+            },
         }
-        require 'luasnip.loaders.from_vscode'.lazy_load()
         local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
         require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
         vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files)
+        -- require 'luasnip.loaders.from_vscode'.lazy_load()
     end,
     dependencies = 'rafamadriz/friendly-snippets',
 }
@@ -48,7 +57,7 @@ plugins:add {
     keys = {
         { '<leader>gg', '<Cmd>Neogen<Cr>', desc = 'Generate Snippet' },
     },
-    config = {
+    opts = {
         snippet_engine = 'luasnip',
     },
 }
