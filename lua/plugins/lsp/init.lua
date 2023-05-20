@@ -12,8 +12,24 @@ local config = function()
         local _, conf_opts = pcall(require, 'server.' .. server)
         local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
         require 'lspconfig'[server].setup(conf)
-    end, }
+    end,
+        rust_analyzer = function()
+            require 'rust-tools'.setup {
+                server = { on_attach = handler.on_attach },
+                tools = {
+                    inlay_hints = {
+                        auto = false,
+                    },
+                },
+            }
+        end,
+    }
 end
+
+plugins:add {
+    'simrat39/rust-tools.nvim',
+    lazy = true,
+}
 
 plugins:add {
     'williamboman/mason.nvim',

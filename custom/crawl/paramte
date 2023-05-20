@@ -1,0 +1,22 @@
+---@param text string` or `string[] 
+---@param node_opts table , see [Node](#node)
+function t(text, node_opts) end
+---@param jump_index number , this determines when this node will be jumped to (see
+---@param text string|string[] , a single string for just one line, a list with >1
+---@param node_opts table , described in [Node](#node)
+function i(jump_index, text, node_opts) end
+---@param fn function(argnode_text, parent, user_args1,...,user_argsn) -> text 
+---@param argnode_references node_reference[]|node_refernce|nil .  
+---@param node_opts table , see [Node](#node). One additional key is supported:
+function f(fn, argnode_references, node_opts) end
+---@param jump_index number , since choiceNodes can be jumped to, they need a
+---@param choices node[]|node , the choices. The first will be initialliy active.
+---@param node_opts table`. `choiceNode  supports the keys common to all nodes
+function c(jump_index, choices, node_opts) end
+---@param jump_index number , the usual [Jump-Index](#jump-index).
+---@param nodes node[]|node`, just like for `s .  
+---@param node_opts table : again, the keys common to all nodes (documented in
+function sn(jump_index, nodes, node_opts) end
+---@param jump_index number , just like all jumpable nodes, its' position in the
+---@param function fn(args, parent, old_state, user_args) -> snippetNode 
+---@param node_references node_reference[]|node_references|nil ,

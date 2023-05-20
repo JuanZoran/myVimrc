@@ -22,19 +22,13 @@ end
 
 snips:add(s('zsh', { t '#!/usr/bin/env zsh' }))
 
--- postfix('fuck', {
---     f(function(_, parent)
---         return '[' .. parent.snippet.env.POSTFIX_MATCH .. ']'
---     end, {}),
--- }),
-
 -- INFO :Add pairs utility
-local pair_snip = {
-    -- ['.q'] = "'<++>'",
-    -- ['.p'] = '(<++>)',
-    -- ['.b'] = '[<++>]',
-    -- ['.B'] = '{<++>}',
-}
+-- local pair_snip = {
+--     ['q'] = "'<++>'",
+--     ['p'] = '(<++>)',
+--     ['b'] = '[<++>]',
+--     ['B'] = '{<++>}',
+-- }
 
 -- for trig, pattern in pairs(pair_snip) do
 -- end

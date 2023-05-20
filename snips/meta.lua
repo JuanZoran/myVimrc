@@ -1,4 +1,5 @@
 ---@meta
+local snips = util.list()
 _G.ls = require 'luasnip'
 _G.s = require 'luasnip.nodes.snippet'.S
 _G.sn = require 'luasnip.nodes.snippet'.SN
@@ -16,7 +17,6 @@ _G.fmta = require 'luasnip.extras.fmt'.fmta
 _G.conds = require 'luasnip.extras.expand_conditions'
 _G.postfix = require 'luasnip.extras.postfix'.postfix
 _G.types = require 'luasnip.util.types'
-_G.parse = require 'luasnip.util.parser'.parse_snippet
 _G.ms = require 'luasnip.nodes.multiSnippet'.new_multisnippet
 
 
@@ -29,9 +29,16 @@ _G.m = extras.match
 _G.n = extras.nonempty
 _G.dl = extras.dynamic_lambda
 
+_G.pos = util.snip.pos
+_G.dyn = util.snip.dyn
 
----A wrapper for `require 'luasnip.extras.postfix'.postfix`.
----@param trig string|table -- Trigger string or table of trigger strings.
----@param pattern string -- Pattern to replace with. [Placeholder]: `<++>`.
-_G.pos = function(trig, pattern)
+---Snippet mete like snippet
+---@param trig string -- Trigger string.
+---@param pattern string -- Pattern to replace with. $[index] | ${[index]:[default_text]}
+---@param opts? table -- Options for snippet.
+function parse(trig, pattern, opts)
 end
+
+-- End Snippets --
+return snips
+

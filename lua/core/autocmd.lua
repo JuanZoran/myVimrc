@@ -57,15 +57,14 @@ autocmd('VimResized', {
     end,
 })
 
-
 -- NOTE  Snip Utility
-autocmd('BufEnter', {
-    group = group,
-    pattern = '*/snips/*.lua',
-    callback = function()
-        vim.keymap.set('n', '<CR>', '/-- End Snippets --<CR>:noh<CR>2<Up>o', { silent = true, buffer = true })
-    end,
-})
+-- autocmd('BufEnter', {
+--     group = group,
+--     pattern = '*/snips/*.lua',
+--     callback = function()
+--         vim.keymap.set('n', '<CR>', '/-- End Snippets --<CR>:noh<CR>2<Up>o', { silent = true, buffer = true })
+--     end,
+-- })
 
 
 -- INFO Fix Input Method Switch

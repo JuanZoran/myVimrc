@@ -69,14 +69,14 @@ for hl, color in pairs {
         bg = '#455c6d',
     },
     NoiceLspProgressTitle = {
-        fg = '#7ad7f3'
+        fg = '#7ad7f3',
     },
     NoiceLspProgressClient = {
         -- link = 'MoreMsg'
-        fg = '#d38aea'
+        fg = '#d38aea',
     },
     NoiceLspProgressSpinner = {
-        fg = '#d38aea'
+        fg = '#d38aea',
     },
 } do set_hl(0, hl, color) end
 
@@ -107,5 +107,6 @@ return {
         vim.keymap.set('c', '<S-Enter>', function()
             require 'noice'.redirect(vim.fn.getcmdline())
         end, { desc = 'Redirect Cmdline' })
+        -- vim.opt.guicursor = 'n-v-c:block,i-ci-ve:ver50,r-cr:hor50,o:hor50,a:blinkwait50-blinkoff30-blinkon50-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175F'
     end,
 }

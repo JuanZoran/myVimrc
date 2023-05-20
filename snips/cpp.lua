@@ -7,20 +7,19 @@ snips:add(parse('inc', '#include <$1>'))
 snips:add(parse('once', '#pragma once'))
 
 
-snips:add(pos('.au', 'auto <++> = '))
-snips:add(pos('.p', 'printf("<++>");'))
-snips:add(pos('.nsp', 'using namespace <++>;'))
-snips:add(pos('.us', 'using <++> = '))
+snips:add(pos('au', 'auto <++> = '))
+snips:add(pos('p', 'printf("<++>");'))
+snips:add(pos('nsp', 'using namespace <++>;'))
+snips:add(pos('us', 'using <++> = '))
 
 
-snips:add(s('main', fmta(
-    [[
+snips:add(s('main', fmta([[
     int main(int argc, char *argv[]) {
         <>
         return 0;
     }
-    ]], { i(1) }
-)))
+    ]], { i(0) })))
+
 
 
 snips:add(s('class', fmta(
@@ -64,9 +63,26 @@ snips:add(s('#if', fmta(
     }
 )))
 
--- snips:add(s("", fmta(
 
--- )))
+local function stream()
+    local snippet = sn(1, {
+        t ' << ', i(1, 'stream'),
+    })
+
+    return sn(nil, {
+        snippet,
+        c(2, {
+            t '',
+            d(nil, stream),
+        }),
+    })
+end
+
+snips:add(s('cout', {
+    t 'std::cout << ', i(1, 'stream'), c(2, {
+    t '',
+    d(nil, stream),
+}), t ';', }))
 
 
 -- End Snippets --

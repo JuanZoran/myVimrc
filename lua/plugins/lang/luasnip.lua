@@ -1,4 +1,4 @@
-local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
+local snippets_folder = vim.fn.stdpath 'config' .. '/snips'
 local ls = require 'luasnip'
 local types = require 'luasnip.util.types'
 
@@ -6,27 +6,20 @@ ls.config.set_config {
     updateevents = { 'TextChanged', 'TextChangedI' },
     region_check_events = { 'CursorHold', 'InsertLeave' },
     delete_check_events = { 'TextChanged', 'InsertEnter' },
+    store_select_keys = '<C-e>',
     ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = { { ' Your Choice', 'Title' } }, -- yellow
+                virt_text = { { ' Choice', 'character' } }, -- yellow
             },
         },
         [types.insertNode] = {
             active = {
-                virt_text = { { ' Insert', 'Function' } }, -- purple
+                virt_text = { { ' Insert', 'MoreMsg' } }, -- purple
             },
         },
     },
-    snip_env = {
-        pos = function(trig, pattern)
-            return require 'luasnip.extras.postfix'.postfix(trig, {
-                require 'luasnip.nodes.functionNode'.F(function(_, parent)
-                    return pattern:gsub('<%+%+>', parent.snippet.env.POSTFIX_MATCH)
-                end),
-            })
-        end,
-    },
+    snip_env = util.snip,
 }
 
 

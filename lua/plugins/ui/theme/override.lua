@@ -30,6 +30,8 @@ local c        = {
     light_purple = '#c61ad9',
 }
 
+-- util.color = c
+
 local override = {
     Visual                                 = {
         fg = c.sapphire,
