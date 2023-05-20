@@ -74,25 +74,6 @@ snips:add(s('fd', t '---@format disable'))
 snips:add(s('fdn', t '---@format disable-next'))
 snips:add(s('l', t 'local '))
 
-
-local function elif()
-    local snippet = sn(1, fmta([[
-
-    elseif <> then
-        <>]], {
-        i(1, 'condition'),
-        i(2, 'body'),
-    }, { trim_empty = false }))
-
-    return sn(nil, {
-        snippet,
-        c(2, {
-            t '',
-            d(nil, elif),
-        }),
-    })
-end
-
 snips:add(s('if', fmta([[
     if <> then
         <><>
@@ -100,11 +81,15 @@ snips:add(s('if', fmta([[
 ]], {
     i(1, 'condition'),
     i(2, 'body'),
-    c(3, {
-        t '',
-        d(nil, elif),
-    }),
+    dyn(3, fmta([[
+
+    elseif <> then
+        <>]], {
+        i(1, 'condition'),
+        i(2, 'body'),
+    }, { trim_empty = false })),
 })))
+
 
 -- End Snippets --
 return snips

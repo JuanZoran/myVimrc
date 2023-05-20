@@ -41,10 +41,17 @@ end
 
 snips:add(s('ma', fmta([[
 match <> {<>
-};
-    ]], {
+}; ]], {
     i(1, 'value'),
-    d(2, match_pat),
+    dyn(2, fmt('\n\t{} => {},', {
+        i(1, 'pattern'),
+        c(2, {
+            r(1, 'expr'),
+            sn(nil, fmta([[{
+        <>
+    }]], { r(1, 'expr') })),
+        }),
+    }, { trim_empty = false, dedent = false }), true),
 }), { stored = { expr = i(1, 'expr') } }))
 
 -- snips:add(parse('test', '#[cfg(test)]'))

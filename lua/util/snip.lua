@@ -16,8 +16,41 @@ M.pos = function(trig, pattern)
 end
 
 
-M.dyn = function(jump_index, node)
-    -- TODO :
+local t = require 'luasnip.nodes.textNode'.T
+local c = require 'luasnip.nodes.choiceNode'.C
+local d = require 'luasnip.nodes.dynamicNode'.D
+local sn = require 'luasnip.nodes.snippet'.SN
+
+---Generate a dynamic snippet.
+---@param jump_index? integer
+---@param nodes any[]
+---@param extend? boolean
+---@return any
+M.dyn = function(jump_index, nodes, extend)
+    local function fun()
+        local snippet = sn(1, vim.deepcopy(nodes))
+        return sn(nil, {
+            snippet,
+            c(2, {
+                t '',
+                d(nil, fun),
+            }),
+        })
+    end
+    if extend then
+        return sn(jump_index, {
+            sn(1, nodes),
+            c(2, {
+                t '',
+                d(nil, fun),
+            }),
+        })
+    end
+
+    return c(jump_index, {
+        t '',
+        d(nil, fun),
+    })
 end
 
 return M
