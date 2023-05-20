@@ -31,6 +31,7 @@ plugins:add {
     lazy = true,
 }
 
+
 plugins:add {
     'williamboman/mason.nvim',
     cmd = 'Mason',
@@ -123,9 +124,9 @@ plugins:add {
     opts = function() return require 'plugins.lsp.saga' end,
 }
 
+
 plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
-    -- commit = '84ca3abe8aaecbb5b30ad89e4701d4a9c821b72c',
     init = function()
         require 'plugins.lsp.handlers'.attach(function(client, bufnr)
             require 'lsp-inlayhints'.on_attach(client, bufnr)
@@ -140,6 +141,7 @@ plugins:add {
             type_hints = { prefix = 'type' },
             only_current_line = false,
         },
+        enabled_at_startup = false,
     },
     config = function(_, opts)
         require 'lsp-inlayhints'.setup(opts)

@@ -63,6 +63,7 @@ opt.cindent        = true
 opt.smartindent    = true
 opt.cpoptions:append '>' -- :help cpoptions
 
+opt.showmatch = true
 ---@diagnostic disable-next-line: assign-type-mismatch
 opt.undodir = os.getenv 'HOME' .. '/.vim'
 

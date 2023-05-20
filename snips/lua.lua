@@ -31,10 +31,18 @@ snips:add(s('ll', fmt('local {} = {}', {
     i(1, 'name'),
 })))
 
-snips:add(parse('snip', 'snips:add(${0})'))
-snips:add(parse('p', 'print($0)'))
+
+--- NOTE :
+--  ╭──────────────────────────────────────────────────────────╮
+--  │                       for Snippet                        │
+--  ╰──────────────────────────────────────────────────────────╯
+snips:add(hida('snip', 'snips:add(${0})'))
+snips:add(hida('p', 'print($0)'))
+snips:add(hida('s', 's($1, ${0})'))
+snips:add(hida('pa', "parse('${1:trig}', '$0')"))
 
 
+snips:add(s('l', t 'local '))
 snips:add(parse('lm', [[
     local M = {}
 
@@ -42,7 +50,6 @@ snips:add(parse('lm', [[
 
     return M
 ]]))
-snips:add(parse('parse', "parse('${1:trig}', '$2')"))
 
 
 snips:add(s('mt', fmta([[
@@ -62,7 +69,7 @@ snips:add(s('mt', fmta([[
 )))
 
 
-snips:add(pos('lo', 'local <++> ='))
+snips:add(pos('lo', 'local <++> = '))
 snips:add(pos('ps', 'pairs(<++>)'))
 snips:add(pos('ip', 'ipairs(<++>)'))
 snips:add(pos('C', '---@<++> '))
@@ -72,7 +79,7 @@ snips:add(pos('req', 'local <++> = require("<++>")'))
 snips:add(s('fe', t '---@format enable'))
 snips:add(s('fd', t '---@format disable'))
 snips:add(s('fdn', t '---@format disable-next'))
-snips:add(s('l', t 'local '))
+
 
 snips:add(s('if', fmta([[
     if <> then

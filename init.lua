@@ -53,7 +53,7 @@ require 'lazy'.setup('plugins', {
                 'netrwSettings',
                 'netrwFileHandlers',
                 'matchit',
-                'matchparen',
+                -- 'matchparen',
                 'tar',
                 'tarPlugin',
                 'rrhelper',

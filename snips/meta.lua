@@ -33,12 +33,15 @@ _G.pos = util.snip.pos
 _G.dyn = util.snip.dyn
 
 ---Snippet mete like snippet
----@param trig string -- Trigger string.
+---@param trig? string|table -- Trigger string.
 ---@param pattern string -- Pattern to replace with. $[index] | ${[index]:[default_text]}
 ---@param opts? table -- Options for snippet.
 function parse(trig, pattern, opts)
 end
 
+_G.opt = util.snip.opt
+_G.hid = util.snip.hid
+_G.hida = util.snip.hida
+
 -- End Snippets --
 return snips
-

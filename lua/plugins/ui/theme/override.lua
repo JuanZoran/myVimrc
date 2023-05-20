@@ -140,6 +140,11 @@ local override = {
         fg = c.sapphire,
     },
 
+    MatchParen                             = {
+        bg = c.purple,
+        fg = c.sapphire,
+        bold = true,
+    },
 
     -- IndentBlanklineContextChar  = {
     --     fg = '#89e051'
