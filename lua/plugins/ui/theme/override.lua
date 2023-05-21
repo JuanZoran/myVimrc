@@ -141,8 +141,11 @@ local override = {
     },
 
     MatchParen                             = {
-        bg = c.purple,
-        fg = c.sapphire,
+        fg = '#FFD700',
+        bg = '#505050',
+
+        -- bg = c.purple,
+        -- fg = c.light_green,
         bold = true,
     },
 

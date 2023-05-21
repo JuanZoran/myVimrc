@@ -10,7 +10,7 @@ local keymaps = {}
 for key, capture in pairs {
     f = '@function',
     c = '@class',
-    C = '@commet',
+    C = '@comment',
     d = '@conditional',
     l = '@loop',
     r = '@return',

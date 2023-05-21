@@ -2,6 +2,7 @@ local set = util.map_opt_with_desc
 set {
     mode = 'n',
     map = {
+
         { 'U',                 'VP' },
         -- INFO : command
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
@@ -51,7 +52,7 @@ set {
             else
                 vim.cmd 'w'
             end
-        end, 'Save Current Buffer' },
+        end, 'Save Current Buffer', },
     },
 }
 
@@ -123,6 +124,9 @@ map({ 'x', 'o', 'i', 'c' }, '<C-s>', '<Esc>')
 map({ 'c', 't' }, '<C-x>', '<Cmd>stopinsert<CR>')
 map({ 'i', 'c' }, '<C-j>', '<Left>')
 map({ 'i', 'c' }, '<C-l>', '<Right>')
+
+
+map('', '0', '%', { remap = true })
 
 
 map({ 'n', 'x' }, '<C-h>', [[:s/\v]])

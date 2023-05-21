@@ -374,6 +374,12 @@ plugins:add {
 
 
 plugins:add {
+    'andymass/vim-matchup',
+    event = 'VeryLazy',
+}
+
+
+plugins:add {
     'CRAG666/code_runner.nvim',
     keys = {
         { '<leader>rr', '<Cmd>RunCode<CR>', desc = 'Code Runner' },
