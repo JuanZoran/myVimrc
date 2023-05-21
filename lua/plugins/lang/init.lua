@@ -34,22 +34,13 @@ plugins:add {
                     },
                 },
             },
-            snip_env = {
-                pos = function(trig, pattern)
-                    return require 'luasnip.extras.postfix'.postfix(trig, {
-                        require 'luasnip.nodes.functionNode'.F(function(_, parent)
-                            return pattern:gsub('<%+%+>', parent.snippet.env.POSTFIX_MATCH)
-                        end),
-                    })
-                end,
-            },
+            snip_env = require 'snippet_lua',
         }
-        local snippets_folder = vim.fn.stdpath 'config' .. '/lua/snips'
+        local snippets_folder = vim.fn.stdpath 'config' .. '/custom/snippet_lua/lua/snips'
         require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
         vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files)
-        -- require 'luasnip.loaders.from_vscode'.lazy_load()
     end,
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = { 'JuanZoran/snippet_lua', dev = true },
 }
 
 plugins:add {

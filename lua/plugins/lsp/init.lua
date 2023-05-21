@@ -21,8 +21,26 @@ local config = function()
         ['lua-language-server'] = 'lua_ls',
     } do if exist(binary_name) == 1 then setup(server_name) end end
 
-    require 'mason-lspconfig'.setup_handlers { setup }
+    require 'mason-lspconfig'.setup_handlers {
+        setup,
+        rust_analyzer = function()
+            require 'rust-tools'.setup {
+                server = { on_attach = handler.on_attach },
+                tools = {
+                    inlay_hints = {
+                        auto = false,
+                    },
+                },
+            }
+        end,
+    }
 end
+
+plugins:add {
+    'simrat39/rust-tools.nvim',
+    lazy = true,
+}
+
 
 plugins:add {
     'williamboman/mason.nvim',
@@ -78,7 +96,7 @@ plugins:add {
     opts = {
         library = {
             enabled = true,
-            plugins = { 'plenary.nvim' },
+            plugins = { 'plenary.nvim', 'luasnip' },
         },
     },
 }
@@ -112,10 +130,9 @@ plugins:add {
 }
 plugins:add {
     'glepnir/lspsaga.nvim',
-    opts = function()
-        return require 'plugins.lsp.saga'
-    end,
+    opts = function() return require 'plugins.lsp.saga' end,
 }
+
 
 plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
@@ -124,19 +141,16 @@ plugins:add {
             require 'lsp-inlayhints'.on_attach(client, bufnr)
         end)
     end,
-    keys = {
-        {
-            '<leader>hi',
-            function() require 'lsp-inlayhints'.toggle() end,
-            desc = 'Toggle Inlay Hints'
-        },
-    },
+    keys = { {
+        '<leader>hi', function() require 'lsp-inlayhints'.toggle() end, desc = 'Toggle Inlay Hints',
+    }, },
     opts = {
         inlay_hints = {
             parameter_hints = { prefix = 'param:' },
             type_hints = { prefix = 'type' },
             only_current_line = false,
         },
+        enabled_at_startup = false,
     },
     config = function(_, opts)
         require 'lsp-inlayhints'.setup(opts)
@@ -170,12 +184,12 @@ plugins:add {
                 size = '65%',
             },
             mappings = {
-                k = actions.next_sibling,         -- down
-                i = actions.previous_sibling,     -- up
-                j = actions.parent,               -- Move to left panel
-                l = actions.children,             -- Move to right panel
-                h = actions.insert_name,          -- Insert at start of name
-                H = actions.insert_scope,         -- Insert at start of scope
+                k = actions.next_sibling,     -- down
+                i = actions.previous_sibling, -- up
+                j = actions.parent,           -- Move to left panel
+                l = actions.children,         -- Move to right panel
+                h = actions.insert_name,      -- Insert at start of name
+                H = actions.insert_scope,     -- Insert at start of scope
             },
         }
     end,

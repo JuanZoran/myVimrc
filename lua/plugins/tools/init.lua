@@ -158,11 +158,11 @@ plugins:add {
         check_ts = true,
         enable_abbr = true,
         fast_wrap = {
-            map = '<C-;>',
+            map = '<C-1>',
             chars = { '{', '[', '(', '"', "'", '<' },
             pattern = [=[[%'%"%)%>%]%)%}%,]]=],
             offset = 1, -- Offset from pattern match
-            end_key = 'l',
+            end_key = '1',
             -- keys = "qwertyuiopzxcvbnmasdfghjkl",
             keys = 'uiopghjkl',
             check_comma = true,
@@ -356,6 +356,11 @@ plugins:add {
     },
 }
 
+
+plugins:add {
+    'andymass/vim-matchup',
+    event = 'VeryLazy',
+}
 
 
 plugins:add {
