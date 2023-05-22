@@ -138,7 +138,7 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
     },
     opts = function()
         return {
-            ignore = '^$',
+            -- ignore = '^$',
             extra = {
                 ---Add comment on the line above
                 above = 'gcO',
@@ -376,6 +376,10 @@ plugins:add {
 plugins:add {
     'andymass/vim-matchup',
     event = 'VeryLazy',
+    init = function()
+        -- vim.g.matchup_motion_enabled = 0
+        vim.g.matchup_text_obj_enabled = 0
+    end,
 }
 
 

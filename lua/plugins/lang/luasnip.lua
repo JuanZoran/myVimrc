@@ -1,4 +1,4 @@
-local snippets_folder = vim.fn.stdpath 'config' .. '/snips'
+local snippets_folder = vim.fn.stdpath 'config' .. '/custom/snippet_lua/lua/snips'
 local ls = require 'luasnip'
 local types = require 'luasnip.util.types'
 
@@ -19,14 +19,20 @@ ls.config.set_config {
             },
         },
     },
-    snip_env = util.snip,
+    snip_env = require 'snippet_lua',
 }
 
-
-
 require 'luasnip.loaders.from_lua'.lazy_load { paths = snippets_folder }
-vim.keymap.set('n', '<leader><cr>', require 'luasnip.loaders.from_lua'.edit_snippet_files,
-    { desc = 'Edit Snippet' })
+vim.keymap.set('n', '<leader><cr>', function()
+    local fts = require 'luasnip.util.util'.get_snippet_filetypes()
+    vim.ui.select(fts, {
+        prompt = 'Select filetype:',
+    }, function(item, _)
+        if item then
+            vim.cmd.edit(snippets_folder .. '/' .. item .. '.lua')
+        end
+    end)
+end, { desc = 'Edit Snippet' })
 
 -- require 'luasnip.loaders.from_vscode'.lazy_load()
 

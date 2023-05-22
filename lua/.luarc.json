@@ -5,6 +5,7 @@
         "/home/zoran/.local/share/nvim/lazy/plenary.nvim/lua",
         "/home/zoran/.local/share/nvim/lazy/luasnip/lua",
         "/home/zoran/.config/nvim/lua",
+        "${3rd}/luv/library",
         "${3rd}/luv/library"
     ]
 }

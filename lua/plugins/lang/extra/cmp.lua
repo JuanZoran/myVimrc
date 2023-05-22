@@ -31,13 +31,29 @@ local opts = function()
         end
     end, { 'i', 'c' })
 
-    local prev = cmp.mapping(function()
-        if cmp.visible() then
-            cmp.select_prev_item()
-        else
-            cmp.mapping.complete()()
-        end
-    end, { 'i', 'c' })
+    local prev = cmp.mapping {
+        i = function()
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                cmp.mapping.complete()()
+            end
+        end,
+        -- c = function ()
+        --     if cmp.visible() then
+        --         cmp.select_prev_item()
+        --     else
+        --         cmp.mapping.complete()()
+        --     end
+        -- end,
+    }
+    -- local prev = cmp.mapping(function()
+    --     if cmp.visible() then
+    --         cmp.select_prev_item()
+    --     else
+    --         cmp.mapping.complete()()
+    --     end
+    -- end, { 'i', 'c' })
 
     local mapping = {
         ['<C-d>'] = function(fallback)
@@ -57,7 +73,6 @@ local opts = function()
                 elseif copilot.is_visible() then
                     copilot.next()
                 else
-                    ---@diagnostic disable-next-line: missing-parameter
                     cmp.mapping.complete()()
                 end
             end,
@@ -69,13 +84,20 @@ local opts = function()
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if copilot.is_visible() then
+                copilot.accept()
+            elseif cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
         ['<CR>'] = cmp.mapping.confirm { select = false },
         ['<C-o>'] = cmp.mapping.confirm { select = true },
         ['<C-e>'] = cmp.mapping(function(fallback)
             if luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
-                -- if luasnip.locally_jumpable() then
-                --     luasnip.jump(1)
             else
                 fallback()
             end
@@ -87,15 +109,6 @@ local opts = function()
                 fallback()
             end
         end,
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if copilot.is_visible() then
-                copilot.accept()
-            elseif cmp.visible() then
-                cmp.select_next_item()
-            else
-                fallback()
-            end
-        end, { 'i', 's' }),
         ['<C-p>'] = prev,
         ['<C-k>'] = next,
     }

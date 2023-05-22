@@ -14,9 +14,11 @@ plugins:add {
     },
     config = function() require 'plugins.lang.luasnip' end,
     dependencies = {
-        'rafamadriz/friendly-snippets',
+        { 'rafamadriz/friendly-snippets', cond = false },
+        { 'JuanZoran/snippet_lua',        dev = true },
     },
 }
+
 
 plugins:add {
     'danymat/neogen',
@@ -28,41 +30,18 @@ plugins:add {
     },
 }
 
-local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
+-- local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
-    'lukas-reineke/indent-blankline.nvim',
+    'shellRaining/hlchunk.nvim',
+    event = { 'UIEnter' },
     opts = {
-        -- char = "▏",
-        char = '│',
-        filetype_exclude = exclude_ft,
-        show_trailing_blankline_indent = false,
-        show_current_context = false,
-    },
-
-    dependencies = {
-        'echasnovski/mini.indentscope',
-        version = false, -- wait till new 0.7.0 release to put it back on semver
-        opts = {
-            mappings = {
-                object_scope = 'hi',
-            },
-            symbol = '▏',
-            -- symbol = "│",
-            options = { try_as_border = true },
+        chunk = {
+            style = '#00ffff',
+            textobject = 'ai',
         },
-        init = function()
-            vim.api.nvim_create_autocmd('FileType', {
-                pattern = exclude_ft,
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
-        end,
-        config = function(_, opts)
-            require 'mini.indentscope'.setup(opts)
-        end,
     },
 }
+
 
 ---@format disable-next
 plugins:add {
@@ -85,7 +64,7 @@ plugins:add {
             config = function() require 'illuminate'.configure {
                 -- providers = { 'lsp', 'treesitter' },
                 large_file_curoff = 4000,
-                delay = 200,
+                delay = 300,
             }
         end, },
     }, -- rainbow pairs

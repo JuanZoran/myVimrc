@@ -1,27 +1,29 @@
-local set = vim.keymap.set
-set('n', 'zR', require 'ufo'.openAllFolds)
-set('n', 'zM', require 'ufo'.closeAllFolds)
-set('n', 'zp', require 'ufo'.peekFoldedLinesUnderCursor)
-set('n', 'zj', require 'ufo'.goPreviousClosedFold)
-set('n', 'zl', require 'ufo'.goNextClosedFold)
+local map = vim.keymap.set
+map('n', 'zR', require 'ufo'.openAllFolds)
+map('n', 'zM', require 'ufo'.closeAllFolds)
+map('n', 'zp', require 'ufo'.peekFoldedLinesUnderCursor)
+map('n', 'zj', require 'ufo'.goPreviousClosedFold)
+map('n', 'zl', require 'ufo'.goNextClosedFold)
 
 -- INFO : virtual Text hint
 local handler = function(virtText, lnum, endLnum, width, truncate)
+    local get_width = vim.api.nvim_strwidth
+
     local newVirtText = {}
-    local suffix = ('  %d '):format(endLnum - lnum)
-    local sufWidth = vim.api.nvim_strwidth(suffix)
+    local suffix = (' 💌   %d '):format(endLnum - lnum)
+    local sufWidth = get_width(suffix)
     local targetWidth = width - sufWidth
     local curWidth = 0
     for _, chunk in ipairs(virtText) do
         local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+        local chunkWidth = get_width(chunkText)
         if targetWidth > curWidth + chunkWidth then
             newVirtText[#newVirtText + 1] = chunk
         else
             chunkText = truncate(chunkText, targetWidth - curWidth)
             local hlGroup = chunk[2]
             newVirtText[#newVirtText + 1] = { chunkText, hlGroup }
-            chunkWidth = vim.api.nvim_strwidth(chunkText)
+            chunkWidth = get_width(chunkText)
             -- str width returned from truncate() may less than 2nd argument, need padding
             if curWidth + chunkWidth < targetWidth then
                 suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
@@ -45,7 +47,7 @@ require 'ufo'.setup {
     preview = {
         mappings = {
             scrollU = 'I',
-            scrollD = 'K'
+            scrollD = 'K',
         },
     },
 }

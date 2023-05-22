@@ -1,4 +1,4 @@
-local snips = util.list()
+local snips = new()
 
 
 
