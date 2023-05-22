@@ -1,4 +1,5 @@
 local lazygit, ranger
+
 local config = function(_, opts)
     require 'toggleterm'.setup(opts)
     local t = require 'toggleterm.terminal'.Terminal
@@ -18,7 +19,6 @@ local flatten = {
     'willothy/flatten.nvim',
     lazy = false,
     opts = {
-        nest_if_no_args = true,
         callbacks = {
             pre_open = function() -- Close toggleterm when an external open request is received
                 require 'toggleterm'.toggle(0)
@@ -77,14 +77,13 @@ local toggleterm = {
         autochdir = true,
         direction = 'float', --[[ 'vertical' | 'horizontal' | 'tab' | 'float', ]]
         float_opts = {
-            border = 'rounded'
+            border = 'rounded',
         },
     },
-    --- INFO : fix this 
-    dependencies = flatten,
     config = config,
 }
 
 return {
+    flatten,
     toggleterm,
 }

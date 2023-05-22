@@ -19,7 +19,6 @@ plugins:add {
     },
 }
 
-
 plugins:add {
     'danymat/neogen',
     keys = {
@@ -41,7 +40,6 @@ local indent = {
         },
     },
 }
-
 
 ---@format disable-next
 plugins:add {
@@ -150,10 +148,6 @@ plugins:add {
 }
 
 plugins:add {
-    'wsdjeg/xmake.vim',
-    cmd = 'XMake',
-}
-plugins:add {
     'ray-x/web-tools.nvim',
     cmd = 'BrowserPreview',
     config = true,
@@ -169,6 +163,4 @@ plugins:add {
         },
     },
 }
-
-
 return plugins

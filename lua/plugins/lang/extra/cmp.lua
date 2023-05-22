@@ -47,14 +47,6 @@ local opts = function()
         --     end
         -- end,
     }
-    -- local prev = cmp.mapping(function()
-    --     if cmp.visible() then
-    --         cmp.select_prev_item()
-    --     else
-    --         cmp.mapping.complete()()
-    --     end
-    -- end, { 'i', 'c' })
-
     local mapping = {
         ['<C-d>'] = function(fallback)
             if not require 'noice.lsp'.scroll(4) and not cmp.scroll_docs(4) then
