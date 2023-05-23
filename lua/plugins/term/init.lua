@@ -9,7 +9,7 @@ local config = function(_, opts)
     }
 
     ranger = t:new {
-        cmd = 'ranger',
+        cmd = 'lf',
         hidden = true,
     }
 end
@@ -41,8 +41,10 @@ local flatten = {
                 end
                 -- If it's a normal file, then reopen the terminal, then switch back to the newly opened window
                 -- This gives the appearance of the window opening independently of the terminal
+                -- vim.cmd.q()
                 require 'toggleterm'.toggle(0)
-                vim.api.nvim_set_current_win(winnr)
+                vim.api.nvim_set_current_buf(bufnr)
+                -- vim.api.nvim_set_current_win(winnr)
             end,
             block_end = function()
                 -- After blocking ends (for a git commit, etc), reopen the terminal
@@ -59,11 +61,11 @@ local toggleterm = {
     cmd = { 'ToggleTerm', 'TermExec' },
     keys = {
         '<C-d>',
-        { '<C-g>',     function() lazygit:toggle() end,            desc = 'Toggle Lazygit' },
-        { '<leader>R', function() ranger:toggle() end,             desc = 'Toggle Lazygit' },
-        { '<C-e>u',    '<Cmd>ToggleTerm direction=horizontal<CR>', desc = 'Toggle Terminal horizontal' },
-        { '<C-e>o',    '<Cmd>ToggleTerm direction=vertical<CR>',   desc = 'Toggle Terminal vertical' },
-        { '<C-e>i',    '<Cmd>ToggleTerm direction=float<CR>',      desc = 'Toggle Terminal float' },
+        { '<C-g>',  function() lazygit:toggle() end,            desc = 'Toggle Lazygit' },
+        { '<C-w>e', function() ranger:toggle() end,             desc = 'Toggle Lazygit' },
+        { '<C-e>u', '<Cmd>ToggleTerm direction=horizontal<CR>', desc = 'Toggle Terminal horizontal' },
+        { '<C-e>o', '<Cmd>ToggleTerm direction=vertical<CR>',   desc = 'Toggle Terminal vertical' },
+        { '<C-e>i', '<Cmd>ToggleTerm direction=float<CR>',      desc = 'Toggle Terminal float' },
         -- { '<C-e><C-e>', '<Cmd>ToggleTermSendCurrentLine<CR>',       desc = 'Send Current Line' },
     },
     opts = {

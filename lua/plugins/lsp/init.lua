@@ -142,11 +142,14 @@ plugins:add {
             -- type_hints = { prefix = 'type' },
             only_current_line = false,
         },
-        enabled_at_startup = false,
+        enabled_at_startup = true,
     },
     config = function(_, opts)
         require 'lsp-inlayhints'.setup(opts)
-        vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#9692af' })
+        vim.api.nvim_set_hl(0, 'LspInlayHint', {
+            fg = '#858a94',
+            bg = '#2d2e32',
+        })
     end,
 }
 -- dependencies = {

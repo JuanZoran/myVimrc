@@ -6,6 +6,7 @@
         "/home/zoran/.local/share/nvim/lazy/luasnip/lua",
         "/home/zoran/.config/nvim/lua",
         "${3rd}/luv/library",
-        "${3rd}/luv/library"
+        "${3rd}/luv/library",
+        "/home/zoran/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/47e7bcd8"
     ]
 }

@@ -28,12 +28,13 @@ plugins:add {
                 markdown    = true,
                 telescope   = true,
                 headlines   = true,
-                treesitter  = true,
                 telekasten  = true,
                 ts_rainbow2 = true,
                 lsp_trouble = true,
                 native_lsp  = { enabled = true },
                 navic       = { enabled = true },
+
+                treesitter  = true,
                 treesitter_context = true,
                 -- mason = true,
                 -- indent_blankline = {

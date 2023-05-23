@@ -16,6 +16,10 @@ local opts = {
         userThirdParty = {
             os.getenv 'HOME' .. '/.config/LLS-Addons',
         },
+        -- FIXME ?
+        library = {
+            '/home/zoran/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5393ac01'
+        }
     },
     format = {
         enable = true,

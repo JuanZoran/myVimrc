@@ -231,7 +231,9 @@ local sources = {
 }
 
 return {
-    'hrsh7th/nvim-cmp',
+    'folke/nvim-cmp',
+    branch = 'async',
+    -- 'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = opts,
     version = false,

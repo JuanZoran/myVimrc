@@ -20,7 +20,7 @@ autocmd('BufRead', {
     group = group,
     callback = function()
         vim.cmd [[silent! loadview]]
-        vim.opt_local.hlsearch = false
+        -- vim.opt_local.hlsearch = false
     end,
 })
 
