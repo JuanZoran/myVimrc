@@ -34,11 +34,7 @@ plugins:add {
                 lsp_trouble = true,
                 native_lsp  = { enabled = true },
                 navic       = { enabled = true },
-                -- mini        = false,
-                -- treesitter_context = true,
-                -- noice = true,
-                -- illuminate = true,
-                -- which_key = true,
+                treesitter_context = true,
                 -- mason = true,
                 -- indent_blankline = {
                 --     enable = true,
@@ -121,6 +117,15 @@ plugins:add {
             desc =
             '📁Toggle File Explorer in buffer dir',
         },
+        {
+            '<C-w>w',
+            function()
+                local picked_window_id = require 'window-picker'.pick_window()
+                if not picked_window_id then return end
+                vim.api.nvim_set_current_win(picked_window_id)
+            end,
+            desc = 'Window Picker',
+        },
     },
     branch = 'v2.x',
     opts = function()
@@ -128,7 +133,17 @@ plugins:add {
     end,
     dependencies = {
         's1n7ax/nvim-window-picker',
-        config = true,
+        opts = {
+            selection_chars = 'IJKLQWER',
+            show_prompt = false,
+            use_winbar = 'smart',
+            fg_color = '#74c7ec',
+            current_win_hl_color = '#7c3aed',
+            other_win_hl_color = '#181831',
+            selection_display = function (char)
+                return ' ' .. char
+            end
+        },
     },
 }
 
@@ -136,9 +151,9 @@ plugins:add {
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
     keys = {
-        { '<leader>bj', '<Cmd>BufferLineMovePrev<CR>',                desc = 'Move Buffer to Left' },
-        { '<leader>bl', '<Cmd>BufferLineMoveNext<CR>',                desc = 'Move Buffer to Right' },
-        { '<Leader>bb', '<Cmd>BufferLinePickClose<CR>',               desc = 'Pick a Buffer to delete' },
+        { '<leader>bj', '<Cmd>BufferLineMovePrev<CR>',            desc = 'Move Buffer to Left' },
+        { '<leader>bl', '<Cmd>BufferLineMoveNext<CR>',            desc = 'Move Buffer to Right' },
+        { '<Leader>bb', '<Cmd>BufferLinePickClose<CR>',           desc = 'Pick a Buffer to delete' },
         { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
         { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },
         { '<C-j>',      '<Cmd>BufferLineCyclePrev<CR>' },

@@ -2,83 +2,83 @@ local keys = {
     {
         '<leader>th',
         '<Cmd>Telescope help_tags<CR>',
-        desc = ' Check out all tags'
+        desc = ' Check out all tags',
     },
     {
         '<leader>tH',
         '<Cmd>Telescope highlights<CR>',
-        desc = '[] Check out all highlights'
+        desc = '[] Check out all highlights',
     },
     {
         '<leader>tf',
         '<Cmd>Telescope git_files<CR>',
-        desc = '[]Search Git File'
+        desc = '[]Search Git File',
     },
     {
         '<leader>tt',
         '<Cmd>Telescope live_grep<CR>',
-        desc = ' Search text in cucurrent directory'
+        desc = ' Search text in cucurrent directory',
     },
     {
         '<leader>gf',
         '<Cmd>Telescope current_buffer_fuzzy_find<CR>',
-        desc = ' Search text in current buffer'
+        desc = ' Search text in current buffer',
     },
     {
         '<leader>ts',
         '<Cmd>Telescope spell_suggest<CR>',
-        desc = '益spell suggestions about cursor word'
+        desc = '益spell suggestions about cursor word',
     },
     {
         '<leader>tr',
         '<Cmd>Telescope treesitter<CR>',
-        desc = '滑Have a look at the tags provided by 滑'
+        desc = '滑Have a look at the tags provided by 滑',
     },
     {
         '<leader>te',
         '<Cmd>Telescope diagnostics<CR>',
-        desc = ' take a look'
+        desc = ' take a look',
     },
     {
         '<leader>tc',
         '<Cmd>Telescope commands<CR>',
-        desc = 'גּ Check out commands'
+        desc = 'גּ Check out commands',
     },
     {
         '<leader><leader>p',
         '<Cmd>Telescope commands<CR>',
-        desc = 'גּ Check out commands'
+        desc = 'גּ Check out commands',
     },
     {
         '<leader>tC',
         [[<Cmd>lua require"telescope.builtin".colorscheme{enable_preview = true}<CR>]],
-        desc = 'Colorscheme Preview'
+        desc = 'Colorscheme Preview',
     },
     {
         '<leader>ti',
         '<Cmd>Telescope jumplist<CR>',
-        desc = ' Get jumplist'
+        desc = ' Get jumplist',
     },
     {
         '<leader>tk',
         '<Cmd>Telescope keymaps<CR>',
-        desc = ' Check out keymaps[S-C-/]'
+        desc = ' Check out keymaps[S-C-/]',
     },
     {
         '<leader>fd',
         ([[<Cmd>Telescope find_files cwd=%s<CR>]]):format(vim.fn.stdpath 'config'),
-        desc = ' Dotfiles search'
+        desc = ' Dotfiles search',
     },
     {
         '<C-b>',
         '<Cmd>Telescope marks<CR>',
-        desc = '[]Check out Marks'
+        desc = '[]Check out Marks',
     },
     -- TODO :Symbols
     {
         '<C-s>',
         '<Cmd>Telescope lsp_document_symbols<CR>',
-        desc = '[]Check out Marks'
+        desc = '[]Check out Marks',
     },
     { '<leader>T', ':Telescope ' }, -- for C-/
     { '<C-u>',     '<Cmd>Telescope oldfiles<Cr>' },
@@ -94,7 +94,7 @@ local config = function()
             prompt_prefix = ' ',
             selection_caret = ' ',
             path_display = {
-                'smart'
+                'smart',
             },
             -- layout_strategy = "horizontal",
             -- layout_config = { prompt_position = "top" },
@@ -163,22 +163,40 @@ local config = function()
     }
     local telescope = require 'telescope'
     telescope.load_extension 'fzf'
+    require 'telescope-all-recent'
+
+
+    -- FIXME : Remove this when telescope or neovim fixup the async issue
+    vim.api.nvim_create_autocmd('WinLeave', {
+        callback = function()
+            if vim.bo.ft == 'TelescopePrompt' and vim.fn.mode() == 'i' then
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'i', false)
+            end
+        end,
+    })
 end
 
+
 return {
-    'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
-    dependencies = {
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }, -- fuzzy finder
-        {
-            'nvim-lua/plenary.nvim',
-            keys = {
-                { ';t', '<Plug>PlenaryTestFile', desc = 'Test Plugin' },
+    {
+        'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
+        dependencies = {
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }, -- fuzzy finder
+            {
+                'nvim-lua/plenary.nvim',
+                keys = { { ';t', '<Plug>PlenaryTestFile', desc = 'Test Plugin' } },
             },
         },
+        keys = keys,
+        branch = '0.1.x',
+        config = config,
+        import = 'plugins.telescope.extensions',
     },
-    keys = keys,
-    version = false,
-    config = config,
-    import = 'plugins.telescope.extensions'
+
+    {
+        'prochri/telescope-all-recent.nvim',
+        lazy = true,
+        opts = {},
+    },
 }

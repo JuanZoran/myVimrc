@@ -1,7 +1,8 @@
 local api = vim.api
 local autocmd = api.nvim_create_autocmd
-
 local group = api.nvim_create_augroup('UserDefine', { clear = true })
+
+
 
 -- Go to last loc when opening a buffer
 -- autocmd('BufReadPost', {
@@ -26,6 +27,7 @@ autocmd('BufRead', {
 autocmd({ 'BufWrite', 'QuitPre' }, {
     group = group,
     callback = function()
+
         if vim.opt.foldmethod == 'diff' then
             vim.opt.foldmethod = 'manual'
         end

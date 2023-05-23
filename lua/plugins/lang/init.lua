@@ -32,11 +32,14 @@ plugins:add {
 -- local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
 local indent = {
     'shellRaining/hlchunk.nvim',
-    event = { 'UIEnter' },
+    event = 'UIEnter',
     opts = {
         chunk = {
             style = '#00ffff',
             textobject = 'ai',
+        },
+        line_num = {
+            style = '#00ffff',
         },
     },
 }

@@ -13,7 +13,8 @@ local c        = {
     dark_red     = '#f55385',
     maroon       = '#eba0ac',
     white        = '#ffffff',
-    peach        = '#fab387',
+    -- peach        = '#fab387',
+    peach        = '#e5c078',
     yellow       = '#f9e2af',
     green        = '#a6e3a1',
     light_green  = '#89e051',
@@ -107,7 +108,6 @@ local override = {
         fg = c.peach,
     },
     ['@lsp.type.enum']                     = {
-        -- link = 'enum',
         fg = '#94e2d5',
     },
 
@@ -132,9 +132,9 @@ local override = {
         link = 'CmpItemAbbrMatch',
     },
 
-    MiniIndentscopeSymbol                  = {
-        link = 'MoreMsg',
-    },
+    -- MiniIndentscopeSymbol                  = {
+    --     link = 'MoreMsg',
+    -- },
 
     BufferLineBufferSelected               = {
         fg = c.sapphire,

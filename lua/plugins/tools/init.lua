@@ -71,6 +71,28 @@ plugins:add {
     config = function() require 'plugins.tools.todo-comments' end,
 }
 
+
+plugins:add {
+    'nvim-neorg/neorg',
+    build = ':Neorg sync-parsers',
+    ft = 'norg',
+    cmd = 'Neorg',
+    opts = {
+        load = {
+            ['core.defaults'] = {},  -- Loads default behaviour
+            ['core.concealer'] = {}, -- Adds pretty icons to your documents
+            ['core.dirman'] = {      -- Manages Neorg workspaces
+                config = {
+                    workspaces = {
+                        notes = '~/notes',
+                    },
+                },
+            },
+        },
+    },
+}
+
+
 plugins:add {
     'iamcco/markdown-preview.nvim',
     ft = { 'markdown', 'md' },
@@ -83,25 +105,28 @@ plugins:add {
                 { 'mt', '<Cmd>TableModeToggle<CR>', desc = 'Toggle Markdown Table Mode' },
             },
         },
-        {
-            'lukas-reineke/headlines.nvim',
-            config = function()
-                require 'headlines'.setup()
-                local set_hl = vim.api.nvim_set_hl
-                set_hl(0, 'CodeBlock', { bg = 'NONE' })
-                -- for i, color in ipairs {
-                --     { fg = '#a6d189', bg = 'NONE' },
-                --     { fg = '#8caaee', bg = 'NONE' },
-                --     { fg = '#e78284', bg = 'NONE' },
-                --     { fg = '#ca9ee6', bg = 'NONE' },
-                --     { fg = '#e5c890', bg = 'NONE' },
-                --     { fg = '#babbf1', bg = 'NONE' },
-                -- } do set_hl(0, 'Headline' .. i, color) end
-                -- set_hl(0, 'Headline', { link = 'Headline1' })
-            end,
-        },
     },
 }
+
+plugins:add {
+    'lukas-reineke/headlines.nvim',
+    ft = { 'markdown', 'md', 'norg' },
+    config = function()
+        require 'headlines'.setup()
+        local set_hl = vim.api.nvim_set_hl
+        set_hl(0, 'CodeBlock', { bg = 'NONE' })
+        -- for i, color in ipairs {
+        --     { fg = '#a6d189', bg = 'NONE' },
+        --     { fg = '#8caaee', bg = 'NONE' },
+        --     { fg = '#e78284', bg = 'NONE' },
+        --     { fg = '#ca9ee6', bg = 'NONE' },
+        --     { fg = '#e5c890', bg = 'NONE' },
+        --     { fg = '#babbf1', bg = 'NONE' },
+        -- } do set_hl(0, 'Headline' .. i, color) end
+        -- set_hl(0, 'Headline', { link = 'Headline1' })
+    end,
+}
+
 
 plugins:add {
     'CKolkey/ts-node-action',
@@ -360,6 +385,10 @@ plugins:add {
     },
     config = function()
         require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
+        vim.api.nvim_set_hl(0, 'LeapLabelPrimary', {
+            bg = '#181831',
+            fg = '#74c7ec',
+        })
     end,
     dependencies = {
         'ggandor/flit.nvim',
@@ -381,6 +410,8 @@ plugins:add {
         vim.g.matchup_text_obj_enabled = 0
     end,
 }
+
+
 
 
 plugins:add {

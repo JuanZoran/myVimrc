@@ -127,6 +127,7 @@ plugins:add {
 
 plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
+    branch = 'anticonceal',
     init = function()
         require 'plugins.lsp.handlers'.attach(function(client, bufnr)
             require 'lsp-inlayhints'.on_attach(client, bufnr)
@@ -137,8 +138,8 @@ plugins:add {
     }, },
     opts = {
         inlay_hints = {
-            parameter_hints = { prefix = 'param:' },
-            type_hints = { prefix = 'type' },
+            -- parameter_hints = { prefix = 'param:' },
+            -- type_hints = { prefix = 'type' },
             only_current_line = false,
         },
         enabled_at_startup = false,
