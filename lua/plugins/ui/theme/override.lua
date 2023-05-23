@@ -30,78 +30,80 @@ local c        = {
     light_purple = '#c61ad9',
 }
 
+-- util.color = c
+
 local override = {
-    Visual                 = {
+    Visual                                 = {
         fg = c.sapphire,
         bg = c.dim,
     },
-    PmenuSel               = {
+    PmenuSel                               = {
         bold = true,
         fg = c.mantle,
         bg = c.light_green,
         -- fg = c.sapphire,
         -- bg = c.dim,
     },
-    IncSearch              = {
+    IncSearch                              = {
         fg = c.mantle,
         bg = c.sky,
     },
-    Search                 = {
-        link = 'IncSearch'
+    Search                                 = {
+        link = 'IncSearch',
     },
-    MoreMsg                = {
+    MoreMsg                                = {
         fg = c.light_blue,
         bold = true,
     },
-    Cursor                 = {
+    Cursor                                 = {
         bg = c.light_blue,
     },
 
-    CursorLine             = {
+    CursorLine                             = {
         bg = c.base,
     },
-    TermCursor             = {
-        link = 'Cursor'
-    },
-    CursorIM               = {
+    TermCursor                             = {
         link = 'Cursor',
     },
-    NormalFloat            = {
-        link = 'Normal'
+    CursorIM                               = {
+        link = 'Cursor',
     },
-    SagaBorder             = {
+    NormalFloat                            = {
+        link = 'Normal',
+    },
+    SagaBorder                             = {
         fg = c.purple,
         bg = 'NONE',
     },
-    CodeActionText         = {
+    CodeActionText                         = {
         fg = c.light_blue,
     },
     -- ['@property']               = {
-    NavicSeparator         = {
+    NavicSeparator                         = {
         link = '@keyword',
     },
 
-    IlluminatedWordText    = {
+    IlluminatedWordText                    = {
         bg = c.dim_gray,
     },
-    IlluminatedWordRead    = {
+    IlluminatedWordRead                    = {
         link = 'IlluminatedWordText',
     },
-    IlluminatedWordWrite   = {
+    IlluminatedWordWrite                   = {
         link = 'IlluminatedWordText',
     },
-    ['@variable']          = {
+    ['@variable']                          = {
         fg = '#f4b085',
     },
-    ['@keyword.return']    = {
+    ['@keyword.return']                    = {
         fg = c.dark_red,
         italic = true,
     },
-    ['@constant.builtin']  = {
+    ['@constant.builtin']                  = {
         fg = c.blue,
         italic = true,
     },
-    ['@lsp.type.property'] = {
+    ['@lsp.type.property']                 = {
         fg = c.peach,
     },
     ['@lsp.type.enum']                     = {
@@ -116,28 +118,36 @@ local override = {
     --     link = 'enumMember',
     -- },
 
-    CmpItemAbbr            = {
+    CmpItemAbbr                            = {
         fg = c.sapphire,
     },
-    CmpItemAbbrMatch       = {
+    CmpItemAbbrMatch                       = {
         fg = c.purple,
         bold = true,
     },
-    CmpItemMenu            = {
+    CmpItemMenu                            = {
         fg = c.blue,
     },
-    CmpItemAbbrMatchFuzzy  = {
+    CmpItemAbbrMatchFuzzy                  = {
         link = 'CmpItemAbbrMatch',
     },
 
-    MiniIndentscopeSymbol = {
+    MiniIndentscopeSymbol                  = {
         link = 'MoreMsg',
     },
 
-    BufferLineBufferSelected = {
+    BufferLineBufferSelected               = {
         fg = c.sapphire,
     },
 
+    MatchParen                             = {
+        fg = '#FFD700',
+        bg = '#505050',
+
+        -- bg = c.purple,
+        -- fg = c.light_green,
+        bold = true,
+    },
 
     -- IndentBlanklineContextChar  = {
     --     fg = '#89e051'

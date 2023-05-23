@@ -1,0 +1,3 @@
+[submodule "custom/snippet_lua"]
+	path = custom/snippet_lua
+	url = git@github.com:JuanZoran/snippet_lua

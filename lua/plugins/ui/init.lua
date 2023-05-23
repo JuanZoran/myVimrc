@@ -115,7 +115,7 @@ plugins:add {
             '<C-w>d',
             '<Cmd>Neotree reveal_force_cwd dir=%:h toggle<CR>',
             desc =
-            '📁Toggle File Explorer in buffer dir'
+            '📁Toggle File Explorer in buffer dir',
         },
     },
     branch = 'v2.x',
@@ -132,9 +132,9 @@ plugins:add {
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
     keys = {
-        { '<leader>bj', ':BufferLineMovePrev<CR>',                desc = 'Move Buffer to Left' },
-        { '<leader>bl', ':BufferLineMoveNext<CR>',                desc = 'Move Buffer to Right' },
-        { '<Leader>bb', ':BufferLinePickClose<CR>',               desc = 'Pick a Buffer to delete' },
+        { '<leader>bj', '<Cmd>BufferLineMovePrev<CR>',                desc = 'Move Buffer to Left' },
+        { '<leader>bl', '<Cmd>BufferLineMoveNext<CR>',                desc = 'Move Buffer to Right' },
+        { '<Leader>bb', '<Cmd>BufferLinePickClose<CR>',               desc = 'Pick a Buffer to delete' },
         { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
         { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },
         { '<C-j>',      '<Cmd>BufferLineCyclePrev<CR>' },

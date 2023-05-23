@@ -17,11 +17,11 @@ plugins:add {
         local types = require 'luasnip.util.types'
         ls.config.set_config {
             history = false,
+            -- enable_autosnippets = true,
             updateevents = { 'TextChanged', 'TextChangedI' },
             region_check_events = { 'CursorHold', 'InsertLeave' },
             delete_check_events = 'TextChanged',
-            -- enable_autosnippets = true,
-            -- store_selection_keys = "<C-e>",
+            store_selection_keys = "<C-e>",
             ext_opts = {
                 [types.choiceNode] = {
                     active = {
@@ -53,39 +53,18 @@ plugins:add {
     },
 }
 
-local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
-local indent = {
-    'lukas-reineke/indent-blankline.nvim',
-    opts = {
-        -- char = "▏",
-        char = '│',
-        filetype_exclude = exclude_ft,
-        show_trailing_blankline_indent = false,
-        show_current_context = false,
-    },
 
-    dependencies = {
-        'echasnovski/mini.indentscope',
-        version = false, -- wait till new 0.7.0 release to put it back on semver
-        opts = {
-            mappings = {
-                object_scope = 'hi',
-            },
-            symbol = '▏',
-            -- symbol = "│",
-            options = { try_as_border = true },
+local indent = {
+    'shellRaining/hlchunk.nvim',
+    event = { 'UIEnter' },
+    opts = {
+        chunk = {
+            style = '#00ffff',
+            textobject = 'ai',
         },
-        init = function()
-            vim.api.nvim_create_autocmd('FileType', {
-                pattern = exclude_ft,
-                callback = function()
-                    vim.b.miniindentscope_disable = true
-                end,
-            })
-        end,
-        config = function(_, opts)
-            require 'mini.indentscope'.setup(opts)
-        end,
+        line_num = {
+            style = '#00ffff',
+        },
     },
 }
 
@@ -148,7 +127,6 @@ plugins:add {
 }
 
 
-
 local frontend = { 'html', 'css' }
 plugins:add {
     'windwp/nvim-ts-autotag',
@@ -160,8 +138,4 @@ plugins:add {
     ft = frontend,
 }
 
-plugins:add {
-    'wsdjeg/xmake.vim',
-    cmd = 'XMake',
-}
 return plugins
