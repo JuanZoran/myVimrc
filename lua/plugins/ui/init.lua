@@ -20,21 +20,21 @@ plugins:add {
             --     percentage = 0.15,
             -- },
             integrations = {
-                cmp         = true,
-                leap        = true,
-                notify      = true,
-                neotree     = true,
-                gitsigns    = true,
-                markdown    = true,
-                telescope   = true,
-                headlines   = true,
-                telekasten  = true,
-                ts_rainbow2 = true,
-                lsp_trouble = true,
-                native_lsp  = { enabled = true },
-                navic       = { enabled = true },
+                cmp                = true,
+                leap               = true,
+                notify             = true,
+                neotree            = true,
+                gitsigns           = true,
+                markdown           = true,
+                telescope          = true,
+                headlines          = true,
+                telekasten         = true,
+                ts_rainbow2        = true,
+                lsp_trouble        = true,
+                native_lsp         = { enabled = true },
+                navic              = { enabled = true },
 
-                treesitter  = true,
+                treesitter         = true,
                 treesitter_context = true,
                 -- mason = true,
                 -- indent_blankline = {
@@ -141,9 +141,9 @@ plugins:add {
             fg_color = '#74c7ec',
             current_win_hl_color = '#7c3aed',
             other_win_hl_color = '#181831',
-            selection_display = function (char)
+            selection_display = function(char)
                 return ' ' .. char
-            end
+            end,
         },
     },
 }
@@ -152,8 +152,8 @@ plugins:add {
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
     keys = {
-        { '<leader>bj', '<Cmd>BufferLineMovePrev<CR>',            desc = 'Move Buffer to Left' },
-        { '<leader>bl', '<Cmd>BufferLineMoveNext<CR>',            desc = 'Move Buffer to Right' },
+        { '<<',         '<Cmd>BufferLineMovePrev<CR>',            desc = 'Move Buffer to Left' },
+        { '>>',         '<Cmd>BufferLineMoveNext<CR>',            desc = 'Move Buffer to Right' },
         { '<Leader>bb', '<Cmd>BufferLinePickClose<CR>',           desc = 'Pick a Buffer to delete' },
         { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
         { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },

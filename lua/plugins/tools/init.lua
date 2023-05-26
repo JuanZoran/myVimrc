@@ -109,6 +109,13 @@ plugins:add {
 }
 
 plugins:add {
+    'AckslD/nvim-FeMaco.lua',
+    cmd = 'FeMaco',
+    opts = {
+    },
+}
+
+plugins:add {
     'lukas-reineke/headlines.nvim',
     ft = { 'markdown', 'md', 'norg' },
     config = function()

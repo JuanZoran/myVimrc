@@ -1,6 +1,6 @@
 local default_source = {
+    { name = 'luasnip',     group_index = 1, max_item_count = 4 },
     { name = 'nvim_lsp',    group_index = 1 },
-    { name = 'luasnip',     group_index = 1, max_item_count = 5 },
     { name = 'cmp_tabnine', group_index = 1, max_item_count = 5 },
     { name = 'buffer',      group_index = 2, max_item_count = 5 },
     { name = 'path' },
@@ -211,8 +211,6 @@ local sources = {
             }
         end,
     },
-    -- 'octaltree/cmp-look',
-    -- { "jcdickinson/codeium.nvim", config = true },
     {
         'zbirenbaum/copilot.lua',
         opts = {
@@ -228,12 +226,12 @@ local sources = {
             },
         },
     },
+    -- 'octaltree/cmp-look',
+    -- { "jcdickinson/codeium.nvim", config = true },
 }
 
 return {
-    'folke/nvim-cmp',
-    branch = 'async',
-    -- 'hrsh7th/nvim-cmp',
+    'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = opts,
     version = false,

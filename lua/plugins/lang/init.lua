@@ -35,12 +35,15 @@ local indent = {
     event = 'UIEnter',
     opts = {
         chunk = {
-            style = '#00ffff',
+            style = '#61AEEF',
             textobject = 'ai',
         },
         line_num = {
-            style = '#00ffff',
+            style = '#61AEEF',
         },
+        blank = {
+            enable = false
+        }
     },
 }
 

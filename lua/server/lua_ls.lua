@@ -35,6 +35,7 @@ local opts = {
 
 return {
     cmd = {
+        -- '/home/zoran/Downloads/lua-language-server-3.6.19-linux-x64/bin/lua-language-server',
         'lua-language-server',
         '--locale=zh-cn',
     },

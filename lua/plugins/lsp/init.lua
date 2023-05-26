@@ -149,6 +149,7 @@ plugins:add {
         vim.api.nvim_set_hl(0, 'LspInlayHint', {
             fg = '#858a94',
             bg = '#2d2e32',
+            italic = true,
         })
     end,
 }
