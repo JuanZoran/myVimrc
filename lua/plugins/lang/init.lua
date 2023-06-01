@@ -1,5 +1,4 @@
 local plugins = util.list()
-
 plugins:add {
     import = 'plugins.lang.extra',
 }
@@ -12,7 +11,7 @@ plugins:add {
         { mode = 'x', '<C-x>', [["ec<cmd>lua require('luasnip.extras.otf').on_the_fly()<cr>]] },
         { mode = 'i', '<C-x>', [[<cmd>lua require('luasnip.extras.otf').on_the_fly("e")<cr>]] },
     },
-    config = function() require 'plugins.lang.luasnip' end,
+    config = function() require 'plugins.lang.opts.luasnip' end,
     dependencies = {
         { 'rafamadriz/friendly-snippets', cond = false },
         { 'JuanZoran/snippet_lua',        dev = true },
@@ -28,53 +27,6 @@ plugins:add {
         snippet_engine = 'luasnip',
     },
 }
-
--- local exclude_ft = { 'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'lazy' }
-local indent = {
-    'shellRaining/hlchunk.nvim',
-    event = 'UIEnter',
-    opts = {
-        chunk = {
-            style = '#61AEEF',
-            textobject = 'ai',
-        },
-        line_num = {
-            style = '#61AEEF',
-        },
-        blank = {
-            enable = false
-        }
-    },
-}
-
----@format disable-next
-plugins:add {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    event = { 'BufReadPost', 'BufNewFile' },
-    dependencies = {
-        indent,
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        'HiPhish/nvim-ts-rainbow2',
-        'RRethy/nvim-treesitter-endwise',
-        { 'nvim-treesitter/nvim-treesitter-context', config = true},
-
-        { 'kevinhwang91/nvim-ufo',
-            dependencies = 'kevinhwang91/promise-async',
-            config = function() require 'plugins.lang.ufo' end,
-        },
-
-        { 'rrethy/vim-illuminate',
-            config = function() require 'illuminate'.configure {
-                -- providers = { 'lsp', 'treesitter' },
-                large_file_curoff = 4000,
-                delay = 300,
-            }
-        end, },
-    }, -- rainbow pairs
-    config = function() require 'plugins.lang.treesitter' end,
-}
-
 
 plugins:add {
     'folke/trouble.nvim',

@@ -14,12 +14,13 @@ local opts = {
     },
     workspace = {
         userThirdParty = {
-            os.getenv 'HOME' .. '/.config/LLS-Addons',
+            -- os.getenv 'HOME' .. '/.config/LLS-Addons/addons',
+            '/home/zoran/.config/LLS-Addons/addons',
         },
         -- FIXME ?
-        library = {
-            '/home/zoran/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5393ac01'
-        }
+        -- library = {
+        --     '/home/zoran/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/5393ac01'
+        -- }
     },
     format = {
         enable = true,

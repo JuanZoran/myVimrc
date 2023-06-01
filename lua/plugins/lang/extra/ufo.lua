@@ -1,11 +1,3 @@
-local map = vim.keymap.set
-map('n', 'zR', require 'ufo'.openAllFolds)
-map('n', 'zM', require 'ufo'.closeAllFolds)
-map('n', 'zp', require 'ufo'.peekFoldedLinesUnderCursor)
-map('n', 'zj', require 'ufo'.goPreviousClosedFold)
-map('n', 'zl', require 'ufo'.goNextClosedFold)
-
--- INFO : virtual Text hint
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local get_width = vim.api.nvim_strwidth
 
@@ -37,29 +29,40 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     return newVirtText
 end
 
--- global handler
-require 'ufo'.setup {
-    fold_virt_text_handler = handler,
-    open_fold_hl_timeout = 250,
-    provider_selector = function()
-        return { 'treesitter', 'indent' }
-    end,
-    preview = {
-        mappings = {
-            scrollU = 'I',
-            scrollD = 'K',
+
+return {
+    'kevinhwang91/nvim-ufo',
+    dependencies = 'kevinhwang91/promise-async',
+    event = 'BufReadPre',
+    opts = {
+        fold_virt_text_handler = handler,
+        open_fold_hl_timeout = 250,
+        provider_selector = function()
+            return { 'treesitter', 'indent' }
+        end,
+        preview = {
+            mappings = {
+                scrollU = 'I',
+                scrollD = 'K',
+            },
         },
     },
+    config = function(_, opts)
+        require 'ufo'.setup(opts)
+        local set_hl = vim.api.nvim_set_hl
+        set_hl(0, 'Folded', {
+            bg = '#33467c',
+            bold = true,
+        })
+
+        local map = vim.keymap.set
+        map('n', 'zR', require 'ufo'.openAllFolds)
+        map('n', 'zM', require 'ufo'.closeAllFolds)
+        map('n', 'zp', require 'ufo'.peekFoldedLinesUnderCursor)
+        map('n', 'zj', require 'ufo'.goPreviousClosedFold)
+        map('n', 'zl', require 'ufo'.goNextClosedFold)
+    end,
 }
-
--- INFO open Fold hl
-local set_hl = vim.api.nvim_set_hl
-set_hl(0, 'Folded', {
-    bg = '#33467c',
-    bold = true,
-})
-
-
 -- INFO : some infomation for ufo
 --     open_fold_hl_timeout = {
 --         description = [[Time in millisecond between the range to be highlgihted and to be cleared

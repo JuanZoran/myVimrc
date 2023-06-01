@@ -23,7 +23,11 @@ local install = M.commands.install
 install.key = 'Y'
 install.key_plugin = 'y'
 
-require 'lazy'.setup('plugins', {
+require 'lazy'.setup({
+    { import = 'plugins' },
+    -- {import = 'plugins.lsp'},
+    -- {import = 'plugins.lang'},
+}, {
     install = {
         colorscheme = { 'catppuccin', 'tokyonight', 'kanagawa', 'habamax' },
     },

@@ -22,7 +22,7 @@ plugins:add {
             integrations = {
                 cmp                = true,
                 leap               = true,
-                notify             = true,
+                notify             = false,
                 neotree            = true,
                 gitsigns           = true,
                 markdown           = true,
@@ -118,6 +118,16 @@ plugins:add {
             desc =
             '📁Toggle File Explorer in buffer dir',
         },
+    },
+    branch = 'v2.x',
+    opts = function()
+        return require 'plugins.ui.neo-tree'
+    end,
+}
+
+plugins:add {
+    's1n7ax/nvim-window-picker',
+    keys = {
         {
             '<C-w>w',
             function()
@@ -128,32 +138,34 @@ plugins:add {
             desc = 'Window Picker',
         },
     },
-    branch = 'v2.x',
-    opts = function()
-        return require 'plugins.ui.neo-tree'
-    end,
-    dependencies = {
-        's1n7ax/nvim-window-picker',
-        opts = {
-            selection_chars = 'IJKLQWER',
-            show_prompt = false,
-            use_winbar = 'smart',
-            fg_color = '#74c7ec',
-            current_win_hl_color = '#7c3aed',
-            other_win_hl_color = '#181831',
-            selection_display = function(char)
-                return ' ' .. char
-            end,
+    opts = {
+        selection_chars = 'IJKLQWER',
+        highlights = {
+            statusline = {
+                focused = {
+                    fg = '#74c7ec',
+                    bg = '#7c3aed',
+                    bold = true,
+                },
+                unfocused = {
+                    fg = '#74c7ec',
+                    bg = '#181831',
+                    bold = true,
+                },
+            },
         },
     },
+    config = function(_, opts)
+        require 'window-picker'.setup(opts)
+    end,
 }
 
 
 plugins:add { -- 标签栏
     'akinsho/bufferline.nvim',
     keys = {
-        { '<<',         '<Cmd>BufferLineMovePrev<CR>',            desc = 'Move Buffer to Left' },
-        { '>>',         '<Cmd>BufferLineMoveNext<CR>',            desc = 'Move Buffer to Right' },
+        { '<C-,>',      '<Cmd>BufferLineMovePrev<CR>',            desc = 'Move Buffer to Left' },
+        { '<C-.>',      '<Cmd>BufferLineMoveNext<CR>',            desc = 'Move Buffer to Right' },
         { '<Leader>bb', '<Cmd>BufferLinePickClose<CR>',           desc = 'Pick a Buffer to delete' },
         { '<leader>bp', '<Cmd>BufferLineTogglePin<CR>' },
         { '<leader>bP', '<Cmd>BufferLineGroupClose ungrouped<CR>' },

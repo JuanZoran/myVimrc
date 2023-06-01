@@ -164,16 +164,6 @@ local config = function()
     local telescope = require 'telescope'
     telescope.load_extension 'fzf'
     require 'telescope-all-recent'
-
-
-    -- FIXME : Remove this when telescope or neovim fixup the async issue
-    vim.api.nvim_create_autocmd('WinLeave', {
-        callback = function()
-            if vim.bo.ft == 'TelescopePrompt' and vim.fn.mode() == 'i' then
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'i', false)
-            end
-        end,
-    })
 end
 
 

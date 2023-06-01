@@ -30,7 +30,7 @@ local function opts()
                 color = {
                     fg = '#69bbae',
                     -- bg = '#1e1e2e'
-                    bg = '#304263'
+                    bg = '#304263',
                 },
             },
         },
@@ -39,7 +39,7 @@ local function opts()
                 'fancy_lsp_servers',
                 color = {
                     fg = '#1e1e2e',
-                    bg = '#986FEC'
+                    bg = '#986FEC',
                 },
             },
         },
@@ -55,7 +55,7 @@ local function opts()
                 icon = ' ',
                 color = {
                     fg = '#69bbae',
-                    bg = '#1e1e2e'
+                    bg = '#1e1e2e',
                 },
             },
             { 'fancy_diff' },
@@ -117,7 +117,7 @@ return {
             },
             init = function()
                 -- vim.g.navic_silence = true
-                require 'plugins.lsp.handlers'.attach(function(client, bufnr)
+                require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
                     if client.server_capabilities.documentSymbolProvider then
                         require 'nvim-navic'.attach(client, bufnr)
                     end

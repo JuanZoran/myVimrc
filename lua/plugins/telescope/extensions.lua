@@ -77,18 +77,19 @@ plugins:add {
     },
 }
 
-plugins:add {
-    'nvim-telescope/telescope-ui-select.nvim',
-    init = function()
-        ---@diagnostic disable-next-line: duplicate-set-field
-        vim.ui.select = function(...)
-            require 'lazy'.load { plugins = { 'telescope-ui-select.nvim' } }
-            return vim.ui.select(...)
-        end
-    end,
-    lazy = true,
-    config = function() require 'telescope'.load_extension 'ui-select' end,
-}
+-- plugins:add {
+--     'nvim-telescope/telescope-ui-select.nvim',
+--     cond = false,
+--     init = function()
+--         ---@diagnostic disable-next-line: duplicate-set-field
+--         vim.ui.select = function(...)
+--             require 'lazy'.load { plugins = { 'telescope-ui-select.nvim' } }
+--             return vim.ui.select(...)
+--         end
+--     end,
+--     lazy = true,
+--     config = function() require 'telescope'.load_extension 'ui-select' end,
+-- }
 
 
 

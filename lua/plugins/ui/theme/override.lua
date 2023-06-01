@@ -93,7 +93,7 @@ local override = {
     IlluminatedWordWrite                   = {
         link = 'IlluminatedWordText',
     },
-    ['@variable']                          = {
+    ['@lsp.type.variable']                 = {
         fg = '#f4b085',
     },
     ['@keyword.return']                    = {

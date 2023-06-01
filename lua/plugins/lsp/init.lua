@@ -2,12 +2,14 @@ if util.firenvim then return {} end
 local plugins = util.list()
 
 local config = function()
-    local handler = require 'plugins.lsp.handlers'
+    local handler = require 'plugins.lsp.opts.handlers'
     local opts = {
         on_attach = handler.on_attach,
         capabilities = handler.get_capabilities(),
         handlers = handler.handlers,
     }
+
+
     require 'mason-lspconfig'.setup_handlers { function(server)
         local _, conf_opts = pcall(require, 'server.' .. server)
         local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
@@ -120,8 +122,7 @@ plugins:add {
 
 }
 plugins:add {
-    'glepnir/lspsaga.nvim',
-    opts = function() return require 'plugins.lsp.saga' end,
+    import = 'plugins.lsp.extra',
 }
 
 
@@ -129,7 +130,7 @@ plugins:add {
     'lvimuser/lsp-inlayhints.nvim',
     branch = 'anticonceal',
     init = function()
-        require 'plugins.lsp.handlers'.attach(function(client, bufnr)
+        require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
             require 'lsp-inlayhints'.on_attach(client, bufnr)
         end)
     end,
@@ -142,7 +143,7 @@ plugins:add {
             -- type_hints = { prefix = 'type' },
             only_current_line = false,
         },
-        enabled_at_startup = true,
+        enabled_at_startup = false,
     },
     config = function(_, opts)
         require 'lsp-inlayhints'.setup(opts)
@@ -162,10 +163,17 @@ plugins:add {
 --     },
 -- }, -- pretty ui for [code-action | hover-text | ....]
 
+-- plugins:add {
+--     'mrcjkb/haskell-tools.nvim',
+--     ft = 'haskell',
+--     opts = {}
+-- }
+
 plugins:add {
     'SmiteshP/nvim-navbuddy',
+    cond = false,
     init = function()
-        require 'plugins.lsp.handlers'.attach(function(client, bufnr)
+        require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
             require 'nvim-navbuddy'.attach(client, bufnr)
         end)
     end,

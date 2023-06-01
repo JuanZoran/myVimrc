@@ -1,7 +1,7 @@
 local default_source = {
     { name = 'luasnip',     group_index = 1, max_item_count = 4 },
     { name = 'nvim_lsp',    group_index = 1 },
-    { name = 'cmp_tabnine', group_index = 1, max_item_count = 5 },
+    { name = 'cmp_tabnine', group_index = 2, max_item_count = 5 },
     { name = 'buffer',      group_index = 2, max_item_count = 5 },
     { name = 'path' },
 }
@@ -223,6 +223,26 @@ local sources = {
             },
             filetypes = {
                 ['*'] = true,
+            },
+        },
+    },
+    {
+        'windwp/nvim-autopairs',
+        opts = {
+            check_ts = true,
+            enable_abbr = true,
+            fast_wrap = {
+                map = '<C-;>',
+                chars = { '{', '[', '(', '"', "'", '<' },
+                pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+                offset = 1, -- Offset from pattern match
+                end_key = ';',
+                -- keys = "qwertyuiopzxcvbnmasdfghjkl",
+                keys = 'uiopghjkl',
+                check_comma = true,
+                highlight = 'PmenuSel',
+                -- highlight_grey = "LineNr",
+                highlight_grey = 'Comment',
             },
         },
     },

@@ -115,6 +115,7 @@ plugins:add {
     },
 }
 
+
 plugins:add {
     'lukas-reineke/headlines.nvim',
     ft = { 'markdown', 'md', 'norg' },
@@ -168,19 +169,22 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
         { 'gc',        mode = { 'n', 'x' } },
         { '<leader>A', desc = 'Add Comment at end of line' },
     },
-    opts = function()
-        return {
-            -- ignore = '^$',
-            extra = {
-                ---Add comment on the line above
-                above = 'gcO',
-                ---Add comment on the line below
-                below = 'gco',
-                ---Add comment at the end of line
-                eol = '<Leader>A',
-            },
-        }
-    end,
+    opts = {
+        -- ignore = '^$',
+        extra = {
+            ---Add comment on the line above
+            above = 'gcO',
+            ---Add comment on the line below
+            below = 'gco',
+            ---Add comment at the end of line
+            eol = '<Leader>A',
+        },
+    },
+    config = function (_, opts)
+        require'Comment'.setup(opts)
+        local ft = require("Comment.ft")
+        ft.set("rasi", { "//%s", "/*%s*/" })
+    end
 }
 
 plugins:add {
@@ -191,27 +195,6 @@ plugins:add {
     },
 }
 
-plugins:add {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    opts = {
-        check_ts = true,
-        enable_abbr = true,
-        fast_wrap = {
-            map = '<C-;>',
-            chars = { '{', '[', '(', '"', "'", '<' },
-            pattern = [=[[%'%"%)%>%]%)%}%,]]=],
-            offset = 1, -- Offset from pattern match
-            end_key = ';',
-            -- keys = "qwertyuiopzxcvbnmasdfghjkl",
-            keys = 'uiopghjkl',
-            check_comma = true,
-            highlight = 'PmenuSel',
-            -- highlight_grey = "LineNr",
-            highlight_grey = 'Comment',
-        },
-    },
-}
 
 plugins:add {
     'echasnovski/mini.surround',

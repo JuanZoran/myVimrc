@@ -105,6 +105,13 @@ g.no_man_maps               = true
 -- opt.guicursor='n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
 -- \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
 -- \,sm:block-blinkwait175-blinkoff150-blinkon175
+vim.filetype.add {
+    extension = {
+        rasi = 'rasi', -- For Rofi configuration file
+        -- haskell = 'haskell',
+    },
+}
+
 
 if g.neovide then
     opt.guifont = 'JetBrainsMono Nerd Font,得意黑:h12'
