@@ -11,7 +11,7 @@
 --     nocombine = true,
 -- })
 
-require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
+-- require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
 
 -- {
 --   ft = true,
@@ -32,17 +32,6 @@ require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
 --   },
 --   targets = <function 1>
 -- }
-
---- TODO : match multi target then select
--- local function align(target)
---     vim.pretty_print(target)
--- end
-
--- local function align(target)
---
--- end
-
-
 
 
 -- local cmd = 'normal '

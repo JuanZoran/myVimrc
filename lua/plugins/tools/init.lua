@@ -180,19 +180,11 @@ plugins:add { -- powerful comment with gc<char> | gb<char> | <leader>A
             eol = '<Leader>A',
         },
     },
-    config = function (_, opts)
-        require'Comment'.setup(opts)
-        local ft = require("Comment.ft")
-        ft.set("rasi", { "//%s", "/*%s*/" })
-    end
-}
-
-plugins:add {
-    'mfussenegger/nvim-treehopper',
-    keys = {
-        { mode = 'x', 'm', ":<C-U>lua require('tsht').nodes()<CR>", silent = true },
-        { mode = 'o', 'm', function() require 'tsht'.nodes() end },
-    },
+    config = function(_, opts)
+        require 'Comment'.setup(opts)
+        local ft = require 'Comment.ft'
+        ft.set('rasi', { '//%s', '/*%s*/' })
+    end,
 }
 
 
@@ -367,32 +359,6 @@ plugins:add {
 
 
 plugins:add {
-    'ggandor/leap.nvim',
-    keys = {
-        { mode = { 'x', 'o', 'n' }, '<leader>j',         '<Plug>(leap-backward-to)',  desc = 'Jump backward' },
-        { mode = { 'x', 'o', 'n' }, '<leader><leader>l', '<Plug>(leap-cross-window)', desc = 'Jump cross window' },
-        { mode = { 'x', 'o', 'n' }, '<leader>l',         '<Plug>(leap-forward-to)',   desc = 'Jump forward' },
-    },
-    config = function()
-        require 'leap'.opts.highlight_unlabeled_phase_one_targets = true
-        vim.api.nvim_set_hl(0, 'LeapLabelPrimary', {
-            bg = '#181831',
-            fg = '#74c7ec',
-        })
-    end,
-    dependencies = {
-        'ggandor/flit.nvim',
-        keys = { 'f', 'F', 't', 'T' },
-        opts = {
-            -- A string like "nv", "nvo", "o", etc.
-            labeled_modes = 'v',
-            multiline = true,
-        },
-    },
-}
-
-
-plugins:add {
     'andymass/vim-matchup',
     event = 'VeryLazy',
     init = function()
@@ -400,8 +366,6 @@ plugins:add {
         vim.g.matchup_text_obj_enabled = 0
     end,
 }
-
-
 
 
 plugins:add {

@@ -166,7 +166,6 @@ local config = function()
     require 'telescope-all-recent'
 end
 
-
 return {
     {
         'nvim-telescope/telescope.nvim',

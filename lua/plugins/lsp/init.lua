@@ -9,15 +9,17 @@ local config = function()
         handlers = handler.handlers,
     }
 
-
-    require 'mason-lspconfig'.setup_handlers { function(server)
+    local merged_conf = function(server)
         local _, conf_opts = pcall(require, 'server.' .. server)
-        local conf = _ and vim.tbl_extend('error', opts, conf_opts) or opts
-        require 'lspconfig'[server].setup(conf)
-    end,
+
+        return _ and vim.tbl_extend('force', opts, conf_opts) or opts
+    end
+
+    require 'mason-lspconfig'.setup_handlers {
+        function(server) require 'lspconfig'[server].setup(merged_conf(server)) end,
         rust_analyzer = function()
             require 'rust-tools'.setup {
-                server = { on_attach = handler.on_attach },
+                server = merged_conf 'rust_analyzer',
                 tools = {
                     inlay_hints = {
                         auto = false,
@@ -125,79 +127,71 @@ plugins:add {
     import = 'plugins.lsp.extra',
 }
 
+vim.keymap.set('n', '<leader>hi', function()
+    vim.lsp.buf.inlay_hint(0)
+end)
 
-plugins:add {
-    'lvimuser/lsp-inlayhints.nvim',
-    branch = 'anticonceal',
-    init = function()
-        require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
-            require 'lsp-inlayhints'.on_attach(client, bufnr)
-        end)
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(env)
+        if vim.lsp.get_client_by_id(env.data.client_id).server_capabilities.inlayHintProvider then
+            vim.lsp.buf.inlay_hint(env.buf, true)
+            vim.api.nvim_set_hl(0, 'LspInlayHint', {
+                fg = '#858a94',
+                bg = '#2d2e32',
+                italic = true,
+            })
+        end
     end,
-    keys = { {
-        '<leader>hi', function() require 'lsp-inlayhints'.toggle() end, desc = 'Toggle Inlay Hints',
-    }, },
-    opts = {
-        inlay_hints = {
-            -- parameter_hints = { prefix = 'param:' },
-            -- type_hints = { prefix = 'type' },
-            only_current_line = false,
-        },
-        enabled_at_startup = false,
-    },
-    config = function(_, opts)
-        require 'lsp-inlayhints'.setup(opts)
-        vim.api.nvim_set_hl(0, 'LspInlayHint', {
-            fg = '#858a94',
-            bg = '#2d2e32',
-            italic = true,
-        })
-    end,
-}
--- dependencies = {
---     {
---         'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
---         -- FIXME :
---         cond = false,
---         config = true,
---     },
--- }, -- pretty ui for [code-action | hover-text | ....]
+})
 
 -- plugins:add {
---     'mrcjkb/haskell-tools.nvim',
---     ft = 'haskell',
---     opts = {}
+--     'SmiteshP/nvim-navbuddy',
+--     cond = false,
+--     init = function()
+--         require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
+--             require 'nvim-navbuddy'.attach(client, bufnr)
+--         end)
+--     end,
+--     keys = {
+--         { '<leader>k', '<Cmd>Navbuddy<CR>' },
+--     },
+--     opts = function()
+--         local actions = require 'nvim-navbuddy.actions'
+--         return {
+--             window = {
+--                 border = 'rounded',
+--                 size = '65%',
+--             },
+--             mappings = {
+--                 k = actions.next_sibling,     -- down
+--                 i = actions.previous_sibling, -- up
+--                 j = actions.parent,           -- Move to left panel
+--                 l = actions.children,         -- Move to right panel
+--                 h = actions.insert_name,      -- Insert at start of name
+--                 H = actions.insert_scope,     -- Insert at start of scope
+--             },
+--         }
+--     end,
 -- }
 
-plugins:add {
-    'SmiteshP/nvim-navbuddy',
-    cond = false,
-    init = function()
-        require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
-            require 'nvim-navbuddy'.attach(client, bufnr)
-        end)
-    end,
-    keys = {
-        { '<leader>k', '<Cmd>Navbuddy<CR>' },
-    },
-    opts = function()
-        local actions = require 'nvim-navbuddy.actions'
-        return {
-            window = {
-                border = 'rounded',
-                size = '65%',
-            },
-            mappings = {
-                k = actions.next_sibling,     -- down
-                i = actions.previous_sibling, -- up
-                j = actions.parent,           -- Move to left panel
-                l = actions.children,         -- Move to right panel
-                h = actions.insert_name,      -- Insert at start of name
-                H = actions.insert_scope,     -- Insert at start of scope
-            },
-        }
-    end,
-}
+
+-- plugins:add {
+--     'SmiteshP/nvim-navic',
+--     lazy = true,
+--     opts = {
+--         highlight = true,
+--         separator = ' >> ',
+--         depth_limit = 5,
+--     },
+--     init = function()
+--         -- vim.g.navic_silence = true
+--         require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
+--             if client.server_capabilities.documentSymbolProvider then
+--                 require 'nvim-navic'.attach(client, bufnr)
+--             end
+--         end)
+--     end,
+-- }
 
 return {
     'neovim/nvim-lspconfig', -- official lspconfig

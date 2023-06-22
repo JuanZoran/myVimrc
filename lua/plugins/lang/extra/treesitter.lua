@@ -21,7 +21,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     dependencies = {
         indent,
-        { 'nvim-treesitter/nvim-treesitter-context', config = true },
+        -- { 'nvim-treesitter/nvim-treesitter-context', config = true },
         'HiPhish/nvim-ts-rainbow2',
         'RRethy/nvim-treesitter-endwise',
         {

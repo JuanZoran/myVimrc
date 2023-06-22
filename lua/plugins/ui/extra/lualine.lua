@@ -16,20 +16,12 @@ local function opts()
                 color = { fg = '#ff9e64' },
             },
         },
-        lualine_c = {
-            {
-                -- require 'nvim-navic'.get_location,
-                -- cond = require 'nvim-navic'.is_available,
-                function() return require 'nvim-navic'.get_location() end, -- FIXME : why it is not working
-                cond = require 'nvim-navic'.is_available,
-            },
-        },
+        lualine_c = { '%{%v:lua.dropbar.get_dropbar_str()%}' },
         lualine_y = {
             {
                 memory_use,
                 color = {
                     fg = '#69bbae',
-                    -- bg = '#1e1e2e'
                     bg = '#304263',
                 },
             },
@@ -108,21 +100,18 @@ return {
     dependencies = {
         'meuter/lualine-so-fancy.nvim',
         {
-            'SmiteshP/nvim-navic',
-            lazy = true,
-            opts = {
-                highlight = true,
-                separator = ' >> ',
-                depth_limit = 5,
+            'Bekaboo/dropbar.nvim',
+            keys = {
+                { '<leader>k', function() require 'dropbar.api'.pick() end },
             },
-            init = function()
-                -- vim.g.navic_silence = true
-                require 'plugins.lsp.opts.handlers'.attach(function(client, bufnr)
-                    if client.server_capabilities.documentSymbolProvider then
-                        require 'nvim-navic'.attach(client, bufnr)
-                    end
-                end)
-            end,
+            opts = {
+                general = { enable = false },
+                menu = {
+                    win_configs = {
+                        border = 'rounded',
+                    },
+                },
+            },
         },
     },
     opts = opts,

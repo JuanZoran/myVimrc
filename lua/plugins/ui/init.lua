@@ -21,7 +21,6 @@ plugins:add {
             -- },
             integrations = {
                 cmp                = true,
-                leap               = true,
                 notify             = false,
                 neotree            = true,
                 gitsigns           = true,
@@ -32,16 +31,18 @@ plugins:add {
                 ts_rainbow2        = true,
                 lsp_trouble        = true,
                 native_lsp         = { enabled = true },
-                navic              = { enabled = true },
 
                 treesitter         = true,
                 treesitter_context = true,
+                dropbar            = { enabled = true, color_mode = true },
+
+                -- navic              = { enabled = true },
+                -- leap               = true,
                 -- mason = true,
                 -- indent_blankline = {
                 --     enable = true,
                 --     colored_indent_levels = true,
                 -- },
-                -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
             },
         }
     end,
