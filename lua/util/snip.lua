@@ -11,7 +11,6 @@ local postfix = require 'luasnip.extras.postfix'.postfix
 local parse   = require 'luasnip.util.parser'.parse_snippet
 
 
-
 ---@class snippet_env
 local M = {}
 

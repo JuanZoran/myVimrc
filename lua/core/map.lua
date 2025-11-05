@@ -47,8 +47,6 @@ set {
             if vim.api.nvim_buf_get_name(0) == '' then
                 local filename = vim.fn.input 'Save as: '
                 if filename ~= '' then vim.cmd('w ' .. filename) end
-            elseif util.firenvim then
-                vim.cmd [[wq]]
             else
                 vim.cmd 'w'
             end
@@ -84,6 +82,7 @@ local feedkey = function(key)
         end)
     end
 end
+
 
 set {
     mode = 'i',
@@ -127,11 +126,25 @@ map({ 'i', 'c' }, '<C-l>', '<Right>')
 
 
 map('', '0', '%', { remap = true })
-
-
 map({ 'n', 'x' }, '<C-h>', [[:s/\v]])
-
 map('c', '<C-a>', '<Home>')
+
+
+
+-- Smooth cursor settings:
+local nxo = { 'n', 'x', 'o' }
+local nx = { 'n', 'x' }
+util.map {
+    { mode = nxo, 'i', 'gk' },
+    { mode = nxo, 'k', 'gj' },
+    { mode = nxo, 'j', 'h' },
+    { mode = nxo, 'h', 'i' },
+    { mode = nxo, 'L', 'g$' },
+    { mode = nxo, 'J', 'g^' },
+    { mode = nxo, 'I', '<C-u>zz' },
+    { mode = nxo, 'K', '<C-d>zz' },
+    { mode = nx, 'H', 'I' },
+}
 
 if vim.g.neovide then
     map('i', '<C-V>', '<C-r>+')

@@ -51,11 +51,11 @@ end
 ---@param keymaps keymap|keymap[]
 function M.map(keymaps)
     if type(keymaps[1]) == 'string' then
-        load_keymap(keymaps)
-    else
-        ---@cast keymaps keymap[]
-        for _, keymap in ipairs(keymaps) do load_keymap(keymap) end
+        return load_keymap(keymaps)
     end
+
+    ---@cast keymaps keymap[]
+    for _, keymap in ipairs(keymaps) do load_keymap(keymap) end
 end
 
 ---Map with description
@@ -68,32 +68,5 @@ function M.map_opt_with_desc(args)
         set(mode, map[1], map[2], opts)
     end
 end
-
-M.firenvim = vim.g.started_by_firenvim ~= nil
-if M.firenvim then
-    vim.g.firenvim_config = {
-        globalSettings = { alt = 'all' },
-        localSettings = {
-            ['.*'] = {
-                cmdline  = 'neovim',
-                content  = 'text',
-                priority = 0,
-                selector = 'textarea',
-                takeover = 'never'
-            },
-        },
-    }
-
-    vim.api.nvim_create_autocmd('UIEnter', {
-        callback = function()
-            local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
-            if client and client.name == 'Firenvim' then
-                vim.o.laststatus = 0
-                vim.cmd [[set lines=40 columns=100]]
-            end
-        end,
-    })
-end
-
 
 _G.util = M

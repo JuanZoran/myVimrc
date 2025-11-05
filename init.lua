@@ -4,7 +4,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.fn.system {
         'git',
         'clone',
@@ -25,8 +25,6 @@ install.key_plugin = 'y'
 
 require 'lazy'.setup({
     { import = 'plugins' },
-    -- {import = 'plugins.lsp'},
-    -- {import = 'plugins.lang'},
 }, {
     install = {
         colorscheme = { 'catppuccin', 'tokyonight', 'kanagawa', 'habamax' },
@@ -37,39 +35,6 @@ require 'lazy'.setup({
     ui = {
         size = { width = 0.85, height = 0.85 },
         border = 'rounded',
-    },
-    performance = {
-        cache = {
-            enabled = true,
-            -- disable_events = {},
-        },
-        rtp = {
-            disabled_plugins = {
-                'spellfile_plugin',
-                'syntax_completion',
-                '2html_plugin',
-                'getscript',
-                'getscriptPlugin',
-                -- 'gzip',
-                -- 'zip',
-                -- 'zipPlugin',
-                'logipat',
-                'netrw',
-                'netrwPlugin',
-                'netrwSettings',
-                'netrwFileHandlers',
-                'matchit',
-                'matchparen',
-                'tar',
-                'tarPlugin',
-                'rrhelper',
-                'shada',
-                'vimball',
-                'vimballPlugin',
-                'tohtml',
-                'tutor',
-            },
-        },
     },
     dev = {
         -- directory where you store your local plugin projects
@@ -82,11 +47,3 @@ require 'lazy'.setup({
 })
 
 require 'core'
--- util.map {
---     { mode = {'n', 'i'}, '<Tab>', function ()
---         print('tab is pressed')
---     end },
---     { mode = {'n', 'i'}, '<C-I>', function ()
---         print('<C-i> is pressed')
---     end },
--- }

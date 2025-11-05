@@ -1,0 +1,6 @@
+[submodule "custom/Trans.nvim"]
+	path = custom/Trans.nvim
+	url = https://github.com/JuanZoran/Trans.nvim.git
+[submodule "custom/snippet_lua"]
+	path = custom/snippet_lua
+	url = https://github.com/JuanZoran/snippet_lua.git
