@@ -48,5 +48,4 @@ opt.undodir = os.getenv 'HOME' .. '/.vim'
 
 -- opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
 opt.viewoptions = 'cursor,folds'
-opt.signcolumn = 'yes' -- for diagnose signcolumn
--- opt.clipboard:append ("unnamedplus") -- 使用系统剪贴板
+opt.signcolumn = 'yes:2' -- for diagnose signcolumn

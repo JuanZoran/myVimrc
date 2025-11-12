@@ -1,3 +1,6 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 local set = util.map_opt_with_desc
 set {
     mode = 'n',
@@ -8,10 +11,9 @@ set {
         { '<Leader><leader>w', '<Cmd>wqa<CR>',        'Save and quit all window' },
         { '<Leader>ck',        '<Cmd>set spell!<CR>', 'Toggle builtin spell checker' },
         { '<Leader>p',         '<Cmd>Lazy<CR>',       'Plugin Manager' },
-        { 'qq',                '<C-^>',               'Toggle Recent Buffer' },
+        { 'qr',                '<C-^>',               'Toggle Recent Buffer' },
         { 'qd',                '<Cmd>bdelete!<CR>' },
         { 'qw',                '<Cmd>close<CR>' },
-        { '<leader>J',         'J' },
         { '<S-CR>',            'J' },
         { '<C-q>',             '<Cmd>q!<CR>' },
 
@@ -36,9 +38,8 @@ set {
         { 'dq',                [[di']] },
         { 'vq',                [[vi']] },
 
-        { 'Z',                 'zf' },
         { '<C-CR>',            '/<++><CR>vf>c' },
-        { '<leader>a',         '@',                   'Macro' },
+        { ';',         '@',                   'Macro' },
         { '<C-w>o',            '<Cmd>vsp<CR>',        'Split Window' },
         { '<C-w>u',            '<Cmd>sp<CR>',         'Split Window Vertically' },
         { '<C-w>n',            '<Cmd>only<CR>',       'Close Another Window' },
@@ -87,20 +88,11 @@ end
 set {
     mode = 'i',
     map = {
-        { '<C-CR>', '<Esc>/<++><CR>vf>c' },
         { '<C-b>',  feedkey 'b' },
         { '<C-f>',  feedkey 'w' },
         { '<C-a>',  feedkey '^' },
         { '<C-e>',  function() vim.fn.cursor { vim.fn.line '.', vim.fn.col '$' } end },
-        -- { '<C-e>',  feedkey '$' },
-        -- { '<C-a>', function()
-        --     ---@diagnostic disable-next-line: param-type-mismatch, undefined-field
-        --     local s = (vim.api.nvim_get_current_line()):find '%S'
-        --     vim.fn.cursor { vim.fn.line '.', s or 0 }
-        -- end, },
     },
-    -- {"<++>", "<++>"},
-    -- {"<++>", "<++>"},
 }
 
 set {
@@ -108,7 +100,6 @@ set {
     map = {
         { '<A-k>', ":m '>+1<CR>gv=gv" },
         { '<A-i>', ":m '<-2<CR>gv=gv" },
-
 
         { '>',     '>gv' },
         { '<',     '<gv' },
@@ -125,10 +116,8 @@ map({ 'i', 'c' }, '<C-j>', '<Left>')
 map({ 'i', 'c' }, '<C-l>', '<Right>')
 
 
-map('', '0', '%', { remap = true })
+map('', '0', '%')
 map({ 'n', 'x' }, '<C-h>', [[:s/\v]])
-map('c', '<C-a>', '<Home>')
-
 
 
 -- Smooth cursor settings:
@@ -145,7 +134,3 @@ util.map {
     { mode = nxo, 'K', '<C-d>zz' },
     { mode = nx, 'H', 'I' },
 }
-
-if vim.g.neovide then
-    map('i', '<C-V>', '<C-r>+')
-end

@@ -24,9 +24,8 @@ vim.diagnostic.config({ virtual_text = { current_line = true }})
 load_cmd('fmtopt')
 load_cmd('view')
 load_cmd('cursorline')
+load_cmd('imselect')
 
--- FIXME :
--- load_cmd('imselect')
 
 autocmd('TextYankPost', {
     group = group,
