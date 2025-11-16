@@ -45,7 +45,7 @@ local override = {
     PmenuSel                               = {
         bold = true,
         fg = c.mantle,
-        bg = c.light_green,
+        bg = c.mauve,
         -- fg = c.sapphire,
         -- bg = c.dim,
     },

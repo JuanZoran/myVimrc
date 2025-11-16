@@ -50,6 +50,7 @@ local function config()
 	end
 end
 
+
 -- FIXME :
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",

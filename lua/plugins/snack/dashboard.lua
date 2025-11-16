@@ -1,5 +1,5 @@
 local headers = {
-[[
+	[[
 ███████╗ ██████╗ ██████╗  █████╗ ███╗   ██╗
 ╚══███╔╝██╔═══██╗██╔══██╗██╔══██╗████╗  ██║
   ███╔╝ ██║   ██║██████╔╝███████║██╔██╗ ██║
@@ -7,11 +7,18 @@ local headers = {
 ███████╗╚██████╔╝██║  ██║██║  ██║██║ ╚████║
 ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝]],
 }
-
-local header = {text = headers[1]}
-
 return {
-    sections = {
-        header,
-    }
+	sections = {
+		{
+			section = "terminal",
+			cmd = "chafa ~/.config/omarchy/current/background --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
+			height = 17,
+			padding = 1,
+		},
+		{
+			pane = 2,
+			{ section = "keys", gap = 1, padding = 1 },
+			{ section = "startup" },
+		},
+	},
 }

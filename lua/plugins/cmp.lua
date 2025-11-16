@@ -8,18 +8,14 @@ local keymap = {
 
 	["<C-e>"] = { "snippet_forward", "fallback" },
 	["<C-b>"] = { "snippet_backward", "fallback" },
-	-- ["<CR>"] = { "accept", "fallback" },
+
+	["<C-u>"] = { "scroll_documentation_up", "fallback" },
+	["<C-d>"] = { "scroll_documentation_down", "fallback" },
+	["<C-c>"] = { "hide", "fallback" },
 }
-
-
 
 local opts = {
 	keymap = keymap,
-	appearance = {
-		-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-		-- Adjusts spacing to ensure icons are aligned
-		nerd_font_variant = "mono",
-	},
 	cmdline = {
 		keymap = {
 			preset = "inherit",
@@ -28,9 +24,19 @@ local opts = {
 		completion = { menu = { auto_show = true } },
 	},
 
-	-- (Default) Only show the documentation popup when manually triggered
-	completion = { documentation = { auto_show = true } },
 	snippets = { preset = "luasnip" },
+	completion = {
+		documentation = {
+			auto_show = true,
+			window = {
+				border = "rounded",
+			},
+		},
+		menu = {
+			border = "rounded",
+			winhighlight = "CursorLine:PmenuSel",
+		},
+	},
 	sources = {
 		default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 		providers = {
@@ -40,9 +46,28 @@ local opts = {
 				-- make lazydev completions top priority (see `:h blink.cmp`)
 				score_offset = 100,
 			},
+			-- supermaven = {
+			-- 	name = "supermaven",
+			-- 	module = "blink-cmp-supermaven",
+			-- 	async = true,
+			-- },
 		},
 	},
 	fuzzy = { implementation = "prefer_rust_with_warning" },
+}
+
+local ai = {
+	"milanglacier/minuet-ai.nvim",
+	opts = {
+        provider = 'gemini',
+		cmp = { enable_auto_complete = false },
+		virtualtext = {
+			auto_trigger_ft = { },
+			keymap = {
+				accept = "<A-a>",
+			},
+		},
+	},
 }
 
 return {

@@ -19,6 +19,8 @@ end
 
 
 vim.diagnostic.config({ virtual_text = { current_line = true }})
+vim.lsp.inlay_hint.enable(true)
+
 
 
 load_cmd('fmtopt')

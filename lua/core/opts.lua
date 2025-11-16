@@ -43,9 +43,11 @@ opt.helplang       = 'cn'
 opt.undofile       = true
 opt.cindent        = true
 opt.smartindent    = true
+opt.ignorecase    = true
+opt.smartcase    = true
 
 opt.undodir = os.getenv 'HOME' .. '/.vim'
 
 -- opt.iskeyword:append '-' -- 将word-word视为一个word, 方便daw
 opt.viewoptions = 'cursor,folds'
-opt.signcolumn = 'yes:2' -- for diagnose signcolumn
+opt.signcolumn = 'yes:3' -- for diagnose signcolumn
