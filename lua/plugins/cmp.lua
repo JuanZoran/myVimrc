@@ -77,6 +77,5 @@ return {
 		{ "L3MON4D3/LuaSnip" },
 	},
 	opts = opts,
-	event = "InsertEnter",
-	-- opts_extend = { "sources.default" }
+	event = {"InsertEnter", 'CmdlineEnter'},
 }
